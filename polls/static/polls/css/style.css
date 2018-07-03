@@ -1,0 +1,10 @@
+body {
+    background: white url("/static/images/background.gif") no-repeat;
+}
+a {
+    color: whitesmoke;
+}
+
+header {
+    color: mistyrose;
+}

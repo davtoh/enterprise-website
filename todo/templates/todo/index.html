@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Todo index
+{% endblock %}
+
+{% block styles %}
+    {% load static %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/css/style.css' %}">
+{%  endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <h2>Hello {{ user.username }}, this is your TodoList</h2>
+    {% else %}
+        <h2>Hello {{name|default:"User"}}, this is your TodoList</h2>
+    {% endif %}
+
+    <a href="{% url 'todo:add' %}">Add Todo</a>
+    <ul>
+        {% for todo in todos %}
+            <li><a href="{% url 'todo:details' todo.id %}">{{ todo.title }}</a> : {{ todo.text }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

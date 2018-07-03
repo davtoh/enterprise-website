@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}
+    Add to Todo list
+{% endblock %}
+{% block content %}
+    {% url 'todo:index' as back_url %}
+    <a href="{{ request.GET.next | default:back_url}}"><< Go back</a><br><br>
+    <form action="{% url 'todo:add' %}" method="post">
+        {% csrf_token %} <!-- Cross Site Request Forgery protection https://docs.djangoproject.com/en/2.0/ref/csrf/ -->
+        <label for="title">Title</label><br/>
+        <input type="text" name="title" id="title"/>
+        <br>
+        <label for="text">Text</label><br/>
+        <textarea type="text" name="text" id="text"></textarea>
+        <br><br>
+        <input type="hidden" name="next" value="{{ request.GET.next | default:back_url}}">
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

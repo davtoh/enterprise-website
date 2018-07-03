@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<html>
+  <head>
+    <meta charset="utf-8">
+    {% block styles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    {% endblock %}
+    {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% endblock %}
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+  </head>
+  <body>
+    {# template_include 'partials/header.html' #}
+    {% block header %}
+    <header>
+        <h1>
+            {% block header_title %}
+                <script>
+                    document.write(document.title);
+                </script>
+            {% endblock %}
+            {# <a href="{% url 'language_management:index' %}?next={{request.path}}">Language</a> #}
+            {% include "language_management/form.html" with active_tab='tab2' %}
+            {% include "partials/menu.html" with active_tab='tab2' %}
+        </h1>
+        <hr>
+    </header>
+    {% endblock %}
+
+    {# This is the message handling system #}
+    {% include 'partials/messages.html' %}
+
+    {# This is the main page #}
+    <div class="container" id="content">
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% include 'partials/footer.html' %}
+  </body>
+</html>

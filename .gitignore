@@ -1,0 +1,24 @@
+# IntelliJ project files
+.idea/
+*.iml
+out
+gen
+
+# ignore .pyc binaries
+*.pyc
+locale/
+
+# ignore executables
+/dist/
+/build/
+/documentation/_build/
+/doc/_build/
+
+# ignore temporal files like caches and memoizations
+/temp/
+
+# additional files
+*NOTES*
+*.dat
+*.gz
+*.sqlite*

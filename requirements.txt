@@ -1,0 +1,14 @@
+"C:\Users\Davtoh\Downloads\opencv_python-3.4.1+contrib-cp36-cp36m-win_amd64.whl"
+PyQt5
+#pyqt5-tools # only windows, needed for qt designer
+"F:\Davtoh\python_vision_env\requirements.txt"
+mysqlclient  # on linux run: sudo apt-get install libmysqlclient-dev
+SQLAlchemy
+requests
+brython
+transcrypt
+SpeechRecognition
+django-easy-timezones
+django-timezone-field
+django-rosetta
+babel

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    Todo details
+{% endblock %}
+{% block content %}
+    <a href="{% url 'todo:index' %}"><< Go back</a>
+    <h1>{{ todo.title }}</h1>
+    <p>{{ todo.text }}</p>
+    <br>
+    {% load tz %}
+    {% get_current_timezone as TIME_ZONE %}
+    {# this is bad {{ todo.created_at.tzinfo }}, the time is processed and does not represent tzinfo #}
+    This was created on {{ todo.created_at|localtime}} ({{ TIME_ZONE }}).<br>
+    Forced to America/Bogota ({{ todo.created_at|timezone:"America/Bogota" }}).<br>
+    {% localtime on %}
+        Local time ON from server perspective ({{ todo.created_at }}).<br>
+    {% endlocaltime %}
+    {% localtime off %}
+        Local time OFF from server perspective ({{ todo.created_at }})({{ todo.created_at.tzinfo }}).<br>
+    {% endlocaltime %}
+    Passed by variable from user perspective {{ time_zone_user }} ({{ date }}).<br>
+{% endblock %}
