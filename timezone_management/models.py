@@ -8,6 +8,13 @@ from collections import defaultdict
 
 
 def _get_groups(tags, compact='others', original=False):
+    """
+
+    :param tags:
+    :param compact:
+    :param original:
+    :return: dictionary with continets as keys and conutries as values
+    """
     res = defaultdict(list)
     for tag in tags:
         sep = tag.split('/')
@@ -23,11 +30,15 @@ def _get_groups(tags, compact='others', original=False):
     return res
 
 
+show_timezones = pytz.all_timezones  # pytz.common_timezones
+
+
 class TimeZone(models.Model):
-    time_zones = [(i, _(i)) for i in pytz.all_timezones]
-    time_zone_groups = [(_(k), (v if '/' not in v else k+'/'+v, _(v))) for k, v in _get_groups(pytz.all_timezones).items()]
-    timezone = TimeZoneField(choices=time_zone_groups, max_length=35, default=settings.TIME_ZONE)  # defaults supported
-    #timezone = models.CharField(choices=[(x, x) for x in pytz.common_timezones], max_length=35, default=settings.TIME_ZONE)
+    time_zones = [(i, _(i)) for i in show_timezones]
+    time_zone_groups = [(_(k), [(t if '/' not in t else k+'/'+t, _(t)) for t in v]) for k, v in _get_groups(show_timezones).items()]
+    # FIXME groups not supported in TimeZoneField
+    #timezone = TimeZoneField(choices=time_zone_groups, max_length=35, default=settings.TIME_ZONE)  # defaults supported
+    timezone = models.CharField(choices=time_zone_groups, max_length=35, default=settings.TIME_ZONE)
 
 
 class TimeZoneForm(ModelForm):
