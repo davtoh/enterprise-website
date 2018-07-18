@@ -1,0 +1,51 @@
+/* https://codepen.io/anon/pen/Qxezmo */
+ul.list-unstyled {
+    height: 30px;
+    width: 150px;
+    border: 1px #000 solid;
+}
+ul.list-unstyled li {
+    padding: 5px 10px;
+    z-index: 2;
+}
+ul.list-unstyled li:not(.init) {
+    float: left;
+    width: 150px;
+    display: none;
+    background: #ddd;
+}
+ul.list-unstyled li:not(.init):hover, ul.list-unstyled li.selected:not(.init) {
+    background: #09f;
+}
+ul.list-unstyled li.init {
+    cursor: pointer;
+}
+a#submit { z-index: 1; }
+
+.popup {
+    background-color: #ffffff;
+    color: #888888;
+    height: 245px;
+    padding: 20px;
+    position: fixed;
+    right: 30%;
+    top: 25%;
+    width: 550px;
+    z-index: 101;
+    -moz-box-shadow: 0px 0px 10px 1px #888888;
+    -webkit-box-shadow: 0px 0px 10px 1px #888888;
+    box-shadow: 0px 0px 10px 1px #888888;
+    border-radius:10px;
+    -moz-border-radius:10px;
+}
+
+a.close {
+    background: url("static/cancel_26x26px.png") repeat scroll left top transparent;
+    cursor: pointer;
+    float: right;
+    height: 26px;
+    left: 32px;
+    position: relative;
+    top: -33px;
+    width: 26px;
+}
