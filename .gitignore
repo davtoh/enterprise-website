@@ -26,3 +26,11 @@ Product_web_page/static/
 *.zip
 *.sql
 *.json
+
+# ignore migrations on repo for clean installs
+*/migrations/*
+
+# ignore temporal file on early development
+static/
+node_modules/
+documentation/
