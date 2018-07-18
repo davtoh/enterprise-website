@@ -9,6 +9,10 @@ brython
 transcrypt
 SpeechRecognition
 django-easy-timezones
-django-timezone-field
+#django-timezone-field
+django-countries
 django-rosetta
+django-phonenumber-field
 babel
+sqlparse
+dateutil

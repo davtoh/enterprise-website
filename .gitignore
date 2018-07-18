@@ -16,9 +16,13 @@ locale/
 
 # ignore temporal files like caches and memoizations
 /temp/
+Product_web_page/static/
 
 # additional files
 *NOTES*
 *.dat
 *.gz
 *.sqlite*
+*.zip
+*.sql
+*.json

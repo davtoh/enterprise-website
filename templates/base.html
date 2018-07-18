@@ -1,46 +1,176 @@
 {% load static %}
+{% load stright_include %}
+{% load kwacros %}
+{% with css_folder="css" %}
 <!DOCTYPE html>
 <html lang="en">
-<html>
-  <head>
-    <meta charset="utf-8">
+    <head>
+    {# This is where metadata is specified #}
+    {% block meta %}
+        {% include 'partials/meta.html' %}
+        <!-- Meta Description -->
+        <meta name="description" content="{% block meta.description %}{% endblock %}">
+        <!-- Meta Keyword -->
+        <meta name="keywords" content="{% block meta.keywords %}{% endblock %}">
+        <!-- bootstrap support for mobile phones -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock %}
+
+    {# This is were stylesheet goes #}
     {% block styles %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        {# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> #}
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+        <!--
+        CSS
+        ============================================= -->
+
+        <!-- others -->
+        {% comment %}
+        {% with css_folder|add:"/hexagons.min.css" as link_static %}
+          <link rel="stylesheet" href="{% static link_static %}">
+        {% endwith %}
+        {% with css_folder|add:"/owl.carousel.css" as link_static %}
+          <link rel="stylesheet" href="{% static link_static %}">
+        {% endwith %}
+        {% endcomment %}
+
+        <!-- fonts -->
+        {% with css_folder|add:"/linearicons.css" as link_static %}
+          <link rel="stylesheet" href="{% static link_static %}">
+        {% endwith %}
+        {% with css_folder|add:"/font-awesome.min.css" as link_static %}
+          <link rel="stylesheet" href="{% static link_static %}">
+        {% endwith %}
+
+        <!-- additional  -->
+        {% with css_folder|add:"/magnific-popup.css" as link_static %}
+          <link rel="stylesheet" href="{% static link_static %}">
+        {% endwith %}
+        {% with css_folder|add:"/nice-select.css" as link_static %}
+          <link rel="stylesheet" href="{% static link_static %}">
+        {% endwith %}
+        {% with css_folder|add:"/animate.min.css" as link_static %}
+          <link rel="stylesheet" href="{% static link_static %}">
+        {% endwith %}
+
+        <!-- main styles -->
+        {% with css_folder|add:"/bootstrap.css" as link_static %}
+          <link rel="stylesheet" href="{% static link_static %}">
+        {% endwith %}
+        {% with css_folder|add:"/main.css" as link_static %}
+          <link rel="stylesheet" href="{% static link_static %}">
+        {% endwith %}
+        {% with css_folder|add:"/django.css" as link_static %}
+          <link rel="stylesheet" href="{% static link_static %}">
+        {% endwith %}
     {% endblock %}
+
+    {# This is where scripts go. It must be last to ensure that some scripts are executed when the page is ready #}
     {% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% include 'partials/scripts.html' %}
     {% endblock %}
+
+    {# This is were title is specified #}
     <title>{% block title %}{{ title }}{% endblock %}</title>
-  </head>
-  <body>
-    {# template_include 'partials/header.html' #}
-    {% block header %}
-    <header>
-        <h1>
-            {% block header_title %}
-                <script>
-                    document.write(document.title);
-                </script>
+    </head>
+
+    <body>
+        {# template_include 'partials/header.html' #}
+        <header {% block header.attrs %}id="site-header"{% endblock %}>
+            {% block header %}
+
+			    <div class="container main-menu">
+			    	<div class="row align-items-center justify-content-between d-flex">
+				      <div id="logo">
+				        <a href="index.html"><img src="{% static "img/logo.png" %}" alt="" title="" /></a>
+				      </div>
+				      <nav id="nav-menu-container">
+				        <ul class="nav-menu">
+				          <li class="menu-active"><a href="index.html">Home</a></li>
+				          <li><a href="about.html">About Us</a></li>
+				          <li><a href="services.html">Services</a></li>
+				          <li><a href="products.html">Products</a></li>
+				          <li class="menu-has-children"><a href="">Blog</a>
+				            <ul>
+				              <li><a href="blog-home.html">Blog Home</a></li>
+				              <li><a href="blog-single.html">Blog Single</a></li>
+				            </ul>
+				          </li>
+				          <li><a href="contact.html">Contact</a></li>
+				          <li class="menu-has-children"><a href="">Dropdown</a>
+				            <ul>
+				              <li><a href="elements.html">Elements</a></li>
+				              <li><a href="product-details.html">Product Details</a></li>
+				              <li class="menu-has-children"><a href="">Level 2</a>
+					            <ul>
+					              <li><a href="#">Item 1</a></li>
+					              <li><a href="#">Item 2</a></li>
+					            </ul>
+					          </li>
+				            </ul>
+				          </li>
+                        {% if user.is_authenticated %}
+                          <li><a href="{% url 'user_management:logout' %}">logout</a></li>
+                        {% else %}
+                          <li><a href="{% url 'user_management:login' %}">login</a></li>
+                          <li><a href="{% url 'user_management:signup' %}">signup</a></li>
+                        {% endif %}
+                        <li>{% include "language_management/form.html" with type="menu"%}</li>
+				        </ul>
+				      </nav><!-- #nav-menu-container -->
+			    	</div>
+			    </div>
             {% endblock %}
-            {# <a href="{% url 'language_management:index' %}?next={{request.path}}">Language</a> #}
-            {% include "language_management/form.html" with active_tab='tab2' %}
-            {% include "partials/menu.html" with active_tab='tab2' %}
-        </h1>
-        <hr>
-    </header>
-    {% endblock %}
+        </header>
 
-    {# This is the message handling system #}
-    {% include 'partials/messages.html' %}
+        {# This is the main page #}
+        <main class="{% block main.class %}site-main{% endblock %}">
 
-    {# This is the main page #}
-    <div class="container" id="content">
+            {% block banner %}
+            <!-- start banner Area -->
+            <section class="banner-area" id="home">
+                <div class="container">
+                    <div class="row fullscreen d-flex align-items-center justify-content-center">
+                        {% block banner.content %}
+                            <div class="about-content col-lg-12">
+                                <h1 class="text-white">
+                                    {% kwacro banner.content.title %}
+                                        {% block banner.content.title %}
+                                            {% if banner_content_title %}
+                                                {{ banner_content_title }}
+                                            {% else %}
+                                                <script>
+                                                    document.write(document.title);
+                                                </script>
+                                            {% endif %}
+                                        {% endblock %}
+                                    {% endkwacro %}
+                                    {% usekwacro banner.content.title %}
+                                </h1>
+                                <p class="text-white link-nav"><a href="{% url "home:index" %}">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{{ request.path }}">
+                                {% usekwacro banner.content.title %}</a></p>
+                            </div>
+                        {% endblock %}
+                    </div>
+                </div>
+            </section>
+            <!-- End banner Area -->
+            {% endblock %}
 
-        {% block content %}
-        {% endblock %}
-    </div>
+            {# This is the message handling system #}
+            {% block messaging %}
+            {% include 'partials/messages.html' %}
+            {% endblock %}
 
-    {% include 'partials/footer.html' %}
-  </body>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer class="{% block footer.class %}site-footer{% endblock %}">
+            {% block footer %}
+                {% include 'partials/footer.html' %}
+            {% endblock %}
+        </footer>
+    </body>
 </html>
+{% endwith %}

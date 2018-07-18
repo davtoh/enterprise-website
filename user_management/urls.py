@@ -1,8 +1,8 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
-#app_name = 'user_management'
+app_name = 'user_management'
 urlpatterns = [
     path('', views.SiteUserListView.as_view(), name='index'),
     path('signup/', views.SignUpView.as_view(), name='signup'),
@@ -10,6 +10,10 @@ urlpatterns = [
     path('login/',  views.LoginView.as_view(), name='login'),
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('profile/', views.SiteUserProfileView.as_view(), name='profile'),
+    path('ajax/load-states/', views.load_states, name='ajax_load_states'),
+    path('ajax/load-cities/', views.load_cities, name='ajax_load_cities'),
+    re_path(r'^activate/(?P<slug>[0-9A-Za-z_\-]+)/(?P<slug2>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/account/$',
+        views.activate_user_account, name='activate_user_account'),
 ]
 
 #from django.contrib.auth import views

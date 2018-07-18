@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
 
 {% block title %}
     Polls
 {% endblock %}
 
 {% block styles %}
-    {% load static %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}">
 {%  endblock %}

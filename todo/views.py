@@ -8,6 +8,7 @@ from .models import Todo
 from pytz import timezone
 from django.urls import include
 
+
 def index(request):
     # get data
     todos = Todo.objects.all()#[:10]

@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from django.conf.urls.static import static  # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 urlpatterns = [
     path('', include('home.urls')),
@@ -27,7 +28,7 @@ urlpatterns = [
     #path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),  # <url path>/setlang
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if 'rosetta' in settings.INSTALLED_APPS:
     urlpatterns += [

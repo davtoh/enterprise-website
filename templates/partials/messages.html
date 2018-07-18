@@ -1,74 +1,27 @@
-{% load static %}
 <script type="text/javascript">
-function openDialog() {
-    $('#overlay').fadeIn('fast', function() {
-        $('#popup').css('display','block');
-        $('#popup').animate({'left':'30%'},500);
+    // delete messages after certain time to not clutter pages
+    $(document).ready( function() {
+        $('.alert-wrapper-float').delay(10000).fadeOut();
     });
-}
-
-function closeDialog(id) {
-    $('#'+id).css('position','absolute');
-    $('#'+id).animate({'left':'-100%'}, 500, function() {
-        $('#'+id).css('position','fixed');
-        $('#'+id).css('left','100%');
-        $('#overlay').fadeOut('fast');
-    });
-}
-
-$(function() {
-    $("#btnExito").click(function(){
-      $('#modal_exito').modal('show');
-    });
-});
-
-$(function() {
-    $("#btnFalla").click(function(){
-      $('#modal_falla').modal('show');
-    });
-});
 </script>
-<style>
-    .popup {
-    background-color: #ffffff;
-    color: #888888;
-    height: 245px;
-    left: 50%;
-    padding: 20px;
-    position: fixed;
-    right: 30%;
-    top: 25%;
-    width: 550px;
-    z-index: 101;
-    -moz-box-shadow: 0px 0px 10px 1px #888888;
-    -webkit-box-shadow: 0px 0px 10px 1px #888888;
-    box-shadow: 0px 0px 10px 1px #888888;
-    border-radius:10px;
-    -moz-border-radius:10px;
-}
 
-.overlay {
-    background: #000000;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 100;
-    opacity:0.5;
-}
-a.close {
-    background: url({% static "/cancel.png" %}) repeat scroll left top transparent;
-    cursor: pointer;
-    float: right;
-    height: 26px;
-    left: 32px;
-    position: relative;
-    top: -33px;
-    width: 26px;
+<style>
+.alert-wrapper-float {
+    position:fixed !important;
+    z-index:999999 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*align-items: center;*/
+    text-align: center;
+    min-height: 100vh;
+    width: 100%;
 }
 </style>
 
+{% comment %}
+
+<div class="alert-wrapper-float">
 {% for message in messages %}
   <div class="alert {{ message.tags }} alert-dismissible" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -77,12 +30,21 @@ a.close {
     {{ message }}
   </div>
 {% endfor %}
-
-{% comment %}
-<div id="popup" class="popup">
-    <a onclick="closeDialog('popup');" class="close"></a>
-    <div>
-        go fuck yourself
-    </div>
 </div>
 {% endcomment %}
+<div class="container">
+<div class="alert-wrapper-float">
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+      This is a test message
+  </div>
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+      This is a test message that is bigger than normal
+  </div>
+</div>
+</div>

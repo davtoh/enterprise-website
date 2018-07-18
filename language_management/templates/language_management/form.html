@@ -1,19 +1,63 @@
 {% load i18n %}
 {# https://docs.djangoproject.com/en/2.1/topics/i18n/translation/#the-set-language-redirect-view #}
 {% block content %}
-<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+
+<form action="{% url 'set_language' %}" method="post" id="form-language">{% csrf_token %}
     {# change value on input to tell set_language where to redirect #}
     <input name="next" type="hidden" value="{{ request.path }}">
-    <select name="language" onchange="this.form.submit()">
-        {% get_current_language as LANGUAGE_CODE %}
-        {% get_available_languages as LANGUAGES %}
-        {% get_language_info_list for LANGUAGES as languages %}
-        {% for language in languages %}
-            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                {{ language.name_local|title }} ({{ language.code }})
-            </option>
-        {% endfor %}
-    </select>
+    {% get_current_language as LANGUAGE_CODE %}
+    {% get_available_languages as LANGUAGES %}
+    {% get_language_info_list for LANGUAGES as languages %}
+
+    {% if type == 'menu' %}
+        {# make a list for a menu #}
+        <input name="language" type="hidden" value="" id="form-language-input">
+        <script type="text/javascript">
+        {# for language in languages #}
+            // https://stackoverflow.com/a/7340341
+            //document.getElementById("form-language-link-{{ language.code }}").onclick = function() {
+            //    document.getElementById("form-language-input").value="{{ language.code }}";
+            //    document.getElementById("form-language").submit();
+            //}
+
+            // https://stackoverflow.com/a/6799546
+            //document.getElementById("form-language-link-{{ language.code }}").addEventListener("click", function () {
+            //    document.getElementById("form-language").submit();
+            //    return true;
+            //});
+        {# endfor #}
+            // port using javascript https://stackoverflow.com/a/133997
+            // solution https://stackoverflow.com/a/14867603/5288758
+            function SubmitFunction (form, use) {
+                document.getElementById("form-language-input").value=use;
+                document.getElementById(form).submit();
+            }
+            // good example of implementing select with li https://codepen.io/webrajendra/pen/VvjgYY
+        </script>
+        <li class="menu-has-children"><a href="">{% blocktrans %}Language{% endblocktrans %}</a>
+          <ul>
+            {% for language in languages %}
+                <li {% if language.code == LANGUAGE_CODE %} class="menu-active"{% endif %}>
+                    <a href="#" id="form-language-link-{{ language.code }}"
+                       onclick='SubmitFunction("form-language","{{ language.code }}");'>
+                        {{ language.name_local|title }} ({{ language.code }})</a>
+                </li>
+            {% endfor %}
+          </ul>
+        </li>
+
+    {% else %}
+        {# make a selection for a form #}
+        <select name="language" onchange="this.form.submit()">
+            {% for language in languages %}
+                <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                    {{ language.name_local|title }} ({{ language.code }})
+                </option>
+            {% endfor %}
+        </select>
+
+    {% endif %}
+
     {# <input type="submit" value="Go">#}
 </form>
 {% endblock %}
