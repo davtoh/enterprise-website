@@ -1,4 +1,6 @@
 from django.core.management.base import BaseCommand
+from django.utils.crypto import get_random_string
+import random
 import logging
 from django.db import connection, migrations
 from django.db.utils import Error
@@ -80,3 +82,22 @@ def load_source(fn, cache=True, replacements=None, verbose=True):
             except Error:
                 logger.error("Error in command {} of {}>{}...".format(i+1, size, l[:show_until]))
                 raise
+
+
+def generate_key(length=50, chars=None, django_method=True):
+    """
+    Generate a random key.
+
+    :param length: number of characters on generated key
+    :param chars: a string of characters to use
+    :param django_method: True to use default django encryption or False to use System random
+    :return: string of generated key
+    """
+    if not chars:
+        chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+
+    if django_method:
+        # https://stackoverflow.com/a/16630719
+        return get_random_string(length, chars)
+    else:
+        return ''.join([random.SystemRandom().choice(chars) for _ in range(length)])

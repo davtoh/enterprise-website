@@ -12,13 +12,14 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import json
+from custom_tags.management.commands.secret_keys import Command, PLATFORM
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # read secret keys and sensitive data
-with open(os.path.join(BASE_DIR, "keys.json"), "r") as f:
-    KEYS = json.load(f)
+SECRET_FILE = "keys.json"
+KEYS = Command().load_keys_file(SECRET_FILE)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -109,10 +110,10 @@ DATABASES = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'productsDB',                      # Or path to database file if using sqlite3.
-        'USER': KEYS.get("DB_USER_WIN", "root") if os.name == 'nt' else KEYS.get("DB_USER_LINUX", "root"),
-        'PASSWORD': KEYS.get("DB_PASS_WIN", "") if os.name == 'nt' else KEYS.get("DB_PASS_LINUX", ""),
+        'USER': KEYS.get("DB_USER_{}".format(PLATFORM), KEYS.get("DB_USER", "root")),
+        'PASSWORD': KEYS.get("DB_PASS_{}".format(PLATFORM), KEYS.get("DB_PASS", "")),
         'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
     }
