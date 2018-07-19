@@ -33,13 +33,13 @@ mysql> exit
 After installing the basic programs (i.e. MySQL, python, git) on the server machine follow the remaining instructions to
 setup the project
 
-#. cloning the repository
+1. cloning the repository
 $ git clone https://github.com/davtoh/product-web-page.git
 
-#. Installing requirements
+2. Installing requirements
 $ pip install requirements.txt
 
-#. create the ``keys.json`` configuration file for sensitive data
+3. create the ``keys.json`` configuration file for sensitive data
 To protect sensitive data the keys.json file is loaded on the settings.py file and used to provide the necessary keys.
 If ti is not provided a generic file will be created and a generic ``SECRET_KEY`` provided. The default file
 ``keys.json`` has the form:
@@ -73,14 +73,14 @@ the keys files can be created or managed using the ``secret_keys`` command. Type
 
 $ python manage.py secret_keys --help
 
-#. Run migrations
+4. Run migrations
 Once the database is created it is necessary to create the tables reflecting the models used on the web page. Run
 the following commands if the project's ``settings.py`` file is configured with the database.
 
 $ python manage.py makemigrations
 $ python manage.py migrate
 
-#. Create admin user
+5. Create admin user
 It is a good practice to create a superuser that will have control over all the web page and use it exclusively
 to create staff users which will have lower permissions to administer the web page. This superuser is usually the
 owner of the enterprise if there is just one or an user that represents all the enterprise and that will be kept
@@ -88,7 +88,7 @@ secret to employees, only accessible to higher-ups.
 
 $ python manage.py createsuperuser --username=admin --email=email@messages.com
 
-#. (Optional) Create debug users
+6. (Optional) Create debug users
 $ python manage.py populate_users --test
 
 .. warning::
@@ -96,7 +96,7 @@ $ python manage.py populate_users --test
     and it should not be used for production. This can cause a breach so only use for debugging or testing and
     delete after uses
 
-#. Additional resources and databases
+7. Additional resources and databases
 Download the following resources, extract and place them on the working directory:
 
 * [world.sql](https://github.com/prograhammer/countries-regions-cities)
@@ -105,7 +105,7 @@ Download the following resources, extract and place them on the working director
 
 This files are used as pre-loaded databases to start using the web page.
 
-#. Populate locations
+8. Populate locations
 To use the countries, states and cities we need to populate the database with this information. The ``populate_locations``
 imports the locations from the ``world.sql`` and creates a cache file according to your project to do this task
 way faster than the first run.
