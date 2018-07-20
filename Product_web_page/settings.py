@@ -38,10 +38,17 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',  # https://docs.djangoproject.com/en/2.0/ref/contrib/contenttypes/#module-django.contrib.contenttypes
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',  # https://docs.djangoproject.com/en/2.0/ref/contrib/staticfiles/#module-django.contrib.staticfiles
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
     'webprogram.apps.WebprogramConfig',
     'home.apps.HomeConfig',
     'todo.apps.TodoConfig',
@@ -100,13 +107,6 @@ WSGI_APPLICATION = 'Product_web_page.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 DATABASES = {
     'default': {

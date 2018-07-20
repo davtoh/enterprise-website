@@ -1,20 +1,20 @@
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
+from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView as _LoginView, LogoutView as _LogoutView
 #from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.tokens import default_token_generator
 from django.urls import reverse_lazy
-from .models import SiteUser, Countries, States, Cities
-from .forms import SiteUserCreationForm, ImageUploadForm
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import login
 from django.conf import settings
-from django.utils.encoding import force_bytes
-from django.utils.encoding import force_text
-from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.mail import EmailMultiAlternatives
-from django.contrib.auth.tokens import default_token_generator
 from django.template.loader import render_to_string
+from .models import States, Cities
+from .forms import SiteUserCreationForm, ImageUploadForm
 
 
 # https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html
@@ -46,10 +46,11 @@ def send_account_activation_email(request, user):
 
 
 def activate_user_account(request, uidb64=None, token=None):
+    UserModel = get_user_model()
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = SiteUser.objects.get(pk=uid)
-    except SiteUser.DoesNotExist:
+        uid = urlsafe_base64_decode(uidb64).decode()  # https://stackoverflow.com/a/47924973
+        user = UserModel.objects.get(pk=uid)
+    except UserModel.DoesNotExist:
         user = None
     if user and default_token_generator.check_token(user, token):
         user.is_email_verified = True
@@ -71,7 +72,7 @@ class LogoutView(_LogoutView):
 
 
 class SiteUserListView(LoginRequiredMixin, ListView):
-    model = SiteUser
+    model = settings.AUTH_USER_MODEL
     context_object_name = 'Users'
 
 
@@ -79,7 +80,7 @@ class SignUpView(CreateView):
     """
     View the signup page with all the fields with signup.html template
     """
-    model = SiteUser
+    model = settings.AUTH_USER_MODEL
     form_class = SiteUserCreationForm
     template_name = 'user_management/signup.html'
     success_url = reverse_lazy('user_management:login')
@@ -111,13 +112,13 @@ def load_cities(request):
 
 
 class SiteUserUpdateView(UpdateView):
-    model = SiteUser
+    model = settings.AUTH_USER_MODEL
     fields = ('username', 'first_name', 'last_name', 'email', 'birthdate', 'country', 'city', 'password')
     success_url = reverse_lazy('user_management:login')
 
 
 class SiteUserProfileView(DetailView):
-    model = SiteUser
+    model = settings.AUTH_USER_MODEL
     fields = ('username', 'first_name', 'last_name', 'email', 'birthdate', 'country', 'city', 'password')
 
 

@@ -64,9 +64,9 @@ setup the project
 
     $ pip install requirements.txt
 
-3. create the ``keys.json`` configuration file for sensitive data
+3. create a ``keys.json`` configuration file for sensitive data
 
-To protect sensitive data the keys.json file is loaded on the settings.py file and used to provide the necessary keys.
+To protect sensitive data a keys.json file is loaded on the settings and used to provide the necessary keys.
 If ti is not provided a generic file will be created and a generic ``SECRET_KEY`` provided. The default file
 ``keys.json`` has the form:
 

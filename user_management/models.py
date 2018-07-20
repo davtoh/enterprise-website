@@ -6,14 +6,17 @@ from easy_timezones.signals import detected_timezone
 from django.dispatch import receiver
 from location_management.models import Countries, States, Cities
 from phonenumber_field.modelfields import PhoneNumberField
+from django.conf import settings
 
 # https://docs.djangoproject.com/en/2.0/ref/contrib/auth/
-# http://django-book.readthedocs.io/en/latest/chapter14.html#using-users
-# https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
-# https://www.codingforentrepreneurs.com/blog/how-to-create-a-custom-django-user-model/
-# https://wsvincent.com/django-user-authentication-tutorial-login-and-logout/
-# https://wsvincent.com/django-custom-user-model-tutorial/
-# https://simpleisbetterthancomplex.com/tutorial/2018/01/18/how-to-implement-multiple-user-types-with-django.html
+# explains official user models https://docs.djangoproject.com/en/2.0/topics/auth/customizing/
+# Sessions, Users, and Registration http://django-book.readthedocs.io/en/latest/chapter14.html#using-users
+# custom user email-based https://www.codingforentrepreneurs.com/blog/how-to-create-a-custom-django-user-model/
+# ways to extend user https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
+# ways to implement user  https://simpleisbetterthancomplex.com/tutorial/2018/01/18/how-to-implement-multiple-user-types-with-django.html
+# custom user app 2017 https://wsvincent.com/django-user-authentication-tutorial-login-and-logout/
+# custom user app 2018 https://wsvincent.com/django-custom-user-model-tutorial/
+# sign up using social networks https://wsvincent.com/django-allauth-tutorial-custom-user-model/
 
 
 class Gender(models.Model):
@@ -24,6 +27,15 @@ class Gender(models.Model):
 
 
 class SiteUser(AbstractUser):
+    """
+    User Model for the site. This model can be used int the settings.py with
+    AUTH_USER_MODEL = SiteUser.
+
+    .. note::
+
+        All user models can be accessed statically with settings.AUTH_USER_MODEL
+        and dynamically with django.contrib.auth.get_user_model()
+    """
     username_validator = ASCIIUsernameValidator()
 
     date_of_birth = models.DateField(null=True, blank=True)
@@ -41,11 +53,14 @@ class SiteUser(AbstractUser):
     #class Meta:
     #    proxy = True  # If no new field is added.
 
+    # USERNAME_FIELD = 'username'
+    # REQUIRED_FIELDS = ['email']
+
     def __str__(self):
         return self.username
 
 
-@receiver(detected_timezone, sender=SiteUser)
+@receiver(detected_timezone, sender=settings.AUTH_USER_MODEL)
 def process_timezone(sender, instance, timezone, **kwargs):
     try:
         instance.timezone

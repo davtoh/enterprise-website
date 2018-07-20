@@ -2,14 +2,14 @@ from django.contrib import admin
 #from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 from .forms import SiteUserCreationForm, SiteUserChangeForm
-from .models import SiteUser
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 
 class SiteUserAdmin(UserAdmin):
     add_form = SiteUserCreationForm
     form = SiteUserChangeForm
-    model = SiteUser
+    model = settings.AUTH_USER_MODEL
     #list_display = ['username', 'email', 'first_name', 'last_name']
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
@@ -26,4 +26,4 @@ class SiteUserAdmin(UserAdmin):
     )
 
 
-admin.site.register(SiteUser, SiteUserAdmin)
+admin.site.register(settings.AUTH_USER_MODEL, SiteUserAdmin)

@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.admin.widgets import AdminDateWidget
-from .models import SiteUser, Cities, States
+from .models import Cities, States
+from django.conf import settings
 from django.core.files.images import get_image_dimensions
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
@@ -73,7 +74,7 @@ class SiteUserCommonForm:
 class SiteUserCreationForm(UserCreationForm, SiteUserCommonForm):
 
     class Meta(UserCreationForm.Meta):
-        model = SiteUser
+        model = settings.AUTH_USER_MODEL
         fields = ('username', 'first_name', 'last_name', 'email', 'phone_number', 'profile_picture', 'date_of_birth', 'country', 'state', 'city')
         # https://stackoverflow.com/a/22250192/5288758
         widgets = {
@@ -110,7 +111,7 @@ class SiteUserCreationForm(UserCreationForm, SiteUserCommonForm):
 class SiteUserChangeForm(UserChangeForm, SiteUserCommonForm):
 
     class Meta:
-        model = SiteUser
+        model = settings.AUTH_USER_MODEL
         fields = UserChangeForm.Meta.fields
 
 

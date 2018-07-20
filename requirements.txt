@@ -13,6 +13,7 @@ django-easy-timezones
 django-countries
 django-rosetta
 django-phonenumber-field
+django-allauth
 babel
 sqlparse
 dateutil

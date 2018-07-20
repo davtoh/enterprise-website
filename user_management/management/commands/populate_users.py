@@ -1,4 +1,4 @@
-from user_management.models import SiteUser
+from django.contrib.auth import get_user_model
 from custom_tags.utils import LoggerCommand
 from django.db.utils import IntegrityError
 
@@ -55,16 +55,17 @@ class Command(LoggerCommand):
         )
 
     def _create_supersuer(self, username='superuser', password=None):
+        UserModel = get_user_model()
         if password is None:
             password = username
         try:
-            user = SiteUser.objects.create_user(username=username, password=password, is_active=True, is_superuser=True, is_staff=True)
+            user = UserModel.objects.create_user(username=username, password=password, is_active=True, is_superuser=True, is_staff=True)
             user.save()
             self.logger.info("created superuser '{}'".format(username))
         except IntegrityError:
             # user already exits update password
             if self.update:
-                user = SiteUser.objects.get(username__exact=username)
+                user = UserModel.objects.get(username__exact=username)
                 if password and user.is_superuser:
                     user.set_password(password)
                     user.save()
@@ -73,16 +74,17 @@ class Command(LoggerCommand):
                 self.logger.info("User '{}' already exists".format(username))
 
     def _create_staff(self, username='staff', password=None):
+        UserModel = get_user_model()
         if password is None:
             password = username
         try:
-            user = SiteUser.objects.create_user(username=username, password=password, is_active=True, is_superuser=False, is_staff=True)
+            user = UserModel.objects.create_user(username=username, password=password, is_active=True, is_superuser=False, is_staff=True)
             user.save()
             self.logger.info("created staff user '{}'".format(username))
         except IntegrityError:
             # user already exits update password
             if self.update:
-                user = SiteUser.objects.get(username__exact=username)
+                user = UserModel.objects.get(username__exact=username)
                 if password and user.is_staff:
                     user.set_password(password)
                     user.save()
@@ -91,16 +93,17 @@ class Command(LoggerCommand):
                 self.logger.info("User '{}' already exists".format(username))
 
     def _create_regular(self, username='regular', password=None):
+        UserModel = get_user_model()
         if password is None:
             password = username
         try:
-            user = SiteUser.objects.create_user(username=username, password=password, is_active=True, is_superuser=False, is_staff=False)
+            user = UserModel.objects.create_user(username=username, password=password, is_active=True, is_superuser=False, is_staff=False)
             user.save()
             self.logger.info("created regular user '{}'".format(username))
         except IntegrityError:
             # user already exits update password
             if self.update:
-                user = SiteUser.objects.get(username__exact=username)
+                user = UserModel.objects.get(username__exact=username)
                 if password and not user.is_staff and not user.is_superuser:
                     user.set_password(password)
                     user.save()
