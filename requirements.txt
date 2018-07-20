@@ -15,6 +15,7 @@ django-rosetta
 django-phonenumber-field
 django-allauth
 djangorestframework
+channels
 babel
 sqlparse
 dateutil

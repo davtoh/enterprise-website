@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'django_countries',  # https://github.com/SmileyChris/django-countries/
     'phonenumber_field',  # https://github.com/stefanfoulis/django-phonenumber-field
     'rosetta',
+    'channels',
 ]
 
 # during the request phase, where middleware is applied first-to-last
@@ -280,3 +281,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+# channels
+ASGI_APPLICATION = "Product_web_page.routing.application"
