@@ -14,6 +14,7 @@ django-countries
 django-rosetta
 django-phonenumber-field
 django-allauth
+djangorestframework
 babel
 sqlparse
 dateutil
