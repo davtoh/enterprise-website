@@ -1,2 +1,0 @@
-Python Templating
-Templating with Python has never been more easy! It is a really cool thing to do on your page.
