@@ -1,88 +1,94 @@
+<!DOCTYPE html>
 {% load static %}
 {% load stright_include %}
-{% load kwacros %}
+
+
 {% with css_folder="css" %}
-<!DOCTYPE html>
+
 <html lang="en">
     <head>
-    {# This is where metadata is specified #}
-    {% block meta %}
-        {% include 'partials/meta.html' %}
-        <!-- Meta Description -->
-        <meta name="description" content="{% block meta.description %}{% endblock %}">
-        <!-- Meta Keyword -->
-        <meta name="keywords" content="{% block meta.keywords %}{% endblock %}">
-        <!-- bootstrap support for mobile phones -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% endblock %}
+        {# This is where metadata is specified #}
+        {% block meta %}
+            {% include 'partials/meta.html' %}
+            <!-- Meta Description -->
+            <meta name="description" content="{% block meta.description %}{% endblock %}">
+            <!-- Meta Keyword -->
+            <meta name="keywords" content="{% block meta.keywords %}{% endblock %}">
+            <!-- bootstrap support for mobile phones -->
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% endblock %}
 
-    {# This is were stylesheet goes #}
-    {% block styles %}
-        {# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> #}
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-        <!--
-        CSS
-        ============================================= -->
+        {# This is were stylesheet goes #}
+        {% block styles %}
+            {# <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> #}
+            <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+            <!--
+            CSS
+            ============================================= -->
 
-        <!-- others -->
-        {% comment %}
-        {% with css_folder|add:"/hexagons.min.css" as link_static %}
-          <link rel="stylesheet" href="{% static link_static %}">
-        {% endwith %}
-        {% with css_folder|add:"/owl.carousel.css" as link_static %}
-          <link rel="stylesheet" href="{% static link_static %}">
-        {% endwith %}
-        {% endcomment %}
+            <!-- others -->
+            {% comment %}
+            {% with css_folder|add:"/hexagons.min.css" as link_static %}
+              <link rel="stylesheet" href="{% static link_static %}">
+            {% endwith %}
+            {% with css_folder|add:"/owl.carousel.css" as link_static %}
+              <link rel="stylesheet" href="{% static link_static %}">
+            {% endwith %}
+            {% endcomment %}
 
-        <!-- fonts -->
-        {% with css_folder|add:"/linearicons.css" as link_static %}
-          <link rel="stylesheet" href="{% static link_static %}">
-        {% endwith %}
-        {% with css_folder|add:"/font-awesome.min.css" as link_static %}
-          <link rel="stylesheet" href="{% static link_static %}">
-        {% endwith %}
+            <!-- fonts -->
+            {% with css_folder|add:"/linearicons.css" as link_static %}
+              <link rel="stylesheet" href="{% static link_static %}">
+            {% endwith %}
+            {% with css_folder|add:"/font-awesome.min.css" as link_static %}
+              <link rel="stylesheet" href="{% static link_static %}">
+            {% endwith %}
 
-        <!-- additional  -->
-        {% with css_folder|add:"/magnific-popup.css" as link_static %}
-          <link rel="stylesheet" href="{% static link_static %}">
-        {% endwith %}
-        {% with css_folder|add:"/nice-select.css" as link_static %}
-          <link rel="stylesheet" href="{% static link_static %}">
-        {% endwith %}
-        {% with css_folder|add:"/animate.min.css" as link_static %}
-          <link rel="stylesheet" href="{% static link_static %}">
-        {% endwith %}
+            <!-- additional  -->
+            {% with css_folder|add:"/magnific-popup.css" as link_static %}
+              <link rel="stylesheet" href="{% static link_static %}">
+            {% endwith %}
+            {% with css_folder|add:"/nice-select.css" as link_static %}
+              <link rel="stylesheet" href="{% static link_static %}">
+            {% endwith %}
+            {% with css_folder|add:"/animate.min.css" as link_static %}
+              <link rel="stylesheet" href="{% static link_static %}">
+            {% endwith %}
 
-        <!-- main styles -->
-        {% with css_folder|add:"/bootstrap.css" as link_static %}
-          <link rel="stylesheet" href="{% static link_static %}">
-        {% endwith %}
-        {% with css_folder|add:"/main.css" as link_static %}
-          <link rel="stylesheet" href="{% static link_static %}">
-        {% endwith %}
-        {% with css_folder|add:"/django.css" as link_static %}
-          <link rel="stylesheet" href="{% static link_static %}">
-        {% endwith %}
-    {% endblock %}
+            <!-- main styles -->
+            {% with css_folder|add:"/bootstrap.css" as link_static %}
+              <link rel="stylesheet" href="{% static link_static %}">
+            {% endwith %}
+            {% with css_folder|add:"/main.css" as link_static %}
+              <link rel="stylesheet" href="{% static link_static %}">
+            {% endwith %}
+            {% with css_folder|add:"/django.css" as link_static %}
+              <link rel="stylesheet" href="{% static link_static %}">
+            {% endwith %}
+        {% endblock %}
 
-    {# This is where scripts go. It must be last to ensure that some scripts are executed when the page is ready #}
-    {% block scripts %}
-        {% include 'partials/scripts.html' %}
-    {% endblock %}
+        {# This is where scripts go. It must be last to ensure that some scripts are executed when the page is ready #}
+        {% block scripts %}
+            {% include 'partials/scripts.html' %}
+        {% endblock %}
 
-    {# This is were title is specified #}
-    <title>{% block title %}{{ title }}{% endblock %}</title>
+        {# This is were title is specified #}
+        <title>{% block title %}{{ title }}{% endblock %}</title>
+
+        {# This is were favicon is specified #}
+        {% block favicon %}<link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>{% endblock %}
+
     </head>
 
     <body>
         {# template_include 'partials/header.html' #}
-        <header {% block header.attrs %}id="site-header"{% endblock %}>
+        <header id="header" {% block header.attrs %}{% endblock %}>
             {% block header %}
 
 			    <div class="container main-menu">
 			    	<div class="row align-items-center justify-content-between d-flex">
 				      <div id="logo">
-				        <a href="index.html"><img src="{% static "img/logo.png" %}" alt="" title="" /></a>
+				        <a href="index.html"><img src="{% static 'img/logo.png' %}" alt="" title="" /></a>
 				      </div>
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu">
@@ -109,13 +115,14 @@
 					          </li>
 				            </ul>
 				          </li>
+                            <li>{% include "language_management/form.html" with type="menu"%}</li>
                         {% if user.is_authenticated %}
-                          <li><a href="{% url 'user_management:logout' %}">logout</a></li>
+                          <li><a href="{% url 'user_management:logout' %}">logout {{user.username}}</a></li>
                         {% else %}
                           <li><a href="{% url 'user_management:login' %}">login</a></li>
                           <li><a href="{% url 'user_management:signup' %}">signup</a></li>
                         {% endif %}
-                        <li>{% include "language_management/form.html" with type="menu"%}</li>
+
 				        </ul>
 				      </nav><!-- #nav-menu-container -->
 			    	</div>
@@ -130,27 +137,16 @@
             <!-- start banner Area -->
             <section class="banner-area" id="home">
                 <div class="container">
-                    <div class="row fullscreen d-flex align-items-center justify-content-center">
-                        {% block banner.content %}
-                            <div class="about-content col-lg-12">
-                                <h1 class="text-white">
-                                    {% kwacro banner.content.title %}
-                                        {% block banner.content.title %}
-                                            {% if banner_content_title %}
-                                                {{ banner_content_title }}
-                                            {% else %}
-                                                <script>
-                                                    document.write(document.title);
-                                                </script>
-                                            {% endif %}
-                                        {% endblock %}
-                                    {% endkwacro %}
-                                    {% usekwacro banner.content.title %}
-                                </h1>
-                                <p class="text-white link-nav"><a href="{% url "home:index" %}">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{{ request.path }}">
-                                {% usekwacro banner.content.title %}</a></p>
-                            </div>
-                        {% endblock %}
+                    <div {% block banner.attrs %} style="height: 100px;" class="row d-flex align-items-center justify-content-center"{% endblock %}>
+                        <div {% block banner.content_attrs %} class="col-lg-6 col-md-6"{% endblock %} >
+                            {% block banner.content %}
+                            {% endblock %}
+                        </div>
+
+                        <div {% block banner.image_attrs %} class="banner-img col-lg-6 col-md-6"{% endblock %} >
+                            {% block banner.image %}
+                            {% endblock %}
+                        </div>
                     </div>
                 </div>
             </section>

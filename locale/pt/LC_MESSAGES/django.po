@@ -1,0 +1,237 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-03 00:05-0500\n"
+"PO-Revision-Date: 2018-06-25 11:34-0456\n"
+"Last-Translator: b'  <missitios@hotmail.com>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.8.1\n"
+
+#: .\enterprise_website\settings.py:204
+msgid "English"
+msgstr "Inglês"
+
+#: .\enterprise_website\settings.py:205
+msgid "Spanish"
+msgstr "Espanhol"
+
+#: .\enterprise_website\settings.py:206
+msgid "Portuguese"
+msgstr "Português"
+
+#: .\enterprise_website\settings.py:207
+msgid "French"
+msgstr "Francês"
+
+#: .\enterprise_website\settings.py:208
+msgid "Italian"
+msgstr "Italiano"
+
+#: .\enterprise_website\settings.py:209
+msgid "Japanese"
+msgstr "Japonês"
+
+#: .\home\admin.py:4
+msgid "Page Administration"
+msgstr "Administração Da Página"
+
+#: .\home\admin.py:5 .\templates\admin\base_site.html:5
+#: .\templates\admin\base_site.html:18
+msgid "Administration"
+msgstr "Administração"
+
+#: .\language_management\models.py:16
+msgid "User language"
+msgstr "Idioma do usuário"
+
+#: .\language_management\models.py:19
+msgid "Set the language to show in site"
+msgstr "Definir o idioma para mostrar no site"
+
+#: .\language_management\models.py:23
+msgid "This language code is too long."
+msgstr "Este código de idioma é muito longo."
+
+#: .\language_management\templates\language_management\form.html:37
+#, fuzzy
+#| msgid "User language"
+msgid "Language"
+msgstr "Idioma do usuário"
+
+#: .\location_management\apps.py:7
+msgid "Location management"
+msgstr ""
+
+#: .\location_management\models.py:8
+msgid "country name"
+msgstr ""
+
+#: .\location_management\models.py:8 .\location_management\models.py:9
+#: .\location_management\models.py:21 .\location_management\models.py:22
+#: .\location_management\models.py:23 .\location_management\models.py:35
+#: .\location_management\models.py:36 .\location_management\models.py:37
+#: .\location_management\models.py:38 .\location_management\models.py:39
+#: .\timezone_management\models.py:41 .\user_management\models.py:25
+#: .\user_management\models.py:43 .\user_management\models.py:44
+#: .\user_management\models.py:45 .\user_management\models.py:48
+#: .\user_management\models.py:49 .\user_management\models.py:50
+#: .\user_management\models.py:51 .\user_management\models.py:52
+msgid "This is the help text"
+msgstr ""
+
+#: .\location_management\models.py:9
+msgid "country code"
+msgstr ""
+
+#: .\location_management\models.py:13 .\location_management\models.py:21
+#: .\location_management\models.py:35 .\user_management\models.py:49
+msgid "country"
+msgstr ""
+
+#: .\location_management\models.py:14
+msgid "countries"
+msgstr ""
+
+#: .\location_management\models.py:22
+msgid "state name"
+msgstr ""
+
+#: .\location_management\models.py:23
+msgid "state code"
+msgstr ""
+
+#: .\location_management\models.py:27 .\location_management\models.py:36
+#: .\user_management\models.py:50
+msgid "state"
+msgstr ""
+
+#: .\location_management\models.py:28
+msgid "states"
+msgstr ""
+
+#: .\location_management\models.py:37
+msgid "city name"
+msgstr ""
+
+#: .\location_management\models.py:38
+msgid "latitude"
+msgstr ""
+
+#: .\location_management\models.py:39
+msgid "longitude"
+msgstr ""
+
+#: .\location_management\models.py:43 .\user_management\models.py:51
+msgid "city"
+msgstr ""
+
+#: .\location_management\models.py:44
+msgid "cities"
+msgstr ""
+
+#: .\polls\apps.py:7
+msgid "Polls"
+msgstr "Sondagens"
+
+#: .\polls\templates\polls\index.html:23
+#, fuzzy
+msgid "No polls are available."
+msgstr "Não há enquetes disponíveis."
+
+#: .\timezone_management\models.py:41 .\user_management\models.py:48
+#, fuzzy
+#| msgid "Sets the timezone"
+msgid "timezone"
+msgstr "Define o fuso horário"
+
+#: .\timezone_management\models.py:49
+msgid "Sets the timezone"
+msgstr "Define o fuso horário"
+
+#: .\timezone_management\models.py:52
+msgid "Select the timezone to keep track of time"
+msgstr "Selecione o fuso horário para manter o controle de tempo"
+
+#: .\timezone_management\models.py:56
+msgid "This timezone format is too long"
+msgstr "Este formato de fuso horário é muito longo"
+
+#: .\todo\apps.py:7
+msgid "Todo's"
+msgstr "Tarefas"
+
+#: .\user_management\admin.py:16
+msgid "Personal info"
+msgstr ""
+
+#: .\user_management\admin.py:17
+msgid "Permissions"
+msgstr ""
+
+#: .\user_management\admin.py:19
+msgid "Important dates"
+msgstr ""
+
+#: .\user_management\apps.py:7
+#, fuzzy
+#| msgid "User language"
+msgid "User management"
+msgstr "Idioma do usuário"
+
+#: .\user_management\forms.py:36
+msgid "Please use an image that is %(w) x %(h) pixels or smaller."
+msgstr ""
+
+#: .\user_management\forms.py:42
+msgid "Please use a JPEG, GIF or PNG image."
+msgstr ""
+
+#: .\user_management\forms.py:48
+#, python-format
+msgid "Avatar file size may not exceed %s."
+msgstr ""
+
+#: .\user_management\forms.py:67
+msgid "Invalid date - unless you come from the future"
+msgstr ""
+
+#: .\user_management\forms.py:72
+#, python-format
+msgid "Invalid date - you must older than %d"
+msgstr ""
+
+#: .\user_management\models.py:25 .\user_management\models.py:44
+msgid "gender"
+msgstr ""
+
+#: .\user_management\models.py:43
+msgid "birthdate"
+msgstr ""
+
+#: .\user_management\models.py:45
+msgid "profile picture"
+msgstr ""
+
+#: .\user_management\models.py:52
+msgid "phone"
+msgstr ""
+
+#: .\user_management\models.py:65
+msgid "site user"
+msgstr ""
+
+#: .\user_management\models.py:66
+msgid "site users"
+msgstr ""

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,2EAA2E;AAC3E,gDAAgD;AAChD,UACA;EACI,KAAK,EAAE,GAAG;;;AAEd,2BAA4B;EAC5B,MAAM,EAAE,aAAa;;;AAGrB,SAAS;EACL,KAAK,EAAE,OAAO",
+"sources": ["../scss/django.scss"],
+"names": [],
+"file": "django.css"
+}

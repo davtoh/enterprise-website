@@ -8,6 +8,7 @@ from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
 import datetime
 from dateutil.relativedelta import relativedelta
+from django.contrib.auth import get_user_model
 
 
 def years_ago(years, from_date=None):
@@ -38,13 +39,13 @@ class SiteUserCommonForm:
             #validate content type
             main, sub = avatar.content_type.split('/')
             if not (main == 'image' and sub in ['jpeg', 'pjpeg', 'gif', 'png']):
-                raise forms.ValidationError(_(u'Please use a JPEG, GIF or PNG image.'))
+                raise ValidationError(_(u'Please use a JPEG, GIF or PNG image.'))
 
             #validate file size
             max_size = 20
             if len(avatar) > (max_size * 1024):
                 max_size_str = "20k".format(max_size)
-                raise forms.ValidationError(_('Avatar file size may not exceed %s.') % max_size_str)
+                raise ValidationError(_('Avatar file size may not exceed %s.') % max_size_str)
 
         except AttributeError:
             """
@@ -55,8 +56,11 @@ class SiteUserCommonForm:
 
         return avatar
 
-    def clean_date_of_birth(self):
-        data = self.cleaned_data['date_of_birth']
+    def clean_birthdate(self):
+        data = self.cleaned_data['birthdate']
+
+        if data is None:
+            return  # no birth data to process
 
         # Check date is not in future
         if data > datetime.date.today():
@@ -74,11 +78,12 @@ class SiteUserCommonForm:
 class SiteUserCreationForm(UserCreationForm, SiteUserCommonForm):
 
     class Meta(UserCreationForm.Meta):
-        model = settings.AUTH_USER_MODEL
-        fields = ('username', 'first_name', 'last_name', 'email', 'phone_number', 'profile_picture', 'date_of_birth', 'country', 'state', 'city')
+        model = get_user_model()
+        fields = ('username', 'first_name', 'last_name', 'email', 'phone_number', 'profile_picture',
+                  'birthdate', 'country', 'state', 'city')
         # https://stackoverflow.com/a/22250192/5288758
         widgets = {
-            'date_of_birth': forms.DateInput(attrs={'class':'datepicker'}),  # https://stackoverflow.com/a/5455164/5288758
+            'birthdate': forms.DateInput(attrs={'class':'datepicker'}),  # https://stackoverflow.com/a/5455164/5288758
         }
 
     def __init__(self, *args, **kwargs):
@@ -111,7 +116,7 @@ class SiteUserCreationForm(UserCreationForm, SiteUserCommonForm):
 class SiteUserChangeForm(UserChangeForm, SiteUserCommonForm):
 
     class Meta:
-        model = settings.AUTH_USER_MODEL
+        model = get_user_model()
         fields = UserChangeForm.Meta.fields
 
 

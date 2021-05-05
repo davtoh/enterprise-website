@@ -1,0 +1,3 @@
+countries https://dev.maxmind.com/geoip/legacy/codes/iso3166/
+dabatabase cities http://www.geodatasource.com/world-cities-database/free
+Colombian database https://github.com/vafelu/departamentos-y-municipios-colombia-SQL

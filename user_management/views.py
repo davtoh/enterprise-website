@@ -72,7 +72,7 @@ class LogoutView(_LogoutView):
 
 
 class SiteUserListView(LoginRequiredMixin, ListView):
-    model = settings.AUTH_USER_MODEL
+    model = get_user_model()
     context_object_name = 'Users'
 
 
@@ -80,10 +80,16 @@ class SignUpView(CreateView):
     """
     View the signup page with all the fields with signup.html template
     """
-    model = settings.AUTH_USER_MODEL
+    model = get_user_model()
     form_class = SiteUserCreationForm
     template_name = 'user_management/signup.html'
     success_url = reverse_lazy('user_management:login')
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        # form.send_email()  # intended to send mail
+        return super().form_valid(form)  # Save form
 
 
 def load_states(request):
@@ -112,13 +118,13 @@ def load_cities(request):
 
 
 class SiteUserUpdateView(UpdateView):
-    model = settings.AUTH_USER_MODEL
+    model = get_user_model()
     fields = ('username', 'first_name', 'last_name', 'email', 'birthdate', 'country', 'city', 'password')
     success_url = reverse_lazy('user_management:login')
 
 
 class SiteUserProfileView(DetailView):
-    model = settings.AUTH_USER_MODEL
+    model = get_user_model()
     fields = ('username', 'first_name', 'last_name', 'email', 'birthdate', 'country', 'city', 'password')
 
 

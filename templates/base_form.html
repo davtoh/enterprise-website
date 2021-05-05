@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load kwacros %}
+
+{% block title %}Form{% endblock %}
+
+{% block banner.attrs %} class="row fitscreen d-flex align-items-center justify-content-center"{% endblock %}
+{% block banner.content_attrs %} class="about-content col-lg-6 col-md-6" {% endblock %}
+{% block banner.image_attrs %} class="banner-img col-lg-6 col-md-6"{% endblock %}
+
+{% block banner.content %}
+<h1 class="text-white">
+    {% kwacro banner.content.title %}
+        {% block banner.content.title %}
+            {% if banner_content_title %}
+                {{ banner_content_title }}
+            {% else %}
+                <script>
+                    document.write(document.title);
+                </script>
+            {% endif %}
+        {% endblock %}
+    {% endkwacro %}
+
+    {% usekwacro banner.content.title %}
+</h1>
+<p class="text-white link-nav"><a href="{% url 'home:index' %}">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{{ request.path }}">
+{% usekwacro banner.content.title %}</a></p>
+{% endblock %}
+
+{% block content %}
+  <h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}

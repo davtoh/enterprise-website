@@ -1,21 +1,44 @@
-"C:\Users\Davtoh\Downloads\opencv_python-3.4.1+contrib-cp36-cp36m-win_amd64.whl"
-PyQt5
-#pyqt5-tools # only windows, needed for qt designer
-"F:\Davtoh\python_vision_env\requirements.txt"
-mysqlclient  # on linux run: sudo apt-get install libmysqlclient-dev
-SQLAlchemy
-requests
-brython
-transcrypt
-SpeechRecognition
-django-easy-timezones
-#django-timezone-field
-django-countries
-django-rosetta
-django-phonenumber-field
-django-allauth
-djangorestframework
-channels
-babel
-sqlparse
-dateutil
+#opencv-python>=3.4.1+contrib  # Wrapper package for OpenCV python bindings
+opencv
+# interface packages
+#PyQt5>=5.10.1
+#pyqt5-tools>=5.9.0.1.2 # only windows, needed for qt designer
+
+#packaging and documenting packages
+six>=1.11.0  # Python 2 and 3 compatibility utilities
+packaging>=16.8  # Core utilities for Python packages
+appdirs>=1.4  # get useful user information on OS
+alabaster>=0.7.11  # theme for the Sphinx
+
+#scientific packages
+numpy>=1.9 # for array manipulation and Memory-mapped file
+matplotlib>=1.4  # Python plotting package
+future>=0.16.0  # Clean single-source support for Python 3 and 2
+scipy>=1.1.0  # SciPy: Scientific Library for Python
+
+# for webpage
+mysqlclient #>=1.3.12  ## - Python interface to MySQL  # on linux run: sudo apt-get install libmysqlclient-dev # or # sudo apt-get install mysql-server # on windows pip install mysqlclient
+SQLAlchemy>=1.2.8  # Database Abstraction Library
+requests>=2.19.0  # Python HTTP for Humans
+brython>=3.6.2  # - implementation of Python 3 running in the browser # pip install brython
+
+#Transcrypt>=3.6.101  # -INVALID- Python in the browser, JavaScript transpiler, supporting multiple inheritance and generating lean, highly readable code
+
+#SpeechRecognition>=3.8.1  # - Library for performing speech recognition, with support for several engines and APIs, online and offline
+
+Django  # A high-level Python Web framework that encourages rapid development and clean, pragmatic design
+django-easy-timezones # - >=0.8.0  # Easy timezones for Django (>=1.7) based on MaxMind GeoIP
+#django-timezone-field>=2.1  # A Django app providing database and form fields for pytz timezone objects
+django-countries>=5.3.1  # - Provides a country field for Django models
+django-rosetta>=0.8.1  # A Django application that eases the translation of Django projects
+phonenumberslite>=8.9.9  ## Install to solve bug in django-phonenumber-field # Python version of Google's common library for parsing, formatting, storing and validating international phone numbers
+django-phonenumber-field>=2.0.0  # An international phone number field for django models
+django-allauth>=0.36.0  # Integrated set of Django applications addressing authentication, registration, account management as well as 3rd party (social) account authentication
+djangorestframework>=3.8.2  # Web APIs for Django, made easy
+# django-oauth-toolkit  # OAuth2 Provider for Django
+channels  # Brings async, event-driven capabilities to Django. Django 1.11 and up only  # under windows it requires pip install pypiwin32
+babel>=2.6.0  # A collection of tools for internationalizing Python applications
+sqlparse>=0.2.4  # Non-validating SQL parser
+python-dateutil>=2.7.3  # Extensions to the standard Python datetime module
+wagtail>=2.6.1  # A Django content management system
+idna>=2.7  # Internationalized Domain Names in Applications

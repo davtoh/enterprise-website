@@ -1,4 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'base_form.html' %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
 
 {% block content %}
   <h2>User Form</h2>
@@ -8,8 +11,10 @@
     <table>
       {{ form.as_table }}
     </table>
-    <button type="submit">Save</button>
-    <a href="{% url 'user_management:index' %}">Cancel</a>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+
+    <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary">Cancel</a>{# return to previous page #}
   </form>
 {% endblock %}
 

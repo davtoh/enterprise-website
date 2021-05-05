@@ -1,7 +1,7 @@
 import pytz
 from django.db import models
 from django.forms import ModelForm
-from timezone_field import TimeZoneField
+#from timezone_field import TimeZoneField
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from collections import defaultdict
@@ -38,7 +38,7 @@ class TimeZone(models.Model):
     time_zone_groups = [(_(k), [(t if '/' not in t else k+'/'+t, _(t)) for t in v]) for k, v in _get_groups(show_timezones).items()]
     # FIXME groups not supported in TimeZoneField
     #timezone = TimeZoneField(choices=time_zone_groups, max_length=35, default=settings.TIME_ZONE)  # defaults supported
-    timezone = models.CharField(choices=time_zone_groups, max_length=35, default=settings.TIME_ZONE)
+    timezone = models.CharField(_('timezone'), help_text=_('This is the help text'), choices=time_zone_groups, max_length=35, default=settings.TIME_ZONE)
 
 
 class TimeZoneForm(ModelForm):

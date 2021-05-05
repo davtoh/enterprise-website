@@ -4,6 +4,9 @@
 out
 gen
 
+# ignore thesis work
+/thesis/
+
 # ignore .pyc binaries
 *.pyc
 
@@ -20,3 +23,9 @@ gen
 *.dat
 *.sql
 *.json
+
+# ignore files not still oficially in project
+node_modules
+*.jpg
+*.ico
+*.png

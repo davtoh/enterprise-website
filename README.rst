@@ -1,6 +1,6 @@
-=======================
-WEB PAGE DOCUMENTATION
-=======================
+=================================
+ENTERPRISE WEB SITE DOCUMENTATION
+=================================
 
 This projects intents to provide a base web page for industrial or commercial businesses that intent to offer their
 products, services or just want to advertise their enterprise online.
@@ -19,7 +19,14 @@ instructions based from https://www.digitalocean.com/community/tutorials/how-to-
 
     $ sudo apt update
     $ sudo apt install mysql-server
+    # install client for python mySQLdb solving "OSError: mysql_config not found" https://stackoverflow.com/a/7475296/5288758
+    $ sudo apt-get install libmysqlclient-dev
+    # to start a walk-through to set mysql type:
     $ sudo mysql_secure_installation
+    # to start mysql
+    $ sudo service mysql start
+    # or
+    $ /etc/init.d/mysql start
 
 Run additional commands to allow phpMyAdmin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,7 +65,7 @@ setup the project
 
 1. cloning the repository    ::
 
-    $ git clone https://github.com/davtoh/product-web-page.git
+    $ git clone https://github.com/davtoh/enterprise-website.git
 
 2. Installing requirements    ::
 
@@ -67,7 +74,7 @@ setup the project
 3. create a ``keys.json`` configuration file for sensitive data
 
 To protect sensitive data a keys.json file is loaded on the settings and used to provide the necessary keys.
-If ti is not provided a generic file will be created and a generic ``SECRET_KEY`` provided. The default file
+If it is not provided a generic file will be created and a generic ``SECRET_KEY`` provided. The default file
 ``keys.json`` has the form:
 
 .. code-block:: json
@@ -155,6 +162,44 @@ way faster than the first run.
     $ python manage.py populate_locations
 
 .. note::
-    That is right, the first time running ``populate_locations`` takes long time as it has to fist sanitize and adapt
-    ``world.sql`` to your project. After this a local cached file is created with the same name so subsequents runs
-    if any don't have to repeat these processes. Consider drinking a coffee if running without a cached file.
+    The first time running ``populate_locations`` takes a long time as it has to fist sanitize and adapt ``world.sql``
+    to your project. After this a local cached file is created with the same name (.json) so that subsequents runs
+    don't have to repeat these processes. Consider drinking a coffee if you are running without a cached file.
+
+9. Run a debug server
+
+The quickest way to run the server is by executing the following command:
+
+    ::
+
+    $ ptyhon manager.py runserver 0.0.0.0:8000
+
+.. note::
+    A web browser can be opened with the address ``http://127.0.0.1:8001/`` to explore the page. The variable
+    ``ALLOWED_HOSTS`` can be modified to allow incoming connections from trusted domains or IP addresses.
+
+Maintenance:
+------------
+
+Rosetta for translations
+
+To make messages to be translated in webpage you can run:
+    ::
+
+    $ python manage.py makemessages -l <language code>
+or using -a flag to process all available locales configured in settings
+    ::
+
+    $ python manage.py makemessages -a
+
+.. note::
+    If the error "Can't find msguniq. Make sure you have GNU gettext tools 0.15 or newer installed." appers then
+    install gettext from https://mlocati.github.io/articles/gettext-iconv-windows.html
+    the restart program, terminal or system to run again
+
+after you finish translating the sentences in the "rosetta/" page you can run the compilation to start
+using translations on the webpage
+
+    ::
+
+    $ python manage.py compilemessages

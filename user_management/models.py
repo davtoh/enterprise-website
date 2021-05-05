@@ -7,6 +7,8 @@ from django.dispatch import receiver
 from location_management.models import Countries, States, Cities
 from phonenumber_field.modelfields import PhoneNumberField
 from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.utils.translation import gettext_lazy as _
 
 # https://docs.djangoproject.com/en/2.0/ref/contrib/auth/
 # explains official user models https://docs.djangoproject.com/en/2.0/topics/auth/customizing/
@@ -20,7 +22,7 @@ from django.conf import settings
 
 
 class Gender(models.Model):
-    gender = models.CharField(max_length=200)
+    gender = models.CharField(_('gender'), help_text=_('This is the help text'), max_length=200)
 
     def __str__(self):
         return self.gender
@@ -38,16 +40,16 @@ class SiteUser(AbstractUser):
     """
     username_validator = ASCIIUsernameValidator()
 
-    date_of_birth = models.DateField(null=True, blank=True)
-    gender = models.ForeignKey(Gender, on_delete=models.CASCADE, null=True, blank=True)
-    profile_picture = models.ImageField(upload_to='profile_pictures/',
+    birthdate = models.DateField(_('birthdate'), help_text=_('This is the help text'), null=True, blank=True)
+    gender = models.ForeignKey(Gender, verbose_name=_('gender'), help_text=_('This is the help text'), on_delete=models.CASCADE, null=True, blank=True)
+    profile_picture = models.ImageField(_('profile picture'), help_text=_('This is the help text'), upload_to='profile_pictures/',
                                         #default='profile_pictures/None/no-img.jpg',
                                         blank=True, null=True)
-    timezone = models.ForeignKey(TimeZone, on_delete=models.SET_NULL, null=True, blank=True)
-    country = models.ForeignKey(Countries, on_delete=models.SET_NULL, null=True, blank=True)
-    state = models.ForeignKey(States, on_delete=models.SET_NULL, null=True, blank=True)
-    city = models.ForeignKey(Cities, on_delete=models.SET_NULL, null=True, blank=True)
-    phone_number = PhoneNumberField(null=True, blank=True)  # https://stackoverflow.com/a/19131360/5288758
+    timezone = models.ForeignKey(TimeZone, verbose_name=_('timezone'), help_text=_('This is the help text'), on_delete=models.SET_NULL, null=True, blank=True)
+    country = models.ForeignKey(Countries, verbose_name=_('country'), help_text=_('This is the help text'), on_delete=models.SET_NULL, null=True, blank=True)
+    state = models.ForeignKey(States, verbose_name=_('state'), help_text=_('This is the help text'), on_delete=models.SET_NULL, null=True, blank=True)
+    city = models.ForeignKey(Cities, verbose_name=_('city'), help_text=_('This is the help text'), on_delete=models.SET_NULL, null=True, blank=True)
+    phone_number = PhoneNumberField(_('phone'), help_text=_('This is the help text'), null=True, blank=True)  # https://stackoverflow.com/a/19131360/5288758
 
     # http://benlopatin.com/using-django-proxy-models/
     #class Meta:
@@ -59,8 +61,12 @@ class SiteUser(AbstractUser):
     def __str__(self):
         return self.username
 
+    class Meta:
+        verbose_name = _('site user')
+        verbose_name_plural = _('site users')
 
-@receiver(detected_timezone, sender=settings.AUTH_USER_MODEL)
+
+@receiver(detected_timezone, sender=get_user_model())
 def process_timezone(sender, instance, timezone, **kwargs):
     try:
         instance.timezone

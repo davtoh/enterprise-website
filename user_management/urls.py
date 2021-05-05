@@ -16,6 +16,7 @@ urlpatterns = [
         views.activate_user_account, name='activate_user_account'),
 ]
 
+# TODO https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
 #from django.contrib.auth import views
 #
 #urlpatterns += [
