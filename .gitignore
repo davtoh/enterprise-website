@@ -6,31 +6,17 @@ gen
 
 # ignore .pyc binaries
 *.pyc
-locale/
 
 # ignore executables
 /dist/
 /build/
 /documentation/_build/
-/doc/_build/
 
 # ignore temporal files like caches and memoizations
 /temp/
-Product_web_page/static/
+!/tests/unittest_tests/*.py
 
-# additional files
-*NOTES*
+# ignore databases and configurations
 *.dat
-*.gz
-*.sqlite*
-*.zip
 *.sql
 *.json
-
-# ignore migrations on repo for clean installs
-*/migrations/*
-
-# ignore temporal file on early development
-static/
-node_modules/
-documentation/
