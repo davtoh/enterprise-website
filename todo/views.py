@@ -3,10 +3,15 @@ from django.contrib import messages
 #from django.http import HttpResponse, HttpResponseRedirect
 #from django.urls import reverse
 from .models import Todo
-#from django.template.loader import get_template
-#from django.views.generic.base import TemplateView
-from pytz import timezone
 from django.urls import include
+try:
+    from zoneinfo import ZoneInfo
+except ImportError:
+    ZoneInfo = None
+    try:
+        from pytz import timezone as ZoneInfo
+    except ImportError:
+        ZoneInfo = None
 
 
 def index(request):
@@ -27,10 +32,17 @@ def details(request, id):
 
     # make context
     detected_timezone = request.session.get('django_timezone')
+    todo_date = todo.created_at
+    if detected_timezone and ZoneInfo is not None:
+        try:
+            todo_date = todo.created_at.astimezone(ZoneInfo(detected_timezone))
+        except Exception:
+            pass
+
     context = {
         'todo': todo,
-        'time_zone_user': detected_timezone,  # https://docs.djangoproject.com/en/2.0/topics/i18n/timezones/#selecting-the-current-time-zone
-        'date': todo.created_at.astimezone(timezone(detected_timezone)),
+        'time_zone_user': detected_timezone,
+        'date': todo_date,
     }
     return render(request, 'todo/details.html', context=context)
 

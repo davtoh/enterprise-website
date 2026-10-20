@@ -7,15 +7,23 @@ from django.core.files.images import get_image_dimensions
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
 import datetime
-from dateutil.relativedelta import relativedelta
+try:
+    from dateutil.relativedelta import relativedelta
+except ImportError:
+    relativedelta = None
 from django.contrib.auth import get_user_model
 
 
 def years_ago(years, from_date=None):
-    # https://stackoverflow.com/a/765990/5288758
     if from_date is None:
         from_date = datetime.date.today()
-    return from_date - relativedelta(years=years)
+    if relativedelta is not None:
+        return from_date - relativedelta(years=years)
+    try:
+        return from_date.replace(year=from_date.year - years)
+    except ValueError:
+        # Handles leap years (Feb 29 -> Feb 28)
+        return from_date.replace(year=from_date.year - years, day=28)
 
 
 class SiteUserCommonForm:

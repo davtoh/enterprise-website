@@ -12,35 +12,37 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import json
-from custom_tags.management.commands.secret_keys import Command, PLATFORM
 from pathlib import Path
+from dotenv import load_dotenv
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Build paths inside the project like this: BASE_DIR / 'subdir'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# read secret keys and sensitive dataSITE_ID
-SECRET_FILE = "keys.json"
-KEYS = Command().load_keys_file(SECRET_FILE)
+# Load environment variables from .env file
+load_dotenv(BASE_DIR / ".env")
+
+# Backward compatibility with keys.json if present
+KEYS = {}
+keys_file = BASE_DIR / "keys.json"
+if keys_file.exists():
+    try:
+        with open(keys_file, "r", encoding="utf-8") as f:
+            KEYS = json.load(f)
+    except Exception:
+        pass
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
+SECRET_KEY = os.getenv("SECRET_KEY", KEYS.get("SECRET_KEY", "django-insecure-default-change-me"))
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = KEYS.get("SECRET_KEY", "")
+DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = [
-    '192.168.0.4',
-    '127.0.0.1',
-]
+ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost,192.168.0.4").split(",") if host.strip()]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',  # Must be before django.contrib.staticfiles for channels/ASGI
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
@@ -64,7 +66,6 @@ INSTALLED_APPS = [
     'location_management.apps.LocationManagementConfig',
     'user_management.apps.UserManagementConfig',
     'timezone_management.apps.TimezoneManagementConfig',
-    'easy_timezones',  # allow timezone per user https://github.com/Miserlou/django-easy-timezones
     'django_countries',  # https://github.com/SmileyChris/django-countries/
     'phonenumber_field',  # https://github.com/stefanfoulis/django-phonenumber-field
     'rosetta',
@@ -82,11 +83,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware', #Associates users with requests using sessions.
+    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'easy_timezones.middleware.EasyTimezoneMiddleware',  # https://github.com/Miserlou/django-easy-timezones
-    #'django.contrib.redirects.middleware.RedirectFallbackMiddleware',  # https://docs.djangoproject.com/en/2.0/ref/contrib/redirects/
 ]
 
 ROOT_URLCONF = 'enterprise_website.urls'
@@ -94,8 +94,7 @@ ROOT_URLCONF = 'enterprise_website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             # https://docs.djangoproject.com/en/2.0/ref/templates/api/#using-requestcontext
@@ -112,19 +111,28 @@ TEMPLATES = [
 WSGI_APPLICATION = 'enterprise_website.wsgi.application'
 
 
-# Database
+# Database - OS-agnostic: SQLite for zero-setup local dev; MySQL/Postgres in prod
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+USE_SQLITE = os.getenv("USE_SQLITE", "True").lower() in ("true", "1", "t")
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'productsDB',                      # Or path to database file if using sqlite3.
-        'USER': KEYS.get("DB_USER_{}".format(PLATFORM), KEYS.get("DB_USER", "root")),
-        'PASSWORD': KEYS.get("DB_PASS_{}".format(PLATFORM), KEYS.get("DB_PASS", "")),
-        'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '3306',                      # Set to empty string for default. Not used with sqlite3.
+if USE_SQLITE:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.mysql'), # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': os.getenv('DB_NAME', KEYS.get('DB_NAME', 'productsDB')), # Or path to database file if using sqlite3.
+            'USER': os.getenv('DB_USER', KEYS.get('DB_USER', 'root')),
+            'PASSWORD': os.getenv('DB_PASSWORD', KEYS.get('DB_PASS', '')),
+            'HOST': os.getenv('DB_HOST', '127.0.0.1'), # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': os.getenv('DB_PORT', '3306'), # Set to empty string for default. Not used with sqlite3.
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -159,32 +167,22 @@ TIME_ZONE = 'America/Bogota'  # for my site. All are saved to databases as UTC r
 
 USE_I18N = True
 
-USE_L10N = True
-
 # With USE_TZ = True django expects aware datetimes on the database layer.
 # Any value you get from a model or form field will be aware.
 # If Django encounters a naïve datetime, it interprets it as local time (TIME_ZONE)
 # of the current time zone and logs a warning.
 USE_TZ = True
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-# All settings common to all environments
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]  # https://docs.djangoproject.com/en/2.0/ref/settings/#prefixes-optional
-# FIX SITE_ID = 1 fixes "Site matching query does not exist."
-SITE_ID = 1  # https://docs.djangoproject.com/en/2.0/ref/settings/#sites
+    BASE_DIR / 'static',
+]
 
-# easy_timezones
-# https://github.com/Miserlou/django-easy-timezones
-GEOIP_DATABASE = './GeoLiteCity.dat'
-GEOIPV6_DATABASE = './GeoLiteCityv6.dat'
+SITE_ID = 1
 
 # to give color to messages
 from django.contrib.messages import constants as messages

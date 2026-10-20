@@ -20,7 +20,7 @@ def get_referer_view(request, default=None):
         return default
 
     # remove the protocol and split the url at the slashes
-    referer = re.sub('^https?:\/\/', '', referer).split('/')
+    referer = re.sub(r'^https?://', '', referer).split('/')
     if referer[0] != request.META.get('SERVER_NAME'):
         return default
 

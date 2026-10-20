@@ -1,0 +1,9 @@
+-r base.txt
+
+# Production WSGI/ASGI Servers
+gunicorn>=21.2.0; sys_platform != "win32"
+uvicorn>=0.23.0
+
+# Production Database Drivers
+mysqlclient>=2.2.0
+psycopg2-binary>=2.9.7

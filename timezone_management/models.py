@@ -1,4 +1,4 @@
-import pytz
+import sys
 from django.db import models
 from django.forms import ModelForm
 #from timezone_field import TimeZoneField
@@ -6,15 +6,18 @@ from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from collections import defaultdict
 
+try:
+    import zoneinfo
+    show_timezones = sorted(zoneinfo.available_timezones())
+except (ImportError, AttributeError):
+    try:
+        import pytz
+        show_timezones = pytz.all_timezones
+    except ImportError:
+        show_timezones = ['UTC', 'America/Bogota', 'America/New_York', 'Europe/London']
+
 
 def _get_groups(tags, compact='others', original=False):
-    """
-
-    :param tags:
-    :param compact:
-    :param original:
-    :return: dictionary with continets as keys and conutries as values
-    """
     res = defaultdict(list)
     for tag in tags:
         sep = tag.split('/')
@@ -28,9 +31,6 @@ def _get_groups(tags, compact='others', original=False):
         else:
             res[sep[0]].append(sep[0])
     return res
-
-
-show_timezones = pytz.all_timezones  # pytz.common_timezones
 
 
 class TimeZone(models.Model):

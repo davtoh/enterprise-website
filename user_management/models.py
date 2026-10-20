@@ -2,13 +2,17 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import ASCIIUsernameValidator
 from timezone_management.models import TimeZone
-from easy_timezones.signals import detected_timezone
-from django.dispatch import receiver
+from django.dispatch import receiver, Signal
 from location_management.models import Countries, States, Cities
 from phonenumber_field.modelfields import PhoneNumberField
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
+
+try:
+    from easy_timezones.signals import detected_timezone
+except ImportError:
+    detected_timezone = Signal()
 
 # https://docs.djangoproject.com/en/2.0/ref/contrib/auth/
 # explains official user models https://docs.djangoproject.com/en/2.0/topics/auth/customizing/
@@ -83,6 +87,13 @@ def process_timezone(sender, instance, timezone, **kwargs):
 
     # if user choice come first regardless of detected timezone
     if user_choice and instance.timezone and instance.timezone != timezone:
-        from django.utils import timezone
-        import pytz
-        timezone.activate(pytz.timezone(instance.timezone))
+        from django.utils import timezone as dj_timezone
+        try:
+            import zoneinfo
+            dj_timezone.activate(zoneinfo.ZoneInfo(str(instance.timezone)))
+        except Exception:
+            try:
+                import pytz
+                dj_timezone.activate(pytz.timezone(str(instance.timezone)))
+            except Exception:
+                pass

@@ -1,31 +1,55 @@
-# IntelliJ project files
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs
+*.log
+
+# IDEs
 .idea/
-*.iml
-out
-gen
+.vscode/
+*.swp
+*.swo
 
-# ignore thesis work
-/thesis/
+# OS & Temp
+.DS_Store
+Thumbs.db
+~$*.xlsx
+~$*.docx
 
-# ignore .pyc binaries
-*.pyc
+# Secrets & Environment variables
+keys.json
+.env
+.env.*
+!.env.example
 
-# ignore executables
-/dist/
-/build/
-/documentation/_build/
+# Local databases & media
+*.sqlite3
+db.sqlite3
+/media/
+/static/static/
 
-# ignore temporal files like caches and memoizations
-/temp/
-!/tests/unittest_tests/*.py
-
-# ignore databases and configurations
+# Legacy binary GeoIP databases
 *.dat
-*.sql
-*.json
-
-# ignore files not still oficially in project
-node_modules
-*.jpg
-*.ico
-*.png

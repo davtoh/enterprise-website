@@ -9,7 +9,11 @@ from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import login
 from django.conf import settings
-from django.utils.encoding import force_bytes, force_text
+try:
+    from django.utils.encoding import force_str
+except ImportError:
+    from django.utils.encoding import force_text as force_str
+from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
