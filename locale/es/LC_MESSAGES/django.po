@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 23:59-0500\n"
+"POT-Creation-Date: 2026-10-21 00:27-0500\n"
 "PO-Revision-Date: 2021-05-02 23:54-0456\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,8 +106,8 @@ msgid ""
 "data access through Django REST Framework."
 msgstr ""
 "Esta plataforma une aplicaciones web modulares en una interfaz empresarial "
-"unificada: incluye gestión dinámica de tareas (Todo), encuestas interactivas"
-" de decisión (Polls), ejecución de Python basada en navegador (Brython) y "
+"unificada: incluye gestión dinámica de tareas (Todo), encuestas interactivas "
+"de decisión (Polls), ejecución de Python basada en navegador (Brython) y "
 "acceso a datos programáticos a través de Django REST Framework."
 
 #: .\home\templates\home\about.html:38 .\home\templates\home\index.html:23
@@ -161,8 +161,8 @@ msgid ""
 "Clean app separation with dedicated models, views, and APIs ready for "
 "internationalization and multi-cloud deployment."
 msgstr ""
-"Separación limpia de aplicaciones con modelos dedicados, vistas y API listas"
-" para la internacionalización y la implementación en múltiples nubes."
+"Separación limpia de aplicaciones con modelos dedicados, vistas y API listas "
+"para la internacionalización y la implementación en múltiples nubes."
 
 #: .\home\templates\home\contact.html:5
 #, fuzzy
@@ -228,12 +228,12 @@ msgstr "Ingrese la dirección de correo"
 msgid "Enter subject"
 msgstr "Introduce el asunto"
 
-#: .\home\templates\home\contact.html:68
+#: .\home\templates\home\contact.html:71
 #, fuzzy
 msgid "Enter Message"
 msgstr "Escriba el mensaje"
 
-#: .\home\templates\home\contact.html:71
+#: .\home\templates\home\contact.html:75
 #, fuzzy
 msgid "Send Message"
 msgstr "Enviar mensaje"
@@ -397,11 +397,11 @@ msgstr ""
 msgid "Enter Email"
 msgstr ""
 
-#: .\home\templates\home\index.html:350
+#: .\home\templates\home\index.html:351
 msgid "Subscribe"
 msgstr ""
 
-#: .\home\templates\home\index.html:360
+#: .\home\templates\home\index.html:361
 msgid "Instragram Feed"
 msgstr ""
 
@@ -839,8 +839,8 @@ msgstr ""
 
 #: .\templates\registration\login.html:20
 msgid ""
-"Your account doesn't have access to this page. To proceed, please login with"
-" an account that has access."
+"Your account doesn't have access to this page. To proceed, please login with "
+"an account that has access."
 msgstr ""
 
 #: .\templates\registration\login.html:22

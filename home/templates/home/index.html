@@ -340,7 +340,8 @@
 
                                 <div class="form-group row" style="width: 100%">
                                     <div class="col-lg-8 col-md-12">
-                                        <input name="EMAIL" placeholder="{% trans 'Enter Email' %}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{% trans \'Enter Email\' %}'" required="" type="email">
+                                        {% trans "Enter Email" as trans_enter_email %}
+                                        <input name="EMAIL" placeholder="{{ trans_enter_email }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_enter_email }}'" required="" type="email">
                                         <div style="position: absolute; left: -5000px;">
                                             <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
                                         </div>

@@ -60,12 +60,16 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-lg-6 form-group">
-                                <input name="name" placeholder="{% trans 'Enter your name' %}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{% trans \'Enter your name\' %}'" class="common-input mb-20 form-control" required="" type="text">
-                                <input name="email" placeholder="{% trans 'Enter email address' %}" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = '{% trans \'Enter email address\' %}'" class="common-input mb-20 form-control" required="" type="email">
-                                <input name="subject" placeholder="{% trans 'Enter subject' %}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{% trans \'Enter subject\' %}'" class="common-input mb-20 form-control" required="" type="text">
+                                {% trans "Enter your name" as trans_name %}
+                                {% trans "Enter email address" as trans_email %}
+                                {% trans "Enter subject" as trans_subject %}
+                                <input name="name" placeholder="{{ trans_name }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_name }}'" class="common-input mb-20 form-control" required="" type="text">
+                                <input name="email" placeholder="{{ trans_email }}" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_email }}'" class="common-input mb-20 form-control" required="" type="email">
+                                <input name="subject" placeholder="{{ trans_subject }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_subject }}'" class="common-input mb-20 form-control" required="" type="text">
                             </div>
                             <div class="col-lg-6 form-group">
-                                <textarea class="common-textarea form-control" name="message" placeholder="{% trans 'Enter Message' %}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{% trans \'Enter Message\' %}'" required="" style="height: 165px;"></textarea>
+                                {% trans "Enter Message" as trans_message %}
+                                <textarea class="common-textarea form-control" name="message" placeholder="{{ trans_message }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_message }}'" required="" style="height: 165px;"></textarea>
                             </div>
                             <div class="col-lg-12">
                                 <button type="submit" class="primary-btn mt-20 text-white" style="float: right; border: none; cursor: pointer;">{% trans "Send Message" %}</button>

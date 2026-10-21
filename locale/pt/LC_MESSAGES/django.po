@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-20 23:59-0500\n"
+"POT-Creation-Date: 2026-10-21 00:27-0500\n"
 "PO-Revision-Date: 2018-06-25 11:34-0456\n"
 "Last-Translator: b'  <missitios@hotmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,11 +184,11 @@ msgstr ""
 msgid "Enter subject"
 msgstr ""
 
-#: .\home\templates\home\contact.html:68
+#: .\home\templates\home\contact.html:71
 msgid "Enter Message"
 msgstr ""
 
-#: .\home\templates\home\contact.html:71
+#: .\home\templates\home\contact.html:75
 msgid "Send Message"
 msgstr ""
 
@@ -343,11 +343,11 @@ msgstr ""
 msgid "Enter Email"
 msgstr ""
 
-#: .\home\templates\home\index.html:350
+#: .\home\templates\home\index.html:351
 msgid "Subscribe"
 msgstr ""
 
-#: .\home\templates\home\index.html:360
+#: .\home\templates\home\index.html:361
 msgid "Instragram Feed"
 msgstr ""
 
