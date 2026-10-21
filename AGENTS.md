@@ -41,4 +41,18 @@ Welcome to the project repository. When working on modernization, debugging, fea
 
 ---
 
+## 5. Environment Discovery & Command Execution
+- **Explicit Python Virtual Environment:** Always use the active local virtual environment at `.\.venv\Scripts\python.exe`.
+- **Avoid Global `python` Calls:** Global PATH commands (like `python` or `py`) resolve to unconfigured or stub versions without Django dependencies installed.
+- **Project Command Invocation:**
+  ```powershell
+  .\.venv\Scripts\python.exe manage.py <command>
+  ```
+- **Authentication Model Context:**
+  - `AUTH_USER_MODEL = 'user_management.SiteUser'`
+  - Front-end auth is at `/accounts/login/` (any active `SiteUser`).
+  - Admin auth is at `/admin/login/` (requires `is_staff=True`).
+
+---
+
 *Detailed modular rules are located in `.agents/rules/`.*

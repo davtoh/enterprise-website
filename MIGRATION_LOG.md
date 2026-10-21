@@ -85,3 +85,27 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `manage.py check` passes with 0 issues.
   - Test client verified HTTP 200 on GET and 302 on POST for `/accounts/logout/`.
   - Full route matrix verified across all apps with HTTP 200 / 302.
+
+---
+
+## [Milestone 4] - Messages Refactoring & Environment Execution Standards
+- **Date:** 2026-10-20
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Refactor `templates/partials/messages.html`:
+    - Remove hardcoded test alerts and restore dynamic Django message rendering loop (`{% if messages %} ... {% endif %}`).
+    - Eliminate hacky `!important`, full-screen viewport taking `min-height: 100vh`, and intrusive high z-index overlay.
+    - Implement clean Bootstrap alerts with gentle drop shadow, dismiss button, and 6-second auto-dismiss.
+  - Document Environment & Execution Standards:
+    - Eliminate command discovery friction by clearly defining the local virtual environment at `.\.venv\Scripts\python.exe` (and pip at `.\.venv\Scripts\pip.exe`).
+    - Explain that global Windows PATH points to an unconfigured Python stub without project packages installed.
+    - Clarify authentication architecture: custom user model `user_management.SiteUser`, separation of front-end `/accounts/login/` vs `/admin/login/` (`is_staff=True`), and how to inspect/create default users.
+    - Persist these rules across `.agents/rules/environment_and_execution.md` and root `AGENTS.md`.
+- **Files Created / Modified:**
+  - `templates/partials/messages.html`
+  - `.agents/rules/environment_and_execution.md`
+  - `AGENTS.md`
+  - `MIGRATION_LOG.md`
+- **Verification:**
+  - Verified `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
+  - Confirmed `templates/partials/messages.html` renders only when messages exist and without intrusive CSS overrides.
