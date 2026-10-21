@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load kwacros %}
+{% load i18n %}
 
-{% block title %}Form{% endblock %}
+{% block title %}{% trans "Form" %}{% endblock %}
 
 {% block banner.attrs %} class="row fitscreen d-flex align-items-center justify-content-center"{% endblock %}
 {% block banner.content_attrs %} class="about-content col-lg-6 col-md-6" {% endblock %}
@@ -23,15 +24,19 @@
 
     {% usekwacro banner.content.title %}
 </h1>
-<p class="text-white link-nav"><a href="{% url 'home:index' %}">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{{ request.path }}">
+<p class="text-white link-nav"><a href="{% url 'home:index' %}">{% trans "Home" %} </a>  <span class="lnr lnr-arrow-right"></span>  <a href="{{ request.path }}">
 {% usekwacro banner.content.title %}</a></p>
 {% endblock %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+<section class="section-gap">
+  <div class="container">
+    <h2>{% trans "Sign up" %}</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="primary-btn text-uppercase">{% trans "Sign up" %}</button>
+    </form>
+  </div>
+</section>
 {% endblock %}

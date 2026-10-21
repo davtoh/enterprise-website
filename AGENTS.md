@@ -55,4 +55,16 @@ Welcome to the project repository. When working on modernization, debugging, fea
 
 ---
 
+## 6. Internationalization (i18n) & Rosetta Translation
+- **Mandatory Translation in Templates:** All user-facing strings must load `{% load i18n %}` and use `{% trans "..." %}` or `{% blocktrans %}...{% endblocktrans %}`.
+- **Mandatory Translation in Python:**
+  - Models, forms, and field labels use `gettext_lazy as _`.
+  - Views and flash messages use `gettext as _` (`messages.success(request, _("..."))`).
+- **Rosetta Catalog Maintenance:**
+  - Keep all catalogs up-to-date with `.\.venv\Scripts\python.exe manage.py makemessages --all --ignore=.venv`.
+  - Maintain PO files and compile with `.\.venv\Scripts\python.exe manage.py compilemessages`.
+  - Enable machine translation bootstrapping and in-app Rosetta translation suggestions for fast localization.
+
+---
+
 *Detailed modular rules are located in `.agents/rules/`.*

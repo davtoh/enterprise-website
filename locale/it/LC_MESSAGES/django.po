@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-03 00:05-0500\n"
+"POT-Creation-Date: 2026-10-20 23:59-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\enterprise_website\settings.py:204
+#: .\enterprise_website\settings.py:203
 msgid "English"
 msgstr ""
 
-#: .\enterprise_website\settings.py:205
+#: .\enterprise_website\settings.py:204
 msgid "Spanish"
 msgstr ""
 
-#: .\enterprise_website\settings.py:206
+#: .\enterprise_website\settings.py:205
 msgid "Portuguese"
 msgstr ""
 
-#: .\enterprise_website\settings.py:207
+#: .\enterprise_website\settings.py:206
 msgid "French"
 msgstr ""
 
-#: .\enterprise_website\settings.py:208
+#: .\enterprise_website\settings.py:207
 msgid "Italian"
 msgstr ""
 
-#: .\enterprise_website\settings.py:209
+#: .\enterprise_website\settings.py:208
 msgid "Japanese"
 msgstr ""
 
@@ -49,6 +49,461 @@ msgstr ""
 #: .\home\admin.py:5 .\templates\admin\base_site.html:5
 #: .\templates\admin\base_site.html:18
 msgid "Administration"
+msgstr ""
+
+#: .\home\templates\home\about.html:5
+msgid "About Us - Enterprise Website"
+msgstr ""
+
+#: .\home\templates\home\about.html:12
+msgid "About Our Platform"
+msgstr ""
+
+#: .\home\templates\home\about.html:14 .\home\templates\home\contact.html:14
+#: .\home\templates\home\index.html:5 .\home\templates\home\products.html:14
+#: .\home\templates\home\services.html:14 .\templates\base.html:97
+#: .\templates\base_form.html:27
+#: .\user_management\templates\user_management\logout.html:14
+#: .\user_management\templates\user_management\logout.html:29
+#: .\user_management\templates\user_management\profile.html:14
+#: .\user_management\templates\user_management\siteuser_list.html:14
+msgid "Home"
+msgstr ""
+
+#: .\home\templates\home\about.html:14 .\home\templates\home\index.html:327
+#: .\templates\base.html:98
+msgid "About Us"
+msgstr ""
+
+#: .\home\templates\home\about.html:17
+msgid "Empowering modern web services, automation, and intelligent tools"
+msgstr ""
+
+#: .\home\templates\home\about.html:33
+msgid "Enterprise Grade Innovation <br>Powered by Modern Django"
+msgstr ""
+
+#: .\home\templates\home\about.html:34
+msgid "Modernized with Python 3.12 and Django 5.0"
+msgstr ""
+
+#: .\home\templates\home\about.html:36
+msgid ""
+"This platform unites modular web applications into a unified enterprise "
+"interface: including dynamic task management (Todo), interactive decision "
+"surveys (Polls), browser-based Python execution (Brython), and programmatic "
+"data access through Django REST Framework."
+msgstr ""
+
+#: .\home\templates\home\about.html:38 .\home\templates\home\index.html:23
+msgid "Explore Services"
+msgstr ""
+
+#: .\home\templates\home\about.html:50
+msgid "Our Engineering Principles"
+msgstr ""
+
+#: .\home\templates\home\about.html:52
+msgid "Standards-compliant, secure, and built for cross-platform resilience."
+msgstr ""
+
+#: .\home\templates\home\about.html:64
+msgid ""
+"Modern asynchronous and synchronous runtime supporting robust database "
+"interactions and secure session authentication."
+msgstr ""
+
+#: .\home\templates\home\about.html:72
+msgid "Enterprise Security"
+msgstr ""
+
+#: .\home\templates\home\about.html:75
+msgid ""
+"OWASP Top 10 compliance, 12-Factor isolated environment credentials, "
+"parameterized queries, and CSRF protection."
+msgstr ""
+
+#: .\home\templates\home\about.html:83
+msgid "Modular Architecture"
+msgstr ""
+
+#: .\home\templates\home\about.html:86
+msgid ""
+"Clean app separation with dedicated models, views, and APIs ready for "
+"internationalization and multi-cloud deployment."
+msgstr ""
+
+#: .\home\templates\home\contact.html:5
+msgid "Contact Us - Enterprise Website"
+msgstr ""
+
+#: .\home\templates\home\contact.html:12
+msgid "Get in Touch"
+msgstr ""
+
+#: .\home\templates\home\contact.html:14 .\templates\base.html:101
+msgid "Contact"
+msgstr ""
+
+#: .\home\templates\home\contact.html:17
+msgid ""
+"Have questions about platform integration or custom solutions? We are here "
+"to help."
+msgstr ""
+
+#: .\home\templates\home\contact.html:35
+msgid "Enterprise Technology Lab"
+msgstr ""
+
+#: .\home\templates\home\contact.html:36
+msgid "Global Engineering Center"
+msgstr ""
+
+#: .\home\templates\home\contact.html:44
+msgid "Local Support Services"
+msgstr ""
+
+#: .\home\templates\home\contact.html:45
+msgid "Mon to Fri 9am to 6pm"
+msgstr ""
+
+#: .\home\templates\home\contact.html:54
+msgid "Send us your query anytime!"
+msgstr ""
+
+#: .\home\templates\home\contact.html:63
+msgid "Enter your name"
+msgstr ""
+
+#: .\home\templates\home\contact.html:64
+msgid "Enter email address"
+msgstr ""
+
+#: .\home\templates\home\contact.html:65
+msgid "Enter subject"
+msgstr ""
+
+#: .\home\templates\home\contact.html:68
+msgid "Enter Message"
+msgstr ""
+
+#: .\home\templates\home\contact.html:71
+msgid "Send Message"
+msgstr ""
+
+#: .\home\templates\home\index.html:13
+msgid ""
+"Improved <br>\n"
+"        Production level <br>\n"
+"        with Robotics"
+msgstr ""
+
+#: .\home\templates\home\index.html:21
+msgid "Everyone wants the innovation through robotics"
+msgstr ""
+
+#: .\home\templates\home\index.html:37
+msgid "Featured Robotics Products to Show"
+msgstr ""
+
+#: .\home\templates\home\index.html:39 .\home\templates\home\index.html:52
+#: .\home\templates\home\index.html:66 .\home\templates\home\index.html:80
+#: .\home\templates\home\index.html:94 .\home\templates\home\index.html:164
+#: .\home\templates\home\index.html:274
+msgid "Who are in extremely love with eco friendly system."
+msgstr ""
+
+#: .\home\templates\home\index.html:50 .\home\templates\home\products.html:43
+msgid "The Upper Eye"
+msgstr ""
+
+#: .\home\templates\home\index.html:54 .\home\templates\home\index.html:68
+#: .\home\templates\home\index.html:82 .\home\templates\home\index.html:96
+msgid "View Details"
+msgstr ""
+
+#: .\home\templates\home\index.html:64 .\home\templates\home\products.html:57
+msgid "The Crab Wheel"
+msgstr ""
+
+#: .\home\templates\home\index.html:78 .\home\templates\home\products.html:71
+msgid "The Plug Ninja"
+msgstr ""
+
+#: .\home\templates\home\index.html:92
+msgid "The Controller"
+msgstr ""
+
+#: .\home\templates\home\index.html:113
+msgid ""
+"Globally Connected <br>\n"
+"                    by Large Network"
+msgstr ""
+
+#: .\home\templates\home\index.html:116 .\home\templates\home\index.html:140
+msgid "We are here to listen from you deliver exellence"
+msgstr ""
+
+#: .\home\templates\home\index.html:121
+msgid "Get Details"
+msgstr ""
+
+#: .\home\templates\home\index.html:134
+msgid "Brand new app to blow your mind"
+msgstr ""
+
+#: .\home\templates\home\index.html:136
+msgid ""
+"We’ve made a life <br>\n"
+"                        that will change you"
+msgstr ""
+
+#: .\home\templates\home\index.html:145
+msgid "Get Started Now"
+msgstr ""
+
+#: .\home\templates\home\index.html:162
+msgid "Some Features that Made us Unique"
+msgstr ""
+
+#: .\home\templates\home\index.html:173
+msgid "Expert Technicians"
+msgstr ""
+
+#: .\home\templates\home\index.html:176 .\home\templates\home\index.html:187
+#: .\home\templates\home\index.html:198 .\home\templates\home\index.html:209
+#: .\home\templates\home\index.html:220 .\home\templates\home\index.html:231
+msgid ""
+"Usage of the Internet is becoming more common due to rapid advancement of "
+"technology and power."
+msgstr ""
+
+#: .\home\templates\home\index.html:184
+msgid "Professional Service"
+msgstr ""
+
+#: .\home\templates\home\index.html:195
+msgid "Great Support"
+msgstr ""
+
+#: .\home\templates\home\index.html:206
+msgid "Technical Skills"
+msgstr ""
+
+#: .\home\templates\home\index.html:217
+msgid "Highly Recomended"
+msgstr ""
+
+#: .\home\templates\home\index.html:228
+msgid "Positive Reviews"
+msgstr ""
+
+#: .\home\templates\home\index.html:272
+msgid "Latest News from our Blog"
+msgstr ""
+
+#: .\home\templates\home\index.html:285 .\home\templates\home\index.html:301
+msgid "Travel"
+msgstr ""
+
+#: .\home\templates\home\index.html:286 .\home\templates\home\index.html:302
+msgid "Life Style"
+msgstr ""
+
+#: .\home\templates\home\index.html:288 .\home\templates\home\index.html:304
+msgid "Portable latest Fashion for young women"
+msgstr ""
+
+#: .\home\templates\home\index.html:325
+msgid "Top Products"
+msgstr ""
+
+#: .\home\templates\home\index.html:328
+msgid "Our Services"
+msgstr ""
+
+#: .\home\templates\home\index.html:329
+msgid "Products Catalog"
+msgstr ""
+
+#: .\home\templates\home\index.html:330
+msgid "Contact & Support"
+msgstr ""
+
+#: .\home\templates\home\index.html:336
+msgid "Newsletter"
+msgstr ""
+
+#: .\home\templates\home\index.html:337
+msgid "You can trust us. we only send promo offers, not a single spam."
+msgstr ""
+
+#: .\home\templates\home\index.html:343
+msgid "Enter Email"
+msgstr ""
+
+#: .\home\templates\home\index.html:350
+msgid "Subscribe"
+msgstr ""
+
+#: .\home\templates\home\index.html:360
+msgid "Instragram Feed"
+msgstr ""
+
+#: .\home\templates\home\products.html:5
+msgid "Products - Enterprise Website"
+msgstr ""
+
+#: .\home\templates\home\products.html:12
+msgid "Featured Products & Systems"
+msgstr ""
+
+#: .\home\templates\home\products.html:14 .\templates\base.html:100
+msgid "Products"
+msgstr ""
+
+#: .\home\templates\home\products.html:17
+msgid ""
+"Engineered hardware and automation solutions for high-precision environments"
+msgstr ""
+
+#: .\home\templates\home\products.html:30
+msgid "Featured Robotics & Systems Catalog"
+msgstr ""
+
+#: .\home\templates\home\products.html:32
+msgid ""
+"High precision, energy-efficient robotic hardware integrated with our web "
+"telemetry endpoints."
+msgstr ""
+
+#: .\home\templates\home\products.html:45
+msgid ""
+"Optical vision sensor with low latency edge telemetry streaming to Django "
+"REST endpoints."
+msgstr ""
+
+#: .\home\templates\home\products.html:47
+msgid "Industrial Grade"
+msgstr ""
+
+#: .\home\templates\home\products.html:59
+msgid ""
+"Omnidirectional navigation chassis designed for automated warehouse "
+"coordination."
+msgstr ""
+
+#: .\home\templates\home\products.html:61
+msgid "Automated AGV"
+msgstr ""
+
+#: .\home\templates\home\products.html:73
+msgid ""
+"Modular smart connector hub bridging microcontrollers to cloud WebSocket "
+"channels."
+msgstr ""
+
+#: .\home\templates\home\products.html:75
+msgid "IoT Gateway"
+msgstr ""
+
+#: .\home\templates\home\products.html:85
+msgid "The Master Controller"
+msgstr ""
+
+#: .\home\templates\home\products.html:87
+msgid ""
+"Dual-core industrial computing unit running embedded Linux with remote "
+"Django API sync."
+msgstr ""
+
+#: .\home\templates\home\products.html:89
+msgid "Core Processor"
+msgstr ""
+
+#: .\home\templates\home\services.html:5
+msgid "Services - Enterprise Website"
+msgstr ""
+
+#: .\home\templates\home\services.html:12
+msgid "Our Services & Applications"
+msgstr ""
+
+#: .\home\templates\home\services.html:14 .\templates\base.html:99
+msgid "Services"
+msgstr ""
+
+#: .\home\templates\home\services.html:17
+msgid "Modular enterprise services integrated into a cohesive web suite"
+msgstr ""
+
+#: .\home\templates\home\services.html:30
+msgid "Integrated Platform Capabilities"
+msgstr ""
+
+#: .\home\templates\home\services.html:32
+msgid ""
+"High-availability modules designed for modern operations, workflow "
+"automation, and data exchange."
+msgstr ""
+
+#: .\home\templates\home\services.html:44
+msgid "Todo & Task Manager"
+msgstr ""
+
+#: .\home\templates\home\services.html:46
+msgid ""
+"Manage daily operational tasks with persistent timezone-aware tracking, "
+"custom tags, and detailed status auditing."
+msgstr ""
+
+#: .\home\templates\home\services.html:48
+#: .\home\templates\home\services.html:64
+#: .\home\templates\home\services.html:80
+msgid "Open App"
+msgstr ""
+
+#: .\home\templates\home\services.html:60
+msgid "Polls & Voting Engine"
+msgstr ""
+
+#: .\home\templates\home\services.html:62
+msgid ""
+"Real-time dynamic opinion gathering with concurrency-safe atomic voting "
+"(Django F-expressions) and visual analytics."
+msgstr ""
+
+#: .\home\templates\home\services.html:76
+msgid "Brython Web Programming"
+msgstr ""
+
+#: .\home\templates\home\services.html:78
+msgid ""
+"Run Python in the browser without plugins. Experience seamless DOM "
+"manipulation using Python 3 client scripts."
+msgstr ""
+
+#: .\home\templates\home\services.html:92
+msgid "RESTful API Gateway"
+msgstr ""
+
+#: .\home\templates\home\services.html:94
+msgid ""
+"Standards-based REST API powered by Django REST Framework with interactive "
+"schema navigation and token authentication."
+msgstr ""
+
+#: .\home\templates\home\services.html:96
+msgid "Open API"
+msgstr ""
+
+#: .\home\views.py:63
+#, python-format
+msgid "Thank you, %(name)s! Your message has been received."
+msgstr ""
+
+#: .\home\views.py:65
+msgid "Please fill out all required fields."
 msgstr ""
 
 #: .\language_management\models.py:16
@@ -67,6 +522,10 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+#: .\language_management\views.py:13
+msgid "Language Management"
+msgstr ""
+
 #: .\location_management\apps.py:7
 msgid "Location management"
 msgstr ""
@@ -80,11 +539,11 @@ msgstr ""
 #: .\location_management\models.py:23 .\location_management\models.py:35
 #: .\location_management\models.py:36 .\location_management\models.py:37
 #: .\location_management\models.py:38 .\location_management\models.py:39
-#: .\timezone_management\models.py:41 .\user_management\models.py:25
-#: .\user_management\models.py:43 .\user_management\models.py:44
-#: .\user_management\models.py:45 .\user_management\models.py:48
-#: .\user_management\models.py:49 .\user_management\models.py:50
-#: .\user_management\models.py:51 .\user_management\models.py:52
+#: .\timezone_management\models.py:41 .\user_management\models.py:29
+#: .\user_management\models.py:47 .\user_management\models.py:48
+#: .\user_management\models.py:49 .\user_management\models.py:52
+#: .\user_management\models.py:53 .\user_management\models.py:54
+#: .\user_management\models.py:55 .\user_management\models.py:56
 msgid "This is the help text"
 msgstr ""
 
@@ -93,7 +552,7 @@ msgid "country code"
 msgstr ""
 
 #: .\location_management\models.py:13 .\location_management\models.py:21
-#: .\location_management\models.py:35 .\user_management\models.py:49
+#: .\location_management\models.py:35 .\user_management\models.py:53
 msgid "country"
 msgstr ""
 
@@ -110,7 +569,7 @@ msgid "state code"
 msgstr ""
 
 #: .\location_management\models.py:27 .\location_management\models.py:36
-#: .\user_management\models.py:50
+#: .\user_management\models.py:54
 msgid "state"
 msgstr ""
 
@@ -130,7 +589,7 @@ msgstr ""
 msgid "longitude"
 msgstr ""
 
-#: .\location_management\models.py:43 .\user_management\models.py:51
+#: .\location_management\models.py:43 .\user_management\models.py:55
 msgid "city"
 msgstr ""
 
@@ -138,15 +597,208 @@ msgstr ""
 msgid "cities"
 msgstr ""
 
-#: .\polls\apps.py:7
+#: .\polls\apps.py:7 .\polls\templates\polls\index.html:6
+#: .\templates\base.html:105
 msgid "Polls"
 msgstr ""
 
-#: .\polls\templates\polls\index.html:23
+#: .\polls\models.py:10
+msgid "Question text"
+msgstr ""
+
+#: .\polls\models.py:11
+msgid "Date published"
+msgstr ""
+
+#: .\polls\models.py:12
+msgid "Poll status"
+msgstr ""
+
+#: .\polls\models.py:15 .\polls\models.py:31
+msgid "Question"
+msgstr ""
+
+#: .\polls\models.py:16
+msgid "Questions"
+msgstr ""
+
+#: .\polls\models.py:27
+msgid "Published recently?"
+msgstr ""
+
+#: .\polls\models.py:32
+msgid "Choice text"
+msgstr ""
+
+#: .\polls\models.py:33
+msgid "Votes"
+msgstr ""
+
+#: .\polls\models.py:36
+msgid "Choice"
+msgstr ""
+
+#: .\polls\models.py:37
+msgid "Choices"
+msgstr ""
+
+#: .\polls\templates\polls\detail.html:5
+msgid "Poll details"
+msgstr ""
+
+#: .\polls\templates\polls\detail.html:14
+#: .\polls\templates\polls\results.html:14
+msgid "Back to Polls"
+msgstr ""
+
+#: .\polls\templates\polls\detail.html:31
+msgid "Submit Vote"
+msgstr ""
+
+#: .\polls\templates\polls\index.html:21
+msgid "Community Polls"
+msgstr ""
+
+#: .\polls\templates\polls\index.html:35
 msgid "No polls are available."
 msgstr ""
 
-#: .\timezone_management\models.py:41 .\user_management\models.py:48
+#: .\polls\templates\polls\results.html:5
+msgid "Poll results"
+msgstr ""
+
+#: .\polls\templates\polls\results.html:22
+#, python-format
+msgid "%(votes)s vote"
+msgid_plural "%(votes)s votes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\polls\templates\polls\results.html:29
+msgid "Vote Again"
+msgstr ""
+
+#: .\polls\templates\polls\results.html:30
+msgid "All Polls"
+msgstr ""
+
+#: .\polls\views.py:72
+msgid "Please select an option before submitting your vote."
+msgstr ""
+
+#: .\polls\views.py:75
+msgid "You didn't select a choice."
+msgstr ""
+
+#: .\polls\views.py:83
+#, python-format
+msgid "Your vote for '%(choice)s' has been recorded!"
+msgstr ""
+
+#: .\templates\base.html:93
+msgid "Enterprise Website"
+msgstr ""
+
+#: .\templates\base.html:102
+msgid "Apps"
+msgstr ""
+
+#: .\templates\base.html:104
+msgid "Todo List"
+msgstr ""
+
+#: .\templates\base.html:106
+msgid "Brython WebProgram"
+msgstr ""
+
+#: .\templates\base.html:107
+msgid "REST API"
+msgstr ""
+
+#: .\templates\base.html:108
+msgid "Site Admin"
+msgstr ""
+
+#: .\templates\base.html:115
+#: .\user_management\templates\user_management\profile.html:14
+msgid "Profile"
+msgstr ""
+
+#: .\templates\base.html:120
+msgid "Logout"
+msgstr ""
+
+#: .\templates\base.html:125 .\templates\registration\login.html:4
+#: .\templates\registration\login.html:40
+#: .\user_management\templates\user_management\login.html:4
+#: .\user_management\templates\user_management\login.html:18
+msgid "Login"
+msgstr ""
+
+#: .\templates\base.html:126
+msgid "Signup"
+msgstr ""
+
+#: .\templates\base_form.html:5
+msgid "Form"
+msgstr ""
+
+#: .\templates\base_form.html:34 .\templates\base_form.html:38
+#: .\templates\signup.html:9 .\templates\signup.html:13
+msgid "Sign up"
+msgstr ""
+
+#: .\templates\registration\logged_out.html:4
+#: .\user_management\templates\user_management\logout.html:12
+#: .\user_management\templates\user_management\logout.html:14
+msgid "Logged Out"
+msgstr ""
+
+#: .\templates\registration\logged_out.html:9
+msgid "You are logged out"
+msgstr ""
+
+#: .\templates\registration\logged_out.html:11
+#: .\user_management\templates\user_management\logout.html:28
+msgid "Log In Again"
+msgstr ""
+
+#: .\templates\registration\login.html:12
+#: .\user_management\templates\user_management\login.html:12
+msgid "Sign In"
+msgstr ""
+
+#: .\templates\registration\login.html:15
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: .\templates\registration\login.html:20
+msgid ""
+"Your account doesn't have access to this page. To proceed, please login with "
+"an account that has access."
+msgstr ""
+
+#: .\templates\registration\login.html:22
+msgid "Please login to see this page."
+msgstr ""
+
+#: .\templates\registration\login.html:42
+msgid "Lost password?"
+msgstr ""
+
+#: .\templates\registration\password_reset_email.html:1
+#: .\user_management\templates\user_management\password_reset_email.html:5
+#, python-format
+msgid ""
+"Someone asked for password reset for email %(email)s. Follow the link below:"
+msgstr ""
+
+#: .\templates\signup.html:4
+#: .\user_management\templates\user_management\signup.html:5
+msgid "Sign Up"
+msgstr ""
+
+#: .\timezone_management\models.py:41 .\user_management\models.py:52
 msgid "timezone"
 msgstr ""
 
@@ -162,8 +814,105 @@ msgstr ""
 msgid "This timezone format is too long"
 msgstr ""
 
+#: .\timezone_management\templates\timezone_management\select.html:6
+msgid "Time zone:"
+msgstr ""
+
+#: .\timezone_management\templates\timezone_management\select.html:12
+msgid "Set"
+msgstr ""
+
 #: .\todo\apps.py:7
 msgid "Todo's"
+msgstr ""
+
+#: .\todo\models.py:9 .\todo\templates\todo\add.html:19
+msgid "Title"
+msgstr ""
+
+#: .\todo\models.py:10
+msgid "Text"
+msgstr ""
+
+#: .\todo\models.py:11
+msgid "Created at"
+msgstr ""
+
+#: .\todo\models.py:14
+msgid "Todo"
+msgstr ""
+
+#: .\todo\models.py:15
+msgid "Todos"
+msgstr ""
+
+#: .\todo\templates\todo\add.html:5
+msgid "Add to Todo list"
+msgstr ""
+
+#: .\todo\templates\todo\add.html:14 .\todo\templates\todo\details.html:13
+msgid "Back to Todo List"
+msgstr ""
+
+#: .\todo\templates\todo\add.html:15
+msgid "Create New Task"
+msgstr ""
+
+#: .\todo\templates\todo\add.html:20
+msgid "Enter task title"
+msgstr ""
+
+#: .\todo\templates\todo\add.html:23
+msgid "Description / Notes"
+msgstr ""
+
+#: .\todo\templates\todo\add.html:24
+msgid "Enter task description..."
+msgstr ""
+
+#: .\todo\templates\todo\add.html:27
+msgid "Save Task"
+msgstr ""
+
+#: .\todo\templates\todo\details.html:5
+msgid "Todo details"
+msgstr ""
+
+#: .\todo\templates\todo\details.html:18
+msgid "Timezone & Timestamp Diagnostics:"
+msgstr ""
+
+#: .\todo\templates\todo\index.html:6
+msgid "Todo Index"
+msgstr ""
+
+#: .\todo\templates\todo\index.html:24
+#, python-format
+msgid "Welcome, %(username)s!"
+msgstr ""
+
+#: .\todo\templates\todo\index.html:26
+msgid "Welcome to Your Todo List"
+msgstr ""
+
+#: .\todo\templates\todo\index.html:28
+msgid "Add Todo"
+msgstr ""
+
+#: .\todo\templates\todo\index.html:45
+msgid "No tasks yet. Create your first task to get started!"
+msgstr ""
+
+#: .\todo\templates\todo\index.html:46
+msgid "Create Task"
+msgstr ""
+
+#: .\todo\views.py:58
+msgid "Todo title cannot be empty."
+msgstr ""
+
+#: .\todo\views.py:67
+msgid "Task created successfully!"
 msgstr ""
 
 #: .\user_management\admin.py:16
@@ -182,48 +931,314 @@ msgstr ""
 msgid "User management"
 msgstr ""
 
-#: .\user_management\forms.py:36
+#: .\user_management\forms.py:44
 msgid "Please use an image that is %(w) x %(h) pixels or smaller."
 msgstr ""
 
-#: .\user_management\forms.py:42
+#: .\user_management\forms.py:50
 msgid "Please use a JPEG, GIF or PNG image."
 msgstr ""
 
-#: .\user_management\forms.py:48
+#: .\user_management\forms.py:56
 #, python-format
 msgid "Avatar file size may not exceed %s."
 msgstr ""
 
-#: .\user_management\forms.py:67
+#: .\user_management\forms.py:75
 msgid "Invalid date - unless you come from the future"
 msgstr ""
 
-#: .\user_management\forms.py:72
+#: .\user_management\forms.py:80
 #, python-format
 msgid "Invalid date - you must older than %d"
 msgstr ""
 
-#: .\user_management\models.py:25 .\user_management\models.py:44
+#: .\user_management\forms.py:133
+msgid "Image"
+msgstr ""
+
+#: .\user_management\models.py:29 .\user_management\models.py:48
 msgid "gender"
 msgstr ""
 
-#: .\user_management\models.py:43
+#: .\user_management\models.py:47
 msgid "birthdate"
 msgstr ""
 
-#: .\user_management\models.py:45
+#: .\user_management\models.py:49
 msgid "profile picture"
 msgstr ""
 
-#: .\user_management\models.py:52
+#: .\user_management\models.py:56
 msgid "phone"
 msgstr ""
 
-#: .\user_management\models.py:65
+#: .\user_management\models.py:69
 msgid "site user"
 msgstr ""
 
-#: .\user_management\models.py:66
+#: .\user_management\models.py:70
 msgid "site users"
+msgstr ""
+
+#: .\user_management\templates\emails\user_management\activation.html:3
+msgid "Email Activation"
+msgstr ""
+
+#: .\user_management\templates\emails\user_management\activation.html:5
+#, python-format
+msgid "Dear %(username)s"
+msgstr ""
+
+#: .\user_management\templates\emails\user_management\activation.html:6
+msgid ""
+"Your account has been successfully created. Please click the link below to "
+"activate your account."
+msgstr ""
+
+#: .\user_management\templates\emails\user_management\activation.html:7
+msgid "Activate your account"
+msgstr ""
+
+#: .\user_management\templates\user_management\login.html:19
+#: .\user_management\templates\user_management\signup.html:18
+msgid "Cancel"
+msgstr ""
+
+#: .\user_management\templates\user_management\logout.html:5
+msgid "Logged Out - Enterprise Website"
+msgstr ""
+
+#: .\user_management\templates\user_management\logout.html:25
+msgid "You have been successfully logged out"
+msgstr ""
+
+#: .\user_management\templates\user_management\logout.html:26
+msgid ""
+"Thank you for visiting Enterprise Website. We hope to see you again soon!"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_complete.html:4
+msgid "Password Changed"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_complete.html:13
+msgid "The password has been changed!"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_complete.html:14
+msgid "Log in now"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_confirm.html:4
+#: .\user_management\templates\user_management\password_reset_confirm.html:13
+msgid "Set New Password"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_confirm.html:14
+msgid "Please enter (and confirm) your new password."
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_confirm.html:20
+msgid "New password:"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_confirm.html:25
+msgid "Confirm password:"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_confirm.html:30
+msgid "Change my password"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_confirm.html:35
+msgid "Password reset failed"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_confirm.html:36
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_confirm.html:37
+msgid "Request New Reset"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_done.html:4
+msgid "Password Reset Sent"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_done.html:12
+msgid "Password Reset Instructions Sent"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_done.html:13
+msgid ""
+"We've emailed you instructions for setting your password. If they haven't "
+"arrived in a few minutes, check your spam folder."
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_form.html:4
+msgid "Reset Password"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_form.html:12
+msgid "Reset Your Password"
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_form.html:13
+msgid ""
+"Enter your email address and we will send you a link to reset your password."
+msgstr ""
+
+#: .\user_management\templates\user_management\password_reset_form.html:20
+msgid "Reset password"
+msgstr ""
+
+#: .\user_management\templates\user_management\profile.html:5
+msgid "User Profile - Enterprise Website"
+msgstr ""
+
+#: .\user_management\templates\user_management\profile.html:12
+#, python-format
+msgid "%(username)s's Profile"
+msgstr ""
+
+#: .\user_management\templates\user_management\profile.html:30
+msgid "No email set"
+msgstr ""
+
+#: .\user_management\templates\user_management\profile.html:36
+msgid "Username:"
+msgstr ""
+
+#: .\user_management\templates\user_management\profile.html:40
+msgid "Date Joined:"
+msgstr ""
+
+#: .\user_management\templates\user_management\profile.html:44
+msgid "Country:"
+msgstr ""
+
+#: .\user_management\templates\user_management\profile.html:45
+#: .\user_management\templates\user_management\profile.html:49
+msgid "Not specified"
+msgstr ""
+
+#: .\user_management\templates\user_management\profile.html:48
+msgid "City:"
+msgstr ""
+
+#: .\user_management\templates\user_management\profile.html:53
+msgid "Edit Profile"
+msgstr ""
+
+#: .\user_management\templates\user_management\profile.html:54
+msgid "Back to Home"
+msgstr ""
+
+#: .\user_management\templates\user_management\signup.html:8
+msgid "User Form"
+msgstr ""
+
+#: .\user_management\templates\user_management\signup.html:16
+msgid "Save"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:5
+msgid "User Directory - Enterprise Website"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:12
+msgid "User Directory"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:14
+msgid "Users"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:25
+msgid "Registered Platform Users"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:26
+msgid "Add User"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:32
+msgid "Username"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:33
+msgid "Email"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:34
+msgid "Country"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:35
+msgid "City"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:36
+msgid "Status"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:48
+msgid "Active"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:50
+msgid "Inactive"
+msgstr ""
+
+#: .\user_management\templates\user_management\siteuser_list.html:56
+msgid "No users found."
+msgstr ""
+
+#: .\user_management\templates\user_management\upload_image_form.html:6
+msgid "Submit"
+msgstr ""
+
+#: .\user_management\views.py:72
+#, python-format
+msgid "Welcome, %(username)s! Your account has been successfully activated."
+msgstr ""
+
+#: .\user_management\views.py:75
+msgid ""
+"The activation link is invalid or has expired. Please log in or request a "
+"new activation."
+msgstr ""
+
+#: .\user_management\views.py:85
+#, python-format
+msgid "Welcome back, %(name)s!"
+msgstr ""
+
+#: .\user_management\views.py:89
+msgid ""
+"Invalid username or password. Please check your credentials and try again."
+msgstr ""
+
+#: .\user_management\views.py:99
+msgid "You have been successfully logged out. See you soon!"
+msgstr ""
+
+#: .\user_management\views.py:128
+msgid "Account created successfully! You can now log in."
+msgstr ""
+
+#: .\user_management\views.py:132
+msgid "Please correct the errors below to complete your registration."
+msgstr ""
+
+#: .\user_management\views.py:171
+msgid "Your profile has been updated successfully."
+msgstr ""
+
+#: .\user_management\views.py:175
+msgid "Unable to save profile changes. Please review the highlighted fields."
 msgstr ""

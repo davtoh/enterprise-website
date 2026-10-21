@@ -1,1 +1,15 @@
-you are logged out
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Logged Out" %}{% endblock %}
+
+{% block content %}
+<section class="section-gap">
+    <div class="container text-center">
+        <h2>{% trans "You are logged out" %}</h2>
+        <div class="mt-4">
+            <a href="{% url 'user_management:login' %}" class="primary-btn text-uppercase">{% trans "Log In Again" %}</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block title %}
-    Polls
+    {% trans "Polls" %}
 {% endblock %}
 
 {% block styles %}
@@ -18,7 +18,7 @@
             <div class="col-lg-8">
                 <div class="card p-4" style="border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-radius: 10px;">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h3 class="m-0"><i class="fa fa-bar-chart mr-2" style="color: #8490ff;"></i> Community Polls</h3>
+                        <h3 class="m-0"><i class="fa fa-bar-chart mr-2" style="color: #8490ff;"></i> {% trans "Community Polls" %}</h3>
                     </div>
                     {% if latest_question_list %}
                         <ul class="list-group list-group-flush">

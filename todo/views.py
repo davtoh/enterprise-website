@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.utils.translation import gettext as _
 #from django.http import HttpResponse, HttpResponseRedirect
 #from django.urls import reverse
 from .models import Todo
@@ -54,7 +55,7 @@ def add(request):
         text = request.POST.get('text', '').strip()
 
         if not title:
-            messages.error(request, 'Todo title cannot be empty.', extra_tags='danger')
+            messages.error(request, _('Todo title cannot be empty.'), extra_tags='danger')
             return render(request, 'todo/add.html', {'text': text})
 
         # save to database
@@ -63,7 +64,7 @@ def add(request):
         # return redirect(request.META.get('HTTP_REFERER', 'todo:index')) # better do https://stackoverflow.com/a/35796559
         #return HttpResponseRedirect(reverse('todo:index'))
         # using next convention https://stackoverflow.com/a/35796559/5288758
-        messages.success(request, 'Form submission successful', extra_tags='alert')
+        messages.success(request, _('Task created successfully!'), extra_tags='alert')
         return redirect(request.POST.get('next', 'todo:index'))
     else:
         return render(request, 'todo/add.html')

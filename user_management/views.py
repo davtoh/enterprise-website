@@ -23,6 +23,7 @@ from .forms import SiteUserCreationForm, ImageUploadForm
 
 from django.contrib import messages
 from django.contrib.auth import logout as auth_logout
+from django.utils.translation import gettext as _
 
 
 # https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html
@@ -68,10 +69,10 @@ def activate_user_account(request, uidb64=None, token=None):
         user.is_active = True
         user.save()
         login(request, user)
-        messages.success(request, f"Welcome, {user.username}! Your account has been successfully activated.")
+        messages.success(request, _("Welcome, %(username)s! Your account has been successfully activated.") % {'username': user.username})
         return redirect('user_management:profile')
     else:
-        messages.error(request, "The activation link is invalid or has expired. Please log in or request a new activation.")
+        messages.error(request, _("The activation link is invalid or has expired. Please log in or request a new activation."))
         return redirect('user_management:login')
 
 
@@ -81,11 +82,11 @@ class LoginView(_LoginView):
 
     def form_valid(self, form):
         user = form.get_user()
-        messages.success(self.request, f"Welcome back, {user.first_name or user.username}!")
+        messages.success(self.request, _("Welcome back, %(name)s!") % {'name': user.first_name or user.username})
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, "Invalid username or password. Please check your credentials and try again.")
+        messages.error(self.request, _("Invalid username or password. Please check your credentials and try again."))
         return super().form_invalid(form)
 
 
@@ -95,7 +96,7 @@ class LogoutView(_LogoutView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            messages.info(request, "You have been successfully logged out. See you soon!")
+            messages.info(request, _("You have been successfully logged out. See you soon!"))
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
@@ -124,11 +125,11 @@ class SignUpView(CreateView):
         # It should return an HttpResponse.
         # form.send_email()  # intended to send mail
         response = super().form_valid(form)
-        messages.success(self.request, "Account created successfully! You can now log in.")
+        messages.success(self.request, _("Account created successfully! You can now log in."))
         return response
 
     def form_invalid(self, form):
-        messages.error(self.request, "Please correct the errors below to complete your registration.")
+        messages.error(self.request, _("Please correct the errors below to complete your registration."))
         return super().form_invalid(form)
 
 
@@ -167,11 +168,11 @@ class SiteUserUpdateView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def form_valid(self, form):
-        messages.success(self.request, "Your profile has been updated successfully.")
+        messages.success(self.request, _("Your profile has been updated successfully."))
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, "Unable to save profile changes. Please review the highlighted fields.")
+        messages.error(self.request, _("Unable to save profile changes. Please review the highlighted fields."))
         return super().form_invalid(form)
 
 

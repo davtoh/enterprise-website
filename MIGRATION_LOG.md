@@ -142,3 +142,56 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
 - **Verification:**
   - Verified `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
   - Tested template tag parsing in `messages.html` to support both `alert-` prefixed tags and bare tags (`error`, `warning`, `success`, `info`).
+
+---
+
+## [Milestone 6] - Internationalization (i18n), Rosetta Mapping & Automated Translation Baseline
+- **Date:** 2026-10-21
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - **AI & Project Rule Updates:**
+    - Created [`.agents/rules/rosetta_and_i18n.md`](file:///g:/Mi%20unidad/projects/web_and_services/enterprise_website/.agents/rules/rosetta_and_i18n.md) defining strict i18n and Rosetta standards for all new templates, models, and views.
+    - Updated [`AGENTS.md`](file:///g:/Mi%20unidad/projects/web_and_services/enterprise_website/AGENTS.md) with **Section 6: Internationalization (i18n) & Rosetta Translation**.
+  - **Rosetta & Machine Translation Settings:**
+    - Configured `django.template.context_processors.i18n` in `TEMPLATES['OPTIONS']['context_processors']` within `enterprise_website/settings.py`.
+    - Enabled `ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True` and added optional API keys (`DEEPL_AUTH_KEY`, `OPENAI_API_KEY`, `AZURE_CLIENT_SECRET`, `GOOGLE_APPLICATION_CREDENTIALS_PATH`) in `enterprise_website/settings.py` and `.env.example`.
+  - **Comprehensive Codebase Mapping & Translation Tagging:**
+    - Mapped and wrapped all untranslated strings across:
+      - Core layout: `templates/base.html`, `templates/admin/base_site.html`, `templates/signup.html`, `templates/base_form.html`, `templates/registration/logged_out.html`.
+      - Home App: `index.html`, `about.html`, `services.html`, `products.html`, `contact.html`, and contact flash messages in `home/views.py`.
+      - User Management App: `login.html`, `logout.html`, `profile.html`, `siteuser_list.html`, `signup.html`, `upload_image_form.html`, password reset templates (`password_reset_form.html`, `password_reset_done.html`, `password_reset_confirm.html`, `password_reset_complete.html`, `password_reset_email.html`), activation email (`activation.html`), `user_management/forms.py` (image validation, birthdate validation, ImageUploadForm label), and all authentication flash messages in `user_management/views.py`.
+      - Todo App: model verbose names in `todo/models.py`, task messages in `todo/views.py`, and templates (`index.html`, `add.html`, `details.html`).
+      - Polls App: model verbose names in `polls/models.py`, vote messages in `polls/views.py`, and templates (`index.html`, `detail.html`, `results.html`).
+      - Timezone Management: `timezone_management/templates/timezone_management/select.html`.
+      - Language Management: `language_management/views.py`.
+  - **Catalog Extraction:**
+    - Executed `.\.venv\Scripts\python.exe manage.py makemessages --all --ignore=.venv`.
+    - Total catalog strings increased from 49 to 278 across all 5 target locales (`es`, `fr`, `it`, `ja`, `pt`).
+  - **Automated Baseline Translation Tooling:**
+    - Built custom Django management command: `python manage.py auto_translate` (`language_management/management/commands/auto_translate.py`).
+    - Features:
+      - Multi-backend translation: MyMemory (free tier, no API key needed), DeepL (`DEEPL_AUTH_KEY`), OpenAI (`OPENAI_API_KEY`).
+      - Format specifier protection: Replaces `%(var)s`, `%s`, `{{ var }}`, `{% tag %}` with safe placeholder tokens during translation and safely restores them.
+      - Rosetta workflow integration: Automatically tags machine-generated translations with the `fuzzy` flag so human translators can easily filter and review them in `/rosetta/`.
+      - Automatically fixes mismatched gettext fuzzy guesses from obsolete strings.
+      - Automatically triggers `compilemessages --ignore=.venv`.
+- **Files Created / Modified:**
+  - `.agents/rules/rosetta_and_i18n.md`
+  - `AGENTS.md`
+  - `enterprise_website/settings.py`
+  - `.env.example`
+  - `language_management/management/commands/auto_translate.py`
+  - `templates/base.html`, `templates/admin/base_site.html`, `templates/signup.html`, `templates/base_form.html`, `templates/registration/logged_out.html`, `templates/registration/password_reset_email.html`
+  - `home/templates/home/` (index, about, services, products, contact) & `home/views.py`
+  - `user_management/templates/user_management/` (all templates), `user_management/forms.py`, `user_management/views.py`
+  - `todo/models.py`, `todo/views.py`, `todo/templates/todo/`
+  - `polls/models.py`, `polls/views.py`, `polls/templates/polls/`
+  - `timezone_management/templates/timezone_management/select.html`
+  - `language_management/views.py`
+  - `locale/` (PO catalogs for `es`, `fr`, `it`, `ja`, `pt`)
+  - `MIGRATION_LOG.md`
+- **Verification:**
+  - Ran `.\.venv\Scripts\python.exe manage.py check` -> 0 issues.
+  - Ran `makemessages` -> 278 catalog entries created.
+  - Tested `auto_translate` command with MyMemory and placeholder protection.
+  - Verified `compilemessages --ignore=.venv` succeeds across all 5 languages.

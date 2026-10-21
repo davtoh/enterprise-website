@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Logged Out - Enterprise Website{% endblock %}
+{% block title %}{% trans "Logged Out - Enterprise Website" %}{% endblock %}
 
 {% block banner.attrs %} class="row fullscreen d-flex align-items-center justify-content-center"{% endblock %}
 {% block banner.content_attrs %} class="about-content col-lg-8 col-md-10 text-center"{% endblock %}
 {% block banner.image_attrs %} class="d-none"{% endblock %}
 
 {% block banner.content %}
-    <h1 class="text-white">Logged Out</h1>
+    <h1 class="text-white">{% trans "Logged Out" %}</h1>
     <p class="text-white link-nav">
-        <a href="{% url 'home:index' %}">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="#"> Logged Out</a>
+        <a href="{% url 'home:index' %}">{% trans "Home" %} </a> <span class="lnr lnr-arrow-right"></span> <a href="#"> {% trans "Logged Out" %}</a>
     </p>
 {% endblock %}
 
@@ -21,11 +22,11 @@
             <div class="col-lg-6">
                 <div class="card p-5" style="border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-radius: 10px;">
                     <span class="lnr lnr-checkmark-circle mb-3" style="font-size: 50px; color: #28a745;"></span>
-                    <h3>You have been successfully logged out</h3>
-                    <p class="text-muted mt-2">Thank you for visiting Enterprise Website. We hope to see you again soon!</p>
+                    <h3>{% trans "You have been successfully logged out" %}</h3>
+                    <p class="text-muted mt-2">{% trans "Thank you for visiting Enterprise Website. We hope to see you again soon!" %}</p>
                     <div class="mt-4">
-                        <a href="{% url 'user_management:login' %}" class="primary-btn text-uppercase">Log In Again</a>
-                        <a href="{% url 'home:index' %}" class="genric-btn default text-uppercase ml-2">Home</a>
+                        <a href="{% url 'user_management:login' %}" class="primary-btn text-uppercase">{% trans "Log In Again" %}</a>
+                        <a href="{% url 'home:index' %}" class="genric-btn default text-uppercase ml-2">{% trans "Home" %}</a>
                     </div>
                 </div>
             </div>

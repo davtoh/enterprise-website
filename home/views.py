@@ -43,6 +43,7 @@ class ProductsView(TemplateView):
 
 
 from django.contrib import messages
+from django.utils.translation import gettext as _
 
 
 class ContactView(TemplateView):
@@ -59,9 +60,9 @@ class ContactView(TemplateView):
         subject = request.POST.get('subject', '').strip()
         message = request.POST.get('message', '').strip()
         if name and email and message:
-            messages.success(request, f"Thank you, {name}! Your message has been received.")
+            messages.success(request, _("Thank you, %(name)s! Your message has been received.") % {'name': name})
         else:
-            messages.error(request, "Please fill out all required fields.")
+            messages.error(request, _("Please fill out all required fields."))
         return redirect('home:contact')
 
 

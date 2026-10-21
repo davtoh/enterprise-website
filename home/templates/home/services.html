@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Services - Enterprise Website{% endblock %}
+{% block title %}{% trans "Services - Enterprise Website" %}{% endblock %}
 
 {% block banner.attrs %} class="row fullscreen d-flex align-items-center justify-content-center"{% endblock %}
 {% block banner.content_attrs %} class="about-content col-lg-8 col-md-10 text-center"{% endblock %}
 {% block banner.image_attrs %} class="d-none"{% endblock %}
 
 {% block banner.content %}
-    <h1 class="text-white">Our Services & Applications</h1>
+    <h1 class="text-white">{% trans "Our Services & Applications" %}</h1>
     <p class="text-white link-nav">
-        <a href="{% url 'home:index' %}">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="{% url 'home:services' %}"> Services</a>
+        <a href="{% url 'home:index' %}">{% trans "Home" %} </a> <span class="lnr lnr-arrow-right"></span> <a href="{% url 'home:services' %}"> {% trans "Services" %}</a>
     </p>
     <p class="text-white text-uppercase pt-10">
-        Modular enterprise services integrated into a cohesive web suite
+        {% trans "Modular enterprise services integrated into a cohesive web suite" %}
     </p>
 {% endblock %}
 
@@ -26,9 +27,9 @@
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-12 pb-40 header-text text-center">
-                    <h1 class="pb-10">Integrated Platform Capabilities</h1>
+                    <h1 class="pb-10">{% trans "Integrated Platform Capabilities" %}</h1>
                     <p>
-                        High-availability modules designed for modern operations, workflow automation, and data exchange.
+                        {% trans "High-availability modules designed for modern operations, workflow automation, and data exchange." %}
                     </p>
                 </div>
             </div>
@@ -40,11 +41,11 @@
                             <span class="lnr lnr-list" style="font-size: 40px; color: #8490ff;"></span>
                         </div>
                         <div class="details text-center">
-                            <h4>Todo & Task Manager</h4>
+                            <h4>{% trans "Todo & Task Manager" %}</h4>
                             <p>
-                                Manage daily operational tasks with persistent timezone-aware tracking, custom tags, and detailed status auditing.
+                                {% trans "Manage daily operational tasks with persistent timezone-aware tracking, custom tags, and detailed status auditing." %}
                             </p>
-                            <a href="{% url 'todo:index' %}" class="primary-btn text-uppercase">Open App</a>
+                            <a href="{% url 'todo:index' %}" class="primary-btn text-uppercase">{% trans "Open App" %}</a>
                         </div>
                     </div>
                 </div>
@@ -56,11 +57,11 @@
                             <span class="lnr lnr-chart-bars" style="font-size: 40px; color: #8490ff;"></span>
                         </div>
                         <div class="details text-center">
-                            <h4>Polls & Voting Engine</h4>
+                            <h4>{% trans "Polls & Voting Engine" %}</h4>
                             <p>
-                                Real-time dynamic opinion gathering with concurrency-safe atomic voting (Django F-expressions) and visual analytics.
+                                {% trans "Real-time dynamic opinion gathering with concurrency-safe atomic voting (Django F-expressions) and visual analytics." %}
                             </p>
-                            <a href="{% url 'polls:index' %}" class="primary-btn text-uppercase">Open App</a>
+                            <a href="{% url 'polls:index' %}" class="primary-btn text-uppercase">{% trans "Open App" %}</a>
                         </div>
                     </div>
                 </div>
@@ -72,11 +73,11 @@
                             <span class="lnr lnr-laptop-phone" style="font-size: 40px; color: #8490ff;"></span>
                         </div>
                         <div class="details text-center">
-                            <h4>Brython Web Programming</h4>
+                            <h4>{% trans "Brython Web Programming" %}</h4>
                             <p>
-                                Run Python in the browser without plugins. Experience seamless DOM manipulation using Python 3 client scripts.
+                                {% trans "Run Python in the browser without plugins. Experience seamless DOM manipulation using Python 3 client scripts." %}
                             </p>
-                            <a href="{% url 'webprogram:index' %}" class="primary-btn text-uppercase">Open App</a>
+                            <a href="{% url 'webprogram:index' %}" class="primary-btn text-uppercase">{% trans "Open App" %}</a>
                         </div>
                     </div>
                 </div>
@@ -88,11 +89,11 @@
                             <span class="lnr lnr-sync" style="font-size: 40px; color: #8490ff;"></span>
                         </div>
                         <div class="details text-center">
-                            <h4>RESTful API Gateway</h4>
+                            <h4>{% trans "RESTful API Gateway" %}</h4>
                             <p>
-                                Standards-based REST API powered by Django REST Framework with interactive schema navigation and token authentication.
+                                {% trans "Standards-based REST API powered by Django REST Framework with interactive schema navigation and token authentication." %}
                             </p>
-                            <a href="/rest_api/" class="primary-btn text-uppercase">Open API</a>
+                            <a href="/rest_api/" class="primary-btn text-uppercase">{% trans "Open API" %}</a>
                         </div>
                     </div>
                 </div>

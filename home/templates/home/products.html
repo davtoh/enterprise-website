@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Products - Enterprise Website{% endblock %}
+{% block title %}{% trans "Products - Enterprise Website" %}{% endblock %}
 
 {% block banner.attrs %} class="row fullscreen d-flex align-items-center justify-content-center"{% endblock %}
 {% block banner.content_attrs %} class="about-content col-lg-8 col-md-10 text-center"{% endblock %}
 {% block banner.image_attrs %} class="d-none"{% endblock %}
 
 {% block banner.content %}
-    <h1 class="text-white">Featured Products & Systems</h1>
+    <h1 class="text-white">{% trans "Featured Products & Systems" %}</h1>
     <p class="text-white link-nav">
-        <a href="{% url 'home:index' %}">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="{% url 'home:products' %}"> Products</a>
+        <a href="{% url 'home:index' %}">{% trans "Home" %} </a> <span class="lnr lnr-arrow-right"></span> <a href="{% url 'home:products' %}"> {% trans "Products" %}</a>
     </p>
     <p class="text-white text-uppercase pt-10">
-        Engineered hardware and automation solutions for high-precision environments
+        {% trans "Engineered hardware and automation solutions for high-precision environments" %}
     </p>
 {% endblock %}
 
@@ -26,9 +27,9 @@
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-12 pb-40 header-text text-center">
-                    <h1 class="pb-10">Featured Robotics & Systems Catalog</h1>
+                    <h1 class="pb-10">{% trans "Featured Robotics & Systems Catalog" %}</h1>
                     <p>
-                        High precision, energy-efficient robotic hardware integrated with our web telemetry endpoints.
+                        {% trans "High precision, energy-efficient robotic hardware integrated with our web telemetry endpoints." %}
                     </p>
                 </div>
             </div>
@@ -39,11 +40,11 @@
                             <img src="{% static 'img/p1.png' %}" class="img-fluid" alt="The Upper Eye">
                         </div>
                         <div class="details">
-                            <h4>The Upper Eye</h4>
+                            <h4>{% trans "The Upper Eye" %}</h4>
                             <p>
-                                Optical vision sensor with low latency edge telemetry streaming to Django REST endpoints.
+                                {% trans "Optical vision sensor with low latency edge telemetry streaming to Django REST endpoints." %}
                             </p>
-                            <span class="badge badge-primary py-2 px-3 mb-2">Industrial Grade</span>
+                            <span class="badge badge-primary py-2 px-3 mb-2">{% trans "Industrial Grade" %}</span>
                         </div>
                     </div>
                 </div>
@@ -53,11 +54,11 @@
                             <img src="{% static 'img/p2.png' %}" class="img-fluid" alt="The Crab Wheel">
                         </div>
                         <div class="details">
-                            <h4>The Crab Wheel</h4>
+                            <h4>{% trans "The Crab Wheel" %}</h4>
                             <p>
-                                Omnidirectional navigation chassis designed for automated warehouse coordination.
+                                {% trans "Omnidirectional navigation chassis designed for automated warehouse coordination." %}
                             </p>
-                            <span class="badge badge-success py-2 px-3 mb-2">Automated AGV</span>
+                            <span class="badge badge-success py-2 px-3 mb-2">{% trans "Automated AGV" %}</span>
                         </div>
                     </div>
                 </div>
@@ -67,11 +68,11 @@
                             <img src="{% static 'img/p3.png' %}" class="img-fluid" alt="The Plug Ninja">
                         </div>
                         <div class="details">
-                            <h4>The Plug Ninja</h4>
+                            <h4>{% trans "The Plug Ninja" %}</h4>
                             <p>
-                                Modular smart connector hub bridging microcontrollers to cloud WebSocket channels.
+                                {% trans "Modular smart connector hub bridging microcontrollers to cloud WebSocket channels." %}
                             </p>
-                            <span class="badge badge-info py-2 px-3 mb-2">IoT Gateway</span>
+                            <span class="badge badge-info py-2 px-3 mb-2">{% trans "IoT Gateway" %}</span>
                         </div>
                     </div>
                 </div>
@@ -81,11 +82,11 @@
                             <img src="{% static 'img/p4.png' %}" class="img-fluid" alt="The Controller">
                         </div>
                         <div class="details">
-                            <h4>The Master Controller</h4>
+                            <h4>{% trans "The Master Controller" %}</h4>
                             <p>
-                                Dual-core industrial computing unit running embedded Linux with remote Django API sync.
+                                {% trans "Dual-core industrial computing unit running embedded Linux with remote Django API sync." %}
                             </p>
-                            <span class="badge badge-dark py-2 px-3 mb-2">Core Processor</span>
+                            <span class="badge badge-dark py-2 px-3 mb-2">{% trans "Core Processor" %}</span>
                         </div>
                     </div>
                 </div>

@@ -130,4 +130,4 @@ class SiteUserChangeForm(UserChangeForm, SiteUserCommonForm):
 
 class ImageUploadForm(forms.Form):
     """Image upload form."""
-    image = forms.ImageField()
+    image = forms.ImageField(label=_('Image'))

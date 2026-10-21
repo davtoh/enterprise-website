@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
+
 {% block title %}
-    Poll details
+    {% trans "Poll details" %}
 {% endblock %}
 
 {% block content %}
@@ -9,7 +11,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="card p-4" style="border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-radius: 10px;">
-                    <a href="{% url 'polls:index' %}" class="text-muted mb-3 d-inline-block"><i class="fa fa-arrow-left mr-1"></i> Back to Polls</a>
+                    <a href="{% url 'polls:index' %}" class="text-muted mb-3 d-inline-block"><i class="fa fa-arrow-left mr-1"></i> {% trans "Back to Polls" %}</a>
                     <h3 class="mb-3">{{ question.question_text }}</h3>
 
                     {% if error_message %}
@@ -26,7 +28,7 @@
                                 </label>
                             {% endfor %}
                         </div>
-                        <button type="submit" class="primary-btn text-uppercase" style="border: none; cursor: pointer;">Submit Vote</button>
+                        <button type="submit" class="primary-btn text-uppercase" style="border: none; cursor: pointer;">{% trans "Submit Vote" %}</button>
                     </form>
                 </div>
             </div>

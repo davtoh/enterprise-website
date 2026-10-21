@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
-{% block title %}Sign Up{% endblock %}
+{% block title %}{% trans "Sign Up" %}{% endblock %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+<section class="section-gap">
+  <div class="container">
+    <h2>{% trans "Sign up" %}</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="primary-btn text-uppercase">{% trans "Sign up" %}</button>
+    </form>
+  </div>
+</section>
 {% endblock %}

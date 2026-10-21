@@ -103,6 +103,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',
             ],
         },
     },
@@ -214,7 +215,11 @@ LOCALE_PATHS = (
 # http://django-rosetta.readthedocs.io/en/latest/settings.html
 ROSETTA_REQUIRES_AUTH = True  # restrict users
 ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True  # suggest translations
-YANDEX_TRANSLATE_KEY = KEYS.get("YANDEX_TRANSLATE_KEY", "")
+YANDEX_TRANSLATE_KEY = os.getenv("YANDEX_TRANSLATE_KEY", KEYS.get("YANDEX_TRANSLATE_KEY", ""))
+DEEPL_AUTH_KEY = os.getenv("DEEPL_AUTH_KEY", KEYS.get("DEEPL_AUTH_KEY", None))
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", KEYS.get("OPENAI_API_KEY", None))
+AZURE_CLIENT_SECRET = os.getenv("AZURE_CLIENT_SECRET", KEYS.get("AZURE_CLIENT_SECRET", None))
+GOOGLE_APPLICATION_CREDENTIALS_PATH = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_PATH", KEYS.get("GOOGLE_APPLICATION_CREDENTIALS_PATH", None))
 ROSETTA_LANGUAGE_GROUPS = True  # choose groups to translate
 ROSETTA_SHOW_AT_ADMIN_PANEL = True  # in admin
 ROSETTA_STORAGE_CLASS = 'rosetta.storage.CacheRosettaStorage'  # 'rosetta.storage.SessionRosettaStorage'

@@ -1,10 +1,11 @@
 {% extends 'base_form.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Sign Up{% endblock %}
+{% block title %}{% trans "Sign Up" %}{% endblock %}
 
 {% block content %}
-  <h2>User Form</h2>
+  <h2>{% trans "User Form" %}</h2>
 
   <form method="post" id="userForm" data-cities-url="{% url 'user_management:ajax_load_cities' %}" data-states-url="{% url 'user_management:ajax_load_states' %}" novalidate>
     {% csrf_token %}
@@ -12,9 +13,9 @@
       {{ form.as_table }}
     </table>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
 
-    <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary">Cancel</a>{# return to previous page #}
+    <a href="{{request.META.HTTP_REFERER|default:'/'}}" class="btn btn-primary">{% trans "Cancel" %}</a>{# return to previous page #}
   </form>
 {% endblock %}
 

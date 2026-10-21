@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 {% load stright_include %}
 
 
 {% with css_folder="css" %}
 
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
     <head>
         {# This is where metadata is specified #}
         {% block meta %}
@@ -88,40 +89,40 @@
 			    <div class="container main-menu">
 			    	<div class="row align-items-center justify-content-between d-flex">
 				      <div id="logo">
-				        <a href="{% url 'home:index' %}"><img src="{% static 'img/logo.png' %}" alt="Enterprise Logo" title="Enterprise Website" /></a>
+				        <a href="{% url 'home:index' %}"><img src="{% static 'img/logo.png' %}" alt="Enterprise Logo" title="{% trans 'Enterprise Website' %}" /></a>
 				      </div>
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu">
-				          <li class="{% if request.resolver_match.view_name == 'home:index' or request.resolver_match.view_name == 'home:index_file' %}menu-active{% endif %}"><a href="{% url 'home:index' %}">Home</a></li>
-				          <li class="{% if request.resolver_match.view_name == 'home:about' or request.resolver_match.view_name == 'home:about_file' %}menu-active{% endif %}"><a href="{% url 'home:about' %}">About Us</a></li>
-				          <li class="{% if request.resolver_match.view_name == 'home:services' or request.resolver_match.view_name == 'home:services_file' %}menu-active{% endif %}"><a href="{% url 'home:services' %}">Services</a></li>
-				          <li class="{% if request.resolver_match.view_name == 'home:products' or request.resolver_match.view_name == 'home:products_file' %}menu-active{% endif %}"><a href="{% url 'home:products' %}">Products</a></li>
-				          <li class="{% if request.resolver_match.view_name == 'home:contact' or request.resolver_match.view_name == 'home:contact_file' %}menu-active{% endif %}"><a href="{% url 'home:contact' %}">Contact</a></li>
-				          <li class="menu-has-children"><a href="#">Apps</a>
+				          <li class="{% if request.resolver_match.view_name == 'home:index' or request.resolver_match.view_name == 'home:index_file' %}menu-active{% endif %}"><a href="{% url 'home:index' %}">{% trans "Home" %}</a></li>
+				          <li class="{% if request.resolver_match.view_name == 'home:about' or request.resolver_match.view_name == 'home:about_file' %}menu-active{% endif %}"><a href="{% url 'home:about' %}">{% trans "About Us" %}</a></li>
+				          <li class="{% if request.resolver_match.view_name == 'home:services' or request.resolver_match.view_name == 'home:services_file' %}menu-active{% endif %}"><a href="{% url 'home:services' %}">{% trans "Services" %}</a></li>
+				          <li class="{% if request.resolver_match.view_name == 'home:products' or request.resolver_match.view_name == 'home:products_file' %}menu-active{% endif %}"><a href="{% url 'home:products' %}">{% trans "Products" %}</a></li>
+				          <li class="{% if request.resolver_match.view_name == 'home:contact' or request.resolver_match.view_name == 'home:contact_file' %}menu-active{% endif %}"><a href="{% url 'home:contact' %}">{% trans "Contact" %}</a></li>
+				          <li class="menu-has-children"><a href="#">{% trans "Apps" %}</a>
 				            <ul>
-				              <li><a href="{% url 'todo:index' %}"><i class="fa fa-tasks"></i> Todo List</a></li>
-				              <li><a href="{% url 'polls:index' %}"><i class="fa fa-bar-chart"></i> Polls</a></li>
-				              <li><a href="{% url 'webprogram:index' %}"><i class="fa fa-code"></i> Brython WebProgram</a></li>
-				              <li><a href="/rest_api/"><i class="fa fa-cogs"></i> REST API</a></li>
-				              <li><a href="{% url 'admin:index' %}"><i class="fa fa-shield"></i> Site Admin</a></li>
+				              <li><a href="{% url 'todo:index' %}"><i class="fa fa-tasks"></i> {% trans "Todo List" %}</a></li>
+				              <li><a href="{% url 'polls:index' %}"><i class="fa fa-bar-chart"></i> {% trans "Polls" %}</a></li>
+				              <li><a href="{% url 'webprogram:index' %}"><i class="fa fa-code"></i> {% trans "Brython WebProgram" %}</a></li>
+				              <li><a href="/rest_api/"><i class="fa fa-cogs"></i> {% trans "REST API" %}</a></li>
+				              <li><a href="{% url 'admin:index' %}"><i class="fa fa-shield"></i> {% trans "Site Admin" %}</a></li>
 				            </ul>
 				          </li>
                           <li>{% include "language_management/form.html" with type="menu"%}</li>
                         {% if user.is_authenticated %}
                           <li class="menu-has-children"><a href="#"><i class="fa fa-user"></i> {{ user.username }}</a>
                             <ul>
-                              <li><a href="{% url 'user_management:profile' %}">Profile</a></li>
+                              <li><a href="{% url 'user_management:profile' %}">{% trans "Profile" %}</a></li>
                               <li>
                                 <form id="logout-form" method="post" action="{% url 'user_management:logout' %}" style="display:none;">
                                   {% csrf_token %}
                                 </form>
-                                <a href="javascript:void(0);" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                                <a href="javascript:void(0);" onclick="document.getElementById('logout-form').submit();">{% trans "Logout" %}</a>
                               </li>
                             </ul>
                           </li>
                         {% else %}
-                          <li><a href="{% url 'user_management:login' %}">Login</a></li>
-                          <li><a href="{% url 'user_management:signup' %}">Signup</a></li>
+                          <li><a href="{% url 'user_management:login' %}">{% trans "Login" %}</a></li>
+                          <li><a href="{% url 'user_management:signup' %}">{% trans "Signup" %}</a></li>
                         {% endif %}
 
 				        </ul>
