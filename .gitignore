@@ -50,6 +50,8 @@ keys.json
 db.sqlite3
 /media/
 /static/static/
+world.sql
+world.sql.json
 
 # Legacy binary GeoIP databases
 *.dat
