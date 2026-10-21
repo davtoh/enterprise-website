@@ -195,3 +195,36 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - Ran `makemessages` -> 278 catalog entries created.
   - Tested `auto_translate` command with MyMemory and placeholder protection.
   - Verified `compilemessages --ignore=.venv` succeeds across all 5 languages.
+
+---
+
+## [Milestone 7] - Documentation Consolidation & System Operations Manual
+- **Date:** 2026-10-21
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - **Single Root README Consolidation:**
+    - Consolidated all relevant legacy setup instructions, production MySQL configurations, data fixtures, and project purpose from `README.rst` into `README.md`.
+    - Removed redundant root `README.rst` to maintain a single source of truth (`README.md`).
+  - **Comprehensive System Manual Creation:**
+    - Created [`documentation/README.md`](file:///g:/Mi%20unidad/projects/web_and_services/enterprise_website/documentation/README.md) detailing:
+      - Project executive summary, purpose, and value proposition.
+      - Full architectural directory breakdown across all apps (`home`, `user_management`, `todo`, `polls`, `language_management`, `location_management`, `timezone_management`, `rest_api`, `webprogram`, `custom_tags`).
+      - Detailed feature descriptions for each module.
+      - System workflows with Mermaid diagrams (Authentication lifecycle, i18n & Rosetta translation pipeline, Geo-data ingestion, and Polling/voting).
+      - Step-by-step commands guide for virtual environments, migrations, fixtures (`populate_users --test`), location databases (`populate_locations`), and poll management (`closepoll`).
+      - Full commands reference for translation tooling (`makemessages`, `auto_translate` with all backend and flag variations, and `compilemessages`).
+      - Windows GNU gettext installation instructions (`mlocati`).
+      - Production database configuration (MySQL / PostgreSQL) and Daphne ASGI deployment.
+  - **Root Documentation References:**
+    - Added direct references and links to `documentation/README.md` within root `README.md`.
+    - Added Operations & Maintenance command cheat sheet to `README.md`.
+- **Files Created / Modified:**
+  - `documentation/README.md` (created)
+  - `README.md` (updated & consolidated)
+  - `README.rst` (deleted)
+  - `MIGRATION_LOG.md` (updated)
+- **Verification:**
+  - Verified `README.rst` deleted (`Test-Path README.rst` -> `False`).
+  - Verified markdown links and formatting in `README.md` and `documentation/README.md`.
+  - Ran `.\.venv\Scripts\python.exe manage.py check` to ensure zero regressions.
+
