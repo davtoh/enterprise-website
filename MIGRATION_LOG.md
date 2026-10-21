@@ -109,3 +109,36 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
 - **Verification:**
   - Verified `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
   - Confirmed `templates/partials/messages.html` renders only when messages exist and without intrusive CSS overrides.
+
+---
+
+## [Milestone 5] - Full Application Flash Messaging Integration
+- **Date:** 2026-10-20
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Wire Django messages framework across all critical user interactions:
+    - **Login (`user_management.views.LoginView`)**:
+      - `form_valid`: Displays `messages.success` greeting the user by name upon successful login.
+      - `form_invalid`: Displays `messages.error` ("Invalid username or password. Please check your credentials and try again.").
+    - **Logout (`user_management.views.LogoutView`)**:
+      - `dispatch`: Displays `messages.info` ("You have been successfully logged out. See you soon!").
+    - **Sign Up / Registration (`user_management.views.SignUpView`)**:
+      - `form_valid`: Displays `messages.success` notifying account creation and prompting login.
+      - `form_invalid`: Displays `messages.error` prompting correction of registration errors.
+    - **Account Activation (`user_management.views.activate_user_account`)**:
+      - Success: Displays `messages.success` and redirects to profile.
+      - Expired/Invalid token: Displays `messages.error` and redirects cleanly to `/accounts/login/` instead of raw plain-text HTTP response.
+    - **Profile Updates (`user_management.views.SiteUserUpdateView`)**:
+      - `form_valid`: Displays `messages.success` on profile changes.
+      - `form_invalid`: Displays `messages.error` if profile validation fails.
+    - **Polls Voting (`polls.views.vote`)**:
+      - No selection: Displays `messages.warning` ("Please select an option before submitting your vote.").
+      - Vote cast: Displays `messages.success` confirming recorded vote.
+- **Files Created / Modified:**
+  - `user_management/views.py`
+  - `polls/views.py`
+  - `templates/partials/messages.html`
+  - `MIGRATION_LOG.md`
+- **Verification:**
+  - Verified `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
+  - Tested template tag parsing in `messages.html` to support both `alert-` prefixed tags and bare tags (`error`, `warning`, `success`, `info`).

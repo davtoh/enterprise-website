@@ -21,6 +21,7 @@ from .models import States, Cities
 from .forms import SiteUserCreationForm, ImageUploadForm
 
 
+from django.contrib import messages
 from django.contrib.auth import logout as auth_logout
 
 
@@ -67,19 +68,35 @@ def activate_user_account(request, uidb64=None, token=None):
         user.is_active = True
         user.save()
         login(request, user)
+        messages.success(request, f"Welcome, {user.username}! Your account has been successfully activated.")
         return redirect('user_management:profile')
     else:
-        return HttpResponse("Activation link has expired")
+        messages.error(request, "The activation link is invalid or has expired. Please log in or request a new activation.")
+        return redirect('user_management:login')
 
 
 class LoginView(_LoginView):
     template_name = 'user_management/login.html'
     authentication_form = None
 
+    def form_valid(self, form):
+        user = form.get_user()
+        messages.success(self.request, f"Welcome back, {user.first_name or user.username}!")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Invalid username or password. Please check your credentials and try again.")
+        return super().form_invalid(form)
+
 
 class LogoutView(_LogoutView):
     template_name = 'user_management/logout.html'
     http_method_names = ['get', 'post', 'options']
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            messages.info(request, "You have been successfully logged out. See you soon!")
+        return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         # Allow graceful GET logout while supporting Django 5 POST standards
@@ -106,7 +123,13 @@ class SignUpView(CreateView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         # form.send_email()  # intended to send mail
-        return super().form_valid(form)  # Save form
+        response = super().form_valid(form)
+        messages.success(self.request, "Account created successfully! You can now log in.")
+        return response
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Please correct the errors below to complete your registration.")
+        return super().form_invalid(form)
 
 
 def load_states(request):
@@ -142,6 +165,14 @@ class SiteUserUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    def form_valid(self, form):
+        messages.success(self.request, "Your profile has been updated successfully.")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Unable to save profile changes. Please review the highlighted fields.")
+        return super().form_invalid(form)
 
 
 class SiteUserProfileView(LoginRequiredMixin, DetailView):

@@ -6,6 +6,7 @@ from django.views import generic
 from django.utils import timezone
 from django.db.models import F  # https://docs.djangoproject.com/en/2.0/ref/models/expressions/#avoiding-race-conditions-using-f
 
+from django.contrib import messages
 from .models import Question, Choice
 
 
@@ -66,7 +67,8 @@ def vote(request, question_id):
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
+        # Redisplay the question voting form with message
+        messages.warning(request, "Please select an option before submitting your vote.")
         return render(request, 'polls/detail.html', {
             'question': question,
             'error_message': "You didn't select a choice.",
@@ -77,6 +79,7 @@ def vote(request, question_id):
         selected_choice.votes = F('votes') + 1
         # reporter.refresh_from_db()  # if i was going to use the updated value
         selected_choice.save()
+        messages.success(request, f"Your vote for '{selected_choice.choice_text}' has been recorded!")
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.

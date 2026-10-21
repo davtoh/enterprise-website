@@ -1,52 +1,32 @@
 <script type="text/javascript">
-    // delete messages after certain time to not clutter pages
-    $(document).ready( function() {
-        $('.alert-wrapper-float').delay(10000).fadeOut();
+    // Auto-dismiss messages after 6 seconds
+    $(document).ready(function() {
+        $('.site-messages .alert').delay(6000).fadeOut('slow');
     });
 </script>
 
 <style>
-.alert-wrapper-float {
-    position:fixed !important;
-    z-index:999999 !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /*align-items: center;*/
-    text-align: center;
-    min-height: 100vh;
-    width: 100%;
+/* Clean alert notification styles - no hacky !important or full-screen overlays */
+.site-messages {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.site-messages .alert {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
 }
 </style>
 
-
-{% comment %}
-<div class="alert-wrapper-float">
-{% for message in messages %}
-  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    {{ message }}
-  </div>
-{% endfor %}
+{% if messages %}
+<div class="container site-messages">
+    {% for message in messages %}
+    <div class="alert {% if 'alert-' in message.tags %}{{ message.tags }}{% elif message.tags == 'error' %}alert-danger{% elif message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %}
 </div>
-{% endcomment %}
-
-
-<div class="container">
-<div class="alert-wrapper-float">
-  <div class="alert alert-warning alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-      This is a test message
-  </div>
-  <div class="alert alert-warning alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-      This is a test message that is bigger than normal
-  </div>
-</div>
-</div>
+{% endif %}
