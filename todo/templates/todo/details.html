@@ -3,20 +3,33 @@
     Todo details
 {% endblock %}
 {% block content %}
-    <a href="{% url 'todo:index' %}"><< Go back</a>
-    <h1>{{ todo.title }}</h1>
-    <p>{{ todo.text }}</p>
-    <br>
-    {% load tz %}
-    {% get_current_timezone as TIME_ZONE %}
-    {# this is bad {{ todo.created_at.tzinfo }}, the time is processed and does not represent tzinfo #}
-    This was created on {{ todo.created_at|localtime}} ({{ TIME_ZONE }}).<br>
-    Forced to America/Bogota ({{ todo.created_at|timezone:"America/Bogota" }}).<br>
-    {% localtime on %}
-        Local time ON from server perspective ({{ todo.created_at }}).<br>
-    {% endlocaltime %}
-    {% localtime off %}
-        Local time OFF from server perspective ({{ todo.created_at }})({{ todo.created_at.tzinfo }}).<br>
-    {% endlocaltime %}
-    Passed by variable from user perspective {{ time_zone_user }} ({{ date }}).<br>
+<section class="section-gap">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card p-4" style="border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-radius: 10px;">
+                    <a href="{% url 'todo:index' %}" class="text-muted mb-3 d-inline-block"><i class="fa fa-arrow-left mr-1"></i> Back to Todo List</a>
+                    <h2 class="mb-3">{{ todo.title }}</h2>
+                    <p class="lead mb-4" style="white-space: pre-line;">{{ todo.text }}</p>
+                    <hr>
+                    <div class="alert alert-light p-3" style="font-size: 14px; background: #f9f9ff; border: 1px solid #eef0ff;">
+                        <h6 class="font-weight-bold mb-2"><i class="fa fa-clock-o mr-1"></i> Timezone & Timestamp Diagnostics:</h6>
+                        {% load tz %}
+                        {% get_current_timezone as TIME_ZONE %}
+                        {# this is bad {{ todo.created_at.tzinfo }}, the time is processed and does not represent tzinfo #}
+                        <div>This was created on <strong>{{ todo.created_at|localtime}}</strong> ({{ TIME_ZONE }}).</div>
+                        <div>Forced to America/Bogota ({{ todo.created_at|timezone:"America/Bogota" }}).</div>
+                        {% localtime on %}
+                            <div>Local time ON from server perspective ({{ todo.created_at }}).</div>
+                        {% endlocaltime %}
+                        {% localtime off %}
+                            <div>Local time OFF from server perspective ({{ todo.created_at }})({{ todo.created_at.tzinfo }}).</div>
+                        {% endlocaltime %}
+                        <div>Passed by variable from user perspective {{ time_zone_user }} ({{ date }}).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

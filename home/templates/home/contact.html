@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - Enterprise Website{% endblock %}
+
+{% block banner.attrs %} class="row fullscreen d-flex align-items-center justify-content-center"{% endblock %}
+{% block banner.content_attrs %} class="about-content col-lg-8 col-md-10 text-center"{% endblock %}
+{% block banner.image_attrs %} class="d-none"{% endblock %}
+
+{% block banner.content %}
+    <h1 class="text-white">Get in Touch</h1>
+    <p class="text-white link-nav">
+        <a href="{% url 'home:index' %}">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="{% url 'home:contact' %}"> Contact</a>
+    </p>
+    <p class="text-white text-uppercase pt-10">
+        Have questions about platform integration or custom solutions? We are here to help.
+    </p>
+{% endblock %}
+
+{% block banner.image %}
+{% endblock %}
+
+{% block content %}
+    <!-- Start contact-page Area -->
+    <section class="contact-page-area section-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 d-flex flex-column address-wrap">
+                    <div class="single-contact-address d-flex flex-row mb-4">
+                        <div class="icon mr-3">
+                            <span class="lnr lnr-home" style="font-size: 28px; color: #8490ff;"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h5>Enterprise Technology Lab</h5>
+                            <p>Global Engineering Center</p>
+                        </div>
+                    </div>
+                    <div class="single-contact-address d-flex flex-row mb-4">
+                        <div class="icon mr-3">
+                            <span class="lnr lnr-phone-handset" style="font-size: 28px; color: #8490ff;"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h5>Local Support Services</h5>
+                            <p>Mon to Fri 9am to 6pm</p>
+                        </div>
+                    </div>
+                    <div class="single-contact-address d-flex flex-row mb-4">
+                        <div class="icon mr-3">
+                            <span class="lnr lnr-envelope" style="font-size: 28px; color: #8490ff;"></span>
+                        </div>
+                        <div class="contact-details">
+                            <h5>support@enterprise.local</h5>
+                            <p>Send us your query anytime!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <form class="form-area contact-form text-right" id="contactForm" method="post" action="{% url 'home:contact' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <input name="name" placeholder="Enter your name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'" class="common-input mb-20 form-control" required="" type="text">
+                                <input name="email" placeholder="Enter email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common-input mb-20 form-control" required="" type="email">
+                                <input name="subject" placeholder="Enter subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'" class="common-input mb-20 form-control" required="" type="text">
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <textarea class="common-textarea form-control" name="message" placeholder="Enter Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" required="" style="height: 165px;"></textarea>
+                            </div>
+                            <div class="col-lg-12">
+                                <button type="submit" class="primary-btn mt-20 text-white" style="float: right; border: none; cursor: pointer;">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End contact-page Area -->
+{% endblock %}

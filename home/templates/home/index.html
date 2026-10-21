@@ -19,7 +19,7 @@
     <p class="text-white text-uppercase">
         Everyone wants the innovation through robotics
     </p>
-    <a href="#" class="primary-btn header-btn text-uppercase">View Details</a>
+    <a href="{% url 'home:services' %}" class="primary-btn header-btn text-uppercase">Explore Services</a>
 {% endblock %}
 
 {% block banner.image %}
@@ -50,7 +50,7 @@
                             <p>
                                 Who are in extremely love with eco friendly system.
                             </p>
-                            <a href="#" class="primary-btn text-uppercase">View Details</a>
+                            <a href="{% url 'home:products' %}" class="primary-btn text-uppercase">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                             <p>
                                 Who are in extremely love with eco friendly system.
                             </p>
-                            <a href="#" class="primary-btn text-uppercase">View Details</a>
+                            <a href="{% url 'home:products' %}" class="primary-btn text-uppercase">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                             <p>
                                 Who are in extremely love with eco friendly system.
                             </p>
-                            <a href="#" class="primary-btn text-uppercase">View Details</a>
+                            <a href="{% url 'home:products' %}" class="primary-btn text-uppercase">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                             <p>
                                 Who are in extremely love with eco friendly system.
                             </p>
-                            <a href="#" class="primary-btn text-uppercase">View Details</a>
+                            <a href="{% url 'home:products' %}" class="primary-btn text-uppercase">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
                     </p>
-                    <a class="primary-btn text-uppercase" href="#">Get Details</a>
+                    <a class="primary-btn text-uppercase" href="{% url 'home:about' %}">Get Details</a>
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed doeiusmo d tempor incididunt ut labore et dolore magna aliqua.
                     </p>
-                    <a class="primary-btn" href="#">Get Started Now</a>
+                    <a class="primary-btn" href="{% url 'home:services' %}">Get Started Now</a>
                 </div>
                 <div class="col-lg-6 about-video-right justify-content-center align-items-center d-flex relative">
                     <div class="overlay overlay-bg"></div>
@@ -323,10 +323,10 @@
                     <div class="single-footer-widget">
                         <h6>Top Products</h6>
                         <ul class="footer-nav">
-                            <li><a href="#">Managed Website</a></li>
-                            <li><a href="#">Manage Reputation</a></li>
-                            <li><a href="#">Power Tools</a></li>
-                            <li><a href="#">Marketing Service</a></li>
+                            <li><a href="{% url 'home:about' %}">About Us</a></li>
+                            <li><a href="{% url 'home:services' %}">Our Services</a></li>
+                            <li><a href="{% url 'home:products' %}">Products Catalog</a></li>
+                            <li><a href="{% url 'home:contact' %}">Contact & Support</a></li>
                         </ul>
                     </div>
                 </div>

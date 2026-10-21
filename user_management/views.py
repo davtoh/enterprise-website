@@ -21,6 +21,9 @@ from .models import States, Cities
 from .forms import SiteUserCreationForm, ImageUploadForm
 
 
+from django.contrib.auth import logout as auth_logout
+
+
 # https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html
 # https://django-easy-tutorial.blogspot.com/2017/04/django-send-one-time-use-activation-email.html
 
@@ -28,14 +31,17 @@ from .forms import SiteUserCreationForm, ImageUploadForm
 def send_account_activation_email(request, user):
     text_content = 'Account Activation Email'
     subject = 'Email Activation'
-    template_name = "emails/account/activation.html"
+    template_name = "emails/user_management/activation.html"
     from_email = settings.DEFAULT_FROM_EMAIL
     recipients = [user.email]
+    uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+    if isinstance(uidb64, bytes):
+        uidb64 = uidb64.decode()
     kwargs = {
-        "uidb64": urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+        "uidb64": uidb64,
         "token": default_token_generator.make_token(user)
     }
-    activation_url = reverse("app:activate_user_account", kwargs=kwargs)
+    activation_url = reverse("user_management:activate_user_account", kwargs=kwargs)
 
     activate_url = "{0}://{1}{2}".format(request.scheme, request.get_host(), activation_url)
 
@@ -52,16 +58,16 @@ def send_account_activation_email(request, user):
 def activate_user_account(request, uidb64=None, token=None):
     UserModel = get_user_model()
     try:
-        uid = urlsafe_base64_decode(uidb64).decode()  # https://stackoverflow.com/a/47924973
+        uid = force_str(urlsafe_base64_decode(uidb64))  # https://stackoverflow.com/a/47924973
         user = UserModel.objects.get(pk=uid)
-    except UserModel.DoesNotExist:
+    except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
         user = None
     if user and default_token_generator.check_token(user, token):
         user.is_email_verified = True
         user.is_active = True
         user.save()
         login(request, user)
-        return redirect('hr:user_profile')
+        return redirect('user_management:profile')
     else:
         return HttpResponse("Activation link has expired")
 
@@ -73,11 +79,18 @@ class LoginView(_LoginView):
 
 class LogoutView(_LogoutView):
     template_name = 'user_management/logout.html'
+    http_method_names = ['get', 'post', 'options']
+
+    def get(self, request, *args, **kwargs):
+        # Allow graceful GET logout while supporting Django 5 POST standards
+        auth_logout(request)
+        return render(request, self.template_name)
 
 
 class SiteUserListView(LoginRequiredMixin, ListView):
     model = get_user_model()
     context_object_name = 'Users'
+    template_name = 'user_management/siteuser_list.html'
 
 
 class SignUpView(CreateView):
@@ -121,15 +134,23 @@ def load_cities(request):
     return render(request, 'user_management/city_dropdown_list_options.html', {'cities': cities})
 
 
-class SiteUserUpdateView(UpdateView):
+class SiteUserUpdateView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
-    fields = ('username', 'first_name', 'last_name', 'email', 'birthdate', 'country', 'city', 'password')
-    success_url = reverse_lazy('user_management:login')
+    fields = ('first_name', 'last_name', 'email', 'birthdate', 'country', 'city')
+    template_name = 'user_management/signup.html'
+    success_url = reverse_lazy('user_management:profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
-class SiteUserProfileView(DetailView):
+class SiteUserProfileView(LoginRequiredMixin, DetailView):
     model = get_user_model()
-    fields = ('username', 'first_name', 'last_name', 'email', 'birthdate', 'country', 'city', 'password')
+    template_name = 'user_management/profile.html'
+    context_object_name = 'object'
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 def upload_pic(request):

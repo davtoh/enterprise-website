@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - Enterprise Website{% endblock %}
+
+{% block banner.attrs %} class="row fullscreen d-flex align-items-center justify-content-center"{% endblock %}
+{% block banner.content_attrs %} class="about-content col-lg-8 col-md-10 text-center"{% endblock %}
+{% block banner.image_attrs %} class="d-none"{% endblock %}
+
+{% block banner.content %}
+    <h1 class="text-white">About Our Platform</h1>
+    <p class="text-white link-nav">
+        <a href="{% url 'home:index' %}">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="{% url 'home:about' %}"> About Us</a>
+    </p>
+    <p class="text-white text-uppercase pt-10">
+        Empowering modern web services, automation, and intelligent tools
+    </p>
+{% endblock %}
+
+{% block banner.image %}
+{% endblock %}
+
+{% block content %}
+    <!-- Start home-about Area -->
+    <section class="home-about-area section-gap">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 home-about-left">
+                    <img class="mx-auto d-block img-fluid" src="{% static 'img/about-img.png' %}" alt="About Us">
+                </div>
+                <div class="col-lg-6 home-about-right">
+                    <h1>Enterprise Grade Innovation <br>Powered by Modern Django</h1>
+                    <h5>Modernized with Python 3.12 and Django 5.0</h5>
+                    <p>
+                        This platform unites modular web applications into a unified enterprise interface: including dynamic task management (Todo), interactive decision surveys (Polls), browser-based Python execution (Brython), and programmatic data access through Django REST Framework.
+                    </p>
+                    <a class="primary-btn text-uppercase" href="{% url 'home:services' %}">Explore Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End home-about Area -->
+
+    <!-- Start feature Area -->
+    <section class="feature-area section-gap">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12 pb-40 header-text text-center">
+                    <h1 class="pb-10 text-white">Our Engineering Principles</h1>
+                    <p class="text-white">
+                        Standards-compliant, secure, and built for cross-platform resilience.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-feature">
+                        <div class="title d-flex flex-row">
+                            <span class="lnr lnr-rocket"></span>
+                            <h4>Python 3.12 & Django 5</h4>
+                        </div>
+                        <p>
+                            Modern asynchronous and synchronous runtime supporting robust database interactions and secure session authentication.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-feature">
+                        <div class="title d-flex flex-row">
+                            <span class="lnr lnr-shield"></span>
+                            <h4>Enterprise Security</h4>
+                        </div>
+                        <p>
+                            OWASP Top 10 compliance, 12-Factor isolated environment credentials, parameterized queries, and CSRF protection.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-feature">
+                        <div class="title d-flex flex-row">
+                            <span class="lnr lnr-code"></span>
+                            <h4>Modular Architecture</h4>
+                        </div>
+                        <p>
+                            Clean app separation with dedicated models, views, and APIs ready for internationalization and multi-cloud deployment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End feature Area -->
+
+    <!-- Start brand Area -->
+    <section class="brand-area pt-120 pb-120">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col single-brand text-center">
+                    <img class="img-fluid" src="{% static 'img/l1.png' %}" alt="Partner 1">
+                </div>
+                <div class="col single-brand text-center">
+                    <img class="img-fluid" src="{% static 'img/l2.png' %}" alt="Partner 2">
+                </div>
+                <div class="col single-brand text-center">
+                    <img class="img-fluid" src="{% static 'img/l3.png' %}" alt="Partner 3">
+                </div>
+                <div class="col single-brand text-center">
+                    <img class="img-fluid" src="{% static 'img/l4.png' %}" alt="Partner 4">
+                </div>
+                <div class="col single-brand text-center">
+                    <img class="img-fluid" src="{% static 'img/l5.png' %}" alt="Partner 5">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End brand Area -->
+{% endblock %}

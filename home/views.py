@@ -10,11 +10,66 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = "Brythonを使ったやつ"
-        context['banner_content_title'] = "Brythonを使ったやつ"
+        context['title'] = "Home - Enterprise Website"
+        context['banner_content_title'] = "Enterprise Website"
         return context
 
 
+class AboutView(TemplateView):
+    template_name = "home/about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "About Us - Enterprise Website"
+        return context
+
+
+class ServicesView(TemplateView):
+    template_name = "home/services.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Services - Enterprise Website"
+        return context
+
+
+class ProductsView(TemplateView):
+    template_name = "home/products.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Products - Enterprise Website"
+        return context
+
+
+from django.contrib import messages
+
+
+class ContactView(TemplateView):
+    template_name = "home/contact.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Contact Us - Enterprise Website"
+        return context
+
+    def post(self, request, *args, **kwargs):
+        name = request.POST.get('name', '').strip()
+        email = request.POST.get('email', '').strip()
+        subject = request.POST.get('subject', '').strip()
+        message = request.POST.get('message', '').strip()
+        if name and email and message:
+            messages.success(request, f"Thank you, {name}! Your message has been received.")
+        else:
+            messages.error(request, "Please fill out all required fields.")
+        return redirect('home:contact')
+
+
 home = HomeView.as_view()
+about = AboutView.as_view()
+services = ServicesView.as_view()
+products = ProductsView.as_view()
+contact = ContactView.as_view()
+
 #def index(request):
 #    return render(request, 'brython/index.html')

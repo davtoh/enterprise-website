@@ -3,17 +3,30 @@
     Add to Todo list
 {% endblock %}
 {% block content %}
-    {% url 'todo:index' as back_url %}
-    <a href="{{ request.GET.next | default:back_url}}"><< Go back</a><br><br>
-    <form action="{% url 'todo:add' %}" method="post">
-        {% csrf_token %} <!-- Cross Site Request Forgery protection https://docs.djangoproject.com/en/2.0/ref/csrf/ -->
-        <label for="title">Title</label><br/>
-        <input type="text" name="title" id="title"/>
-        <br>
-        <label for="text">Text</label><br/>
-        <textarea type="text" name="text" id="text"></textarea>
-        <br><br>
-        <input type="hidden" name="next" value="{{ request.GET.next | default:back_url}}">
-        <input type="submit" value="Submit">
-    </form>
+<section class="section-gap">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card p-4" style="border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-radius: 10px;">
+                    {% url 'todo:index' as back_url %}
+                    <a href="{{ request.GET.next | default:back_url}}" class="text-muted mb-3 d-inline-block"><i class="fa fa-arrow-left mr-1"></i> Back to Todo List</a>
+                    <h3 class="mb-4">Create New Task</h3>
+                    <form action="{% url 'todo:add' %}" method="post">
+                        {% csrf_token %} <!-- Cross Site Request Forgery protection https://docs.djangoproject.com/en/2.0/ref/csrf/ -->
+                        <div class="form-group mb-3">
+                            <label for="title" class="font-weight-bold">Title</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Enter task title" required />
+                        </div>
+                        <div class="form-group mb-4">
+                            <label for="text" class="font-weight-bold">Description / Notes</label>
+                            <textarea name="text" id="text" rows="4" class="form-control" placeholder="Enter task description..."></textarea>
+                        </div>
+                        <input type="hidden" name="next" value="{{ request.GET.next | default:back_url}}">
+                        <button type="submit" class="primary-btn text-uppercase" style="border: none; cursor: pointer;">Save Task</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

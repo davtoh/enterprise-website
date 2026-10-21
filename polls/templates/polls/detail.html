@@ -4,16 +4,33 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ question.question_text }}</h1>
+<section class="section-gap">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card p-4" style="border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-radius: 10px;">
+                    <a href="{% url 'polls:index' %}" class="text-muted mb-3 d-inline-block"><i class="fa fa-arrow-left mr-1"></i> Back to Polls</a>
+                    <h3 class="mb-3">{{ question.question_text }}</h3>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                    {% if error_message %}
+                        <div class="alert alert-danger py-2">{{ error_message }}</div>
+                    {% endif %}
 
-<form action="{% url 'polls:vote' question.id %}" method="post">
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
-{% endfor %}
-<input type="submit" value="Vote" />
-</form>
+                    <form action="{% url 'polls:vote' question.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="list-group mb-4">
+                            {% for choice in question.choice_set.all %}
+                                <label class="list-group-item list-group-item-action d-flex align-items-center py-3" style="cursor: pointer;">
+                                    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" class="mr-3" />
+                                    <span>{{ choice.choice_text }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="primary-btn text-uppercase" style="border: none; cursor: pointer;">Submit Vote</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

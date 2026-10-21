@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 #from django.http import HttpResponse, HttpResponseRedirect
 #from django.urls import reverse
@@ -27,8 +27,8 @@ def index(request):
 
 
 def details(request, id):
-    # get data
-    todo = Todo.objects.get(id=id)
+    # get data - using get_object_or_404 to avoid unhandled 500 exceptions
+    todo = get_object_or_404(Todo, id=id)
 
     # make context
     detected_timezone = request.session.get('django_timezone')
@@ -49,9 +49,13 @@ def details(request, id):
 
 def add(request):
     if request.method == "POST":
-        # get data
-        title = request.POST['title']
-        text = request.POST['text']
+        # get data safely
+        title = request.POST.get('title', '').strip()
+        text = request.POST.get('text', '').strip()
+
+        if not title:
+            messages.error(request, 'Todo title cannot be empty.', extra_tags='danger')
+            return render(request, 'todo/add.html', {'text': text})
 
         # save to database
         todo = Todo(title=title, text=text)

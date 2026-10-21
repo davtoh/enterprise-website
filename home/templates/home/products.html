@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Products - Enterprise Website{% endblock %}
+
+{% block banner.attrs %} class="row fullscreen d-flex align-items-center justify-content-center"{% endblock %}
+{% block banner.content_attrs %} class="about-content col-lg-8 col-md-10 text-center"{% endblock %}
+{% block banner.image_attrs %} class="d-none"{% endblock %}
+
+{% block banner.content %}
+    <h1 class="text-white">Featured Products & Systems</h1>
+    <p class="text-white link-nav">
+        <a href="{% url 'home:index' %}">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="{% url 'home:products' %}"> Products</a>
+    </p>
+    <p class="text-white text-uppercase pt-10">
+        Engineered hardware and automation solutions for high-precision environments
+    </p>
+{% endblock %}
+
+{% block banner.image %}
+{% endblock %}
+
+{% block content %}
+    <!-- Start products Area -->
+    <section class="products-area section-gap">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12 pb-40 header-text text-center">
+                    <h1 class="pb-10">Featured Robotics & Systems Catalog</h1>
+                    <p>
+                        High precision, energy-efficient robotic hardware integrated with our web telemetry endpoints.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-30">
+                    <div class="single-product">
+                        <div class="thumb text-center p-3">
+                            <img src="{% static 'img/p1.png' %}" class="img-fluid" alt="The Upper Eye">
+                        </div>
+                        <div class="details">
+                            <h4>The Upper Eye</h4>
+                            <p>
+                                Optical vision sensor with low latency edge telemetry streaming to Django REST endpoints.
+                            </p>
+                            <span class="badge badge-primary py-2 px-3 mb-2">Industrial Grade</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-30">
+                    <div class="single-product">
+                        <div class="thumb text-center p-3">
+                            <img src="{% static 'img/p2.png' %}" class="img-fluid" alt="The Crab Wheel">
+                        </div>
+                        <div class="details">
+                            <h4>The Crab Wheel</h4>
+                            <p>
+                                Omnidirectional navigation chassis designed for automated warehouse coordination.
+                            </p>
+                            <span class="badge badge-success py-2 px-3 mb-2">Automated AGV</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-30">
+                    <div class="single-product">
+                        <div class="thumb text-center p-3">
+                            <img src="{% static 'img/p3.png' %}" class="img-fluid" alt="The Plug Ninja">
+                        </div>
+                        <div class="details">
+                            <h4>The Plug Ninja</h4>
+                            <p>
+                                Modular smart connector hub bridging microcontrollers to cloud WebSocket channels.
+                            </p>
+                            <span class="badge badge-info py-2 px-3 mb-2">IoT Gateway</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-30">
+                    <div class="single-product">
+                        <div class="thumb text-center p-3">
+                            <img src="{% static 'img/p4.png' %}" class="img-fluid" alt="The Controller">
+                        </div>
+                        <div class="details">
+                            <h4>The Master Controller</h4>
+                            <p>
+                                Dual-core industrial computing unit running embedded Linux with remote Django API sync.
+                            </p>
+                            <span class="badge badge-dark py-2 px-3 mb-2">Core Processor</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End products Area -->
+{% endblock %}
