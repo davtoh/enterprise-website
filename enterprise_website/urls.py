@@ -34,7 +34,6 @@ urlpatterns = [
     path('accounts/', include('user_management.urls')),
     #path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    #path('admin2/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),  # <url path>/setlang
     path('rest_api/', include('rest_api.urls')),  # , namespace='rest_framework'
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

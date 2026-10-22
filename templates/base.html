@@ -130,6 +130,9 @@
                           <li class="menu-has-children"><a href="#"><i class="fa fa-user"></i> {{ user.username }}</a>
                             <ul>
                               <li><a href="{% url 'user_management:profile' %}">{% trans "Profile" %}</a></li>
+                              {% if user.is_staff %}
+                                <li><a href="{% url 'admin:index' %}"><i class="fa fa-shield"></i> {% trans "Site Admin" %}</a></li>
+                              {% endif %}
                               <li>
                                 <form id="logout-form" method="post" action="{% url 'user_management:logout' %}" style="display:none;">
                                   {% csrf_token %}

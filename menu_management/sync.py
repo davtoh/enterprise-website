@@ -21,6 +21,36 @@ def sync_plugin_menus(menu_slug: str = 'main_navbar'):
             defaults={'title': 'Main Navigation', 'is_active': True}
         )
 
+        # Ensure Apps parent container exists
+        apps_parent = MenuItem.objects.filter(menu=menu, title='Apps').first()
+        if not apps_parent:
+            apps_parent = MenuItem.objects.create(
+                menu=menu,
+                title='Apps',
+                url_name='',
+                url_path='#',
+                order=60,
+                is_custom=False,
+                plugin_source='system'
+            )
+
+        # Ensure Site Admin item exists under Apps for staff users
+        admin_item = MenuItem.objects.filter(menu=menu, url_name='admin:index').first()
+        if not admin_item:
+            MenuItem.objects.create(
+                menu=menu,
+                parent=apps_parent,
+                title='Site Admin',
+                url_name='admin:index',
+                url_path='/admin/',
+                icon='fa fa-shield',
+                order=50,
+                requires_auth=True,
+                requires_staff=True,
+                plugin_source='system',
+                is_custom=False,
+            )
+
         for plugin_name, plugin_cls in plugins.items():
             for item_def in plugin_cls.get_menu_items():
                 # Check parent if specified by slug/title
