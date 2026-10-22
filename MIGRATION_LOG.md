@@ -228,3 +228,30 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - Verified markdown links and formatting in `README.md` and `documentation/README.md`.
   - Ran `.\.venv\Scripts\python.exe manage.py check` to ensure zero regressions.
 
+---
+
+## [Milestone 8] - Plugin Registry & Dynamic Menus System
+- **Date:** 2026-10-22
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Build `plugin_registry` Django application with `AppPlugin` base interface and `registry.autodiscover()`.
+  - Build `menu_management` Django application with `Menu` and `MenuItem` models supporting hierarchy, URL reverse resolution, permission checks, and plugin origin tracking.
+  - Create `sync_menus` command and admin action to synchronize discovered `AppPlugin` definitions into active database menus without overriding manual user customizations.
+  - Implement `dynamic_menu` context processor injecting structured tree `main_navigation` into all templates.
+  - Update `templates/base.html` to render the dynamic navigation menu with graceful static fallback.
+  - Register `home`, `todo`, `polls`, `webprogram`, and `rest_api` apps with `plugin.py` implementations.
+  - Add `documentation/plugin_system.md` detailing plugin creation and menu management workflows.
+- **Files Created / Modified:**
+  - `plugin_registry/` (`base.py`, `registry.py`, `apps.py`, `__init__.py`)
+  - `menu_management/` (`models.py`, `apps.py`, `admin.py`, `context_processors.py`, `sync.py`, `management/commands/sync_menus.py`, `migrations/0001_initial.py`)
+  - `home/plugin.py`, `todo/plugin.py`, `polls/plugin.py`, `webprogram/plugin.py`, `rest_api/plugin.py`
+  - `enterprise_website/settings.py` (registered apps, added context processor, added `testserver` to `ALLOWED_HOSTS`)
+  - `templates/base.html` (dynamic menu loop)
+  - `documentation/plugin_system.md`
+  - `MIGRATION_LOG.md`
+- **Verification:**
+  - `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
+  - `.\.venv\Scripts\python.exe manage.py migrate` executed cleanly.
+  - `.\.venv\Scripts\python.exe manage.py sync_menus` successfully populated `main_navbar`.
+  - Django test client verified HTTP 200 on `/` with all 6 root navigation items and 4 child items under "Apps".
+

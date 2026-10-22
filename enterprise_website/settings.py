@@ -36,7 +36,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", KEYS.get("SECRET_KEY", "django-insecure-def
 
 DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
 
-ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost,192.168.0.4").split(",") if host.strip()]
+ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost,192.168.0.4,testserver").split(",") if host.strip()]
 
 
 # Application definition
@@ -57,6 +57,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
+    'plugin_registry.apps.PluginRegistryConfig',
+    'menu_management.apps.MenuManagementConfig',
+    'rest_api.apps.RestApiConfig',
     'webprogram.apps.WebprogramConfig',
     'home.apps.HomeConfig',
     'todo.apps.TodoConfig',
@@ -104,6 +107,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
+                'menu_management.context_processors.dynamic_menu',
             ],
         },
     },

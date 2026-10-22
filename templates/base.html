@@ -93,6 +93,23 @@
 				      </div>
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu">
+				        {% if main_navigation %}
+				          {% for nav_item in main_navigation %}
+				            {% if nav_item.children %}
+				              <li class="menu-has-children"><a href="{{ nav_item.url }}">{% if nav_item.icon %}<i class="{{ nav_item.icon }}"></i> {% endif %}{% trans nav_item.title %}</a>
+				                <ul>
+				                  {% for child in nav_item.children %}
+				                    <li><a href="{{ child.url }}">{% if child.icon %}<i class="{{ child.icon }}"></i> {% endif %}{% trans child.title %}</a></li>
+				                  {% endfor %}
+				                </ul>
+				              </li>
+				            {% else %}
+				              <li class="{% if nav_item.url_name and request.resolver_match.view_name == nav_item.url_name %}menu-active{% endif %}">
+				                <a href="{{ nav_item.url }}">{% if nav_item.icon %}<i class="{{ nav_item.icon }}"></i> {% endif %}{% trans nav_item.title %}</a>
+				              </li>
+				            {% endif %}
+				          {% endfor %}
+				        {% else %}
 				          <li class="{% if request.resolver_match.view_name == 'home:index' or request.resolver_match.view_name == 'home:index_file' %}menu-active{% endif %}"><a href="{% url 'home:index' %}">{% trans "Home" %}</a></li>
 				          <li class="{% if request.resolver_match.view_name == 'home:about' or request.resolver_match.view_name == 'home:about_file' %}menu-active{% endif %}"><a href="{% url 'home:about' %}">{% trans "About Us" %}</a></li>
 				          <li class="{% if request.resolver_match.view_name == 'home:services' or request.resolver_match.view_name == 'home:services_file' %}menu-active{% endif %}"><a href="{% url 'home:services' %}">{% trans "Services" %}</a></li>
@@ -107,6 +124,7 @@
 				              <li><a href="{% url 'admin:index' %}"><i class="fa fa-shield"></i> {% trans "Site Admin" %}</a></li>
 				            </ul>
 				          </li>
+				        {% endif %}
                           <li>{% include "language_management/form.html" with type="menu"%}</li>
                         {% if user.is_authenticated %}
                           <li class="menu-has-children"><a href="#"><i class="fa fa-user"></i> {{ user.username }}</a>
