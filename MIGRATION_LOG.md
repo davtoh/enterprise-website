@@ -361,7 +361,9 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `python manage.py check --deploy` passes with 0 issues in production mode (`$env:DEBUG="False"`).
   - `docker compose config` and `docker compose -f docker-compose.yml config` validate syntax, environment interpolation, and network topology with 0 errors.
   - `manage.py download_geodata --help` functions cleanly.
-  - `.\.venv\Scripts\python.exe -m pytest` executed cleanly: **109 passed in 19.86s** with **0 failures**.
+  - `.\.venv\Scripts\python.exe -m pytest` executed cleanly: **110 passed in 22.15s** with **0 failures**.
   - `.\.venv\Scripts\python.exe -m pytest --cov=. --cov-report=html` maintains **80% total statement coverage**.
+  - `docker compose -f docker-compose.yml up -d --build` verified live: all 4 containers (`enterprise_db`, `enterprise_redis`, `enterprise_web`, `enterprise_nginx`) built cleanly, passed health checks, migrated PostgreSQL 16 automatically, synced menus, and served HTTP 200 on `http://localhost/`.
+  - Static asset delivery verified: updated `docker-entrypoint.sh` to ensure `collectstatic` unconditionally populates `/app/staticfiles` in the shared volume on startup, resolving HTTP 200 for all CSS, JS, and image assets via Nginx.
 
 

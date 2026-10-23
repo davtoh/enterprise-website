@@ -38,11 +38,9 @@ python manage.py migrate --noinput
 echo "==> Synchronizing dynamic navigation menus..."
 python manage.py sync_menus || true
 
-# Collect static files in production / non-debug mode
-if [ "$DEBUG" != "True" ] && [ "$DEBUG" != "true" ]; then
-    echo "==> Collecting static files for production..."
-    python manage.py collectstatic --noinput --clear || true
-fi
+# Collect static files so Nginx can serve them from the shared volume
+echo "==> Collecting static files..."
+python manage.py collectstatic --noinput || true
 
 echo "==> Launching server process: $@"
 exec "$@"

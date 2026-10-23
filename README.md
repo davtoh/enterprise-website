@@ -247,8 +247,14 @@ Run the production configuration without development overrides:
 # Build and start all services in detached mode
 docker compose -f docker-compose.yml up -d --build
 
+# Expose Nginx on port 8080 instead:
+$env:PORT="8080"; docker compose -f docker-compose.yml up -d
+
 # Inspect running container health
 docker compose -f docker-compose.yml ps
+
+# To see what the web server is doing
+docker compose -f docker-compose.yml logs -f web
 
 # Execute management commands inside the container
 docker compose -f docker-compose.yml exec web python manage.py check

@@ -9,11 +9,13 @@ FROM python:3.12-slim-bookworm AS builder
 
 WORKDIR /build
 
-# Install build-time packages required for compiling C extensions (psycopg2, Pillow, etc.)
+# Install build-time packages required for compiling C extensions (psycopg2, mysqlclient, Pillow, etc.)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     gcc \
+    pkg-config \
     libpq-dev \
+    default-libmysqlclient-dev \
     python3-dev \
     gettext \
     && rm -rf /var/lib/apt/lists/*
@@ -33,9 +35,10 @@ FROM python:3.12-slim-bookworm AS runtime
 
 WORKDIR /app
 
-# Install minimal runtime dependencies (libpq for postgres, curl for healthchecks, gettext for translations)
+# Install minimal runtime dependencies (libpq for postgres, libmariadb for mysql, curl for healthchecks, gettext for translations)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq5 \
+    libmariadb3 \
     curl \
     gettext \
     && rm -rf /var/lib/apt/lists/*
