@@ -57,17 +57,22 @@ def send_account_activation_email(request, user):
     email.send()
 
 
-def activate_user_account(request, uidb64=None, token=None):
+def activate_user_account(request, uidb64=None, token=None, slug=None, slug2=None):
+    uidb64 = uidb64 or slug
+    token = token or slug2
     UserModel = get_user_model()
+
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))  # https://stackoverflow.com/a/47924973
         user = UserModel.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, UserModel.DoesNotExist):
         user = None
     if user and default_token_generator.check_token(user, token):
-        user.is_email_verified = True
+        if hasattr(user, 'is_email_verified'):
+            user.is_email_verified = True
         user.is_active = True
         user.save()
+
         login(request, user)
         messages.success(request, _("Welcome, %(username)s! Your account has been successfully activated.") % {'username': user.username})
         return redirect('user_management:profile')

@@ -55,3 +55,9 @@ world.sql.json
 
 # Legacy binary GeoIP databases
 *.dat
+
+# Test & coverage artifacts
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/

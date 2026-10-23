@@ -255,3 +255,52 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `.\.venv\Scripts\python.exe manage.py sync_menus` successfully populated `main_navbar`.
   - Django test client verified HTTP 200 on `/` with all 6 root navigation items and 4 child items under "Apps".
 
+---
+
+## [Milestone 9] - Automated Test Suite & Code Quality Hardening
+- **Date:** 2026-10-22
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Configure `pytest-django` testing framework via `pytest.ini` and coverage runner via `.coveragerc`.
+  - Update `requirements/local.txt` to include `pytest-cov>=4.1.0` alongside `pytest` and `pytest-django`.
+  - Build comprehensive, isolated unit and integration test modules across all applications:
+    - `tests/test_home.py` (13 tests): verified HTTP 200 for all standard and legacy `.html` routes (`/`, `/about/`, `/services/`, `/products/`, `/contact/`) and contact form submission/validation.
+    - `tests/test_user_management.py` (17 tests): verified user signup, login, GET/POST logout, profile views, update views, activation token workflow, AJAX location loaders, `populate_users` command, age and birthdate form validation, and model representations.
+    - `tests/test_todo.py` (11 tests): verified list view (empty and populated), authenticated greeting, add form GET/POST, detailed timezone conversion diagnostics, 404 handling, and newly added `delete` route.
+    - `tests/test_polls.py` (15 tests): verified questions filtering (past vs future), detail view, race-condition protected voting (`F('votes') + 1`), error redisplay on missing choices, results view, and `closepoll` command (including `--delete`).
+    - `tests/test_language_management.py` (11 tests): verified index view, Django `/i18n/setlang/` endpoint for multiple languages, placeholder protection engine (`_protect_placeholders`), and translation backends (MyMemory, DeepL, OpenAI).
+    - `tests/test_timezone_management.py` (4 tests): verified `TimezoneMiddleware` activation with `Asia/Tokyo`, deactivation fallback to default, and `set_timezone` view.
+    - `tests/test_plugin_registry.py` (8 tests): verified autodiscovery across all apps, menu hierarchy synchronization, idempotency, URL resolution, permission visibility, and `dynamic_menu` context processor.
+    - `tests/test_rest_api.py` (5 tests): verified API root, paginated users list, user details, and dynamic attribute filtering (`?val=username&val=email`).
+    - `tests/test_webprogram.py` (2 tests): verified Brython WebProgram views.
+    - `tests/test_utils_and_extra.py` (9 tests): verified referer parsing, valid same-host referer, age utility, and avatar image validation (dimensions, format, size limits).
+  - Codebase stabilization fixes implemented during test development:
+    - `user_management/urls.py` & `views.py`: Fixed `activate_user_account` URL parameter names (`uidb64`/`token` vs legacy `slug`/`slug2`) and added fallback kwargs to prevent `NoReverseMatch` and runtime crashes.
+    - `timezone_management/middleware.py` & `views.py`: Eliminated hard crashes on `import pytz` by implementing standard library `zoneinfo` with multi-version fallbacks.
+    - `timezone_management/urls.py` & `enterprise_website/urls.py`: Wired `set_timezone` route into main URLconf at `/tz/set/`.
+    - `todo/views.py` & `urls.py`: Added explicit `delete` view and route (`todo:delete`).
+    - `polls/tests.py`: Modernized legacy `assertQuerysetEqual` calls for Django 5 compatibility.
+    - `user_management/forms.py`: Corrected format specifiers (`%(w)d x %(h)d` and `{max_size}k`) in avatar dimension validation to prevent `ValueError: unsupported format character`.
+    - `user_management/management/commands/populate_users.py`: Wrapped `create_user` calls in `with transaction.atomic():` savepoints to prevent breaking the outer test transaction on `IntegrityError`.
+    - `rest_api/urls.py`: Added `order_by('id')` to `UserViewSet` queryset to eliminate DRF pagination warnings.
+- **Files Created / Modified:**
+  - `.gitignore` (added `.coverage`, `.coverage.*`, `htmlcov/`, `.pytest_cache/`, and untracked legacy `.coverage`)
+  - `requirements/local.txt`
+  - `pytest.ini` (created)
+  - `.coveragerc` (created)
+  - `tests/__init__.py`, `tests/test_home.py`, `tests/test_user_management.py`, `tests/test_todo.py`, `tests/test_polls.py`, `tests/test_language_management.py`, `tests/test_timezone_management.py`, `tests/test_plugin_registry.py`, `tests/test_rest_api.py`, `tests/test_webprogram.py`, `tests/test_utils_and_extra.py`
+  - `user_management/urls.py`, `user_management/views.py`, `user_management/forms.py`, `user_management/management/commands/populate_users.py`
+  - `timezone_management/middleware.py`, `timezone_management/views.py`, `timezone_management/urls.py`
+  - `todo/views.py`, `todo/urls.py`
+  - `polls/tests.py`
+  - `rest_api/urls.py`
+  - `enterprise_website/urls.py`
+  - `milestone_plan.md`
+  - `TODO_MODERNIZATION.md`
+  - `MIGRATION_LOG.md`
+- **Verification:**
+  - `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
+  - `.\.venv\Scripts\python.exe -m pytest` executed cleanly: **106 passed in 22.03s** with **0 failures**.
+  - `.\.venv\Scripts\python.exe -m pytest --cov=. --cov-report=html` achieved **80% total statement coverage** with report generated in `htmlcov/index.html`.
+
+

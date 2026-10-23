@@ -68,3 +68,11 @@ def add(request):
         return redirect(request.POST.get('next', 'todo:index'))
     else:
         return render(request, 'todo/add.html')
+
+
+def delete(request, id):
+    todo = get_object_or_404(Todo, id=id)
+    todo.delete()
+    messages.success(request, _('Task deleted successfully!'), extra_tags='alert')
+    return redirect('todo:index')
+

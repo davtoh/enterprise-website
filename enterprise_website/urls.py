@@ -31,7 +31,9 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('webprogram/', include('webprogram.urls')),
     path('lang/', include('language_management.urls')),
+    path('tz/', include('timezone_management.urls')),
     path('accounts/', include('user_management.urls')),
+
     #path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),  # <url path>/setlang

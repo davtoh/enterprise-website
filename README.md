@@ -178,7 +178,37 @@ To populate countries, states, and cities from `world.sql`:
 
 ---
 
+### Automated Test Suite & Coverage
+
+The project uses `pytest` and `pytest-django` for automated unit and integration tests across all apps, with coverage tracked via `pytest-cov`.
+
+#### Running Tests
+
+```powershell
+# Windows
+.\.venv\Scripts\python.exe -m pytest
+
+# Linux / macOS
+python -m pytest
+```
+
+#### Running with HTML & Terminal Coverage Report
+
+```powershell
+# Windows
+.\.venv\Scripts\python.exe -m pytest --cov=. --cov-report=html --cov-report=term
+
+# Linux / macOS
+pytest --cov=. --cov-report=html --cov-report=term
+```
+
+- **Target Coverage:** $\ge$ 80% (Achieved: 80% with 106 passing tests across all modules)
+- **HTML Report Location:** `htmlcov/index.html` (open in browser to inspect statement-by-statement coverage)
+
+---
+
 ## Production Deployment (MySQL / PostgreSQL & ASGI)
+
 
 1. **Setup Production Database (e.g., MySQL on Linux):**
    ```bash

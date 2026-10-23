@@ -1,0 +1,25 @@
+[run]
+source = .
+omit =
+    */migrations/*
+    */tests/*
+    tests/*
+    */.venv/*
+    .venv/*
+    manage.py
+    enterprise_website/wsgi.py
+    enterprise_website/asgi.py
+    */static/*
+    static/*
+    polls/setup.py
+    */populate_locations.py
+
+
+[report]
+show_missing = True
+skip_covered = False
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise NotImplementedError
+    if __name__ == .__main__.:

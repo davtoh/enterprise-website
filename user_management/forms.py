@@ -40,20 +40,26 @@ class SiteUserCommonForm:
 
             #validate dimensions
             max_width = max_height = 100
-            if w > max_width or h > max_height:
-                raise forms.ValidationError(_('Please use an image that is '
-                     '%(w) x %(h) pixels or smaller.') % {"w": max_width, "h": max_height})
+            if w and h and (w > max_width or h > max_height):
+                raise forms.ValidationError(
+                    _('Please use an image that is %(w)d x %(h)d pixels or smaller.') % {"w": max_width, "h": max_height}
+                )
 
             #validate content type
-            main, sub = avatar.content_type.split('/')
-            if not (main == 'image' and sub in ['jpeg', 'pjpeg', 'gif', 'png']):
-                raise ValidationError(_(u'Please use a JPEG, GIF or PNG image.'))
+            content_type = getattr(avatar, 'content_type', '')
+            if '/' in content_type:
+                main, sub = content_type.split('/', 1)
+                if not (main == 'image' and sub in ['jpeg', 'pjpeg', 'gif', 'png']):
+                    raise ValidationError(_('Please use a JPEG, GIF or PNG image.'))
+            else:
+                raise ValidationError(_('Please use a JPEG, GIF or PNG image.'))
 
             #validate file size
             max_size = 20
-            if len(avatar) > (max_size * 1024):
-                max_size_str = "20k".format(max_size)
+            if getattr(avatar, 'size', len(avatar)) > (max_size * 1024):
+                max_size_str = f"{max_size}k"
                 raise ValidationError(_('Avatar file size may not exceed %s.') % max_size_str)
+
 
         except AttributeError:
             """

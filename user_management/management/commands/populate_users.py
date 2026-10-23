@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
+from django.db import transaction
 from custom_tags.utils import LoggerCommand
 from django.db.utils import IntegrityError
+
 
 
 class Command(LoggerCommand):
@@ -59,8 +61,9 @@ class Command(LoggerCommand):
         if password is None:
             password = username
         try:
-            user = UserModel.objects.create_user(username=username, password=password, is_active=True, is_superuser=True, is_staff=True)
-            user.save()
+            with transaction.atomic():
+                user = UserModel.objects.create_user(username=username, password=password, is_active=True, is_superuser=True, is_staff=True)
+                user.save()
             self.logger.info("created superuser '{}'".format(username))
         except IntegrityError:
             # user already exits update password
@@ -78,8 +81,9 @@ class Command(LoggerCommand):
         if password is None:
             password = username
         try:
-            user = UserModel.objects.create_user(username=username, password=password, is_active=True, is_superuser=False, is_staff=True)
-            user.save()
+            with transaction.atomic():
+                user = UserModel.objects.create_user(username=username, password=password, is_active=True, is_superuser=False, is_staff=True)
+                user.save()
             self.logger.info("created staff user '{}'".format(username))
         except IntegrityError:
             # user already exits update password
@@ -97,8 +101,9 @@ class Command(LoggerCommand):
         if password is None:
             password = username
         try:
-            user = UserModel.objects.create_user(username=username, password=password, is_active=True, is_superuser=False, is_staff=False)
-            user.save()
+            with transaction.atomic():
+                user = UserModel.objects.create_user(username=username, password=password, is_active=True, is_superuser=False, is_staff=False)
+                user.save()
             self.logger.info("created regular user '{}'".format(username))
         except IntegrityError:
             # user already exits update password
@@ -110,6 +115,7 @@ class Command(LoggerCommand):
                     self.logger.info("Password for regular user '{}' updated".format(username))
             else:
                 self.logger.info("User '{}' already exists".format(username))
+
 
     def _handle_args(self, lists, method):
         for i in range(0, len(lists), 2):

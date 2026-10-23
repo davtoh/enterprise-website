@@ -106,8 +106,8 @@ msgid ""
 "data access through Django REST Framework."
 msgstr ""
 "Esta plataforma une aplicaciones web modulares en una interfaz empresarial "
-"unificada: incluye gestión dinámica de tareas (Todo), encuestas interactivas "
-"de decisión (Polls), ejecución de Python basada en navegador (Brython) y "
+"unificada: incluye gestión dinámica de tareas (Todo), encuestas interactivas"
+" de decisión (Polls), ejecución de Python basada en navegador (Brython) y "
 "acceso a datos programáticos a través de Django REST Framework."
 
 #: .\home\templates\home\about.html:38 .\home\templates\home\index.html:23
@@ -161,8 +161,8 @@ msgid ""
 "Clean app separation with dedicated models, views, and APIs ready for "
 "internationalization and multi-cloud deployment."
 msgstr ""
-"Separación limpia de aplicaciones con modelos dedicados, vistas y API listas "
-"para la internacionalización y la implementación en múltiples nubes."
+"Separación limpia de aplicaciones con modelos dedicados, vistas y API listas"
+" para la internacionalización y la implementación en múltiples nubes."
 
 #: .\home\templates\home\contact.html:5
 #, fuzzy
@@ -274,52 +274,63 @@ msgstr "vías respiratorias"
 
 #: .\home\templates\home\index.html:54 .\home\templates\home\index.html:68
 #: .\home\templates\home\index.html:82 .\home\templates\home\index.html:96
+#, fuzzy
 msgid "View Details"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:64 .\home\templates\home\products.html:57
+#, fuzzy
 msgid "The Crab Wheel"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:78 .\home\templates\home\products.html:71
+#, fuzzy
 msgid "The Plug Ninja"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:92
+#, fuzzy
 msgid "The Controller"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:113
+#, fuzzy
 msgid ""
 "Globally Connected <br>\n"
 "                    by Large Network"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:116 .\home\templates\home\index.html:140
+#, fuzzy
 msgid "We are here to listen from you deliver exellence"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:121
+#, fuzzy
 msgid "Get Details"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:134
+#, fuzzy
 msgid "Brand new app to blow your mind"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:136
+#, fuzzy
 msgid ""
 "We’ve made a life <br>\n"
 "                        that will change you"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:145
+#, fuzzy
 msgid "Get Started Now"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:162
+#, fuzzy
 msgid "Some Features that Made us Unique"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:173
 msgid "Expert Technicians"
@@ -839,8 +850,8 @@ msgstr ""
 
 #: .\templates\registration\login.html:20
 msgid ""
-"Your account doesn't have access to this page. To proceed, please login with "
-"an account that has access."
+"Your account doesn't have access to this page. To proceed, please login with"
+" an account that has access."
 msgstr ""
 
 #: .\templates\registration\login.html:22

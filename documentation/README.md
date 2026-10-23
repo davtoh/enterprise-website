@@ -15,12 +15,14 @@ A comprehensive guide to the architecture, purpose, functionalities, system flow
    - [Polls & Interactive Voting](#polls--interactive-voting)
 5. [Maintenance & Management Commands Guide](#5-maintenance--management-commands-guide)
    - [Virtual Environment & Execution Standards](#virtual-environment--execution-standards)
+   - [Automated Testing & Coverage (pytest & pytest-cov)](#automated-testing--coverage-pytest--pytest-cov)
    - [Database Migrations & Setup](#database-migrations--setup)
    - [User Management & Testing Fixtures](#user-management--testing-fixtures)
    - [Data Population & Pre-Loaded Databases](#data-population--pre-loaded-databases)
    - [Translation & i18n Tooling (Rosetta & Auto-Translate)](#translation--i18n-tooling-rosetta--auto-translate)
    - [Server Execution (Development & Production ASGI)](#server-execution-development--production-asgi)
 6. [Security & Production Readiness](#6-security--production-readiness)
+
 
 ---
 
@@ -264,7 +266,54 @@ In accordance with repository guidelines, **always use the project virtual envir
 
 ---
 
+### Automated Testing & Coverage (pytest & pytest-cov)
+
+The platform is fortified with a comprehensive test suite utilizing `pytest`, `pytest-django`, and `pytest-cov`.
+
+#### Test Architecture & Organization
+
+Test suites are decoupled into dedicated test modules within `tests/` and individual app packages:
+
+| Test Module | Scope & Covered Scenarios |
+| :--- | :--- |
+| `tests/test_home.py` | Validates HTTP 200 for all standard and legacy `.html` routes (`/`, `/about/`, `/services/`, `/products/`, `/contact/`) and contact form submission/validation. |
+| `tests/test_user_management.py` | User signup, login, GET/POST logout, profile views, update views, activation token workflow, AJAX location loaders, `populate_users` command, age and birthdate form validation, and model representations. |
+| `tests/test_todo.py` | List view (empty and populated), authenticated greeting, add form GET/POST, detailed timezone conversion diagnostics, 404 handling, and `delete` route. |
+| `tests/test_polls.py` | Questions filtering (past vs future), detail view, race-condition protected voting (`F('votes') + 1`), error redisplay on missing choices, results view, and `closepoll` command (including `--delete`). |
+| `tests/test_language_management.py` | Index view, Django `/i18n/setlang/` endpoint for multiple languages, placeholder protection engine (`_protect_placeholders`), and translation backends (MyMemory, DeepL, OpenAI). |
+| `tests/test_timezone_management.py` | `TimezoneMiddleware` activation with `Asia/Tokyo`, deactivation fallback to default, and `set_timezone` view. |
+| `tests/test_plugin_registry.py` | Plugin autodiscovery across all apps, menu hierarchy synchronization, idempotency, URL resolution, permission visibility, and `dynamic_menu` context processor. |
+| `tests/test_rest_api.py` | DRF root, paginated users list, user details, and dynamic attribute filtering (`?val=username&val=email`). |
+| `tests/test_webprogram.py` | Brython WebProgram views. |
+| `tests/test_utils_and_extra.py` | Referer parsing, valid same-host referer, age utility, and avatar image validation (dimensions, format, size limits). |
+
+#### Running the Test Suite
+
+```powershell
+# Run all tests
+.\.venv\Scripts\python.exe -m pytest
+
+# Run a specific test module
+.\.venv\Scripts\python.exe -m pytest tests/test_user_management.py
+
+# Run with verbose output and strict markers
+.\.venv\Scripts\python.exe -m pytest -v
+```
+
+#### Generating Code Coverage Reports
+
+```powershell
+# Generate terminal summary and HTML coverage report
+.\.venv\Scripts\python.exe -m pytest --cov=. --cov-report=html --cov-report=term
+```
+
+- **Target Coverage:** $\ge$ 80% statement coverage (Achieved: **80%** with **106 tests passed**).
+- **Interactive HTML Report:** Generated at `htmlcov/index.html`. Open this file in your browser to inspect line-by-line execution and branch coverage.
+
+---
+
 ### Database Migrations & Setup
+
 
 1. **Check System Health:**
    ```powershell

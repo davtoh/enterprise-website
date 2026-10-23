@@ -12,8 +12,9 @@ urlpatterns = [
     path('profile/', views.SiteUserProfileView.as_view(), name='profile'),
     path('ajax/load-states/', views.load_states, name='ajax_load_states'),
     path('ajax/load-cities/', views.load_cities, name='ajax_load_cities'),
-    re_path(r'^activate/(?P<slug>[0-9A-Za-z_\-]+)/(?P<slug2>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/account/$',
+    re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z_\-]+)/account/$',
         views.activate_user_account, name='activate_user_account'),
+
 ]
 
 # TODO https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication

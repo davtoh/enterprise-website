@@ -70,27 +70,31 @@
 ---
 
 ### [Milestone 9] — Automated Test Suite
+**Status:** **COMPLETE** (2026-10-22)  
 **Scope:** Stabilize the current codebase with comprehensive tests before adding new features.
 
 **Objectives:**
-- Configure `pytest-django` with `pytest.ini` / `pyproject.toml`
-- Write test modules for each existing app:
-  - `tests/test_home.py` — all 5 pages return 200, contact form submission
-  - `tests/test_user_management.py` — signup, login, logout, profile update, activation flow
-  - `tests/test_todo.py` — add, complete, delete, detail views; authentication enforcement
-  - `tests/test_polls.py` — list, vote, results; duplicate vote prevention
-  - `tests/test_language_management.py` — language switch, `auto_translate` command
-  - `tests/test_timezone_management.py` — timezone switch middleware
-  - `tests/test_plugin_registry.py` — plugin discovery, menu auto-population
-  - `tests/test_rest_api.py` — DRF endpoint health checks
-- Add `coverage` reporting (`pytest --cov=. --cov-report=html`)
-- Target: ≥80% coverage across all apps
-- Update `requirements/local.txt` with test dependencies
+- [x] Configure `pytest-django` with `pytest.ini` / `pyproject.toml`
+- [x] Write test modules for each existing app:
+  - [x] `tests/test_home.py` — all 5 pages return 200, contact form submission
+  - [x] `tests/test_user_management.py` — signup, login, logout, profile update, activation flow
+  - [x] `tests/test_todo.py` — add, complete, delete, detail views; authentication enforcement
+  - [x] `tests/test_polls.py` — list, vote, results; duplicate vote prevention
+  - [x] `tests/test_language_management.py` — language switch, `auto_translate` command
+  - [x] `tests/test_timezone_management.py` — timezone switch middleware
+  - [x] `tests/test_plugin_registry.py` — plugin discovery, menu auto-population
+  - [x] `tests/test_rest_api.py` — DRF endpoint health checks
+  - [x] `tests/test_webprogram.py` — Brython webprogram views
+  - [x] `tests/test_utils_and_extra.py` — referer helper & form avatar validations
+- [x] Add `coverage` reporting (`pytest --cov=. --cov-report=html`)
+- [x] Target: ≥80% coverage across all apps (Achieved: 80% with 106 passing tests)
+- [x] Update `requirements/local.txt` with test dependencies (`pytest-cov>=4.1.0`)
 
 **Verification:**
-- `pytest` runs cleanly with no failures
-- Coverage report generated in `htmlcov/`
+- `pytest` runs cleanly: 106 passed in 22.03s, 0 failures
+- Coverage report generated in `htmlcov/` (80% total statement coverage)
 - `manage.py check` → 0 issues
+
 
 ---
 

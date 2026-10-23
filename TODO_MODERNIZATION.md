@@ -60,7 +60,7 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
 ### Phase 4: Verification & Migrations
 - [x] `python manage.py check` passes with 0 issues.
 - [x] `python manage.py showmigrations` and `python manage.py migrate` executed cleanly.
-- [ ] Run automated tests (`pytest` / `python manage.py test`).
+- [x] Run automated test suite (`pytest`: 106 tests passing, 80% statement coverage report in `htmlcov/`).
 
 ### Phase 5: Production Readiness & Containerization
 - [x] Add cross-platform `README.md` (Windows, Linux, macOS).
@@ -75,3 +75,25 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
 - [x] Interactive Modules Menu: Added "Apps" dropdown to navbar linking directly to Todo, Polls, Brython, REST API, and Admin.
 - [x] User Management & Auth: Fixed Django 5 LogoutView GET/POST support, base64 encoding/decoding, reverse URLs, and created missing templates (`profile.html`, `logout.html`, `siteuser_list.html`).
 - [x] Todo & Polls Logic: Replaced hard lookups with `get_object_or_404()`, fixed typographical curly quotes in templates, and enhanced card styling while preserving all original learning references.
+
+### Phase 7: Automated Testing & Code Quality (Milestone 9)
+- [x] Configured `pytest-django` via `pytest.ini` and `coverage` via `.coveragerc`.
+- [x] Comprehensive test suites covering all applications:
+  - `tests/test_home.py` (13 tests) — 5 public pages (standard + `.html`), contact form submission & validation.
+  - `tests/test_user_management.py` (17 tests) — signup, login, logout, profile update, activation token flow, AJAX endpoints, commands (`populate_users`), form validators, and model representations.
+  - `tests/test_todo.py` (11 tests) — list views, authenticated greetings, add, detail with timezone diagnostics, delete, and 404 handling.
+  - `tests/test_polls.py` (15 tests) — published/future questions, detail view, voting with concurrency expression (`F('votes') + 1`), error redisplay, results, and `closepoll` command.
+  - `tests/test_language_management.py` (11 tests) — language switcher (`/i18n/setlang/`), placeholder preservation engine, and `auto_translate` backends.
+  - `tests/test_timezone_management.py` (4 tests) — `TimezoneMiddleware` activation/deactivation and `set_timezone` view.
+  - `tests/test_plugin_registry.py` (8 tests) — plugin autodiscovery, menu auto-population, `sync_menus` command, URL resolution, and permission filters.
+  - `tests/test_rest_api.py` (5 tests) — DRF root, paginated users list, user details, and dynamic query filtering (`?val=username&val=email`).
+  - `tests/test_webprogram.py` (2 tests) — Brython WebProgram views.
+  - `tests/test_utils_and_extra.py` (9 tests) — referer parser and avatar image validator edge cases.
+- [x] Codebase stabilization fixes:
+  - Fixed `activate_user_account` URL parameter naming (`uidb64`/`token` vs `slug`/`slug2`) and added backward-compatible fallback kwargs.
+  - Fixed `TimezoneMiddleware` and `timezone_management/views.py` `ModuleNotFoundError: pytz` by implementing standard library `zoneinfo` fallbacks.
+  - Modernized `polls/tests.py` `assertQuerysetEqual` calls for Django 5.
+  - Fixed string format specifiers in avatar validation (`%(w)d x %(h)d` and `{max_size}k`).
+  - Added ordering to `UserViewSet` queryset to eliminate DRF pagination warnings.
+- [x] Verification: 106 tests passing, 80% statement coverage achieved with HTML report in `htmlcov/`.
+
