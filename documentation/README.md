@@ -221,13 +221,15 @@ sequenceDiagram
 ### Location & Geo-Data Processing
 ```mermaid
 flowchart LR
-    A["world.sql<br/>(Countries, Regions, Cities)"] --> B["populate_locations<br/>Command"]
-    B --> C{"Cache Exists?<br/>(world.sql.json)"}
-    C -- No --> D["Sanitize & Adapt SQL<br/>Generate Cache File"]
-    D --> E["Bulk Insert into<br/>location_management Models"]
-    C -- Yes --> F["Fast Load from<br/>world.sql.json Cache"]
-    F --> E
-    E --> G[("Database<br/>Countries / States / Cities")]
+    A["Upstream Source / Archive<br/>(Git LFS or Remote URL)"] --> B["download_geodata<br/>Command"]
+    B --> C["world.sql<br/>(Countries, Regions, Cities)"]
+    C --> D["populate_locations<br/>Command"]
+    D --> E{"Cache Exists?<br/>(world.sql.json)"}
+    E -- No --> F["Sanitize & Adapt SQL<br/>Generate Cache File"]
+    F --> G["Bulk Insert into<br/>location_management Models"]
+    E -- Yes --> H["Fast Load from<br/>world.sql.json Cache"]
+    H --> G
+    G --> I[("Database<br/>Countries / States / Cities")]
 ```
 
 ---
@@ -365,7 +367,13 @@ Test suites are decoupled into dedicated test modules within `tests/` and indivi
 
 ### Data Population & Pre-Loaded Databases
 
-1. **Populate Countries, States, and Cities (`populate_locations`):**
+1. **Download Geodata On-Demand (`download_geodata`):**
+   Downloads `world.sql` directly from upstream GitHub archive without bloating the Git repository:
+   ```powershell
+   .\.venv\Scripts\python.exe manage.py download_geodata
+   ```
+
+2. **Populate Countries, States, and Cities (`populate_locations`):**
    Imports global geographical datasets into `location_management` models:
    ```powershell
    .\.venv\Scripts\python.exe manage.py populate_locations
@@ -373,7 +381,7 @@ Test suites are decoupled into dedicated test modules within `tests/` and indivi
    > [!NOTE]
    > The first run sanitizes `world.sql` and generates a local cached `world.sql.json` file. Subsequent runs execute quickly using the cache.
 
-2. **Close or Moderate Polls (`closepoll`):**
+3. **Close or Moderate Polls (`closepoll`):**
    ```powershell
    # Close poll ID 1 from voting
    .\.venv\Scripts\python.exe manage.py closepoll 1
@@ -494,3 +502,86 @@ When switching from the default zero-setup SQLite engine to MySQL or PostgreSQL:
    pip install -r requirements/production.txt
    python manage.py migrate
    ```
+
+---
+
+## 7. Docker & Containerized Architecture
+
+The starter kit provides production-ready containerization with multi-stage builds and process isolation:
+
+```
++---------------------------------------------------------------------------------+
+|                           Host (Port 80 / 443)                                  |
++---------------------------------------------------------------------------------+
+                                      |
+                                      v
++---------------------------------------------------------------------------------+
+|                             Nginx Reverse Proxy                                 |
+|   - Serves /static/ directly from shared volume                                 |
+|   - Serves /media/ directly from shared volume                                  |
+|   - Proxies HTTP and WebSockets (with Connection: upgrade) to Web Service       |
++---------------------------------------------------------------------------------+
+                                      |
+                                      v
++---------------------------------------------------------------------------------+
+|                        Web Service (Daphne ASGI Server)                         |
+|   - Multi-stage slim image, running under dedicated non-root user (appuser)    |
+|   - Auto-migrates and synchronizes menus upon container start                   |
++---------------------------------------------------------------------------------+
+             |                                                |
+             v                                                v
++--------------------------+                     +-------------------------------+
+|      PostgreSQL 16       |                     |            Redis 7            |
+|   Relational Database    |                     |   Channel Layers & Pub/Sub    |
++--------------------------+                     +-------------------------------+
+```
+
+### Docker Compose Commands
+
+```bash
+# Local development with live reload & volume mount:
+docker compose up
+
+# Full production stack (PostgreSQL + Redis + Nginx):
+docker compose -f docker-compose.yml up -d --build
+
+# Run checks or migrations in running container:
+docker compose -f docker-compose.yml exec web python manage.py check
+docker compose -f docker-compose.yml exec web python manage.py migrate
+```
+
+---
+
+## 8. Production Security & Deployment Auditing
+
+When running with `DEBUG=False`, the following security controls are active:
+- `SECURE_SSL_REDIRECT = True`: Enforces HTTPS traffic.
+- `SESSION_COOKIE_SECURE = True`: Session cookies are transmitted over HTTPS only.
+- `CSRF_COOKIE_SECURE = True`: CSRF tokens are transmitted over HTTPS only.
+- `SECURE_HSTS_SECONDS = 31536000`: Enforces HTTP Strict Transport Security for 1 year.
+- `SECURE_HSTS_INCLUDE_SUBDOMAINS = True`: Extends HSTS to all subdomains.
+- `SECURE_HSTS_PRELOAD = True`: Permits domain submission to browser HSTS preload list.
+- `X_FRAME_OPTIONS = 'DENY'`: Protects against clickjacking.
+- `SECURE_CONTENT_TYPE_NOSNIFF = True`: Prevents MIME-type sniffing.
+- `SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')`: Safe reverse proxy SSL termination.
+
+Run security verification at any time:
+```bash
+python manage.py check --deploy
+```
+
+---
+
+## 9. CI/CD Pipeline (GitHub Actions)
+
+Continuous Integration is defined in `.github/workflows/ci.yml`:
+- **Automated Validation on Push & PR:**
+  - Matrix setup with Python 3.12.
+  - Compiles translation catalogs (`compilemessages`).
+  - Verifies zero system issues (`manage.py check`).
+  - Verifies deployment security readiness (`manage.py check --deploy`).
+  - Runs full automated test suite with coverage (`pytest --cov=. --cov-report=html`).
+  - Retains and uploads HTML test coverage reports.
+- **Automated Docker Image Release on Tag (`v*`):**
+  - Builds multi-stage production container image.
+  - Authenticates and publishes container image to GitHub Container Registry (`ghcr.io`).

@@ -102,29 +102,30 @@
 **Scope:** Make the starter kit deployable and automatically validated.
 
 **Objectives:**
-- **Docker:**
-  - `Dockerfile` — multi-stage build (builder + slim runtime)
-  - `docker-compose.yml` — services: `web` (Django/Daphne), `db` (PostgreSQL), `redis` (for Channels + future Celery), `nginx` (static files + reverse proxy)
-  - `docker-compose.override.yml` — local dev overrides (SQLite mode, debug, volume mounts)
-  - `.dockerignore` — exclude `.venv`, `*.pyc`, `world.sql`, media, etc.
-- **Production Security Headers** in `settings.py`:
-  - `SECURE_SSL_REDIRECT`, `SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE`
-  - `SECURE_HSTS_SECONDS`, `SECURE_HSTS_INCLUDE_SUBDOMAINS`
-  - `X_FRAME_OPTIONS = 'DENY'`, `SECURE_CONTENT_TYPE_NOSNIFF`
-  - Guard all headers behind `DEBUG=False` conditional
-- **GitHub Actions CI/CD** (`.github/workflows/ci.yml`):
-  - On push/PR: install deps → `manage.py check` → `pytest --cov` → upload coverage report
-  - On tag/release: build Docker image → push to registry (GitHub Container Registry)
-- **world.sql cleanup:**
-  - Move `world.sql` and `world.sql.json` out of git history
-  - Add a `download_geodata.py` management command that fetches them from a URL or Git LFS
-  - Document in `README.md` and `documentation/README.md`
+- [x] **Docker:**
+  - [x] `Dockerfile` — multi-stage build (builder + slim runtime with non-root appuser)
+  - [x] `docker-compose.yml` — services: `web` (Django/Daphne), `db` (PostgreSQL 16), `redis` (7 for Channels + future Celery), `nginx` (1.27 static files + reverse proxy)
+  - [x] `docker-compose.override.yml` — local dev overrides (SQLite mode, debug, volume mounts)
+  - [x] `.dockerignore` — exclude `.venv`, `*.pyc`, `world.sql`, media, etc.
+- [x] **Production Security Headers** in `settings.py`:
+  - [x] `SECURE_SSL_REDIRECT`, `SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE`
+  - [x] `SECURE_HSTS_SECONDS`, `SECURE_HSTS_INCLUDE_SUBDOMAINS`, `SECURE_HSTS_PRELOAD`
+  - [x] `X_FRAME_OPTIONS = 'DENY'`, `SECURE_CONTENT_TYPE_NOSNIFF`, `SECURE_PROXY_SSL_HEADER`
+  - [x] Guard all headers behind `DEBUG=False` conditional with environment overrides
+- [x] **GitHub Actions CI/CD** (`.github/workflows/ci.yml`):
+  - [x] On push/PR: install deps → `compilemessages` → `manage.py check` → `manage.py check --deploy` → `pytest --cov` → upload coverage report artifact
+  - [x] On tag/release: build Docker image with Buildx → push to GitHub Container Registry (`ghcr.io`)
+- [x] **world.sql cleanup & on-demand download:**
+  - [x] Keep `world.sql` and `world.sql.json` out of git history (verified in `.gitignore` and `.dockerignore`)
+  - [x] Add a `download_geodata.py` management command that fetches them on demand from upstream repository or archive
+  - [x] Document in `README.md` and `documentation/README.md`
 
 **Verification:**
-- `docker compose up` starts all services cleanly
-- `docker compose exec web python manage.py check` → 0 issues
-- CI workflow runs green on GitHub Actions
-- Security headers verified with `python manage.py check --deploy`
+- `docker compose config` and `docker compose -f docker-compose.yml config` validate with 0 syntax/structure errors
+- `python manage.py check` → 0 issues
+- `python manage.py check --deploy` with production environment flags → 0 issues
+- 109 unit & integration tests passing with 80% code coverage
+- CI workflow validated at `.github/workflows/ci.yml`
 
 ---
 

@@ -1,0 +1,17 @@
+# ==============================================================================
+# Local Development Overrides for Docker Compose
+# Automatically loaded by `docker compose up` in local environments.
+# Provides live code reloading, direct port binding, and zero-setup SQLite fallback.
+# ==============================================================================
+
+services:
+  web:
+    environment:
+      - DEBUG=True
+      - USE_SQLITE=True
+      - DJANGO_LOG_LEVEL=DEBUG
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000

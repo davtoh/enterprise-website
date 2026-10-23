@@ -333,16 +333,18 @@ msgid "Some Features that Made us Unique"
 msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:173
+#, fuzzy
 msgid "Expert Technicians"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:176 .\home\templates\home\index.html:187
 #: .\home\templates\home\index.html:198 .\home\templates\home\index.html:209
 #: .\home\templates\home\index.html:220 .\home\templates\home\index.html:231
+#, fuzzy
 msgid ""
 "Usage of the Internet is becoming more common due to rapid advancement of "
 "technology and power."
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:184
 msgid "Professional Service"

@@ -19,6 +19,10 @@
 | **Django Compatibility Fixes** | `force_text`, invalid escape syntax, `allauth` AccountMiddleware | `force_str`, raw strings in `todo/urls.py` and `utils.py`, `allauth.account.middleware.AccountMiddleware` added | **DONE** |
 | **Migrations** | Unapplied migrations | All migrations successfully executed on local database (`python manage.py migrate` OK) | **DONE** |
 | **Documentation** | Outdated `README.rst` with syntax errors & Ubuntu-only instructions | Modern `README.md` with cross-platform instructions (Windows PowerShell, Linux/macOS bash) | **DONE** |
+| **Containerization** | None | Multi-stage `Dockerfile`, `docker-compose.yml` (PostgreSQL 16, Redis 7, Nginx 1.27), `docker-compose.override.yml` | **DONE** |
+| **Production Security** | Zero SSL / HSTS / cookie protections | `check --deploy` clean, HSTS preload, secure cookies, framing protection, proxy SSL headers | **DONE** |
+| **CI/CD Automation** | None | GitHub Actions (`.github/workflows/ci.yml`) for tests, coverage upload, and container publishing | **DONE** |
+| **Geodata Delivery** | 175MB raw `world.sql` directly on root | `download_geodata` command for streaming download on-demand; kept out of Git | **DONE** |
 
 ---
 
@@ -42,7 +46,7 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
 - [x] Add `keys.json` and `.env` to `.gitignore`.
 - [x] Create `.env.example` with template keys and sensible defaults.
 - [x] Isolate and ignore local `.sqlite3` and media files.
-- [ ] Review removal/archival of 175MB `world.sql` and `world.sql.json` from git history.
+- [x] Ensure 175MB `world.sql` and `world.sql.json` stay out of git history; added `download_geodata` on-demand stream command.
 
 ### Phase 2: Python & Virtual Environment Setup
 - [x] Install Python 3.12 runtime.
@@ -60,12 +64,14 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
 ### Phase 4: Verification & Migrations
 - [x] `python manage.py check` passes with 0 issues.
 - [x] `python manage.py showmigrations` and `python manage.py migrate` executed cleanly.
-- [x] Run automated test suite (`pytest`: 106 tests passing, 80% statement coverage report in `htmlcov/`).
+- [x] Run automated test suite (`pytest`: 109 tests passing, 80% statement coverage report in `htmlcov/`).
 
 ### Phase 5: Production Readiness & Containerization
 - [x] Add cross-platform `README.md` (Windows, Linux, macOS).
-- [ ] Add `Dockerfile` and `docker-compose.yml` for containerized multi-platform local run & production deployment.
-- [ ] Configure production security headers (`SECURE_SSL_REDIRECT`, `SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE`).
+- [x] Add multi-stage `Dockerfile` (builder + slim runtime with non-root appuser) and `docker-compose.yml` (web, db, redis, nginx).
+- [x] Add `docker-compose.override.yml` for local dev (SQLite mode, live reload) and `.dockerignore`.
+- [x] Configure production security headers (`SECURE_SSL_REDIRECT`, `SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE`, HSTS, nosniff, `X_FRAME_OPTIONS = 'DENY'`).
+- [x] Add GitHub Actions CI/CD pipeline (`.github/workflows/ci.yml`) for automated check, deploy check, pytest, coverage, and Docker registry publish.
 
 ### Phase 6: Routing, AI Standards & Logic Modernization
 - [x] AI Governance: Root `AGENTS.md`, modular `.agents/rules/`, and portable `documentation/GLOBAL_AI_RULES.md` for comment retention, persistent logging, and milestone reviews.

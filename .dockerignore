@@ -1,0 +1,55 @@
+# Git & CI
+.git/
+.github/
+.gitignore
+
+# Python virtual environments & bytecode
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Secrets & Local Environment
+keys.json
+.env
+.env.*
+!.env.example
+
+# Local SQLite databases & User Uploads
+*.sqlite3
+db.sqlite3
+/media/
+
+# Large Geodata & Legacy Binary Data
+world.sql
+world.sql.json
+*.dat
+
+# Test & Coverage Artifacts
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+package-lock.json
+
+# Docker & Compose configs
+Dockerfile*
+docker-compose*.yml

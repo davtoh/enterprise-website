@@ -303,4 +303,65 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `.\.venv\Scripts\python.exe -m pytest` executed cleanly: **106 passed in 22.03s** with **0 failures**.
   - `.\.venv\Scripts\python.exe -m pytest --cov=. --cov-report=html` achieved **80% total statement coverage** with report generated in `htmlcov/index.html`.
 
+---
+
+## [Milestone 10] - Docker, CI/CD & Production Security
+- **Date:** 2026-10-22
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Containerization Architecture:
+    - Multi-stage `Dockerfile` (`builder` stage for wheel builds + `runtime` stage based on `python:3.12-slim-bookworm` running as non-root `appuser` with container healthchecks).
+    - Production `docker-compose.yml` orchestrating 4 services: `web` (Django 5/Daphne ASGI), `db` (PostgreSQL 16 Alpine with `pg_isready` healthcheck), `redis` (Redis 7 Alpine with `redis-cli ping` healthcheck), and `nginx` (Nginx 1.27 Alpine reverse proxy).
+    - Development overrides `docker-compose.override.yml` providing zero-setup live code reloading, volume mounts, direct port binding, and SQLite mode.
+    - Container entrypoint script `docker-entrypoint.sh` with socket-based database readiness wait, automated `migrate`, `sync_menus`, and production `collectstatic`.
+    - Reverse proxy configuration `nginx/default.conf` serving static and media volumes directly, terminating SSL headers, and proxying HTTP/WebSockets (`Connection: Upgrade`).
+    - Optimization and hygiene: `.dockerignore` isolating virtual environments, bytecode, user uploads, sqlite files, and raw geodata dumps.
+  - Production Security Hardening in `enterprise_website/settings.py`:
+    - Guarded behind `DEBUG=False` with granular `.env` overrides:
+      - `SECURE_SSL_REDIRECT = True`
+      - `SESSION_COOKIE_SECURE = True`
+      - `CSRF_COOKIE_SECURE = True`
+      - `SECURE_HSTS_SECONDS = 31536000` (1 year)
+      - `SECURE_HSTS_INCLUDE_SUBDOMAINS = True`
+      - `SECURE_HSTS_PRELOAD = True`
+      - `X_FRAME_OPTIONS = 'DENY'`
+      - `SECURE_CONTENT_TYPE_NOSNIFF = True`
+      - `SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')`
+    - Dynamic Channels layer configuration: in-memory layer for local development and testing, Redis layer (`channels_redis.core.RedisChannelLayer`) when `REDIS_URL` is set.
+    - Added `channels-redis>=4.2.0` and `redis>=5.0.0` to `requirements/production.txt`.
+    - Updated `.env.example` with PostgreSQL, Redis, geodata download, and production security templates.
+  - Automated CI/CD Pipeline (`.github/workflows/ci.yml`):
+    - Push and Pull Request workflow: setups Python 3.12, caches pip wheels, installs dependencies, compiles message catalogs, runs `manage.py check`, audits deployment security with `manage.py check --deploy`, runs full `pytest --cov` test suite, and uploads coverage HTML artifact.
+    - Tag / Release workflow (`v*`): automated Docker Buildx build and container image publishing to GitHub Container Registry (`ghcr.io`).
+  - Large Geodata On-Demand Delivery & Cleanup:
+    - Confirmed 175MB `world.sql` and `world.sql.json` are excluded via `.gitignore` and `.dockerignore`.
+    - Implemented streaming management command `location_management/management/commands/download_geodata.py` allowing on-demand downloads with download progress, atomic renaming, and overwrite guards.
+    - Added automated unit tests for `download_geodata` (skip when exists, stream success, HTTP error) and security settings in `tests/test_utils_and_extra.py`.
+    - Documented container workflows, on-demand geodata downloads, security checks, and CI/CD in `README.md` and `documentation/README.md`.
+- **Files Created / Modified:**
+  - `Dockerfile` (created)
+  - `docker-compose.yml` (created)
+  - `docker-compose.override.yml` (created)
+  - `.dockerignore` (created)
+  - `docker-entrypoint.sh` (created)
+  - `nginx/default.conf` (created)
+  - `.github/workflows/ci.yml` (created)
+  - `location_management/management/commands/download_geodata.py` (created)
+  - `enterprise_website/settings.py` (modified)
+  - `requirements/production.txt` (modified)
+  - `.env.example` (modified)
+  - `tests/test_utils_and_extra.py` (modified)
+  - `README.md` (modified)
+  - `documentation/README.md` (modified)
+  - `milestone_plan.md` (modified)
+  - `TODO_MODERNIZATION.md` (modified)
+  - `MIGRATION_LOG.md` (modified)
+- **Verification:**
+  - `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
+  - `python manage.py check --deploy` passes with 0 issues in production mode (`$env:DEBUG="False"`).
+  - `docker compose config` and `docker compose -f docker-compose.yml config` validate syntax, environment interpolation, and network topology with 0 errors.
+  - `manage.py download_geodata --help` functions cleanly.
+  - `.\.venv\Scripts\python.exe -m pytest` executed cleanly: **109 passed in 19.86s** with **0 failures**.
+  - `.\.venv\Scripts\python.exe -m pytest --cov=. --cov-report=html` maintains **80% total statement coverage**.
+
 

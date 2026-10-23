@@ -86,3 +86,80 @@ class TestFormAvatarValidation:
         form.cleaned_data = {"profile_picture": large_file}
         with pytest.raises(ValidationError):
             form.clean_profile_picture()
+
+
+class TestDownloadGeodataCommand:
+    """Tests for download_geodata management command."""
+
+    def test_download_geodata_skips_when_exists(self, tmp_path):
+        from django.core.management import call_command
+        target_file = tmp_path / "world.sql"
+        target_file.write_text("existing content", encoding="utf-8")
+
+        out = io.StringIO()
+        call_command("download_geodata", output=str(target_file), stdout=out)
+        output_str = out.getvalue()
+        assert "Geodata file already exists" in output_str
+        assert target_file.read_text(encoding="utf-8") == "existing content"
+
+    def test_download_geodata_success(self, tmp_path, monkeypatch):
+        from django.core.management import call_command
+        target_file = tmp_path / "downloaded_world.sql"
+
+        dummy_chunks = [b"-- MySQL dump\n", b"CREATE TABLE `countries` (id INT);\n"]
+
+        class DummyResponse:
+            status_code = 200
+            reason = "OK"
+            headers = {"content-length": str(sum(len(c) for c in dummy_chunks))}
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def iter_content(self, chunk_size=65536):
+                for chunk in dummy_chunks:
+                    yield chunk
+
+        monkeypatch.setattr("requests.get", lambda *args, **kwargs: DummyResponse())
+
+        out = io.StringIO()
+        call_command("download_geodata", output=str(target_file), force=True, stdout=out)
+        output_str = out.getvalue()
+        assert "Successfully downloaded geodata" in output_str
+        assert target_file.exists()
+        assert target_file.read_bytes() == b"".join(dummy_chunks)
+
+    def test_download_geodata_http_error(self, tmp_path, monkeypatch):
+        from django.core.management import call_command, CommandError
+        target_file = tmp_path / "failed_world.sql"
+
+        class Dummy404Response:
+            status_code = 404
+            reason = "Not Found"
+            headers = {}
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def iter_content(self, chunk_size=65536):
+                return []
+
+        monkeypatch.setattr("requests.get", lambda *args, **kwargs: Dummy404Response())
+
+        with pytest.raises(CommandError) as exc:
+            call_command("download_geodata", output=str(target_file), force=True)
+        assert "HTTP 404 Not Found" in str(exc.value)
+        assert not target_file.exists()
+
+
+def test_production_security_headers_setting():
+    from django.conf import settings
+    # X_FRAME_OPTIONS and SECURE_CONTENT_TYPE_NOSNIFF should be active
+    assert getattr(settings, "X_FRAME_OPTIONS", None) == "DENY"
+    assert getattr(settings, "SECURE_CONTENT_TYPE_NOSNIFF", False) is True
