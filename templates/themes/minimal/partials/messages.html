@@ -1,0 +1,15 @@
+{% if messages %}
+<div class="container mt-3">
+  {% for message in messages %}
+    <aside 
+      x-data="{ show: true }" 
+      x-show="show" 
+      x-cloak
+      class="card p-3 mb-2 d-flex align-items-center justify-content-between" 
+      role="alert">
+      <span>{{ message }}</span>
+      <button @click="show = false" type="button" class="btn btn-outline py-1 px-2 small">&times;</button>
+    </aside>
+  {% endfor %}
+</div>
+{% endif %}

@@ -18,3 +18,8 @@ class TodoPlugin(AppPlugin):
             parent_slug="Apps",
         )
     ]
+
+    plugin_templates = {
+        'bootstrap5': 'todo/bs5/',
+        'tailwind': 'todo/tw/',
+    }

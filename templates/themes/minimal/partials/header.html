@@ -1,0 +1,78 @@
+{% load static %}
+{% load i18n %}
+
+<header>
+  <div class="container">
+    <nav>
+      <!-- Brand Logo -->
+      <a href="{% url 'home:index' %}" class="d-flex align-items-center gap-1 fw-bold text-dark text-decoration-none" title="{% trans 'Enterprise Website' %}">
+        <img src="{% static 'img/logo.png' %}" alt="Enterprise Logo" title="{% trans 'Enterprise Website' %}" height="30">
+        <span>{% trans "Enterprise Website" %}</span>
+      </a>
+
+      <!-- Nav Links -->
+      <ul class="nav-links">
+        {% if main_navigation %}
+          {% for nav_item in main_navigation %}
+            {% if nav_item.children %}
+              <li class="position-relative" x-data="{ open: false }">
+                <button @click="open = !open" @click.away="open = false" type="button" class="btn btn-outline border-0 py-1 px-2">
+                  {% if nav_item.icon %}<i class="{{ nav_item.icon }}"></i>{% endif %}
+                  <span>{% trans nav_item.title %}</span> &#9662;
+                </button>
+                <div x-show="open" x-cloak class="dropdown-panel-left">
+                  {% for child in nav_item.children %}
+                    <a href="{{ child.url }}" class="dropdown-item-link">
+                      {% if child.icon %}<i class="{{ child.icon }}"></i>{% endif %} {% trans child.title %}
+                    </a>
+                  {% endfor %}
+                </div>
+              </li>
+            {% else %}
+              <li>
+                <a href="{{ nav_item.url }}" class="{% if nav_item.url_name and request.resolver_match.view_name == nav_item.url_name %}fw-bold text-primary{% else %}text-muted{% endif %}">
+                  {% if nav_item.icon %}<i class="{{ nav_item.icon }}"></i>{% endif %} {% trans nav_item.title %}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <li><a href="{% url 'home:index' %}">{% trans "Home" %}</a></li>
+          <li><a href="{% url 'home:about' %}">{% trans "About" %}</a></li>
+          <li><a href="{% url 'home:services' %}">{% trans "Services" %}</a></li>
+          <li><a href="{% url 'home:contact' %}">{% trans "Contact" %}</a></li>
+        {% endif %}
+      </ul>
+
+      <!-- Right Actions: Theme Selector & User Auth -->
+      <div class="d-flex align-items-center gap-2">
+        {% include 'partials/theme_selector.html' %}
+
+        {% if user.is_authenticated %}
+          <div class="position-relative" x-data="{ open: false }">
+            <button @click="open = !open" @click.away="open = false" type="button" class="btn btn-outline py-1 px-2 small">
+              <i class="fa fa-user"></i> {{ user.username }} &#9662;
+            </button>
+            <div x-show="open" x-cloak class="dropdown-panel">
+              <a href="{% url 'user_management:profile' %}" class="dropdown-item-link">{% trans "Profile" %}</a>
+              {% if user.is_staff %}
+                <a href="{% url 'admin:index' %}" class="dropdown-item-link">{% trans "Admin" %}</a>
+                <a href="{% url 'task_runner:list' %}" class="dropdown-item-link">{% trans "Tasks" %}</a>
+              {% endif %}
+              <hr class="m-1 border-top border-light">
+              <form id="min-logout-form" method="post" action="{% url 'user_management:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline border-0 text-danger p-1 w-100 text-start">
+                  {% trans "Logout" %}
+                </button>
+              </form>
+            </div>
+          </div>
+        {% else %}
+          <a href="{% url 'user_management:login' %}" class="btn btn-outline">{% trans "Login" %}</a>
+          <a href="{% url 'user_management:signup' %}" class="btn">{% trans "Signup" %}</a>
+        {% endif %}
+      </div>
+    </nav>
+  </div>
+</header>

@@ -5,26 +5,26 @@
     {% trans "Add to Todo list" %}
 {% endblock %}
 {% block content %}
-<section class="section-gap">
+<section class="section-gap py-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <div class="card p-4" style="border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-radius: 10px;">
+                <div class="card shadow-sm border-0 rounded-3 p-4">
                     {% url 'todo:index' as back_url %}
-                    <a href="{{ request.GET.next | default:back_url}}" class="text-muted mb-3 d-inline-block"><i class="fa fa-arrow-left mr-1"></i> {% trans "Back to Todo List" %}</a>
+                    <a href="{{ request.GET.next | default:back_url}}" class="text-muted mb-3 d-inline-block"><i class="fa fa-arrow-left me-1"></i> {% trans "Back to Todo List" %}</a>
                     <h3 class="mb-4">{% trans "Create New Task" %}</h3>
                     <form action="{% url 'todo:add' %}" method="post">
                         {% csrf_token %} <!-- Cross Site Request Forgery protection https://docs.djangoproject.com/en/2.0/ref/csrf/ -->
-                        <div class="form-group mb-3">
-                            <label for="title" class="font-weight-bold">{% trans "Title" %}</label>
+                        <div class="mb-3">
+                            <label for="title" class="form-label fw-bold">{% trans "Title" %}</label>
                             <input type="text" name="title" id="title" class="form-control" placeholder="{% trans 'Enter task title' %}" required />
                         </div>
-                        <div class="form-group mb-4">
-                            <label for="text" class="font-weight-bold">{% trans "Description / Notes" %}</label>
+                        <div class="mb-4">
+                            <label for="text" class="form-label fw-bold">{% trans "Description / Notes" %}</label>
                             <textarea name="text" id="text" rows="4" class="form-control" placeholder="{% trans 'Enter task description...' %}"></textarea>
                         </div>
                         <input type="hidden" name="next" value="{{ request.GET.next | default:back_url}}">
-                        <button type="submit" class="primary-btn text-uppercase" style="border: none; cursor: pointer;">{% trans "Save Task" %}</button>
+                        <button type="submit" class="btn btn-primary text-uppercase">{% trans "Save Task" %}</button>
                     </form>
                 </div>
             </div>

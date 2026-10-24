@@ -6,28 +6,28 @@
 {% endblock %}
 
 {% block content %}
-<section class="section-gap">
+<section class="section-gap py-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <div class="card p-4" style="border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-radius: 10px;">
-                    <a href="{% url 'polls:index' %}" class="text-muted mb-3 d-inline-block"><i class="fa fa-arrow-left mr-1"></i> {% trans "Back to Polls" %}</a>
+                <div class="card shadow-sm border-0 rounded-3 p-4">
+                    <a href="{% url 'polls:index' %}" class="text-muted mb-3 d-inline-block"><i class="fa fa-arrow-left me-1"></i> {% trans "Back to Polls" %}</a>
                     <h3 class="mb-4">{{ question.question_text }}</h3>
 
                     <ul class="list-group mb-4">
                     {% for choice in question.choice_set.all %}
                         <li class="list-group-item d-flex justify-content-between align-items-center py-3">
                             <span>{{ choice.choice_text }}</span>
-                            <span class="badge badge-primary badge-pill px-3 py-2" style="background: #8490ff;">
+                            <span class="badge bg-primary rounded-pill px-3 py-2">
                                 {% blocktrans count votes=choice.votes %}{{ votes }} vote{% plural %}{{ votes }} votes{% endblocktrans %}
                             </span>
                         </li>
                     {% endfor %}
                     </ul>
 
-                    <div>
-                        <a href="{% url 'polls:detail' question.id %}" class="primary-btn text-uppercase">{% trans "Vote Again" %}</a>
-                        <a href="{% url 'polls:index' %}" class="genric-btn default text-uppercase ml-2">{% trans "All Polls" %}</a>
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'polls:detail' question.id %}" class="btn btn-primary text-uppercase">{% trans "Vote Again" %}</a>
+                        <a href="{% url 'polls:index' %}" class="btn btn-outline-secondary text-uppercase">{% trans "All Polls" %}</a>
                     </div>
                 </div>
             </div>

@@ -34,6 +34,7 @@ urlpatterns = [
     path('tz/', include('timezone_management.urls')),
     path('accounts/', include('user_management.urls')),
     path('tasks/', include('task_runner.urls')),
+    path('theme/', include('theme_management.urls')),
 
     #path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),

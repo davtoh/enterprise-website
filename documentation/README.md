@@ -104,12 +104,23 @@ enterprise_website/
 │   ├── views.py                  # Task list, detail, trigger, and JSON API views
 │   └── plugin.py                 # TaskRunnerPlugin for dynamic menu registration
 │
+├── theme_management/             # Dynamic CSS Framework & Theme Architecture
+│   ├── loaders.py                # ThemeTemplateLoader prioritizing active theme directory
+│   ├── middleware.py             # ThemeMiddleware (?theme=, session, cookie, thread-local)
+│   ├── context_processors.py     # theme_context (site_theme, available_themes)
+│   ├── views.py                  # set_theme view with open-redirect protection
+│   └── urls.py                   # /theme/set/<theme_name>/ routes
+│
 ├── custom_tags/                  # Shared Utilities & Base Commands
 │   ├── utils.py                  # LoggerCommand, source file loaders, key generators
 │   └── management/commands/      # secret_keys utility command
 │
-├── templates/                    # Global Base Templates & Component Partials
-│   ├── base.html                 # Master HTML5 layout (navbar, footer, flash messages)
+├── templates/                    # Global Base Templates & Multi-Theme Sets
+│   ├── themes/                   # Multi-Theme Architecture directories
+│   │   ├── bootstrap5/           # Native Bootstrap 5.3.3 templates & partials
+│   │   ├── tailwind/             # Tailwind CSS & Alpine.js templates & partials
+│   │   └── minimal/              # Semantic HTML5 & CSS custom properties templates
+│   ├── base.html                 # Master layout with dynamic theme switcher
 │   ├── partials/messages.html    # Django messages alert component
 │   └── admin/base_site.html      # Customized Django Admin banner
 │
@@ -654,3 +665,29 @@ Continuous Integration is defined in `.github/workflows/ci.yml`:
 - **Automated Docker Image Release on Tag (`v*`):**
   - Builds multi-stage production container image.
   - Authenticates and publishes container image to GitHub Container Registry (`ghcr.io`).
+
+---
+
+## 10. Dynamic Themes, Frontend Modernization & CSS Framework Architecture
+
+The presentation layer is modernized on **Bootstrap 5.3.3**, retiring legacy Bootstrap 3 CDN scripts, Bootstrap 4 CSS mismatches, and custom modal hacks. A multi-framework theme architecture allows runtime switching between CSS frameworks.
+
+### Supported Themes
+1. **`bootstrap5` (Default):**
+   - Clean native Bootstrap 5.3.3 styles, responsive flexbox layout (`d-flex`, `gap-2`, `me-2`, `ms-2`), and modern cards.
+   - Core interactive components use native `data-bs-*` attributes (`data-bs-toggle="modal"`, `data-bs-target`, `data-bs-dismiss="modal"`).
+   - Vendored offline bundle: `static/js/vendor/bootstrap.bundle.min.js`.
+2. **`tailwind`:**
+   - Utility-first Tailwind CSS classes with responsive mobile drawer navigation and Alpine.js interactive dropdowns.
+3. **`minimal`:**
+   - Lightweight semantic HTML5 styling driven by CSS custom properties (`--color-primary`, `--color-bg`, `--font-sans`) and accessible keyboard interactions.
+
+### Dynamic Theme Switching Flow
+- **Resolution Priority:** `?theme=<name>` (query param) → `request.session['site_theme']` → `request.COOKIES['site_theme']` → `settings.SITE_THEME` (`'bootstrap5'`).
+- **Template Resolution:** `theme_management.loaders.ThemeTemplateLoader` looks in `templates/themes/<current_theme>/` first, followed by plugin templates mapped in `AppPlugin.plugin_templates`, before falling back to `templates/`.
+- **Interactive Switcher:** Available in the navigation bar dropdown (`/theme/set/<theme_name>/?next=/current/page/`) with safe URL redirect validation.
+
+### Declarative Frontend: HTMX & Alpine.js
+- **HTMX:** Used for declarative AJAX interactions without page reload (e.g. `hx-post` for todo item deletion).
+- **Alpine.js:** Manages client-side UI state (tab selection, mobile menu toggles, modal dismissal) without jQuery or custom JavaScript workarounds.
+

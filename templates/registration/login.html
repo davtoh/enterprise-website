@@ -4,11 +4,11 @@
 {% block title %}{% trans "Login" %}{% endblock %}
 
 {% block content %}
-<section class="section-gap">
+<section class="section-gap py-5">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-5">
-        <div class="card p-4" style="border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-radius: 10px;">
+        <div class="card shadow-sm border-0 rounded-3 p-4">
           <h2 class="mb-4 text-center">{% trans "Sign In" %}</h2>
 
 {% if form.errors %}
@@ -37,7 +37,7 @@
 </table>
 
 <div class="mt-3 d-flex justify-content-between align-items-center">
-  <button type="submit" class="primary-btn text-uppercase">{% trans "Login" %}</button>
+  <button type="submit" class="btn btn-primary text-uppercase">{% trans "Login" %}</button>
   <input type="hidden" name="next" value="{{ next }}" />
   <p class="mb-0"><a href="{% url 'password_reset' %}" class="text-muted">{% trans "Lost password?" %}</a></p>
 </div>

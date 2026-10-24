@@ -1,0 +1,154 @@
+{% load static %}
+{% load i18n %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'home:index' %}" title="{% trans 'Enterprise Website' %}">
+      <img src="{% static 'img/logo.png' %}" alt="Enterprise Logo" title="{% trans 'Enterprise Website' %}" height="34" class="d-inline-block align-text-top me-2">
+      <span class="d-none d-sm-inline-block fw-bold text-dark fs-5">{% trans "Enterprise Website" %}</span>
+    </a>
+
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#bs5NavbarNav" aria-controls="bs5NavbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="bs5NavbarNav">
+      <!-- Main Nav Items -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if main_navigation %}
+          {% for nav_item in main_navigation %}
+            {% if nav_item.children %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="{{ nav_item.url }}" id="navDropdown-{{ forloop.counter }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {% if nav_item.icon %}<i class="{{ nav_item.icon }} me-1"></i>{% endif %}{% trans nav_item.title %}
+                </a>
+                <ul class="dropdown-menu shadow-sm" aria-labelledby="navDropdown-{{ forloop.counter }}">
+                  {% for child in nav_item.children %}
+                    <li>
+                      <a class="dropdown-item d-flex align-items-center" href="{{ child.url }}">
+                        {% if child.icon %}<i class="{{ child.icon }} me-2"></i>{% endif %}{% trans child.title %}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link {% if nav_item.url_name and request.resolver_match.view_name == nav_item.url_name %}active fw-semibold text-primary{% endif %}" href="{{ nav_item.url }}">
+                  {% if nav_item.icon %}<i class="{{ nav_item.icon }} me-1"></i>{% endif %}{% trans nav_item.title %}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.view_name == 'home:index' or request.resolver_match.view_name == 'home:index_file' %}active fw-semibold text-primary{% endif %}" href="{% url 'home:index' %}">{% trans "Home" %}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.view_name == 'home:about' or request.resolver_match.view_name == 'home:about_file' %}active fw-semibold text-primary{% endif %}" href="{% url 'home:about' %}">{% trans "About Us" %}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.view_name == 'home:services' or request.resolver_match.view_name == 'home:services_file' %}active fw-semibold text-primary{% endif %}" href="{% url 'home:services' %}">{% trans "Services" %}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.view_name == 'home:products' or request.resolver_match.view_name == 'home:products_file' %}active fw-semibold text-primary{% endif %}" href="{% url 'home:products' %}">{% trans "Products" %}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.view_name == 'home:contact' or request.resolver_match.view_name == 'home:contact_file' %}active fw-semibold text-primary{% endif %}" href="{% url 'home:contact' %}">{% trans "Contact" %}</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {% trans "Apps" %}
+            </a>
+            <ul class="dropdown-menu shadow-sm" aria-labelledby="appsDropdown">
+              <li><a class="dropdown-item" href="{% url 'todo:index' %}"><i class="fa fa-tasks me-2"></i>{% trans "Todo List" %}</a></li>
+              <li><a class="dropdown-item" href="{% url 'polls:index' %}"><i class="fa fa-bar-chart me-2"></i>{% trans "Polls" %}</a></li>
+              <li><a class="dropdown-item" href="{% url 'webprogram:index' %}"><i class="fa fa-code me-2"></i>{% trans "Brython WebProgram" %}</a></li>
+              <li><a class="dropdown-item" href="/rest_api/"><i class="fa fa-cogs me-2"></i>{% trans "REST API" %}</a></li>
+              <li><a class="dropdown-item" href="{% url 'task_runner:list' %}"><i class="fa fa-terminal me-2"></i>{% trans "Background Tasks" %}</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'admin:index' %}"><i class="fa fa-shield me-2"></i>{% trans "Site Admin" %}</a></li>
+            </ul>
+          </li>
+        {% endif %}
+      </ul>
+
+      <!-- Right Nav Items: CSS Framework Selector, Language, Auth -->
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <!-- CSS Framework Theme Selector -->
+        {% include 'partials/theme_selector.html' %}
+
+        <!-- Language Selector -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="{% trans 'Switch Language' %}">
+            <i class="fa fa-globe me-1"></i>
+            <span class="text-uppercase">{{ LANGUAGE_CODE|default:'en' }}</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="langDropdown">
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
+            <li><h6 class="dropdown-header text-uppercase small text-muted">{% trans "Language" %}</h6></li>
+            {% for lang in languages %}
+              <li>
+                <form action="{% url 'set_language' %}" method="post" class="d-inline">
+                  {% csrf_token %}
+                  <input name="next" type="hidden" value="{{ request.path }}">
+                  <input name="language" type="hidden" value="{{ lang.code }}">
+                  <button type="submit" class="dropdown-item d-flex align-items-center justify-content-between {% if lang.code == LANGUAGE_CODE %}active fw-bold{% endif %}">
+                    <span>{{ lang.name_local|title }}</span>
+                    <span class="text-muted small ms-2">({{ lang.code }})</span>
+                  </button>
+                </form>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+
+        <!-- User Authentication -->
+        {% if user.is_authenticated %}
+          <li class="nav-item dropdown ms-lg-2">
+            <a class="nav-link dropdown-toggle d-flex align-items-center fw-semibold" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-user-circle me-1"></i>
+              <span>{{ user.username }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
+              <li>
+                <a class="dropdown-item" href="{% url 'user_management:profile' %}">
+                  <i class="fa fa-id-card-o me-2"></i>{% trans "Profile" %}
+                </a>
+              </li>
+              {% if user.is_staff %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'admin:index' %}">
+                    <i class="fa fa-shield me-2"></i>{% trans "Site Admin" %}
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'task_runner:list' %}">
+                    <i class="fa fa-terminal me-2"></i>{% trans "Task Runner" %}
+                  </a>
+                </li>
+              {% endif %}
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <form id="bs5-logout-form" method="post" action="{% url 'user_management:logout' %}" class="d-none">
+                  {% csrf_token %}
+                </form>
+                <a class="dropdown-item text-danger" href="javascript:void(0);" onclick="document.getElementById('bs5-logout-form').submit();">
+                  <i class="fa fa-sign-out me-2"></i>{% trans "Logout" %}
+                </a>
+              </li>
+            </ul>
+          </li>
+        {% else %}
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-outline-primary btn-sm me-1" href="{% url 'user_management:login' %}">{% trans "Login" %}</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary btn-sm" href="{% url 'user_management:signup' %}">{% trans "Signup" %}</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

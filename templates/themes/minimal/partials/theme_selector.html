@@ -1,0 +1,27 @@
+{% load i18n %}
+<div class="position-relative d-inline-flex" x-data="{ open: false }">
+  <button 
+    @click="open = !open" 
+    @click.away="open = false" 
+    type="button" 
+    class="btn btn-outline small py-1 px-2"
+    title="{% trans 'Switch CSS Framework' %}">
+    <i class="{{ current_theme_icon }}"></i>
+    <span>{{ current_theme_label }}</span>
+    <small>&#9662;</small>
+  </button>
+  <div 
+    x-show="open" 
+    x-cloak
+    class="dropdown-panel">
+    <strong class="text-muted small fw-bold text-uppercase d-block mb-1">{% trans "CSS Framework" %}</strong>
+    {% for theme in theme_choices %}
+      <a 
+        href="{% url 'theme_management:set_theme' theme.name %}?next={{ request.path }}" 
+        class="dropdown-item-link {% if theme.is_active %}active{% endif %}">
+        <span><i class="{{ theme.icon }}"></i> {{ theme.label }}</span>
+        {% if theme.is_active %}&check;{% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</div>

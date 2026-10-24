@@ -1,0 +1,116 @@
+{% load static %}
+<!-- Tailwind CSS via CDN with Typography & Forms plugins -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            50: '#f0f4ff',
+            100: '#d9e2ff',
+            500: '#3b82f6',
+            600: '#2563eb',
+            700: '#1d4ed8',
+          }
+        },
+        fontFamily: {
+          sans: ['Poppins', 'system-ui', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+
+<style>
+  [x-cloak] {
+    display: none !important;
+  }
+  /* Tailwind compatibility utilities for Django form elements and cards */
+  .card {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  }
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .table th, .table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    transition: all 0.15s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background-color: #2563eb;
+    color: #ffffff;
+  }
+  .btn-primary:hover {
+    background-color: #1d4ed8;
+  }
+  .btn-secondary {
+    background-color: #6b7280;
+    color: #ffffff;
+  }
+  .btn-success {
+    background-color: #16a34a;
+    color: #ffffff;
+  }
+  .btn-danger {
+    background-color: #dc2626;
+    color: #ffffff;
+  }
+  .btn-outline-primary {
+    border: 1px solid #2563eb;
+    color: #2563eb;
+  }
+  .btn-outline-primary:hover {
+    background-color: #2563eb;
+    color: #ffffff;
+  }
+  .form-control, .form-select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+  }
+  .progress {
+    height: 1rem;
+    overflow: hidden;
+    background-color: #e5e7eb;
+    border-radius: 0.375rem;
+  }
+  .progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2563eb;
+    color: #ffffff;
+  }
+</style>

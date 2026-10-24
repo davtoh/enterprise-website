@@ -1,0 +1,43 @@
+{% load i18n %}
+<div class="relative" x-data="{ open: false }">
+  <button 
+    @click="open = !open" 
+    @click.away="open = false" 
+    type="button" 
+    class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
+    title="{% trans 'Switch CSS Framework' %}">
+    <i class="{{ current_theme_icon }} mr-2 text-brand-600"></i>
+    <span>{{ current_theme_label }}</span>
+    <i class="fa fa-chevron-down ml-2 text-xs text-gray-400"></i>
+  </button>
+
+  <div 
+    x-show="open" 
+    x-transition:enter="transition ease-out duration-100"
+    x-transition:enter-start="transform opacity-0 scale-95"
+    x-transition:enter-end="transform opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-75"
+    x-transition:leave-start="transform opacity-100 scale-100"
+    x-transition:leave-end="transform opacity-0 scale-95"
+    class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 divide-y divide-gray-100"
+    x-cloak>
+    <div class="px-4 py-2">
+      <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">{% trans "CSS Framework" %}</p>
+    </div>
+    <div class="py-1">
+      {% for theme in theme_choices %}
+        <a 
+          href="{% url 'theme_management:set_theme' theme.name %}?next={{ request.path }}" 
+          class="flex items-center justify-between px-4 py-2 text-sm {% if theme.is_active %}bg-brand-50 text-brand-700 font-semibold{% else %}text-gray-700 hover:bg-gray-100{% endif %}">
+          <span class="flex items-center">
+            <i class="{{ theme.icon }} mr-3 text-gray-500"></i>
+            {{ theme.label }}
+          </span>
+          {% if theme.is_active %}
+            <i class="fa fa-check text-green-600 text-xs"></i>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -468,5 +468,65 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
     - Updated `milestone_plan.md` and `TODO_MODERNIZATION.md` to make Milestone 12 explicitly encompass the full retirement of legacy Bootstrap 3 JS and Bootstrap 4 CSS, and the complete elimination of all ad-hoc inline styles (`style="..."`) and custom modal overrides in favor of pure, native Bootstrap 5.3+ utilities and components.
     - Updated `.agents/rules/frontend_and_css_standards.md` and `AGENTS.md` (Section 7) requiring future modernized templates to adhere strictly to framework utility classes without ad-hoc custom styles.
 
+---
+
+## [Milestone 12] - Dynamic Menus: CSS Framework Selector, Bootstrap 5 Modernization & Custom Style Elimination
+- **Date:** 2026-10-24
+- **Status:** **COMPLETE**
+- **Objectives & Achievements:**
+  - **Retire Legacy Assets & Unify Framework Baseline:**
+    - Retired legacy Bootstrap 3.3.7 JS CDN scripts (`templates/partials/scripts.html`) and legacy Bootstrap 4.0-beta CSS (`static/css/bootstrap.css`).
+    - Standardized on modern **Bootstrap 5.3.3** CSS and JS bundle with Popper.
+    - Vendored offline JS libraries in `static/js/vendor/`: `bootstrap.bundle.min.js` (5.3.3), `htmx.min.js` (1.9.12), and `alpine.min.js` (3.14.0).
+  - **Eliminate All Ad-Hoc Inline Styles & Custom Hacks:**
+    - Performed audit and clean refactoring across all template files (`task_runner`, `user_management`, `todo`, `polls`, `home`, `templates/base.html`, `templates/registration/login.html`):
+      - Removed all inline `style="..."` attributes (retaining only dynamic progress bar width `style="width: {{ progress }}%;"`).
+      - Removed custom modal workarounds in `task_runner/job_list.html` (`#launchTaskModal` display/opacity overrides, `.modal.in`, manual JS backdrops, `.task-type-tab`) in favor of native Bootstrap 5 modal components (`data-bs-toggle="modal"`, `data-bs-target`, `data-bs-dismiss="modal"`, `btn-close`).
+      - Cleaned admin task runner templates (`taskjob/launch_script.html`, `taskjob/change_list.html`), replacing ad-hoc styles with semantic CSS classes.
+      - Standardized all UI spacing on native Bootstrap 5 utility classes (`gap-2`, `me-2`, `ms-2`, `d-flex`, `badge bg-*`).
+  - **Multi-Theme Architecture (`templates/themes/`):**
+    - `bootstrap5/`: pure native Bootstrap 5.3.3 templates (`base.html`, `partials/header.html`, `partials/footer.html`, `partials/styles.html`, `partials/scripts.html`, `partials/messages.html`, `partials/theme_selector.html`).
+    - `tailwind/`: Tailwind CSS equivalent templates with Alpine.js dropdowns and mobile off-canvas drawer navigation.
+    - `minimal/`: Bare semantic HTML5 templates with CSS custom properties and dark-mode readiness.
+  - **Dynamic Theme Resolution & Settings:**
+    - Added `SITE_THEME = os.getenv('SITE_THEME', 'bootstrap5')` and `AVAILABLE_THEMES = ['bootstrap5', 'tailwind', 'minimal']` to `enterprise_website/settings.py`.
+    - Implemented `theme_management` Django app:
+      - `theme_management.middleware.ThemeMiddleware`: dynamically resolves theme preference per request from `?theme=`, session (`request.session['site_theme']`), persistent cookie (`site_theme`), or `settings.SITE_THEME`, using thread-local storage.
+      - `theme_management.loaders.ThemeTemplateLoader`: custom Django template loader prioritizing `templates/themes/<current_theme>/`, plugin template mappings, and fallback to `templates/`.
+      - `theme_management.context_processors.theme_context`: exposes `site_theme`, `available_themes`, and `theme_choices` to all templates.
+      - `theme_management.views.set_theme`: view allowing interactive theme switching with OWASP-compliant `url_has_allowed_host_and_scheme` validation to prevent open-redirect attacks.
+      - `theme_management.urls`: mounted at `/theme/set/<theme_name>/` and `/theme/set/`.
+      - `theme_management.plugin.ThemeManagementPlugin`: registered with `PluginRegistry`.
+  - **Plugin Registry Extensions:**
+    - Extended `AppPlugin` interface (`plugin_registry/base.py`) with `plugin_templates` dictionary mapping and `get_plugin_templates()` method.
+    - Added `get_all_plugin_templates()` to `PluginRegistry` (`plugin_registry/registry.py`).
+    - Declared `plugin_templates = {'bootstrap5': 'todo/bs5/', 'tailwind': 'todo/tw/'}` in `todo/plugin.py`.
+  - **HTMX & Alpine.js Integration:**
+    - Integrated HTMX `hx-post` for zero-reload declarative Todo task deletion with empty 200 response handling in `todo/views.py`.
+    - Integrated Alpine.js for lightweight, reactive dropdowns, tab switching, and collapsible elements across all themes without jQuery.
+- **Files Created / Modified:**
+  - `theme_management/__init__.py`, `apps.py`, `middleware.py`, `loaders.py`, `context_processors.py`, `views.py`, `urls.py`, `plugin.py` (created)
+  - `templates/themes/bootstrap5/base.html`, `partials/styles.html`, `scripts.html`, `messages.html`, `header.html`, `footer.html`, `theme_selector.html` (created)
+  - `templates/themes/tailwind/base.html`, `partials/styles.html`, `scripts.html`, `messages.html`, `header.html`, `footer.html`, `theme_selector.html` (created)
+  - `templates/themes/minimal/base.html`, `partials/styles.html`, `scripts.html`, `messages.html`, `header.html`, `footer.html`, `theme_selector.html` (created)
+  - `enterprise_website/settings.py` (configured SITE_THEME, AVAILABLE_THEMES, ThemeTemplateLoader, ThemeMiddleware, context processor)
+  - `enterprise_website/urls.py` (mounted `theme_management.urls`)
+  - `plugin_registry/base.py` & `registry.py` (plugin_templates support)
+  - `todo/plugin.py` & `todo/views.py` & `todo/templates/todo/*` (plugin templates & HTMX delete)
+  - `task_runner/urls.py` (canonical list and job_list alias)
+  - `templates/base.html`, `templates/partials/styles.html`, `templates/partials/scripts.html`, `templates/registration/login.html` (retire BS3/BS4, clean inline styles, dynamic theme dropdown)
+  - `task_runner/templates/task_runner/job_list.html`, `job_detail.html`, `task_progress_widget.html`, `change_list.html`, `launch_script.html` (native BS5 modal & zero custom CSS overrides)
+  - `user_management/templates/user_management/*` (profile, siteuser_list, login, logout, password reset views modernized to BS5 cards/utilities)
+  - `polls/templates/polls/*` (index, detail, results modernized)
+  - `home/templates/home/*` (contact, index, services modernized)
+  - `static/css/bootstrap.css` (modernized to Bootstrap 5.3.3)
+  - `static/js/vendor/bootstrap.bundle.min.js`, `htmx.min.js`, `alpine.min.js` (vendored offline)
+  - `tests/test_theme_management.py` (17 tests created)
+- **Verification & Test Outcomes:**
+  - `.\.venv\Scripts\python.exe manage.py check` → 0 issues.
+  - `.\.venv\Scripts\python.exe manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean.
+  - `.\.venv\Scripts\python.exe -m pytest tests/test_theme_management.py` → **17 passed in 3.18s**.
+  - `.\.venv\Scripts\python.exe -m pytest --cov=.` → **146 passed in 31.56s**, **81% statement coverage**.
+
 
 

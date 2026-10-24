@@ -11,62 +11,71 @@
 {% endblock %}
 
 {% block content %}
-<div id="content-main" style="max-width: 900px;">
-  <div class="module" style="background: #fff; border: 1px solid #ccc; border-radius: 6px; padding: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.06);">
-    <h2 style="margin-top: 0; color: #333; font-size: 1.4rem;">
-      <i class="fa fa-terminal" style="color: #28a745; margin-right: 8px;"></i>{% trans "Queue External Script in Background" %}
-    </h2>
-    <p style="color: #666; margin-bottom: 20px;">
-      {% trans "Specify any Python, Django management, or shell command to execute asynchronously inside a Celery worker. Output is streamed live via WebSocket to the job detail view." %}
-    </p>
-
-    <form method="post" action="{% url 'admin:task_runner_launch_script' %}">
-      {% csrf_token %}
-
-      <div style="margin-bottom: 20px;">
-        <label for="id_command" style="display: block; font-weight: bold; margin-bottom: 6px; color: #222;">
-          {% trans "Command to Execute:" %}
-        </label>
-        <input 
-          type="text" 
-          id="id_command" 
-          name="command" 
-          required 
-          value="python manage.py check"
-          style="width: 100%; padding: 10px 14px; font-family: Consolas, monospace; font-size: 1rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"
-          placeholder="e.g. python manage.py check"
-        />
-      </div>
-
-      <div style="margin-bottom: 25px;">
-        <label style="display: block; font-size: 0.85rem; color: #555; margin-bottom: 8px; font-weight: 600;">
-          {% trans "Quick Presets (Click to autofill):" %}
-        </label>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-          <button type="button" class="preset-btn" data-cmd="python manage.py check">python manage.py check</button>
-          <button type="button" class="preset-btn" data-cmd="python manage.py showmigrations">python manage.py showmigrations</button>
-          <button type="button" class="preset-btn" data-cmd="python --version">python --version</button>
-          <button type="button" class="preset-btn" data-cmd="python -m pytest -q tests/test_task_runner.py">pytest test_task_runner</button>
-          <button type="button" class="preset-btn" data-cmd="celery --version">celery --version</button>
-        </div>
-      </div>
-
-      <div style="padding-top: 15px; border-top: 1px solid #eee; display: flex; align-items: center; gap: 12px;">
-        <input 
-          type="submit" 
-          value="{% trans 'Queue Script Now' %}" 
-          class="default" 
-          style="background: #28a745; border: none; padding: 10px 22px; font-weight: bold; font-size: 1rem; color: white; border-radius: 4px; cursor: pointer;"
-        />
-        <a href="{% url 'admin:task_runner_taskjob_changelist' %}" style="color: #666; text-decoration: underline; margin-left: 10px;">
-          {% trans "Cancel" %}
-        </a>
-      </div>
-    </form>
-  </div>
-</div>
-
 <style>
+.admin-launcher-box {
+  max-width: 900px;
+}
+.admin-launcher-card {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 25px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}
+.admin-launcher-title {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.4rem;
+}
+.admin-launcher-desc {
+  color: #666;
+  margin-bottom: 20px;
+}
+.admin-launcher-field {
+  margin-bottom: 20px;
+}
+.admin-launcher-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #222;
+}
+.admin-launcher-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: Consolas, monospace;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.admin-presets-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.admin-actions-bar {
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.admin-submit-btn {
+  background: #28a745;
+  border: none;
+  padding: 10px 22px;
+  font-weight: bold;
+  font-size: 1rem;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.admin-cancel-link {
+  color: #666;
+  text-decoration: underline;
+  margin-left: 10px;
+}
 .preset-btn {
   background: #f8f9fa;
   border: 1px solid #ced4da;
@@ -84,6 +93,60 @@
   border-color: #28a745;
 }
 </style>
+
+<div id="content-main" class="admin-launcher-box">
+  <div class="module admin-launcher-card">
+    <h2 class="admin-launcher-title">
+      <i class="fa fa-terminal text-success"></i> {% trans "Queue External Script in Background" %}
+    </h2>
+    <p class="admin-launcher-desc">
+      {% trans "Specify any Python, Django management, or shell command to execute asynchronously inside a Celery worker. Output is streamed live via WebSocket to the job detail view." %}
+    </p>
+
+    <form method="post" action="{% url 'admin:task_runner_launch_script' %}">
+      {% csrf_token %}
+
+      <div class="admin-launcher-field">
+        <label for="id_command" class="admin-launcher-label">
+          {% trans "Command to Execute:" %}
+        </label>
+        <input 
+          type="text" 
+          id="id_command" 
+          name="command" 
+          required 
+          value="python manage.py check"
+          class="admin-launcher-input"
+          placeholder="e.g. python manage.py check"
+        />
+      </div>
+
+      <div class="admin-launcher-field">
+        <label class="admin-launcher-label small text-muted">
+          {% trans "Quick Presets (Click to autofill):" %}
+        </label>
+        <div class="admin-presets-container">
+          <button type="button" class="preset-btn" data-cmd="python manage.py check">python manage.py check</button>
+          <button type="button" class="preset-btn" data-cmd="python manage.py showmigrations">python manage.py showmigrations</button>
+          <button type="button" class="preset-btn" data-cmd="python --version">python --version</button>
+          <button type="button" class="preset-btn" data-cmd="python -m pytest -q tests/test_task_runner.py">pytest test_task_runner</button>
+          <button type="button" class="preset-btn" data-cmd="celery --version">celery --version</button>
+        </div>
+      </div>
+
+      <div class="admin-actions-bar">
+        <input 
+          type="submit" 
+          value="{% trans 'Queue Script Now' %}" 
+          class="default admin-submit-btn" 
+        />
+        <a href="{% url 'admin:task_runner_taskjob_changelist' %}" class="admin-cancel-link">
+          {% trans "Cancel" %}
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {

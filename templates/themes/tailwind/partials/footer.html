@@ -1,0 +1,21 @@
+{% load i18n %}
+<footer class="bg-gray-900 text-gray-400 py-8 mt-auto border-t border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="text-sm text-gray-300">
+          &copy; {% now "Y" %} {% trans "Enterprise Website" %}. {% trans "All rights reserved." %}
+        </p>
+        <p class="text-xs text-gray-500 mt-1">
+          {% trans "Active CSS Framework:" %} <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-brand-600 text-white">{{ current_theme_label }}</span>
+        </p>
+      </div>
+      <div class="flex space-x-6 text-sm">
+        <a href="{% url 'home:about' %}" class="hover:text-white transition">{% trans "About" %}</a>
+        <a href="{% url 'home:services' %}" class="hover:text-white transition">{% trans "Services" %}</a>
+        <a href="{% url 'home:products' %}" class="hover:text-white transition">{% trans "Products" %}</a>
+        <a href="{% url 'home:contact' %}" class="hover:text-white transition">{% trans "Contact" %}</a>
+      </div>
+    </div>
+  </div>
+</footer>

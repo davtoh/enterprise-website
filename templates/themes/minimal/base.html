@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<head>
+    {% block meta %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="{% block meta.description %}{% trans 'Modern Enterprise Web Application (Minimal Semantic Theme)' %}{% endblock %}">
+        <meta name="keywords" content="{% block meta.keywords %}enterprise, python, django, minimal, semantic{% endblock %}">
+    {% endblock %}
+
+    <title>{% block title %}{{ title|default:_('Enterprise Website') }}{% endblock %}</title>
+
+    {% block favicon %}
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.png' %}"/>
+    {% endblock %}
+
+    {% block styles %}
+        {% include 'partials/styles.html' %}
+    {% endblock %}
+
+    {% block scripts %}
+        {% include 'partials/scripts.html' %}
+    {% endblock %}
+</head>
+
+<body>
+    <header id="header">
+        {% block header %}
+            {% include 'partials/header.html' %}
+        {% endblock %}
+    </header>
+
+    <main class="py-4 {% block main.class %}site-main{% endblock %}">
+        {% block banner %}
+        {% endblock %}
+
+        {% block messaging %}
+            {% include 'partials/messages.html' %}
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    {% block footer %}
+        {% include 'partials/footer.html' %}
+    {% endblock %}
+
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 17:47-0500\n"
+"POT-Creation-Date: 2026-10-24 00:10-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\enterprise_website\settings.py:208
+#: .\enterprise_website\settings.py:220
 msgid "English"
 msgstr ""
 
-#: .\enterprise_website\settings.py:209
+#: .\enterprise_website\settings.py:221
 msgid "Spanish"
 msgstr ""
 
-#: .\enterprise_website\settings.py:210
+#: .\enterprise_website\settings.py:222
 msgid "Portuguese"
 msgstr ""
 
-#: .\enterprise_website\settings.py:211
+#: .\enterprise_website\settings.py:223
 msgid "French"
 msgstr ""
 
-#: .\enterprise_website\settings.py:212
+#: .\enterprise_website\settings.py:224
 msgid "Italian"
 msgstr ""
 
-#: .\enterprise_website\settings.py:213
+#: .\enterprise_website\settings.py:225
 msgid "Japanese"
 msgstr ""
 
@@ -62,8 +62,12 @@ msgstr ""
 #: .\home\plugin.py:12 .\home\templates\home\about.html:14
 #: .\home\templates\home\contact.html:14 .\home\templates\home\index.html:5
 #: .\home\templates\home\products.html:14
-#: .\home\templates\home\services.html:14 .\templates\base.html:114
-#: .\templates\base_form.html:27
+#: .\home\templates\home\services.html:14
+#: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:6
+#: .\templates\base.html:114 .\templates\base_form.html:27
+#: .\templates\themes\bootstrap5\partials\header.html:45
+#: .\templates\themes\minimal\partials\header.html:40
+#: .\templates\themes\tailwind\partials\header.html:53
 #: .\user_management\templates\user_management\logout.html:14
 #: .\user_management\templates\user_management\logout.html:29
 #: .\user_management\templates\user_management\profile.html:14
@@ -73,21 +77,40 @@ msgstr ""
 
 #: .\home\plugin.py:13 .\home\templates\home\about.html:14
 #: .\home\templates\home\index.html:327 .\templates\base.html:115
+#: .\templates\themes\bootstrap5\partials\header.html:48
+#: .\templates\themes\tailwind\partials\header.html:54
 msgid "About Us"
 msgstr ""
 
 #: .\home\plugin.py:14 .\home\templates\home\services.html:14
 #: .\templates\base.html:116
+#: .\templates\themes\bootstrap5\partials\footer.html:16
+#: .\templates\themes\bootstrap5\partials\header.html:51
+#: .\templates\themes\minimal\partials\footer.html:10
+#: .\templates\themes\minimal\partials\header.html:42
+#: .\templates\themes\tailwind\partials\footer.html:15
+#: .\templates\themes\tailwind\partials\header.html:55
 msgid "Services"
 msgstr ""
 
 #: .\home\plugin.py:15 .\home\templates\home\products.html:14
 #: .\templates\base.html:117
+#: .\templates\themes\bootstrap5\partials\footer.html:17
+#: .\templates\themes\bootstrap5\partials\header.html:54
+#: .\templates\themes\minimal\partials\footer.html:11
+#: .\templates\themes\tailwind\partials\footer.html:16
+#: .\templates\themes\tailwind\partials\header.html:56
 msgid "Products"
 msgstr ""
 
 #: .\home\plugin.py:16 .\home\templates\home\contact.html:14
 #: .\templates\base.html:118
+#: .\templates\themes\bootstrap5\partials\footer.html:18
+#: .\templates\themes\bootstrap5\partials\header.html:57
+#: .\templates\themes\minimal\partials\footer.html:12
+#: .\templates\themes\minimal\partials\header.html:43
+#: .\templates\themes\tailwind\partials\footer.html:17
+#: .\templates\themes\tailwind\partials\header.html:57
 msgid "Contact"
 msgstr ""
 
@@ -531,6 +554,7 @@ msgid "This language code is too long."
 msgstr ""
 
 #: .\language_management\templates\language_management\form.html:37
+#: .\templates\themes\bootstrap5\partials\header.html:90
 msgid "Language"
 msgstr ""
 
@@ -740,6 +764,7 @@ msgstr ""
 
 #: .\polls\apps.py:7 .\polls\plugin.py:14 .\polls\templates\polls\index.html:6
 #: .\templates\base.html:122
+#: .\templates\themes\bootstrap5\partials\header.html:65
 msgid "Polls"
 msgstr ""
 
@@ -845,6 +870,7 @@ msgid "Your vote for '%(choice)s' has been recorded!"
 msgstr ""
 
 #: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:124
+#: .\templates\themes\bootstrap5\partials\header.html:67
 msgid "REST API"
 msgstr ""
 
@@ -852,152 +878,202 @@ msgstr ""
 msgid "Django REST Framework browsable and serialized endpoints"
 msgstr ""
 
-#: .\task_runner\admin.py:32
+#: .\task_runner\admin.py:37
 msgid "Task Overview"
 msgstr ""
 
-#: .\task_runner\admin.py:46
+#: .\task_runner\admin.py:51
 msgid "Live Monitoring"
 msgstr ""
 
-#: .\task_runner\admin.py:52
+#: .\task_runner\admin.py:57
 msgid "Task Logs & Result"
 msgstr ""
 
-#: .\task_runner\admin.py:61 .\task_runner\models.py:29
+#: .\task_runner\admin.py:70 .\task_runner\models.py:36
 #: .\task_runner\templates\task_runner\job_detail.html:47
-#: .\task_runner\templates\task_runner\job_list.html:69
+#: .\task_runner\templates\task_runner\job_list.html:120
 msgid "Task ID"
 msgstr ""
 
-#: .\task_runner\admin.py:65 .\task_runner\models.py:42
-#: .\task_runner\templates\task_runner\job_list.html:70
+#: .\task_runner\admin.py:74 .\task_runner\models.py:49
+#: .\task_runner\templates\task_runner\job_list.html:121
 #: .\user_management\templates\user_management\siteuser_list.html:36
 msgid "Status"
 msgstr ""
 
-#: .\task_runner\admin.py:82
-#: .\task_runner\templates\task_runner\job_list.html:71
+#: .\task_runner\admin.py:91
+#: .\task_runner\templates\task_runner\job_list.html:122
 msgid "Progress"
 msgstr ""
 
-#: .\task_runner\admin.py:91
+#: .\task_runner\admin.py:100
 msgid "Real-time Task Monitor"
 msgstr ""
 
-#: .\task_runner\admin.py:94
+#: .\task_runner\admin.py:103
 msgid "Save task first to display live stream."
 msgstr ""
 
-#: .\task_runner\admin.py:111
+#: .\task_runner\admin.py:120
 msgid "Trigger Collectstatic in background"
 msgstr ""
 
-#: .\task_runner\admin.py:114
+#: .\task_runner\admin.py:123
 msgid "Background collectstatic task queued."
 msgstr ""
 
-#: .\task_runner\admin.py:116
+#: .\task_runner\admin.py:125
 msgid "Trigger Auto-Translate (Spanish baseline)"
 msgstr ""
 
-#: .\task_runner\admin.py:119
+#: .\task_runner\admin.py:128
 msgid "Background auto-translate task for Spanish queued."
 msgstr ""
 
+#: .\task_runner\admin.py:130 .\task_runner\admin.py:172
+#: .\task_runner\templates\admin\task_runner\taskjob\change_list.html:17
+#: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:9
+msgid "Launch External Script"
+msgstr ""
+
+#: .\task_runner\admin.py:150
+msgid "Please provide a valid command."
+msgstr ""
+
+#: .\task_runner\admin.py:163
+#, python-brace-format
+msgid "External script '{0}' queued successfully with Task ID: {1}"
+msgstr ""
+
 #: .\task_runner\apps.py:8 .\task_runner\templates\task_runner\job_list.html:4
-#: .\task_runner\templates\task_runner\job_list.html:11
+#: .\task_runner\templates\task_runner\job_list.html:12
 msgid "Background Task Runner"
 msgstr ""
 
-#: .\task_runner\models.py:19
+#: .\task_runner\models.py:25
 msgid "Pending"
 msgstr ""
 
-#: .\task_runner\models.py:20
+#: .\task_runner\models.py:26
 msgid "Running"
 msgstr ""
 
-#: .\task_runner\models.py:21
+#: .\task_runner\models.py:27
 msgid "Success"
 msgstr ""
 
-#: .\task_runner\models.py:22
+#: .\task_runner\models.py:28
 msgid "Failure"
 msgstr ""
 
-#: .\task_runner\models.py:23
+#: .\task_runner\models.py:29
 msgid "Revoked"
 msgstr ""
 
-#: .\task_runner\models.py:30
+#: .\task_runner\models.py:37
 msgid "Celery task UUID or unique identifier"
 msgstr ""
 
-#: .\task_runner\models.py:34
+#: .\task_runner\models.py:41
 #: .\task_runner\templates\task_runner\job_detail.html:50
-#: .\task_runner\templates\task_runner\job_list.html:68
+#: .\task_runner\templates\task_runner\job_list.html:119
 msgid "Task Name"
 msgstr ""
 
-#: .\task_runner\models.py:35
+#: .\task_runner\models.py:42
 msgid "Human-readable name or task function path"
 msgstr ""
 
-#: .\task_runner\models.py:46
+#: .\task_runner\models.py:53
 msgid "Progress (%)"
 msgstr ""
 
-#: .\task_runner\models.py:47
+#: .\task_runner\models.py:54
 msgid "Completion percentage between 0 and 100"
 msgstr ""
 
-#: .\task_runner\models.py:52
+#: .\task_runner\models.py:59
 msgid "Log Output"
 msgstr ""
 
-#: .\task_runner\models.py:53
+#: .\task_runner\models.py:60
 msgid "Captured stdout, stderr, or lifecycle log stream"
 msgstr ""
 
-#: .\task_runner\models.py:58
+#: .\task_runner\models.py:65
 msgid "Error Message"
 msgstr ""
 
-#: .\task_runner\models.py:59
+#: .\task_runner\models.py:66
 msgid "Exception message or stack trace if the task failed"
 msgstr ""
 
-#: .\task_runner\models.py:64
+#: .\task_runner\models.py:71
 #: .\task_runner\templates\task_runner\job_detail.html:69
 msgid "Result Data"
 msgstr ""
 
-#: .\task_runner\models.py:65
+#: .\task_runner\models.py:72
 msgid "JSON-encoded output returned by the background task"
 msgstr ""
 
-#: .\task_runner\models.py:73
+#: .\task_runner\models.py:80
 #: .\task_runner\templates\task_runner\job_detail.html:53
-#: .\task_runner\templates\task_runner\job_list.html:72
+#: .\task_runner\templates\task_runner\job_list.html:123
 msgid "Created By"
 msgstr ""
 
-#: .\task_runner\models.py:77
-#: .\task_runner\templates\task_runner\job_list.html:73
+#: .\task_runner\models.py:84
+#: .\task_runner\templates\task_runner\job_list.html:124
 msgid "Created At"
 msgstr ""
 
-#: .\task_runner\models.py:81
+#: .\task_runner\models.py:88
 msgid "Updated At"
 msgstr ""
 
-#: .\task_runner\models.py:86
+#: .\task_runner\models.py:93
 msgid "Background Task Job"
 msgstr ""
 
-#: .\task_runner\models.py:87
+#: .\task_runner\models.py:94
 msgid "Background Task Jobs"
+msgstr ""
+
+#: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:8
+msgid "Task jobs"
+msgstr ""
+
+#: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:100
+msgid "Queue External Script in Background"
+msgstr ""
+
+#: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:103
+msgid ""
+"Specify any Python, Django management, or shell command to execute "
+"asynchronously inside a Celery worker. Output is streamed live via WebSocket "
+"to the job detail view."
+msgstr ""
+
+#: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:111
+#: .\task_runner\templates\task_runner\job_list.html:267
+msgid "Command to Execute:"
+msgstr ""
+
+#: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:126
+msgid "Quick Presets (Click to autofill):"
+msgstr ""
+
+#: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:140
+msgid "Queue Script Now"
+msgstr ""
+
+#: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:144
+#: .\task_runner\templates\task_runner\job_list.html:320
+#: .\user_management\templates\user_management\login.html:19
+#: .\user_management\templates\user_management\signup.html:18
+msgid "Cancel"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_detail.html:4
@@ -1005,6 +1081,8 @@ msgid "Background Task"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_detail.html:13
+#: .\templates\themes\bootstrap5\partials\header.html:128
+#: .\templates\themes\tailwind\partials\header.html:121
 msgid "Task Runner"
 msgstr ""
 
@@ -1021,7 +1099,7 @@ msgid "Task Details"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_detail.html:58
-#: .\task_runner\templates\task_runner\job_list.html:113
+#: .\task_runner\templates\task_runner\job_list.html:164
 msgid "System / Daemon"
 msgstr ""
 
@@ -1033,99 +1111,125 @@ msgstr ""
 msgid "Last Update"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:13
+#: .\task_runner\templates\task_runner\job_list.html:14
 msgid ""
 "Monitor, launch, and inspect Celery asynchronous jobs with live streaming."
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:17
+#: .\task_runner\templates\task_runner\job_list.html:23
 msgid "Launch New Task"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:20
+#: .\task_runner\templates\task_runner\job_list.html:26
+msgid "Admin Script Launcher"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:29
 msgid "Django Admin"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:36
+#: .\task_runner\templates\task_runner\job_list.html:39
+msgid "Quick Script Execution (Celery Background Task)"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:41
+msgid "Runs asynchronously via Celery worker & streams output live."
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:61
+msgid "Run Script"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:65
+msgid "Presets:"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:87
 msgid "Search by task name or task ID..."
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:42
+#: .\task_runner\templates\task_runner\job_list.html:93
 msgid "All Statuses"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:50
+#: .\task_runner\templates\task_runner\job_list.html:101
 msgid "Filter"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:74
+#: .\task_runner\templates\task_runner\job_list.html:125
 msgid "Actions"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:121
+#: .\task_runner\templates\task_runner\job_list.html:172
 msgid "View"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:129
+#: .\task_runner\templates\task_runner\job_list.html:180
 msgid "No background tasks found."
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:139
+#: .\task_runner\templates\task_runner\job_list.html:190
 msgid "Page navigation"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:143
+#: .\task_runner\templates\task_runner\job_list.html:194
 msgid "Previous"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:151
+#: .\task_runner\templates\task_runner\job_list.html:202
 msgid "Next"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:167
+#: .\task_runner\templates\task_runner\job_list.html:220
 msgid "Queue New Background Task"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:175
-msgid "Select Task Type"
+#: .\task_runner\templates\task_runner\job_list.html:232
+msgid "Choose Task to Queue:"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:177
-msgid "Auto-Translate Catalog (auto_translate)"
+#: .\task_runner\templates\task_runner\job_list.html:240
+msgid "Run External Script"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:178
-msgid "Collect Static Files (collectstatic)"
+#: .\task_runner\templates\task_runner\job_list.html:249
+msgid "Auto-Translate"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:179
-msgid "Run External Script (subprocess)"
+#: .\task_runner\templates\task_runner\job_list.html:258
+msgid "Collect Static"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:186
+#: .\task_runner\templates\task_runner\job_list.html:276
+msgid ""
+"The command runs inside a background Celery worker subprocess. Output is "
+"streamed live via WebSocket."
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:280
+msgid "Click to fill preset:"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:292
 msgid "Target Language (Optional)"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:190
+#: .\task_runner\templates\task_runner\job_list.html:296
 msgid "Translation Backend"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:198
+#: .\task_runner\templates\task_runner\job_list.html:304
 msgid "Max Strings (Optional test limit)"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:206
-msgid "Command"
+#: .\task_runner\templates\task_runner\job_list.html:313
+msgid ""
+"Collects all static assets into STATIC_ROOT in the background without "
+"blocking the web worker."
 msgstr ""
 
-#: .\task_runner\templates\task_runner\job_list.html:212
-#: .\user_management\templates\user_management\login.html:19
-#: .\user_management\templates\user_management\signup.html:18
-msgid "Cancel"
-msgstr ""
-
-#: .\task_runner\templates\task_runner\job_list.html:214
-msgid "Queue Task"
+#: .\task_runner\templates\task_runner\job_list.html:323
+msgid "Queue Task Now"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:13
@@ -1148,16 +1252,16 @@ msgstr ""
 msgid "Copy Log"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\task_progress_widget.html:64
+#: .\task_runner\templates\task_runner\task_progress_widget.html:71
 msgid "Task initialized. Waiting for stream output..."
 msgstr ""
 
-#: .\task_runner\templates\task_runner\task_progress_widget.html:175
-msgid "WebSocket Connected"
+#: .\task_runner\templates\task_runner\task_progress_widget.html:227
+msgid "Live WebSocket Connected"
 msgstr ""
 
-#: .\task_runner\templates\task_runner\task_progress_widget.html:190
-msgid "Falling back to HTTP polling"
+#: .\task_runner\templates\task_runner\task_progress_widget.html:248
+msgid "Live Sync Active (HTTP Poll)"
 msgstr ""
 
 #: .\task_runner\views.py:64
@@ -1184,43 +1288,81 @@ msgstr ""
 msgid "Unknown task type specified."
 msgstr ""
 
-#: .\templates\base.html:93
+#: .\templates\base.html:93 .\templates\themes\bootstrap5\base.html:14
+#: .\templates\themes\bootstrap5\partials\footer.html:7
+#: .\templates\themes\bootstrap5\partials\header.html:6
+#: .\templates\themes\bootstrap5\partials\header.html:7
+#: .\templates\themes\bootstrap5\partials\header.html:8
+#: .\templates\themes\minimal\base.html:14
+#: .\templates\themes\minimal\partials\footer.html:5
+#: .\templates\themes\minimal\partials\header.html:8
+#: .\templates\themes\minimal\partials\header.html:9
+#: .\templates\themes\minimal\partials\header.html:10
+#: .\templates\themes\tailwind\base.html:14
+#: .\templates\themes\tailwind\partials\footer.html:7
+#: .\templates\themes\tailwind\partials\header.html:9
+#: .\templates\themes\tailwind\partials\header.html:10
+#: .\templates\themes\tailwind\partials\header.html:11
 msgid "Enterprise Website"
 msgstr ""
 
 #: .\templates\base.html:119
+#: .\templates\themes\bootstrap5\partials\header.html:61
 msgid "Apps"
 msgstr ""
 
-#: .\templates\base.html:121 .\todo\plugin.py:14
+#: .\templates\base.html:121
+#: .\templates\themes\bootstrap5\partials\header.html:64 .\todo\plugin.py:14
 msgid "Todo List"
 msgstr ""
 
-#: .\templates\base.html:123 .\webprogram\plugin.py:7 .\webprogram\plugin.py:14
+#: .\templates\base.html:123
+#: .\templates\themes\bootstrap5\partials\header.html:66
+#: .\webprogram\plugin.py:7 .\webprogram\plugin.py:14
 msgid "Brython WebProgram"
 msgstr ""
 
-#: .\templates\base.html:125 .\templates\base.html:135
+#: .\templates\base.html:125 .\templates\base.html:147
+#: .\templates\themes\bootstrap5\partials\header.html:70
+#: .\templates\themes\bootstrap5\partials\header.html:123
+#: .\templates\themes\tailwind\partials\header.html:118
 msgid "Site Admin"
 msgstr ""
 
-#: .\templates\base.html:133
+#: .\templates\base.html:145
+#: .\templates\themes\bootstrap5\partials\header.html:117
+#: .\templates\themes\minimal\partials\header.html:57
+#: .\templates\themes\tailwind\partials\header.html:114
 #: .\user_management\templates\user_management\profile.html:14
 msgid "Profile"
 msgstr ""
 
-#: .\templates\base.html:141
+#: .\templates\base.html:148
+#: .\templates\themes\bootstrap5\partials\header.html:68
+msgid "Background Tasks"
+msgstr ""
+
+#: .\templates\base.html:154
+#: .\templates\themes\bootstrap5\partials\header.html:138
+#: .\templates\themes\minimal\partials\header.html:66
+#: .\templates\themes\tailwind\partials\header.html:128
 msgid "Logout"
 msgstr ""
 
-#: .\templates\base.html:146 .\templates\registration\login.html:4
+#: .\templates\base.html:159 .\templates\registration\login.html:4
 #: .\templates\registration\login.html:40
+#: .\templates\themes\bootstrap5\partials\header.html:145
+#: .\templates\themes\minimal\partials\header.html:72
+#: .\templates\themes\tailwind\partials\header.html:134
 #: .\user_management\templates\user_management\login.html:4
 #: .\user_management\templates\user_management\login.html:18
 msgid "Login"
 msgstr ""
 
-#: .\templates\base.html:147
+#: .\templates\base.html:160
+#: .\templates\themes\bootstrap5\partials\header.html:148
+#: .\templates\themes\minimal\partials\header.html:73
+#: .\templates\themes\tailwind\partials\header.html:135
 msgid "Signup"
 msgstr ""
 
@@ -1281,6 +1423,65 @@ msgstr ""
 #: .\templates\signup.html:4
 #: .\user_management\templates\user_management\signup.html:5
 msgid "Sign Up"
+msgstr ""
+
+#: .\templates\themes\bootstrap5\base.html:10
+msgid "Modern Enterprise Web Application"
+msgstr ""
+
+#: .\templates\themes\bootstrap5\partials\footer.html:7
+#: .\templates\themes\minimal\partials\footer.html:5
+#: .\templates\themes\tailwind\partials\footer.html:7
+msgid "All rights reserved."
+msgstr ""
+
+#: .\templates\themes\bootstrap5\partials\footer.html:10
+#: .\templates\themes\minimal\partials\footer.html:6
+#: .\templates\themes\tailwind\partials\footer.html:10
+msgid "Active CSS Framework:"
+msgstr ""
+
+#: .\templates\themes\bootstrap5\partials\footer.html:15
+#: .\templates\themes\minimal\partials\footer.html:9
+#: .\templates\themes\minimal\partials\header.html:41
+#: .\templates\themes\tailwind\partials\footer.html:14
+msgid "About"
+msgstr ""
+
+#: .\templates\themes\bootstrap5\partials\header.html:83
+msgid "Switch Language"
+msgstr ""
+
+#: .\templates\themes\bootstrap5\partials\theme_selector.html:3
+#: .\templates\themes\minimal\partials\theme_selector.html:8
+#: .\templates\themes\tailwind\partials\theme_selector.html:8
+msgid "Switch CSS Framework"
+msgstr ""
+
+#: .\templates\themes\bootstrap5\partials\theme_selector.html:8
+#: .\templates\themes\minimal\partials\theme_selector.html:17
+#: .\templates\themes\tailwind\partials\theme_selector.html:25
+msgid "CSS Framework"
+msgstr ""
+
+#: .\templates\themes\minimal\base.html:10
+msgid "Modern Enterprise Web Application (Minimal Semantic Theme)"
+msgstr ""
+
+#: .\templates\themes\minimal\partials\header.html:59
+msgid "Admin"
+msgstr ""
+
+#: .\templates\themes\minimal\partials\header.html:60
+msgid "Tasks"
+msgstr ""
+
+#: .\templates\themes\tailwind\base.html:10
+msgid "Modern Enterprise Web Application (Tailwind CSS Theme)"
+msgstr ""
+
+#: .\theme_management\apps.py:8
+msgid "Theme & CSS Framework Management"
 msgstr ""
 
 #: .\timezone_management\models.py:41 .\user_management\models.py:52
@@ -1389,10 +1590,18 @@ msgid "Add Todo"
 msgstr ""
 
 #: .\todo\templates\todo\index.html:45
-msgid "No tasks yet. Create your first task to get started!"
+msgid "Are you sure you want to delete this task?"
 msgstr ""
 
 #: .\todo\templates\todo\index.html:46
+msgid "Delete Task"
+msgstr ""
+
+#: .\todo\templates\todo\index.html:56
+msgid "No tasks yet. Create your first task to get started!"
+msgstr ""
+
+#: .\todo\templates\todo\index.html:57
 msgid "Create Task"
 msgstr ""
 
@@ -1404,7 +1613,7 @@ msgstr ""
 msgid "Task created successfully!"
 msgstr ""
 
-#: .\todo\views.py:76
+#: .\todo\views.py:81
 msgid "Task deleted successfully!"
 msgstr ""
 
@@ -1558,11 +1767,11 @@ msgstr ""
 msgid "Password Reset Sent"
 msgstr ""
 
-#: .\user_management\templates\user_management\password_reset_done.html:12
+#: .\user_management\templates\user_management\password_reset_done.html:13
 msgid "Password Reset Instructions Sent"
 msgstr ""
 
-#: .\user_management\templates\user_management\password_reset_done.html:13
+#: .\user_management\templates\user_management\password_reset_done.html:14
 msgid ""
 "We've emailed you instructions for setting your password. If they haven't "
 "arrived in a few minutes, check your spam folder."

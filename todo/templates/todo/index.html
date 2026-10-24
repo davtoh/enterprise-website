@@ -9,41 +9,52 @@
 {% block styles %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static 'todo/css/style.css' %}">
-{%  endblock %}
+{% endblock %}
 
 {% block header.attrs %}id="header" class="header-scrolled"{% endblock %}
 
 {% block content %}
-<section class="section-gap">
+<section class="section-gap py-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card p-4" style="border: none; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-radius: 10px;">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="card shadow-sm border-0 rounded-3 p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                         {% if user.is_authenticated %}
                             <h3 class="m-0">{% blocktrans with username=user.username %}Welcome, {{ username }}!{% endblocktrans %}</h3>
                         {% else %}
                             <h3 class="m-0">{% trans "Welcome to Your Todo List" %}</h3>
                         {% endif %}
-                        <a href="{% url 'todo:add' %}" class="primary-btn text-uppercase"><i class="fa fa-plus mr-1"></i> {% trans "Add Todo" %}</a>
+                        <a href="{% url 'todo:add' %}" class="btn btn-primary text-uppercase"><i class="fa fa-plus me-1"></i> {% trans "Add Todo" %}</a>
                     </div>
                     {% if todos %}
                         <ul class="list-group list-group-flush">
                             {% for todo in todos %}
-                                <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                <li class="list-group-item d-flex justify-content-between align-items-center py-3" id="todo-row-{{ todo.id }}">
                                     <div>
-                                        <a href="{% url 'todo:details' todo.id %}" style="font-size: 16px; font-weight: 600; color: #222;">{{ todo.title }}</a>
+                                        <a href="{% url 'todo:details' todo.id %}" class="fw-semibold text-dark text-decoration-none">{{ todo.title }}</a>
                                         <p class="text-muted mb-0 small">{{ todo.text|truncatewords:15 }}</p>
                                     </div>
-                                    <span class="badge badge-light text-muted">{{ todo.created_at|date:"M d, Y" }}</span>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="badge bg-light text-muted border">{{ todo.created_at|date:"M d, Y" }}</span>
+                                        <button 
+                                            class="btn btn-sm btn-outline-danger" 
+                                            hx-post="{% url 'todo:delete' todo.id %}" 
+                                            hx-target="#todo-row-{{ todo.id }}" 
+                                            hx-swap="outerHTML" 
+                                            hx-confirm="{% trans 'Are you sure you want to delete this task?' %}" 
+                                            title="{% trans 'Delete Task' %}">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </li>
                             {% endfor %}
                         </ul>
                     {% else %}
                         <div class="text-center py-5">
-                            <span class="lnr lnr-list" style="font-size: 48px; color: #ccc;"></span>
+                            <i class="fa fa-list-alt fa-3x text-muted mb-3 d-block"></i>
                             <p class="text-muted mt-3">{% trans "No tasks yet. Create your first task to get started!" %}</p>
-                            <a href="{% url 'todo:add' %}" class="primary-btn text-uppercase mt-2">{% trans "Create Task" %}</a>
+                            <a href="{% url 'todo:add' %}" class="btn btn-primary text-uppercase mt-2">{% trans "Create Task" %}</a>
                         </div>
                     {% endif %}
                 </div>

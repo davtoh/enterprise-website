@@ -17,6 +17,9 @@ For an in-depth architectural breakdown, directory layout, application modules, 
 ## Key Features
 
 - **Modern Django Stack:** Powered by Django 5.0 on Python 3.12 with async ASGI support via Channels & Daphne.
+- **Dynamic CSS Themes & Framework Selector:** Switch cleanly between native **Bootstrap 5.3**, **Tailwind CSS**, and **Minimal Semantic HTML5** via top navigation, powered by custom `ThemeTemplateLoader`, middleware, and session/cookie persistence.
+- **Declarative Frontend & Clean Utility UI:** Zero-reload declarative AJAX powered by **HTMX** and lightweight UI state by **Alpine.js** without jQuery, eliminating custom style overrides.
+- **Async Task Infrastructure:** Celery 5.6 + Redis + Flower with WebSocket real-time progress broadcasting (`task_runner` app).
 - **Cross-Platform & OS-Agnostic:** Runs on Windows, Linux, and macOS without machine-dependent hardcoded configurations.
 - **Zero-Barrier Local Development:** Out-of-the-box local SQLite database mode (no MySQL or C++ compiler required).
 - **Production-Ready Database Support:** Switch seamlessly to MySQL or PostgreSQL using `.env` environment variables.

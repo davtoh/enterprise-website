@@ -125,6 +125,18 @@
 				            </ul>
 				          </li>
 				        {% endif %}
+                          <!-- Theme & CSS Framework Selector -->
+                          <li class="menu-has-children"><a href="#"><i class="{{ current_theme_icon }}"></i> {{ current_theme_label }}</a>
+                            <ul>
+                              {% for theme in theme_choices %}
+                                <li>
+                                  <a href="{% url 'theme_management:set_theme' theme.name %}?next={{ request.path }}">
+                                    <i class="{{ theme.icon }}"></i> {{ theme.label }} {% if theme.is_active %}&check;{% endif %}
+                                  </a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                          </li>
                           <li>{% include "language_management/form.html" with type="menu"%}</li>
                         {% if user.is_authenticated %}
                           <li class="menu-has-children"><a href="#"><i class="fa fa-user"></i> {{ user.username }}</a>
@@ -132,9 +144,10 @@
                               <li><a href="{% url 'user_management:profile' %}">{% trans "Profile" %}</a></li>
                               {% if user.is_staff %}
                                 <li><a href="{% url 'admin:index' %}"><i class="fa fa-shield"></i> {% trans "Site Admin" %}</a></li>
+                                <li><a href="{% url 'task_runner:list' %}"><i class="fa fa-terminal"></i> {% trans "Background Tasks" %}</a></li>
                               {% endif %}
                               <li>
-                                <form id="logout-form" method="post" action="{% url 'user_management:logout' %}" style="display:none;">
+                                <form id="logout-form" method="post" action="{% url 'user_management:logout' %}" class="d-none">
                                   {% csrf_token %}
                                 </form>
                                 <a href="javascript:void(0);" onclick="document.getElementById('logout-form').submit();">{% trans "Logout" %}</a>
@@ -160,7 +173,7 @@
             <!-- start banner Area -->
             <section class="banner-area" id="home">
                 <div class="container">
-                    <div {% block banner.attrs %} style="height: 100px;" class="row d-flex align-items-center justify-content-center"{% endblock %}>
+                    <div {% block banner.attrs %} class="row d-flex align-items-center justify-content-center py-4"{% endblock %}>
                         <div {% block banner.content_attrs %} class="col-lg-6 col-md-6"{% endblock %} >
                             {% block banner.content %}
                             {% endblock %}

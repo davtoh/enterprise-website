@@ -47,6 +47,9 @@ class AppPlugin:
     # Background Celery tasks registered by this plugin
     tasks: List[str] = []
 
+    # Per-theme template directories / overrides: e.g. {'bootstrap5': 'todo/bs5/', 'tailwind': 'todo/tw/'}
+    plugin_templates: Dict[str, str] = {}
+
     @classmethod
     def get_menu_items(cls) -> List[MenuItemDefinition]:
         return cls.menu_items
@@ -54,3 +57,7 @@ class AppPlugin:
     @classmethod
     def get_tasks(cls) -> List[str]:
         return cls.tasks
+
+    @classmethod
+    def get_plugin_templates(cls) -> Dict[str, str]:
+        return cls.plugin_templates

@@ -1,0 +1,23 @@
+{% load i18n %}
+<footer class="bg-dark text-white-50 py-5 mt-auto border-top">
+  <div class="container">
+    <div class="row align-items-center justify-content-between g-3">
+      <div class="col-md-6 text-center text-md-start">
+        <p class="mb-1 text-white">
+          &copy; {% now "Y" %} {% trans "Enterprise Website" %}. {% trans "All rights reserved." %}
+        </p>
+        <small class="text-white-50">
+          {% trans "Active CSS Framework:" %} <span class="badge bg-primary">{{ current_theme_label }}</span>
+        </small>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        <div class="d-inline-flex gap-3">
+          <a href="{% url 'home:about' %}" class="text-white-50 text-decoration-none">{% trans "About" %}</a>
+          <a href="{% url 'home:services' %}" class="text-white-50 text-decoration-none">{% trans "Services" %}</a>
+          <a href="{% url 'home:products' %}" class="text-white-50 text-decoration-none">{% trans "Products" %}</a>
+          <a href="{% url 'home:contact' %}" class="text-white-50 text-decoration-none">{% trans "Contact" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

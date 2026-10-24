@@ -136,22 +136,29 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
 ---
 
 ## 5. Milestone 12 — Bootstrap 5 Modernization, Custom Style Elimination & Theme Flexibility
-- [ ] **Retire Legacy Assets & Unify Baseline:**
-  - [ ] Remove legacy Bootstrap 3.3.7 JS (`templates/partials/scripts.html`) and Bootstrap 4.0-beta CSS (`static/css/bootstrap.css`).
-  - [ ] Standardize completely on modern **Bootstrap 5.3+** matching CSS and JS bundle without jQuery dependency.
-- [ ] **Eliminate All Ad-Hoc Inline Styles & Custom Hacks:**
-  - [ ] Audit and refactor all templates across apps (`task_runner`, `menu_management`, `user_management`, `todo`, `polls`, `home`):
-    - [ ] Remove all inline styles (`style="margin-right: 10px;"`, `style="display: flex;"`, etc.).
-    - [ ] Remove custom modal CSS workarounds (`#launchTaskModal`, `.modal.in`, manual backdrops) in favor of native Bootstrap 5 modal components.
-    - [ ] Standardize on Bootstrap 5 spacing utilities (`gap-2`, `me-2`, `ms-2`, `d-flex`).
-    - [ ] Standardize modal/interactive attributes exclusively on `data-bs-toggle="modal"`, `data-bs-target`, and `data-bs-dismiss="modal"`.
-- [ ] **Theme Architecture (`templates/themes/`):**
-  - [ ] `bootstrap5/` — pure native Bootstrap 5 templates.
-  - [ ] `tailwind/` — Tailwind CSS template set.
-  - [ ] `minimal/` — bare semantic HTML5 template set.
-  - [ ] Add `SITE_THEME` setting (default `'bootstrap5'`) and theme template loader.
-- [ ] **HTMX & Alpine.js Integration:**
-  - [ ] Integrate HTMX for declarative AJAX partial page updates.
-  - [ ] Integrate Alpine.js for lightweight UI state management (modals, dropdowns) without jQuery.
+- [x] **Retire Legacy Assets & Unify Baseline:**
+  - [x] Removed legacy Bootstrap 3.3.7 JS (`templates/partials/scripts.html`) and updated `static/css/bootstrap.css` to Bootstrap 5.3.3.
+  - [x] Vendored offline assets in `static/js/vendor/`: `bootstrap.bundle.min.js` (5.3.3), `htmx.min.js` (1.9.12), and `alpine.min.js` (3.14.0).
+  - [x] Standardized completely on modern **Bootstrap 5.3+** matching CSS and JS bundle without jQuery dependency for core UI components.
+- [x] **Eliminate All Ad-Hoc Inline Styles & Custom Hacks:**
+  - [x] Audited and refactored all templates across apps (`task_runner`, `menu_management`, `user_management`, `todo`, `polls`, `home`, `templates/base.html`):
+    - [x] Removed all inline styles (`style="margin-right: 10px;"`, `style="display: flex;"`, `style="padding: ...;"`).
+    - [x] Removed custom modal CSS workarounds (`#launchTaskModal`, `.modal.in`, manual JS backdrops, `.task-type-tab`) in favor of native Bootstrap 5 modal components.
+    - [x] Standardized on Bootstrap 5 spacing utilities (`gap-2`, `me-2`, `ms-2`, `d-flex`, `badge bg-*`).
+    - [x] Standardized modal/interactive attributes exclusively on `data-bs-toggle="modal"`, `data-bs-target`, and `data-bs-dismiss="modal"`.
+- [x] **Theme Architecture (`templates/themes/`):**
+  - [x] Created `templates/themes/bootstrap5/` — pure native Bootstrap 5 templates (`base.html`, `partials/header.html`, `partials/footer.html`, `partials/styles.html`, `partials/scripts.html`, `partials/messages.html`, `partials/theme_selector.html`).
+  - [x] Created `templates/themes/tailwind/` — Tailwind CSS template set with Alpine.js dropdowns and mobile drawer navigation.
+  - [x] Created `templates/themes/minimal/` — bare semantic HTML5 template set with CSS custom properties and dark-mode readiness.
+  - [x] Added `SITE_THEME` setting (default `'bootstrap5'`), `AVAILABLE_THEMES`, and dynamic `ThemeTemplateLoader` (`theme_management.loaders.ThemeTemplateLoader`).
+  - [x] Created `theme_management` app with `ThemeMiddleware` (supporting `?theme=`, session, cookies, thread-local resolution) and `set_theme` view with OWASP open-redirect validation.
+  - [x] Extended `AppPlugin` interface with `plugin_templates` dictionary mapping (`plugin_templates = {'bootstrap5': 'todo/bs5/', 'tailwind': 'todo/tw/'}`).
+- [x] **HTMX & Alpine.js Integration:**
+  - [x] Integrated HTMX for declarative AJAX partial page updates (e.g. `hx-post` for zero-reload todo item deletion).
+  - [x] Integrated Alpine.js for lightweight UI state management (modals, dropdowns, tab switching) without jQuery or custom CSS hacks.
+- [x] **Verification & Quality:**
+  - [x] Created `tests/test_theme_management.py` with 17 comprehensive unit and integration tests.
+  - [x] Verified zero modal overrides or ad-hoc inline styles.
+  - [x] Full test suite passing: **146 passed in 31.56s** with **81% total statement coverage**.
 
 

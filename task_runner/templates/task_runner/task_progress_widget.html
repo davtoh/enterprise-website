@@ -1,17 +1,17 @@
 {% load i18n %}
 <div class="card shadow-sm border-0 mb-4 task-widget" id="task-widget-{{ task_id }}" data-task-id="{{ task_id }}">
-  <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-2 px-3" style="display: flex;">
-    <div class="d-flex align-items-center" style="display: flex; align-items: center;">
-      <i class="fa fa-terminal text-info mr-2 me-2" style="margin-right: 8px;"></i>
-      <span class="fw-semibold task-title mr-2 me-2" style="margin-right: 8px; font-weight: 600;">{{ title }}</span>
+  <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-2 px-3">
+    <div class="d-flex align-items-center">
+      <i class="fa fa-terminal text-info me-2"></i>
+      <span class="fw-semibold task-title me-2">{{ title }}</span>
       <code class="text-white-50 small">#{{ task_id|slice:":8" }}</code>
     </div>
-    <div class="d-flex align-items-center" style="display: flex; align-items: center;">
-      <span class="badge bg-secondary task-status-badge mr-2 me-2" id="badge-{{ task_id }}" style="margin-right: 8px;">
+    <div class="d-flex align-items-center">
+      <span class="badge bg-secondary task-status-badge me-2" id="badge-{{ task_id }}">
         {{ status }}
       </span>
       <span class="task-conn-status text-warning small" id="conn-{{ task_id }}" title="{% trans 'Connection Status' %}">
-        <i class="fa fa-circle text-secondary" style="font-size: 8px;"></i>
+        <i class="fa fa-circle text-secondary"></i>
       </span>
     </div>
   </div>
@@ -19,16 +19,16 @@
   <div class="card-body p-3 bg-light">
     <!-- Progress Bar -->
     <div class="mb-2">
-      <div class="d-flex justify-content-between small text-muted mb-1" style="display: flex; justify-content: space-between;">
+      <div class="d-flex justify-content-between small text-muted mb-1">
         <span>{% trans "Execution Progress" %}</span>
-        <span class="fw-bold task-progress-percent" id="percent-{{ task_id }}" style="font-weight: bold;">{{ progress }}%</span>
+        <span class="fw-bold task-progress-percent" id="percent-{{ task_id }}">{{ progress }}%</span>
       </div>
-      <div class="progress" style="height: 20px; border-radius: 6px; background-color: #e9ecef;">
+      <div class="progress rounded-2">
         <div 
-          class="progress-bar progress-bar-striped {% if status == 'RUNNING' %}progress-bar-animated bg-primary{% elif status == 'SUCCESS' %}bg-success{% elif status == 'FAILURE' %}bg-danger{% else %}bg-secondary{% endif %} task-progress-bar"
+          class="progress-bar progress-bar-striped {% if status == 'RUNNING' %}progress-bar-animated bg-primary{% elif status == 'SUCCESS' %}bg-success{% elif status == 'FAILURE' %}bg-danger{% else %}bg-secondary{% endif %} task-progress-bar small fw-semibold"
           id="bar-{{ task_id }}"
           role="progressbar"
-          style="width: {{ progress }}%; font-size: 11px; font-weight: 600; line-height: 20px; min-width: 2em;"
+          style="width: {{ progress }}%;"
           aria-valuenow="{{ progress }}"
           aria-valuemin="0"
           aria-valuemax="100">
@@ -40,10 +40,9 @@
     <!-- Error Banner (Hidden by default unless failed) -->
     <div 
       class="alert alert-danger py-2 px-3 small mb-2 task-error-box {% if not error_message %}d-none{% endif %}" 
-      id="error-box-{{ task_id }}"
-      {% if not error_message %}style="display: none;"{% endif %}>
-      <div class="d-flex align-items-start" style="display: flex;">
-        <i class="fa fa-exclamation-triangle mt-1 mr-2 me-2" style="margin-right: 8px;"></i>
+      id="error-box-{{ task_id }}">
+      <div class="d-flex align-items-start">
+        <i class="fa fa-exclamation-triangle mt-1 me-2"></i>
         <div>
           <strong>{% trans "Task Error:" %}</strong>
           <span class="task-error-text" id="error-text-{{ task_id }}">{{ error_message }}</span>
@@ -53,16 +52,23 @@
 
     <!-- Live Terminal Console -->
     <div class="position-relative">
-      <div class="d-flex justify-content-between align-items-center px-2 py-1 bg-dark text-muted small" style="display: flex; justify-content: space-between; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom: 1px solid #333;">
-        <span class="text-white-50"><i class="fa fa-file-text-o mr-1 me-1" style="margin-right: 5px;"></i> {% trans "Live Console Output" %}</span>
-        <button class="btn btn-sm text-secondary p-0 copy-log-btn" type="button" data-task-id="{{ task_id }}" title="{% trans 'Copy Log' %}" style="background: none; border: 0; color: #adb5bd; cursor: pointer; padding: 2px 6px;">
+      <div class="d-flex justify-content-between align-items-center px-3 py-1 bg-dark text-muted small rounded-top border-bottom border-secondary">
+        <span class="text-white-50"><i class="fa fa-file-text-o me-1"></i> {% trans "Live Console Output" %}</span>
+        <button class="btn btn-sm btn-link text-white-50 p-0 copy-log-btn text-decoration-none" type="button" data-task-id="{{ task_id }}" title="{% trans 'Copy Log' %}">
           <i class="fa fa-copy"></i>
         </button>
       </div>
+      <style>
+      .task-console-scroll {
+        max-height: 240px;
+        min-height: 110px;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+      </style>
       <pre 
-        class="bg-black text-light p-3 m-0 small task-console-log" 
-        id="console-{{ task_id }}"
-        style="max-height: 240px; min-height: 110px; overflow-y: auto; font-family: Consolas, 'Courier New', monospace; white-space: pre-wrap; word-break: break-all; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; background-color: #1a1a1a; color: #f8f9fa;">{{ log_output|default:_("Task initialized. Waiting for stream output...") }}</pre>
+        class="bg-dark text-light p-3 m-0 small font-monospace rounded-bottom overflow-auto task-console-log task-console-scroll" 
+        id="console-{{ task_id }}">{{ log_output|default:_("Task initialized. Waiting for stream output...") }}</pre>
     </div>
   </div>
 </div>
@@ -218,7 +224,7 @@
 
       socket.onopen = function() {
         if (conn) {
-          conn.innerHTML = '<i class="fa fa-circle text-success" title="{% trans "Live WebSocket Connected" %}" style="font-size: 8px;"></i>';
+          conn.innerHTML = '<i class="fa fa-circle text-success small" title="{% trans "Live WebSocket Connected" %}"></i>';
         }
       };
 
@@ -239,14 +245,14 @@
 
       socket.onerror = function() {
         if (conn) {
-          conn.innerHTML = '<i class="fa fa-circle text-warning" title="{% trans "Live Sync Active (HTTP Poll)" %}" style="font-size: 8px;"></i>';
+          conn.innerHTML = '<i class="fa fa-circle text-warning small" title="{% trans "Live Sync Active (HTTP Poll)" %}"></i>';
         }
         startPolling();
       };
 
       socket.onclose = function() {
         if (conn) {
-          conn.innerHTML = '<i class="fa fa-circle text-secondary" style="font-size: 8px;"></i>';
+          conn.innerHTML = '<i class="fa fa-circle text-secondary small"></i>';
         }
         startPolling();
       };

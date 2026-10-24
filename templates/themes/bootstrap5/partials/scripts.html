@@ -1,0 +1,31 @@
+{% load static %}
+<!-- Bootstrap 5.3.3 Bundle with Popper (No jQuery dependency for core UI components) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<!-- HTMX Declarative AJAX -->
+<script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYWy424GJA4ORNeSR7DC9d2hB5hxGbxv7KZ6/B2Z428CXa+CZ906XQCb5E4" crossorigin="anonymous"></script>
+
+<!-- Alpine.js Client-Side State -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.0/dist/cdn.min.js"></script>
+
+<!-- Configure HTMX CSRF -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.body.addEventListener('htmx:configRequest', function (evt) {
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+      if (csrfToken) {
+        evt.detail.headers['X-CSRFToken'] = csrfToken;
+      }
+    });
+  });
+</script>
+
+<!-- Optional Agency Homepage Animations (jQuery fallback) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{% static 'js/hoverIntent.js' %}"></script>
+<script src="{% static 'js/superfish.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>

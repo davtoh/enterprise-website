@@ -1,0 +1,18 @@
+{% load i18n %}
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="themeDropdownMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false" title="{% trans 'Switch CSS Framework' %}">
+        <i class="{{ current_theme_icon }} me-1"></i>
+        <span>{{ current_theme_label }}</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="themeDropdownMenu">
+        <li><h6 class="dropdown-header text-uppercase small text-muted">{% trans "CSS Framework" %}</h6></li>
+        {% for theme in theme_choices %}
+            <li>
+                <a class="dropdown-item d-flex align-items-center justify-content-between {% if theme.is_active %}active fw-bold{% endif %}" href="{% url 'theme_management:set_theme' theme.name %}?next={{ request.path }}">
+                    <span><i class="{{ theme.icon }} me-2"></i>{{ theme.label }}</span>
+                    {% if theme.is_active %}<i class="fa fa-check text-success ms-2"></i>{% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</li>

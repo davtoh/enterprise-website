@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'rosetta',
     'channels',
     'task_runner.apps.TaskRunnerConfig',
+    'theme_management.apps.ThemeManagementConfig',
 ]
 
 # during the request phase, where middleware is applied first-to-last
@@ -89,10 +90,15 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware', #Associates users with requests using sessions.
     'allauth.account.middleware.AccountMiddleware',
+    'theme_management.middleware.ThemeMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Theme Architecture & Dynamic CSS Framework Configuration
+SITE_THEME = os.getenv('SITE_THEME', 'bootstrap5').lower().strip()
+AVAILABLE_THEMES = ['bootstrap5', 'tailwind', 'minimal']
 
 ROOT_URLCONF = 'enterprise_website.urls'
 
@@ -100,8 +106,12 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
         'OPTIONS': {
+            'loaders': [
+                'theme_management.loaders.ThemeTemplateLoader',
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
             # https://docs.djangoproject.com/en/2.0/ref/templates/api/#using-requestcontext
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -110,6 +120,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'menu_management.context_processors.dynamic_menu',
+                'theme_management.context_processors.theme_context',
             ],
         },
     },

@@ -2,8 +2,18 @@
 {% load i18n %}
 
 {% block object-tools-items %}
+  <style>
+  .launch-script-admin-link {
+    background: #28a745 !important;
+    color: #fff !important;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 5px 12px;
+    margin-right: 8px;
+  }
+  </style>
   <li>
-    <a href="{% url 'admin:task_runner_launch_script' %}" class="addlink" style="background: #28a745; color: #fff; font-weight: bold; border-radius: 4px; padding: 5px 12px; margin-right: 8px;">
+    <a href="{% url 'admin:task_runner_launch_script' %}" class="addlink launch-script-admin-link">
       <i class="fa fa-terminal"></i> {% trans "Launch External Script" %}
     </a>
   </li>

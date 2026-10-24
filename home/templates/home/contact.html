@@ -23,56 +23,56 @@
 
 {% block content %}
     <!-- Start contact-page Area -->
-    <section class="contact-page-area section-gap">
+    <section class="contact-page-area section-gap py-5">
         <div class="container">
-            <div class="row">
+            <div class="row g-4">
                 <div class="col-lg-4 d-flex flex-column address-wrap">
-                    <div class="single-contact-address d-flex flex-row mb-4">
-                        <div class="icon mr-3">
-                            <span class="lnr lnr-home" style="font-size: 28px; color: #8490ff;"></span>
+                    <div class="single-contact-address d-flex flex-row mb-4 align-items-center">
+                        <div class="icon me-3">
+                            <i class="fa fa-home fa-2x text-primary"></i>
                         </div>
                         <div class="contact-details">
-                            <h5>{% trans "Enterprise Technology Lab" %}</h5>
-                            <p>{% trans "Global Engineering Center" %}</p>
+                            <h5 class="mb-1">{% trans "Enterprise Technology Lab" %}</h5>
+                            <p class="text-muted mb-0">{% trans "Global Engineering Center" %}</p>
                         </div>
                     </div>
-                    <div class="single-contact-address d-flex flex-row mb-4">
-                        <div class="icon mr-3">
-                            <span class="lnr lnr-phone-handset" style="font-size: 28px; color: #8490ff;"></span>
+                    <div class="single-contact-address d-flex flex-row mb-4 align-items-center">
+                        <div class="icon me-3">
+                            <i class="fa fa-phone fa-2x text-primary"></i>
                         </div>
                         <div class="contact-details">
-                            <h5>{% trans "Local Support Services" %}</h5>
-                            <p>{% trans "Mon to Fri 9am to 6pm" %}</p>
+                            <h5 class="mb-1">{% trans "Local Support Services" %}</h5>
+                            <p class="text-muted mb-0">{% trans "Mon to Fri 9am to 6pm" %}</p>
                         </div>
                     </div>
-                    <div class="single-contact-address d-flex flex-row mb-4">
-                        <div class="icon mr-3">
-                            <span class="lnr lnr-envelope" style="font-size: 28px; color: #8490ff;"></span>
+                    <div class="single-contact-address d-flex flex-row mb-4 align-items-center">
+                        <div class="icon me-3">
+                            <i class="fa fa-envelope fa-2x text-primary"></i>
                         </div>
                         <div class="contact-details">
-                            <h5>support@enterprise.local</h5>
-                            <p>{% trans "Send us your query anytime!" %}</p>
+                            <h5 class="mb-1">support@enterprise.local</h5>
+                            <p class="text-muted mb-0">{% trans "Send us your query anytime!" %}</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <form class="form-area contact-form text-right" id="contactForm" method="post" action="{% url 'home:contact' %}">
+                    <form class="form-area contact-form text-end" id="contactForm" method="post" action="{% url 'home:contact' %}">
                         {% csrf_token %}
-                        <div class="row">
-                            <div class="col-lg-6 form-group">
+                        <div class="row g-3">
+                            <div class="col-lg-6">
                                 {% trans "Enter your name" as trans_name %}
                                 {% trans "Enter email address" as trans_email %}
                                 {% trans "Enter subject" as trans_subject %}
-                                <input name="name" placeholder="{{ trans_name }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_name }}'" class="common-input mb-20 form-control" required="" type="text">
-                                <input name="email" placeholder="{{ trans_email }}" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_email }}'" class="common-input mb-20 form-control" required="" type="email">
-                                <input name="subject" placeholder="{{ trans_subject }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_subject }}'" class="common-input mb-20 form-control" required="" type="text">
+                                <input name="name" placeholder="{{ trans_name }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_name }}'" class="common-input mb-3 form-control" required="" type="text">
+                                <input name="email" placeholder="{{ trans_email }}" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_email }}'" class="common-input mb-3 form-control" required="" type="email">
+                                <input name="subject" placeholder="{{ trans_subject }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_subject }}'" class="common-input mb-3 form-control" required="" type="text">
                             </div>
-                            <div class="col-lg-6 form-group">
+                            <div class="col-lg-6">
                                 {% trans "Enter Message" as trans_message %}
-                                <textarea class="common-textarea form-control" name="message" placeholder="{{ trans_message }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_message }}'" required="" style="height: 165px;"></textarea>
+                                <textarea class="common-textarea form-control" rows="6" name="message" placeholder="{{ trans_message }}" onfocus="this.placeholder = ''" onblur="this.placeholder = '{{ trans_message }}'" required=""></textarea>
                             </div>
-                            <div class="col-lg-12">
-                                <button type="submit" class="primary-btn mt-20 text-white" style="float: right; border: none; cursor: pointer;">{% trans "Send Message" %}</button>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-primary text-white">{% trans "Send Message" %}</button>
                             </div>
                         </div>
                     </form>

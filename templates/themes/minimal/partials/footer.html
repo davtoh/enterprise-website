@@ -1,0 +1,15 @@
+{% load i18n %}
+<footer>
+  <div class="container d-flex align-items-center justify-content-between flex-wrap gap-2">
+    <div>
+      <p class="m-0">&copy; {% now "Y" %} {% trans "Enterprise Website" %}. {% trans "All rights reserved." %}</p>
+      <small>{% trans "Active CSS Framework:" %} <strong>{{ current_theme_label }}</strong></small>
+    </div>
+    <div class="d-flex gap-3">
+      <a href="{% url 'home:about' %}">{% trans "About" %}</a>
+      <a href="{% url 'home:services' %}">{% trans "Services" %}</a>
+      <a href="{% url 'home:products' %}">{% trans "Products" %}</a>
+      <a href="{% url 'home:contact' %}">{% trans "Contact" %}</a>
+    </div>
+  </div>
+</footer>

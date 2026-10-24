@@ -158,32 +158,33 @@
 **Scope:** Modernize the entire frontend presentation layer to clean Bootstrap 5.3, retire legacy Bootstrap 3 JS + Bootstrap 4 CSS mismatches, and eliminate all ad-hoc inline styles and custom modal workarounds across the codebase.
 
 **Objectives:**
-- **Retire Legacy Assets & Unify Framework Baseline:**
-  - Remove outdated CDN Bootstrap 3.3.7 JS (`templates/partials/scripts.html`) and legacy Bootstrap 4.0-beta CSS (`static/css/bootstrap.css`).
-  - Standardize completely on modern **Bootstrap 5.3+** with matching CSS and JS bundle (eliminating jQuery dependency for core UI components).
-- **Eliminate All Ad-Hoc Inline Styles & Custom Hacks:**
-  - Audit and clean all project templates (including `task_runner`, `menu_management`, `user_management`, `todo`, `polls`, `home`):
-    - Remove all inline styles (e.g. `style="margin-right: 10px;"`, `style="display: flex;"`, `style="z-index: ...;"`).
-    - Remove custom modal CSS workarounds (such as `#launchTaskModal` display/opacity overrides, `.modal.in`, manual JS backdrops, `.task-type-tab`).
-    - Replace with standard Bootstrap 5 utility classes (`gap-2`, `me-2`, `ms-2`, `d-flex`, `form-select`, `badge bg-*`).
-    - Standardize interactive component attributes exclusively on native Bootstrap 5 `data-bs-toggle="modal"`, `data-bs-target`, and `data-bs-dismiss="modal"`.
-- **Create Theme Architecture (`templates/themes/`):**
-  - `bootstrap5/` — pure native Bootstrap 5 templates (base, navbar, cards, forms, alerts, modals)
-  - `tailwind/` — Tailwind CSS equivalent templates (with CDN fallback and PostCSS build option)
-  - `minimal/` — bare semantic HTML5 with CSS custom properties only
-- **Settings & Dynamic Resolution:**
-  - Add `SITE_THEME` setting (default `'bootstrap5'`) controlling active theme template directory.
-  - Template loader resolving `base.html`, `partials/messages.html`, etc. from `templates/themes/{SITE_THEME}/`.
-  - `AppPlugin` template declaration per theme (`plugin_templates = {'bootstrap5': 'todo/bs5/', 'tailwind': 'todo/tw/'}`).
-- **HTMX & Alpine.js Integration:**
-  - Add lightweight HTMX for declarative AJAX partial page updates (e.g. task progress polling, todo item toggle/delete).
-  - Add Alpine.js for client-side state (modals, dropdowns, collapsible consoles) without jQuery or custom style manipulation.
+- [x] **Retire Legacy Assets & Unify Framework Baseline:**
+  - [x] Remove outdated CDN Bootstrap 3.3.7 JS (`templates/partials/scripts.html`) and legacy Bootstrap 4.0-beta CSS (`static/css/bootstrap.css`).
+  - [x] Standardize completely on modern **Bootstrap 5.3+** with matching CSS and JS bundle (eliminating jQuery dependency for core UI components).
+- [x] **Eliminate All Ad-Hoc Inline Styles & Custom Hacks:**
+  - [x] Audit and clean all project templates (including `task_runner`, `menu_management`, `user_management`, `todo`, `polls`, `home`):
+    - [x] Remove all inline styles (e.g. `style="margin-right: 10px;"`, `style="display: flex;"`, `style="z-index: ...;"`).
+    - [x] Remove custom modal CSS workarounds (such as `#launchTaskModal` display/opacity overrides, `.modal.in`, manual JS backdrops, `.task-type-tab`).
+    - [x] Replace with standard Bootstrap 5 utility classes (`gap-2`, `me-2`, `ms-2`, `d-flex`, `form-select`, `badge bg-*`).
+    - [x] Standardize interactive component attributes exclusively on native Bootstrap 5 `data-bs-toggle="modal"`, `data-bs-target`, and `data-bs-dismiss="modal"`.
+- [x] **Create Theme Architecture (`templates/themes/`):**
+  - [x] `bootstrap5/` — pure native Bootstrap 5 templates (base, navbar, cards, forms, alerts, modals)
+  - [x] `tailwind/` — Tailwind CSS equivalent templates (with CDN fallback and PostCSS build option)
+  - [x] `minimal/` — bare semantic HTML5 with CSS custom properties only
+- [x] **Settings & Dynamic Resolution:**
+  - [x] Add `SITE_THEME` setting (default `'bootstrap5'`) controlling active theme template directory.
+  - [x] Template loader resolving `base.html`, `partials/messages.html`, etc. from `templates/themes/{SITE_THEME}/`.
+  - [x] `AppPlugin` template declaration per theme (`plugin_templates = {'bootstrap5': 'todo/bs5/', 'tailwind': 'todo/tw/'}`).
+- [x] **HTMX & Alpine.js Integration:**
+  - [x] Add lightweight HTMX for declarative AJAX partial page updates (e.g. task progress polling, todo item toggle/delete).
+  - [x] Add Alpine.js for client-side state (modals, dropdowns, collapsible consoles) without jQuery or custom style manipulation.
 
 **Verification:**
-- Zero custom inline styles or modal CSS overrides remaining in codebase.
-- Switching `SITE_THEME` to `'tailwind'` renders the full site in Tailwind without breaking any views.
-- HTMX operations execute without full page reloads.
-- Bootstrap 5 / Alpine.js powers all modals, dropdowns, and collapse components cleanly across mobile and desktop.
+- [x] Zero custom inline styles or modal CSS overrides remaining in codebase.
+- [x] Switching `SITE_THEME` to `'tailwind'` renders the full site in Tailwind without breaking any views.
+- [x] HTMX operations execute without full page reloads.
+- [x] Bootstrap 5 / Alpine.js powers all modals, dropdowns, and collapse components cleanly across mobile and desktop.
+- [x] 146 tests passing with 81% total statement coverage (17 dedicated theme_management tests).
 
 
 ---

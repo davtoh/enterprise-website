@@ -70,9 +70,14 @@ def add(request):
         return render(request, 'todo/add.html')
 
 
+from django.http import HttpResponse
+
+
 def delete(request, id):
     todo = get_object_or_404(Todo, id=id)
     todo.delete()
+    if request.headers.get('HX-Request'):
+        return HttpResponse("", status=200)
     messages.success(request, _('Task deleted successfully!'), extra_tags='alert')
     return redirect('todo:index')
 

@@ -1,0 +1,29 @@
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'alert' %}warning{% else %}{{ message.tags }}{% endif %}{% else %}alert-info{% endif %} alert-dismissible fade show shadow-sm d-flex align-items-center justify-content-between" role="alert">
+            <div class="d-flex align-items-center">
+                <i class="fa {% if message.tags == 'error' or message.tags == 'danger' %}fa-exclamation-circle text-danger{% elif message.tags == 'success' %}fa-check-circle text-success{% elif message.tags == 'alert' or message.tags == 'warning' %}fa-exclamation-triangle text-warning{% else %}fa-info-circle text-primary{% endif %} me-2"></i>
+                <span>{{ message }}</span>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    setTimeout(function() {
+        document.querySelectorAll('.alert-dismissible').forEach(function(alert) {
+            try {
+                if (typeof bootstrap !== 'undefined' && bootstrap.Alert) {
+                    var bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                    bsAlert.close();
+                } else {
+                    alert.classList.remove('show');
+                    setTimeout(() => alert.remove(), 250);
+                }
+            } catch(e) {}
+        });
+    }, 6000);
+</script>
+{% endif %}

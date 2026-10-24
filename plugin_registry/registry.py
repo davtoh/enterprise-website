@@ -39,6 +39,15 @@ class PluginRegistry:
             if plugin_cls.get_tasks()
         }
 
+    def get_all_plugin_templates(self) -> Dict[str, Dict[str, str]]:
+        """Returns all registered theme templates indexed by plugin name."""
+        self.autodiscover()
+        return {
+            name: plugin_cls.get_plugin_templates()
+            for name, plugin_cls in self._plugins.items()
+            if plugin_cls.get_plugin_templates()
+        }
+
     def autodiscover(self):
         """Scan all INSTALLED_APPS for a `plugin.py` module and load subclasses of AppPlugin."""
         if self._discovered:

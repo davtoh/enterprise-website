@@ -1,0 +1,17 @@
+<!-- HTMX Declarative AJAX -->
+<script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYWy424GJA4ORNeSR7DC9d2hB5hxGbxv7KZ6/B2Z428CXa+CZ906XQCb5E4" crossorigin="anonymous"></script>
+
+<!-- Alpine.js Client-Side State -->
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.0/dist/cdn.min.js"></script>
+
+<!-- Configure HTMX CSRF -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.body.addEventListener('htmx:configRequest', function (evt) {
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+      if (csrfToken) {
+        evt.detail.headers['X-CSRFToken'] = csrfToken;
+      }
+    });
+  });
+</script>
