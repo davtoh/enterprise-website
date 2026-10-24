@@ -53,14 +53,13 @@ msgid "Administration"
 msgstr "Administración"
 
 #: .\home\plugin.py:7
-#, fuzzy
 msgid "Corporate Showcase"
-msgstr "Texto traducido de prueba"
+msgstr "Muestra Corporativa"
 
 #: .\home\plugin.py:8
-#, fuzzy
 msgid "Corporate showcase pages: Home, About, Services, Products, Contact"
-msgstr "Texto traducido de prueba"
+msgstr ""
+"Páginas corporativas: Inicio, Quiénes somos, Servicios, Productos, Contacto"
 
 #: .\home\plugin.py:12 .\home\templates\home\about.html:14
 #: .\home\templates\home\contact.html:14 .\home\templates\home\index.html:5
@@ -71,27 +70,23 @@ msgstr "Texto traducido de prueba"
 #: .\user_management\templates\user_management\logout.html:29
 #: .\user_management\templates\user_management\profile.html:14
 #: .\user_management\templates\user_management\siteuser_list.html:14
-#, fuzzy
 msgid "Home"
 msgstr "Inicio"
 
 #: .\home\plugin.py:13 .\home\templates\home\about.html:14
 #: .\home\templates\home\index.html:327 .\templates\base.html:115
-#, fuzzy
 msgid "About Us"
 msgstr "¿Quiénes somos?"
 
 #: .\home\plugin.py:14 .\home\templates\home\services.html:14
 #: .\templates\base.html:116
-#, fuzzy
 msgid "Services"
-msgstr "Texto traducido de prueba"
+msgstr "Servicios"
 
 #: .\home\plugin.py:15 .\home\templates\home\products.html:14
 #: .\templates\base.html:117
-#, fuzzy
 msgid "Products"
-msgstr "Texto traducido de prueba"
+msgstr "Productos"
 
 #: .\home\plugin.py:16 .\home\templates\home\contact.html:14
 #: .\templates\base.html:118
@@ -298,89 +293,83 @@ msgstr "vías respiratorias"
 
 #: .\home\templates\home\index.html:54 .\home\templates\home\index.html:68
 #: .\home\templates\home\index.html:82 .\home\templates\home\index.html:96
-#, fuzzy
 msgid "View Details"
-msgstr "Texto traducido de prueba"
+msgstr "Ver Detalles"
 
 #: .\home\templates\home\index.html:64 .\home\templates\home\products.html:57
-#, fuzzy
 msgid "The Crab Wheel"
-msgstr "Texto traducido de prueba"
+msgstr "La Rueda de Cangrejo"
 
 #: .\home\templates\home\index.html:78 .\home\templates\home\products.html:71
-#, fuzzy
 msgid "The Plug Ninja"
-msgstr "Texto traducido de prueba"
+msgstr "El Ninja del Conector"
 
 #: .\home\templates\home\index.html:92
-#, fuzzy
 msgid "The Controller"
-msgstr "Texto traducido de prueba"
+msgstr "El Controlador"
 
 #: .\home\templates\home\index.html:113
-#, fuzzy
 msgid ""
 "Globally Connected <br>\n"
 "                    by Large Network"
-msgstr "Texto traducido de prueba"
+msgstr ""
+"Conectados Globalmente <br>\n"
+"                    por una Gran Red"
 
 #: .\home\templates\home\index.html:116 .\home\templates\home\index.html:140
-#, fuzzy
 msgid "We are here to listen from you deliver exellence"
-msgstr "Texto traducido de prueba"
+msgstr "Estamos aquí para escucharle y ofrecer excelencia"
 
 #: .\home\templates\home\index.html:121
-#, fuzzy
 msgid "Get Details"
-msgstr "Texto traducido de prueba"
+msgstr "Obtener Detalles"
 
 #: .\home\templates\home\index.html:134
-#, fuzzy
 msgid "Brand new app to blow your mind"
-msgstr "Texto traducido de prueba"
+msgstr "Una nueva aplicación para sorprenderte"
 
 #: .\home\templates\home\index.html:136
-#, fuzzy
 msgid ""
 "We’ve made a life <br>\n"
 "                        that will change you"
-msgstr "Texto traducido de prueba"
+msgstr ""
+"Hemos creado una experiencia <br>\n"
+"                        que te transformará"
 
 #: .\home\templates\home\index.html:145
-#, fuzzy
 msgid "Get Started Now"
-msgstr "Texto traducido de prueba"
+msgstr "Comenzar Ahora"
 
 #: .\home\templates\home\index.html:162
-#, fuzzy
 msgid "Some Features that Made us Unique"
-msgstr "Texto traducido de prueba"
+msgstr "Características que Nos Hacen Únicos"
 
 #: .\home\templates\home\index.html:173
-#, fuzzy
 msgid "Expert Technicians"
-msgstr "Texto traducido de prueba"
+msgstr "Técnicos Expertos"
 
 #: .\home\templates\home\index.html:176 .\home\templates\home\index.html:187
 #: .\home\templates\home\index.html:198 .\home\templates\home\index.html:209
 #: .\home\templates\home\index.html:220 .\home\templates\home\index.html:231
-#, fuzzy
 msgid ""
 "Usage of the Internet is becoming more common due to rapid advancement of "
 "technology and power."
-msgstr "Texto traducido de prueba"
+msgstr ""
+"El uso de Internet es cada vez más común debido al rápido avance de la "
+"tecnología y la conectividad."
 
 #: .\home\templates\home\index.html:184
 msgid "Professional Service"
-msgstr ""
+msgstr "Servicio Profesional"
 
 #: .\home\templates\home\index.html:195
 msgid "Great Support"
-msgstr ""
+msgstr "Gran Soporte"
 
 #: .\home\templates\home\index.html:206
+#, fuzzy
 msgid "Technical Skills"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\templates\home\index.html:217
 msgid "Highly Recomended"
@@ -1100,19 +1089,17 @@ msgid "Edit in Admin"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_detail.html:42
-#, fuzzy
 msgid "Task Details"
-msgstr "Texto traducido de prueba"
+msgstr "Detalles de la Tarea"
 
 #: .\task_runner\templates\task_runner\job_detail.html:58
 #: .\task_runner\templates\task_runner\job_list.html:113
 msgid "System / Daemon"
-msgstr ""
+msgstr "Sistema / Demonio"
 
 #: .\task_runner\templates\task_runner\job_detail.html:62
-#, fuzzy
 msgid "Started At"
-msgstr "Texto traducido de prueba"
+msgstr "Iniciada En"
 
 #: .\task_runner\templates\task_runner\job_detail.html:65
 msgid "Last Update"

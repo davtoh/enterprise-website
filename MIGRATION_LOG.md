@@ -460,5 +460,13 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
     - Added clipboard copy event listener with temporary visual confirmation badge (`fa-check`) to the copy button in `task_progress_widget.html`.
     - Corrected button spacing in `job_detail.html` with explicit margins (`mr-2 me-2`).
     - Formulated Bootstrap Modernization roadmap (Milestone 12) to cleanly unify legacy Bootstrap 3 JS + Bootstrap 4 CSS into a modern, native Bootstrap 5.3 architecture.
+  - **Zero Sensitive Data & Infrastructure Security Rule:**
+    - Audited settings and eliminated all hardcoded fallback literals for infrastructure endpoints, ports, hostnames, and credentials (including `redis://127.0.0.1:6379/0`, `192.168.0.4`, MySQL defaults).
+    - Established global security rules in `.agents/rules/security_and_standards.md` and `AGENTS.md` mandating that all infrastructure configurations strictly resolve from environment variables (`os.getenv(...)`) with safe empty defaults (`""`).
+    - Cleaned `.env.example` and `settings.py` `ALLOWED_HOSTS` to remove old local development IPs.
+  - **Milestone 12 Plan Updated — Custom Style Elimination Policy:**
+    - Updated `milestone_plan.md` and `TODO_MODERNIZATION.md` to make Milestone 12 explicitly encompass the full retirement of legacy Bootstrap 3 JS and Bootstrap 4 CSS, and the complete elimination of all ad-hoc inline styles (`style="..."`) and custom modal overrides in favor of pure, native Bootstrap 5.3+ utilities and components.
+    - Updated `.agents/rules/frontend_and_css_standards.md` and `AGENTS.md` (Section 7) requiring future modernized templates to adhere strictly to framework utility classes without ad-hoc custom styles.
+
 
 

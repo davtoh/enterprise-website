@@ -154,24 +154,37 @@
 
 ---
 
-### [Milestone 12] — Dynamic Menus: CSS Framework Selector & Frontend Flexibility
-**Scope:** Extend the plugin/template system to support multiple CSS frameworks chosen at project-init time.
+### [Milestone 12] — Dynamic Menus: CSS Framework Selector, Bootstrap 5 Modernization & Custom Style Elimination
+**Scope:** Modernize the entire frontend presentation layer to clean Bootstrap 5.3, retire legacy Bootstrap 3 JS + Bootstrap 4 CSS mismatches, and eliminate all ad-hoc inline styles and custom modal workarounds across the codebase.
 
 **Objectives:**
-- Create `templates/themes/` directory:
-  - `bootstrap5/` — current Bootstrap 5 templates (base, navbar, cards, forms, alerts)
+- **Retire Legacy Assets & Unify Framework Baseline:**
+  - Remove outdated CDN Bootstrap 3.3.7 JS (`templates/partials/scripts.html`) and legacy Bootstrap 4.0-beta CSS (`static/css/bootstrap.css`).
+  - Standardize completely on modern **Bootstrap 5.3+** with matching CSS and JS bundle (eliminating jQuery dependency for core UI components).
+- **Eliminate All Ad-Hoc Inline Styles & Custom Hacks:**
+  - Audit and clean all project templates (including `task_runner`, `menu_management`, `user_management`, `todo`, `polls`, `home`):
+    - Remove all inline styles (e.g. `style="margin-right: 10px;"`, `style="display: flex;"`, `style="z-index: ...;"`).
+    - Remove custom modal CSS workarounds (such as `#launchTaskModal` display/opacity overrides, `.modal.in`, manual JS backdrops, `.task-type-tab`).
+    - Replace with standard Bootstrap 5 utility classes (`gap-2`, `me-2`, `ms-2`, `d-flex`, `form-select`, `badge bg-*`).
+    - Standardize interactive component attributes exclusively on native Bootstrap 5 `data-bs-toggle="modal"`, `data-bs-target`, and `data-bs-dismiss="modal"`.
+- **Create Theme Architecture (`templates/themes/`):**
+  - `bootstrap5/` — pure native Bootstrap 5 templates (base, navbar, cards, forms, alerts, modals)
   - `tailwind/` — Tailwind CSS equivalent templates (with CDN fallback and PostCSS build option)
   - `minimal/` — bare semantic HTML5 with CSS custom properties only
-- Add `SITE_THEME` setting (default `'bootstrap5'`) — controls which theme template directory is active
-- Template loader that resolves `base.html`, `partials/messages.html`, etc. from `templates/themes/{SITE_THEME}/`
-- Each `AppPlugin` declares its templates per theme (`plugin_templates = {'bootstrap5': 'todo/bs5/', 'tailwind': 'todo/tw/'}`)
-- HTMX integration: add `htmx` CDN to base templates; convert Todo add/complete actions to HTMX partial updates
-- Alpine.js integration: add `alpine.js` CDN; use for dropdown menus, collapsible sections, form validation feedback
+- **Settings & Dynamic Resolution:**
+  - Add `SITE_THEME` setting (default `'bootstrap5'`) controlling active theme template directory.
+  - Template loader resolving `base.html`, `partials/messages.html`, etc. from `templates/themes/{SITE_THEME}/`.
+  - `AppPlugin` template declaration per theme (`plugin_templates = {'bootstrap5': 'todo/bs5/', 'tailwind': 'todo/tw/'}`).
+- **HTMX & Alpine.js Integration:**
+  - Add lightweight HTMX for declarative AJAX partial page updates (e.g. task progress polling, todo item toggle/delete).
+  - Add Alpine.js for client-side state (modals, dropdowns, collapsible consoles) without jQuery or custom style manipulation.
 
 **Verification:**
-- Switching `SITE_THEME` to `'tailwind'` renders the full site in Tailwind without breaking any views
-- HTMX Todo operations work without full page reloads
-- Alpine.js powers dropdown menus on mobile
+- Zero custom inline styles or modal CSS overrides remaining in codebase.
+- Switching `SITE_THEME` to `'tailwind'` renders the full site in Tailwind without breaking any views.
+- HTMX operations execute without full page reloads.
+- Bootstrap 5 / Alpine.js powers all modals, dropdowns, and collapse components cleanly across mobile and desktop.
+
 
 ---
 

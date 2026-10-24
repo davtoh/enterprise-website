@@ -4,11 +4,14 @@ To ensure visual consistency, functional interactive components, and clean DevOp
 
 ---
 
-## 1. CSS Framework Baseline (Bootstrap 4.x)
-- **Primary CSS Engine:** The project layout and stylesheet is **Bootstrap v4.0.0-beta** located at `static/css/bootstrap.css`.
-- **Flexbox Spacing:**
-  - Bootstrap 4 does **NOT** support flex `gap-*` utilities (e.g., `gap-2`, `gap-3`), which were introduced only in Bootstrap 5.
-  - Always use Bootstrap 4 margin utilities (`mr-2`, `mb-2`, `mt-2`) alongside modern aliases (`me-2`) or explicit margin styling (`style="margin-right: 8px;"`) to ensure buttons and flex elements are properly spaced.
+## 1. CSS Framework Baseline & Custom Style Elimination Policy
+- **Legacy State (Bootstrap 4.x / 3.x mix):** The legacy layout uses `static/css/bootstrap.css` (Bootstrap 4.0.0-beta) and `scripts.html` (Bootstrap 3.3.7 JS).
+- **Modernization & Custom Style Elimination Rule:**
+  - Whenever templates are created, edited, or modernized (Milestone 12+), **eliminate all custom inline styles** (`style="margin-right: ...;"`, `style="display: flex;"`, `style="z-index: ...;"`) and custom modal CSS overrides (`#launchTaskModal.show`, manual backdrop styling).
+  - Use native framework utility classes exclusively:
+    - Replace margin/flex hacks with native Bootstrap 5 spacing and flex utilities (`me-2`, `ms-2`, `gap-2`, `d-flex`).
+    - Standardize interactive triggers exclusively on native `data-bs-*` attributes (`data-bs-toggle="modal"`, `data-bs-target`, `data-bs-dismiss="modal"`).
+  - No new ad-hoc custom CSS classes or `<style>` blocks should be introduced into application templates; layout and styling must strictly use standard design system utility classes.
 
 ---
 

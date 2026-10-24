@@ -29,6 +29,7 @@ Welcome to the project repository. When working on modernization, debugging, fea
 ## 4. Security & Engineering Standards
 - **OWASP & Framework Security:**
   - Zero plaintext secrets in code; isolate environment variables in `.env` (with `.env.example`).
+  - Zero hardcoded infrastructure endpoints: Never embed connection strings (`redis://...`), hostnames/IPs (`127.0.0.1`, `localhost`), credentials, or ports (`6379`, `5432`, `3306`) as fallback defaults in Python code. All endpoints must resolve strictly from environment variables.
   - Strict CSRF protection on POST/PUT requests.
   - Safe error handling: use `get_object_or_404` instead of crashing on `DoesNotExist`.
   - Proper user authentication, permission checks, and safe URL redirects.
@@ -66,13 +67,12 @@ Welcome to the project repository. When working on modernization, debugging, fea
   - Enable machine translation bootstrapping and in-app Rosetta translation suggestions for fast localization.
 
 ## 7. Frontend, UI Standards & Port Isolation
-- **Bootstrap 4.x & Spacing Compatibility:**
-  - Layout is built on Bootstrap 4 (`static/css/bootstrap.css`).
-  - Bootstrap 4 does not support flex `gap-*` utilities; always use margin utilities (`mr-*`, `me-*`) or inline margin styling.
+- **Bootstrap Modernization & Custom Style Elimination:**
+  - Modernized templates (Milestone 12+) standardize on **Bootstrap 5.3+**.
+  - **Eliminate custom styles:** Avoid and remove ad-hoc inline styles (`style="..."`) and custom modal hacks. Use framework utilities (`gap-*`, `me-*`, `ms-*`, `d-flex`) and clean semantic classes.
+  - Interactive components must migrate from dual `data-toggle`/`data-bs-toggle` to standard native `data-bs-*` attributes (`data-bs-toggle="modal"`, `data-bs-target`, etc.).
 - **FontAwesome 4.x Icon Prefix:**
   - Always prefix icons with `fa fa-<name>` (e.g., `fa fa-tasks`). Omitting `fa` causes empty square glyphs.
-- **Interactive Component Data Attributes:**
-  - Modals and toggles must declare dual data attributes: `data-toggle="modal" data-bs-toggle="modal"` and `data-target="#id" data-bs-target="#id"`.
 - **Port Security & Docker Overrides:**
   - Never expose internal database/cache ports in `docker-compose.yml`. Host port bindings belong strictly in `docker-compose.override.yml`.
 

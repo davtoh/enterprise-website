@@ -130,6 +130,28 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
   - Updated `docker-compose.yml` with `celery_worker` and `flower` services.
   - Updated `docker-compose.override.yml` with local development code volume bindings.
 - [x] Automated Test Suite:
-  - Created `tests/test_task_runner.py` with 18 comprehensive tests covering models, Celery tasks, Channels consumer, staff views, JSON API, template tags, and plugin integration.
-  - Entire test suite: **128 passed in 33.78s** with **81% total statement coverage**.
+  - Created `tests/test_task_runner.py` with 19 comprehensive tests covering models, Celery tasks, Channels consumer, staff views, JSON API, admin script launcher, template tags, and plugin integration.
+  - Entire test suite: **129 passed in 29.16s** with **81% total statement coverage**.
+
+---
+
+## 5. Milestone 12 — Bootstrap 5 Modernization, Custom Style Elimination & Theme Flexibility
+- [ ] **Retire Legacy Assets & Unify Baseline:**
+  - [ ] Remove legacy Bootstrap 3.3.7 JS (`templates/partials/scripts.html`) and Bootstrap 4.0-beta CSS (`static/css/bootstrap.css`).
+  - [ ] Standardize completely on modern **Bootstrap 5.3+** matching CSS and JS bundle without jQuery dependency.
+- [ ] **Eliminate All Ad-Hoc Inline Styles & Custom Hacks:**
+  - [ ] Audit and refactor all templates across apps (`task_runner`, `menu_management`, `user_management`, `todo`, `polls`, `home`):
+    - [ ] Remove all inline styles (`style="margin-right: 10px;"`, `style="display: flex;"`, etc.).
+    - [ ] Remove custom modal CSS workarounds (`#launchTaskModal`, `.modal.in`, manual backdrops) in favor of native Bootstrap 5 modal components.
+    - [ ] Standardize on Bootstrap 5 spacing utilities (`gap-2`, `me-2`, `ms-2`, `d-flex`).
+    - [ ] Standardize modal/interactive attributes exclusively on `data-bs-toggle="modal"`, `data-bs-target`, and `data-bs-dismiss="modal"`.
+- [ ] **Theme Architecture (`templates/themes/`):**
+  - [ ] `bootstrap5/` — pure native Bootstrap 5 templates.
+  - [ ] `tailwind/` — Tailwind CSS template set.
+  - [ ] `minimal/` — bare semantic HTML5 template set.
+  - [ ] Add `SITE_THEME` setting (default `'bootstrap5'`) and theme template loader.
+- [ ] **HTMX & Alpine.js Integration:**
+  - [ ] Integrate HTMX for declarative AJAX partial page updates.
+  - [ ] Integrate Alpine.js for lightweight UI state management (modals, dropdowns) without jQuery.
+
 
