@@ -83,8 +83,9 @@ msgstr "¿Quiénes somos?"
 
 #: .\home\plugin.py:14 .\home\templates\home\services.html:14
 #: .\templates\base.html:116
+#, fuzzy
 msgid "Services"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\plugin.py:15 .\home\templates\home\products.html:14
 #: .\templates\base.html:117

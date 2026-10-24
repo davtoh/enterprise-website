@@ -1,0 +1,11 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+{% block object-tools-items %}
+  <li>
+    <a href="{% url 'admin:task_runner_launch_script' %}" class="addlink" style="background: #28a745; color: #fff; font-weight: bold; border-radius: 4px; padding: 5px 12px; margin-right: 8px;">
+      <i class="fa fa-terminal"></i> {% trans "Launch External Script" %}
+    </a>
+  </li>
+  {{ block.super }}
+{% endblock %}

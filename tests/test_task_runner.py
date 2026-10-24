@@ -1,6 +1,7 @@
 import json
 import pytest
 from unittest.mock import patch
+from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.template import Context, Template
 from django.urls import reverse
@@ -319,3 +320,32 @@ class TestTaskRunnerViewsAndTemplateTags:
         all_tasks = registry.get_all_tasks()
         assert "task_runner" in all_tasks
         assert "task_runner.run_auto_translate" in all_tasks["task_runner"]
+
+    @patch("task_runner.admin.run_external_script.apply_async")
+    def test_admin_launch_script_view(self, mock_apply, client, staff_user, sample_job):
+        staff_user.is_superuser = True
+        staff_user.save()
+        client.force_login(staff_user)
+        url = reverse("admin:task_runner_launch_script")
+
+        # GET request renders the form
+        get_res = client.get(url)
+        assert get_res.status_code == 200
+        assert b"Queue External Script in Background" in get_res.content
+
+        # POST request queues task and redirects to change view
+        post_res = client.post(url, {"command": "python manage.py check"})
+        assert post_res.status_code == 302
+        assert "/admin/task_runner/taskjob/" in post_res.url
+        mock_apply.assert_called_once()
+
+        # Action redirect test
+        changelist_url = reverse("admin:task_runner_taskjob_changelist")
+        action_res = client.post(changelist_url, {
+            "action": "action_run_external_script",
+            admin.helpers.ACTION_CHECKBOX_NAME: [sample_job.pk],
+        })
+        assert action_res.status_code == 302
+        assert action_res.url == url
+
+

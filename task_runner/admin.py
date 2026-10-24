@@ -1,13 +1,18 @@
-from django.contrib import admin
+import uuid
+from django.contrib import admin, messages
+from django.shortcuts import render, redirect
+from django.urls import path, reverse
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _, gettext
 from .models import TaskJob
-from .tasks import run_auto_translate, run_collectstatic
+from .tasks import run_auto_translate, run_collectstatic, run_external_script
 
 
 @admin.register(TaskJob)
 class TaskJobAdmin(admin.ModelAdmin):
+    change_list_template = "admin/task_runner/taskjob/change_list.html"
+
     list_display = (
         "name",
         "task_id_short",
@@ -56,7 +61,11 @@ class TaskJobAdmin(admin.ModelAdmin):
             },
         ),
     )
-    actions = ["action_run_collectstatic", "action_run_auto_translate_es"]
+    actions = [
+        "action_run_collectstatic",
+        "action_run_auto_translate_es",
+        "action_run_external_script",
+    ]
 
     @admin.display(description=_("Task ID"))
     def task_id_short(self, obj):
@@ -117,3 +126,51 @@ class TaskJobAdmin(admin.ModelAdmin):
     def action_run_auto_translate_es(self, request, queryset):
         run_auto_translate.delay(lang="es", max_entries=5)
         self.message_user(request, _("Background auto-translate task for Spanish queued."))
+
+    @admin.action(description=_("Launch External Script"))
+    def action_run_external_script(self, request, queryset):
+        return redirect("admin:task_runner_launch_script")
+
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path(
+                "launch-script/",
+                self.admin_site.admin_view(self.launch_script_view),
+                name="task_runner_launch_script",
+            ),
+        ]
+        return custom_urls + urls
+
+    def launch_script_view(self, request):
+        """Custom Django Admin view to queue external scripts directly with live streaming."""
+        if request.method == "POST":
+            cmd = request.POST.get("command", "").strip()
+            if not cmd:
+                self.message_user(request, _("Please provide a valid command."), level=messages.ERROR)
+                return render(request, "admin/task_runner/taskjob/launch_script.html")
+
+            task_id = str(uuid.uuid4())
+            job = TaskJob.objects.create(
+                task_id=task_id,
+                name=f"Admin Script: {cmd[:40]}",
+                status=TaskJob.Status.PENDING,
+                created_by=request.user if request.user.is_authenticated else None,
+            )
+            run_external_script.apply_async(args=[cmd], task_id=task_id)
+            self.message_user(
+                request,
+                _("External script '{0}' queued successfully with Task ID: {1}").format(cmd, task_id),
+                level=messages.SUCCESS,
+            )
+            return redirect("admin:task_runner_taskjob_change", job.pk)
+
+        return render(
+            request,
+            "admin/task_runner/taskjob/launch_script.html",
+            {
+                "title": _("Launch External Script"),
+                "opts": self.model._meta,
+                "has_view_permission": self.has_view_permission(request),
+            },
+        )

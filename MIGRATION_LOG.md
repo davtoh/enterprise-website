@@ -445,7 +445,14 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - **Database & Data Integrity:**
     - Set `DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'` in `enterprise_website/settings.py` to match the legacy integer schema and eliminate pending migrations altering legacy primary keys and foreign keys.
     - Added `default=generate_task_id` in `task_runner/models.py` and fallback UUID in `task_runner/base.py`, applied migration `0002_alter_taskjob_task_id.py`, preventing unkeyed insertion `IntegrityError`s.
-  - **Full Regression Verification:**
-    - Automated test suite: `pytest` passed **128 tests in 26.74s** with 0 failures and 81% code coverage.
+  - **External Script Launcher & Django Admin UI Enhancements:**
+    - Root cause analysis: Bootstrap 3.3.7 JS (`scripts.html`) was adding `.in` to the modal element, but Bootstrap 4.0 CSS (`bootstrap.css`) required `.show` with `.modal.fade` defaulting to `opacity: 0; display: none;`. This caused the body padding and scrollbar to shift while the modal dialog remained completely transparent/invisible.
+    - Added self-contained modal visibility controller with explicit CSS overrides (`display: block !important; opacity: 1 !important; visibility: visible !important;`) and native backdrop management.
+    - Promoted "Run External Script" to the prominent default active tab inside the modal with command input and clickable quick preset tags (`python manage.py check`, `python manage.py showmigrations`, `python --version`, `pytest -q`, `celery --version`).
+    - Added an on-page **"Quick Script Execution"** console directly above the tasks table for instant 1-click execution without needing to open a modal.
+    - Added Django Admin External Script Launcher:
+      - Custom admin view `admin:task_runner_launch_script` at `/admin/task_runner/taskjob/launch-script/`.
+      - Changelist button `[Launch External Script]` via `admin/task_runner/taskjob/change_list.html` and admin action `action_run_external_script`.
+    - Automated test suite expanded to 19 tests in `test_task_runner.py`; full suite passing **129 tests in 29.42s** with 0 failures.
 
 

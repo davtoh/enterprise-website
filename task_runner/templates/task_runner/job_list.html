@@ -4,15 +4,85 @@
 {% block title %}{% trans "Background Task Runner" %} - {{ block.super }}{% endblock %}
 
 {% block content %}
+<style>
+/* Robust cross-version modal visibility (BS3, BS4, BS5, Vanilla) */
+#launchTaskModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1060;
+  background-color: rgba(0, 0, 0, 0.55);
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+}
+#launchTaskModal.show,
+#launchTaskModal.in,
+#launchTaskModal[style*="display: block"] {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+#launchTaskModal .modal-dialog {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  z-index: 1065;
+  transform: none !important;
+  -webkit-transform: none !important;
+}
+.task-type-tab {
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid #ced4da;
+  background: #f8f9fa;
+  color: #495057;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  display: inline-block;
+  transition: all 0.15s ease-in-out;
+}
+.task-type-tab.active {
+  background: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+.preset-badge {
+  cursor: pointer;
+  display: inline-block;
+  padding: 4px 9px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  background: #e9ecef;
+  border-radius: 4px;
+  font-family: Consolas, monospace;
+  font-size: 0.82rem;
+  color: #212529;
+  border: 1px solid #ced4da;
+  transition: all 0.15s ease-in-out;
+}
+.preset-badge:hover {
+  background: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+</style>
+
 <div class="container py-4">
-  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-    <div>
+  <!-- Header & Actions -->
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+    <div class="mb-2">
       <h2 class="h3 fw-bold mb-1">
-        <i class="fa fa-tasks text-primary me-2"></i>{% trans "Background Task Runner" %}
+        <i class="fa fa-tasks text-primary mr-2 me-2"></i>{% trans "Background Task Runner" %}
       </h2>
       <p class="text-muted mb-0">{% trans "Monitor, launch, and inspect Celery asynchronous jobs with live streaming." %}</p>
     </div>
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center mb-2">
       <button 
         type="button" 
         id="launchTaskBtn" 
@@ -22,19 +92,64 @@
         data-target="#launchTaskModal" 
         data-bs-toggle="modal" 
         data-bs-target="#launchTaskModal">
-        <i class="fa fa-play me-1 mr-1"></i>{% trans "Launch New Task" %}
+        <i class="fa fa-play mr-1 me-1"></i>{% trans "Launch New Task" %}
       </button>
-      <a href="{% url 'admin:task_runner_taskjob_changelist' %}" class="btn btn-outline-secondary">
-        <i class="fa fa-cog me-1 mr-1"></i>{% trans "Django Admin" %}
+      <a href="{% url 'admin:task_runner_launch_script' %}" class="btn btn-success mr-2 me-2" style="margin-right: 10px;">
+        <i class="fa fa-terminal mr-1 me-1"></i>{% trans "Admin Script Launcher" %}
       </a>
+      <a href="{% url 'admin:task_runner_taskjob_changelist' %}" class="btn btn-outline-secondary">
+        <i class="fa fa-cog mr-1 me-1"></i>{% trans "Django Admin" %}
+      </a>
+    </div>
+  </div>
+
+  <!-- Direct On-Page Quick Script Launcher -->
+  <div class="card shadow-sm border-0 mb-4 bg-light">
+    <div class="card-body p-3">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <span class="fw-bold text-dark">
+          <i class="fa fa-bolt text-warning mr-1 me-1"></i>{% trans "Quick Script Execution (Celery Background Task)" %}
+        </span>
+        <small class="text-muted">{% trans "Runs asynchronously via Celery worker & streams output live." %}</small>
+      </div>
+      <form method="post" action="{% url 'task_runner:trigger' %}" class="row align-items-center">
+        {% csrf_token %}
+        <input type="hidden" name="task_type" value="external_script">
+        <div class="col-md-9 mb-2 mb-md-0">
+          <div class="input-group">
+            <span class="input-group-text bg-white font-monospace"><i class="fa fa-terminal text-muted"></i></span>
+            <input 
+              type="text" 
+              name="command" 
+              id="quickScriptInput" 
+              class="form-control font-monospace" 
+              placeholder="e.g. python manage.py check" 
+              value="python manage.py check" 
+              required>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-success w-100 fw-bold">
+            <i class="fa fa-paper-plane mr-1 me-1"></i>{% trans "Run Script" %}
+          </button>
+        </div>
+        <div class="col-12 mt-2">
+          <small class="text-muted mr-2 me-2">{% trans "Presets:" %}</small>
+          <span class="preset-badge quick-preset" data-cmd="python manage.py check">python manage.py check</span>
+          <span class="preset-badge quick-preset" data-cmd="python manage.py showmigrations">python manage.py showmigrations</span>
+          <span class="preset-badge quick-preset" data-cmd="python --version">python --version</span>
+          <span class="preset-badge quick-preset" data-cmd="python -m pytest -q tests/test_task_runner.py">pytest test_task_runner</span>
+          <span class="preset-badge quick-preset" data-cmd="celery --version">celery --version</span>
+        </div>
+      </form>
     </div>
   </div>
 
   <!-- Filters & Search -->
   <div class="card shadow-sm border-0 mb-4">
     <div class="card-body p-3">
-      <form method="get" class="row g-2 align-items-center">
-        <div class="col-md-5">
+      <form method="get" class="row align-items-center">
+        <div class="col-md-5 mb-2 mb-md-0">
           <div class="input-group">
             <span class="input-group-text bg-white"><i class="fa fa-search text-muted"></i></span>
             <input 
@@ -45,17 +160,17 @@
               value="{{ search_query }}">
           </div>
         </div>
-        <div class="col-md-4">
-          <select name="status" class="form-select">
+        <div class="col-md-4 mb-2 mb-md-0">
+          <select name="status" class="form-control form-select">
             <option value="">{% trans "All Statuses" %}</option>
             {% for code, label in status_choices %}
               <option value="{{ code }}" {% if selected_status == code %}selected{% endif %}>{{ label }}</option>
             {% endfor %}
           </select>
         </div>
-        <div class="col-md-3 d-flex gap-2">
-          <button type="submit" class="btn btn-secondary w-100">
-            <i class="fa fa-filter me-1"></i>{% trans "Filter" %}
+        <div class="col-md-3 d-flex">
+          <button type="submit" class="btn btn-secondary w-100 mr-2 me-2">
+            <i class="fa fa-filter mr-1 me-1"></i>{% trans "Filter" %}
           </button>
           {% if selected_status or search_query %}
             <a href="{% url 'task_runner:list' %}" class="btn btn-outline-secondary">
@@ -79,7 +194,7 @@
             <th scope="col" style="width: 20%;">{% trans "Progress" %}</th>
             <th scope="col">{% trans "Created By" %}</th>
             <th scope="col">{% trans "Created At" %}</th>
-            <th scope="col" class="text-end">{% trans "Actions" %}</th>
+            <th scope="col" class="text-right text-end">{% trans "Actions" %}</th>
           </tr>
         </thead>
         <tbody>
@@ -93,20 +208,20 @@
               </td>
               <td>
                 {% if job.status == 'RUNNING' %}
-                  <span class="badge bg-primary"><i class="fa fa-spinner fa-spin me-1"></i>RUNNING</span>
+                  <span class="badge badge-primary bg-primary"><i class="fa fa-spinner fa-spin mr-1 me-1"></i>RUNNING</span>
                 {% elif job.status == 'SUCCESS' %}
-                  <span class="badge bg-success"><i class="fa fa-check me-1"></i>SUCCESS</span>
+                  <span class="badge badge-success bg-success"><i class="fa fa-check mr-1 me-1"></i>SUCCESS</span>
                 {% elif job.status == 'FAILURE' %}
-                  <span class="badge bg-danger"><i class="fa fa-exclamation me-1"></i>FAILURE</span>
+                  <span class="badge badge-danger bg-danger"><i class="fa fa-exclamation mr-1 me-1"></i>FAILURE</span>
                 {% elif job.status == 'REVOKED' %}
-                  <span class="badge bg-warning text-dark">REVOKED</span>
+                  <span class="badge badge-warning bg-warning text-dark">REVOKED</span>
                 {% else %}
-                  <span class="badge bg-secondary">PENDING</span>
+                  <span class="badge badge-secondary bg-secondary">PENDING</span>
                 {% endif %}
               </td>
               <td>
-                <div class="d-flex align-items-center gap-2">
-                  <div class="progress flex-grow-1" style="height: 10px;">
+                <div class="d-flex align-items-center">
+                  <div class="progress flex-grow-1" style="height: 10px; margin-right: 8px;">
                     <div 
                       class="progress-bar {% if job.status == 'SUCCESS' %}bg-success{% elif job.status == 'FAILURE' %}bg-danger{% else %}bg-primary{% endif %}" 
                       style="width: {{ job.progress }}%;"></div>
@@ -116,7 +231,7 @@
               </td>
               <td>
                 {% if job.created_by %}
-                  <span class="small"><i class="fa fa-user-circle me-1 text-muted"></i>{{ job.created_by.get_username }}</span>
+                  <span class="small"><i class="fa fa-user-circle mr-1 me-1 text-muted"></i>{{ job.created_by.get_username }}</span>
                 {% else %}
                   <span class="text-muted small"><em>{% trans "System / Daemon" %}</em></span>
                 {% endif %}
@@ -124,16 +239,16 @@
               <td class="small text-muted">
                 {{ job.created_at|date:"Y-m-d H:i" }}
               </td>
-              <td class="text-end">
+              <td class="text-right text-end">
                 <a href="{% url 'task_runner:detail' task_id=job.task_id %}" class="btn btn-sm btn-outline-primary">
-                  <i class="fa fa-eye me-1"></i>{% trans "View" %}
+                  <i class="fa fa-eye mr-1 me-1"></i>{% trans "View" %}
                 </a>
               </td>
             </tr>
           {% empty %}
             <tr>
               <td colspan="7" class="text-center py-5 text-muted">
-                <i class="fa fa-inbox fa-3x mb-3 text-secondary"></i>
+                <i class="fa fa-inbox fa-3x mb-3 text-secondary" style="display: block;"></i>
                 <p class="mb-0">{% trans "No background tasks found." %}</p>
               </td>
             </tr>
@@ -166,32 +281,69 @@
   </div>
 </div>
 
-<!-- Launch Task Modal -->
+<!-- ============================================================================== -->
+<!-- Launch Task Modal (Bulletproof Cross-Version Modal) -->
+<!-- ============================================================================== -->
 <div class="modal fade" id="launchTaskModal" tabindex="-1" role="dialog" aria-labelledby="launchTaskModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content border-0 shadow">
-      <div class="modal-header bg-primary text-white d-flex justify-content-between align-items-center">
-        <h5 class="modal-title m-0" id="launchTaskModalLabel">
-          <i class="fa fa-play-circle me-1 mr-1"></i>{% trans "Queue New Background Task" %}
+      <div class="modal-header bg-primary text-white d-flex justify-content-between align-items-center" style="display: flex;">
+        <h5 class="modal-title m-0" id="launchTaskModalLabel" style="color: white; font-weight: bold;">
+          <i class="fa fa-play-circle mr-1 me-1"></i>{% trans "Queue New Background Task" %}
         </h5>
-        <button type="button" class="close text-white btn-close btn-close-white" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" style="background: none; border: 0; font-size: 1.6rem; opacity: 0.9; cursor: pointer; color: white;">
+        <button type="button" id="closeModalCrossBtn" class="close text-white" aria-label="Close" style="background: none; border: 0; font-size: 1.8rem; opacity: 0.95; cursor: pointer; color: white;">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
       <form method="post" action="{% url 'task_runner:trigger' %}">
         {% csrf_token %}
+        <input type="hidden" name="task_type" id="modalTaskTypeInput" value="external_script">
+
         <div class="modal-body p-4">
-          <div class="form-group mb-3">
-            <label class="form-label fw-bold">{% trans "Select Task Type" %}</label>
-            <select name="task_type" id="taskTypeSelector" class="form-control form-select" required>
-              <option value="auto_translate">{% trans "Auto-Translate Catalog (auto_translate)" %}</option>
-              <option value="collectstatic">{% trans "Collect Static Files (collectstatic)" %}</option>
-              <option value="external_script">{% trans "Run External Script (subprocess)" %}</option>
-            </select>
+          <!-- Task Selection Tabs -->
+          <div class="mb-3">
+            <label class="form-label fw-bold d-block mb-2">{% trans "Choose Task to Queue:" %}</label>
+            <div>
+              <span class="task-type-tab active" data-type="external_script">
+                <i class="fa fa-terminal mr-1 me-1"></i>{% trans "Run External Script" %}
+              </span>
+              <span class="task-type-tab" data-type="auto_translate">
+                <i class="fa fa-globe mr-1 me-1"></i>{% trans "Auto-Translate" %}
+              </span>
+              <span class="task-type-tab" data-type="collectstatic">
+                <i class="fa fa-files-o mr-1 me-1"></i>{% trans "Collect Static" %}
+              </span>
+            </div>
           </div>
 
-          <!-- Auto-Translate Options -->
-          <div id="autoTranslateFields">
+          <!-- Section 1: External Script (Default) -->
+          <div id="sectionExternalScript">
+            <div class="form-group mb-3">
+              <label class="form-label fw-bold">{% trans "Command to Execute:" %}</label>
+              <input 
+                type="text" 
+                name="command" 
+                id="modalCommandInput" 
+                class="form-control font-monospace" 
+                placeholder="e.g. python manage.py check" 
+                value="python manage.py check">
+              <small class="form-text text-muted">
+                {% trans "The command runs inside a background Celery worker subprocess. Output is streamed live via WebSocket." %}
+              </small>
+            </div>
+            <div class="mb-2">
+              <small class="text-muted d-block mb-1 font-weight-bold">{% trans "Click to fill preset:" %}</small>
+              <span class="preset-badge modal-preset" data-cmd="python manage.py check">python manage.py check</span>
+              <span class="preset-badge modal-preset" data-cmd="python manage.py showmigrations">python manage.py showmigrations</span>
+              <span class="preset-badge modal-preset" data-cmd="python --version">python --version</span>
+              <span class="preset-badge modal-preset" data-cmd="python -m pytest -q tests/test_task_runner.py">pytest test_task_runner</span>
+              <span class="preset-badge modal-preset" data-cmd="celery --version">celery --version</span>
+            </div>
+          </div>
+
+          <!-- Section 2: Auto-Translate Options -->
+          <div id="sectionAutoTranslate" style="display: none;">
             <div class="form-group mb-3">
               <label class="form-label">{% trans "Target Language (Optional)" %}</label>
               <input type="text" name="lang" class="form-control" placeholder="e.g. es, pt, fr, de, it (blank for all)">
@@ -210,18 +362,21 @@
             </div>
           </div>
 
-          <!-- Script Options -->
-          <div id="scriptFields" style="display: none;">
-            <div class="form-group mb-3">
-              <label class="form-label fw-bold">{% trans "Command" %}</label>
-              <input type="text" name="command" class="form-control font-monospace" placeholder="e.g. python --version">
+          <!-- Section 3: Collectstatic Info -->
+          <div id="sectionCollectstatic" style="display: none;">
+            <div class="alert alert-info py-2 px-3 mb-0">
+              <i class="fa fa-info-circle mr-1 me-1"></i>
+              {% trans "Collects all static assets into STATIC_ROOT in the background without blocking the web worker." %}
             </div>
           </div>
         </div>
-        <div class="modal-footer bg-light d-flex justify-content-end">
-          <button type="button" class="btn btn-secondary mr-2 me-2" data-dismiss="modal" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
-          <button type="submit" class="btn btn-primary">
-            <i class="fa fa-paper-plane me-1 mr-1"></i>{% trans "Queue Task" %}
+
+        <div class="modal-footer bg-light d-flex justify-content-end" style="display: flex;">
+          <button type="button" id="closeModalFooterBtn" class="btn btn-secondary mr-2 me-2" style="margin-right: 10px;">
+            {% trans "Cancel" %}
+          </button>
+          <button type="submit" class="btn btn-primary fw-bold">
+            <i class="fa fa-paper-plane mr-1 me-1"></i>{% trans "Queue Task Now" %}
           </button>
         </div>
       </form>
@@ -231,85 +386,106 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  const selector = document.getElementById("taskTypeSelector");
-  const autoFields = document.getElementById("autoTranslateFields");
-  const scriptFields = document.getElementById("scriptFields");
-
-  if (selector) {
-    selector.addEventListener("change", function() {
-      if (this.value === "auto_translate") {
-        autoFields.style.display = "block";
-        scriptFields.style.display = "none";
-      } else if (this.value === "external_script") {
-        autoFields.style.display = "none";
-        scriptFields.style.display = "block";
-      } else {
-        autoFields.style.display = "none";
-        scriptFields.style.display = "none";
-      }
-    });
-  }
-
-  // Cross-framework modal controller (supports Bootstrap 3, 4, 5, and vanilla fallback)
-  const launchBtn = document.getElementById("launchTaskBtn");
   const modalEl = document.getElementById("launchTaskModal");
+  const launchBtn = document.getElementById("launchTaskBtn");
+  const closeCrossBtn = document.getElementById("closeModalCrossBtn");
+  const closeFooterBtn = document.getElementById("closeModalFooterBtn");
 
-  function openModal() {
-    if (window.jQuery && typeof window.jQuery(modalEl).modal === "function") {
-      window.jQuery(modalEl).modal("show");
-    } else if (window.bootstrap && window.bootstrap.Modal) {
-      window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
-    } else {
-      modalEl.style.display = "block";
-      modalEl.classList.add("show");
-      modalEl.setAttribute("aria-hidden", "false");
-      document.body.classList.add("modal-open");
-      let backdrop = document.getElementById("task-modal-backdrop");
-      if (!backdrop) {
-        backdrop = document.createElement("div");
-        backdrop.id = "task-modal-backdrop";
-        backdrop.className = "modal-backdrop fade show in";
-        document.body.appendChild(backdrop);
+  const taskTypeInput = document.getElementById("modalTaskTypeInput");
+  const secScript = document.getElementById("sectionExternalScript");
+  const secTranslate = document.getElementById("sectionAutoTranslate");
+  const secCollect = document.getElementById("sectionCollectstatic");
+  const modalCmdInput = document.getElementById("modalCommandInput");
+  const quickCmdInput = document.getElementById("quickScriptInput");
+
+  // Tab switching
+  document.querySelectorAll(".task-type-tab").forEach(function(tab) {
+    tab.addEventListener("click", function() {
+      document.querySelectorAll(".task-type-tab").forEach(t => t.classList.remove("active"));
+      this.classList.add("active");
+      const selected = this.getAttribute("data-type");
+      taskTypeInput.value = selected;
+
+      secScript.style.display = (selected === "external_script") ? "block" : "none";
+      secTranslate.style.display = (selected === "auto_translate") ? "block" : "none";
+      secCollect.style.display = (selected === "collectstatic") ? "block" : "none";
+    });
+  });
+
+  // Modal Presets autofill
+  document.querySelectorAll(".modal-preset").forEach(function(badge) {
+    badge.addEventListener("click", function() {
+      modalCmdInput.value = this.getAttribute("data-cmd");
+      modalCmdInput.focus();
+    });
+  });
+
+  // Quick Launcher Presets autofill
+  document.querySelectorAll(".quick-preset").forEach(function(badge) {
+    badge.addEventListener("click", function() {
+      quickCmdInput.value = this.getAttribute("data-cmd");
+      quickCmdInput.focus();
+    });
+  });
+
+  // Self-contained modal controller guaranteed to display across BS3, BS4, BS5
+  function showModal() {
+    modalEl.style.display = "block";
+    modalEl.classList.add("show");
+    modalEl.classList.add("in");
+    modalEl.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    setTimeout(function() {
+      if (modalCmdInput && secScript.style.display !== "none") {
+        modalCmdInput.focus();
       }
-    }
+    }, 100);
   }
 
-  function closeModal() {
-    if (window.jQuery && typeof window.jQuery(modalEl).modal === "function") {
-      window.jQuery(modalEl).modal("hide");
-    } else if (window.bootstrap && window.bootstrap.Modal) {
-      const inst = window.bootstrap.Modal.getInstance(modalEl);
-      if (inst) inst.hide();
-    } else {
-      modalEl.style.display = "none";
-      modalEl.classList.remove("show");
-      modalEl.setAttribute("aria-hidden", "true");
-      document.body.classList.remove("modal-open");
-      const backdrop = document.getElementById("task-modal-backdrop");
-      if (backdrop) backdrop.remove();
-    }
+  function hideModal() {
+    modalEl.style.display = "none";
+    modalEl.classList.remove("show");
+    modalEl.classList.remove("in");
+    modalEl.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    document.querySelectorAll(".modal-backdrop").forEach(function(el) { el.remove(); });
   }
 
-  if (launchBtn && modalEl) {
+  if (launchBtn) {
     launchBtn.addEventListener("click", function(e) {
       e.preventDefault();
-      openModal();
-    });
-
-    modalEl.querySelectorAll('[data-dismiss="modal"], [data-bs-dismiss="modal"]').forEach(function(btn) {
-      btn.addEventListener("click", function(e) {
-        e.preventDefault();
-        closeModal();
-      });
-    });
-
-    // Close when clicking outside dialog area
-    modalEl.addEventListener("click", function(e) {
-      if (e.target === modalEl) {
-        closeModal();
-      }
+      e.stopPropagation();
+      showModal();
     });
   }
+
+  if (closeCrossBtn) {
+    closeCrossBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      hideModal();
+    });
+  }
+
+  if (closeFooterBtn) {
+    closeFooterBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      hideModal();
+    });
+  }
+
+  // Close when clicking outside the dialog content box
+  modalEl.addEventListener("click", function(e) {
+    if (e.target === modalEl) {
+      hideModal();
+    }
+  });
+
+  // Escape key closes modal
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" && modalEl.style.display === "block") {
+      hideModal();
+    }
+  });
 });
 </script>
 {% endblock %}
