@@ -6,10 +6,6 @@
     {% trans "Todo Index" %}
 {% endblock %}
 
-{% block styles %}
-    {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% static 'todo/css/style.css' %}">
-{% endblock %}
 
 {% block header.attrs %}id="header" class="header-scrolled"{% endblock %}
 
@@ -25,7 +21,7 @@
                         {% else %}
                             <h3 class="m-0">{% trans "Welcome to Your Todo List" %}</h3>
                         {% endif %}
-                        <a href="{% url 'todo:add' %}" class="btn btn-primary text-uppercase"><i class="fa fa-plus me-1"></i> {% trans "Add Todo" %}</a>
+                        <a href="{% url 'todo:add' %}" class="btn btn-brand-primary rounded-pill px-4 text-uppercase"><i class="fa fa-plus me-1"></i> {% trans "Add Todo" %}</a>
                     </div>
                     {% if todos %}
                         <ul class="list-group list-group-flush">
@@ -54,7 +50,7 @@
                         <div class="text-center py-5">
                             <i class="fa fa-list-alt fa-3x text-muted mb-3 d-block"></i>
                             <p class="text-muted mt-3">{% trans "No tasks yet. Create your first task to get started!" %}</p>
-                            <a href="{% url 'todo:add' %}" class="btn btn-primary text-uppercase mt-2">{% trans "Create Task" %}</a>
+                            <a href="{% url 'todo:add' %}" class="btn btn-brand-primary rounded-pill px-4 text-uppercase mt-2">{% trans "Create Task" %}</a>
                         </div>
                     {% endif %}
                 </div>

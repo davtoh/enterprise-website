@@ -504,21 +504,33 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - **HTMX & Alpine.js Integration:**
     - Integrated HTMX `hx-post` for zero-reload declarative Todo task deletion with empty 200 response handling in `todo/views.py`.
     - Integrated Alpine.js for lightweight, reactive dropdowns, tab switching, and collapsible elements across all themes without jQuery.
+  - **Unified Design Tokens & Reusable Component System:**
+    - Created `static/css/theme-tokens.css` as the single source of truth for base reusable elements:
+      - Brand color tokens (`--brand-primary`, `--brand-secondary`, `--brand-gradient-vibrant`).
+      - Component classes: `.btn-brand-primary`, `.btn-brand-outline`, `.btn-hero-cta`, `.card-brand`, `.navbar-brand-theme`, `.hero-language-picker`.
+    - Restored brand colors to top navigation menu (`.navbar-brand-theme`) with warm gradient bottom border, active/hover accent states, and elevated dropdowns.
+    - Fixed hero section "Improved Production level with Robotics":
+      - Replaced broken `div.form-select` with `.hero-language-picker` and modern Bootstrap 5 `<select class="form-select ...">`.
+      - Modernized "Explore Services" button with high-contrast `.btn-hero-cta` pill styling and hover micro-animations.
+    - Unified primary buttons across `todo`, `polls`, `task_runner`, `user_management`, and `home` using `.btn-brand-primary.rounded-pill.px-4`.
+    - Neutralized rogue tutorial stylesheets in `polls/` and `todo/` that broke link text and background colors.
 - **Files Created / Modified:**
+  - `static/css/theme-tokens.css` (created reusable design tokens & components)
   - `theme_management/__init__.py`, `apps.py`, `middleware.py`, `loaders.py`, `context_processors.py`, `views.py`, `urls.py`, `plugin.py` (created)
-  - `templates/themes/bootstrap5/base.html`, `partials/styles.html`, `scripts.html`, `messages.html`, `header.html`, `footer.html`, `theme_selector.html` (created)
+  - `templates/themes/bootstrap5/base.html`, `partials/styles.html`, `scripts.html`, `messages.html`, `header.html`, `footer.html`, `theme_selector.html` (created & styled)
   - `templates/themes/tailwind/base.html`, `partials/styles.html`, `scripts.html`, `messages.html`, `header.html`, `footer.html`, `theme_selector.html` (created)
   - `templates/themes/minimal/base.html`, `partials/styles.html`, `scripts.html`, `messages.html`, `header.html`, `footer.html`, `theme_selector.html` (created)
   - `enterprise_website/settings.py` (configured SITE_THEME, AVAILABLE_THEMES, ThemeTemplateLoader, ThemeMiddleware, context processor)
   - `enterprise_website/urls.py` (mounted `theme_management.urls`)
   - `plugin_registry/base.py` & `registry.py` (plugin_templates support)
-  - `todo/plugin.py` & `todo/views.py` & `todo/templates/todo/*` (plugin templates & HTMX delete)
+  - `todo/plugin.py` & `todo/views.py` & `todo/templates/todo/*` (plugin templates, HTMX delete, unified buttons)
   - `task_runner/urls.py` (canonical list and job_list alias)
   - `templates/base.html`, `templates/partials/styles.html`, `templates/partials/scripts.html`, `templates/registration/login.html` (retire BS3/BS4, clean inline styles, dynamic theme dropdown)
   - `task_runner/templates/task_runner/job_list.html`, `job_detail.html`, `task_progress_widget.html`, `change_list.html`, `launch_script.html` (native BS5 modal & zero custom CSS overrides)
   - `user_management/templates/user_management/*` (profile, siteuser_list, login, logout, password reset views modernized to BS5 cards/utilities)
-  - `polls/templates/polls/*` (index, detail, results modernized)
-  - `home/templates/home/*` (contact, index, services modernized)
+  - `polls/templates/polls/*` (index, detail, results modernized with unified buttons)
+  - `home/templates/home/*` (contact, index, services modernized with hero CTA)
+  - `language_management/templates/language_management/form.html` (Bootstrap 5 select classes)
   - `static/css/bootstrap.css` (modernized to Bootstrap 5.3.3)
   - `static/js/vendor/bootstrap.bundle.min.js`, `htmx.min.js`, `alpine.min.js` (vendored offline)
   - `tests/test_theme_management.py` (17 tests created)
@@ -526,7 +538,7 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `.\.venv\Scripts\python.exe manage.py check` → 0 issues.
   - `.\.venv\Scripts\python.exe manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean.
   - `.\.venv\Scripts\python.exe -m pytest tests/test_theme_management.py` → **17 passed in 3.18s**.
-  - `.\.venv\Scripts\python.exe -m pytest --cov=.` → **146 passed in 31.56s**, **81% statement coverage**.
+  - `.\.venv\Scripts\python.exe -m pytest` → **146 passed in 26.03s**, 0 failures.
 
 
 

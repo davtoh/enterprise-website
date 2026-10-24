@@ -33,8 +33,25 @@
         {% endblock %}
     </header>
 
-    <main class="flex-grow-1 {% block main.class %}site-main{% endblock %}">
         {% block banner %}
+        <!-- start banner Area -->
+        <section class="banner-area text-white position-relative overflow-hidden" id="home">
+            <div class="overlay overlay-bg"></div>
+            <div class="container position-relative z-1">
+                <div {% block banner.attrs %} class="row d-flex align-items-center justify-content-center py-4"{% endblock %}>
+                    <div {% block banner.content_attrs %} class="col-lg-6 col-md-6"{% endblock %}>
+                        {% block banner.content %}
+                        {% endblock %}
+                    </div>
+
+                    <div {% block banner.image_attrs %} class="banner-img col-lg-6 col-md-6"{% endblock %}>
+                        {% block banner.image %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End banner Area -->
         {% endblock %}
 
         {% block messaging %}

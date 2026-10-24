@@ -48,7 +48,7 @@
 
     {% else %}
         {# make a selection for a form #}
-        <select name="language" onchange="this.form.submit()">
+        <select name="language" onchange="this.form.submit()" class="form-select border-0 shadow-none bg-transparent fw-semibold text-dark py-1">
             {% for language in languages %}
                 <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
                     {{ language.name_local|title }} ({{ language.code }})

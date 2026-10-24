@@ -1,0 +1,190 @@
+/**
+ * theme-tokens.css
+ * Enterprise Website - Unified Design Tokens & Reusable Component Utilities
+ *
+ * Single source of truth for custom reusable UI elements, brand colors,
+ * navbar accents, hero CTA buttons, and card elevations across all templates.
+ */
+
+:root {
+  /* Brand Color Palette */
+  --brand-primary: #ff7d59;
+  --brand-primary-hover: #e8633d;
+  --brand-secondary: #ffa98c;
+  --brand-accent: #ffe38c;
+  --brand-dark: #222222;
+  --brand-light: #fff8f5;
+
+  /* Brand Gradients */
+  --brand-gradient: linear-gradient(135deg, #ffa98c 0%, #ffe38c 100%);
+  --brand-gradient-vibrant: linear-gradient(135deg, #ff7d59 0%, #ffa98c 50%, #ffe38c 100%);
+  --brand-gradient-hover: linear-gradient(135deg, #ff6a42 0%, #ff9a78 50%, #ffd974 100%);
+
+  /* Shadows & Elevation */
+  --brand-shadow: 0 4px 15px rgba(255, 125, 89, 0.25);
+  --brand-shadow-lg: 0 8px 25px rgba(255, 125, 89, 0.35);
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+  /* Radius Tokens */
+  --radius-pill: 50rem;
+  --radius-card: 1rem;
+}
+
+/* ==========================================================================
+   1. Reusable Button Components
+   ========================================================================== */
+.btn-brand-primary {
+  background: var(--brand-gradient-vibrant);
+  color: #ffffff !important;
+  border: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: var(--brand-shadow);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-brand-primary:hover {
+  background: var(--brand-gradient-hover);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: var(--brand-shadow-lg);
+}
+
+.btn-brand-outline {
+  background: transparent;
+  color: var(--brand-primary) !important;
+  border: 2px solid var(--brand-primary);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-brand-outline:hover {
+  background: var(--brand-gradient-vibrant);
+  color: #ffffff !important;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+/* Hero CTA Button (e.g. 'Explore Services') */
+.btn-hero-cta {
+  background: #ffffff;
+  color: var(--brand-primary) !important;
+  border: 2px solid #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-hero-cta:hover {
+  background: transparent;
+  color: #ffffff !important;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   2. Reusable Card & Surface Components
+   ========================================================================== */
+.card-brand {
+  border: none;
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  background: #ffffff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-brand:hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* ==========================================================================
+   3. Navbar & Menu Color System
+   ========================================================================== */
+.navbar-brand-theme {
+  background: #ffffff;
+  border-bottom: 3px solid transparent;
+  border-image: var(--brand-gradient-vibrant) 1;
+}
+
+.navbar-brand-theme .nav-link {
+  color: #495057;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+  padding: 0.5rem 0.85rem;
+  border-radius: 6px;
+}
+
+.navbar-brand-theme .nav-link:hover,
+.navbar-brand-theme .nav-link:focus {
+  color: var(--brand-primary) !important;
+  background-color: rgba(255, 125, 89, 0.08);
+}
+
+.navbar-brand-theme .nav-item.active .nav-link,
+.navbar-brand-theme .nav-link.active {
+  color: var(--brand-primary) !important;
+  font-weight: 600;
+  background-color: rgba(255, 125, 89, 0.12);
+}
+
+.navbar-brand-theme .dropdown-menu {
+  border: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 0.5rem;
+}
+
+.navbar-brand-theme .dropdown-item {
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.navbar-brand-theme .dropdown-item:hover {
+  background-color: rgba(255, 125, 89, 0.1);
+  color: var(--brand-primary);
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   4. Reusable Form Elements (e.g. Hero Language Picker)
+   ========================================================================== */
+.hero-language-picker {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem 0.25rem 1rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.hero-language-picker:focus-within {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18), 0 0 0 3px rgba(255, 125, 89, 0.35);
+}
+
+.hero-language-picker .form-select {
+  border: none !important;
+  background-color: transparent !important;
+  font-weight: 600;
+  color: #333333;
+  padding-left: 0.5rem;
+  box-shadow: none !important;
+  cursor: pointer;
+}

@@ -9,18 +9,25 @@
 {% block banner.image_attrs %} class="banner-img col-lg-6 col-md-6"{% endblock %}
 
 {% block banner.content %}
-    <h1 class="text-white">
+    <h1 class="text-white display-5 fw-bold mb-3 lh-sm">
         {% blocktrans %}Improved <br>
         Production level <br>
         with Robotics{% endblocktrans %}
     </h1>
-    <div class="form-select" id="default-select">
-        {% include "language_management/form.html"%}
+    <div class="my-4 col-sm-10 col-md-9 col-lg-8">
+        <div class="hero-language-picker w-100">
+            <i class="fa fa-globe text-primary me-2"></i>
+            {% include "language_management/form.html" %}
+        </div>
     </div>
-    <p class="text-white text-uppercase">
+    <p class="text-white-50 text-uppercase fw-semibold mb-4">
         {% trans "Everyone wants the innovation through robotics" %}
     </p>
-    <a href="{% url 'home:services' %}" class="primary-btn header-btn text-uppercase">{% trans "Explore Services" %}</a>
+    <div>
+        <a href="{% url 'home:services' %}" class="btn btn-hero-cta btn-lg rounded-pill px-4 py-2 text-uppercase fw-bold shadow">
+            {% trans "Explore Services" %} <i class="fa fa-arrow-right ms-2"></i>
+        </a>
+    </div>
 {% endblock %}
 
 {% block banner.image %}

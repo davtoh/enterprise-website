@@ -17,15 +17,15 @@
       <button 
         type="button" 
         id="launchTaskBtn" 
-        class="btn btn-primary me-2" 
+        class="btn btn-brand-primary rounded-pill px-4 me-2" 
         data-bs-toggle="modal" 
         data-bs-target="#launchTaskModal">
         <i class="fa fa-play me-1"></i>{% trans "Launch New Task" %}
       </button>
-      <a href="{% url 'admin:task_runner_launch_script' %}" class="btn btn-success me-2">
+      <a href="{% url 'admin:task_runner_launch_script' %}" class="btn btn-outline-success rounded-pill px-3 me-2">
         <i class="fa fa-terminal me-1"></i>{% trans "Admin Script Launcher" %}
       </a>
-      <a href="{% url 'admin:task_runner_taskjob_changelist' %}" class="btn btn-outline-secondary">
+      <a href="{% url 'admin:task_runner_taskjob_changelist' %}" class="btn btn-outline-secondary rounded-pill px-3">
         <i class="fa fa-cog me-1"></i>{% trans "Django Admin" %}
       </a>
     </div>
