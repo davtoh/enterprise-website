@@ -61,3 +61,8 @@ world.sql.json
 .coverage.*
 htmlcov/
 .pytest_cache/
+
+# Docker local overrides
+docker-compose.override.yml
+!docker-compose.override.yml.example
+

@@ -9,6 +9,12 @@ from channels.layers import get_channel_layer
 logger = logging.getLogger(__name__)
 
 
+import uuid
+
+def generate_task_id():
+    return str(uuid.uuid4())
+
+
 class TaskJob(models.Model):
     """
     Tracks lifecycle, progress percentage, logs, and status of Celery background jobs.
@@ -26,6 +32,7 @@ class TaskJob(models.Model):
         max_length=255,
         unique=True,
         db_index=True,
+        default=generate_task_id,
         verbose_name=_("Task ID"),
         help_text=_("Celery task UUID or unique identifier"),
     )

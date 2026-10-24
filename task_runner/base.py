@@ -1,5 +1,6 @@
 import logging
 import traceback
+import uuid
 from celery import Task
 from .models import TaskJob
 
@@ -15,7 +16,7 @@ class TrackedTask(Task):
     abstract = True
 
     def __call__(self, *args, **kwargs):
-        task_id = self.request.id or f"sync-{self.name}"
+        task_id = self.request.id or str(uuid.uuid4())
         task_name = self.name or self.__class__.__name__
 
         job, created = TaskJob.objects.get_or_create(

@@ -179,7 +179,7 @@ USE_I18N = True
 # of the current time zone and logs a warning.
 USE_TZ = True
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'

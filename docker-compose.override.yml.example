@@ -1,7 +1,7 @@
 # ==============================================================================
-# Local Development Overrides for Docker Compose
-# Automatically loaded by `docker compose up` in local environments.
-# Provides live code reloading, direct port binding, and zero-setup SQLite fallback.
+# Local Development Overrides for Docker Compose (Template)
+# Copy to `docker-compose.override.yml` for local developer host port bindings,
+# hot-reloading mounts, and development debug mode.
 # ==============================================================================
 
 services:
@@ -23,3 +23,12 @@ services:
       - DJANGO_LOG_LEVEL=DEBUG
     volumes:
       - .:/app
+
+  redis:
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+
+  # Uncomment if you want to connect external DB GUI tools (e.g. DBeaver) to the PostgreSQL container
+  # db:
+  #   ports:
+  #     - "${POSTGRES_PORT:-5432}:5432"

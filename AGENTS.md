@@ -65,6 +65,17 @@ Welcome to the project repository. When working on modernization, debugging, fea
   - Maintain PO files and compile with `.\.venv\Scripts\python.exe manage.py compilemessages`.
   - Enable machine translation bootstrapping and in-app Rosetta translation suggestions for fast localization.
 
+## 7. Frontend, UI Standards & Port Isolation
+- **Bootstrap 4.x & Spacing Compatibility:**
+  - Layout is built on Bootstrap 4 (`static/css/bootstrap.css`).
+  - Bootstrap 4 does not support flex `gap-*` utilities; always use margin utilities (`mr-*`, `me-*`) or inline margin styling.
+- **FontAwesome 4.x Icon Prefix:**
+  - Always prefix icons with `fa fa-<name>` (e.g., `fa fa-tasks`). Omitting `fa` causes empty square glyphs.
+- **Interactive Component Data Attributes:**
+  - Modals and toggles must declare dual data attributes: `data-toggle="modal" data-bs-toggle="modal"` and `data-target="#id" data-bs-target="#id"`.
+- **Port Security & Docker Overrides:**
+  - Never expose internal database/cache ports in `docker-compose.yml`. Host port bindings belong strictly in `docker-compose.override.yml`.
+
 ---
 
 *Detailed modular rules are located in `.agents/rules/`.*

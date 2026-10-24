@@ -100,3 +100,20 @@ def sync_plugin_menus(menu_slug: str = 'main_navbar'):
                         is_custom=False,
                     )
                     logger.info("Created menu item for plugin: %s (%s)", plugin_name, item_def.label)
+                elif not existing.is_custom:
+                    updated = False
+                    if existing.parent != parent_item:
+                        existing.parent = parent_item
+                        updated = True
+                    if existing.icon != item_def.icon:
+                        existing.icon = item_def.icon
+                        updated = True
+                    if existing.requires_staff != item_def.requires_staff:
+                        existing.requires_staff = item_def.requires_staff
+                        updated = True
+                    if existing.requires_auth != item_def.requires_auth:
+                        existing.requires_auth = item_def.requires_auth
+                        updated = True
+                    if updated:
+                        existing.save()
+                        logger.info("Updated menu item for plugin: %s (%s)", plugin_name, item_def.label)

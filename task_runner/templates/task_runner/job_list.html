@@ -12,12 +12,20 @@
       </h2>
       <p class="text-muted mb-0">{% trans "Monitor, launch, and inspect Celery asynchronous jobs with live streaming." %}</p>
     </div>
-    <div class="d-flex gap-2">
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#launchTaskModal">
-        <i class="fa fa-play me-1"></i>{% trans "Launch New Task" %}
+    <div class="d-flex align-items-center">
+      <button 
+        type="button" 
+        id="launchTaskBtn" 
+        class="btn btn-primary mr-2 me-2" 
+        style="margin-right: 10px;"
+        data-toggle="modal" 
+        data-target="#launchTaskModal" 
+        data-bs-toggle="modal" 
+        data-bs-target="#launchTaskModal">
+        <i class="fa fa-play me-1 mr-1"></i>{% trans "Launch New Task" %}
       </button>
       <a href="{% url 'admin:task_runner_taskjob_changelist' %}" class="btn btn-outline-secondary">
-        <i class="fa fa-cog me-1"></i>{% trans "Django Admin" %}
+        <i class="fa fa-cog me-1 mr-1"></i>{% trans "Django Admin" %}
       </a>
     </div>
   </div>
@@ -159,21 +167,23 @@
 </div>
 
 <!-- Launch Task Modal -->
-<div class="modal fade" id="launchTaskModal" tabindex="-1" aria-labelledby="launchTaskModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+<div class="modal fade" id="launchTaskModal" tabindex="-1" role="dialog" aria-labelledby="launchTaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content border-0 shadow">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="launchTaskModalLabel">
-          <i class="fa fa-play-circle me-1"></i>{% trans "Queue New Background Task" %}
+      <div class="modal-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="modal-title m-0" id="launchTaskModalLabel">
+          <i class="fa fa-play-circle me-1 mr-1"></i>{% trans "Queue New Background Task" %}
         </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="close text-white btn-close btn-close-white" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" style="background: none; border: 0; font-size: 1.6rem; opacity: 0.9; cursor: pointer; color: white;">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       <form method="post" action="{% url 'task_runner:trigger' %}">
         {% csrf_token %}
         <div class="modal-body p-4">
-          <div class="mb-3">
+          <div class="form-group mb-3">
             <label class="form-label fw-bold">{% trans "Select Task Type" %}</label>
-            <select name="task_type" id="taskTypeSelector" class="form-select" required>
+            <select name="task_type" id="taskTypeSelector" class="form-control form-select" required>
               <option value="auto_translate">{% trans "Auto-Translate Catalog (auto_translate)" %}</option>
               <option value="collectstatic">{% trans "Collect Static Files (collectstatic)" %}</option>
               <option value="external_script">{% trans "Run External Script (subprocess)" %}</option>
@@ -182,36 +192,36 @@
 
           <!-- Auto-Translate Options -->
           <div id="autoTranslateFields">
-            <div class="mb-3">
+            <div class="form-group mb-3">
               <label class="form-label">{% trans "Target Language (Optional)" %}</label>
               <input type="text" name="lang" class="form-control" placeholder="e.g. es, pt, fr, de, it (blank for all)">
             </div>
-            <div class="mb-3">
+            <div class="form-group mb-3">
               <label class="form-label">{% trans "Translation Backend" %}</label>
-              <select name="backend" class="form-select">
+              <select name="backend" class="form-control form-select">
                 <option value="mymemory" selected>MyMemory (Free tier)</option>
                 <option value="deepl">DeepL API</option>
                 <option value="openai">OpenAI API</option>
               </select>
             </div>
-            <div class="mb-3">
+            <div class="form-group mb-3">
               <label class="form-label">{% trans "Max Strings (Optional test limit)" %}</label>
               <input type="number" name="max_entries" class="form-control" placeholder="e.g. 5">
             </div>
           </div>
 
           <!-- Script Options -->
-          <div id="scriptFields" class="d-none">
-            <div class="mb-3">
+          <div id="scriptFields" style="display: none;">
+            <div class="form-group mb-3">
               <label class="form-label fw-bold">{% trans "Command" %}</label>
               <input type="text" name="command" class="form-control font-monospace" placeholder="e.g. python --version">
             </div>
           </div>
         </div>
-        <div class="modal-footer bg-light">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
+        <div class="modal-footer bg-light d-flex justify-content-end">
+          <button type="button" class="btn btn-secondary mr-2 me-2" data-dismiss="modal" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
           <button type="submit" class="btn btn-primary">
-            <i class="fa fa-paper-plane me-1"></i>{% trans "Queue Task" %}
+            <i class="fa fa-paper-plane me-1 mr-1"></i>{% trans "Queue Task" %}
           </button>
         </div>
       </form>
@@ -228,14 +238,75 @@ document.addEventListener("DOMContentLoaded", function() {
   if (selector) {
     selector.addEventListener("change", function() {
       if (this.value === "auto_translate") {
-        autoFields.classList.remove("d-none");
-        scriptFields.classList.add("d-none");
+        autoFields.style.display = "block";
+        scriptFields.style.display = "none";
       } else if (this.value === "external_script") {
-        autoFields.classList.add("d-none");
-        scriptFields.classList.remove("d-none");
+        autoFields.style.display = "none";
+        scriptFields.style.display = "block";
       } else {
-        autoFields.classList.add("d-none");
-        scriptFields.classList.add("d-none");
+        autoFields.style.display = "none";
+        scriptFields.style.display = "none";
+      }
+    });
+  }
+
+  // Cross-framework modal controller (supports Bootstrap 3, 4, 5, and vanilla fallback)
+  const launchBtn = document.getElementById("launchTaskBtn");
+  const modalEl = document.getElementById("launchTaskModal");
+
+  function openModal() {
+    if (window.jQuery && typeof window.jQuery(modalEl).modal === "function") {
+      window.jQuery(modalEl).modal("show");
+    } else if (window.bootstrap && window.bootstrap.Modal) {
+      window.bootstrap.Modal.getOrCreateInstance(modalEl).show();
+    } else {
+      modalEl.style.display = "block";
+      modalEl.classList.add("show");
+      modalEl.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      let backdrop = document.getElementById("task-modal-backdrop");
+      if (!backdrop) {
+        backdrop = document.createElement("div");
+        backdrop.id = "task-modal-backdrop";
+        backdrop.className = "modal-backdrop fade show in";
+        document.body.appendChild(backdrop);
+      }
+    }
+  }
+
+  function closeModal() {
+    if (window.jQuery && typeof window.jQuery(modalEl).modal === "function") {
+      window.jQuery(modalEl).modal("hide");
+    } else if (window.bootstrap && window.bootstrap.Modal) {
+      const inst = window.bootstrap.Modal.getInstance(modalEl);
+      if (inst) inst.hide();
+    } else {
+      modalEl.style.display = "none";
+      modalEl.classList.remove("show");
+      modalEl.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      const backdrop = document.getElementById("task-modal-backdrop");
+      if (backdrop) backdrop.remove();
+    }
+  }
+
+  if (launchBtn && modalEl) {
+    launchBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      openModal();
+    });
+
+    modalEl.querySelectorAll('[data-dismiss="modal"], [data-bs-dismiss="modal"]').forEach(function(btn) {
+      btn.addEventListener("click", function(e) {
+        e.preventDefault();
+        closeModal();
+      });
+    });
+
+    // Close when clicking outside dialog area
+    modalEl.addEventListener("click", function(e) {
+      if (e.target === modalEl) {
+        closeModal();
       }
     });
   }

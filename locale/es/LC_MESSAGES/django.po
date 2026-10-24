@@ -58,8 +58,9 @@ msgid "Corporate Showcase"
 msgstr "Texto traducido de prueba"
 
 #: .\home\plugin.py:8
+#, fuzzy
 msgid "Corporate showcase pages: Home, About, Services, Products, Contact"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\plugin.py:12 .\home\templates\home\about.html:14
 #: .\home\templates\home\contact.html:14 .\home\templates\home\index.html:5

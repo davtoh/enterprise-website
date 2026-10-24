@@ -17,8 +17,10 @@ class TaskRunnerPlugin(AppPlugin):
         MenuItemDefinition(
             label="Background Tasks",
             url_name="task_runner:list",
-            icon="fa-tasks",
-            order=50,
+            icon="fa fa-tasks",
+            order=45,
+            parent_slug="Apps",
+            requires_auth=True,
             requires_staff=True,
         ),
     ]

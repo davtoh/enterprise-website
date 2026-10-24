@@ -432,5 +432,20 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `.\.venv\Scripts\python.exe -m pytest tests/test_task_runner.py -v` executes cleanly: **18 passed in 7.71s** with **0 failures**.
   - `.\.venv\Scripts\python.exe -m pytest --cov=. --cov-report=term-missing` executed full suite cleanly: **128 passed in 33.78s** with **0 failures**.
   - Total statement coverage achieved: **81%** (exceeding the 80% coverage threshold).
+- **Milestone 11 Post-Verification Hardening & Rule Updates:**
+  - **Port Policy & Git Isolation:**
+    - Sealed `docker-compose.yml` to internal Docker network only (`enterprise_network`) for production security, ensuring internal Redis/PostgreSQL ports are never exposed to the host network.
+    - Moved developer host port mappings (`${REDIS_PORT:-6379}:6379`) to `docker-compose.override.yml`, automatically loaded by Docker Compose in local development environments.
+    - Created `docker-compose.override.yml.example` as a template for developer environments.
+  - **UI & CSS Rule Modernization:**
+    - Established `.agents/rules/frontend_and_css_standards.md` and added Section 7 to `AGENTS.md`.
+    - Documented Bootstrap 4.x base: requiring margin utilities (`mr-*`, `me-*`) instead of unsupported flex `gap-*`.
+    - Documented FontAwesome 4.x requirement: mandatory `fa fa-<name>` icon classes to prevent empty square glyph rendering.
+    - Documented cross-version interactive data attributes: dual `data-toggle`/`data-bs-toggle` and `data-target`/`data-bs-target`.
+  - **Database & Data Integrity:**
+    - Set `DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'` in `enterprise_website/settings.py` to match the legacy integer schema and eliminate pending migrations altering legacy primary keys and foreign keys.
+    - Added `default=generate_task_id` in `task_runner/models.py` and fallback UUID in `task_runner/base.py`, applied migration `0002_alter_taskjob_task_id.py`, preventing unkeyed insertion `IntegrityError`s.
+  - **Full Regression Verification:**
+    - Automated test suite: `pytest` passed **128 tests in 26.74s** with 0 failures and 81% code coverage.
 
 
