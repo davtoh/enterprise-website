@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 00:10-0500\n"
+"POT-Creation-Date: 2026-10-24 14:14-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\enterprise_website\settings.py:220
+#: .\enterprise_website\settings.py:221
 msgid "English"
 msgstr ""
 
-#: .\enterprise_website\settings.py:221
+#: .\enterprise_website\settings.py:222
 msgid "Spanish"
 msgstr ""
 
-#: .\enterprise_website\settings.py:222
+#: .\enterprise_website\settings.py:223
 msgid "Portuguese"
 msgstr ""
 
-#: .\enterprise_website\settings.py:223
+#: .\enterprise_website\settings.py:224
 msgid "French"
 msgstr ""
 
-#: .\enterprise_website\settings.py:224
+#: .\enterprise_website\settings.py:225
 msgid "Italian"
 msgstr ""
 
-#: .\enterprise_website\settings.py:225
+#: .\enterprise_website\settings.py:226
 msgid "Japanese"
 msgstr ""
 
@@ -72,11 +72,13 @@ msgstr ""
 #: .\user_management\templates\user_management\logout.html:29
 #: .\user_management\templates\user_management\profile.html:14
 #: .\user_management\templates\user_management\siteuser_list.html:14
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:21
+#: .\video_gallery\templates\video_gallery\gallery_list.html:23
 msgid "Home"
 msgstr ""
 
 #: .\home\plugin.py:13 .\home\templates\home\about.html:14
-#: .\home\templates\home\index.html:327 .\templates\base.html:115
+#: .\home\templates\home\index.html:334 .\templates\base.html:115
 #: .\templates\themes\bootstrap5\partials\header.html:48
 #: .\templates\themes\tailwind\partials\header.html:54
 msgid "About Us"
@@ -142,7 +144,7 @@ msgid ""
 "data access through Django REST Framework."
 msgstr ""
 
-#: .\home\templates\home\about.html:38 .\home\templates\home\index.html:23
+#: .\home\templates\home\about.html:38 .\home\templates\home\index.html:28
 msgid "Explore Services"
 msgstr ""
 
@@ -241,155 +243,155 @@ msgid ""
 "        with Robotics"
 msgstr ""
 
-#: .\home\templates\home\index.html:21
+#: .\home\templates\home\index.html:24
 msgid "Everyone wants the innovation through robotics"
 msgstr ""
 
-#: .\home\templates\home\index.html:37
+#: .\home\templates\home\index.html:44
 msgid "Featured Robotics Products to Show"
 msgstr ""
 
-#: .\home\templates\home\index.html:39 .\home\templates\home\index.html:52
-#: .\home\templates\home\index.html:66 .\home\templates\home\index.html:80
-#: .\home\templates\home\index.html:94 .\home\templates\home\index.html:164
-#: .\home\templates\home\index.html:274
+#: .\home\templates\home\index.html:46 .\home\templates\home\index.html:59
+#: .\home\templates\home\index.html:73 .\home\templates\home\index.html:87
+#: .\home\templates\home\index.html:101 .\home\templates\home\index.html:171
+#: .\home\templates\home\index.html:281
 msgid "Who are in extremely love with eco friendly system."
 msgstr ""
 
-#: .\home\templates\home\index.html:50 .\home\templates\home\products.html:43
+#: .\home\templates\home\index.html:57 .\home\templates\home\products.html:43
 msgid "The Upper Eye"
 msgstr ""
 
-#: .\home\templates\home\index.html:54 .\home\templates\home\index.html:68
-#: .\home\templates\home\index.html:82 .\home\templates\home\index.html:96
+#: .\home\templates\home\index.html:61 .\home\templates\home\index.html:75
+#: .\home\templates\home\index.html:89 .\home\templates\home\index.html:103
 msgid "View Details"
 msgstr ""
 
-#: .\home\templates\home\index.html:64 .\home\templates\home\products.html:57
+#: .\home\templates\home\index.html:71 .\home\templates\home\products.html:57
 msgid "The Crab Wheel"
 msgstr ""
 
-#: .\home\templates\home\index.html:78 .\home\templates\home\products.html:71
+#: .\home\templates\home\index.html:85 .\home\templates\home\products.html:71
 msgid "The Plug Ninja"
 msgstr ""
 
-#: .\home\templates\home\index.html:92
+#: .\home\templates\home\index.html:99
 msgid "The Controller"
 msgstr ""
 
-#: .\home\templates\home\index.html:113
+#: .\home\templates\home\index.html:120
 msgid ""
 "Globally Connected <br>\n"
 "                    by Large Network"
 msgstr ""
 
-#: .\home\templates\home\index.html:116 .\home\templates\home\index.html:140
+#: .\home\templates\home\index.html:123 .\home\templates\home\index.html:147
 msgid "We are here to listen from you deliver exellence"
 msgstr ""
 
-#: .\home\templates\home\index.html:121
+#: .\home\templates\home\index.html:128
 msgid "Get Details"
 msgstr ""
 
-#: .\home\templates\home\index.html:134
+#: .\home\templates\home\index.html:141
 msgid "Brand new app to blow your mind"
 msgstr ""
 
-#: .\home\templates\home\index.html:136
+#: .\home\templates\home\index.html:143
 msgid ""
 "We’ve made a life <br>\n"
 "                        that will change you"
 msgstr ""
 
-#: .\home\templates\home\index.html:145
+#: .\home\templates\home\index.html:152
 msgid "Get Started Now"
 msgstr ""
 
-#: .\home\templates\home\index.html:162
+#: .\home\templates\home\index.html:169
 msgid "Some Features that Made us Unique"
 msgstr ""
 
-#: .\home\templates\home\index.html:173
+#: .\home\templates\home\index.html:180
 msgid "Expert Technicians"
 msgstr ""
 
-#: .\home\templates\home\index.html:176 .\home\templates\home\index.html:187
-#: .\home\templates\home\index.html:198 .\home\templates\home\index.html:209
-#: .\home\templates\home\index.html:220 .\home\templates\home\index.html:231
+#: .\home\templates\home\index.html:183 .\home\templates\home\index.html:194
+#: .\home\templates\home\index.html:205 .\home\templates\home\index.html:216
+#: .\home\templates\home\index.html:227 .\home\templates\home\index.html:238
 msgid ""
 "Usage of the Internet is becoming more common due to rapid advancement of "
 "technology and power."
 msgstr ""
 
-#: .\home\templates\home\index.html:184
+#: .\home\templates\home\index.html:191
 msgid "Professional Service"
 msgstr ""
 
-#: .\home\templates\home\index.html:195
+#: .\home\templates\home\index.html:202
 msgid "Great Support"
 msgstr ""
 
-#: .\home\templates\home\index.html:206
+#: .\home\templates\home\index.html:213
 msgid "Technical Skills"
 msgstr ""
 
-#: .\home\templates\home\index.html:217
+#: .\home\templates\home\index.html:224
 msgid "Highly Recomended"
 msgstr ""
 
-#: .\home\templates\home\index.html:228
+#: .\home\templates\home\index.html:235
 msgid "Positive Reviews"
 msgstr ""
 
-#: .\home\templates\home\index.html:272
+#: .\home\templates\home\index.html:279
 msgid "Latest News from our Blog"
 msgstr ""
 
-#: .\home\templates\home\index.html:285 .\home\templates\home\index.html:301
+#: .\home\templates\home\index.html:292 .\home\templates\home\index.html:308
 msgid "Travel"
 msgstr ""
 
-#: .\home\templates\home\index.html:286 .\home\templates\home\index.html:302
+#: .\home\templates\home\index.html:293 .\home\templates\home\index.html:309
 msgid "Life Style"
 msgstr ""
 
-#: .\home\templates\home\index.html:288 .\home\templates\home\index.html:304
+#: .\home\templates\home\index.html:295 .\home\templates\home\index.html:311
 msgid "Portable latest Fashion for young women"
 msgstr ""
 
-#: .\home\templates\home\index.html:325
+#: .\home\templates\home\index.html:332
 msgid "Top Products"
 msgstr ""
 
-#: .\home\templates\home\index.html:328
+#: .\home\templates\home\index.html:335
 msgid "Our Services"
 msgstr ""
 
-#: .\home\templates\home\index.html:329
+#: .\home\templates\home\index.html:336
 msgid "Products Catalog"
 msgstr ""
 
-#: .\home\templates\home\index.html:330
+#: .\home\templates\home\index.html:337
 msgid "Contact & Support"
 msgstr ""
 
-#: .\home\templates\home\index.html:336
+#: .\home\templates\home\index.html:343
 msgid "Newsletter"
 msgstr ""
 
-#: .\home\templates\home\index.html:337
+#: .\home\templates\home\index.html:344
 msgid "You can trust us. we only send promo offers, not a single spam."
 msgstr ""
 
-#: .\home\templates\home\index.html:343
+#: .\home\templates\home\index.html:350
 msgid "Enter Email"
 msgstr ""
 
-#: .\home\templates\home\index.html:351
+#: .\home\templates\home\index.html:358
 msgid "Subscribe"
 msgstr ""
 
-#: .\home\templates\home\index.html:361
+#: .\home\templates\home\index.html:368
 msgid "Instragram Feed"
 msgstr ""
 
@@ -554,7 +556,7 @@ msgid "This language code is too long."
 msgstr ""
 
 #: .\language_management\templates\language_management\form.html:37
-#: .\templates\themes\bootstrap5\partials\header.html:90
+#: .\templates\themes\bootstrap5\partials\header.html:91
 msgid "Language"
 msgstr ""
 
@@ -649,7 +651,7 @@ msgstr ""
 msgid "Menu Management"
 msgstr ""
 
-#: .\menu_management\models.py:8
+#: .\menu_management\models.py:8 .\video_gallery\models.py:35
 msgid "Slug"
 msgstr ""
 
@@ -659,10 +661,12 @@ msgstr ""
 
 #: .\menu_management\models.py:9 .\menu_management\models.py:31
 #: .\todo\models.py:9 .\todo\templates\todo\add.html:19
+#: .\video_gallery\models.py:103
 msgid "Title"
 msgstr ""
 
-#: .\menu_management\models.py:10
+#: .\menu_management\models.py:10 .\video_gallery\models.py:40
+#: .\video_gallery\models.py:104
 msgid "Description"
 msgstr ""
 
@@ -829,11 +833,11 @@ msgstr ""
 msgid "Submit Vote"
 msgstr ""
 
-#: .\polls\templates\polls\index.html:21
+#: .\polls\templates\polls\index.html:17
 msgid "Community Polls"
 msgstr ""
 
-#: .\polls\templates\polls\index.html:35
+#: .\polls\templates\polls\index.html:31
 msgid "No polls are available."
 msgstr ""
 
@@ -868,8 +872,8 @@ msgstr ""
 msgid "Your vote for '%(choice)s' has been recorded!"
 msgstr ""
 
-#: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:124
-#: .\templates\themes\bootstrap5\partials\header.html:67
+#: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:125
+#: .\templates\themes\bootstrap5\partials\header.html:68
 msgid "REST API"
 msgstr ""
 
@@ -1025,10 +1029,12 @@ msgstr ""
 
 #: .\task_runner\models.py:84
 #: .\task_runner\templates\task_runner\job_list.html:124
+#: .\video_gallery\models.py:42 .\video_gallery\models.py:133
 msgid "Created At"
 msgstr ""
 
-#: .\task_runner\models.py:88
+#: .\task_runner\models.py:88 .\video_gallery\models.py:43
+#: .\video_gallery\models.py:134
 msgid "Updated At"
 msgstr ""
 
@@ -1080,7 +1086,7 @@ msgid "Background Task"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_detail.html:13
-#: .\templates\themes\bootstrap5\partials\header.html:128
+#: .\templates\themes\bootstrap5\partials\header.html:129
 #: .\templates\themes\tailwind\partials\header.html:121
 msgid "Task Runner"
 msgstr ""
@@ -1152,6 +1158,7 @@ msgid "All Statuses"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_list.html:101
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:56
 msgid "Filter"
 msgstr ""
 
@@ -1168,14 +1175,17 @@ msgid "No background tasks found."
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_list.html:190
+#: .\video_gallery\templates\video_gallery\gallery_list.html:149
 msgid "Page navigation"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_list.html:194
+#: .\video_gallery\templates\video_gallery\gallery_list.html:154
 msgid "Previous"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_list.html:202
+#: .\video_gallery\templates\video_gallery\gallery_list.html:172
 msgid "Next"
 msgstr ""
 
@@ -1317,40 +1327,49 @@ msgstr ""
 
 #: .\templates\base.html:123
 #: .\templates\themes\bootstrap5\partials\header.html:66
+#: .\video_gallery\plugin.py:7 .\video_gallery\plugin.py:14
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:6
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:22
+#: .\video_gallery\templates\video_gallery\gallery_list.html:24
+msgid "Media Gallery"
+msgstr ""
+
+#: .\templates\base.html:124
+#: .\templates\themes\bootstrap5\partials\header.html:67
 #: .\webprogram\plugin.py:7 .\webprogram\plugin.py:14
 msgid "Brython WebProgram"
 msgstr ""
 
-#: .\templates\base.html:125 .\templates\base.html:147
-#: .\templates\themes\bootstrap5\partials\header.html:70
-#: .\templates\themes\bootstrap5\partials\header.html:123
+#: .\templates\base.html:126 .\templates\base.html:148
+#: .\templates\themes\bootstrap5\partials\header.html:71
+#: .\templates\themes\bootstrap5\partials\header.html:124
 #: .\templates\themes\tailwind\partials\header.html:118
 msgid "Site Admin"
 msgstr ""
 
-#: .\templates\base.html:145
-#: .\templates\themes\bootstrap5\partials\header.html:117
+#: .\templates\base.html:146
+#: .\templates\themes\bootstrap5\partials\header.html:118
 #: .\templates\themes\minimal\partials\header.html:57
 #: .\templates\themes\tailwind\partials\header.html:114
 #: .\user_management\templates\user_management\profile.html:14
 msgid "Profile"
 msgstr ""
 
-#: .\templates\base.html:148
-#: .\templates\themes\bootstrap5\partials\header.html:68
+#: .\templates\base.html:149
+#: .\templates\themes\bootstrap5\partials\header.html:69
 msgid "Background Tasks"
 msgstr ""
 
-#: .\templates\base.html:154
-#: .\templates\themes\bootstrap5\partials\header.html:138
+#: .\templates\base.html:155
+#: .\templates\themes\bootstrap5\partials\header.html:139
 #: .\templates\themes\minimal\partials\header.html:66
 #: .\templates\themes\tailwind\partials\header.html:128
 msgid "Logout"
 msgstr ""
 
-#: .\templates\base.html:159 .\templates\registration\login.html:4
+#: .\templates\base.html:160 .\templates\registration\login.html:4
 #: .\templates\registration\login.html:40
-#: .\templates\themes\bootstrap5\partials\header.html:145
+#: .\templates\themes\bootstrap5\partials\header.html:146
 #: .\templates\themes\minimal\partials\header.html:72
 #: .\templates\themes\tailwind\partials\header.html:134
 #: .\user_management\templates\user_management\login.html:4
@@ -1358,8 +1377,8 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: .\templates\base.html:160
-#: .\templates\themes\bootstrap5\partials\header.html:148
+#: .\templates\base.html:161
+#: .\templates\themes\bootstrap5\partials\header.html:149
 #: .\templates\themes\minimal\partials\header.html:73
 #: .\templates\themes\tailwind\partials\header.html:135
 msgid "Signup"
@@ -1447,7 +1466,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: .\templates\themes\bootstrap5\partials\header.html:83
+#: .\templates\themes\bootstrap5\partials\header.html:84
 msgid "Switch Language"
 msgstr ""
 
@@ -1575,32 +1594,32 @@ msgstr ""
 msgid "Todo Index"
 msgstr ""
 
-#: .\todo\templates\todo\index.html:24
+#: .\todo\templates\todo\index.html:20
 #, python-format
 msgid "Welcome, %(username)s!"
 msgstr ""
 
-#: .\todo\templates\todo\index.html:26
+#: .\todo\templates\todo\index.html:22
 msgid "Welcome to Your Todo List"
 msgstr ""
 
-#: .\todo\templates\todo\index.html:28
+#: .\todo\templates\todo\index.html:24
 msgid "Add Todo"
 msgstr ""
 
-#: .\todo\templates\todo\index.html:45
+#: .\todo\templates\todo\index.html:41
 msgid "Are you sure you want to delete this task?"
 msgstr ""
 
-#: .\todo\templates\todo\index.html:46
+#: .\todo\templates\todo\index.html:42
 msgid "Delete Task"
 msgstr ""
 
-#: .\todo\templates\todo\index.html:56
+#: .\todo\templates\todo\index.html:52
 msgid "No tasks yet. Create your first task to get started!"
 msgstr ""
 
-#: .\todo\templates\todo\index.html:57
+#: .\todo\templates\todo\index.html:53
 msgid "Create Task"
 msgstr ""
 
@@ -1934,6 +1953,309 @@ msgstr ""
 
 #: .\user_management\views.py:180
 msgid "Unable to save profile changes. Please review the highlighted fields."
+msgstr ""
+
+#: .\video_gallery\admin.py:32
+msgid "Thumbnail"
+msgstr ""
+
+#: .\video_gallery\admin.py:49
+#: .\video_gallery\templates\video_gallery\gallery_list.html:36
+msgid "Videos"
+msgstr ""
+
+#: .\video_gallery\admin.py:73
+msgid "Video Information"
+msgstr ""
+
+#: .\video_gallery\admin.py:77
+msgid "Media Source"
+msgstr ""
+
+#: .\video_gallery\admin.py:85
+msgid ""
+"Paste a YouTube or Vimeo share link, or upload an MP4 file. For YouTube, "
+"thumbnails are derived automatically if left blank."
+msgstr ""
+
+#: .\video_gallery\admin.py:91
+msgid "Media Previews"
+msgstr ""
+
+#: .\video_gallery\admin.py:98
+msgid "Display & Publishing"
+msgstr ""
+
+#: .\video_gallery\admin.py:112
+msgid "Thumb"
+msgstr ""
+
+#: .\video_gallery\admin.py:116
+msgid "Save item first to generate preview."
+msgstr ""
+
+#: .\video_gallery\admin.py:125
+msgid "Thumbnail Preview"
+msgstr ""
+
+#: .\video_gallery\admin.py:129
+msgid "Save item first to view embed player."
+msgstr ""
+
+#: .\video_gallery\admin.py:148
+msgid "Live Player Preview"
+msgstr ""
+
+#: .\video_gallery\apps.py:8 .\video_gallery\models.py:46
+msgid "Video Gallery"
+msgstr ""
+
+#: .\video_gallery\models.py:33
+msgid "Name"
+msgstr ""
+
+#: .\video_gallery\models.py:38
+msgid "URL-friendly slug for public gallery routing (e.g. product-demos)"
+msgstr ""
+
+#: .\video_gallery\models.py:41 .\video_gallery\models.py:132
+msgid "Is Active"
+msgstr ""
+
+#: .\video_gallery\models.py:47
+msgid "Video Galleries"
+msgstr ""
+
+#: .\video_gallery\models.py:92
+msgid "YouTube"
+msgstr ""
+
+#: .\video_gallery\models.py:93
+msgid "Vimeo"
+msgstr ""
+
+#: .\video_gallery\models.py:94
+msgid "MP4 Video"
+msgstr ""
+
+#: .\video_gallery\models.py:101
+msgid "Gallery"
+msgstr ""
+
+#: .\video_gallery\models.py:106
+msgid "Source Type"
+msgstr ""
+
+#: .\video_gallery\models.py:112
+msgid "Embed URL or Share Link"
+msgstr ""
+
+#: .\video_gallery\models.py:115
+msgid "YouTube or Vimeo watch/share link, or direct MP4 URL"
+msgstr ""
+
+#: .\video_gallery\models.py:118
+msgid "Video File (MP4)"
+msgstr ""
+
+#: .\video_gallery\models.py:122
+msgid "Upload an MP4 file if not using an external link"
+msgstr ""
+
+#: .\video_gallery\models.py:125
+msgid "Custom Thumbnail"
+msgstr ""
+
+#: .\video_gallery\models.py:129
+msgid "Optional custom thumbnail. Auto-derived for YouTube if left blank."
+msgstr ""
+
+#: .\video_gallery\models.py:131
+msgid "Display Order"
+msgstr ""
+
+#: .\video_gallery\models.py:137
+msgid "Video Item"
+msgstr ""
+
+#: .\video_gallery\models.py:138
+msgid "Video Items"
+msgstr ""
+
+#: .\video_gallery\models.py:149
+msgid ""
+"You must specify either an Embed URL / Share Link or upload a Video File."
+msgstr ""
+
+#: .\video_gallery\plugin.py:8
+msgid ""
+"Admin-managed embed-based video galleries supporting YouTube, Vimeo, and MP4"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:32
+#: .\video_gallery\templates\video_gallery\gallery_list.html:110
+msgid "videos"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:39
+msgid "Published"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:55
+msgid "Filter within gallery..."
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:67
+msgid "Filter Source"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:71
+msgid "All"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:97
+msgid "Reset Filters"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:122
+msgid "No Videos Found"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:125
+msgid "No videos match the selected filters or search query."
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:127
+msgid "This gallery currently has no active videos published."
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:132
+msgid "Show All Gallery Videos"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:136
+msgid "Add First Video"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:146
+msgid "Back to All Galleries"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:6
+#: .\video_gallery\templates\video_gallery\gallery_list.html:27
+msgid "Media & Video Galleries"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:9
+msgid ""
+"Explore our collections of product showcases, technical walkthroughs, and "
+"executive presentations."
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:29
+msgid ""
+"Browse our collections of product demos, technical tutorials, and corporate "
+"presentations."
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:33
+msgid "Galleries"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:40
+msgid "New Gallery"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:51
+msgid "Search Media"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:60
+msgid "Search by title or topic..."
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:61
+msgid "Search"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:69
+msgid "Clear search"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:86
+#, python-format
+msgid ""
+"\n"
+"                        Found %(counter)s gallery matching \"%(query)s\"\n"
+"                    "
+msgid_plural ""
+"\n"
+"                        Found %(counter)s galleries matching \"%(query)s\"\n"
+"                    "
+msgstr[0] ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:129
+msgid "Curated video playlist."
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:138
+msgid "Explore Gallery"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:189
+msgid "No Video Galleries Found"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:192
+msgid ""
+"No galleries match your search query. Try searching with different keywords."
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:194
+msgid ""
+"There are currently no active video galleries published. Check back soon or "
+"create one in the admin panel."
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:199
+msgid "Clear Search"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\gallery_list.html:203
+msgid "Add First Gallery"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\partials\player_modal.html:12
+msgid "Video"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\partials\player_modal.html:18
+#: .\video_gallery\templates\video_gallery\partials\player_modal.html:55
+msgid "Close"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\partials\player_modal.html:28
+msgid "Video Player"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\partials\player_modal.html:46
+msgid "About this video"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\partials\player_modal.html:53
+msgid "Press ESC or click outside to close"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\partials\video_card.html:57
+msgid "Play Video"
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\partials\video_card.html:88
+msgid "No description provided."
+msgstr ""
+
+#: .\video_gallery\templates\video_gallery\partials\video_card.html:97
+msgid "Watch"
 msgstr ""
 
 #: .\webprogram\plugin.py:8

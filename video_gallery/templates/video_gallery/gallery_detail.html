@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {{ gallery.name }} | {% trans "Media Gallery" %}
+{% endblock %}
+
+{% block meta.description %}{{ gallery.description|default:gallery.name|truncatewords:25 }}{% endblock %}
+
+{% block header.attrs %}id="header" class="header-scrolled"{% endblock %}
+
+{% block banner %}{% endblock %}
+
+{% block content %}
+<!-- Gallery Header Section -->
+<section class="py-5 bg-light border-bottom">
+    <div class="container py-2">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-3 small text-uppercase fw-semibold">
+                <li class="breadcrumb-item"><a href="{% url 'home:index' %}" class="text-decoration-none">{% trans "Home" %}</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'video_gallery:gallery_list' %}" class="text-decoration-none">{% trans "Media Gallery" %}</a></li>
+                <li class="breadcrumb-item active text-truncate" style="max-width: 300px;" aria-current="page">{{ gallery.name }}</li>
+            </ol>
+        </nav>
+
+        <div class="row align-items-center justify-content-between g-4">
+            <div class="col-lg-8">
+                <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                    <h1 class="display-6 fw-bold text-dark m-0">{{ gallery.name }}</h1>
+                    <span class="badge bg-secondary rounded-pill px-3 py-2 ms-2">
+                        <i class="fa fa-film me-1"></i> {{ gallery.video_count }} {% trans "videos" %}
+                    </span>
+                </div>
+                {% if gallery.description %}
+                    <p class="lead text-secondary mb-3">{{ gallery.description }}</p>
+                {% endif %}
+                <small class="text-muted">
+                    <i class="fa fa-calendar me-1"></i> {% trans "Published" %}: {{ gallery.created_at|date:"M d, Y" }}
+                </small>
+            </div>
+
+            <!-- In-Gallery Search Bar -->
+            <div class="col-lg-4">
+                <form method="get" action="{{ gallery.get_absolute_url }}">
+                    {% if active_source != 'all' %}
+                        <input type="hidden" name="source" value="{{ active_source }}">
+                    {% endif %}
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            name="q" 
+                            value="{{ search_query }}" 
+                            class="form-control rounded-start-pill" 
+                            placeholder="{% trans 'Filter within gallery...' %}" 
+                            aria-label="{% trans 'Filter' %}">
+                        <button class="btn btn-brand-primary rounded-end-pill px-3" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Source Filter Navigation Tabs / Pills -->
+        <div class="d-flex align-items-center gap-2 mt-4 pt-3 border-top flex-wrap">
+            <span class="small fw-bold text-muted text-uppercase me-2">{% trans "Filter Source" %}:</span>
+            
+            <a href="?source=all{% if search_query %}&q={{ search_query }}{% endif %}" 
+               class="btn btn-sm rounded-pill px-3 {% if active_source == 'all' %}btn-dark text-white fw-semibold shadow-sm{% else %}btn-outline-secondary{% endif %}">
+                {% trans "All" %} ({{ source_counts.all }})
+            </a>
+
+            {% if source_counts.youtube %}
+                <a href="?source=youtube{% if search_query %}&q={{ search_query }}{% endif %}" 
+                   class="btn btn-sm rounded-pill px-3 {% if active_source == 'youtube' %}btn-danger text-white fw-semibold shadow-sm{% else %}btn-outline-danger{% endif %}">
+                    <i class="fa fa-youtube-play me-1"></i> YouTube ({{ source_counts.youtube }})
+                </a>
+            {% endif %}
+
+            {% if source_counts.vimeo %}
+                <a href="?source=vimeo{% if search_query %}&q={{ search_query }}{% endif %}" 
+                   class="btn btn-sm rounded-pill px-3 {% if active_source == 'vimeo' %}btn-info text-white fw-semibold shadow-sm{% else %}btn-outline-info{% endif %}">
+                    <i class="fa fa-vimeo me-1"></i> Vimeo ({{ source_counts.vimeo }})
+                </a>
+            {% endif %}
+
+            {% if source_counts.mp4 %}
+                <a href="?source=mp4{% if search_query %}&q={{ search_query }}{% endif %}" 
+                   class="btn btn-sm rounded-pill px-3 {% if active_source == 'mp4' %}btn-primary text-white fw-semibold shadow-sm{% else %}btn-outline-primary{% endif %}">
+                    <i class="fa fa-file-video-o me-1"></i> MP4 Direct ({{ source_counts.mp4 }})
+                </a>
+            {% endif %}
+
+            {% if search_query or active_source != 'all' %}
+                <a href="{{ gallery.get_absolute_url }}" class="btn btn-sm btn-link text-muted ms-auto text-decoration-none">
+                    <i class="fa fa-refresh me-1"></i> {% trans "Reset Filters" %}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Video Grid Content -->
+<section class="section-gap py-5">
+    <div class="container">
+        {% if videos %}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for video in videos %}
+                    {% include 'video_gallery/partials/video_card.html' with video=video %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- Empty State for Gallery -->
+            <div class="card border-0 shadow-sm rounded-4 text-center py-5 px-3 bg-white">
+                <div class="py-4">
+                    <div class="mb-3">
+                        <span class="d-inline-flex align-items-center justify-content-center bg-light rounded-circle" style="width: 80px; height: 80px;">
+                            <i class="fa fa-video-camera text-muted" style="font-size: 2.5rem;"></i>
+                        </span>
+                    </div>
+                    <h4 class="fw-bold text-dark mb-2">{% trans "No Videos Found" %}</h4>
+                    <p class="text-secondary small mb-4 mx-auto" style="max-width: 450px;">
+                        {% if search_query or active_source != 'all' %}
+                            {% trans "No videos match the selected filters or search query." %}
+                        {% else %}
+                            {% trans "This gallery currently has no active videos published." %}
+                        {% endif %}
+                    </p>
+                    {% if search_query or active_source != 'all' %}
+                        <a href="{{ gallery.get_absolute_url }}" class="btn btn-outline-secondary rounded-pill px-4">
+                            {% trans "Show All Gallery Videos" %}
+                        </a>
+                    {% elif user.is_staff %}
+                        <a href="{% url 'admin:video_gallery_videoitem_add' %}" class="btn btn-brand-primary rounded-pill px-4">
+                            <i class="fa fa-plus me-1"></i> {% trans "Add First Video" %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- Navigation back to Catalog -->
+        <div class="mt-5 text-center">
+            <a href="{% url 'video_gallery:gallery_list' %}" class="btn btn-outline-dark rounded-pill px-4">
+                <i class="fa fa-arrow-left me-1"></i> {% trans "Back to All Galleries" %}
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Reusable Video Player Modal -->
+{% include 'video_gallery/partials/player_modal.html' %}
+{% endblock %}

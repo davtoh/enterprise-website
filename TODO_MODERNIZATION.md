@@ -161,4 +161,30 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
   - [x] Verified zero modal overrides or ad-hoc inline styles.
   - [x] Full test suite passing: **146 passed in 31.56s** with **81% total statement coverage**.
 
+---
+
+## 6. Milestone 13 — Video Gallery Module
+- [x] **Video Gallery Django Application:**
+  - [x] Created `video_gallery` app with `VideoGallery` and `VideoItem` models.
+  - [x] Support for YouTube, Vimeo, and direct MP4 file uploads / external URLs.
+  - [x] Multi-format URL extraction engine (`video_gallery.utils`) for 11-char YouTube IDs and numeric Vimeo IDs.
+  - [x] Automatic source type detection and video ID extraction on model `save()`.
+  - [x] Comprehensive Django Admin (`video_gallery/admin.py`) featuring `VideoItemInline`, thumbnail list previews, video count badges, and live responsive 16:9 player preview in change forms.
+- [x] **Plugin Registry & Dynamic Menus:**
+  - [x] Registered `VideoGalleryPlugin` exposing "Media Gallery" under the "Apps" dropdown in navbar (`menu_management`).
+  - [x] Fallback static menu links updated in `templates/base.html` and `templates/themes/bootstrap5/partials/header.html`.
+- [x] **Public Catalog & Detail Views:**
+  - [x] Gallery listing catalog at `/media/` (and `/videos/` alias redirect) with search and stats.
+  - [x] Gallery detail view at `/media/<slug>/` with source filtering pills (All, YouTube, Vimeo, MP4) and within-gallery search.
+  - [x] Zero custom CSS: standard Bootstrap 5.3+ spacing utilities, card layout, and `ratio-16x9` containers.
+- [x] **Interactive Player & Media Previews:**
+  - [x] Autoplay-on-hover for MP4 videos (`@mouseenter="$el.play()"` / `@mouseleave="$el.pause(); $el.currentTime = 0"`).
+  - [x] Hover zoom and glowing play button overlays on provider thumbnails.
+  - [x] Instant playback in native Bootstrap 5 + Alpine.js modal player (`partials/player_modal.html`) with zero reload and automatic audio silence on dismiss.
+- [x] **Verification & Quality:**
+  - [x] `manage.py check` → 0 issues.
+  - [x] Created `tests/test_video_gallery.py` with 40 tests covering utils, models, views, admin, and plugin discovery (91% statement coverage).
+  - [x] Total suite: **186 passed in 26.65s**, 0 failures.
+
+
 

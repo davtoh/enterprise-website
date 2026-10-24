@@ -35,12 +35,14 @@ urlpatterns = [
     path('accounts/', include('user_management.urls')),
     path('tasks/', include('task_runner.urls')),
     path('theme/', include('theme_management.urls')),
+    path('media/', include('video_gallery.urls')),
+    path('videos/', RedirectView.as_view(url='/media/', permanent=False)),
 
     #path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),  # <url path>/setlang
     path('rest_api/', include('rest_api.urls')),  # , namespace='rest_framework'
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if 'rosetta' in settings.INSTALLED_APPS:
     urlpatterns += [

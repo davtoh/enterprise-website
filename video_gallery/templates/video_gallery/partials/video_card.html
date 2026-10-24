@@ -1,0 +1,102 @@
+{% load i18n %}
+{% load static %}
+
+<div class="col">
+    <div class="card h-100 shadow-sm border-0 rounded-3 overflow-hidden video-card-interactive" 
+         x-data="{ isHovered: false }"
+         @mouseenter="isHovered = true"
+         @mouseleave="isHovered = false">
+        
+        <!-- Thumbnail / Video Preview (16:9) -->
+        <div class="ratio ratio-16x9 position-relative overflow-hidden bg-dark">
+            {% if video.is_direct_html5 and video.direct_media_url %}
+                <!-- HTML5 MP4 Preview with Autoplay-on-Hover -->
+                <video 
+                    src="{{ video.direct_media_url }}" 
+                    preload="metadata" 
+                    muted 
+                    loop 
+                    playsinline 
+                    class="w-100 h-100 object-fit-cover"
+                    @mouseenter="$el.play()" 
+                    @mouseleave="$el.pause(); $el.currentTime = 0;">
+                </video>
+            {% else %}
+                <!-- Provider Thumbnail (YouTube/Vimeo) with Hover Zoom -->
+                <img 
+                    src="{{ video.display_thumbnail_url }}" 
+                    alt="{{ video.title }}" 
+                    loading="lazy"
+                    class="w-100 h-100 object-fit-cover transition-transform duration-300"
+                    :class="{ 'scale-105': isHovered }">
+            {% endif %}
+
+            <!-- Floating Source Provider Badge -->
+            <div class="position-absolute top-0 end-0 m-2 z-1">
+                {% if video.source_type == 'youtube' %}
+                    <span class="badge bg-danger shadow-sm text-uppercase px-2 py-1">
+                        <i class="fa fa-youtube-play me-1"></i> YouTube
+                    </span>
+                {% elif video.source_type == 'vimeo' %}
+                    <span class="badge bg-info text-white shadow-sm text-uppercase px-2 py-1">
+                        <i class="fa fa-vimeo me-1"></i> Vimeo
+                    </span>
+                {% else %}
+                    <span class="badge bg-primary shadow-sm text-uppercase px-2 py-1">
+                        <i class="fa fa-file-video-o me-1"></i> MP4 Video
+                    </span>
+                {% endif %}
+            </div>
+
+            <!-- Central Play Button Trigger Overlay -->
+            <div class="position-absolute top-50 start-50 translate-middle pointer-event-none">
+                <button type="button" 
+                        class="btn btn-light rounded-circle shadow p-0 d-flex align-items-center justify-content-center video-play-btn"
+                        style="width: 54px; height: 54px; opacity: 0.9; transition: transform 0.2s ease, opacity 0.2s ease;"
+                        :style="isHovered ? 'transform: scale(1.15); opacity: 1;' : 'transform: scale(1); opacity: 0.85;'"
+                        aria-label="{% trans 'Play Video' %}">
+                    <i class="fa fa-play text-brand-primary" style="font-size: 1.25rem; margin-left: 3px;"></i>
+                </button>
+            </div>
+
+            <!-- Full-card Click Trigger for Modal Playback -->
+            <a href="javascript:void(0);" 
+               class="stretched-link"
+               data-bs-toggle="modal" 
+               data-bs-target="#videoPlayerModal"
+               data-video-title="{{ video.title|escape }}"
+               data-video-description="{{ video.description|default:''|escape }}"
+               data-video-source="{{ video.source_type }}"
+               data-player-url="{{ video.autoplay_embed_url }}"
+               data-is-html5="{% if video.is_direct_html5 and video.direct_media_url %}true{% else %}false{% endif %}"
+               data-media-url="{{ video.direct_media_url }}"
+               aria-label="{{ video.title }}">
+            </a>
+        </div>
+
+        <!-- Video Card Body Details -->
+        <div class="card-body d-flex flex-column p-3">
+            <h5 class="card-title fw-bold text-dark mb-2 text-truncate" title="{{ video.title }}">
+                {{ video.title }}
+            </h5>
+            {% if video.description %}
+                <p class="card-text text-muted small flex-grow-1 mb-3">
+                    {{ video.description|truncatewords:20 }}
+                </p>
+            {% else %}
+                <p class="card-text text-muted small flex-grow-1 mb-3 fst-italic">
+                    {% trans "No description provided." %}
+                </p>
+            {% endif %}
+
+            <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                <span class="badge bg-light text-muted border">
+                    <i class="fa fa-clock-o me-1"></i> {{ video.created_at|date:"M d, Y" }}
+                </span>
+                <span class="text-brand-primary small fw-semibold">
+                    <i class="fa fa-play-circle me-1"></i> {% trans "Watch" %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

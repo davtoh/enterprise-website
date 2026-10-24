@@ -540,5 +540,53 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `.\.venv\Scripts\python.exe -m pytest tests/test_theme_management.py` → **17 passed in 3.18s**.
   - `.\.venv\Scripts\python.exe -m pytest` → **146 passed in 26.03s**, 0 failures.
 
+---
+
+## [Milestone 13] - Video Gallery Module
+- **Date:** 2026-10-24
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Create `video_gallery` Django app:
+    - `VideoGallery` model (name, slug, description, is_active, timestamps, auto cover thumbnail derivation, active video counts, and source breakdown).
+    - `VideoItem` model (title, description, thumbnail, source_type, embed_url/file, gallery FK, order, is_active, created_at, updated_at).
+    - URL parsing engine in `video_gallery/utils.py` extracting 11-char YouTube IDs (standard watch, youtu.be, embed, shorts, mobile, timestamped) and numeric Vimeo IDs (standard, channels, groups, player embed).
+    - Auto-detection of video source ('youtube', 'vimeo', 'mp4') on model save.
+    - Admin panel (`video_gallery/admin.py`) with `VideoItemInline`, thumbnail previews, video count badges, and live 16:9 player previews directly in admin change forms.
+  - Register `VideoGalleryPlugin` (`video_gallery/plugin.py`) with `plugin_registry`, adding "Media Gallery" to dynamic menus under "Apps".
+  - Build public catalog `/media/` (gallery listing with search and stats) and `/media/<slug>/` (gallery detail with filterable responsive video grid and search).
+  - Add `/videos/` alias route redirecting to `/media/`.
+  - Responsive HTML5/iframe player component with autoplay-on-hover for MP4 videos and glowing modal play overlay for YouTube/Vimeo.
+  - Interactive Bootstrap 5 + Alpine.js modal player (`partials/player_modal.html`) that launches immediately without page reload and cleans player sources on dismiss to stop audio.
+  - Multi-language i18n support applied across models, views, admin, and templates (`makemessages` and `compilemessages` executed).
+  - Comprehensive automated test suite (`tests/test_video_gallery.py` with 40 tests).
+- **Files Created / Modified:**
+  - `enterprise_website/settings.py` (registered `VideoGalleryConfig`, set `MEDIA_URL = os.getenv('MEDIA_URL', '/media-files/')`, and configured `MEDIA_ROOT`)
+  - `enterprise_website/urls.py` (mounted `video_gallery.urls` at `/media/`, added `/videos/` redirect alias, and configured `static(settings.MEDIA_URL)`)
+  - `templates/base.html` (added Media Gallery to static fallback Apps dropdown)
+  - `templates/themes/bootstrap5/partials/header.html` (added Media Gallery to Bootstrap 5 theme Apps dropdown)
+  - `video_gallery/__init__.py`, `apps.py` (created)
+  - `video_gallery/models.py` (created `VideoGallery` and `VideoItem` models)
+  - `video_gallery/utils.py` (created YouTube/Vimeo ID extraction, embed generator, and thumbnail derive helpers)
+  - `video_gallery/admin.py` (created admin panel with inlines and previews)
+  - `video_gallery/plugin.py` (created AppPlugin definition)
+  - `video_gallery/views.py` (created `GalleryListView`, `GalleryDetailView`, and `VideoItemModalView`)
+  - `video_gallery/urls.py` (created URL patterns)
+  - `video_gallery/migrations/0001_initial.py` (database migration created and applied)
+  - `video_gallery/templates/video_gallery/gallery_list.html` (public gallery listing template)
+  - `video_gallery/templates/video_gallery/gallery_detail.html` (public gallery detail template)
+  - `video_gallery/templates/video_gallery/partials/video_card.html` (responsive video card with autoplay-on-hover)
+  - `video_gallery/templates/video_gallery/partials/player_modal.html` (Bootstrap 5 modal player)
+  - `video_gallery/templates/video_gallery/partials/player_modal_content.html` (HTMX modal partial)
+  - `tests/test_video_gallery.py` (40 comprehensive unit and integration tests)
+  - `milestone_plan.md` (updated Milestone 13 to complete)
+  - `TODO_MODERNIZATION.md` (updated audit roadmap)
+- **Verification & Test Outcomes:**
+  - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
+  - `.\.venv\Scripts\python.exe manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean.
+  - `.\.venv\Scripts\python.exe manage.py sync_menus` → **Successfully synced plugins into menu 'main_navbar'**.
+  - `.\.venv\Scripts\python.exe -m pytest tests/test_video_gallery.py` → **40 passed in 1.99s** with **91% statement coverage**.
+  - `.\.venv\Scripts\python.exe -m pytest` → **186 passed in 26.65s**, 0 failures across entire codebase.
+
+
 
 

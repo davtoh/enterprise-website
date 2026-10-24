@@ -193,20 +193,21 @@
 **Scope:** Admin-managed embed-based video galleries (YouTube, Vimeo, MP4).
 
 **Objectives:**
-- Create `video_gallery` Django app:
-  - `VideoItem` model: title, description, thumbnail, source_type (youtube/vimeo/mp4), embed_url/file, gallery (FK), order, is_active, created_at
-  - `VideoGallery` model: name, slug, description, is_active
-  - Admin panel with preview thumbnails
-- `AppPlugin` registration with menu item "Media Gallery"
-- Public view: gallery listing page (`/media/`) and gallery detail (`/media/<slug>/`) with responsive video grid
-- Responsive HTML5/iframe player component with autoplay-on-hover for thumbnails
-- YouTube/Vimeo URL parser that extracts embed ID from share URLs automatically
-- i18n wrapper for all user-facing strings
+- [x] Create `video_gallery` Django app:
+  - [x] `VideoItem` model: title, description, thumbnail, source_type (youtube/vimeo/mp4), embed_url/file, gallery (FK), order, is_active, created_at, updated_at
+  - [x] `VideoGallery` model: name, slug, description, is_active, timestamps
+  - [x] Admin panel with preview thumbnails, video count badges, and embedded live player previews
+- [x] `AppPlugin` registration with menu item "Media Gallery"
+- [x] Public view: gallery listing page (`/media/`) and gallery detail (`/media/<slug>/`) with responsive video grid and search/filter
+- [x] Responsive HTML5/iframe player component with autoplay-on-hover for thumbnails and Bootstrap 5 modal player
+- [x] YouTube/Vimeo URL parser that extracts embed ID from share URLs automatically
+- [x] i18n wrapper for all user-facing strings
 
 **Verification:**
-- Create gallery with YouTube + Vimeo + MP4 items in admin → renders correctly in browser
-- Responsive on mobile
-- `manage.py check` → 0 issues
+- [x] Create gallery with YouTube + Vimeo + MP4 items in admin → renders correctly in browser
+- [x] Responsive on mobile (Bootstrap 5.3+ ratio containers, card grid, flex-wrap pills)
+- [x] `manage.py check` → 0 issues
+- [x] 186 tests passing with 91% statement coverage on `video_gallery` (40 dedicated tests)
 
 ---
 

@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     'channels',
     'task_runner.apps.TaskRunnerConfig',
     'theme_management.apps.ThemeManagementConfig',
+    'video_gallery.apps.VideoGalleryConfig',
 ]
 
 # during the request phase, where middleware is applied first-to-last
@@ -254,8 +255,8 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login'  # must be absolute path
 AUTH_USER_MODEL = 'user_management.SiteUser'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = os.getenv('MEDIA_URL', '/media-files/')
+MEDIA_ROOT = BASE_DIR / 'media'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = '1025'
 

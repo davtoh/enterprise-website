@@ -63,6 +63,7 @@
             <ul class="dropdown-menu shadow-sm" aria-labelledby="appsDropdown">
               <li><a class="dropdown-item" href="{% url 'todo:index' %}"><i class="fa fa-tasks me-2"></i>{% trans "Todo List" %}</a></li>
               <li><a class="dropdown-item" href="{% url 'polls:index' %}"><i class="fa fa-bar-chart me-2"></i>{% trans "Polls" %}</a></li>
+              <li><a class="dropdown-item" href="{% url 'video_gallery:gallery_list' %}"><i class="fa fa-video-camera me-2"></i>{% trans "Media Gallery" %}</a></li>
               <li><a class="dropdown-item" href="{% url 'webprogram:index' %}"><i class="fa fa-code me-2"></i>{% trans "Brython WebProgram" %}</a></li>
               <li><a class="dropdown-item" href="/rest_api/"><i class="fa fa-cogs me-2"></i>{% trans "REST API" %}</a></li>
               <li><a class="dropdown-item" href="{% url 'task_runner:list' %}"><i class="fa fa-terminal me-2"></i>{% trans "Background Tasks" %}</a></li>

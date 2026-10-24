@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Media & Video Galleries" %} | Enterprise Website
+{% endblock %}
+
+{% block meta.description %}{% trans "Explore our collections of product showcases, technical walkthroughs, and executive presentations." %}{% endblock %}
+
+{% block header.attrs %}id="header" class="header-scrolled"{% endblock %}
+
+{% block banner %}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-5 bg-light border-bottom">
+    <div class="container py-3">
+        <div class="row align-items-center justify-content-between g-4">
+            <div class="col-lg-7">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-2 small text-uppercase fw-semibold">
+                        <li class="breadcrumb-item"><a href="{% url 'home:index' %}" class="text-decoration-none">{% trans "Home" %}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{% trans "Media Gallery" %}</li>
+                    </ol>
+                </nav>
+                <h1 class="display-5 fw-bold text-dark mb-2">{% trans "Media & Video Galleries" %}</h1>
+                <p class="lead text-secondary mb-3">
+                    {% trans "Browse our collections of product demos, technical tutorials, and corporate presentations." %}
+                </p>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="badge bg-primary rounded-pill px-3 py-2">
+                        <i class="fa fa-folder-open me-1"></i> {{ total_galleries }} {% trans "Galleries" %}
+                    </span>
+                    <span class="badge bg-secondary rounded-pill px-3 py-2">
+                        <i class="fa fa-video-camera me-1"></i> {{ total_videos }} {% trans "Videos" %}
+                    </span>
+                    {% if user.is_staff %}
+                        <a href="{% url 'admin:video_gallery_videogallery_add' %}" class="btn btn-sm btn-outline-dark rounded-pill px-3">
+                            <i class="fa fa-plus me-1"></i> {% trans "New Gallery" %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Search Form -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0 rounded-4 p-3 bg-white">
+                    <form method="get" action="{% url 'video_gallery:gallery_list' %}">
+                        <label for="gallerySearchInput" class="form-label small fw-semibold text-muted text-uppercase mb-2">
+                            <i class="fa fa-search me-1"></i> {% trans "Search Media" %}
+                        </label>
+                        <div class="input-group">
+                            <input 
+                                type="text" 
+                                id="gallerySearchInput" 
+                                name="q" 
+                                value="{{ search_query }}" 
+                                class="form-control rounded-start-pill" 
+                                placeholder="{% trans 'Search by title or topic...' %}" 
+                                aria-label="{% trans 'Search' %}">
+                            <button class="btn btn-brand-primary rounded-end-pill px-3" type="submit">
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </div>
+                        {% if search_query %}
+                            <div class="mt-2 text-end">
+                                <a href="{% url 'video_gallery:gallery_list' %}" class="small text-muted text-decoration-none">
+                                    <i class="fa fa-times-circle me-1"></i> {% trans "Clear search" %}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Galleries Grid Section -->
+<section class="section-gap py-5">
+    <div class="container">
+        {% if search_query %}
+            <div class="mb-4 d-flex align-items-center justify-content-between">
+                <h4 class="m-0 text-secondary">
+                    {% blocktrans with query=search_query count counter=galleries|length %}
+                        Found {{ counter }} gallery matching "{{ query }}"
+                    {% plural %}
+                        Found {{ counter }} galleries matching "{{ query }}"
+                    {% endblocktrans %}
+                </h4>
+            </div>
+        {% endif %}
+
+        {% if galleries %}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                {% for gallery in galleries %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden gallery-card-hover transition-all">
+                            <!-- Cover Thumbnail -->
+                            <div class="ratio ratio-16x9 position-relative overflow-hidden bg-dark">
+                                <img 
+                                    src="{{ gallery.cover_thumbnail_url }}" 
+                                    alt="{{ gallery.name }}" 
+                                    loading="lazy"
+                                    class="w-100 h-100 object-fit-cover">
+                                
+                                <div class="position-absolute bottom-0 start-0 m-3 z-1">
+                                    <span class="badge bg-dark bg-opacity-75 text-white backdrop-blur px-3 py-2 rounded-pill">
+                                        <i class="fa fa-play-circle me-1"></i> {{ gallery.video_count }} {% trans "videos" %}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="card-body d-flex flex-column p-4">
+                                <h3 class="h4 card-title fw-bold text-dark mb-2">
+                                    <a href="{{ gallery.get_absolute_url }}" class="text-decoration-none text-dark hover-brand">
+                                        {{ gallery.name }}
+                                    </a>
+                                </h3>
+                                
+                                {% if gallery.description %}
+                                    <p class="card-text text-muted small flex-grow-1 mb-4">
+                                        {{ gallery.description|truncatewords:24 }}
+                                    </p>
+                                {% else %}
+                                    <p class="card-text text-muted small flex-grow-1 mb-4 fst-italic">
+                                        {% trans "Curated video playlist." %}
+                                    </p>
+                                {% endif %}
+
+                                <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-auto">
+                                    <small class="text-muted">
+                                        <i class="fa fa-calendar me-1"></i> {{ gallery.created_at|date:"M d, Y" }}
+                                    </small>
+                                    <a href="{{ gallery.get_absolute_url }}" class="btn btn-brand-primary btn-sm rounded-pill px-3">
+                                        {% trans "Explore Gallery" %} <i class="fa fa-angle-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if is_paginated %}
+                <nav class="mt-5 d-flex justify-content-center" aria-label="{% trans 'Page navigation' %}">
+                    <ul class="pagination pagination-md">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link rounded-start-pill" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">
+                                    &laquo; {% trans "Previous" %}
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% for num in paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}">{{ num }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link rounded-end-pill" href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">
+                                    {% trans "Next" %} &raquo;
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+
+        {% else %}
+            <!-- Empty State -->
+            <div class="card border-0 shadow-sm rounded-4 text-center py-5 px-3 bg-white">
+                <div class="py-4">
+                    <div class="mb-3">
+                        <span class="d-inline-flex align-items-center justify-content-center bg-light rounded-circle" style="width: 80px; height: 80px;">
+                            <i class="fa fa-film text-muted" style="font-size: 2.5rem;"></i>
+                        </span>
+                    </div>
+                    <h4 class="fw-bold text-dark mb-2">{% trans "No Video Galleries Found" %}</h4>
+                    <p class="text-secondary small mb-4 mx-auto" style="max-width: 450px;">
+                        {% if search_query %}
+                            {% trans "No galleries match your search query. Try searching with different keywords." %}
+                        {% else %}
+                            {% trans "There are currently no active video galleries published. Check back soon or create one in the admin panel." %}
+                        {% endif %}
+                    </p>
+                    {% if search_query %}
+                        <a href="{% url 'video_gallery:gallery_list' %}" class="btn btn-outline-secondary rounded-pill px-4">
+                            {% trans "Clear Search" %}
+                        </a>
+                    {% elif user.is_staff %}
+                        <a href="{% url 'admin:video_gallery_videogallery_add' %}" class="btn btn-brand-primary rounded-pill px-4">
+                            <i class="fa fa-plus me-1"></i> {% trans "Add First Gallery" %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
