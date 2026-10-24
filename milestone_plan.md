@@ -133,23 +133,24 @@
 **Scope:** Enable long-running background jobs (renders, exports, AI calls, external programs) with real-time WebSocket progress updates.
 
 **Objectives:**
-- Install and configure `celery` + `redis` (broker + result backend)
-- Create `task_runner` Django app:
-  - `TaskJob` model: task_id, name, status (pending/running/success/failure), progress %, log output, created_by, created_at
-  - Celery task base class with automatic `TaskJob` status updates
-  - Django Channels consumer that streams `TaskJob` updates via WebSocket to the requesting browser
-  - A reusable `{% task_progress_widget task_id %}` template tag for any page
-- Example tasks:
-  - `run_auto_translate` — existing `auto_translate` command as async Celery task
-  - `run_external_script` — sandboxed subprocess runner (stdin/stdout/stderr streamed live)
-  - `run_collectstatic` — background static file collection
-- Update `AppPlugin` interface to allow plugins to register their own Celery tasks
-- `docker-compose.yml` updated with `celery_worker` and `flower` (task monitor) services
+- [x] Install and configure `celery` + `redis` (broker + result backend)
+- [x] Create `task_runner` Django app:
+  - [x] `TaskJob` model: task_id, name, status (pending/running/success/failure), progress %, log output, created_by, created_at
+  - [x] Celery task base class with automatic `TaskJob` status updates
+  - [x] Django Channels consumer that streams `TaskJob` updates via WebSocket to the requesting browser
+  - [x] A reusable `{% task_progress_widget task_id %}` template tag for any page
+- [x] Example tasks:
+  - [x] `run_auto_translate` — existing `auto_translate` command as async Celery task
+  - [x] `run_external_script` — sandboxed subprocess runner (stdin/stdout/stderr streamed live)
+  - [x] `run_collectstatic` — background static file collection
+- [x] Update `AppPlugin` interface to allow plugins to register their own Celery tasks
+- [x] `docker-compose.yml` updated with `celery_worker` and `flower` (task monitor) services
 
 **Verification:**
-- Submit a task from admin → see real-time progress in browser
-- Failed tasks report error messages in `TaskJob` log
-- `manage.py check` → 0 issues
+- [x] Submit a task from admin / web UI → see real-time progress in browser
+- [x] Failed tasks report error messages in `TaskJob` log
+- [x] `manage.py check` → 0 issues
+- [x] 128 tests passing (18 dedicated task_runner unit/integration tests) with 81% total statement coverage
 
 ---
 

@@ -15,3 +15,11 @@ services:
     ports:
       - "8000:8000"
     command: python manage.py runserver 0.0.0.0:8000
+
+  celery_worker:
+    environment:
+      - DEBUG=True
+      - USE_SQLITE=True
+      - DJANGO_LOG_LEVEL=DEBUG
+    volumes:
+      - .:/app

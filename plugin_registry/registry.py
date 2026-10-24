@@ -30,6 +30,15 @@ class PluginRegistry:
         self.autodiscover()
         return dict(self._plugins)
 
+    def get_all_tasks(self) -> Dict[str, list]:
+        """Returns all registered Celery tasks indexed by plugin name."""
+        self.autodiscover()
+        return {
+            name: plugin_cls.get_tasks()
+            for name, plugin_cls in self._plugins.items()
+            if plugin_cls.get_tasks()
+        }
+
     def autodiscover(self):
         """Scan all INSTALLED_APPS for a `plugin.py` module and load subclasses of AppPlugin."""
         if self._discovered:

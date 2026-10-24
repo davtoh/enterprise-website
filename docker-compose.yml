@@ -76,6 +76,54 @@ services:
     depends_on:
       - web
 
+  celery_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: enterprise_celery_worker
+    restart: unless-stopped
+    command: celery -A enterprise_website worker -l INFO
+    environment:
+      - DEBUG=${DEBUG:-False}
+      - SECRET_KEY=${SECRET_KEY:-django-insecure-production-super-secret-key-change-in-env}
+      - USE_SQLITE=False
+      - DB_ENGINE=django.db.backends.postgresql
+      - DB_NAME=${DB_NAME:-enterprise_db}
+      - DB_USER=${DB_USER:-enterprise_user}
+      - DB_PASSWORD=${DB_PASSWORD:-enterprise_secure_password}
+      - DB_HOST=db
+      - DB_PORT=5432
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  flower:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: enterprise_flower
+    restart: unless-stopped
+    command: celery -A enterprise_website flower --port=5555
+    ports:
+      - "${FLOWER_PORT:-5555}:5555"
+    environment:
+      - DEBUG=${DEBUG:-False}
+      - SECRET_KEY=${SECRET_KEY:-django-insecure-production-super-secret-key-change-in-env}
+      - REDIS_URL=redis://redis:6379/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      redis:
+        condition: service_healthy
+
 volumes:
   postgres_data:
   redis_data:

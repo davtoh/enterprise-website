@@ -44,6 +44,13 @@ class AppPlugin:
     # Optional settings defaults required by this plugin
     settings_defaults: Dict[str, Any] = {}
 
+    # Background Celery tasks registered by this plugin
+    tasks: List[str] = []
+
     @classmethod
     def get_menu_items(cls) -> List[MenuItemDefinition]:
         return cls.menu_items
+
+    @classmethod
+    def get_tasks(cls) -> List[str]:
+        return cls.tasks

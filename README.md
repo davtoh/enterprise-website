@@ -130,9 +130,25 @@ python manage.py runserver
 
 Open `http://127.0.0.1:8000/` in your browser.
 - **Main Site:** `http://127.0.0.1:8000/`
+- **Background Tasks:** `http://127.0.0.1:8000/tasks/`
 - **Admin Panel:** `http://127.0.0.1:8000/admin/`
 - **REST API:** `http://127.0.0.1:8000/rest_api/`
 - **Rosetta Translations:** `http://127.0.0.1:8000/rosetta/`
+
+Start Celery Background Worker:
+```powershell
+# Windows PowerShell (Solo execution pool)
+.\.venv\Scripts\python.exe -m celery -A enterprise_website worker -l INFO -P solo
+
+# Linux / Docker
+celery -A enterprise_website worker -l INFO
+```
+
+Start Flower Task Monitor:
+```powershell
+.\.venv\Scripts\python.exe -m celery -A enterprise_website flower --port=5555
+```
+- **Flower Monitor:** `http://localhost:5555/`
 
 ---
 

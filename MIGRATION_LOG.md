@@ -366,4 +366,71 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `docker compose -f docker-compose.yml up -d --build` verified live: all 4 containers (`enterprise_db`, `enterprise_redis`, `enterprise_web`, `enterprise_nginx`) built cleanly, passed health checks, migrated PostgreSQL 16 automatically, synced menus, and served HTTP 200 on `http://localhost/`.
   - Static asset delivery verified: updated `docker-entrypoint.sh` to ensure `collectstatic` unconditionally populates `/app/staticfiles` in the shared volume on startup, resolving HTTP 200 for all CSS, JS, and image assets via Nginx.
 
+---
+
+## [Milestone 11] - Celery & Async Background Task Infrastructure
+- **Date:** 2026-10-23
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Install and configure `celery` + `redis` + `flower` in project virtual environment and requirements.
+  - Implement `enterprise_website/celery.py` and hook Celery application into `enterprise_website/__init__.py`.
+  - Add Celery settings to `enterprise_website/settings.py` (broker/backend configuration, timezone, serialization, time limits, and test eager mode support).
+  - Create new Django app `task_runner`:
+    - `TaskJob` model: `task_id`, `name`, `status` (`PENDING`, `RUNNING`, `SUCCESS`, `FAILURE`, `REVOKED`), `progress` (0-100%), `log_output`, `error_message`, `result_data`, `created_by`, `created_at`, `updated_at`.
+    - Real-time Channel Layer event emission on job progress updates and state transitions.
+    - Custom Celery task base class `TrackedTask` with automatic lifecycle tracking, log capture, and exception handling.
+    - Django Channels WebSocket consumer `TaskProgressConsumer` streaming live task updates.
+    - WebSocket routing in `task_runner/routing.py` integrated into `enterprise_website/routing.py`.
+    - Reusable template tag `{% task_progress_widget task_id %}` with animated progress bar, status badges, live auto-scrolling log terminal, and WebSocket connection with polling fallback.
+    - Staff UI and dashboard: task list view, task detail view, task launch actions, and Django admin integration.
+  - Example background tasks:
+    - `run_auto_translate`: async translation execution streaming progress and log lines.
+    - `run_external_script`: sandboxed subprocess execution streaming stdout/stderr live.
+    - `run_collectstatic`: background static asset collection.
+  - Update `AppPlugin` interface in `plugin_registry` to allow plugins to register background Celery tasks.
+  - Update `docker-compose.yml` with `celery_worker` and `flower` services, and adjust `docker-compose.override.yml`.
+- **Files Created / Modified:**
+  - `requirements/base.txt` (modified: added `celery>=5.3.6`, `redis>=5.0.0`, `flower>=2.0.1`)
+  - `.env.example` (modified: added Celery and Flower variables)
+  - `enterprise_website/celery.py` (created)
+  - `enterprise_website/__init__.py` (modified: exposed celery_app)
+  - `enterprise_website/settings.py` (modified: Celery settings, INSTALLED_APPS)
+  - `enterprise_website/routing.py` (modified: integrated WebSocket URLRouter)
+  - `enterprise_website/urls.py` (modified: mounted `/tasks/` path)
+  - `task_runner/__init__.py` (created)
+  - `task_runner/apps.py` (created)
+  - `task_runner/models.py` (created: `TaskJob`)
+  - `task_runner/base.py` (created: `TrackedTask`)
+  - `task_runner/consumers.py` (created: `TaskProgressConsumer`)
+  - `task_runner/routing.py` (created: WebSocket route `ws/tasks/<task_id>/`)
+  - `task_runner/tasks.py` (created: `run_auto_translate`, `run_collectstatic`, `run_external_script`)
+  - `task_runner/views.py` (created: `TaskJobListView`, `TaskJobDetailView`, `TaskJobStatusAPIView`, `TaskTriggerView`)
+  - `task_runner/urls.py` (created)
+  - `task_runner/admin.py` (created: `TaskJobAdmin` with live widget and actions)
+  - `task_runner/templatetags/__init__.py` (created)
+  - `task_runner/templatetags/task_runner_tags.py` (created: `task_progress_widget`)
+  - `task_runner/templates/task_runner/task_progress_widget.html` (created)
+  - `task_runner/templates/task_runner/job_list.html` (created)
+  - `task_runner/templates/task_runner/job_detail.html` (created)
+  - `task_runner/plugin.py` (created: `TaskRunnerPlugin`)
+  - `language_management/plugin.py` (created: `LanguageManagementPlugin`)
+  - `plugin_registry/base.py` (modified: added `tasks` and `get_tasks`)
+  - `plugin_registry/registry.py` (modified: added `get_all_tasks`)
+  - `docker-compose.yml` (modified: added `celery_worker` and `flower` services)
+  - `docker-compose.override.yml` (modified: added development volume mount for worker)
+  - `task_runner/migrations/0001_initial.py` (created)
+  - `tests/test_task_runner.py` (created: 18 unit and integration tests)
+  - `documentation/README.md` (modified: architectural guide and Celery operations)
+  - `README.md` (modified: quick start and background task commands)
+  - `milestone_plan.md` (modified: marked Milestone 11 complete)
+  - `TODO_MODERNIZATION.md` (modified: executive summary and completed checklist)
+  - `MIGRATION_LOG.md` (modified)
+- **Verification:**
+  - `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
+  - `docker compose config` and `docker compose -f docker-compose.yml config` validate syntax, environment interpolation, and network topology with 0 errors across all 6 services.
+  - `manage.py sync_menus` executes cleanly and registers "Background Tasks" under the Apps dropdown.
+  - `.\.venv\Scripts\python.exe -m pytest tests/test_task_runner.py -v` executes cleanly: **18 passed in 7.71s** with **0 failures**.
+  - `.\.venv\Scripts\python.exe -m pytest --cov=. --cov-report=term-missing` executed full suite cleanly: **128 passed in 33.78s** with **0 failures**.
+  - Total statement coverage achieved: **81%** (exceeding the 80% coverage threshold).
+
 

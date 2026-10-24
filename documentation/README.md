@@ -95,6 +95,15 @@ enterprise_website/
 ├── webprogram/                   # Brython Python-in-Browser Playground
 │   └── views.py                  # Client-side Python execution demonstrations
 │
+├── task_runner/                  # Celery & Async Background Task Infrastructure
+│   ├── models.py                 # TaskJob tracking model (progress %, logs, status)
+│   ├── base.py                   # TrackedTask Celery base task with auto-logging
+│   ├── consumers.py              # TaskProgressConsumer streaming updates via WebSockets
+│   ├── tasks.py                  # Background tasks (auto_translate, collectstatic, script)
+│   ├── templatetags/             # Reusable {% task_progress_widget task_id %}
+│   ├── views.py                  # Task list, detail, trigger, and JSON API views
+│   └── plugin.py                 # TaskRunnerPlugin for dynamic menu registration
+│
 ├── custom_tags/                  # Shared Utilities & Base Commands
 │   ├── utils.py                  # LoggerCommand, source file loaders, key generators
 │   └── management/commands/      # secret_keys utility command
@@ -458,6 +467,66 @@ The project supports 5 languages: **Spanish (`es`)**, **French (`fr`)**, **Itali
    For production with async HTTP & WebSockets support:
    ```bash
    daphne -b 0.0.0.0 -p 8000 enterprise_website.asgi:application
+   ```
+
+3. **Celery Worker Execution:**
+   - **Windows PowerShell (Solo Pool):**
+     ```powershell
+     .\.venv\Scripts\python.exe -m celery -A enterprise_website worker -l INFO -P solo
+     ```
+   - **Linux / Docker:**
+     ```bash
+     celery -A enterprise_website worker -l INFO
+     ```
+
+4. **Flower Background Task Monitor:**
+   ```powershell
+   .\.venv\Scripts\python.exe -m celery -A enterprise_website flower --port=5555
+   ```
+   - Dashboard: `http://localhost:5555/`
+
+---
+
+### Celery & Async Background Task Infrastructure (`task_runner`)
+
+Enterprise Website provides a full background job processing pipeline featuring real-time WebSocket progress streaming:
+
+1. **`TaskJob` Model (`task_runner/models.py`):**
+   - Tracks unique `task_id`, `name`, `status` (`PENDING`, `RUNNING`, `SUCCESS`, `FAILURE`, `REVOKED`), `progress` (0–100%), `log_output`, `error_message`, and JSON `result_data`.
+   - On state changes or progress increments, broadcasts live events through Django Channels.
+
+2. **Celery Task Base Class `TrackedTask` (`task_runner/base.py`):**
+   - Automatically initializes and binds a `TaskJob` database record.
+   - Transitions state from `PENDING` -> `RUNNING` -> `SUCCESS` or `FAILURE`.
+   - Captures unhandled exceptions and full tracebacks automatically into the task log.
+   - Provides `self.update_job_progress(percent, log_line=None)` inside task logic.
+
+3. **Real-time WebSocket Streaming (`task_runner/consumers.py`):**
+   - WebSocket route: `ws://<host>/ws/tasks/<task_id>/`
+   - Immediately transmits the current snapshot on connection and streams progress updates and log lines as they arrive.
+   - Includes automatic HTTP polling fallback (`/tasks/<task_id>/status/`) if WebSockets are unavailable.
+
+4. **Reusable Progress Widget:**
+   ```html
+   {% load task_runner_tags %}
+   {% task_progress_widget task_id %}
+   ```
+   Renders an interactive card containing:
+   - Status badge with color-coded state indicators.
+   - Animated Bootstrap 5 progress bar.
+   - Dark-mode scrolling terminal console with live log output.
+   - Automatic WebSocket connection and fallback polling handler.
+
+5. **Built-in Tasks:**
+   - `task_runner.tasks.run_auto_translate`: runs the `auto_translate` pipeline asynchronously.
+   - `task_runner.tasks.run_collectstatic`: runs static file collection in the background.
+   - `task_runner.tasks.run_external_script`: sandboxed subprocess execution streaming stdout/stderr line-by-line.
+
+6. **Plugin Task Registration:**
+   Apps can expose their background tasks by adding a `tasks` list to their `AppPlugin`:
+   ```python
+   class MyPlugin(AppPlugin):
+       tasks = ["my_app.tasks.long_running_job"]
    ```
 
 ---

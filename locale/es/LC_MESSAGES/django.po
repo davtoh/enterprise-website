@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-21 00:27-0500\n"
+"POT-Creation-Date: 2026-10-23 17:47-0500\n"
 "PO-Revision-Date: 2021-05-02 23:54-0456\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,27 +19,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.6\n"
 
-#: .\enterprise_website\settings.py:203
+#: .\enterprise_website\settings.py:208
 msgid "English"
 msgstr "Inglés"
 
-#: .\enterprise_website\settings.py:204
+#: .\enterprise_website\settings.py:209
 msgid "Spanish"
 msgstr "Español"
 
-#: .\enterprise_website\settings.py:205
+#: .\enterprise_website\settings.py:210
 msgid "Portuguese"
 msgstr "Portugués"
 
-#: .\enterprise_website\settings.py:206
+#: .\enterprise_website\settings.py:211
 msgid "French"
 msgstr "Francés"
 
-#: .\enterprise_website\settings.py:207
+#: .\enterprise_website\settings.py:212
 msgid "Italian"
 msgstr "Italiano"
 
-#: .\enterprise_website\settings.py:208
+#: .\enterprise_website\settings.py:213
 msgid "Japanese"
 msgstr "Japonés"
 
@@ -52,19 +52,19 @@ msgstr "Administración De La Página"
 msgid "Administration"
 msgstr "Administración"
 
-#: .\home\templates\home\about.html:5
+#: .\home\plugin.py:7
 #, fuzzy
-msgid "About Us - Enterprise Website"
-msgstr "Sobre nosotros - Sitio web de la empresa"
+msgid "Corporate Showcase"
+msgstr "Texto traducido de prueba"
 
-#: .\home\templates\home\about.html:12
-#, fuzzy
-msgid "About Our Platform"
-msgstr "Acerca de nuestra plataforma"
+#: .\home\plugin.py:8
+msgid "Corporate showcase pages: Home, About, Services, Products, Contact"
+msgstr ""
 
-#: .\home\templates\home\about.html:14 .\home\templates\home\contact.html:14
-#: .\home\templates\home\index.html:5 .\home\templates\home\products.html:14
-#: .\home\templates\home\services.html:14 .\templates\base.html:97
+#: .\home\plugin.py:12 .\home\templates\home\about.html:14
+#: .\home\templates\home\contact.html:14 .\home\templates\home\index.html:5
+#: .\home\templates\home\products.html:14
+#: .\home\templates\home\services.html:14 .\templates\base.html:114
 #: .\templates\base_form.html:27
 #: .\user_management\templates\user_management\logout.html:14
 #: .\user_management\templates\user_management\logout.html:29
@@ -74,11 +74,37 @@ msgstr "Acerca de nuestra plataforma"
 msgid "Home"
 msgstr "Inicio"
 
-#: .\home\templates\home\about.html:14 .\home\templates\home\index.html:327
-#: .\templates\base.html:98
+#: .\home\plugin.py:13 .\home\templates\home\about.html:14
+#: .\home\templates\home\index.html:327 .\templates\base.html:115
 #, fuzzy
 msgid "About Us"
 msgstr "¿Quiénes somos?"
+
+#: .\home\plugin.py:14 .\home\templates\home\services.html:14
+#: .\templates\base.html:116
+msgid "Services"
+msgstr ""
+
+#: .\home\plugin.py:15 .\home\templates\home\products.html:14
+#: .\templates\base.html:117
+msgid "Products"
+msgstr ""
+
+#: .\home\plugin.py:16 .\home\templates\home\contact.html:14
+#: .\templates\base.html:118
+#, fuzzy
+msgid "Contact"
+msgstr "Contacto"
+
+#: .\home\templates\home\about.html:5
+#, fuzzy
+msgid "About Us - Enterprise Website"
+msgstr "Sobre nosotros - Sitio web de la empresa"
+
+#: .\home\templates\home\about.html:12
+#, fuzzy
+msgid "About Our Platform"
+msgstr "Acerca de nuestra plataforma"
 
 #: .\home\templates\home\about.html:17
 #, fuzzy
@@ -173,11 +199,6 @@ msgstr "Contáctenos - Sitio web empresarial"
 #, fuzzy
 msgid "Get in Touch"
 msgstr "Ponte en contacto con nosotros"
-
-#: .\home\templates\home\contact.html:14 .\templates\base.html:101
-#, fuzzy
-msgid "Contact"
-msgstr "Contacto"
 
 #: .\home\templates\home\contact.html:17
 #, fuzzy
@@ -426,10 +447,6 @@ msgstr ""
 msgid "Featured Products & Systems"
 msgstr ""
 
-#: .\home\templates\home\products.html:14 .\templates\base.html:100
-msgid "Products"
-msgstr ""
-
 #: .\home\templates\home\products.html:17
 msgid ""
 "Engineered hardware and automation solutions for high-precision environments"
@@ -495,10 +512,6 @@ msgstr ""
 
 #: .\home\templates\home\services.html:12
 msgid "Our Services & Applications"
-msgstr ""
-
-#: .\home\templates\home\services.html:14 .\templates\base.html:99
-msgid "Services"
 msgstr ""
 
 #: .\home\templates\home\services.html:17
@@ -669,8 +682,139 @@ msgstr ""
 msgid "cities"
 msgstr ""
 
-#: .\polls\apps.py:7 .\polls\templates\polls\index.html:6
-#: .\templates\base.html:105
+#: .\menu_management\admin.py:23
+msgid "Items"
+msgstr ""
+
+#: .\menu_management\admin.py:25
+msgid "Sync discovered plugins into this menu"
+msgstr ""
+
+#: .\menu_management\admin.py:29
+msgid "Successfully synced plugin menu items."
+msgstr ""
+
+#: .\menu_management\apps.py:8
+#, fuzzy
+#| msgid "User language"
+msgid "Menu Management"
+msgstr "Idioma del usuario"
+
+#: .\menu_management\models.py:8
+msgid "Slug"
+msgstr ""
+
+#: .\menu_management\models.py:8
+msgid "Unique identifier, e.g. main_navbar"
+msgstr ""
+
+#: .\menu_management\models.py:9 .\menu_management\models.py:31
+#: .\todo\models.py:9 .\todo\templates\todo\add.html:19
+msgid "Title"
+msgstr ""
+
+#: .\menu_management\models.py:10
+msgid "Description"
+msgstr ""
+
+#: .\menu_management\models.py:11
+msgid "Is active"
+msgstr ""
+
+#: .\menu_management\models.py:14 .\menu_management\models.py:28
+msgid "Menu"
+msgstr ""
+
+#: .\menu_management\models.py:15
+msgid "Menus"
+msgstr ""
+
+#: .\menu_management\models.py:29
+msgid "Parent item"
+msgstr ""
+
+#: .\menu_management\models.py:31
+msgid "Display label for the menu item"
+msgstr ""
+
+#: .\menu_management\models.py:32
+msgid "Named URL"
+msgstr ""
+
+#: .\menu_management\models.py:32
+msgid "Django reverse URL name, e.g., home:about"
+msgstr ""
+
+#: .\menu_management\models.py:33
+msgid "Explicit URL / Path"
+msgstr ""
+
+#: .\menu_management\models.py:33
+msgid "External or explicit URL, e.g., /about/ or https://..."
+msgstr ""
+
+#: .\menu_management\models.py:34
+msgid "Icon CSS class"
+msgstr ""
+
+#: .\menu_management\models.py:34
+msgid "FontAwesome or Linearicons class, e.g., fa fa-tasks"
+msgstr ""
+
+#: .\menu_management\models.py:36
+msgid "Order"
+msgstr ""
+
+#: .\menu_management\models.py:36
+msgid "Display order (lower numbers appear first)"
+msgstr ""
+
+#: .\menu_management\models.py:37
+msgid "Visible"
+msgstr ""
+
+#: .\menu_management\models.py:37
+msgid "Toggle to hide or show this item"
+msgstr ""
+
+#: .\menu_management\models.py:40
+msgid "Requires authentication"
+msgstr ""
+
+#: .\menu_management\models.py:41
+msgid "Requires staff access"
+msgstr ""
+
+#: .\menu_management\models.py:44
+msgid "Plugin source"
+msgstr ""
+
+#: .\menu_management\models.py:44
+msgid "Originating plugin ID, e.g., todo, polls"
+msgstr ""
+
+#: .\menu_management\models.py:45
+msgid "Custom user item"
+msgstr ""
+
+#: .\menu_management\models.py:45
+msgid "True if created manually by admin rather than auto-discovered"
+msgstr ""
+
+#: .\menu_management\models.py:48
+msgid "Menu Item"
+msgstr ""
+
+#: .\menu_management\models.py:49
+msgid "Menu Items"
+msgstr ""
+
+#: .\plugin_registry\apps.py:8
+msgid "Plugin Registry"
+msgstr ""
+
+#: .\polls\apps.py:7 .\polls\plugin.py:14 .\polls\templates\polls\index.html:6
+#: .\templates\base.html:122
 msgid "Polls"
 msgstr "Encuestas"
 
@@ -714,6 +858,14 @@ msgstr ""
 
 #: .\polls\models.py:37
 msgid "Choices"
+msgstr ""
+
+#: .\polls\plugin.py:7
+msgid "Polls & Voting"
+msgstr ""
+
+#: .\polls\plugin.py:8
+msgid "Interactive voting system with fraud prevention and results charts"
 msgstr ""
 
 #: .\polls\templates\polls\detail.html:5
@@ -771,49 +923,393 @@ msgstr ""
 msgid "Your vote for '%(choice)s' has been recorded!"
 msgstr ""
 
+#: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:124
+msgid "REST API"
+msgstr ""
+
+#: .\rest_api\plugin.py:8
+msgid "Django REST Framework browsable and serialized endpoints"
+msgstr ""
+
+#: .\task_runner\admin.py:32
+msgid "Task Overview"
+msgstr ""
+
+#: .\task_runner\admin.py:46
+msgid "Live Monitoring"
+msgstr ""
+
+#: .\task_runner\admin.py:52
+msgid "Task Logs & Result"
+msgstr ""
+
+#: .\task_runner\admin.py:61 .\task_runner\models.py:29
+#: .\task_runner\templates\task_runner\job_detail.html:47
+#: .\task_runner\templates\task_runner\job_list.html:69
+msgid "Task ID"
+msgstr ""
+
+#: .\task_runner\admin.py:65 .\task_runner\models.py:42
+#: .\task_runner\templates\task_runner\job_list.html:70
+#: .\user_management\templates\user_management\siteuser_list.html:36
+msgid "Status"
+msgstr ""
+
+#: .\task_runner\admin.py:82
+#: .\task_runner\templates\task_runner\job_list.html:71
+msgid "Progress"
+msgstr ""
+
+#: .\task_runner\admin.py:91
+msgid "Real-time Task Monitor"
+msgstr ""
+
+#: .\task_runner\admin.py:94
+msgid "Save task first to display live stream."
+msgstr ""
+
+#: .\task_runner\admin.py:111
+msgid "Trigger Collectstatic in background"
+msgstr ""
+
+#: .\task_runner\admin.py:114
+msgid "Background collectstatic task queued."
+msgstr ""
+
+#: .\task_runner\admin.py:116
+msgid "Trigger Auto-Translate (Spanish baseline)"
+msgstr ""
+
+#: .\task_runner\admin.py:119
+msgid "Background auto-translate task for Spanish queued."
+msgstr ""
+
+#: .\task_runner\apps.py:8 .\task_runner\templates\task_runner\job_list.html:4
+#: .\task_runner\templates\task_runner\job_list.html:11
+msgid "Background Task Runner"
+msgstr ""
+
+#: .\task_runner\models.py:19
+msgid "Pending"
+msgstr ""
+
+#: .\task_runner\models.py:20
+msgid "Running"
+msgstr ""
+
+#: .\task_runner\models.py:21
+msgid "Success"
+msgstr ""
+
+#: .\task_runner\models.py:22
+msgid "Failure"
+msgstr ""
+
+#: .\task_runner\models.py:23
+msgid "Revoked"
+msgstr ""
+
+#: .\task_runner\models.py:30
+msgid "Celery task UUID or unique identifier"
+msgstr ""
+
+#: .\task_runner\models.py:34
+#: .\task_runner\templates\task_runner\job_detail.html:50
+#: .\task_runner\templates\task_runner\job_list.html:68
+msgid "Task Name"
+msgstr ""
+
+#: .\task_runner\models.py:35
+msgid "Human-readable name or task function path"
+msgstr ""
+
+#: .\task_runner\models.py:46
+msgid "Progress (%)"
+msgstr ""
+
+#: .\task_runner\models.py:47
+msgid "Completion percentage between 0 and 100"
+msgstr ""
+
+#: .\task_runner\models.py:52
+msgid "Log Output"
+msgstr ""
+
+#: .\task_runner\models.py:53
+msgid "Captured stdout, stderr, or lifecycle log stream"
+msgstr ""
+
+#: .\task_runner\models.py:58
+#, fuzzy
+msgid "Error Message"
+msgstr "Escriba el mensaje"
+
+#: .\task_runner\models.py:59
+msgid "Exception message or stack trace if the task failed"
+msgstr ""
+
+#: .\task_runner\models.py:64
+#: .\task_runner\templates\task_runner\job_detail.html:69
+msgid "Result Data"
+msgstr ""
+
+#: .\task_runner\models.py:65
+msgid "JSON-encoded output returned by the background task"
+msgstr ""
+
+#: .\task_runner\models.py:73
+#: .\task_runner\templates\task_runner\job_detail.html:53
+#: .\task_runner\templates\task_runner\job_list.html:72
+msgid "Created By"
+msgstr ""
+
+#: .\task_runner\models.py:77
+#: .\task_runner\templates\task_runner\job_list.html:73
+msgid "Created At"
+msgstr ""
+
+#: .\task_runner\models.py:81
+msgid "Updated At"
+msgstr ""
+
+#: .\task_runner\models.py:86
+msgid "Background Task Job"
+msgstr ""
+
+#: .\task_runner\models.py:87
+msgid "Background Task Jobs"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_detail.html:4
+msgid "Background Task"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_detail.html:13
+msgid "Task Runner"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_detail.html:23
+msgid "Back to Task List"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_detail.html:26
+msgid "Edit in Admin"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_detail.html:42
+#, fuzzy
+msgid "Task Details"
+msgstr "Texto traducido de prueba"
+
+#: .\task_runner\templates\task_runner\job_detail.html:58
+#: .\task_runner\templates\task_runner\job_list.html:113
+msgid "System / Daemon"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_detail.html:62
+#, fuzzy
+msgid "Started At"
+msgstr "Texto traducido de prueba"
+
+#: .\task_runner\templates\task_runner\job_detail.html:65
+msgid "Last Update"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:13
+msgid ""
+"Monitor, launch, and inspect Celery asynchronous jobs with live streaming."
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:17
+msgid "Launch New Task"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:20
+msgid "Django Admin"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:36
+msgid "Search by task name or task ID..."
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:42
+#, fuzzy
+#| msgid "Polls"
+msgid "All Statuses"
+msgstr "Encuestas"
+
+#: .\task_runner\templates\task_runner\job_list.html:50
+msgid "Filter"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:74
+msgid "Actions"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:121
+msgid "View"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:129
+msgid "No background tasks found."
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:139
+#, fuzzy
+#| msgid "Page Administration"
+msgid "Page navigation"
+msgstr "Administración De La Página"
+
+#: .\task_runner\templates\task_runner\job_list.html:143
+msgid "Previous"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:151
+msgid "Next"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:167
+msgid "Queue New Background Task"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:175
+msgid "Select Task Type"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:177
+msgid "Auto-Translate Catalog (auto_translate)"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:178
+msgid "Collect Static Files (collectstatic)"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:179
+msgid "Run External Script (subprocess)"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:186
+msgid "Target Language (Optional)"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:190
+msgid "Translation Backend"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:198
+msgid "Max Strings (Optional test limit)"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:206
+msgid "Command"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:212
+#: .\user_management\templates\user_management\login.html:19
+#: .\user_management\templates\user_management\signup.html:18
+msgid "Cancel"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\job_list.html:214
+msgid "Queue Task"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\task_progress_widget.html:13
+msgid "Connection Status"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\task_progress_widget.html:23
+msgid "Execution Progress"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\task_progress_widget.html:47
+msgid "Task Error:"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\task_progress_widget.html:56
+msgid "Live Console Output"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\task_progress_widget.html:57
+msgid "Copy Log"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\task_progress_widget.html:64
+msgid "Task initialized. Waiting for stream output..."
+msgstr ""
+
+#: .\task_runner\templates\task_runner\task_progress_widget.html:175
+msgid "WebSocket Connected"
+msgstr ""
+
+#: .\task_runner\templates\task_runner\task_progress_widget.html:190
+msgid "Falling back to HTTP polling"
+msgstr ""
+
+#: .\task_runner\views.py:64
+msgid "Task not found"
+msgstr ""
+
+#: .\task_runner\views.py:92
+msgid "Auto-translate task queued successfully."
+msgstr ""
+
+#: .\task_runner\views.py:102
+msgid "Collectstatic task queued successfully."
+msgstr ""
+
+#: .\task_runner\views.py:107
+msgid "Please provide a command to run."
+msgstr ""
+
+#: .\task_runner\views.py:117
+msgid "External script queued successfully."
+msgstr ""
+
+#: .\task_runner\views.py:120
+msgid "Unknown task type specified."
+msgstr ""
+
 #: .\templates\base.html:93
 msgid "Enterprise Website"
 msgstr ""
 
-#: .\templates\base.html:102
+#: .\templates\base.html:119
 msgid "Apps"
 msgstr ""
 
-#: .\templates\base.html:104
+#: .\templates\base.html:121 .\todo\plugin.py:14
 #, fuzzy
 #| msgid "Todo's"
 msgid "Todo List"
 msgstr "Tareas"
 
-#: .\templates\base.html:106
+#: .\templates\base.html:123 .\webprogram\plugin.py:7
+#: .\webprogram\plugin.py:14
 msgid "Brython WebProgram"
 msgstr ""
 
-#: .\templates\base.html:107
-msgid "REST API"
-msgstr ""
-
-#: .\templates\base.html:108
+#: .\templates\base.html:125 .\templates\base.html:135
 msgid "Site Admin"
 msgstr ""
 
-#: .\templates\base.html:115
+#: .\templates\base.html:133
 #: .\user_management\templates\user_management\profile.html:14
 msgid "Profile"
 msgstr ""
 
-#: .\templates\base.html:120
+#: .\templates\base.html:141
 msgid "Logout"
 msgstr ""
 
-#: .\templates\base.html:125 .\templates\registration\login.html:4
+#: .\templates\base.html:146 .\templates\registration\login.html:4
 #: .\templates\registration\login.html:40
 #: .\user_management\templates\user_management\login.html:4
 #: .\user_management\templates\user_management\login.html:18
 msgid "Login"
 msgstr ""
 
-#: .\templates\base.html:126
+#: .\templates\base.html:147
 msgid "Signup"
 msgstr ""
 
@@ -910,10 +1406,6 @@ msgstr ""
 msgid "Todo's"
 msgstr "Tareas"
 
-#: .\todo\models.py:9 .\todo\templates\todo\add.html:19
-msgid "Title"
-msgstr ""
-
 #: .\todo\models.py:10
 msgid "Text"
 msgstr ""
@@ -933,6 +1425,14 @@ msgstr "Tareas"
 #| msgid "Todo's"
 msgid "Todos"
 msgstr "Tareas"
+
+#: .\todo\plugin.py:7
+msgid "Todo Task Manager"
+msgstr ""
+
+#: .\todo\plugin.py:8
+msgid "Interactive task management app with due dates and completion states"
+msgstr ""
 
 #: .\todo\templates\todo\add.html:5
 msgid "Add to Todo list"
@@ -1003,6 +1503,10 @@ msgstr ""
 msgid "Task created successfully!"
 msgstr ""
 
+#: .\todo\views.py:76
+msgid "Task deleted successfully!"
+msgstr ""
+
 #: .\user_management\admin.py:16
 msgid "Personal info"
 msgstr ""
@@ -1021,29 +1525,30 @@ msgstr ""
 msgid "User management"
 msgstr "Idioma del usuario"
 
-#: .\user_management\forms.py:44
-msgid "Please use an image that is %(w) x %(h) pixels or smaller."
+#: .\user_management\forms.py:45
+#, python-format
+msgid "Please use an image that is %(w)d x %(h)d pixels or smaller."
 msgstr ""
 
-#: .\user_management\forms.py:50
+#: .\user_management\forms.py:53 .\user_management\forms.py:55
 msgid "Please use a JPEG, GIF or PNG image."
 msgstr ""
 
-#: .\user_management\forms.py:56
+#: .\user_management\forms.py:61
 #, python-format
 msgid "Avatar file size may not exceed %s."
 msgstr ""
 
-#: .\user_management\forms.py:75
+#: .\user_management\forms.py:81
 msgid "Invalid date - unless you come from the future"
 msgstr ""
 
-#: .\user_management\forms.py:80
+#: .\user_management\forms.py:86
 #, python-format
 msgid "Invalid date - you must older than %d"
 msgstr ""
 
-#: .\user_management\forms.py:133
+#: .\user_management\forms.py:139
 msgid "Image"
 msgstr ""
 
@@ -1088,11 +1593,6 @@ msgstr ""
 
 #: .\user_management\templates\emails\user_management\activation.html:7
 msgid "Activate your account"
-msgstr ""
-
-#: .\user_management\templates\user_management\login.html:19
-#: .\user_management\templates\user_management\signup.html:18
-msgid "Cancel"
 msgstr ""
 
 #: .\user_management\templates\user_management\logout.html:5
@@ -1276,10 +1776,6 @@ msgstr ""
 msgid "City"
 msgstr ""
 
-#: .\user_management\templates\user_management\siteuser_list.html:36
-msgid "Status"
-msgstr ""
-
 #: .\user_management\templates\user_management\siteuser_list.html:48
 msgid "Active"
 msgstr ""
@@ -1296,43 +1792,47 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: .\user_management\views.py:72
+#: .\user_management\views.py:77
 #, python-format
 msgid "Welcome, %(username)s! Your account has been successfully activated."
 msgstr ""
 
-#: .\user_management\views.py:75
+#: .\user_management\views.py:80
 msgid ""
 "The activation link is invalid or has expired. Please log in or request a "
 "new activation."
 msgstr ""
 
-#: .\user_management\views.py:85
+#: .\user_management\views.py:90
 #, python-format
 msgid "Welcome back, %(name)s!"
 msgstr ""
 
-#: .\user_management\views.py:89
+#: .\user_management\views.py:94
 msgid ""
 "Invalid username or password. Please check your credentials and try again."
 msgstr ""
 
-#: .\user_management\views.py:99
+#: .\user_management\views.py:104
 msgid "You have been successfully logged out. See you soon!"
 msgstr ""
 
-#: .\user_management\views.py:128
+#: .\user_management\views.py:133
 msgid "Account created successfully! You can now log in."
 msgstr ""
 
-#: .\user_management\views.py:132
+#: .\user_management\views.py:137
 msgid "Please correct the errors below to complete your registration."
 msgstr ""
 
-#: .\user_management\views.py:171
+#: .\user_management\views.py:176
 msgid "Your profile has been updated successfully."
 msgstr ""
 
-#: .\user_management\views.py:175
+#: .\user_management\views.py:180
 msgid "Unable to save profile changes. Please review the highlighted fields."
+msgstr ""
+
+#: .\webprogram\plugin.py:8
+msgid "In-browser client-side Python execution environment"
 msgstr ""

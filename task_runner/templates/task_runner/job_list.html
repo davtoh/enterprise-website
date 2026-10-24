@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Background Task Runner" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <div>
+      <h2 class="h3 fw-bold mb-1">
+        <i class="fa fa-tasks text-primary me-2"></i>{% trans "Background Task Runner" %}
+      </h2>
+      <p class="text-muted mb-0">{% trans "Monitor, launch, and inspect Celery asynchronous jobs with live streaming." %}</p>
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#launchTaskModal">
+        <i class="fa fa-play me-1"></i>{% trans "Launch New Task" %}
+      </button>
+      <a href="{% url 'admin:task_runner_taskjob_changelist' %}" class="btn btn-outline-secondary">
+        <i class="fa fa-cog me-1"></i>{% trans "Django Admin" %}
+      </a>
+    </div>
+  </div>
+
+  <!-- Filters & Search -->
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-body p-3">
+      <form method="get" class="row g-2 align-items-center">
+        <div class="col-md-5">
+          <div class="input-group">
+            <span class="input-group-text bg-white"><i class="fa fa-search text-muted"></i></span>
+            <input 
+              type="text" 
+              name="q" 
+              class="form-control" 
+              placeholder="{% trans 'Search by task name or task ID...' %}" 
+              value="{{ search_query }}">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <select name="status" class="form-select">
+            <option value="">{% trans "All Statuses" %}</option>
+            {% for code, label in status_choices %}
+              <option value="{{ code }}" {% if selected_status == code %}selected{% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+          <button type="submit" class="btn btn-secondary w-100">
+            <i class="fa fa-filter me-1"></i>{% trans "Filter" %}
+          </button>
+          {% if selected_status or search_query %}
+            <a href="{% url 'task_runner:list' %}" class="btn btn-outline-secondary">
+              <i class="fa fa-times"></i>
+            </a>
+          {% endif %}
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Jobs Table -->
+  <div class="card shadow-sm border-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th scope="col" style="width: 25%;">{% trans "Task Name" %}</th>
+            <th scope="col">{% trans "Task ID" %}</th>
+            <th scope="col">{% trans "Status" %}</th>
+            <th scope="col" style="width: 20%;">{% trans "Progress" %}</th>
+            <th scope="col">{% trans "Created By" %}</th>
+            <th scope="col">{% trans "Created At" %}</th>
+            <th scope="col" class="text-end">{% trans "Actions" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for job in jobs %}
+            <tr>
+              <td>
+                <span class="fw-semibold text-dark">{{ job.name }}</span>
+              </td>
+              <td>
+                <code class="text-secondary small">{{ job.task_id|slice:":12" }}...</code>
+              </td>
+              <td>
+                {% if job.status == 'RUNNING' %}
+                  <span class="badge bg-primary"><i class="fa fa-spinner fa-spin me-1"></i>RUNNING</span>
+                {% elif job.status == 'SUCCESS' %}
+                  <span class="badge bg-success"><i class="fa fa-check me-1"></i>SUCCESS</span>
+                {% elif job.status == 'FAILURE' %}
+                  <span class="badge bg-danger"><i class="fa fa-exclamation me-1"></i>FAILURE</span>
+                {% elif job.status == 'REVOKED' %}
+                  <span class="badge bg-warning text-dark">REVOKED</span>
+                {% else %}
+                  <span class="badge bg-secondary">PENDING</span>
+                {% endif %}
+              </td>
+              <td>
+                <div class="d-flex align-items-center gap-2">
+                  <div class="progress flex-grow-1" style="height: 10px;">
+                    <div 
+                      class="progress-bar {% if job.status == 'SUCCESS' %}bg-success{% elif job.status == 'FAILURE' %}bg-danger{% else %}bg-primary{% endif %}" 
+                      style="width: {{ job.progress }}%;"></div>
+                  </div>
+                  <span class="small fw-bold text-muted">{{ job.progress }}%</span>
+                </div>
+              </td>
+              <td>
+                {% if job.created_by %}
+                  <span class="small"><i class="fa fa-user-circle me-1 text-muted"></i>{{ job.created_by.get_username }}</span>
+                {% else %}
+                  <span class="text-muted small"><em>{% trans "System / Daemon" %}</em></span>
+                {% endif %}
+              </td>
+              <td class="small text-muted">
+                {{ job.created_at|date:"Y-m-d H:i" }}
+              </td>
+              <td class="text-end">
+                <a href="{% url 'task_runner:detail' task_id=job.task_id %}" class="btn btn-sm btn-outline-primary">
+                  <i class="fa fa-eye me-1"></i>{% trans "View" %}
+                </a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="7" class="text-center py-5 text-muted">
+                <i class="fa fa-inbox fa-3x mb-3 text-secondary"></i>
+                <p class="mb-0">{% trans "No background tasks found." %}</p>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if is_paginated %}
+      <div class="card-footer bg-white py-3">
+        <nav aria-label="{% trans 'Page navigation' %}">
+          <ul class="pagination pagination-sm justify-content-center mb-0">
+            {% if page_obj.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if selected_status %}&status={{ selected_status }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">{% trans "Previous" %}</a>
+              </li>
+            {% endif %}
+            <li class="page-item disabled">
+              <span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+            </li>
+            {% if page_obj.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if selected_status %}&status={{ selected_status }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">{% trans "Next" %}</a>
+              </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Launch Task Modal -->
+<div class="modal fade" id="launchTaskModal" tabindex="-1" aria-labelledby="launchTaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="launchTaskModalLabel">
+          <i class="fa fa-play-circle me-1"></i>{% trans "Queue New Background Task" %}
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="post" action="{% url 'task_runner:trigger' %}">
+        {% csrf_token %}
+        <div class="modal-body p-4">
+          <div class="mb-3">
+            <label class="form-label fw-bold">{% trans "Select Task Type" %}</label>
+            <select name="task_type" id="taskTypeSelector" class="form-select" required>
+              <option value="auto_translate">{% trans "Auto-Translate Catalog (auto_translate)" %}</option>
+              <option value="collectstatic">{% trans "Collect Static Files (collectstatic)" %}</option>
+              <option value="external_script">{% trans "Run External Script (subprocess)" %}</option>
+            </select>
+          </div>
+
+          <!-- Auto-Translate Options -->
+          <div id="autoTranslateFields">
+            <div class="mb-3">
+              <label class="form-label">{% trans "Target Language (Optional)" %}</label>
+              <input type="text" name="lang" class="form-control" placeholder="e.g. es, pt, fr, de, it (blank for all)">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">{% trans "Translation Backend" %}</label>
+              <select name="backend" class="form-select">
+                <option value="mymemory" selected>MyMemory (Free tier)</option>
+                <option value="deepl">DeepL API</option>
+                <option value="openai">OpenAI API</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">{% trans "Max Strings (Optional test limit)" %}</label>
+              <input type="number" name="max_entries" class="form-control" placeholder="e.g. 5">
+            </div>
+          </div>
+
+          <!-- Script Options -->
+          <div id="scriptFields" class="d-none">
+            <div class="mb-3">
+              <label class="form-label fw-bold">{% trans "Command" %}</label>
+              <input type="text" name="command" class="form-control font-monospace" placeholder="e.g. python --version">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer bg-light">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-paper-plane me-1"></i>{% trans "Queue Task" %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const selector = document.getElementById("taskTypeSelector");
+  const autoFields = document.getElementById("autoTranslateFields");
+  const scriptFields = document.getElementById("scriptFields");
+
+  if (selector) {
+    selector.addEventListener("change", function() {
+      if (this.value === "auto_translate") {
+        autoFields.classList.remove("d-none");
+        scriptFields.classList.add("d-none");
+      } else if (this.value === "external_script") {
+        autoFields.classList.add("d-none");
+        scriptFields.classList.remove("d-none");
+      } else {
+        autoFields.classList.add("d-none");
+        scriptFields.classList.add("d-none");
+      }
+    });
+  }
+});
+</script>
+{% endblock %}

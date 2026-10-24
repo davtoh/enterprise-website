@@ -23,6 +23,7 @@
 | **Production Security** | Zero SSL / HSTS / cookie protections | `check --deploy` clean, HSTS preload, secure cookies, framing protection, proxy SSL headers | **DONE** |
 | **CI/CD Automation** | None | GitHub Actions (`.github/workflows/ci.yml`) for tests, coverage upload, and container publishing | **DONE** |
 | **Geodata Delivery** | 175MB raw `world.sql` directly on root | `download_geodata` command for streaming download on-demand; kept out of Git | **DONE** |
+| **Async Tasks & Worker** | Synchronous only; blocked long operations | Celery 5.6 + Redis 8 + Flower 2.2 + Django Channels WebSocket task progress streaming (`task_runner` app) | **DONE** |
 
 ---
 
@@ -102,4 +103,33 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
   - Fixed string format specifiers in avatar validation (`%(w)d x %(h)d` and `{max_size}k`).
   - Added ordering to `UserViewSet` queryset to eliminate DRF pagination warnings.
 - [x] Verification: 106 tests passing, 80% statement coverage achieved with HTML report in `htmlcov/`.
+
+---
+
+## 4. Milestone 11 — Celery & Async Background Task Infrastructure
+- [x] Celery and Broker Configuration:
+  - Installed `celery>=5.3.6`, `redis>=5.0.0`, and `flower>=2.0.1` in `requirements/base.txt`.
+  - Configured `enterprise_website/celery.py` and linked Celery app in `enterprise_website/__init__.py`.
+  - Added Celery broker, result backend, timezone, serialization, and eager execution settings to `enterprise_website/settings.py`.
+- [x] Created `task_runner` Application:
+  - `TaskJob` model (`task_runner/models.py`) with lifecycle states (`PENDING`, `RUNNING`, `SUCCESS`, `FAILURE`, `REVOKED`), progress percentage tracking, live log output, error messages, and Channel layer broadcasting.
+  - `TrackedTask` base class (`task_runner/base.py`) providing automatic task lifecycle management, exception logging, and incremental progress helper `self.update_job_progress()`.
+  - `TaskProgressConsumer` (`task_runner/consumers.py`) streaming live task snapshots and incremental broadcasts to browsers via Django Channels WebSockets (`ws/tasks/<task_id>/`).
+  - Reusable template tag `{% task_progress_widget task_id %}` (`task_runner/templatetags/task_runner_tags.py`) with real-time animated progress bar, status badges, live auto-scrolling terminal console, and WebSocket connection with HTTP polling fallback.
+  - Staff management views (`task_runner/views.py` and `task_runner/urls.py`): `/tasks/` (dashboard with filters/search), `/tasks/<task_id>/` (detail view with widget), `/tasks/<task_id>/status/` (JSON API), and `/tasks/trigger/` (task queue launcher).
+  - Django Admin integration (`task_runner/admin.py`) embedding the live real-time widget in task change forms and providing admin actions.
+- [x] Background Task Implementations:
+  - `run_auto_translate` (`task_runner.tasks.run_auto_translate`): asynchronous catalog translation streaming progress and log lines.
+  - `run_external_script` (`task_runner.tasks.run_external_script`): sandboxed subprocess runner streaming stdout/stderr live to the browser.
+  - `run_collectstatic` (`task_runner.tasks.run_collectstatic`): background static file collection.
+- [x] Plugin Registry Integration:
+  - Updated `AppPlugin` interface (`plugin_registry/base.py`) with `tasks` list and `get_tasks()` classmethod.
+  - Added `get_all_tasks()` to `PluginRegistry` (`plugin_registry/registry.py`).
+  - Created `TaskRunnerPlugin` in `task_runner/plugin.py` exposing background tasks in the dynamic menu.
+- [x] Container Architecture:
+  - Updated `docker-compose.yml` with `celery_worker` and `flower` services.
+  - Updated `docker-compose.override.yml` with local development code volume bindings.
+- [x] Automated Test Suite:
+  - Created `tests/test_task_runner.py` with 18 comprehensive tests covering models, Celery tasks, Channels consumer, staff views, JSON API, template tags, and plugin integration.
+  - Entire test suite: **128 passed in 33.78s** with **81% total statement coverage**.
 
