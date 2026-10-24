@@ -89,8 +89,9 @@ msgstr "Texto traducido de prueba"
 
 #: .\home\plugin.py:15 .\home\templates\home\products.html:14
 #: .\templates\base.html:117
+#, fuzzy
 msgid "Products"
-msgstr ""
+msgstr "Texto traducido de prueba"
 
 #: .\home\plugin.py:16 .\home\templates\home\contact.html:14
 #: .\templates\base.html:118

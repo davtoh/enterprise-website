@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import sys
 import json
 from pathlib import Path
 from dotenv import load_dotenv
@@ -36,7 +37,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", KEYS.get("SECRET_KEY", "django-insecure-def
 
 DEBUG = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
 
-ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost,192.168.0.4,testserver").split(",") if host.strip()]
+ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost,testserver").split(",") if host.strip()]
 
 
 # Application definition
@@ -131,12 +132,12 @@ if USE_SQLITE:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.mysql'), # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-            'NAME': os.getenv('DB_NAME', KEYS.get('DB_NAME', 'productsDB')), # Or path to database file if using sqlite3.
-            'USER': os.getenv('DB_USER', KEYS.get('DB_USER', 'root')),
+            'ENGINE': os.getenv('DB_ENGINE', ''),
+            'NAME': os.getenv('DB_NAME', KEYS.get('DB_NAME', '')),
+            'USER': os.getenv('DB_USER', KEYS.get('DB_USER', '')),
             'PASSWORD': os.getenv('DB_PASSWORD', KEYS.get('DB_PASS', '')),
-            'HOST': os.getenv('DB_HOST', '127.0.0.1'), # Set to empty string for localhost. Not used with sqlite3.
-            'PORT': os.getenv('DB_PORT', '3306'), # Set to empty string for default. Not used with sqlite3.
+            'HOST': os.getenv('DB_HOST', ''),
+            'PORT': os.getenv('DB_PORT', ''),
         }
     }
 
@@ -313,9 +314,12 @@ REST_FRAMEWORK = {
 # channels
 ASGI_APPLICATION = "enterprise_website.routing.application"
 
-# Channels Layer configuration (In-memory for dev/testing, Redis for staging/production)
+# Channels Layer configuration (Redis for IPC between Celery and Daphne/Web, with InMemory fallback for tests)
+TESTING = "pytest" in sys.modules or "test" in sys.argv
 REDIS_URL = os.getenv("REDIS_URL", "")
-if REDIS_URL:
+USE_REDIS_CHANNEL_LAYER = os.getenv("USE_REDIS_CHANNEL_LAYER", "True").lower() in ("true", "1", "t") and not TESTING
+
+if USE_REDIS_CHANNEL_LAYER and REDIS_URL:
     CHANNEL_LAYERS = {
         "default": {
             "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -331,10 +335,11 @@ else:
         }
     }
 
+
 # Celery Configuration
 # https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html
-CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", os.getenv("REDIS_URL", "redis://localhost:6379/0") or "redis://localhost:6379/0")
-CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", os.getenv("REDIS_URL", "redis://localhost:6379/0") or "redis://localhost:6379/0")
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", REDIS_URL)
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", REDIS_URL)
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'

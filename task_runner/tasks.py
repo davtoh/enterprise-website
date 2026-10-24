@@ -1,9 +1,12 @@
 import io
 import logging
+import os
 import shlex
 import subprocess
 import sys
+from pathlib import Path
 from celery import shared_task
+from django.conf import settings
 from django.core.management import call_command
 from .base import TrackedTask
 
@@ -116,6 +119,14 @@ def run_external_script(self, command, stdin_data=None, timeout=300):
     else:
         args = list(command)
 
+    # Prepend active Python virtual environment Scripts directory to PATH
+    env = os.environ.copy()
+    venv_bin = Path(sys.executable).parent
+    env["PATH"] = str(venv_bin) + os.pathsep + env.get("PATH", "")
+    env["VIRTUAL_ENV"] = str(venv_bin.parent)
+    env["PYTHONUNBUFFERED"] = "1"
+    cwd = str(settings.BASE_DIR)
+
     process = subprocess.Popen(
         args,
         stdin=subprocess.PIPE if stdin_data else None,
@@ -124,6 +135,8 @@ def run_external_script(self, command, stdin_data=None, timeout=300):
         text=True,
         bufsize=1,
         shell=isinstance(args, str),
+        env=env,
+        cwd=cwd,
     )
 
     if stdin_data and process.stdin:

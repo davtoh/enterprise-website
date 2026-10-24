@@ -1,13 +1,13 @@
 {% load i18n %}
 <div class="card shadow-sm border-0 mb-4 task-widget" id="task-widget-{{ task_id }}" data-task-id="{{ task_id }}">
-  <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-2 px-3">
-    <div class="d-flex align-items-center gap-2">
-      <i class="fa fa-terminal text-info"></i>
-      <span class="fw-semibold task-title">{{ title }}</span>
-      <code class="text-white-50 small ms-1">#{{ task_id|slice:":8" }}</code>
+  <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-2 px-3" style="display: flex;">
+    <div class="d-flex align-items-center" style="display: flex; align-items: center;">
+      <i class="fa fa-terminal text-info mr-2 me-2" style="margin-right: 8px;"></i>
+      <span class="fw-semibold task-title mr-2 me-2" style="margin-right: 8px; font-weight: 600;">{{ title }}</span>
+      <code class="text-white-50 small">#{{ task_id|slice:":8" }}</code>
     </div>
-    <div class="d-flex align-items-center gap-2">
-      <span class="badge bg-secondary task-status-badge" id="badge-{{ task_id }}">
+    <div class="d-flex align-items-center" style="display: flex; align-items: center;">
+      <span class="badge bg-secondary task-status-badge mr-2 me-2" id="badge-{{ task_id }}" style="margin-right: 8px;">
         {{ status }}
       </span>
       <span class="task-conn-status text-warning small" id="conn-{{ task_id }}" title="{% trans 'Connection Status' %}">
@@ -19,16 +19,16 @@
   <div class="card-body p-3 bg-light">
     <!-- Progress Bar -->
     <div class="mb-2">
-      <div class="d-flex justify-content-between small text-muted mb-1">
+      <div class="d-flex justify-content-between small text-muted mb-1" style="display: flex; justify-content: space-between;">
         <span>{% trans "Execution Progress" %}</span>
-        <span class="fw-bold task-progress-percent" id="percent-{{ task_id }}">{{ progress }}%</span>
+        <span class="fw-bold task-progress-percent" id="percent-{{ task_id }}" style="font-weight: bold;">{{ progress }}%</span>
       </div>
-      <div class="progress" style="height: 18px; border-radius: 6px;">
+      <div class="progress" style="height: 20px; border-radius: 6px; background-color: #e9ecef;">
         <div 
           class="progress-bar progress-bar-striped {% if status == 'RUNNING' %}progress-bar-animated bg-primary{% elif status == 'SUCCESS' %}bg-success{% elif status == 'FAILURE' %}bg-danger{% else %}bg-secondary{% endif %} task-progress-bar"
           id="bar-{{ task_id }}"
           role="progressbar"
-          style="width: {{ progress }}%; font-size: 11px; font-weight: 600;"
+          style="width: {{ progress }}%; font-size: 11px; font-weight: 600; line-height: 20px; min-width: 2em;"
           aria-valuenow="{{ progress }}"
           aria-valuemin="0"
           aria-valuemax="100">
@@ -40,9 +40,10 @@
     <!-- Error Banner (Hidden by default unless failed) -->
     <div 
       class="alert alert-danger py-2 px-3 small mb-2 task-error-box {% if not error_message %}d-none{% endif %}" 
-      id="error-box-{{ task_id }}">
-      <div class="d-flex align-items-start gap-2">
-        <i class="fa fa-exclamation-triangle mt-1"></i>
+      id="error-box-{{ task_id }}"
+      {% if not error_message %}style="display: none;"{% endif %}>
+      <div class="d-flex align-items-start" style="display: flex;">
+        <i class="fa fa-exclamation-triangle mt-1 mr-2 me-2" style="margin-right: 8px;"></i>
         <div>
           <strong>{% trans "Task Error:" %}</strong>
           <span class="task-error-text" id="error-text-{{ task_id }}">{{ error_message }}</span>
@@ -52,16 +53,16 @@
 
     <!-- Live Terminal Console -->
     <div class="position-relative">
-      <div class="d-flex justify-content-between align-items-center px-2 py-1 bg-dark text-muted small" style="border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom: 1px solid #333;">
-        <span class="text-white-50"><i class="fa fa-file-text-o me-1"></i> {% trans "Live Console Output" %}</span>
-        <button class="btn btn-sm text-secondary p-0 copy-log-btn" type="button" data-task-id="{{ task_id }}" title="{% trans 'Copy Log' %}">
+      <div class="d-flex justify-content-between align-items-center px-2 py-1 bg-dark text-muted small" style="display: flex; justify-content: space-between; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom: 1px solid #333;">
+        <span class="text-white-50"><i class="fa fa-file-text-o mr-1 me-1" style="margin-right: 5px;"></i> {% trans "Live Console Output" %}</span>
+        <button class="btn btn-sm text-secondary p-0 copy-log-btn" type="button" data-task-id="{{ task_id }}" title="{% trans 'Copy Log' %}" style="background: none; border: 0; color: #adb5bd; cursor: pointer; padding: 2px 6px;">
           <i class="fa fa-copy"></i>
         </button>
       </div>
       <pre 
         class="bg-black text-light p-3 m-0 small task-console-log" 
         id="console-{{ task_id }}"
-        style="max-height: 220px; min-height: 100px; overflow-y: auto; font-family: 'Consolas', 'Courier New', monospace; white-space: pre-wrap; word-break: break-all; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;">{{ log_output|default:_("Task initialized. Waiting for stream output...") }}</pre>
+        style="max-height: 240px; min-height: 110px; overflow-y: auto; font-family: Consolas, 'Courier New', monospace; white-space: pre-wrap; word-break: break-all; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; background-color: #1a1a1a; color: #f8f9fa;">{{ log_output|default:_("Task initialized. Waiting for stream output...") }}</pre>
     </div>
   </div>
 </div>
@@ -77,6 +78,7 @@
   const consoleLog = document.getElementById("console-" + taskId);
   const errorBox = document.getElementById("error-box-" + taskId);
   const errorText = document.getElementById("error-text-" + taskId);
+  const copyBtn = document.querySelector(".copy-log-btn[data-task-id='" + taskId + "']");
 
   function scrollToBottom() {
     if (consoleLog) {
@@ -85,23 +87,58 @@
   }
   scrollToBottom();
 
+  // Copy to clipboard functionality
+  if (copyBtn && consoleLog) {
+    copyBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      const textToCopy = consoleLog.innerText || consoleLog.textContent || "";
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(textToCopy).then(showCopiedFeedback);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = textToCopy;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand("copy");
+          showCopiedFeedback();
+        } catch (err) {
+          console.error("Copy command failed:", err);
+        }
+        document.body.removeChild(textarea);
+      }
+    });
+
+    function showCopiedFeedback() {
+      const icon = copyBtn.querySelector("i");
+      if (icon) {
+        icon.className = "fa fa-check text-success";
+        setTimeout(function() {
+          icon.className = "fa fa-copy";
+        }, 1500);
+      }
+    }
+  }
+
   function updateUI(data) {
     if (!data) return;
 
     // Status badge
     if (badge && data.status) {
       badge.textContent = data.status;
-      badge.className = "badge task-status-badge ";
+      badge.className = "badge task-status-badge mr-2 me-2 ";
       if (data.status === "RUNNING") {
-        badge.className += "bg-primary";
+        badge.className += "bg-primary badge-primary";
       } else if (data.status === "SUCCESS") {
-        badge.className += "bg-success";
+        badge.className += "bg-success badge-success";
       } else if (data.status === "FAILURE") {
-        badge.className += "bg-danger";
+        badge.className += "bg-danger badge-danger";
       } else if (data.status === "REVOKED") {
-        badge.className += "bg-warning text-dark";
+        badge.className += "bg-warning badge-warning text-dark";
       } else {
-        badge.className += "bg-secondary";
+        badge.className += "bg-secondary badge-secondary";
       }
     }
 
@@ -134,17 +171,19 @@
 
     // Error box
     if (data.error_message) {
-      if (errorBox) errorBox.classList.remove("d-none");
+      if (errorBox) {
+        errorBox.classList.remove("d-none");
+        errorBox.style.display = "block";
+      }
       if (errorText) errorText.textContent = data.error_message;
     } else if (errorBox && data.status !== "FAILURE") {
       errorBox.classList.add("d-none");
+      errorBox.style.display = "none";
     }
   }
 
-  // WebSocket Connection
-  let socket = null;
+  // Active HTTP Polling Heartbeat
   let pollInterval = null;
-
   function startPolling() {
     if (pollInterval) return;
     pollInterval = setInterval(function() {
@@ -158,21 +197,28 @@
           }
         })
         .catch(function(err) {
-          console.debug("Task polling error:", err);
+          console.debug("Task polling check:", err);
         });
-    }, 2000);
+    }, 1200);
   }
 
+  // Always start active polling heartbeat if task is not in terminal state
+  const initialStatus = "{{ status }}";
+  if (initialStatus === "PENDING" || initialStatus === "RUNNING" || initialStatus === "") {
+    startPolling();
+  }
+
+  // WebSocket Connection for instant sub-millisecond push updates
   function initWebSocket() {
     const wsScheme = window.location.protocol === "https:" ? "wss://" : "ws://";
     const wsUrl = wsScheme + window.location.host + "/ws/tasks/" + taskId + "/";
 
     try {
-      socket = new WebSocket(wsUrl);
+      const socket = new WebSocket(wsUrl);
 
       socket.onopen = function() {
         if (conn) {
-          conn.innerHTML = '<i class="fa fa-circle text-success" title="{% trans 'WebSocket Connected' %}" style="font-size: 8px;"></i>';
+          conn.innerHTML = '<i class="fa fa-circle text-success" title="{% trans "Live WebSocket Connected" %}" style="font-size: 8px;"></i>';
         }
       };
 
@@ -180,14 +226,20 @@
         try {
           const payload = JSON.parse(event.data);
           updateUI(payload);
+          if (payload.status === "SUCCESS" || payload.status === "FAILURE" || payload.status === "REVOKED") {
+            if (pollInterval) {
+              clearInterval(pollInterval);
+              pollInterval = null;
+            }
+          }
         } catch (e) {
           console.error("Failed to parse websocket message", e);
         }
       };
 
-      socket.onerror = function(err) {
+      socket.onerror = function() {
         if (conn) {
-          conn.innerHTML = '<i class="fa fa-circle text-warning" title="{% trans 'Falling back to HTTP polling' %}" style="font-size: 8px;"></i>';
+          conn.innerHTML = '<i class="fa fa-circle text-warning" title="{% trans "Live Sync Active (HTTP Poll)" %}" style="font-size: 8px;"></i>';
         }
         startPolling();
       };
@@ -196,7 +248,6 @@
         if (conn) {
           conn.innerHTML = '<i class="fa fa-circle text-secondary" style="font-size: 8px;"></i>';
         }
-        // If final status is not yet reached, trigger fallback polling
         startPolling();
       };
     } catch (e) {

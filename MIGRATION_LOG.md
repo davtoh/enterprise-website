@@ -454,5 +454,11 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
       - Custom admin view `admin:task_runner_launch_script` at `/admin/task_runner/taskjob/launch-script/`.
       - Changelist button `[Launch External Script]` via `admin/task_runner/taskjob/change_list.html` and admin action `action_run_external_script`.
     - Automated test suite expanded to 19 tests in `test_task_runner.py`; full suite passing **129 tests in 29.42s** with 0 failures.
+  - **Live Streaming, Subprocess Isolation & UI Stabilization:**
+    - Root cause of 5% progress freeze: Django Channels was defaulting to `InMemoryChannelLayer`, isolating Celery worker broadcasts in one process from the Web/Daphne server in another. Added `channels-redis>=4.2.0` connected to `REDIS_URL`, and added an automatic 1.2s HTTP polling heartbeat in `task_progress_widget.html` so progress and console logs stream continuously without requiring page reloads.
+    - Root cause of script failures (`celery --version` and `python manage.py check`): Subprocesses running on Windows via `cmd.exe` defaulted to global system PATH without the virtualenv. Updated `run_external_script` in `task_runner/tasks.py` to prepend `Path(sys.executable).parent` to `env["PATH"]`, set `VIRTUAL_ENV`, `PYTHONUNBUFFERED=1`, and `cwd=BASE_DIR`.
+    - Added clipboard copy event listener with temporary visual confirmation badge (`fa-check`) to the copy button in `task_progress_widget.html`.
+    - Corrected button spacing in `job_detail.html` with explicit margins (`mr-2 me-2`).
+    - Formulated Bootstrap Modernization roadmap (Milestone 12) to cleanly unify legacy Bootstrap 3 JS + Bootstrap 4 CSS into a modern, native Bootstrap 5.3 architecture.
 
 
