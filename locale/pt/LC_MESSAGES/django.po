@@ -20,7 +20,8 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.8.1\n"
 
 #: .\crm\admin.py:62 .\crm\templates\crm\company_detail.html:117
-#: .\crm\templates\crm\dashboard.html:145 .\crm\templates\crm\lead_list.html:55
+#: .\crm\templates\crm\dashboard.html:145
+#: .\crm\templates\crm\lead_list.html:55
 msgid "Stage"
 msgstr ""
 
@@ -141,10 +142,8 @@ msgid "Company"
 msgstr ""
 
 #: .\crm\models.py:33 .\crm\templates\crm\base_crm.html:44
-#, fuzzy
-#| msgid "Spanish"
 msgid "Companies"
-msgstr "Espanhol"
+msgstr "Empresas"
 
 #: .\crm\models.py:50
 msgid "First Name"
@@ -419,9 +418,9 @@ msgstr ""
 
 #: .\crm\models.py:346
 msgid ""
-"Supports placeholders: {{ contact.first_name }}, {{ contact.last_name }}, "
-"{{ contact.email }}, {{ company.name }}, {{ lead.title }}, "
-"{{ tracking_pixel }}"
+"Supports placeholders: {{ contact.first_name }}, {{ contact.last_name }}, {{"
+" contact.email }}, {{ company.name }}, {{ lead.title }}, {{ tracking_pixel "
+"}}"
 msgstr ""
 
 #: .\crm\models.py:354 .\crm\models.py:445
@@ -539,8 +538,8 @@ msgstr ""
 #: .\crm\models.py:516
 msgid ""
 "Filters applied to contacts/leads. Supported keys: 'stage' (e.g. "
-"'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), "
-"'min_value' (number), 'subscribed' (bool)."
+"'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), 'min_value' "
+"(number), 'subscribed' (bool)."
 msgstr ""
 
 #: .\crm\models.py:524
@@ -627,10 +626,8 @@ msgid "Email Deliveries & Open Rate"
 msgstr ""
 
 #: .\crm\templates\crm\analytics.html:102
-#, fuzzy
-#| msgid "User language"
 msgid "Engagement"
-msgstr "Idioma do usuário"
+msgstr "Engajamento"
 
 #: .\crm\templates\crm\analytics.html:127
 msgid "Deals"
@@ -728,12 +725,14 @@ msgid "New Deal"
 msgstr ""
 
 #: .\crm\templates\crm\company_detail.html:115
-#: .\crm\templates\crm\dashboard.html:143 .\crm\templates\crm\lead_list.html:52
+#: .\crm\templates\crm\dashboard.html:143
+#: .\crm\templates\crm\lead_list.html:52
 msgid "Deal Title"
 msgstr ""
 
 #: .\crm\templates\crm\company_detail.html:118
-#: .\crm\templates\crm\dashboard.html:146 .\crm\templates\crm\lead_list.html:56
+#: .\crm\templates\crm\dashboard.html:146
+#: .\crm\templates\crm\lead_list.html:56
 msgid "Value"
 msgstr ""
 
@@ -973,10 +972,8 @@ msgid "opened"
 msgstr ""
 
 #: .\crm\templates\crm\dashboard.html:74
-#, fuzzy
-#| msgid "Page Administration"
 msgid "Pipeline Distribution"
-msgstr "Administração Da Página"
+msgstr "Distribuição do Pipeline"
 
 #: .\crm\templates\crm\dashboard.html:76
 msgid "Open Kanban"
@@ -2082,16 +2079,12 @@ msgstr "Este código de idioma é muito longo."
 
 #: .\language_management\templates\language_management\form.html:37
 #: .\templates\themes\bootstrap5\partials\header.html:92
-#, fuzzy
-#| msgid "User language"
 msgid "Language"
-msgstr "Idioma do usuário"
+msgstr "Idioma"
 
 #: .\language_management\views.py:13
-#, fuzzy
-#| msgid "User language"
 msgid "Language Management"
-msgstr "Idioma do usuário"
+msgstr "Gestão de Idiomas"
 
 #: .\location_management\apps.py:7
 msgid "Location management"
@@ -2177,10 +2170,8 @@ msgid "Successfully synced plugin menu items."
 msgstr ""
 
 #: .\menu_management\apps.py:8
-#, fuzzy
-#| msgid "User language"
 msgid "Menu Management"
-msgstr "Idioma do usuário"
+msgstr "Gestão de Menus"
 
 #: .\menu_management\models.py:8 .\video_gallery\models.py:35
 msgid "Slug"
@@ -2307,10 +2298,8 @@ msgid "Date published"
 msgstr ""
 
 #: .\polls\models.py:12
-#, fuzzy
-#| msgid "Polls"
 msgid "Poll status"
-msgstr "Sondagens"
+msgstr "Estado da Sondagem"
 
 #: .\polls\models.py:15 .\polls\models.py:31
 msgid "Question"
@@ -2366,7 +2355,6 @@ msgid "Community Polls"
 msgstr ""
 
 #: .\polls\templates\polls\index.html:31
-#, fuzzy
 msgid "No polls are available."
 msgstr "Não há enquetes disponíveis."
 
@@ -2386,10 +2374,8 @@ msgid "Vote Again"
 msgstr ""
 
 #: .\polls\templates\polls\results.html:30
-#, fuzzy
-#| msgid "Polls"
 msgid "All Polls"
-msgstr "Sondagens"
+msgstr "Todas as Sondagens"
 
 #: .\polls\views.py:72
 msgid "Please select an option before submitting your vote."
@@ -2568,8 +2554,8 @@ msgstr ""
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:103
 msgid ""
 "Specify any Python, Django management, or shell command to execute "
-"asynchronously inside a Celery worker. Output is streamed live via WebSocket "
-"to the job detail view."
+"asynchronously inside a Celery worker. Output is streamed live via WebSocket"
+" to the job detail view."
 msgstr ""
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:111
@@ -2658,10 +2644,8 @@ msgid "Search by task name or task ID..."
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_list.html:93
-#, fuzzy
-#| msgid "Polls"
 msgid "All Statuses"
-msgstr "Sondagens"
+msgstr "Todos os Estados"
 
 #: .\task_runner\templates\task_runner\job_list.html:180
 msgid "No background tasks found."
@@ -2669,10 +2653,8 @@ msgstr ""
 
 #: .\task_runner\templates\task_runner\job_list.html:190
 #: .\video_gallery\templates\video_gallery\gallery_list.html:149
-#, fuzzy
-#| msgid "Page Administration"
 msgid "Page navigation"
-msgstr "Administração Da Página"
+msgstr "Navegação de Página"
 
 #: .\task_runner\templates\task_runner\job_list.html:194
 #: .\video_gallery\templates\video_gallery\gallery_list.html:154
@@ -2817,10 +2799,8 @@ msgstr ""
 
 #: .\templates\base.html:121
 #: .\templates\themes\bootstrap5\partials\header.html:64 .\todo\plugin.py:14
-#, fuzzy
-#| msgid "Todo's"
 msgid "Todo List"
-msgstr "Tarefas"
+msgstr "Lista de Tarefas"
 
 #: .\templates\base.html:124
 #: .\templates\themes\bootstrap5\partials\header.html:67
@@ -2916,8 +2896,8 @@ msgstr ""
 
 #: .\templates\registration\login.html:20
 msgid ""
-"Your account doesn't have access to this page. To proceed, please login with "
-"an account that has access."
+"Your account doesn't have access to this page. To proceed, please login with"
+" an account that has access."
 msgstr ""
 
 #: .\templates\registration\login.html:22
@@ -2964,10 +2944,8 @@ msgid "About"
 msgstr ""
 
 #: .\templates\themes\bootstrap5\partials\header.html:85
-#, fuzzy
-#| msgid "User language"
 msgid "Switch Language"
-msgstr "Idioma do usuário"
+msgstr "Mudar Idioma"
 
 #: .\templates\themes\bootstrap5\partials\theme_selector.html:3
 #: .\templates\themes\minimal\partials\theme_selector.html:8
@@ -3002,10 +2980,8 @@ msgid "Theme & CSS Framework Management"
 msgstr ""
 
 #: .\timezone_management\models.py:41 .\user_management\models.py:52
-#, fuzzy
-#| msgid "Sets the timezone"
 msgid "timezone"
-msgstr "Define o fuso horário"
+msgstr "fuso horário"
 
 #: .\timezone_management\models.py:49
 msgid "Sets the timezone"
@@ -3020,10 +2996,8 @@ msgid "This timezone format is too long"
 msgstr "Este formato de fuso horário é muito longo"
 
 #: .\timezone_management\templates\timezone_management\select.html:6
-#, fuzzy
-#| msgid "Sets the timezone"
 msgid "Time zone:"
-msgstr "Define o fuso horário"
+msgstr "Fuso horário:"
 
 #: .\timezone_management\templates\timezone_management\select.html:12
 msgid "Set"
@@ -3042,14 +3016,10 @@ msgid "Created at"
 msgstr ""
 
 #: .\todo\models.py:14
-#, fuzzy
-#| msgid "Todo's"
 msgid "Todo"
-msgstr "Tarefas"
+msgstr "Tarefa"
 
 #: .\todo\models.py:15
-#, fuzzy
-#| msgid "Todo's"
 msgid "Todos"
 msgstr "Tarefas"
 
@@ -3155,10 +3125,8 @@ msgid "Important dates"
 msgstr ""
 
 #: .\user_management\apps.py:7
-#, fuzzy
-#| msgid "User language"
 msgid "User management"
-msgstr "Idioma do usuário"
+msgstr "Gestão de Utilizadores"
 
 #: .\user_management\forms.py:45
 #, python-format
@@ -3335,10 +3303,8 @@ msgid "No email set"
 msgstr ""
 
 #: .\user_management\templates\user_management\profile.html:36
-#, fuzzy
-#| msgid "User language"
 msgid "Username:"
-msgstr "Idioma do usuário"
+msgstr "Nome de utilizador:"
 
 #: .\user_management\templates\user_management\profile.html:40
 msgid "Date Joined:"
@@ -3389,10 +3355,8 @@ msgid "Add User"
 msgstr ""
 
 #: .\user_management\templates\user_management\siteuser_list.html:32
-#, fuzzy
-#| msgid "User language"
 msgid "Username"
-msgstr "Idioma do usuário"
+msgstr "Nome de utilizador"
 
 #: .\user_management\templates\user_management\siteuser_list.html:56
 msgid "No users found."

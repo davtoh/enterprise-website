@@ -60,14 +60,12 @@ msgid "Detailed notes about this interaction..."
 msgstr ""
 
 #: .\crm\forms.py:126 .\crm\models.py:342
-#, fuzzy
 msgid "Email Subject"
-msgstr "Introduce el asunto"
+msgstr "Asunto del correo"
 
 #: .\crm\forms.py:127
-#, fuzzy
 msgid "Enter campaign subject..."
-msgstr "Introduce el asunto"
+msgstr "Ingrese el asunto de la campaña..."
 
 #: .\crm\forms.py:130
 msgid "HTML / Plain Message"
@@ -145,10 +143,8 @@ msgid "Company"
 msgstr ""
 
 #: .\crm\models.py:33 .\crm\templates\crm\base_crm.html:44
-#, fuzzy
-#| msgid "Spanish"
 msgid "Companies"
-msgstr "Español"
+msgstr "Empresas"
 
 #: .\crm\models.py:50
 msgid "First Name"
@@ -159,9 +155,8 @@ msgid "Last Name"
 msgstr ""
 
 #: .\crm\models.py:52
-#, fuzzy
 msgid "Email Address"
-msgstr "Ingrese la dirección de correo"
+msgstr "Dirección de correo electrónico"
 
 #: .\crm\models.py:53
 msgid "Phone Number"
@@ -200,25 +195,22 @@ msgstr ""
 #: .\templates\themes\minimal\partials\header.html:43
 #: .\templates\themes\tailwind\partials\footer.html:17
 #: .\templates\themes\tailwind\partials\header.html:57
-#, fuzzy
 msgid "Contact"
 msgstr "Contacto"
 
 #: .\crm\models.py:80 .\crm\templates\crm\base_crm.html:39
 #: .\crm\templates\crm\company_detail.html:79
 #: .\crm\templates\crm\company_list.html:46
-#, fuzzy
 msgid "Contacts"
-msgstr "Contacto"
+msgstr "Contactos"
 
 #: .\crm\models.py:101
 msgid "New"
 msgstr ""
 
 #: .\crm\models.py:102
-#, fuzzy
 msgid "Contacted"
-msgstr "Contacto"
+msgstr "Contactado"
 
 #: .\crm\models.py:103
 msgid "Qualified"
@@ -266,9 +258,8 @@ msgstr ""
 
 #: .\crm\models.py:127 .\crm\templates\crm\lead_detail.html:70
 #: .\crm\templates\crm\lead_list.html:53
-#, fuzzy
 msgid "Primary Contact"
-msgstr "Contacto"
+msgstr "Contacto Principal"
 
 #: .\crm\models.py:142
 msgid "Pipeline Stage"
@@ -506,9 +497,8 @@ msgid "Recipient Email"
 msgstr ""
 
 #: .\crm\models.py:462
-#, fuzzy
 msgid "Subject"
-msgstr "Introduce el asunto"
+msgstr "Asunto"
 
 #: .\crm\models.py:467
 msgid "Tracking Token"
@@ -527,9 +517,8 @@ msgid "Opened At"
 msgstr ""
 
 #: .\crm\models.py:482 .\task_runner\models.py:65
-#, fuzzy
 msgid "Error Message"
-msgstr "Escriba el mensaje"
+msgstr "Mensaje de error"
 
 #: .\crm\models.py:485
 msgid "Email Delivery Log"
@@ -638,24 +627,20 @@ msgid "Email Deliveries & Open Rate"
 msgstr ""
 
 #: .\crm\templates\crm\analytics.html:102
-#, fuzzy
-#| msgid "User language"
 msgid "Engagement"
-msgstr "Idioma del usuario"
+msgstr "Interacción"
 
 #: .\crm\templates\crm\analytics.html:127
 msgid "Deals"
 msgstr ""
 
 #: .\crm\templates\crm\analytics.html:193
-#, fuzzy
 msgid "New Contacts"
-msgstr "Contacto"
+msgstr "Nuevos Contactos"
 
 #: .\crm\templates\crm\base_crm.html:15
-#, fuzzy
 msgid "Enterprise CRM"
-msgstr "Productos de HPE Enterprise Security"
+msgstr "CRM Empresarial"
 
 #: .\crm\templates\crm\base_crm.html:16
 msgid "Pipeline, Contacts, Sequences & Revenue Intelligence"
@@ -720,9 +705,8 @@ msgstr ""
 #: .\crm\templates\crm\company_detail.html:81
 #: .\crm\templates\crm\contact_list.html:14
 #: .\crm\templates\crm\dashboard.html:109
-#, fuzzy
 msgid "Add Contact"
-msgstr "Contacto"
+msgstr "Agregar Contacto"
 
 #: .\crm\templates\crm\company_detail.html:89
 msgid "Staff"
@@ -738,10 +722,8 @@ msgstr ""
 
 #: .\crm\templates\crm\company_detail.html:107
 #: .\crm\templates\crm\lead_list.html:17
-#, fuzzy
-#| msgid "View Details"
 msgid "New Deal"
-msgstr "Ver Detalles"
+msgstr "Nuevo Trato"
 
 #: .\crm\templates\crm\company_detail.html:115
 #: .\crm\templates\crm\dashboard.html:143
@@ -877,15 +859,12 @@ msgstr ""
 
 #: .\crm\templates\crm\contact_detail.html:30
 #: .\crm\templates\crm\contact_form.html:11
-#, fuzzy
 msgid "Edit Contact"
-msgstr "Contacto"
+msgstr "Editar Contacto"
 
 #: .\crm\templates\crm\contact_detail.html:46
-#, fuzzy
-#| msgid "Get Details"
 msgid "Contact Details"
-msgstr "Obtener Detalles"
+msgstr "Detalles del Contacto"
 
 #: .\crm\templates\crm\contact_detail.html:86
 msgid "Associated Deals"
@@ -934,9 +913,8 @@ msgid "Create New Contact"
 msgstr ""
 
 #: .\crm\templates\crm\contact_form.html:92
-#, fuzzy
 msgid "Save Contact"
-msgstr "Contacto"
+msgstr "Guardar Contacto"
 
 #: .\crm\templates\crm\contact_list.html:9
 msgid "Contacts Directory"
@@ -983,9 +961,8 @@ msgid "Conversion efficiency"
 msgstr ""
 
 #: .\crm\templates\crm\dashboard.html:56
-#, fuzzy
 msgid "Total Contacts"
-msgstr "Contacto"
+msgstr "Total de Contactos"
 
 #: .\crm\templates\crm\dashboard.html:61
 msgid "emails sent"
@@ -996,10 +973,8 @@ msgid "opened"
 msgstr ""
 
 #: .\crm\templates\crm\dashboard.html:74
-#, fuzzy
-#| msgid "Page Administration"
 msgid "Pipeline Distribution"
-msgstr "Administración De La Página"
+msgstr "Distribución del Pipeline"
 
 #: .\crm\templates\crm\dashboard.html:76
 msgid "Open Kanban"
@@ -1022,16 +997,12 @@ msgid "View Full Analytics"
 msgstr ""
 
 #: .\crm\templates\crm\dashboard.html:135
-#, fuzzy
-#| msgid "Get Details"
 msgid "Recent Deals"
-msgstr "Obtener Detalles"
+msgstr "Tratos Recientes"
 
 #: .\crm\templates\crm\dashboard.html:136
-#, fuzzy
-#| msgid "View Details"
 msgid "View all"
-msgstr "Ver Detalles"
+msgstr "Ver todo"
 
 #: .\crm\templates\crm\dashboard.html:144
 msgid "Contact / Company"
@@ -1066,10 +1037,8 @@ msgstr ""
 
 #: .\crm\templates\crm\lead_detail.html:32
 #: .\crm\templates\crm\partials\lead_kanban_card.html:41
-#, fuzzy
-#| msgid "Get Details"
 msgid "Edit Deal"
-msgstr "Obtener Detalles"
+msgstr "Editar Trato"
 
 #: .\crm\templates\crm\lead_detail.html:43
 msgid "Pipeline Stage Progression"
@@ -1126,10 +1095,8 @@ msgid "Activity Type"
 msgstr ""
 
 #: .\crm\templates\crm\lead_detail.html:185
-#, fuzzy
-#| msgid "Get Details"
 msgid "Details"
-msgstr "Obtener Detalles"
+msgstr "Detalles"
 
 #: .\crm\templates\crm\lead_detail.html:190
 msgid "Record Activity"
@@ -1227,9 +1194,8 @@ msgid "Network error occurred while moving deal."
 msgstr ""
 
 #: .\crm\templates\crm\segment_detail.html:12
-#, fuzzy
 msgid "contacts"
-msgstr "Contacto"
+msgstr "contactos"
 
 #: .\crm\templates\crm\segment_detail.html:16
 msgid "Customer segment dynamically evaluated against filter rules."
@@ -1252,9 +1218,8 @@ msgid "All subscribed contacts (no filters applied)"
 msgstr ""
 
 #: .\crm\templates\crm\segment_detail.html:59
-#, fuzzy
 msgid "Contact Name"
-msgstr "Contacto"
+msgstr "Nombre del Contacto"
 
 #: .\crm\templates\crm\segment_detail.html:62
 msgid "Marketing Status"
@@ -1681,34 +1646,28 @@ msgid "Products"
 msgstr "Productos"
 
 #: .\home\templates\home\about.html:5
-#, fuzzy
 msgid "About Us - Enterprise Website"
 msgstr "Sobre nosotros - Sitio web de la empresa"
 
 #: .\home\templates\home\about.html:12
-#, fuzzy
 msgid "About Our Platform"
 msgstr "Acerca de nuestra plataforma"
 
 #: .\home\templates\home\about.html:17
-#, fuzzy
 msgid "Empowering modern web services, automation, and intelligent tools"
 msgstr ""
 "Potenciar los servicios web modernos, la automatización y las herramientas "
 "inteligentes"
 
 #: .\home\templates\home\about.html:33
-#, fuzzy
 msgid "Enterprise Grade Innovation <br>Powered by Modern Django"
 msgstr "Innovación de nivel empresarial <br>impulsada por el moderno Django"
 
 #: .\home\templates\home\about.html:34
-#, fuzzy
 msgid "Modernized with Python 3.12 and Django 5.0"
 msgstr "Modernizado con Python 3.12 y Django 5.0"
 
 #: .\home\templates\home\about.html:36
-#, fuzzy
 msgid ""
 "This platform unites modular web applications into a unified enterprise "
 "interface: including dynamic task management (Todo), interactive decision "
@@ -1721,24 +1680,20 @@ msgstr ""
 "acceso a datos programáticos a través de Django REST Framework."
 
 #: .\home\templates\home\about.html:38 .\home\templates\home\index.html:28
-#, fuzzy
 msgid "Explore Services"
 msgstr "Explorar servicios"
 
 #: .\home\templates\home\about.html:50
-#, fuzzy
 msgid "Our Engineering Principles"
 msgstr "Principios de ingeniería"
 
 #: .\home\templates\home\about.html:52
-#, fuzzy
 msgid "Standards-compliant, secure, and built for cross-platform resilience."
 msgstr ""
 "Cumple con los estándares, es seguro y está diseñado para la resiliencia "
 "multiplataforma."
 
 #: .\home\templates\home\about.html:64
-#, fuzzy
 msgid ""
 "Modern asynchronous and synchronous runtime supporting robust database "
 "interactions and secure session authentication."
@@ -1747,12 +1702,10 @@ msgstr ""
 "sólidas de bases de datos y autenticación de sesión segura."
 
 #: .\home\templates\home\about.html:72
-#, fuzzy
 msgid "Enterprise Security"
-msgstr "Productos de HPE Enterprise Security"
+msgstr "Seguridad Empresarial"
 
 #: .\home\templates\home\about.html:75
-#, fuzzy
 msgid ""
 "OWASP Top 10 compliance, 12-Factor isolated environment credentials, "
 "parameterized queries, and CSRF protection."
@@ -1761,12 +1714,10 @@ msgstr ""
 "factores, consultas parametrizadas y protección CSRF."
 
 #: .\home\templates\home\about.html:83
-#, fuzzy
 msgid "Modular Architecture"
 msgstr "Arquitectura Modular"
 
 #: .\home\templates\home\about.html:86
-#, fuzzy
 msgid ""
 "Clean app separation with dedicated models, views, and APIs ready for "
 "internationalization and multi-cloud deployment."
@@ -1775,17 +1726,14 @@ msgstr ""
 " para la internacionalización y la implementación en múltiples nubes."
 
 #: .\home\templates\home\contact.html:5
-#, fuzzy
 msgid "Contact Us - Enterprise Website"
 msgstr "Contáctenos - Sitio web empresarial"
 
 #: .\home\templates\home\contact.html:12
-#, fuzzy
 msgid "Get in Touch"
 msgstr "Ponte en contacto con nosotros"
 
 #: .\home\templates\home\contact.html:17
-#, fuzzy
 msgid ""
 "Have questions about platform integration or custom solutions? We are here "
 "to help."
@@ -1794,73 +1742,60 @@ msgstr ""
 "personalizadas? Estamos aquí para ayudarte."
 
 #: .\home\templates\home\contact.html:35
-#, fuzzy
 msgid "Enterprise Technology Lab"
-msgstr "tecnología empresarial"
+msgstr "Laboratorio de Tecnología Empresarial"
 
 #: .\home\templates\home\contact.html:36
-#, fuzzy
 msgid "Global Engineering Center"
 msgstr "Centro de ingeniería global"
 
 #: .\home\templates\home\contact.html:44
-#, fuzzy
 msgid "Local Support Services"
 msgstr "Servicios de apoyo locales"
 
 #: .\home\templates\home\contact.html:45
-#, fuzzy
 msgid "Mon to Fri 9am to 6pm"
 msgstr "De lunes a viernes de 9:00 a. m. a 6:00 p. m."
 
 #: .\home\templates\home\contact.html:54
-#, fuzzy
 msgid "Send us your query anytime!"
 msgstr "¡Envíanos tu consulta en cualquier momento!"
 
 #: .\home\templates\home\contact.html:63
-#, fuzzy
 msgid "Enter your name"
 msgstr "Introduce tu nombre"
 
 #: .\home\templates\home\contact.html:64
-#, fuzzy
 msgid "Enter email address"
 msgstr "Ingrese la dirección de correo"
 
 #: .\home\templates\home\contact.html:65
-#, fuzzy
 msgid "Enter subject"
 msgstr "Introduce el asunto"
 
 #: .\home\templates\home\contact.html:71
-#, fuzzy
 msgid "Enter Message"
 msgstr "Escriba el mensaje"
 
 #: .\home\templates\home\contact.html:75
-#, fuzzy
 msgid "Send Message"
 msgstr "Enviar mensaje"
 
 #: .\home\templates\home\index.html:13
-#, fuzzy
 msgid ""
 "Improved <br>\n"
 "        Production level <br>\n"
 "        with Robotics"
 msgstr ""
-"Nivel de producción mejorado <br>\n"
-"         <br>\n"
+"Nivel de producción <br>\n"
+"        mejorado <br>\n"
 "        con robótica"
 
 #: .\home\templates\home\index.html:24
-#, fuzzy
 msgid "Everyone wants the innovation through robotics"
 msgstr "Todo el mundo quiere la innovación a través de la robótica"
 
 #: .\home\templates\home\index.html:44
-#, fuzzy
 msgid "Featured Robotics Products to Show"
 msgstr "Productos de robótica destacados para mostrar"
 
@@ -1868,14 +1803,12 @@ msgstr "Productos de robótica destacados para mostrar"
 #: .\home\templates\home\index.html:73 .\home\templates\home\index.html:87
 #: .\home\templates\home\index.html:101 .\home\templates\home\index.html:171
 #: .\home\templates\home\index.html:281
-#, fuzzy
 msgid "Who are in extremely love with eco friendly system."
 msgstr "Quienes están extremadamente enamorados del sistema ecológico."
 
 #: .\home\templates\home\index.html:57 .\home\templates\home\products.html:43
-#, fuzzy
 msgid "The Upper Eye"
-msgstr "vías respiratorias"
+msgstr "El Ojo Superior"
 
 #: .\home\templates\home\index.html:71 .\home\templates\home\products.html:57
 msgid "The Crab Wheel"
@@ -2174,16 +2107,12 @@ msgstr "Este código de idioma es demasiado largo."
 
 #: .\language_management\templates\language_management\form.html:37
 #: .\templates\themes\bootstrap5\partials\header.html:92
-#, fuzzy
-#| msgid "User language"
 msgid "Language"
-msgstr "Idioma del usuario"
+msgstr "Idioma"
 
 #: .\language_management\views.py:13
-#, fuzzy
-#| msgid "User language"
 msgid "Language Management"
-msgstr "Idioma del usuario"
+msgstr "Gestión de Idiomas"
 
 #: .\location_management\apps.py:7
 msgid "Location management"
@@ -2269,10 +2198,8 @@ msgid "Successfully synced plugin menu items."
 msgstr ""
 
 #: .\menu_management\apps.py:8
-#, fuzzy
-#| msgid "User language"
 msgid "Menu Management"
-msgstr "Idioma del usuario"
+msgstr "Gestión de Menús"
 
 #: .\menu_management\models.py:8 .\video_gallery\models.py:35
 msgid "Slug"
@@ -2399,10 +2326,8 @@ msgid "Date published"
 msgstr ""
 
 #: .\polls\models.py:12
-#, fuzzy
-#| msgid "Polls"
 msgid "Poll status"
-msgstr "Encuestas"
+msgstr "Estado de la Encuesta"
 
 #: .\polls\models.py:15 .\polls\models.py:31
 msgid "Question"
@@ -2477,10 +2402,8 @@ msgid "Vote Again"
 msgstr ""
 
 #: .\polls\templates\polls\results.html:30
-#, fuzzy
-#| msgid "Polls"
 msgid "All Polls"
-msgstr "Encuestas"
+msgstr "Todas las Encuestas"
 
 #: .\polls\views.py:72
 msgid "Please select an option before submitting your vote."
@@ -2749,10 +2672,8 @@ msgid "Search by task name or task ID..."
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_list.html:93
-#, fuzzy
-#| msgid "Polls"
 msgid "All Statuses"
-msgstr "Encuestas"
+msgstr "Todos los Estados"
 
 #: .\task_runner\templates\task_runner\job_list.html:180
 msgid "No background tasks found."
@@ -2760,10 +2681,8 @@ msgstr ""
 
 #: .\task_runner\templates\task_runner\job_list.html:190
 #: .\video_gallery\templates\video_gallery\gallery_list.html:149
-#, fuzzy
-#| msgid "Page Administration"
 msgid "Page navigation"
-msgstr "Administración De La Página"
+msgstr "Navegación de Página"
 
 #: .\task_runner\templates\task_runner\job_list.html:194
 #: .\video_gallery\templates\video_gallery\gallery_list.html:154
@@ -2908,10 +2827,8 @@ msgstr ""
 
 #: .\templates\base.html:121
 #: .\templates\themes\bootstrap5\partials\header.html:64 .\todo\plugin.py:14
-#, fuzzy
-#| msgid "Todo's"
 msgid "Todo List"
-msgstr "Tareas"
+msgstr "Lista de Tareas"
 
 #: .\templates\base.html:124
 #: .\templates\themes\bootstrap5\partials\header.html:67
@@ -3051,16 +2968,12 @@ msgstr ""
 #: .\templates\themes\minimal\partials\footer.html:9
 #: .\templates\themes\minimal\partials\header.html:41
 #: .\templates\themes\tailwind\partials\footer.html:14
-#, fuzzy
-#| msgid "About Us"
 msgid "About"
-msgstr "¿Quiénes somos?"
+msgstr "Quiénes somos"
 
 #: .\templates\themes\bootstrap5\partials\header.html:85
-#, fuzzy
-#| msgid "User language"
 msgid "Switch Language"
-msgstr "Idioma del usuario"
+msgstr "Cambiar Idioma"
 
 #: .\templates\themes\bootstrap5\partials\theme_selector.html:3
 #: .\templates\themes\minimal\partials\theme_selector.html:8
@@ -3095,10 +3008,8 @@ msgid "Theme & CSS Framework Management"
 msgstr ""
 
 #: .\timezone_management\models.py:41 .\user_management\models.py:52
-#, fuzzy
-#| msgid "Sets the timezone"
 msgid "timezone"
-msgstr "Establece la zona horaria"
+msgstr "zona horaria"
 
 #: .\timezone_management\models.py:49
 msgid "Sets the timezone"
@@ -3109,16 +3020,12 @@ msgid "Select the timezone to keep track of time"
 msgstr "Seleccione la zona horaria para el seguimiento de tiempo"
 
 #: .\timezone_management\models.py:56
-#, fuzzy
-#| msgid "This language code is too long."
 msgid "This timezone format is too long"
-msgstr "Este código de idioma es demasiado largo."
+msgstr "El formato de zona horaria es demasiado largo."
 
 #: .\timezone_management\templates\timezone_management\select.html:6
-#, fuzzy
-#| msgid "Sets the timezone"
 msgid "Time zone:"
-msgstr "Establece la zona horaria"
+msgstr "Zona horaria:"
 
 #: .\timezone_management\templates\timezone_management\select.html:12
 msgid "Set"
@@ -3137,14 +3044,10 @@ msgid "Created at"
 msgstr ""
 
 #: .\todo\models.py:14
-#, fuzzy
-#| msgid "Todo's"
 msgid "Todo"
-msgstr "Tareas"
+msgstr "Tarea"
 
 #: .\todo\models.py:15
-#, fuzzy
-#| msgid "Todo's"
 msgid "Todos"
 msgstr "Tareas"
 
@@ -3250,10 +3153,8 @@ msgid "Important dates"
 msgstr ""
 
 #: .\user_management\apps.py:7
-#, fuzzy
-#| msgid "User language"
 msgid "User management"
-msgstr "Idioma del usuario"
+msgstr "Gestión de Usuarios"
 
 #: .\user_management\forms.py:45
 #, python-format
@@ -3430,10 +3331,8 @@ msgid "No email set"
 msgstr ""
 
 #: .\user_management\templates\user_management\profile.html:36
-#, fuzzy
-#| msgid "User language"
 msgid "Username:"
-msgstr "Idioma del usuario"
+msgstr "Nombre de usuario:"
 
 #: .\user_management\templates\user_management\profile.html:40
 msgid "Date Joined:"
@@ -3484,10 +3383,8 @@ msgid "Add User"
 msgstr ""
 
 #: .\user_management\templates\user_management\siteuser_list.html:32
-#, fuzzy
-#| msgid "User language"
 msgid "Username"
-msgstr "Idioma del usuario"
+msgstr "Nombre de usuario"
 
 #: .\user_management\templates\user_management\siteuser_list.html:56
 msgid "No users found."
@@ -3775,9 +3672,8 @@ msgid "Curated video playlist."
 msgstr ""
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:138
-#, fuzzy
 msgid "Explore Gallery"
-msgstr "Explorar servicios"
+msgstr "Explorar Galería"
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:189
 msgid "No Video Galleries Found"
