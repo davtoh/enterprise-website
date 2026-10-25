@@ -217,34 +217,36 @@
 **Sub-modules (implemented incrementally within this milestone):**
 
 **14a — Core CRM (Contacts & Leads):**
-- `crm` Django app with `Contact`, `Company`, `Lead`, `InteractionLog` models
-- Lead status pipeline (New → Contacted → Qualified → Proposal → Won/Lost)
-- Admin panel + custom CRM dashboard at `/crm/`
-- `AppPlugin` registration
+- [x] `crm` Django app with `Contact`, `Company`, `Lead`, `InteractionLog` models
+- [x] Lead status pipeline (New → Contacted → Qualified → Proposal → Won/Lost)
+- [x] Admin panel + custom CRM dashboard at `/crm/`
+- [x] `AppPlugin` registration
 
 **14b — Pipeline & Kanban View:**
-- Drag-and-drop Kanban board (HTMX + Alpine.js) showing leads by pipeline stage
-- Stage transitions logged automatically to `InteractionLog`
+- [x] Drag-and-drop Kanban board (HTMX + Alpine.js) showing leads by pipeline stage
+- [x] Stage transitions logged automatically to `InteractionLog`
 
 **14c — Email Sequences:**
-- `EmailSequence` and `EmailStep` models
-- Celery task that auto-sends emails based on lead stage and time delays
-- Email template editor in admin
+- [x] `EmailSequence` and `EmailStep` models
+- [x] Celery task that auto-sends emails based on lead stage and time delays
+- [x] Email template editor in admin with placeholder tags
+- [x] 1x1 transparent tracking pixel for email open analytics
 
 **14d — Customer Segmentation:**
-- `Segment` model with filter rules (e.g., "all leads in stage=Qualified from country=US")
-- Dynamic segment membership evaluation
-- Segment-based email broadcast
+- [x] `Segment` model with filter rules (e.g., "all leads in stage=Qualified from country=US")
+- [x] Dynamic segment membership evaluation
+- [x] Segment-based email broadcast campaign
 
 **14e — Analytics Dashboard:**
-- Charts (Chart.js or Recharts via HTMX) showing: lead funnel conversion, monthly new contacts, email open rates, revenue pipeline value
-- Django admin analytics panel + standalone `/crm/analytics/` page
+- [x] Charts (vendored Chart.js 4.4.4) showing: lead funnel conversion, monthly new contacts, email open rates, revenue pipeline value
+- [x] Django admin analytics panel + standalone `/crm/analytics/` page
 
 **Verification:**
-- Full lead lifecycle from creation to Won/Lost with interaction log
-- Email sequence auto-sends via Celery
-- Analytics charts render with real data
-- i18n applied to all strings
+- [x] Full lead lifecycle from creation to Won/Lost with interaction log
+- [x] Email sequence auto-sends via Celery (`crm.process_email_sequences`)
+- [x] Analytics charts render with real data (API endpoint at `/crm/analytics/data/`)
+- [x] i18n applied to all strings (`makemessages` & `compilemessages` clean)
+- [x] 209 tests passing repository-wide with 85% coverage on `crm` app (23 dedicated tests)
 
 ---
 

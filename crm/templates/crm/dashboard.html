@@ -1,0 +1,237 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n humanize %}
+
+{% block crm_content %}
+<!-- KPI Stats Row -->
+<div class="row g-3 mb-4">
+  <div class="col-sm-6 col-xl-3">
+    <div class="card shadow-sm border-0 border-start border-primary border-4 rounded-3 h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Active Deals" %}</span>
+          <span class="badge bg-primary-subtle text-primary p-2 rounded-circle"><i class="fa fa-bullseye fa-lg"></i></span>
+        </div>
+        <h3 class="fw-bold mb-1">{{ kpi.total_leads }}</h3>
+        <div class="small text-body-secondary">
+          <span class="text-success fw-medium"><i class="fa fa-trophy me-1"></i>{{ kpi.won_leads }}</span> {% trans "deals won" %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-xl-3">
+    <div class="card shadow-sm border-0 border-start border-success border-4 rounded-3 h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Pipeline Value" %}</span>
+          <span class="badge bg-success-subtle text-success p-2 rounded-circle"><i class="fa fa-usd fa-lg"></i></span>
+        </div>
+        <h3 class="fw-bold mb-1">${{ kpi.total_pipeline_val|floatformat:2|intcomma }}</h3>
+        <div class="small text-body-secondary">
+          <span class="text-body-secondary">{% trans "Excludes lost deals" %}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-xl-3">
+    <div class="card shadow-sm border-0 border-start border-info border-4 rounded-3 h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Win Rate" %}</span>
+          <span class="badge bg-info-subtle text-info p-2 rounded-circle"><i class="fa fa-percent fa-lg"></i></span>
+        </div>
+        <h3 class="fw-bold mb-1">{{ kpi.win_rate }}%</h3>
+        <div class="small text-body-secondary">
+          {% trans "Conversion efficiency" %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-xl-3">
+    <div class="card shadow-sm border-0 border-start border-warning border-4 rounded-3 h-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Total Contacts" %}</span>
+          <span class="badge bg-warning-subtle text-warning p-2 rounded-circle"><i class="fa fa-address-book fa-lg"></i></span>
+        </div>
+        <h3 class="fw-bold mb-1">{{ kpi.total_contacts }}</h3>
+        <div class="small text-body-secondary">
+          <span class="text-info fw-medium">{{ kpi.emails_sent }}</span> {% trans "emails sent" %} ({{ kpi.email_open_rate }}% {% trans "opened" %})
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Actions & Pipeline Stage Summary -->
+<div class="row g-4 mb-4">
+  <!-- Pipeline Stage Funnel Snapshot -->
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 d-flex align-items-center justify-content-between py-3 px-4">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-filter me-2 text-primary"></i>{% trans "Pipeline Distribution" %}</h5>
+        <a href="{% url 'crm:pipeline' %}" class="btn btn-sm btn-outline-primary rounded-pill">
+          <i class="fa fa-columns me-1"></i>{% trans "Open Kanban" %}
+        </a>
+      </div>
+      <div class="card-body px-4 pt-1">
+        <div class="row g-3">
+          {% for item in stage_data %}
+            <div class="col-sm-6 col-md-4">
+              <div class="p-3 border rounded-3 bg-light-subtle h-100">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <span class="fw-semibold small">{{ item.label }}</span>
+                  <span class="badge bg-secondary-subtle text-secondary rounded-pill">{{ item.count }}</span>
+                </div>
+                <h5 class="fw-bold mb-0">${{ item.value|floatformat:2|intcomma }}</h5>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 py-3 px-4">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-bolt me-2 text-warning"></i>{% trans "Quick Actions" %}</h5>
+      </div>
+      <div class="card-body px-4 pt-1 d-flex flex-column gap-2">
+        <a href="{% url 'crm:lead_create' %}" class="btn btn-primary text-start d-flex align-items-center justify-content-between rounded-3 py-2">
+          <span><i class="fa fa-plus-circle me-2"></i>{% trans "Create Deal / Lead" %}</span>
+          <i class="fa fa-chevron-right small"></i>
+        </a>
+        <a href="{% url 'crm:contact_create' %}" class="btn btn-outline-secondary text-start d-flex align-items-center justify-content-between rounded-3 py-2">
+          <span><i class="fa fa-user-plus me-2"></i>{% trans "Add Contact" %}</span>
+          <i class="fa fa-chevron-right small"></i>
+        </a>
+        <a href="{% url 'crm:company_create' %}" class="btn btn-outline-secondary text-start d-flex align-items-center justify-content-between rounded-3 py-2">
+          <span><i class="fa fa-building-o me-2"></i>{% trans "Add Company" %}</span>
+          <i class="fa fa-chevron-right small"></i>
+        </a>
+        <a href="{% url 'crm:sequence_create' %}" class="btn btn-outline-secondary text-start d-flex align-items-center justify-content-between rounded-3 py-2">
+          <span><i class="fa fa-envelope-o me-2"></i>{% trans "New Email Drip" %}</span>
+          <i class="fa fa-chevron-right small"></i>
+        </a>
+        <a href="{% url 'crm:analytics' %}" class="btn btn-outline-info text-start d-flex align-items-center justify-content-between rounded-3 py-2">
+          <span><i class="fa fa-line-chart me-2"></i>{% trans "View Full Analytics" %}</span>
+          <i class="fa fa-chevron-right small"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Deals & Recent Touchpoints -->
+<div class="row g-4">
+  <!-- Recent Deals Table -->
+  <div class="col-lg-7">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 d-flex align-items-center justify-content-between py-3 px-4">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-bullseye me-2 text-primary"></i>{% trans "Recent Deals" %}</h5>
+        <a href="{% url 'crm:lead_list' %}" class="btn btn-sm btn-link text-decoration-none">{% trans "View all" %} &rarr;</a>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light small text-uppercase">
+              <tr>
+                <th class="ps-4">{% trans "Deal Title" %}</th>
+                <th>{% trans "Contact / Company" %}</th>
+                <th>{% trans "Stage" %}</th>
+                <th class="text-end pe-4">{% trans "Value" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for deal in recent_leads %}
+                <tr>
+                  <td class="ps-4">
+                    <a href="{% url 'crm:lead_detail' deal.pk %}" class="fw-bold text-decoration-none text-body">
+                      {{ deal.title }}
+                    </a>
+                  </td>
+                  <td>
+                    <div class="small fw-semibold">{{ deal.contact.full_name|default:"—" }}</div>
+                    <div class="small text-body-secondary">{{ deal.company.name|default:"" }}</div>
+                  </td>
+                  <td>
+                    <span class="badge rounded-pill
+                      {% if deal.stage == 'new' %}bg-info
+                      {% elif deal.stage == 'contacted' %}bg-primary
+                      {% elif deal.stage == 'qualified' %}bg-warning text-dark
+                      {% elif deal.stage == 'proposal' %}bg-secondary
+                      {% elif deal.stage == 'won' %}bg-success
+                      {% else %}bg-danger{% endif %}">
+                      {{ deal.get_stage_display }}
+                    </span>
+                  </td>
+                  <td class="text-end pe-4 fw-bold">
+                    ${{ deal.value|floatformat:2|intcomma }}
+                  </td>
+                </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="4" class="text-center py-4 text-body-secondary">
+                    {% trans "No deals found. Create your first deal to get started." %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Activity Feed -->
+  <div class="col-lg-5">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 py-3 px-4">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-history me-2 text-info"></i>{% trans "Recent Activities" %}</h5>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <div class="list-group list-group-flush">
+          {% for activity in recent_interactions %}
+            <div class="list-group-item px-0 py-3">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="badge rounded-pill
+                  {% if activity.interaction_type == 'stage_change' %}bg-dark
+                  {% elif activity.interaction_type == 'call' %}bg-info
+                  {% elif activity.interaction_type == 'email' %}bg-primary
+                  {% elif activity.interaction_type == 'meeting' %}bg-warning text-dark
+                  {% elif activity.interaction_type == 'sequence_step' %}bg-success
+                  {% else %}bg-secondary{% endif %}">
+                  {{ activity.get_interaction_type_display }}
+                </span>
+                <small class="text-body-secondary">{{ activity.timestamp|timesince }} {% trans "ago" %}</small>
+              </div>
+              <div class="fw-semibold text-truncate">{{ activity.summary }}</div>
+              {% if activity.details %}
+                <small class="text-body-secondary text-truncate d-block">{{ activity.details }}</small>
+              {% endif %}
+              <div class="small text-body-secondary mt-1">
+                {% if activity.lead %}
+                  <a href="{% url 'crm:lead_detail' activity.lead.pk %}" class="text-decoration-none me-2">
+                    <i class="fa fa-bullseye me-1"></i>{{ activity.lead.title }}
+                  </a>
+                {% endif %}
+                {% if activity.contact %}
+                  <span class="text-body-secondary"><i class="fa fa-user me-1"></i>{{ activity.contact.full_name }}</span>
+                {% endif %}
+              </div>
+            </div>
+          {% empty %}
+            <div class="py-4 text-center text-body-secondary">
+              {% trans "No recent activities recorded." %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

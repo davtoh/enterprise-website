@@ -1,0 +1,97 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n %}
+
+{% block crm_content %}
+<div class="card shadow-sm border-0 rounded-3">
+  <div class="card-header bg-transparent border-0 py-3 px-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+      <div>
+        <h4 class="fw-bold mb-1"><i class="fa fa-envelope-open-o me-2 text-primary"></i>{% trans "Automated Email Sequences (Drips)" %}</h4>
+        <p class="text-body-secondary mb-0 small">{% trans "Multi-step automated email campaigns triggered by lead stage transitions or enrolled contacts." %}</p>
+      </div>
+      <div class="d-flex gap-2">
+        <form method="post" action="{% url 'crm:process_sequences_now' %}" class="d-inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-info rounded-pill" title="{% trans 'Triggers the Celery background worker to process scheduled drip emails immediately' %}">
+            <i class="fa fa-paper-plane me-1"></i>{% trans "Process Drip Queue Now" %}
+          </button>
+        </form>
+        <a href="{% url 'crm:sequence_create' %}" class="btn btn-primary rounded-pill">
+          <i class="fa fa-plus me-1"></i>{% trans "New Sequence" %}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body px-4 pt-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light small text-uppercase">
+          <tr>
+            <th>{% trans "Sequence Name" %}</th>
+            <th>{% trans "Trigger Stage" %}</th>
+            <th>{% trans "Status" %}</th>
+            <th>{% trans "Steps" %}</th>
+            <th>{% trans "Active Enrollments" %}</th>
+            <th>{% trans "Created" %}</th>
+            <th class="text-end">{% trans "Actions" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for seq in sequences %}
+            <tr>
+              <td>
+                <a href="{% url 'crm:sequence_detail' seq.pk %}" class="fw-bold text-decoration-none text-body">
+                  {{ seq.name }}
+                </a>
+                {% if seq.description %}
+                  <div class="small text-body-secondary text-truncate">{{ seq.description }}</div>
+                {% endif %}
+              </td>
+              <td>
+                {% if seq.trigger_stage %}
+                  <span class="badge bg-primary-subtle text-primary rounded-pill">
+                    <i class="fa fa-bolt me-1"></i>{{ seq.get_trigger_stage_display }}
+                  </span>
+                {% else %}
+                  <span class="text-body-secondary small">{% trans "Manual Only" %}</span>
+                {% endif %}
+              </td>
+              <td>
+                <span class="badge {% if seq.is_active %}bg-success-subtle text-success{% else %}bg-secondary-subtle text-secondary{% endif %} rounded-pill">
+                  {% if seq.is_active %}{% trans "Active" %}{% else %}{% trans "Inactive" %}{% endif %}
+                </span>
+              </td>
+              <td>
+                <span class="badge bg-light text-dark border rounded-pill">{{ seq.step_count }} {% trans "steps" %}</span>
+              </td>
+              <td>
+                <span class="badge bg-info-subtle text-info rounded-pill">{{ seq.enrollment_count }}</span>
+              </td>
+              <td class="small text-body-secondary">{{ seq.created_at|date:"M d, Y" }}</td>
+              <td class="text-end">
+                <a href="{% url 'crm:sequence_detail' seq.pk %}" class="btn btn-sm btn-outline-primary rounded-circle" title="{% trans 'Manage Steps' %}">
+                  <i class="fa fa-eye"></i>
+                </a>
+                <a href="{% url 'crm:sequence_update' seq.pk %}" class="btn btn-sm btn-outline-secondary rounded-circle" title="{% trans 'Edit' %}">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a href="{% url 'crm:sequence_delete' seq.pk %}" class="btn btn-sm btn-outline-danger rounded-circle" title="{% trans 'Delete' %}">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="7" class="text-center py-5 text-body-secondary">
+                <i class="fa fa-envelope-o fa-3x mb-2 d-block opacity-25"></i>
+                {% trans "No email sequences created yet. Set up your first drip campaign." %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

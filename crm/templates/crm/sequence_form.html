@@ -1,0 +1,67 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n %}
+
+{% block crm_content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-3">
+      <div class="card-header bg-transparent border-0 py-3 px-4">
+        <h4 class="fw-bold mb-0">
+          {% if object %}
+            <i class="fa fa-pencil me-2 text-primary"></i>{% trans "Edit Email Sequence" %}
+          {% else %}
+            <i class="fa fa-envelope-open-o me-2 text-primary"></i>{% trans "Create New Email Sequence" %}
+          {% endif %}
+        </h4>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <form method="post" novalidate>
+          {% csrf_token %}
+          
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+              {{ form.non_field_errors }}
+            </div>
+          {% endif %}
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold" for="{{ form.name.id_for_label }}">{{ form.name.label }} *</label>
+            {{ form.name }}
+            {% if form.name.errors %}<div class="text-danger small">{{ form.name.errors }}</div>{% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold" for="{{ form.trigger_stage.id_for_label }}">{{ form.trigger_stage.label }}</label>
+            {{ form.trigger_stage }}
+            <div class="form-text small">{{ form.trigger_stage.help_text }}</div>
+            {% if form.trigger_stage.errors %}<div class="text-danger small">{{ form.trigger_stage.errors }}</div>{% endif %}
+          </div>
+
+          <div class="form-check mb-3">
+            {{ form.is_active }}
+            <label class="form-check-label fw-semibold" for="{{ form.is_active.id_for_label }}">
+              {{ form.is_active.label }}
+            </label>
+            <div class="form-text small">{{ form.is_active.help_text }}</div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold" for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+            {{ form.description }}
+            {% if form.description.errors %}<div class="text-danger small">{{ form.description.errors }}</div>{% endif %}
+          </div>
+
+          <div class="d-flex justify-content-end gap-2">
+            <a href="{% if object %}{% url 'crm:sequence_detail' object.pk %}{% else %}{% url 'crm:sequence_list' %}{% endif %}" class="btn btn-outline-secondary rounded-pill">
+              {% trans "Cancel" %}
+            </a>
+            <button type="submit" class="btn btn-primary rounded-pill px-4">
+              <i class="fa fa-check me-1"></i>{% trans "Save Sequence" %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n %}
+
+{% block crm_content %}
+<div class="card shadow-sm border-0 rounded-3 mb-4">
+  <div class="card-body p-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+      <div>
+        <div class="d-flex align-items-center gap-2 mb-1">
+          <h3 class="fw-bold mb-0">{{ sequence.name }}</h3>
+          <span class="badge {% if sequence.is_active %}bg-success-subtle text-success{% else %}bg-secondary-subtle text-secondary{% endif %} rounded-pill">
+            {% if sequence.is_active %}{% trans "Active" %}{% else %}{% trans "Inactive" %}{% endif %}
+          </span>
+        </div>
+        <p class="text-body-secondary mb-0 small">
+          {% if sequence.trigger_stage %}
+            <i class="fa fa-bolt me-1 text-warning"></i>{% trans "Auto-enrolls leads reaching stage:" %} <strong>{{ sequence.get_trigger_stage_display }}</strong>
+          {% else %}
+            {% trans "Manual enrollment sequence" %}
+          {% endif %}
+          &bull; {{ steps.count }} {% trans "scheduled steps" %}
+        </p>
+      </div>
+
+      <div class="d-flex gap-2">
+        <form method="post" action="{% url 'crm:process_sequences_now' %}" class="d-inline">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+          <button type="submit" class="btn btn-outline-info rounded-pill">
+            <i class="fa fa-paper-plane me-1"></i>{% trans "Dispatch Queue" %}
+          </button>
+        </form>
+        <a href="{% url 'crm:step_create' sequence.pk %}" class="btn btn-primary rounded-pill">
+          <i class="fa fa-plus me-1"></i>{% trans "Add Step" %}
+        </a>
+        <a href="{% url 'crm:sequence_update' sequence.pk %}" class="btn btn-outline-secondary rounded-pill">
+          <i class="fa fa-pencil me-1"></i>{% trans "Edit Sequence" %}
+        </a>
+        <a href="{% url 'crm:sequence_delete' sequence.pk %}" class="btn btn-outline-danger rounded-pill">
+          <i class="fa fa-trash me-1"></i>{% trans "Delete" %}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <!-- Left Column: Scheduled Drip Steps Timeline -->
+  <div class="col-lg-7">
+    <div class="card shadow-sm border-0 rounded-3 mb-4">
+      <div class="card-header bg-transparent border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-list-ol me-2 text-primary"></i>{% trans "Email Steps Timeline" %}</h5>
+        <a href="{% url 'crm:step_create' sequence.pk %}" class="btn btn-sm btn-outline-primary rounded-pill">
+          <i class="fa fa-plus me-1"></i>{% trans "Add Step" %}
+        </a>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <div class="d-flex flex-column gap-3">
+          {% for step in steps %}
+            <div class="border rounded-3 p-3 bg-light-subtle position-relative">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-primary rounded-circle p-2" style="width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;">
+                    {{ step.step_number }}
+                  </span>
+                  <h6 class="fw-bold mb-0">{{ step.subject }}</h6>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-secondary-subtle text-secondary rounded-pill small">
+                    <i class="fa fa-clock-o me-1"></i>{% blocktrans with days=step.delay_days %}Delay: {{ days }} days{% endblocktrans %}
+                  </span>
+                  <a href="{% url 'crm:step_update' sequence.pk step.pk %}" class="btn btn-sm btn-link text-body-secondary p-0" title="{% trans 'Edit step' %}">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                  <a href="{% url 'crm:step_delete' sequence.pk step.pk %}" class="btn btn-sm btn-link text-danger p-0" title="{% trans 'Delete step' %}">
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="bg-body rounded p-2 small border text-body-secondary font-monospace" style="max-height: 120px; overflow-y: auto;">
+                {{ step.body_template|linebreaksbr }}
+              </div>
+            </div>
+          {% empty %}
+            <div class="text-center py-5 text-body-secondary">
+              <i class="fa fa-envelope-o fa-2x mb-2 d-block opacity-50"></i>
+              {% trans "No steps added to this sequence yet. Add Step 1 to begin." %}
+              <div class="mt-2">
+                <a href="{% url 'crm:step_create' sequence.pk %}" class="btn btn-sm btn-primary rounded-pill">
+                  <i class="fa fa-plus me-1"></i>{% trans "Add First Step" %}
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column: Enrollments List -->
+  <div class="col-lg-5">
+    <div class="card shadow-sm border-0 rounded-3">
+      <div class="card-header bg-transparent border-0 py-3 px-4">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-users me-2 text-primary"></i>{% trans "Active Enrollments" %} ({{ enrollments.count }})</h5>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <div class="list-group list-group-flush">
+          {% for enr in enrollments %}
+            <div class="list-group-item px-0 py-3">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="fw-semibold">
+                  <a href="{% url 'crm:contact_detail' enr.contact.pk %}" class="text-decoration-none text-body">
+                    {{ enr.contact.full_name }}
+                  </a>
+                </span>
+                <span class="badge rounded-pill
+                  {% if enr.status == 'active' %}bg-success
+                  {% elif enr.status == 'completed' %}bg-primary
+                  {% elif enr.status == 'paused' %}bg-warning text-dark
+                  {% else %}bg-secondary{% endif %}">
+                  {{ enr.get_status_display }}
+                </span>
+              </div>
+              <div class="small text-body-secondary">
+                {% trans "Current Step" %}: <strong>#{{ enr.current_step_number }}</strong> &bull; {% trans "Next dispatch" %}: {{ enr.next_send_at|date:"M d, Y" }}
+              </div>
+              {% if enr.lead %}
+                <div class="small text-body-secondary mt-1">
+                  <i class="fa fa-bullseye me-1"></i><a href="{% url 'crm:lead_detail' enr.lead.pk %}" class="text-decoration-none">{{ enr.lead.title }}</a>
+                </div>
+              {% endif %}
+            </div>
+          {% empty %}
+            <div class="text-center py-4 text-body-secondary small">
+              {% trans "No contacts currently enrolled in this sequence." %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="container-fluid py-4 px-md-4">
+  <!-- CRM Top Navigation Bar -->
+  <div class="card shadow-sm border-0 mb-4 bg-body rounded-3">
+    <div class="card-body py-3 px-4">
+      <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+        <div class="d-flex align-items-center gap-2">
+          <div class="bg-primary text-white rounded-3 p-2 d-flex align-items-center justify-content-center">
+            <i class="fa fa-users fa-lg"></i>
+          </div>
+          <div>
+            <h4 class="mb-0 fw-bold">{% trans "Enterprise CRM" %}</h4>
+            <small class="text-body-secondary">{% trans "Pipeline, Contacts, Sequences & Revenue Intelligence" %}</small>
+          </div>
+        </div>
+
+        <!-- CRM Module Tabs -->
+        <ul class="nav nav-pills flex-wrap gap-1">
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'crm:dashboard' %}">
+              <i class="fa fa-tachometer me-1"></i>{% trans "Dashboard" %}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'pipeline' %}active{% endif %}" href="{% url 'crm:pipeline' %}">
+              <i class="fa fa-columns me-1"></i>{% trans "Kanban Pipeline" %}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'lead' in request.resolver_match.url_name and request.resolver_match.url_name != 'pipeline' %}active{% endif %}" href="{% url 'crm:lead_list' %}">
+              <i class="fa fa-bullseye me-1"></i>{% trans "Deals / Leads" %}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'contact' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'crm:contact_list' %}">
+              <i class="fa fa-address-book me-1"></i>{% trans "Contacts" %}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'company' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'crm:company_list' %}">
+              <i class="fa fa-building me-1"></i>{% trans "Companies" %}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'sequence' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'crm:sequence_list' %}">
+              <i class="fa fa-envelope-open me-1"></i>{% trans "Email Drips" %}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if 'segment' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'crm:segment_list' %}">
+              <i class="fa fa-pie-chart me-1"></i>{% trans "Segments" %}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'analytics' %}active{% endif %}" href="{% url 'crm:analytics' %}">
+              <i class="fa fa-line-chart me-1"></i>{% trans "Analytics" %}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {% block crm_content %}{% endblock %}
+</div>
+{% endblock %}

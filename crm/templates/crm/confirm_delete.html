@@ -1,0 +1,31 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n %}
+
+{% block crm_content %}
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-5">
+    <div class="card shadow-sm border-0 border-top border-danger border-4 rounded-3">
+      <div class="card-body p-4 text-center">
+        <div class="bg-danger-subtle text-danger rounded-circle p-3 d-inline-flex align-items-center justify-content-center mb-3">
+          <i class="fa fa-exclamation-triangle fa-2x"></i>
+        </div>
+        <h4 class="fw-bold mb-2">{% trans "Confirm Deletion" %}</h4>
+        <p class="text-body-secondary mb-4">
+          {% blocktrans with name=object %}Are you sure you want to permanently delete <strong>"{{ name }}"</strong>? This action cannot be undone.{% endblocktrans %}
+        </p>
+        <form method="post">
+          {% csrf_token %}
+          <div class="d-flex justify-content-center gap-2">
+            <button type="button" onclick="history.back()" class="btn btn-outline-secondary rounded-pill px-4">
+              {% trans "Cancel" %}
+            </button>
+            <button type="submit" class="btn btn-danger rounded-pill px-4">
+              <i class="fa fa-trash me-1"></i>{% trans "Delete Permanently" %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

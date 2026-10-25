@@ -1,0 +1,75 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n %}
+
+{% block crm_content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-3">
+      <div class="card-header bg-transparent border-0 py-3 px-4">
+        <h4 class="fw-bold mb-0">
+          {% if object %}
+            <i class="fa fa-pencil me-2 text-primary"></i>{% trans "Edit Email Step" %}
+          {% else %}
+            <i class="fa fa-plus-circle me-2 text-primary"></i>{% trans "Add Step to Sequence" %}
+          {% endif %}
+        </h4>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <form method="post" novalidate>
+          {% csrf_token %}
+          
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+              {{ form.non_field_errors }}
+            </div>
+          {% endif %}
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.step_number.id_for_label }}">{{ form.step_number.label }} *</label>
+              {{ form.step_number }}
+              {% if form.step_number.errors %}<div class="text-danger small">{{ form.step_number.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.delay_days.id_for_label }}">{{ form.delay_days.label }} *</label>
+              {{ form.delay_days }}
+              <div class="form-text small">{{ form.delay_days.help_text }}</div>
+              {% if form.delay_days.errors %}<div class="text-danger small">{{ form.delay_days.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold" for="{{ form.subject.id_for_label }}">{{ form.subject.label }} *</label>
+            {{ form.subject }}
+            {% if form.subject.errors %}<div class="text-danger small">{{ form.subject.errors }}</div>{% endif %}
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold" for="{{ form.body_template.id_for_label }}">{{ form.body_template.label }} *</label>
+            {{ form.body_template }}
+            <div class="form-text small">
+              <strong>{% trans "Available Placeholders" %}:</strong><br>
+              <code>&#123;&#123; contact.first_name &#125;&#125;</code>,
+              <code>&#123;&#123; contact.last_name &#125;&#125;</code>,
+              <code>&#123;&#123; contact.email &#125;&#125;</code>,
+              <code>&#123;&#123; company.name &#125;&#125;</code>,
+              <code>&#123;&#123; lead.title &#125;&#125;</code>,
+              <code>&#123;&#123; tracking_pixel &#125;&#125;</code>
+            </div>
+            {% if form.body_template.errors %}<div class="text-danger small">{{ form.body_template.errors }}</div>{% endif %}
+          </div>
+
+          <div class="d-flex justify-content-end gap-2">
+            <button type="button" onclick="history.back()" class="btn btn-outline-secondary rounded-pill">
+              {% trans "Cancel" %}
+            </button>
+            <button type="submit" class="btn btn-primary rounded-pill px-4">
+              <i class="fa fa-check me-1"></i>{% trans "Save Step" %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

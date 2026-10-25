@@ -1,0 +1,96 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n %}
+
+{% block crm_content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-3">
+      <div class="card-header bg-transparent border-0 py-3 px-4">
+        <h4 class="fw-bold mb-0">
+          {% if object %}
+            <i class="fa fa-pencil me-2 text-primary"></i>{% trans "Edit Deal / Lead" %}
+          {% else %}
+            <i class="fa fa-plus-circle me-2 text-primary"></i>{% trans "Create New Deal / Lead" %}
+          {% endif %}
+        </h4>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <form method="post" novalidate>
+          {% csrf_token %}
+          
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+              {{ form.non_field_errors }}
+            </div>
+          {% endif %}
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold" for="{{ form.title.id_for_label }}">{{ form.title.label }} *</label>
+            {{ form.title }}
+            {% if form.title.errors %}<div class="text-danger small">{{ form.title.errors }}</div>{% endif %}
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.contact.id_for_label }}">{{ form.contact.label }}</label>
+              {{ form.contact }}
+              {% if form.contact.errors %}<div class="text-danger small">{{ form.contact.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.company.id_for_label }}">{{ form.company.label }}</label>
+              {{ form.company }}
+              {% if form.company.errors %}<div class="text-danger small">{{ form.company.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.stage.id_for_label }}">{{ form.stage.label }} *</label>
+              {{ form.stage }}
+              {% if form.stage.errors %}<div class="text-danger small">{{ form.stage.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.source.id_for_label }}">{{ form.source.label }}</label>
+              {{ form.source }}
+              {% if form.source.errors %}<div class="text-danger small">{{ form.source.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-4">
+              <label class="form-label fw-semibold" for="{{ form.value.id_for_label }}">{{ form.value.label }}</label>
+              {{ form.value }}
+              {% if form.value.errors %}<div class="text-danger small">{{ form.value.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-semibold" for="{{ form.expected_close_date.id_for_label }}">{{ form.expected_close_date.label }}</label>
+              {{ form.expected_close_date }}
+              {% if form.expected_close_date.errors %}<div class="text-danger small">{{ form.expected_close_date.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-semibold" for="{{ form.assigned_to.id_for_label }}">{{ form.assigned_to.label }}</label>
+              {{ form.assigned_to }}
+              {% if form.assigned_to.errors %}<div class="text-danger small">{{ form.assigned_to.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold" for="{{ form.notes.id_for_label }}">{{ form.notes.label }}</label>
+            {{ form.notes }}
+            {% if form.notes.errors %}<div class="text-danger small">{{ form.notes.errors }}</div>{% endif %}
+          </div>
+
+          <div class="d-flex justify-content-end gap-2">
+            <a href="{% if object %}{% url 'crm:lead_detail' object.pk %}{% else %}{% url 'crm:lead_list' %}{% endif %}" class="btn btn-outline-secondary rounded-pill">
+              {% trans "Cancel" %}
+            </a>
+            <button type="submit" class="btn btn-primary rounded-pill px-4">
+              <i class="fa fa-check me-1"></i>{% trans "Save Deal" %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

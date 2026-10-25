@@ -1,0 +1,154 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n humanize %}
+
+{% block crm_content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <div>
+    <h4 class="fw-bold mb-1"><i class="fa fa-columns me-2 text-primary"></i>{% trans "Deals Pipeline (Kanban)" %}</h4>
+    <p class="text-body-secondary mb-0 small">{% trans "Drag and drop cards between stages to update deal progress and trigger automated sequences." %}</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a href="{% url 'crm:lead_create' %}" class="btn btn-primary rounded-pill">
+      <i class="fa fa-plus me-1"></i>{% trans "Add Deal" %}
+    </a>
+    <a href="{% url 'crm:lead_list' %}" class="btn btn-outline-secondary rounded-pill">
+      <i class="fa fa-list me-1"></i>{% trans "List View" %}
+    </a>
+  </div>
+</div>
+
+<!-- CSRF Token for Drag & Drop JS -->
+{% csrf_token %}
+
+<!-- Kanban Columns Container -->
+<div class="d-flex flex-nowrap overflow-x-auto pb-4 gap-3 align-items-start" style="min-height: 70vh;">
+  {% for stage in stages %}
+    <div class="kanban-column flex-shrink-0 rounded-3 bg-body-tertiary border p-2"
+         style="width: 320px;"
+         data-stage="{{ stage.value }}">
+      
+      <!-- Stage Column Header -->
+      <div class="d-flex justify-content-between align-items-center p-2 mb-2 border-bottom">
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge rounded-circle p-2
+            {% if stage.value == 'new' %}bg-info
+            {% elif stage.value == 'contacted' %}bg-primary
+            {% elif stage.value == 'qualified' %}bg-warning text-dark
+            {% elif stage.value == 'proposal' %}bg-secondary
+            {% elif stage.value == 'won' %}bg-success
+            {% else %}bg-danger{% endif %}">
+          </span>
+          <h6 class="fw-bold mb-0 text-truncate">{{ stage.label }}</h6>
+          <span class="badge bg-secondary-subtle text-secondary rounded-pill stage-count" id="count-{{ stage.value }}">
+            {{ stage.count }}
+          </span>
+        </div>
+        <span class="small fw-semibold text-body-secondary stage-val" id="val-{{ stage.value }}">
+          ${{ stage.total_val|floatformat:0|intcomma }}
+        </span>
+      </div>
+
+      <!-- Drop Zone / Cards List -->
+      <div class="kanban-drop-zone d-flex flex-column"
+           style="min-height: 250px;"
+           data-stage="{{ stage.value }}"
+           ondragover="handleDragOver(event)"
+           ondragleave="handleDragLeave(event)"
+           ondrop="handleDrop(event, '{{ stage.value }}')">
+        {% for lead in stage.leads %}
+          {% include "crm/partials/lead_kanban_card.html" with lead=lead all_stages=all_stages %}
+        {% empty %}
+          <div class="empty-column-placeholder text-center text-body-secondary py-4 small">
+            <i class="fa fa-inbox fa-2x mb-2 d-block opacity-50"></i>
+            {% trans "No deals in this stage" %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<!-- Drag and Drop Handler Script -->
+<script>
+  let draggedLeadId = null;
+
+  function handleDragStart(event, leadId) {
+    draggedLeadId = leadId;
+    event.dataTransfer.setData('text/plain', leadId);
+    event.dataTransfer.effectAllowed = 'move';
+    const card = document.getElementById('lead-card-' + leadId);
+    if (card) {
+      card.classList.add('opacity-50');
+    }
+  }
+
+  function handleDragEnd(event) {
+    if (draggedLeadId) {
+      const card = document.getElementById('lead-card-' + draggedLeadId);
+      if (card) {
+        card.classList.remove('opacity-50');
+      }
+    }
+    document.querySelectorAll('.kanban-drop-zone').forEach(zone => {
+      zone.classList.remove('border-primary', 'bg-primary-subtle');
+    });
+  }
+
+  function handleDragOver(event) {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+    const zone = event.currentTarget;
+    zone.classList.add('border', 'border-primary', 'rounded-2');
+  }
+
+  function handleDragLeave(event) {
+    const zone = event.currentTarget;
+    zone.classList.remove('border', 'border-primary', 'rounded-2');
+  }
+
+  function handleDrop(event, newStage) {
+    event.preventDefault();
+    const zone = event.currentTarget;
+    zone.classList.remove('border', 'border-primary', 'rounded-2');
+
+    const leadId = event.dataTransfer.getData('text/plain') || draggedLeadId;
+    if (!leadId) return;
+
+    const card = document.getElementById('lead-card-' + leadId);
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    const formData = new FormData();
+    formData.append('stage', newStage);
+    formData.append('csrfmiddlewaretoken', csrfToken);
+
+    fetch('/crm/leads/' + leadId + '/stage/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        // Remove empty placeholders if present
+        const emptyMsg = zone.querySelector('.empty-column-placeholder');
+        if (emptyMsg) {
+          emptyMsg.remove();
+        }
+        if (card) {
+          zone.prepend(card);
+        }
+        // Reload to update column headers, counters, and stage values cleanly
+        window.location.reload();
+      } else {
+        alert("{% trans 'Failed to update deal stage. Please try again.' %}");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert("{% trans 'Network error occurred while moving deal.' %}");
+    });
+  }
+</script>
+{% endblock %}

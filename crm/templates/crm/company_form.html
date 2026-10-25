@@ -1,0 +1,96 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n %}
+
+{% block crm_content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0 rounded-3">
+      <div class="card-header bg-transparent border-0 py-3 px-4">
+        <h4 class="fw-bold mb-0">
+          {% if object %}
+            <i class="fa fa-pencil me-2 text-primary"></i>{% trans "Edit Company" %}
+          {% else %}
+            <i class="fa fa-building-o me-2 text-primary"></i>{% trans "Create New Company" %}
+          {% endif %}
+        </h4>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <form method="post" novalidate>
+          {% csrf_token %}
+          
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+              {{ form.non_field_errors }}
+            </div>
+          {% endif %}
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.name.id_for_label }}">{{ form.name.label }} *</label>
+              {{ form.name }}
+              {% if form.name.errors %}<div class="text-danger small">{{ form.name.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.industry.id_for_label }}">{{ form.industry.label }}</label>
+              {{ form.industry }}
+              {% if form.industry.errors %}<div class="text-danger small">{{ form.industry.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.website.id_for_label }}">{{ form.website.label }}</label>
+              {{ form.website }}
+              {% if form.website.errors %}<div class="text-danger small">{{ form.website.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+              {{ form.phone }}
+              {% if form.phone.errors %}<div class="text-danger small">{{ form.phone.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-4">
+              <label class="form-label fw-semibold" for="{{ form.city.id_for_label }}">{{ form.city.label }}</label>
+              {{ form.city }}
+              {% if form.city.errors %}<div class="text-danger small">{{ form.city.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-semibold" for="{{ form.country.id_for_label }}">{{ form.country.label }}</label>
+              {{ form.country }}
+              {% if form.country.errors %}<div class="text-danger small">{{ form.country.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-semibold" for="{{ form.annual_revenue.id_for_label }}">{{ form.annual_revenue.label }}</label>
+              {{ form.annual_revenue }}
+              {% if form.annual_revenue.errors %}<div class="text-danger small">{{ form.annual_revenue.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold" for="{{ form.address.id_for_label }}">{{ form.address.label }}</label>
+            {{ form.address }}
+            {% if form.address.errors %}<div class="text-danger small">{{ form.address.errors }}</div>{% endif %}
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold" for="{{ form.notes.id_for_label }}">{{ form.notes.label }}</label>
+            {{ form.notes }}
+            {% if form.notes.errors %}<div class="text-danger small">{{ form.notes.errors }}</div>{% endif %}
+          </div>
+
+          <div class="d-flex justify-content-end gap-2">
+            <a href="{% if object %}{% url 'crm:company_detail' object.pk %}{% else %}{% url 'crm:company_list' %}{% endif %}" class="btn btn-outline-secondary rounded-pill">
+              {% trans "Cancel" %}
+            </a>
+            <button type="submit" class="btn btn-primary rounded-pill px-4">
+              <i class="fa fa-check me-1"></i>{% trans "Save Company" %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -8,38 +8,1611 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 14:14-0500\n"
-"PO-Revision-Date: 2021-05-02 23:54-0456\n"
-"Last-Translator: b'  <>'\n"
+"POT-Creation-Date: 2026-10-24 18:42-0500\n"
+"PO-Revision-Date: 2026-10-24 18:29-0500\n"
+"Last-Translator: <davsamirtor.projects@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Translated-Using: django-rosetta 0.9.6\n"
+"X-Translated-Using: django-rosetta 0.10.3\n"
 
-#: .\enterprise_website\settings.py:221
+#: .\crm\admin.py:62 .\crm\templates\crm\company_detail.html:117
+#: .\crm\templates\crm\dashboard.html:145
+#: .\crm\templates\crm\lead_list.html:55
+#, fuzzy
+msgid "Stage"
+msgstr ""
+
+#: .\crm\admin.py:87
+msgid "Type"
+msgstr ""
+
+#: .\crm\admin.py:113 .\crm\templates\crm\sequence_list.html:34
+msgid "Steps"
+msgstr ""
+
+#: .\crm\admin.py:139 .\crm\models.py:400
+#: .\crm\templates\crm\sequence_list.html:33 .\task_runner\admin.py:74
+#: .\task_runner\models.py:49
+#: .\task_runner\templates\task_runner\job_list.html:121
+#: .\user_management\templates\user_management\siteuser_list.html:36
+msgid "Status"
+msgstr ""
+
+#: .\crm\admin.py:159 .\crm\templates\crm\segment_detail.html:52
+#: .\crm\templates\crm\segment_list.html:27
+msgid "Matching Contacts"
+msgstr ""
+
+#: .\crm\admin.py:163
+msgid "Matching Leads"
+msgstr ""
+
+#: .\crm\apps.py:8
+msgid "Customer Relationship Management (CRM)"
+msgstr ""
+
+#: .\crm\forms.py:92
+msgid "Detailed notes about this interaction..."
+msgstr ""
+
+#: .\crm\forms.py:126 .\crm\models.py:342
+#, fuzzy
+msgid "Email Subject"
+msgstr "Introduce el asunto"
+
+#: .\crm\forms.py:127
+#, fuzzy
+msgid "Enter campaign subject..."
+msgstr "Introduce el asunto"
+
+#: .\crm\forms.py:130
+msgid "HTML / Plain Message"
+msgstr ""
+
+#: .\crm\forms.py:131
+msgid "Write your email body here..."
+msgstr ""
+
+#: .\crm\models.py:13 .\crm\templates\crm\company_list.html:41
+msgid "Company Name"
+msgstr ""
+
+#: .\crm\models.py:14 .\crm\templates\crm\company_list.html:42
+msgid "Industry"
+msgstr ""
+
+#: .\crm\models.py:15
+msgid "Website"
+msgstr ""
+
+#: .\crm\models.py:16 .\crm\templates\crm\company_detail.html:49
+#: .\crm\templates\crm\company_list.html:44
+#: .\crm\templates\crm\contact_detail.html:53
+#: .\crm\templates\crm\contact_list.html:43
+msgid "Phone"
+msgstr ""
+
+#: .\crm\models.py:17 .\crm\templates\crm\company_detail.html:52
+msgid "Address"
+msgstr ""
+
+#: .\crm\models.py:18
+#: .\user_management\templates\user_management\siteuser_list.html:35
+msgid "City"
+msgstr ""
+
+#: .\crm\models.py:19
+#: .\user_management\templates\user_management\siteuser_list.html:34
+msgid "Country"
+msgstr ""
+
+#: .\crm\models.py:25
+msgid "Annual Revenue ($)"
+msgstr ""
+
+#: .\crm\models.py:27 .\crm\models.py:74
+#: .\crm\templates\crm\company_detail.html:69
+#: .\crm\templates\crm\contact_detail.html:76
+#: .\crm\templates\crm\lead_detail.html:156
+msgid "Notes"
+msgstr ""
+
+#: .\crm\models.py:28 .\crm\models.py:75 .\crm\models.py:170
+#: .\crm\models.py:302 .\crm\models.py:350 .\crm\models.py:520
+#: .\task_runner\models.py:84
+#: .\task_runner\templates\task_runner\job_list.html:124
+#: .\video_gallery\models.py:42 .\video_gallery\models.py:133
+msgid "Created At"
+msgstr ""
+
+#: .\crm\models.py:29 .\crm\models.py:76 .\crm\models.py:171
+#: .\crm\models.py:303 .\crm\models.py:351 .\crm\models.py:521
+#: .\task_runner\models.py:88 .\video_gallery\models.py:43
+#: .\video_gallery\models.py:134
+msgid "Updated At"
+msgstr ""
+
+#: .\crm\models.py:32 .\crm\models.py:60 .\crm\models.py:135
+#: .\crm\templates\crm\contact_detail.html:56
+#: .\crm\templates\crm\contact_list.html:44
+#: .\crm\templates\crm\lead_list.html:54
+#: .\crm\templates\crm\segment_detail.html:61
+msgid "Company"
+msgstr ""
+
+#: .\crm\models.py:33 .\crm\templates\crm\base_crm.html:44
+#, fuzzy
+#| msgid "Spanish"
+msgid "Companies"
+msgstr "Español"
+
+#: .\crm\models.py:50
+msgid "First Name"
+msgstr ""
+
+#: .\crm\models.py:51
+msgid "Last Name"
+msgstr ""
+
+#: .\crm\models.py:52
+#, fuzzy
+msgid "Email Address"
+msgstr "Ingrese la dirección de correo"
+
+#: .\crm\models.py:53
+msgid "Phone Number"
+msgstr ""
+
+#: .\crm\models.py:62 .\crm\templates\crm\contact_list.html:45
+msgid "Job Title"
+msgstr ""
+
+#: .\crm\models.py:65 .\crm\templates\crm\lead_detail.html:94
+msgid "Subscribed to Marketing"
+msgstr ""
+
+#: .\crm\models.py:66
+msgid "Designates whether this contact receives marketing broadcast emails."
+msgstr ""
+
+#: .\crm\models.py:71 .\crm\templates\crm\contact_detail.html:65
+#: .\crm\templates\crm\contact_list.html:47
+#: .\crm\templates\crm\segment_detail.html:63
+msgid "Tags"
+msgstr ""
+
+#: .\crm\models.py:72
+msgid "Comma-separated tags (e.g. enterprise, vip, inbound, lead)."
+msgstr ""
+
+#: .\crm\models.py:79 .\crm\models.py:382
+#: .\crm\templates\crm\company_detail.html:116
+#: .\crm\templates\crm\contact_detail.html:20
+#: .\crm\templates\crm\lead_detail.html:84 .\home\plugin.py:16
+#: .\home\templates\home\contact.html:14 .\templates\base.html:118
+#: .\templates\themes\bootstrap5\partials\footer.html:18
+#: .\templates\themes\bootstrap5\partials\header.html:57
+#: .\templates\themes\minimal\partials\footer.html:12
+#: .\templates\themes\minimal\partials\header.html:43
+#: .\templates\themes\tailwind\partials\footer.html:17
+#: .\templates\themes\tailwind\partials\header.html:57
+#, fuzzy
+msgid "Contact"
+msgstr "Contacto"
+
+#: .\crm\models.py:80 .\crm\templates\crm\base_crm.html:39
+#: .\crm\templates\crm\company_detail.html:79
+#: .\crm\templates\crm\company_list.html:46
+#, fuzzy
+msgid "Contacts"
+msgstr "Contacto"
+
+#: .\crm\models.py:101
+msgid "New"
+msgstr ""
+
+#: .\crm\models.py:102
+#, fuzzy
+msgid "Contacted"
+msgstr "Contacto"
+
+#: .\crm\models.py:103
+msgid "Qualified"
+msgstr ""
+
+#: .\crm\models.py:104
+msgid "Proposal"
+msgstr ""
+
+#: .\crm\models.py:105
+msgid "Won"
+msgstr ""
+
+#: .\crm\models.py:106
+msgid "Lost"
+msgstr ""
+
+#: .\crm\models.py:110
+msgid "Website Form"
+msgstr ""
+
+#: .\crm\models.py:111
+msgid "Referral"
+msgstr ""
+
+#: .\crm\models.py:112
+msgid "Cold Outreach"
+msgstr ""
+
+#: .\crm\models.py:113
+msgid "Inbound Email"
+msgstr ""
+
+#: .\crm\models.py:114
+msgid "Event / Conference"
+msgstr ""
+
+#: .\crm\models.py:115
+msgid "Other"
+msgstr ""
+
+#: .\crm\models.py:120
+msgid "Deal / Lead Title"
+msgstr ""
+
+#: .\crm\models.py:127 .\crm\templates\crm\lead_detail.html:70
+#: .\crm\templates\crm\lead_list.html:53
+#, fuzzy
+msgid "Primary Contact"
+msgstr "Contacto"
+
+#: .\crm\models.py:142
+msgid "Pipeline Stage"
+msgstr ""
+
+#: .\crm\models.py:148 .\crm\templates\crm\lead_detail.html:145
+msgid "Lead Source"
+msgstr ""
+
+#: .\crm\models.py:154
+msgid "Estimated Value ($)"
+msgstr ""
+
+#: .\crm\models.py:159
+msgid "Expected Close Date"
+msgstr ""
+
+#: .\crm\models.py:167
+msgid "Assigned Sales Rep"
+msgstr ""
+
+#: .\crm\models.py:169
+msgid "Deal Notes"
+msgstr ""
+
+#: .\crm\models.py:174
+msgid "Lead / Deal"
+msgstr ""
+
+#: .\crm\models.py:175
+msgid "Leads / Deals"
+msgstr ""
+
+#: .\crm\models.py:223
+msgid "Note"
+msgstr ""
+
+#: .\crm\models.py:224
+msgid "Phone Call"
+msgstr ""
+
+#: .\crm\models.py:225 .\crm\templates\crm\contact_detail.html:50
+#: .\crm\templates\crm\contact_list.html:42
+#: .\crm\templates\crm\segment_detail.html:60
+#: .\user_management\templates\user_management\siteuser_list.html:33
+msgid "Email"
+msgstr ""
+
+#: .\crm\models.py:226
+msgid "Meeting"
+msgstr ""
+
+#: .\crm\models.py:227
+msgid "Stage Change"
+msgstr ""
+
+#: .\crm\models.py:228
+msgid "Sequence Drip Step"
+msgstr ""
+
+#: .\crm\models.py:229
+msgid "Broadcast Campaign"
+msgstr ""
+
+#: .\crm\models.py:240
+msgid "Associated Lead / Deal"
+msgstr ""
+
+#: .\crm\models.py:248
+msgid "Associated Contact"
+msgstr ""
+
+#: .\crm\models.py:256
+msgid "Staff User"
+msgstr ""
+
+#: .\crm\models.py:262
+msgid "Interaction Type"
+msgstr ""
+
+#: .\crm\models.py:264 .\crm\templates\crm\lead_detail.html:180
+msgid "Summary"
+msgstr ""
+
+#: .\crm\models.py:265
+msgid "Details / Notes"
+msgstr ""
+
+#: .\crm\models.py:269
+msgid "Timestamp"
+msgstr ""
+
+#: .\crm\models.py:273
+msgid "Interaction Log"
+msgstr ""
+
+#: .\crm\models.py:274
+msgid "Interaction Logs"
+msgstr ""
+
+#: .\crm\models.py:287 .\crm\templates\crm\sequence_list.html:31
+msgid "Sequence Name"
+msgstr ""
+
+#: .\crm\models.py:288 .\crm\models.py:510
+#: .\crm\templates\crm\segment_list.html:26 .\menu_management\models.py:10
+#: .\video_gallery\models.py:40 .\video_gallery\models.py:104
+msgid "Description"
+msgstr ""
+
+#: .\crm\models.py:291
+msgid "Manual Enrollment Only"
+msgstr ""
+
+#: .\crm\models.py:294
+msgid "Auto-Enroll On Stage Entry"
+msgstr ""
+
+#: .\crm\models.py:295
+msgid "When a lead moves to this stage, automatically enroll primary contact."
+msgstr ""
+
+#: .\crm\models.py:299 .\crm\models.py:364
+#: .\crm\templates\crm\sequence_detail.html:12
+#: .\crm\templates\crm\sequence_list.html:62
+#: .\user_management\templates\user_management\siteuser_list.html:48
+msgid "Active"
+msgstr ""
+
+#: .\crm\models.py:300
+msgid "When inactive, scheduled emails in this sequence will be skipped."
+msgstr ""
+
+#: .\crm\models.py:306 .\crm\models.py:331
+msgid "Email Sequence"
+msgstr ""
+
+#: .\crm\models.py:307
+msgid "Email Sequences"
+msgstr ""
+
+#: .\crm\models.py:335
+msgid "Step Number"
+msgstr ""
+
+#: .\crm\models.py:339
+msgid "Delay (Days)"
+msgstr ""
+
+#: .\crm\models.py:340
+msgid "Days to wait after enrollment or previous step before sending."
+msgstr ""
+
+#: .\crm\models.py:344
+msgid "Email Body (Template)"
+msgstr ""
+
+#: .\crm\models.py:346
+msgid ""
+"Supports placeholders: {{ contact.first_name }}, {{ contact.last_name }}, {{"
+" contact.email }}, {{ company.name }}, {{ lead.title }}, {{ tracking_pixel "
+"}}"
+msgstr ""
+
+#: .\crm\models.py:354 .\crm\models.py:445
+msgid "Email Step"
+msgstr ""
+
+#: .\crm\models.py:355
+msgid "Email Steps"
+msgstr ""
+
+#: .\crm\models.py:365
+msgid "Completed"
+msgstr ""
+
+#: .\crm\models.py:366
+msgid "Paused"
+msgstr ""
+
+#: .\crm\models.py:367
+msgid "Cancelled"
+msgstr ""
+
+#: .\crm\models.py:376
+msgid "Sequence"
+msgstr ""
+
+#: .\crm\models.py:390 .\crm\models.py:459
+msgid "Associated Lead"
+msgstr ""
+
+#: .\crm\models.py:394
+msgid "Current Step Number"
+msgstr ""
+
+#: .\crm\models.py:402
+msgid "Enrolled At"
+msgstr ""
+
+#: .\crm\models.py:406
+msgid "Next Send Scheduled At"
+msgstr ""
+
+#: .\crm\models.py:411
+msgid "Completed At"
+msgstr ""
+
+#: .\crm\models.py:415 .\crm\models.py:437
+msgid "Sequence Enrollment"
+msgstr ""
+
+#: .\crm\models.py:416
+msgid "Sequence Enrollments"
+msgstr ""
+
+#: .\crm\models.py:424
+msgid "Sent"
+msgstr ""
+
+#: .\crm\models.py:425
+msgid "Opened"
+msgstr ""
+
+#: .\crm\models.py:426
+msgid "Failed"
+msgstr ""
+
+#: .\crm\models.py:451
+msgid "Recipient Contact"
+msgstr ""
+
+#: .\crm\models.py:461
+msgid "Recipient Email"
+msgstr ""
+
+#: .\crm\models.py:462
+#, fuzzy
+msgid "Subject"
+msgstr "Introduce el asunto"
+
+#: .\crm\models.py:467
+msgid "Tracking Token"
+msgstr ""
+
+#: .\crm\models.py:474
+msgid "Delivery Status"
+msgstr ""
+
+#: .\crm\models.py:476
+msgid "Sent At"
+msgstr ""
+
+#: .\crm\models.py:480
+msgid "Opened At"
+msgstr ""
+
+#: .\crm\models.py:482 .\task_runner\models.py:65
+#, fuzzy
+msgid "Error Message"
+msgstr "Escriba el mensaje"
+
+#: .\crm\models.py:485
+msgid "Email Delivery Log"
+msgstr ""
+
+#: .\crm\models.py:486
+msgid "Email Delivery Logs"
+msgstr ""
+
+#: .\crm\models.py:509 .\crm\templates\crm\segment_list.html:25
+msgid "Segment Name"
+msgstr ""
+
+#: .\crm\models.py:514
+msgid "Filter Rules (JSON)"
+msgstr ""
+
+#: .\crm\models.py:516
+msgid ""
+"Filters applied to contacts/leads. Supported keys: 'stage' (e.g. "
+"'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), 'min_value' "
+"(number), 'subscribed' (bool)."
+msgstr ""
+
+#: .\crm\models.py:524
+msgid "Customer Segment"
+msgstr ""
+
+#: .\crm\models.py:525 .\crm\templates\crm\segment_list.html:9
+msgid "Customer Segments"
+msgstr ""
+
+#: .\crm\plugin.py:9
+msgid "Customer Relationship Management"
+msgstr ""
+
+#: .\crm\plugin.py:10
+msgid ""
+"Full-featured CRM with pipeline Kanban, email sequences, customer "
+"segmentation, and analytics."
+msgstr ""
+
+#: .\crm\plugin.py:19 .\templates\base.html:123
+#: .\templates\themes\bootstrap5\partials\header.html:66
+msgid "CRM"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:10
+msgid "Total Pipeline"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:12
+msgid "tracked deals"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:20
+msgid "Won Revenue Deals"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:22
+msgid "Closed-won opportunities"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:30
+msgid "Funnel Win Rate"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:32
+msgid "Won vs Total pipeline"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:40
+msgid "Email Open Rate"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:42
+msgid "emails opened"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:54
+msgid "Lead Funnel Conversion"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:55
+msgid "Stage Counts"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:69
+msgid "Pipeline Value by Stage ($)"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:70
+msgid "Dollar Volume"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:86
+msgid "Contact Acquisition Growth"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:87
+msgid "Monthly Trend"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:101
+msgid "Email Deliveries & Open Rate"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:102
+#, fuzzy
+#| msgid "User language"
+msgid "Engagement"
+msgstr "Idioma del usuario"
+
+#: .\crm\templates\crm\analytics.html:127
+msgid "Deals"
+msgstr ""
+
+#: .\crm\templates\crm\analytics.html:193
+#, fuzzy
+msgid "New Contacts"
+msgstr "Contacto"
+
+#: .\crm\templates\crm\base_crm.html:15
+#, fuzzy
+msgid "Enterprise CRM"
+msgstr "Productos de HPE Enterprise Security"
+
+#: .\crm\templates\crm\base_crm.html:16
+msgid "Pipeline, Contacts, Sequences & Revenue Intelligence"
+msgstr ""
+
+#: .\crm\templates\crm\base_crm.html:24
+msgid "Dashboard"
+msgstr ""
+
+#: .\crm\templates\crm\base_crm.html:29
+msgid "Kanban Pipeline"
+msgstr ""
+
+#: .\crm\templates\crm\base_crm.html:34
+msgid "Deals / Leads"
+msgstr ""
+
+#: .\crm\templates\crm\base_crm.html:49
+msgid "Email Drips"
+msgstr ""
+
+#: .\crm\templates\crm\base_crm.html:54
+msgid "Segments"
+msgstr ""
+
+#: .\crm\templates\crm\base_crm.html:59
+msgid "Analytics"
+msgstr ""
+
+#: .\crm\templates\crm\company_detail.html:30
+#: .\crm\templates\crm\company_form.html:11
+msgid "Edit Company"
+msgstr ""
+
+#: .\crm\templates\crm\company_detail.html:33
+#: .\crm\templates\crm\company_list.html:83
+#: .\crm\templates\crm\contact_detail.html:33
+#: .\crm\templates\crm\contact_list.html:94
+#: .\crm\templates\crm\lead_detail.html:35
+#: .\crm\templates\crm\lead_list.html:119
+#: .\crm\templates\crm\segment_detail.html:28
+#: .\crm\templates\crm\segment_list.html:60
+#: .\crm\templates\crm\sequence_detail.html:40
+#: .\crm\templates\crm\sequence_list.html:79
+msgid "Delete"
+msgstr ""
+
+#: .\crm\templates\crm\company_detail.html:45
+msgid "Company Particulars"
+msgstr ""
+
+#: .\crm\templates\crm\company_detail.html:55
+#: .\crm\templates\crm\company_list.html:45
+msgid "Annual Revenue"
+msgstr ""
+
+#: .\crm\templates\crm\company_detail.html:64
+#: .\crm\templates\crm\dashboard.html:26
+msgid "Pipeline Value"
+msgstr ""
+
+#: .\crm\templates\crm\company_detail.html:81
+#: .\crm\templates\crm\contact_list.html:14
+#: .\crm\templates\crm\dashboard.html:109
+#, fuzzy
+msgid "Add Contact"
+msgstr "Contacto"
+
+#: .\crm\templates\crm\company_detail.html:89
+msgid "Staff"
+msgstr ""
+
+#: .\crm\templates\crm\company_detail.html:93
+msgid "No contacts registered under this company yet."
+msgstr ""
+
+#: .\crm\templates\crm\company_detail.html:105
+msgid "Deals & Opportunities"
+msgstr ""
+
+#: .\crm\templates\crm\company_detail.html:107
+#: .\crm\templates\crm\lead_list.html:17
+#, fuzzy
+#| msgid "View Details"
+msgid "New Deal"
+msgstr "Ver Detalles"
+
+#: .\crm\templates\crm\company_detail.html:115
+#: .\crm\templates\crm\dashboard.html:143
+#: .\crm\templates\crm\lead_list.html:52
+msgid "Deal Title"
+msgstr ""
+
+#: .\crm\templates\crm\company_detail.html:118
+#: .\crm\templates\crm\dashboard.html:146
+#: .\crm\templates\crm\lead_list.html:56
+msgid "Value"
+msgstr ""
+
+#: .\crm\templates\crm\company_detail.html:148
+msgid "No deals associated with this company."
+msgstr ""
+
+#: .\crm\templates\crm\company_form.html:13
+msgid "Create New Company"
+msgstr ""
+
+#: .\crm\templates\crm\company_form.html:85
+#: .\crm\templates\crm\confirm_delete.html:20
+#: .\crm\templates\crm\contact_form.html:89
+#: .\crm\templates\crm\lead_form.html:85
+#: .\crm\templates\crm\segment_detail.html:129
+#: .\crm\templates\crm\segment_form.html:51
+#: .\crm\templates\crm\sequence_form.html:56
+#: .\crm\templates\crm\step_form.html:64
+#: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:144
+#: .\task_runner\templates\task_runner\job_list.html:320
+#: .\user_management\templates\user_management\login.html:19
+#: .\user_management\templates\user_management\signup.html:18
+msgid "Cancel"
+msgstr ""
+
+#: .\crm\templates\crm\company_form.html:88
+msgid "Save Company"
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:9
+msgid "Companies & Accounts"
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:10
+msgid "Organizations, enterprise clients, and business accounts."
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:14
+#: .\crm\templates\crm\dashboard.html:113
+msgid "Add Company"
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:26
+msgid "Search by company, industry, city..."
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:30
+#: .\crm\templates\crm\contact_list.html:30
+#: .\video_gallery\templates\video_gallery\gallery_list.html:61
+msgid "Search"
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:32
+#: .\crm\templates\crm\contact_list.html:32
+#: .\crm\templates\crm\lead_list.html:43
+msgid "Reset"
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:43
+msgid "Location"
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:47
+#: .\crm\templates\crm\contact_list.html:48
+#: .\crm\templates\crm\lead_list.html:59
+#: .\crm\templates\crm\segment_list.html:30
+#: .\crm\templates\crm\sequence_list.html:37
+#: .\task_runner\templates\task_runner\job_list.html:125
+msgid "Actions"
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:58
+msgid "Visit website"
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:77
+#: .\crm\templates\crm\contact_list.html:88
+#: .\crm\templates\crm\lead_list.html:113
+#: .\task_runner\templates\task_runner\job_list.html:172
+msgid "View"
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:80
+#: .\crm\templates\crm\contact_list.html:91
+#: .\crm\templates\crm\lead_list.html:116
+#: .\crm\templates\crm\segment_list.html:57
+#: .\crm\templates\crm\sequence_list.html:76
+msgid "Edit"
+msgstr ""
+
+#: .\crm\templates\crm\company_list.html:92
+msgid "No companies registered yet."
+msgstr ""
+
+#: .\crm\templates\crm\confirm_delete.html:12
+msgid "Confirm Deletion"
+msgstr ""
+
+#: .\crm\templates\crm\confirm_delete.html:14
+#, python-format
+msgid ""
+"Are you sure you want to permanently delete <strong>\"%(name)s\"</strong>? "
+"This action cannot be undone."
+msgstr ""
+
+#: .\crm\templates\crm\confirm_delete.html:23
+msgid "Delete Permanently"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:16
+#: .\crm\templates\crm\contact_list.html:77
+#: .\crm\templates\crm\segment_detail.html:78
+msgid "Subscribed"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:16
+#: .\crm\templates\crm\contact_list.html:77
+#: .\crm\templates\crm\lead_detail.html:94
+#: .\crm\templates\crm\segment_detail.html:78
+msgid "Unsubscribed"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:30
+#: .\crm\templates\crm\contact_form.html:11
+#, fuzzy
+msgid "Edit Contact"
+msgstr "Contacto"
+
+#: .\crm\templates\crm\contact_detail.html:46
+#, fuzzy
+#| msgid "Get Details"
+msgid "Contact Details"
+msgstr "Obtener Detalles"
+
+#: .\crm\templates\crm\contact_detail.html:86
+msgid "Associated Deals"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:88
+#: .\crm\templates\crm\pipeline.html:12
+msgid "Add Deal"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:106
+msgid "No deals associated with this contact yet."
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:116
+msgid "Email Drip Enrollments"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:127
+msgid "Step"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:127
+msgid "Next send"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:132
+msgid "Not enrolled in any email sequences."
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:144
+msgid "Touchpoint History"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:167
+#: .\crm\templates\crm\lead_detail.html:223
+msgid "System"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:173
+msgid "No activities recorded for this contact."
+msgstr ""
+
+#: .\crm\templates\crm\contact_form.html:13
+msgid "Create New Contact"
+msgstr ""
+
+#: .\crm\templates\crm\contact_form.html:92
+#, fuzzy
+msgid "Save Contact"
+msgstr "Contacto"
+
+#: .\crm\templates\crm\contact_list.html:9
+msgid "Contacts Directory"
+msgstr ""
+
+#: .\crm\templates\crm\contact_list.html:10
+msgid "Individual persons, buyers, champions, and sales stakeholders."
+msgstr ""
+
+#: .\crm\templates\crm\contact_list.html:26
+msgid "Search contacts by name, email, company..."
+msgstr ""
+
+#: .\crm\templates\crm\contact_list.html:41 .\video_gallery\models.py:33
+msgid "Name"
+msgstr ""
+
+#: .\crm\templates\crm\contact_list.html:46
+msgid "Subscription"
+msgstr ""
+
+#: .\crm\templates\crm\contact_list.html:103
+msgid "No contacts found."
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:11
+msgid "Active Deals"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:16
+msgid "deals won"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:31
+msgid "Excludes lost deals"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:41
+msgid "Win Rate"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:46
+msgid "Conversion efficiency"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:56
+#, fuzzy
+msgid "Total Contacts"
+msgstr "Contacto"
+
+#: .\crm\templates\crm\dashboard.html:61
+msgid "emails sent"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:61
+msgid "opened"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:74
+#, fuzzy
+#| msgid "Page Administration"
+msgid "Pipeline Distribution"
+msgstr "Administración De La Página"
+
+#: .\crm\templates\crm\dashboard.html:76
+msgid "Open Kanban"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:101
+msgid "Quick Actions"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:105
+msgid "Create Deal / Lead"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:117
+msgid "New Email Drip"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:121
+msgid "View Full Analytics"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:135
+#, fuzzy
+#| msgid "Get Details"
+msgid "Recent Deals"
+msgstr "Obtener Detalles"
+
+#: .\crm\templates\crm\dashboard.html:136
+#, fuzzy
+#| msgid "View Details"
+msgid "View all"
+msgstr "Ver Detalles"
+
+#: .\crm\templates\crm\dashboard.html:144
+msgid "Contact / Company"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:179
+msgid "No deals found. Create your first deal to get started."
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:194
+msgid "Recent Activities"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:210
+#: .\crm\templates\crm\lead_detail.html:23
+msgid "ago"
+msgstr ""
+
+#: .\crm\templates\crm\dashboard.html:229
+msgid "No recent activities recorded."
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:23
+#: .\crm\templates\crm\segment_list.html:29
+#: .\crm\templates\crm\sequence_list.html:36
+msgid "Created"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:23
+msgid "Last updated"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:32
+#: .\crm\templates\crm\partials\lead_kanban_card.html:41
+#, fuzzy
+#| msgid "Get Details"
+msgid "Edit Deal"
+msgstr "Obtener Detalles"
+
+#: .\crm\templates\crm\lead_detail.html:43
+msgid "Pipeline Stage Progression"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:99
+msgid "No contact linked to this deal."
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:107
+msgid "Company / Account"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:121
+msgid "General"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:133
+msgid "No company assigned."
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:141
+msgid "Deal Particulars"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:148
+#: .\crm\templates\crm\lead_list.html:57
+#: .\crm\templates\crm\partials\lead_kanban_card.html:66
+msgid "Assigned Rep"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:149
+#: .\crm\templates\crm\lead_list.html:106
+msgid "Unassigned"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:151
+#: .\crm\templates\crm\lead_list.html:58
+msgid "Expected Close"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:152
+#: .\user_management\templates\user_management\profile.html:45
+#: .\user_management\templates\user_management\profile.html:49
+msgid "Not specified"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:169
+msgid "Log New Activity"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:176
+msgid "Activity Type"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:185
+#, fuzzy
+#| msgid "Get Details"
+msgid "Details"
+msgstr "Obtener Detalles"
+
+#: .\crm\templates\crm\lead_detail.html:190
+msgid "Record Activity"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:200
+msgid "Interaction History"
+msgstr ""
+
+#: .\crm\templates\crm\lead_detail.html:229
+msgid "No activities recorded for this deal yet."
+msgstr ""
+
+#: .\crm\templates\crm\lead_form.html:11
+msgid "Edit Deal / Lead"
+msgstr ""
+
+#: .\crm\templates\crm\lead_form.html:13
+msgid "Create New Deal / Lead"
+msgstr ""
+
+#: .\crm\templates\crm\lead_form.html:88
+msgid "Save Deal"
+msgstr ""
+
+#: .\crm\templates\crm\lead_list.html:9
+msgid "Deals & Leads Directory"
+msgstr ""
+
+#: .\crm\templates\crm\lead_list.html:10
+msgid ""
+"Track and manage opportunities across all stages of your sales pipeline."
+msgstr ""
+
+#: .\crm\templates\crm\lead_list.html:14
+msgid "Kanban Board"
+msgstr ""
+
+#: .\crm\templates\crm\lead_list.html:29
+msgid "Search by title, contact, company..."
+msgstr ""
+
+#: .\crm\templates\crm\lead_list.html:34
+msgid "All Pipeline Stages"
+msgstr ""
+
+#: .\crm\templates\crm\lead_list.html:41
+#: .\task_runner\templates\task_runner\job_list.html:101
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:56
+msgid "Filter"
+msgstr ""
+
+#: .\crm\templates\crm\lead_list.html:128
+msgid "No deals found matching your query."
+msgstr ""
+
+#: .\crm\templates\crm\partials\lead_kanban_card.html:14
+msgid "Move stage"
+msgstr ""
+
+#: .\crm\templates\crm\partials\lead_kanban_card.html:18
+msgid "Move to Stage"
+msgstr ""
+
+#: .\crm\templates\crm\partials\lead_kanban_card.html:36
+#: .\home\templates\home\index.html:61 .\home\templates\home\index.html:75
+#: .\home\templates\home\index.html:89 .\home\templates\home\index.html:103
+msgid "View Details"
+msgstr "Ver Detalles"
+
+#: .\crm\templates\crm\pipeline.html:7
+msgid "Deals Pipeline (Kanban)"
+msgstr ""
+
+#: .\crm\templates\crm\pipeline.html:8
+msgid ""
+"Drag and drop cards between stages to update deal progress and trigger "
+"automated sequences."
+msgstr ""
+
+#: .\crm\templates\crm\pipeline.html:15
+msgid "List View"
+msgstr ""
+
+#: .\crm\templates\crm\pipeline.html:63
+msgid "No deals in this stage"
+msgstr ""
+
+#: .\crm\templates\crm\pipeline.html:145
+msgid "Failed to update deal stage. Please try again."
+msgstr ""
+
+#: .\crm\templates\crm\pipeline.html:150
+msgid "Network error occurred while moving deal."
+msgstr ""
+
+#: .\crm\templates\crm\segment_detail.html:12
+#, fuzzy
+msgid "contacts"
+msgstr "Contacto"
+
+#: .\crm\templates\crm\segment_detail.html:16
+msgid "Customer segment dynamically evaluated against filter rules."
+msgstr ""
+
+#: .\crm\templates\crm\segment_detail.html:22
+msgid "Send Broadcast Campaign"
+msgstr ""
+
+#: .\crm\templates\crm\segment_detail.html:25
+msgid "Edit Rules"
+msgstr ""
+
+#: .\crm\templates\crm\segment_detail.html:35
+msgid "Active Filter Rules"
+msgstr ""
+
+#: .\crm\templates\crm\segment_detail.html:42
+msgid "All subscribed contacts (no filters applied)"
+msgstr ""
+
+#: .\crm\templates\crm\segment_detail.html:59
+#, fuzzy
+msgid "Contact Name"
+msgstr "Contacto"
+
+#: .\crm\templates\crm\segment_detail.html:62
+msgid "Marketing Status"
+msgstr ""
+
+#: .\crm\templates\crm\segment_detail.html:92
+msgid "No contacts currently match this segment's filter criteria."
+msgstr ""
+
+#: .\crm\templates\crm\segment_detail.html:110
+msgid "Broadcast Campaign to Segment"
+msgstr ""
+
+#: .\crm\templates\crm\segment_detail.html:117
+#, python-format
+msgid ""
+"This message will be dispatched in the background to all %(count)s "
+"subscribed contacts in \"<strong>%(name)s</strong>\"."
+msgstr ""
+
+#: .\crm\templates\crm\segment_detail.html:131
+msgid "Launch Campaign"
+msgstr ""
+
+#: .\crm\templates\crm\segment_form.html:11
+msgid "Edit Customer Segment"
+msgstr ""
+
+#: .\crm\templates\crm\segment_form.html:13
+msgid "Create New Customer Segment"
+msgstr ""
+
+#: .\crm\templates\crm\segment_form.html:43
+msgid "Filter JSON Reference"
+msgstr ""
+
+#: .\crm\templates\crm\segment_form.html:54
+msgid "Save Segment"
+msgstr ""
+
+#: .\crm\templates\crm\segment_list.html:10
+msgid ""
+"Dynamic contact groups filtered by country, deal stage, tag, value, or "
+"industry for targeted campaigns."
+msgstr ""
+
+#: .\crm\templates\crm\segment_list.html:14
+msgid "New Segment"
+msgstr ""
+
+#: .\crm\templates\crm\segment_list.html:28
+msgid "Matching Deals"
+msgstr ""
+
+#: .\crm\templates\crm\segment_list.html:54
+msgid "View & Broadcast"
+msgstr ""
+
+#: .\crm\templates\crm\segment_list.html:69
+msgid ""
+"No customer segments configured yet. Create a segment to start targeted "
+"marketing."
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:12
+#: .\crm\templates\crm\sequence_list.html:62
+#: .\user_management\templates\user_management\siteuser_list.html:50
+msgid "Inactive"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:17
+msgid "Auto-enrolls leads reaching stage:"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:19
+msgid "Manual enrollment sequence"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:21
+msgid "scheduled steps"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:30
+msgid "Dispatch Queue"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:34
+#: .\crm\templates\crm\sequence_detail.html:54
+msgid "Add Step"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:37
+msgid "Edit Sequence"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:52
+msgid "Email Steps Timeline"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:70
+#, python-format
+msgid "Delay: %(days)s days"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:72
+msgid "Edit step"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:75
+msgid "Delete step"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:87
+msgid "No steps added to this sequence yet. Add Step 1 to begin."
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:90
+msgid "Add First Step"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:104
+#: .\crm\templates\crm\sequence_list.html:35
+msgid "Active Enrollments"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:125
+msgid "Current Step"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:125
+msgid "Next dispatch"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_detail.html:135
+msgid "No contacts currently enrolled in this sequence."
+msgstr ""
+
+#: .\crm\templates\crm\sequence_form.html:11
+msgid "Edit Email Sequence"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_form.html:13
+msgid "Create New Email Sequence"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_form.html:59
+msgid "Save Sequence"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_list.html:9
+msgid "Automated Email Sequences (Drips)"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_list.html:10
+msgid ""
+"Multi-step automated email campaigns triggered by lead stage transitions or "
+"enrolled contacts."
+msgstr ""
+
+#: .\crm\templates\crm\sequence_list.html:15
+msgid ""
+"Triggers the Celery background worker to process scheduled drip emails "
+"immediately"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_list.html:16
+msgid "Process Drip Queue Now"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_list.html:20
+msgid "New Sequence"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_list.html:32
+msgid "Trigger Stage"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_list.html:57
+msgid "Manual Only"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_list.html:66
+msgid "steps"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_list.html:73
+msgid "Manage Steps"
+msgstr ""
+
+#: .\crm\templates\crm\sequence_list.html:88
+msgid "No email sequences created yet. Set up your first drip campaign."
+msgstr ""
+
+#: .\crm\templates\crm\step_form.html:11
+msgid "Edit Email Step"
+msgstr ""
+
+#: .\crm\templates\crm\step_form.html:13
+msgid "Add Step to Sequence"
+msgstr ""
+
+#: .\crm\templates\crm\step_form.html:51
+msgid "Available Placeholders"
+msgstr ""
+
+#: .\crm\templates\crm\step_form.html:67
+msgid "Save Step"
+msgstr ""
+
+#: .\crm\views.py:124
+msgid "Invalid stage specified."
+msgstr ""
+
+#: .\crm\views.py:144
+#, python-format
+msgid "Lead stage updated successfully to '%s'."
+msgstr ""
+
+#: .\crm\views.py:203
+#, python-format
+msgid "Lead '%s' created successfully."
+msgstr ""
+
+#: .\crm\views.py:210
+msgid "Lead created"
+msgstr ""
+
+#: .\crm\views.py:211
+#, python-format
+msgid "Initial lead creation in stage: %s"
+msgstr ""
+
+#: .\crm\views.py:226
+#, python-format
+msgid "Lead '%s' updated successfully."
+msgstr ""
+
+#: .\crm\views.py:242
+#, python-format
+msgid "Lead '%s' deleted successfully."
+msgstr ""
+
+#: .\crm\views.py:257
+msgid "Interaction logged successfully."
+msgstr ""
+
+#: .\crm\views.py:259
+msgid "Failed to log interaction. Please check the form."
+msgstr ""
+
+#: .\crm\views.py:318
+#, python-format
+msgid "Contact '%s' created successfully."
+msgstr ""
+
+#: .\crm\views.py:332
+#, python-format
+msgid "Contact '%s' updated successfully."
+msgstr ""
+
+#: .\crm\views.py:348
+#, python-format
+msgid "Contact '%s' deleted successfully."
+msgstr ""
+
+#: .\crm\views.py:399
+#, python-format
+msgid "Company '%s' created successfully."
+msgstr ""
+
+#: .\crm\views.py:413
+#, python-format
+msgid "Company '%s' updated successfully."
+msgstr ""
+
+#: .\crm\views.py:429
+#, python-format
+msgid "Company '%s' deleted successfully."
+msgstr ""
+
+#: .\crm\views.py:469
+#, python-format
+msgid "Sequence '%s' created successfully."
+msgstr ""
+
+#: .\crm\views.py:483
+#, python-format
+msgid "Sequence '%s' updated successfully."
+msgstr ""
+
+#: .\crm\views.py:499
+#, python-format
+msgid "Sequence '%s' deleted successfully."
+msgstr ""
+
+#: .\crm\views.py:512
+#, python-format
+msgid "Email step added to '%s'."
+msgstr ""
+
+#: .\crm\views.py:530
+msgid "Email step updated."
+msgstr ""
+
+#: .\crm\views.py:547
+msgid "Email step deleted."
+msgstr ""
+
+#: .\crm\views.py:566
+#, python-format
+msgid "Email sequence dispatch task launched (Task ID: %s)."
+msgstr ""
+
+#: .\crm\views.py:603
+#, python-format
+msgid "Segment '%s' created successfully."
+msgstr ""
+
+#: .\crm\views.py:617
+#, python-format
+msgid "Segment '%s' updated successfully."
+msgstr ""
+
+#: .\crm\views.py:633
+#, python-format
+msgid "Segment '%s' deleted successfully."
+msgstr ""
+
+#: .\crm\views.py:664
+#, python-format
+msgid "Broadcast campaign launched to segment '%s' (Task ID: %s)."
+msgstr ""
+
+#: .\crm\views.py:667
+msgid "Please provide a valid subject and message."
+msgstr ""
+
+#: .\enterprise_website\settings.py:223
 msgid "English"
 msgstr "Inglés"
 
-#: .\enterprise_website\settings.py:222
+#: .\enterprise_website\settings.py:224
 msgid "Spanish"
 msgstr "Español"
 
-#: .\enterprise_website\settings.py:223
+#: .\enterprise_website\settings.py:225
 msgid "Portuguese"
 msgstr "Portugués"
 
-#: .\enterprise_website\settings.py:224
+#: .\enterprise_website\settings.py:226
 msgid "French"
 msgstr "Francés"
 
-#: .\enterprise_website\settings.py:225
+#: .\enterprise_website\settings.py:227
 msgid "Italian"
 msgstr "Italiano"
 
-#: .\enterprise_website\settings.py:226
+#: .\enterprise_website\settings.py:228
 msgid "Japanese"
 msgstr "Japonés"
 
@@ -107,18 +1680,6 @@ msgstr "Servicios"
 msgid "Products"
 msgstr "Productos"
 
-#: .\home\plugin.py:16 .\home\templates\home\contact.html:14
-#: .\templates\base.html:118
-#: .\templates\themes\bootstrap5\partials\footer.html:18
-#: .\templates\themes\bootstrap5\partials\header.html:57
-#: .\templates\themes\minimal\partials\footer.html:12
-#: .\templates\themes\minimal\partials\header.html:43
-#: .\templates\themes\tailwind\partials\footer.html:17
-#: .\templates\themes\tailwind\partials\header.html:57
-#, fuzzy
-msgid "Contact"
-msgstr "Contacto"
-
 #: .\home\templates\home\about.html:5
 #, fuzzy
 msgid "About Us - Enterprise Website"
@@ -155,8 +1716,8 @@ msgid ""
 "data access through Django REST Framework."
 msgstr ""
 "Esta plataforma une aplicaciones web modulares en una interfaz empresarial "
-"unificada: incluye gestión dinámica de tareas (Todo), encuestas interactivas "
-"de decisión (Polls), ejecución de Python basada en navegador (Brython) y "
+"unificada: incluye gestión dinámica de tareas (Todo), encuestas interactivas"
+" de decisión (Polls), ejecución de Python basada en navegador (Brython) y "
 "acceso a datos programáticos a través de Django REST Framework."
 
 #: .\home\templates\home\about.html:38 .\home\templates\home\index.html:28
@@ -210,8 +1771,8 @@ msgid ""
 "Clean app separation with dedicated models, views, and APIs ready for "
 "internationalization and multi-cloud deployment."
 msgstr ""
-"Separación limpia de aplicaciones con modelos dedicados, vistas y API listas "
-"para la internacionalización y la implementación en múltiples nubes."
+"Separación limpia de aplicaciones con modelos dedicados, vistas y API listas"
+" para la internacionalización y la implementación en múltiples nubes."
 
 #: .\home\templates\home\contact.html:5
 #, fuzzy
@@ -316,11 +1877,6 @@ msgstr "Quienes están extremadamente enamorados del sistema ecológico."
 msgid "The Upper Eye"
 msgstr "vías respiratorias"
 
-#: .\home\templates\home\index.html:61 .\home\templates\home\index.html:75
-#: .\home\templates\home\index.html:89 .\home\templates\home\index.html:103
-msgid "View Details"
-msgstr "Ver Detalles"
-
 #: .\home\templates\home\index.html:71 .\home\templates\home\products.html:57
 msgid "The Crab Wheel"
 msgstr "La Rueda de Cangrejo"
@@ -397,27 +1953,22 @@ msgid "Technical Skills"
 msgstr ""
 
 #: .\home\templates\home\index.html:224
-#, fuzzy
 msgid "Highly Recomended"
 msgstr ""
 
 #: .\home\templates\home\index.html:235
-#, fuzzy
 msgid "Positive Reviews"
 msgstr ""
 
 #: .\home\templates\home\index.html:279
-#, fuzzy
 msgid "Latest News from our Blog"
 msgstr ""
 
 #: .\home\templates\home\index.html:292 .\home\templates\home\index.html:308
-#, fuzzy
 msgid "Travel"
 msgstr ""
 
 #: .\home\templates\home\index.html:293 .\home\templates\home\index.html:309
-#, fuzzy
 msgid "Life Style"
 msgstr ""
 
@@ -622,7 +2173,7 @@ msgid "This language code is too long."
 msgstr "Este código de idioma es demasiado largo."
 
 #: .\language_management\templates\language_management\form.html:37
-#: .\templates\themes\bootstrap5\partials\header.html:91
+#: .\templates\themes\bootstrap5\partials\header.html:92
 #, fuzzy
 #| msgid "User language"
 msgid "Language"
@@ -735,11 +2286,6 @@ msgstr ""
 #: .\todo\models.py:9 .\todo\templates\todo\add.html:19
 #: .\video_gallery\models.py:103
 msgid "Title"
-msgstr ""
-
-#: .\menu_management\models.py:10 .\video_gallery\models.py:40
-#: .\video_gallery\models.py:104
-msgid "Description"
 msgstr ""
 
 #: .\menu_management\models.py:11
@@ -949,8 +2495,8 @@ msgstr ""
 msgid "Your vote for '%(choice)s' has been recorded!"
 msgstr ""
 
-#: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:125
-#: .\templates\themes\bootstrap5\partials\header.html:68
+#: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:126
+#: .\templates\themes\bootstrap5\partials\header.html:69
 msgid "REST API"
 msgstr ""
 
@@ -974,12 +2520,6 @@ msgstr ""
 #: .\task_runner\templates\task_runner\job_detail.html:47
 #: .\task_runner\templates\task_runner\job_list.html:120
 msgid "Task ID"
-msgstr ""
-
-#: .\task_runner\admin.py:74 .\task_runner\models.py:49
-#: .\task_runner\templates\task_runner\job_list.html:121
-#: .\user_management\templates\user_management\siteuser_list.html:36
-msgid "Status"
 msgstr ""
 
 #: .\task_runner\admin.py:91
@@ -1081,11 +2621,6 @@ msgstr ""
 msgid "Captured stdout, stderr, or lifecycle log stream"
 msgstr ""
 
-#: .\task_runner\models.py:65
-#, fuzzy
-msgid "Error Message"
-msgstr "Escriba el mensaje"
-
 #: .\task_runner\models.py:66
 msgid "Exception message or stack trace if the task failed"
 msgstr ""
@@ -1103,17 +2638,6 @@ msgstr ""
 #: .\task_runner\templates\task_runner\job_detail.html:53
 #: .\task_runner\templates\task_runner\job_list.html:123
 msgid "Created By"
-msgstr ""
-
-#: .\task_runner\models.py:84
-#: .\task_runner\templates\task_runner\job_list.html:124
-#: .\video_gallery\models.py:42 .\video_gallery\models.py:133
-msgid "Created At"
-msgstr ""
-
-#: .\task_runner\models.py:88 .\video_gallery\models.py:43
-#: .\video_gallery\models.py:134
-msgid "Updated At"
 msgstr ""
 
 #: .\task_runner\models.py:93
@@ -1135,8 +2659,8 @@ msgstr ""
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:103
 msgid ""
 "Specify any Python, Django management, or shell command to execute "
-"asynchronously inside a Celery worker. Output is streamed live via WebSocket "
-"to the job detail view."
+"asynchronously inside a Celery worker. Output is streamed live via WebSocket"
+" to the job detail view."
 msgstr ""
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:111
@@ -1152,19 +2676,12 @@ msgstr ""
 msgid "Queue Script Now"
 msgstr ""
 
-#: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:144
-#: .\task_runner\templates\task_runner\job_list.html:320
-#: .\user_management\templates\user_management\login.html:19
-#: .\user_management\templates\user_management\signup.html:18
-msgid "Cancel"
-msgstr ""
-
 #: .\task_runner\templates\task_runner\job_detail.html:4
 msgid "Background Task"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_detail.html:13
-#: .\templates\themes\bootstrap5\partials\header.html:129
+#: .\templates\themes\bootstrap5\partials\header.html:130
 #: .\templates\themes\tailwind\partials\header.html:121
 msgid "Task Runner"
 msgstr ""
@@ -1236,19 +2753,6 @@ msgstr ""
 #| msgid "Polls"
 msgid "All Statuses"
 msgstr "Encuestas"
-
-#: .\task_runner\templates\task_runner\job_list.html:101
-#: .\video_gallery\templates\video_gallery\gallery_detail.html:56
-msgid "Filter"
-msgstr ""
-
-#: .\task_runner\templates\task_runner\job_list.html:125
-msgid "Actions"
-msgstr ""
-
-#: .\task_runner\templates\task_runner\job_list.html:172
-msgid "View"
-msgstr ""
 
 #: .\task_runner\templates\task_runner\job_list.html:180
 msgid "No background tasks found."
@@ -1409,8 +2913,8 @@ msgstr ""
 msgid "Todo List"
 msgstr "Tareas"
 
-#: .\templates\base.html:123
-#: .\templates\themes\bootstrap5\partials\header.html:66
+#: .\templates\base.html:124
+#: .\templates\themes\bootstrap5\partials\header.html:67
 #: .\video_gallery\plugin.py:7 .\video_gallery\plugin.py:14
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:6
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:22
@@ -1418,42 +2922,42 @@ msgstr "Tareas"
 msgid "Media Gallery"
 msgstr ""
 
-#: .\templates\base.html:124
-#: .\templates\themes\bootstrap5\partials\header.html:67
+#: .\templates\base.html:125
+#: .\templates\themes\bootstrap5\partials\header.html:68
 #: .\webprogram\plugin.py:7 .\webprogram\plugin.py:14
 msgid "Brython WebProgram"
 msgstr ""
 
-#: .\templates\base.html:126 .\templates\base.html:148
-#: .\templates\themes\bootstrap5\partials\header.html:71
-#: .\templates\themes\bootstrap5\partials\header.html:124
+#: .\templates\base.html:127 .\templates\base.html:149
+#: .\templates\themes\bootstrap5\partials\header.html:72
+#: .\templates\themes\bootstrap5\partials\header.html:125
 #: .\templates\themes\tailwind\partials\header.html:118
 msgid "Site Admin"
 msgstr ""
 
-#: .\templates\base.html:146
-#: .\templates\themes\bootstrap5\partials\header.html:118
+#: .\templates\base.html:147
+#: .\templates\themes\bootstrap5\partials\header.html:119
 #: .\templates\themes\minimal\partials\header.html:57
 #: .\templates\themes\tailwind\partials\header.html:114
 #: .\user_management\templates\user_management\profile.html:14
 msgid "Profile"
 msgstr ""
 
-#: .\templates\base.html:149
-#: .\templates\themes\bootstrap5\partials\header.html:69
+#: .\templates\base.html:150
+#: .\templates\themes\bootstrap5\partials\header.html:70
 msgid "Background Tasks"
 msgstr ""
 
-#: .\templates\base.html:155
-#: .\templates\themes\bootstrap5\partials\header.html:139
+#: .\templates\base.html:156
+#: .\templates\themes\bootstrap5\partials\header.html:140
 #: .\templates\themes\minimal\partials\header.html:66
 #: .\templates\themes\tailwind\partials\header.html:128
 msgid "Logout"
 msgstr ""
 
-#: .\templates\base.html:160 .\templates\registration\login.html:4
+#: .\templates\base.html:161 .\templates\registration\login.html:4
 #: .\templates\registration\login.html:40
-#: .\templates\themes\bootstrap5\partials\header.html:146
+#: .\templates\themes\bootstrap5\partials\header.html:147
 #: .\templates\themes\minimal\partials\header.html:72
 #: .\templates\themes\tailwind\partials\header.html:134
 #: .\user_management\templates\user_management\login.html:4
@@ -1461,8 +2965,8 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: .\templates\base.html:161
-#: .\templates\themes\bootstrap5\partials\header.html:149
+#: .\templates\base.html:162
+#: .\templates\themes\bootstrap5\partials\header.html:150
 #: .\templates\themes\minimal\partials\header.html:73
 #: .\templates\themes\tailwind\partials\header.html:135
 msgid "Signup"
@@ -1503,8 +3007,8 @@ msgstr ""
 
 #: .\templates\registration\login.html:20
 msgid ""
-"Your account doesn't have access to this page. To proceed, please login with "
-"an account that has access."
+"Your account doesn't have access to this page. To proceed, please login with"
+" an account that has access."
 msgstr ""
 
 #: .\templates\registration\login.html:22
@@ -1552,7 +3056,7 @@ msgstr ""
 msgid "About"
 msgstr "¿Quiénes somos?"
 
-#: .\templates\themes\bootstrap5\partials\header.html:84
+#: .\templates\themes\bootstrap5\partials\header.html:85
 #, fuzzy
 #| msgid "User language"
 msgid "Switch Language"
@@ -1939,11 +3443,6 @@ msgstr ""
 msgid "Country:"
 msgstr ""
 
-#: .\user_management\templates\user_management\profile.html:45
-#: .\user_management\templates\user_management\profile.html:49
-msgid "Not specified"
-msgstr ""
-
 #: .\user_management\templates\user_management\profile.html:48
 msgid "City:"
 msgstr ""
@@ -1989,26 +3488,6 @@ msgstr ""
 #| msgid "User language"
 msgid "Username"
 msgstr "Idioma del usuario"
-
-#: .\user_management\templates\user_management\siteuser_list.html:33
-msgid "Email"
-msgstr ""
-
-#: .\user_management\templates\user_management\siteuser_list.html:34
-msgid "Country"
-msgstr ""
-
-#: .\user_management\templates\user_management\siteuser_list.html:35
-msgid "City"
-msgstr ""
-
-#: .\user_management\templates\user_management\siteuser_list.html:48
-msgid "Active"
-msgstr ""
-
-#: .\user_management\templates\user_management\siteuser_list.html:50
-msgid "Inactive"
-msgstr ""
 
 #: .\user_management\templates\user_management\siteuser_list.html:56
 msgid "No users found."
@@ -2112,10 +3591,6 @@ msgstr ""
 
 #: .\video_gallery\apps.py:8 .\video_gallery\models.py:46
 msgid "Video Gallery"
-msgstr ""
-
-#: .\video_gallery\models.py:33
-msgid "Name"
 msgstr ""
 
 #: .\video_gallery\models.py:38
@@ -2276,10 +3751,6 @@ msgstr ""
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:60
 msgid "Search by title or topic..."
-msgstr ""
-
-#: .\video_gallery\templates\video_gallery\gallery_list.html:61
-msgid "Search"
 msgstr ""
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:69

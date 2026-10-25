@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',  # https://docs.djangoproject.com/en/2.0/ref/contrib/staticfiles/#module-django.contrib.staticfiles
+    'django.contrib.humanize',
     'rest_framework',  # support for rest apps
 
     'allauth',
@@ -77,6 +78,7 @@ INSTALLED_APPS = [
     'task_runner.apps.TaskRunnerConfig',
     'theme_management.apps.ThemeManagementConfig',
     'video_gallery.apps.VideoGalleryConfig',
+    'crm.apps.CrmConfig',
 ]
 
 # during the request phase, where middleware is applied first-to-last

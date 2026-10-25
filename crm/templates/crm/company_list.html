@@ -1,0 +1,116 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n humanize %}
+
+{% block crm_content %}
+<div class="card shadow-sm border-0 rounded-3">
+  <div class="card-header bg-transparent border-0 py-3 px-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+      <div>
+        <h4 class="fw-bold mb-1"><i class="fa fa-building-o me-2 text-primary"></i>{% trans "Companies & Accounts" %}</h4>
+        <p class="text-body-secondary mb-0 small">{% trans "Organizations, enterprise clients, and business accounts." %}</p>
+      </div>
+      <div>
+        <a href="{% url 'crm:company_create' %}" class="btn btn-primary rounded-pill">
+          <i class="fa fa-plus me-1"></i>{% trans "Add Company" %}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body px-4 pt-0">
+    <!-- Search Bar -->
+    <form method="get" class="row g-2 align-items-center mb-3">
+      <div class="col-md-6 col-lg-4">
+        <div class="input-group">
+          <span class="input-group-text bg-body border-end-0"><i class="fa fa-search text-body-secondary"></i></span>
+          <input type="text" name="q" value="{{ query }}" class="form-control border-start-0" placeholder="{% trans 'Search by company, industry, city...' %}">
+        </div>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-secondary rounded-pill">{% trans "Search" %}</button>
+        {% if query %}
+          <a href="{% url 'crm:company_list' %}" class="btn btn-outline-secondary rounded-pill">{% trans "Reset" %}</a>
+        {% endif %}
+      </div>
+    </form>
+
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light small text-uppercase">
+          <tr>
+            <th>{% trans "Company Name" %}</th>
+            <th>{% trans "Industry" %}</th>
+            <th>{% trans "Location" %}</th>
+            <th>{% trans "Phone" %}</th>
+            <th>{% trans "Annual Revenue" %}</th>
+            <th>{% trans "Contacts" %}</th>
+            <th class="text-end">{% trans "Actions" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for company in companies %}
+            <tr>
+              <td>
+                <a href="{% url 'crm:company_detail' company.pk %}" class="fw-bold text-decoration-none text-body">
+                  {{ company.name }}
+                </a>
+                {% if company.website %}
+                  <a href="{{ company.website }}" target="_blank" rel="noopener noreferrer" class="text-body-secondary small ms-1" title="{% trans 'Visit website' %}">
+                    <i class="fa fa-external-link"></i>
+                  </a>
+                {% endif %}
+              </td>
+              <td>{{ company.industry|default:"—" }}</td>
+              <td class="small">{{ company.city }}{% if company.city and company.country %}, {% endif %}{{ company.country }}</td>
+              <td class="small">{{ company.phone|default:"—" }}</td>
+              <td class="fw-semibold">
+                {% if company.annual_revenue %}
+                  ${{ company.annual_revenue|floatformat:0|intcomma }}
+                {% else %}
+                  <span class="text-body-secondary small">—</span>
+                {% endif %}
+              </td>
+              <td>
+                <span class="badge bg-secondary-subtle text-secondary rounded-pill">{{ company.contacts.count }}</span>
+              </td>
+              <td class="text-end">
+                <a href="{% url 'crm:company_detail' company.pk %}" class="btn btn-sm btn-outline-primary rounded-circle" title="{% trans 'View' %}">
+                  <i class="fa fa-eye"></i>
+                </a>
+                <a href="{% url 'crm:company_update' company.pk %}" class="btn btn-sm btn-outline-secondary rounded-circle" title="{% trans 'Edit' %}">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a href="{% url 'crm:company_delete' company.pk %}" class="btn btn-sm btn-outline-danger rounded-circle" title="{% trans 'Delete' %}">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="7" class="text-center py-5 text-body-secondary">
+                <i class="fa fa-building-o fa-3x mb-2 d-block opacity-25"></i>
+                {% trans "No companies registered yet." %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+      <nav class="pt-4" aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">&laquo;</a></li>
+          {% endif %}
+          <li class="page-item active"><span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}">&raquo;</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

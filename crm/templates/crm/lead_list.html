@@ -1,0 +1,152 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n humanize %}
+
+{% block crm_content %}
+<div class="card shadow-sm border-0 rounded-3">
+  <div class="card-header bg-transparent border-0 py-3 px-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+      <div>
+        <h4 class="fw-bold mb-1"><i class="fa fa-bullseye me-2 text-primary"></i>{% trans "Deals & Leads Directory" %}</h4>
+        <p class="text-body-secondary mb-0 small">{% trans "Track and manage opportunities across all stages of your sales pipeline." %}</p>
+      </div>
+      <div class="d-flex gap-2">
+        <a href="{% url 'crm:pipeline' %}" class="btn btn-outline-secondary rounded-pill">
+          <i class="fa fa-columns me-1"></i>{% trans "Kanban Board" %}
+        </a>
+        <a href="{% url 'crm:lead_create' %}" class="btn btn-primary rounded-pill">
+          <i class="fa fa-plus me-1"></i>{% trans "New Deal" %}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search & Stage Filters -->
+  <div class="card-body px-4 pt-0">
+    <form method="get" class="row g-2 align-items-center mb-3">
+      <div class="col-md-6 col-lg-4">
+        <div class="input-group">
+          <span class="input-group-text bg-body border-end-0"><i class="fa fa-search text-body-secondary"></i></span>
+          <input type="text" name="q" value="{{ query }}" class="form-control border-start-0" placeholder="{% trans 'Search by title, contact, company...' %}">
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <select name="stage" class="form-select" onchange="this.form.submit()">
+          <option value="">{% trans "All Pipeline Stages" %}</option>
+          {% for val, lbl in stages %}
+            <option value="{{ val }}" {% if current_stage == val %}selected{% endif %}>{{ lbl }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-secondary rounded-pill">{% trans "Filter" %}</button>
+        {% if query or current_stage %}
+          <a href="{% url 'crm:lead_list' %}" class="btn btn-outline-secondary rounded-pill">{% trans "Reset" %}</a>
+        {% endif %}
+      </div>
+    </form>
+
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light small text-uppercase">
+          <tr>
+            <th>{% trans "Deal Title" %}</th>
+            <th>{% trans "Primary Contact" %}</th>
+            <th>{% trans "Company" %}</th>
+            <th>{% trans "Stage" %}</th>
+            <th>{% trans "Value" %}</th>
+            <th>{% trans "Assigned Rep" %}</th>
+            <th>{% trans "Expected Close" %}</th>
+            <th class="text-end">{% trans "Actions" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for lead in leads %}
+            <tr>
+              <td>
+                <a href="{% url 'crm:lead_detail' lead.pk %}" class="fw-bold text-decoration-none text-body">
+                  {{ lead.title }}
+                </a>
+              </td>
+              <td>
+                {% if lead.contact %}
+                  <a href="{% url 'crm:contact_detail' lead.contact.pk %}" class="text-decoration-none">
+                    <i class="fa fa-user me-1 text-body-secondary"></i>{{ lead.contact.full_name }}
+                  </a>
+                {% else %}
+                  <span class="text-body-secondary">—</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if lead.company %}
+                  <a href="{% url 'crm:company_detail' lead.company.pk %}" class="text-decoration-none">
+                    <i class="fa fa-building-o me-1 text-body-secondary"></i>{{ lead.company.name }}
+                  </a>
+                {% else %}
+                  <span class="text-body-secondary">—</span>
+                {% endif %}
+              </td>
+              <td>
+                <span class="badge rounded-pill
+                  {% if lead.stage == 'new' %}bg-info
+                  {% elif lead.stage == 'contacted' %}bg-primary
+                  {% elif lead.stage == 'qualified' %}bg-warning text-dark
+                  {% elif lead.stage == 'proposal' %}bg-secondary
+                  {% elif lead.stage == 'won' %}bg-success
+                  {% else %}bg-danger{% endif %}">
+                  {{ lead.get_stage_display }}
+                </span>
+              </td>
+              <td class="fw-bold text-success">
+                ${{ lead.value|floatformat:2|intcomma }}
+              </td>
+              <td>
+                {% if lead.assigned_to %}
+                  <span class="small"><i class="fa fa-user-circle me-1 text-body-secondary"></i>{{ lead.assigned_to.username }}</span>
+                {% else %}
+                  <span class="text-body-secondary small">{% trans "Unassigned" %}</span>
+                {% endif %}
+              </td>
+              <td class="small text-body-secondary">
+                {{ lead.expected_close_date|default:"—" }}
+              </td>
+              <td class="text-end">
+                <a href="{% url 'crm:lead_detail' lead.pk %}" class="btn btn-sm btn-outline-primary rounded-circle" title="{% trans 'View' %}">
+                  <i class="fa fa-eye"></i>
+                </a>
+                <a href="{% url 'crm:lead_update' lead.pk %}" class="btn btn-sm btn-outline-secondary rounded-circle" title="{% trans 'Edit' %}">
+                  <i class="fa fa-pencil"></i>
+                </a>
+                <a href="{% url 'crm:lead_delete' lead.pk %}" class="btn btn-sm btn-outline-danger rounded-circle" title="{% trans 'Delete' %}">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="8" class="text-center py-5 text-body-secondary">
+                <i class="fa fa-bullseye fa-3x mb-2 d-block opacity-25"></i>
+                {% trans "No deals found matching your query." %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    {% if is_paginated %}
+      <nav class="pt-4" aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+          {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if current_stage %}&stage={{ current_stage }}{% endif %}">&laquo;</a></li>
+          {% endif %}
+          <li class="page-item active"><span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
+          {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if current_stage %}&stage={{ current_stage }}{% endif %}">&raquo;</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

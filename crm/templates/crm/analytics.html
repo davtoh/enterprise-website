@@ -1,0 +1,238 @@
+{% extends "crm/base_crm.html" %}
+{% load i18n humanize static %}
+
+{% block crm_content %}
+<!-- KPI Stats Row -->
+<div class="row g-3 mb-4">
+  <div class="col-sm-6 col-xl-3">
+    <div class="card shadow-sm border-0 border-start border-primary border-4 rounded-3 h-100">
+      <div class="card-body">
+        <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Total Pipeline" %}</span>
+        <h3 class="fw-bold mb-1 mt-1 text-primary">${{ kpi.total_pipeline_val|floatformat:2|intcomma }}</h3>
+        <small class="text-body-secondary">{{ kpi.total_leads }} {% trans "tracked deals" %}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-xl-3">
+    <div class="card shadow-sm border-0 border-start border-success border-4 rounded-3 h-100">
+      <div class="card-body">
+        <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Won Revenue Deals" %}</span>
+        <h3 class="fw-bold mb-1 mt-1 text-success">{{ kpi.won_leads }}</h3>
+        <small class="text-body-secondary">{% trans "Closed-won opportunities" %}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-xl-3">
+    <div class="card shadow-sm border-0 border-start border-info border-4 rounded-3 h-100">
+      <div class="card-body">
+        <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Funnel Win Rate" %}</span>
+        <h3 class="fw-bold mb-1 mt-1 text-info">{{ kpi.win_rate }}%</h3>
+        <small class="text-body-secondary">{% trans "Won vs Total pipeline" %}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-xl-3">
+    <div class="card shadow-sm border-0 border-start border-warning border-4 rounded-3 h-100">
+      <div class="card-body">
+        <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Email Open Rate" %}</span>
+        <h3 class="fw-bold mb-1 mt-1 text-warning">{{ kpi.email_open_rate }}%</h3>
+        <small class="text-body-secondary">{{ kpi.emails_opened }} / {{ kpi.emails_sent }} {% trans "emails opened" %}</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Charts Grid -->
+<div class="row g-4 mb-4">
+  <!-- Chart 1: Lead Funnel Conversion -->
+  <div class="col-lg-6">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-filter me-2 text-primary"></i>{% trans "Lead Funnel Conversion" %}</h5>
+        <span class="badge bg-primary-subtle text-primary rounded-pill small">{% trans "Stage Counts" %}</span>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <div style="position: relative; height: 280px;">
+          <canvas id="funnelChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 2: Pipeline Revenue by Stage -->
+  <div class="col-lg-6">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-usd me-2 text-success"></i>{% trans "Pipeline Value by Stage ($)" %}</h5>
+        <span class="badge bg-success-subtle text-success rounded-pill small">{% trans "Dollar Volume" %}</span>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <div style="position: relative; height: 280px;">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <!-- Chart 3: Monthly New Contacts Trend -->
+  <div class="col-lg-7">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-line-chart me-2 text-info"></i>{% trans "Contact Acquisition Growth" %}</h5>
+        <span class="badge bg-info-subtle text-info rounded-pill small">{% trans "Monthly Trend" %}</span>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <div style="position: relative; height: 280px;">
+          <canvas id="contactsGrowthChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart 4: Email Drips & Broadcast Delivery Performance -->
+  <div class="col-lg-5">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-envelope-open me-2 text-warning"></i>{% trans "Email Deliveries & Open Rate" %}</h5>
+        <span class="badge bg-warning-subtle text-warning rounded-pill small">{% trans "Engagement" %}</span>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <div style="position: relative; height: 280px;">
+          <canvas id="emailStatsChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Vendored Chart.js -->
+<script src="{% static 'js/vendor/chart.umd.min.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const analyticsData = {{ analytics_json|safe }};
+
+    // 1. Funnel Chart
+    const ctxFunnel = document.getElementById('funnelChart');
+    if (ctxFunnel && window.Chart) {
+      new Chart(ctxFunnel, {
+        type: 'bar',
+        data: {
+          labels: analyticsData.funnel.labels,
+          datasets: [{
+            label: "{% trans 'Deals' %}",
+            data: analyticsData.funnel.data,
+            backgroundColor: [
+              'rgba(13, 202, 240, 0.7)',
+              'rgba(13, 110, 253, 0.7)',
+              'rgba(255, 193, 7, 0.7)',
+              'rgba(108, 117, 125, 0.7)',
+              'rgba(25, 135, 84, 0.7)',
+              'rgba(220, 53, 69, 0.7)'
+            ],
+            borderRadius: 6,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { precision: 0 }
+            }
+          }
+        }
+      });
+    }
+
+    // 2. Revenue by Stage Chart
+    const ctxRev = document.getElementById('revenueChart');
+    if (ctxRev && window.Chart) {
+      new Chart(ctxRev, {
+        type: 'doughnut',
+        data: {
+          labels: analyticsData.pipeline_revenue.labels,
+          datasets: [{
+            data: analyticsData.pipeline_revenue.data,
+            backgroundColor: [
+              '#0dcaf0',
+              '#0d6efd',
+              '#ffc107',
+              '#6c757d',
+              '#198754',
+              '#dc3545'
+            ],
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'right' }
+          }
+        }
+      });
+    }
+
+    // 3. Monthly Contacts Chart
+    const ctxGrowth = document.getElementById('contactsGrowthChart');
+    if (ctxGrowth && window.Chart) {
+      new Chart(ctxGrowth, {
+        type: 'line',
+        data: {
+          labels: analyticsData.monthly_contacts.labels,
+          datasets: [{
+            label: "{% trans 'New Contacts' %}",
+            data: analyticsData.monthly_contacts.data,
+            fill: true,
+            borderColor: '#0d6efd',
+            backgroundColor: 'rgba(13, 110, 253, 0.1)',
+            tension: 0.3,
+            pointRadius: 4,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { precision: 0 }
+            }
+          }
+        }
+      });
+    }
+
+    // 4. Email Stats Chart
+    const ctxEmail = document.getElementById('emailStatsChart');
+    if (ctxEmail && window.Chart) {
+      new Chart(ctxEmail, {
+        type: 'doughnut',
+        data: {
+          labels: analyticsData.email_stats.labels,
+          datasets: [{
+            data: analyticsData.email_stats.data,
+            backgroundColor: ['#198754', '#6c757d', '#dc3545'],
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom' }
+          }
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}
