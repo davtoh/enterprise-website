@@ -1,0 +1,107 @@
+{% extends "erp/base_erp.html" %}
+{% load i18n humanize %}
+
+{% block erp_content %}
+<div class="card shadow-sm border-0 rounded-3 mb-4">
+  <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+    <div>
+      <h5 class="fw-bold mb-0">{% trans "Commercial Invoices & Billing" %}</h5>
+      <small class="text-body-secondary">{% trans "Issue customer invoices, track collections, generate PDF copies, and email directly" %}</small>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+      <form method="get" class="d-flex align-items-center gap-2">
+        <select name="status" class="form-select form-select-sm">
+          <option value="">{% trans "All Statuses" %}</option>
+          {% for val, label in status_choices %}
+          <option value="{{ val }}" {% if selected_status == val %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+        <input type="text" name="q" class="form-control form-control-sm" placeholder="{% trans 'Search customer / invoice #...' %}" value="{{ search_query }}">
+        <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="fa fa-filter"></i></button>
+      </form>
+      <a href="{% url 'erp:invoice_create' %}" class="btn btn-sm btn-primary text-nowrap">
+        <i class="fa fa-plus me-1"></i>{% trans "New Invoice" %}
+      </a>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light small">
+          <tr>
+            <th class="ps-4">{% trans "Invoice #" %}</th>
+            <th>{% trans "Customer" %}</th>
+            <th>{% trans "Issue Date" %}</th>
+            <th>{% trans "Due Date" %}</th>
+            <th>{% trans "Total Amount" %}</th>
+            <th>{% trans "Status" %}</th>
+            <th class="pe-4 text-end">{% trans "Actions" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for inv in invoices %}
+          <tr>
+            <td class="ps-4">
+              <a href="{% url 'erp:invoice_detail' inv.pk %}" class="fw-bold text-decoration-none text-primary">
+                {{ inv.invoice_number }}
+              </a>
+            </td>
+            <td>
+              <div class="fw-semibold">{{ inv.customer_name }}</div>
+              <small class="text-body-secondary">{{ inv.customer_email }}</small>
+            </td>
+            <td class="small">{{ inv.issue_date|date:"M d, Y" }}</td>
+            <td class="small">{{ inv.due_date|date:"M d, Y" }}</td>
+            <td class="fw-bold fs-6">${{ inv.total_amount|floatformat:2|intcomma }}</td>
+            <td>
+              {% if inv.status == 'PAID' %}
+              <span class="badge bg-success">{% trans "Paid" %}</span>
+              {% elif inv.status == 'SENT' %}
+              <span class="badge bg-primary">{% trans "Sent" %}</span>
+              {% elif inv.status == 'OVERDUE' %}
+              <span class="badge bg-danger">{% trans "Overdue" %}</span>
+              {% elif inv.status == 'DRAFT' %}
+              <span class="badge bg-secondary">{% trans "Draft" %}</span>
+              {% else %}
+              <span class="badge bg-dark">{{ inv.get_status_display }}</span>
+              {% endif %}
+            </td>
+            <td class="pe-4 text-end">
+              <div class="btn-group btn-group-sm">
+                <a href="{% url 'erp:invoice_detail' inv.pk %}" class="btn btn-outline-secondary" title="{% trans 'View' %}"><i class="fa fa-eye"></i></a>
+                <a href="{% url 'erp:invoice_pdf' inv.pk %}" target="_blank" class="btn btn-outline-danger" title="{% trans 'PDF' %}"><i class="fa fa-file-pdf-o"></i></a>
+                <a href="{% url 'erp:invoice_update' inv.pk %}" class="btn btn-outline-secondary" title="{% trans 'Edit' %}"><i class="fa fa-pencil"></i></a>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="7" class="text-center py-5 text-body-secondary">
+              <i class="fa fa-file-text-o fa-3x mb-2 text-secondary d-block"></i>
+              {% trans "No invoices found matching criteria." %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {% if is_paginated %}
+  <div class="card-footer bg-transparent border-0 py-3">
+    <nav>
+      <ul class="pagination pagination-sm justify-content-center mb-0">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if selected_status %}&status={{ selected_status }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">&laquo;</a></li>
+        {% endif %}
+        <li class="page-item disabled"><span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if selected_status %}&status={{ selected_status }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">&raquo;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

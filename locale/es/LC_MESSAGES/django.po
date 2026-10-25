@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 18:42-0500\n"
+"POT-Creation-Date: 2026-10-24 20:24-0500\n"
 "PO-Revision-Date: 2026-10-24 18:29-0500\n"
 "Last-Translator: <davsamirtor.projects@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.10.3\n"
 
 #: .\crm\admin.py:62 .\crm\templates\crm\company_detail.html:117
-#: .\crm\templates\crm\dashboard.html:145
-#: .\crm\templates\crm\lead_list.html:55
-#, fuzzy
+#: .\crm\templates\crm\dashboard.html:145 .\crm\templates\crm\lead_list.html:55
 msgid "Stage"
 msgstr ""
 
-#: .\crm\admin.py:87
+#: .\crm\admin.py:87 .\erp\templates\erp\dashboard.html:148
+#: .\erp\templates\erp\movement_list.html:34
+#: .\erp\templates\erp\product_detail.html:133
 msgid "Type"
 msgstr ""
 
@@ -35,7 +35,10 @@ msgid "Steps"
 msgstr ""
 
 #: .\crm\admin.py:139 .\crm\models.py:400
-#: .\crm\templates\crm\sequence_list.html:33 .\task_runner\admin.py:74
+#: .\crm\templates\crm\sequence_list.html:33 .\erp\admin.py:120
+#: .\erp\models.py:217 .\erp\templates\erp\dashboard.html:207
+#: .\erp\templates\erp\invoice_list.html:38
+#: .\erp\templates\erp\product_list.html:33 .\task_runner\admin.py:74
 #: .\task_runner\models.py:49
 #: .\task_runner\templates\task_runner\job_list.html:121
 #: .\user_management\templates\user_management\siteuser_list.html:36
@@ -115,13 +118,15 @@ msgstr ""
 #: .\crm\models.py:27 .\crm\models.py:74
 #: .\crm\templates\crm\company_detail.html:69
 #: .\crm\templates\crm\contact_detail.html:76
-#: .\crm\templates\crm\lead_detail.html:156
+#: .\crm\templates\crm\lead_detail.html:156 .\erp\models.py:154
+#: .\erp\templates\erp\movement_list.html:39
 msgid "Notes"
 msgstr ""
 
 #: .\crm\models.py:28 .\crm\models.py:75 .\crm\models.py:170
 #: .\crm\models.py:302 .\crm\models.py:350 .\crm\models.py:520
-#: .\task_runner\models.py:84
+#: .\erp\models.py:16 .\erp\models.py:40 .\erp\models.py:83 .\erp\models.py:162
+#: .\erp\models.py:257 .\task_runner\models.py:84
 #: .\task_runner\templates\task_runner\job_list.html:124
 #: .\video_gallery\models.py:42 .\video_gallery\models.py:133
 msgid "Created At"
@@ -129,6 +134,7 @@ msgstr ""
 
 #: .\crm\models.py:29 .\crm\models.py:76 .\crm\models.py:171
 #: .\crm\models.py:303 .\crm\models.py:351 .\crm\models.py:521
+#: .\erp\models.py:17 .\erp\models.py:41 .\erp\models.py:84 .\erp\models.py:258
 #: .\task_runner\models.py:88 .\video_gallery\models.py:43
 #: .\video_gallery\models.py:134
 msgid "Updated At"
@@ -348,7 +354,7 @@ msgstr ""
 msgid "Details / Notes"
 msgstr ""
 
-#: .\crm\models.py:269
+#: .\crm\models.py:269 .\erp\templates\erp\movement_list.html:33
 msgid "Timestamp"
 msgstr ""
 
@@ -365,8 +371,10 @@ msgid "Sequence Name"
 msgstr ""
 
 #: .\crm\models.py:288 .\crm\models.py:510
-#: .\crm\templates\crm\segment_list.html:26 .\menu_management\models.py:10
-#: .\video_gallery\models.py:40 .\video_gallery\models.py:104
+#: .\crm\templates\crm\segment_list.html:26 .\erp\models.py:15
+#: .\erp\models.py:66 .\erp\templates\erp\invoice_form.html:74
+#: .\menu_management\models.py:10 .\video_gallery\models.py:40
+#: .\video_gallery\models.py:104
 msgid "Description"
 msgstr ""
 
@@ -385,6 +393,7 @@ msgstr ""
 #: .\crm\models.py:299 .\crm\models.py:364
 #: .\crm\templates\crm\sequence_detail.html:12
 #: .\crm\templates\crm\sequence_list.html:62
+#: .\erp\templates\erp\product_list.html:65
 #: .\user_management\templates\user_management\siteuser_list.html:48
 msgid "Active"
 msgstr ""
@@ -419,9 +428,9 @@ msgstr ""
 
 #: .\crm\models.py:346
 msgid ""
-"Supports placeholders: {{ contact.first_name }}, {{ contact.last_name }}, {{"
-" contact.email }}, {{ company.name }}, {{ lead.title }}, {{ tracking_pixel "
-"}}"
+"Supports placeholders: {{ contact.first_name }}, {{ contact.last_name }}, "
+"{{ contact.email }}, {{ company.name }}, {{ lead.title }}, "
+"{{ tracking_pixel }}"
 msgstr ""
 
 #: .\crm\models.py:354 .\crm\models.py:445
@@ -440,7 +449,7 @@ msgstr ""
 msgid "Paused"
 msgstr ""
 
-#: .\crm\models.py:367
+#: .\crm\models.py:367 .\erp\models.py:196
 msgid "Cancelled"
 msgstr ""
 
@@ -476,7 +485,9 @@ msgstr ""
 msgid "Sequence Enrollments"
 msgstr ""
 
-#: .\crm\models.py:424
+#: .\crm\models.py:424 .\erp\templates\erp\dashboard.html:228
+#: .\erp\templates\erp\invoice_detail.html:15
+#: .\erp\templates\erp\invoice_list.html:61
 msgid "Sent"
 msgstr ""
 
@@ -539,8 +550,8 @@ msgstr ""
 #: .\crm\models.py:516
 msgid ""
 "Filters applied to contacts/leads. Supported keys: 'stage' (e.g. "
-"'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), 'min_value' "
-"(number), 'subscribed' (bool)."
+"'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), "
+"'min_value' (number), 'subscribed' (bool)."
 msgstr ""
 
 #: .\crm\models.py:524
@@ -646,7 +657,7 @@ msgstr "CRM Empresarial"
 msgid "Pipeline, Contacts, Sequences & Revenue Intelligence"
 msgstr ""
 
-#: .\crm\templates\crm\base_crm.html:24
+#: .\crm\templates\crm\base_crm.html:24 .\erp\templates\erp\base_erp.html:27
 msgid "Dashboard"
 msgstr ""
 
@@ -685,6 +696,8 @@ msgstr ""
 #: .\crm\templates\crm\segment_list.html:60
 #: .\crm\templates\crm\sequence_detail.html:40
 #: .\crm\templates\crm\sequence_list.html:79
+#: .\erp\templates\erp\invoice_detail.html:205
+#: .\erp\templates\erp\product_list.html:74
 msgid "Delete"
 msgstr ""
 
@@ -726,14 +739,12 @@ msgid "New Deal"
 msgstr "Nuevo Trato"
 
 #: .\crm\templates\crm\company_detail.html:115
-#: .\crm\templates\crm\dashboard.html:143
-#: .\crm\templates\crm\lead_list.html:52
+#: .\crm\templates\crm\dashboard.html:143 .\crm\templates\crm\lead_list.html:52
 msgid "Deal Title"
 msgstr ""
 
 #: .\crm\templates\crm\company_detail.html:118
-#: .\crm\templates\crm\dashboard.html:146
-#: .\crm\templates\crm\lead_list.html:56
+#: .\crm\templates\crm\dashboard.html:146 .\crm\templates\crm\lead_list.html:56
 msgid "Value"
 msgstr ""
 
@@ -753,6 +764,10 @@ msgstr ""
 #: .\crm\templates\crm\segment_form.html:51
 #: .\crm\templates\crm\sequence_form.html:56
 #: .\crm\templates\crm\step_form.html:64
+#: .\erp\templates\erp\confirm_delete.html:21
+#: .\erp\templates\erp\invoice_form.html:133
+#: .\erp\templates\erp\movement_form.html:64
+#: .\erp\templates\erp\product_form.html:95
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:144
 #: .\task_runner\templates\task_runner\job_list.html:320
 #: .\user_management\templates\user_management\login.html:19
@@ -790,10 +805,14 @@ msgstr ""
 #: .\crm\templates\crm\company_list.html:32
 #: .\crm\templates\crm\contact_list.html:32
 #: .\crm\templates\crm\lead_list.html:43
+#: .\erp\templates\erp\inventory_dashboard.html:109
 msgid "Reset"
 msgstr ""
 
-#: .\crm\templates\crm\company_list.html:43
+#: .\crm\templates\crm\company_list.html:43 .\erp\models.py:144
+#: .\erp\templates\erp\dashboard.html:151
+#: .\erp\templates\erp\movement_list.html:37
+#: .\erp\templates\erp\product_detail.html:135
 msgid "Location"
 msgstr ""
 
@@ -802,6 +821,9 @@ msgstr ""
 #: .\crm\templates\crm\lead_list.html:59
 #: .\crm\templates\crm\segment_list.html:30
 #: .\crm\templates\crm\sequence_list.html:37
+#: .\erp\templates\erp\inventory_dashboard.html:136
+#: .\erp\templates\erp\invoice_list.html:39
+#: .\erp\templates\erp\product_list.html:34
 #: .\task_runner\templates\task_runner\job_list.html:125
 msgid "Actions"
 msgstr ""
@@ -813,6 +835,8 @@ msgstr ""
 #: .\crm\templates\crm\company_list.html:77
 #: .\crm\templates\crm\contact_list.html:88
 #: .\crm\templates\crm\lead_list.html:113
+#: .\erp\templates\erp\invoice_list.html:72
+#: .\erp\templates\erp\product_list.html:72
 #: .\task_runner\templates\task_runner\job_list.html:172
 msgid "View"
 msgstr ""
@@ -822,6 +846,10 @@ msgstr ""
 #: .\crm\templates\crm\lead_list.html:116
 #: .\crm\templates\crm\segment_list.html:57
 #: .\crm\templates\crm\sequence_list.html:76
+#: .\erp\templates\erp\invoice_detail.html:37
+#: .\erp\templates\erp\invoice_list.html:74
+#: .\erp\templates\erp\product_detail.html:19
+#: .\erp\templates\erp\product_list.html:73
 msgid "Edit"
 msgstr ""
 
@@ -830,6 +858,7 @@ msgid "No companies registered yet."
 msgstr ""
 
 #: .\crm\templates\crm\confirm_delete.html:12
+#: .\erp\templates\erp\confirm_delete.html:12
 msgid "Confirm Deletion"
 msgstr ""
 
@@ -928,7 +957,8 @@ msgstr ""
 msgid "Search contacts by name, email, company..."
 msgstr ""
 
-#: .\crm\templates\crm\contact_list.html:41 .\video_gallery\models.py:33
+#: .\crm\templates\crm\contact_list.html:41
+#: .\erp\templates\erp\product_list.html:28 .\video_gallery\models.py:33
 msgid "Name"
 msgstr ""
 
@@ -1001,6 +1031,8 @@ msgid "Recent Deals"
 msgstr "Tratos Recientes"
 
 #: .\crm\templates\crm\dashboard.html:136
+#: .\erp\templates\erp\dashboard.html:141
+#: .\erp\templates\erp\dashboard.html:197
 msgid "View all"
 msgstr "Ver todo"
 
@@ -1144,6 +1176,7 @@ msgid "All Pipeline Stages"
 msgstr ""
 
 #: .\crm\templates\crm\lead_list.html:41
+#: .\erp\templates\erp\inventory_dashboard.html:107
 #: .\task_runner\templates\task_runner\job_list.html:101
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:56
 msgid "Filter"
@@ -1286,6 +1319,7 @@ msgstr ""
 
 #: .\crm\templates\crm\sequence_detail.html:12
 #: .\crm\templates\crm\sequence_list.html:62
+#: .\erp\templates\erp\product_list.html:67
 #: .\user_management\templates\user_management\siteuser_list.html:50
 msgid "Inactive"
 msgstr ""
@@ -1557,29 +1591,1135 @@ msgstr ""
 msgid "Please provide a valid subject and message."
 msgstr ""
 
-#: .\enterprise_website\settings.py:223
+#: .\enterprise_website\settings.py:224
 msgid "English"
 msgstr "Inglés"
 
-#: .\enterprise_website\settings.py:224
+#: .\enterprise_website\settings.py:225
 msgid "Spanish"
 msgstr "Español"
 
-#: .\enterprise_website\settings.py:225
+#: .\enterprise_website\settings.py:226
 msgid "Portuguese"
 msgstr "Portugués"
 
-#: .\enterprise_website\settings.py:226
+#: .\enterprise_website\settings.py:227
 msgid "French"
 msgstr "Francés"
 
-#: .\enterprise_website\settings.py:227
+#: .\enterprise_website\settings.py:228
 msgid "Italian"
 msgstr "Italiano"
 
-#: .\enterprise_website\settings.py:228
+#: .\enterprise_website\settings.py:229
 msgid "Japanese"
 msgstr "Japonés"
+
+#: .\erp\admin.py:22 .\erp\models.py:88 .\erp\templates\erp\base_erp.html:37
+#: .\home\plugin.py:15 .\home\templates\home\products.html:14
+#: .\templates\base.html:117
+#: .\templates\themes\bootstrap5\partials\footer.html:17
+#: .\templates\themes\bootstrap5\partials\header.html:54
+#: .\templates\themes\minimal\partials\footer.html:11
+#: .\templates\themes\tailwind\partials\footer.html:16
+#: .\templates\themes\tailwind\partials\header.html:56
+msgid "Products"
+msgstr "Productos"
+
+#: .\erp\admin.py:60 .\erp\templates\erp\inventory_dashboard.html:153
+#: .\erp\templates\erp\product_list.html:56
+msgid "Out of Stock"
+msgstr ""
+
+#: .\erp\admin.py:62
+msgid "Low Stock"
+msgstr ""
+
+#: .\erp\admin.py:63
+msgid "In Stock"
+msgstr ""
+
+#: .\erp\admin.py:64
+#, fuzzy
+#| msgid "Poll status"
+msgid "Stock Status"
+msgstr "Estado de la Encuesta"
+
+#: .\erp\apps.py:8
+msgid "ERP & Inventory"
+msgstr ""
+
+#: .\erp\forms.py:83
+msgid "Quantity must be a non-zero integer."
+msgstr ""
+
+#: .\erp\models.py:13
+#, fuzzy
+#| msgid "Contact Name"
+msgid "Category Name"
+msgstr "Nombre del Contacto"
+
+#: .\erp\models.py:20 .\erp\models.py:64
+#: .\erp\templates\erp\inventory_dashboard.html:131
+#: .\erp\templates\erp\product_detail.html:34
+#: .\erp\templates\erp\product_list.html:29
+msgid "Category"
+msgstr ""
+
+#: .\erp\models.py:21
+msgid "Categories"
+msgstr ""
+
+#: .\erp\models.py:36
+#, fuzzy
+#| msgid "Contact Name"
+msgid "Location Name"
+msgstr "Nombre del Contacto"
+
+#: .\erp\models.py:37
+msgid "Location Code"
+msgstr ""
+
+#: .\erp\models.py:38
+msgid "Address / Bin Location"
+msgstr ""
+
+#: .\erp\models.py:39 .\erp\models.py:82 .\video_gallery\models.py:41
+#: .\video_gallery\models.py:132
+msgid "Is Active"
+msgstr ""
+
+#: .\erp\models.py:44
+msgid "Inventory Location"
+msgstr ""
+
+#: .\erp\models.py:45
+msgid "Inventory Locations"
+msgstr ""
+
+#: .\erp\models.py:55
+msgid "SKU / Item Code"
+msgstr ""
+
+#: .\erp\models.py:56 .\erp\templates\erp\inventory_dashboard.html:130
+#, fuzzy
+#| msgid "Products"
+msgid "Product Name"
+msgstr "Productos"
+
+#: .\erp\models.py:67 .\erp\templates\erp\product_detail.html:38
+msgid "Unit of Measure"
+msgstr ""
+
+#: .\erp\models.py:72
+msgid "Selling Unit Price"
+msgstr ""
+
+#: .\erp\models.py:78 .\erp\templates\erp\product_detail.html:46
+#: .\erp\templates\erp\product_list.html:31
+msgid "Cost Price"
+msgstr ""
+
+#: .\erp\models.py:80 .\erp\templates\erp\dashboard.html:384
+msgid "Current Stock"
+msgstr ""
+
+#: .\erp\models.py:81 .\erp\templates\erp\dashboard.html:390
+#: .\erp\templates\erp\product_detail.html:72
+msgid "Reorder Threshold"
+msgstr ""
+
+#: .\erp\models.py:87 .\erp\models.py:136 .\erp\models.py:309
+#: .\erp\templates\erp\dashboard.html:149
+#: .\erp\templates\erp\movement_list.html:35
+#, fuzzy
+#| msgid "Products"
+msgid "Product"
+msgstr "Productos"
+
+#: .\erp\models.py:123
+msgid "Stock In / Received"
+msgstr ""
+
+#: .\erp\models.py:124
+msgid "Stock Out / Sold"
+msgstr ""
+
+#: .\erp\models.py:125
+msgid "Adjustment / Audit"
+msgstr ""
+
+#: .\erp\models.py:126
+msgid "Customer Return"
+msgstr ""
+
+#: .\erp\models.py:150
+msgid "Movement Type"
+msgstr ""
+
+#: .\erp\models.py:152 .\erp\models.py:316
+#: .\erp\templates\erp\invoice_form.html:75
+#: .\erp\templates\erp\movement_list.html:36
+#: .\erp\templates\erp\product_detail.html:134
+msgid "Quantity"
+msgstr ""
+
+#: .\erp\models.py:153
+msgid "Reference / Document #"
+msgstr ""
+
+#: .\erp\models.py:160 .\erp\models.py:255 .\task_runner\models.py:80
+#: .\task_runner\templates\task_runner\job_detail.html:53
+#: .\task_runner\templates\task_runner\job_list.html:123
+msgid "Created By"
+msgstr ""
+
+#: .\erp\models.py:165
+msgid "Stock Movement"
+msgstr ""
+
+#: .\erp\models.py:166
+msgid "Stock Movements"
+msgstr ""
+
+#: .\erp\models.py:192 .\erp\templates\erp\invoice_detail.html:19
+#: .\erp\templates\erp\invoice_list.html:65
+msgid "Draft"
+msgstr ""
+
+#: .\erp\models.py:193
+msgid "Sent / Issued"
+msgstr ""
+
+#: .\erp\models.py:194 .\erp\templates\erp\dashboard.html:226
+#: .\erp\templates\erp\invoice_detail.html:13
+#: .\erp\templates\erp\invoice_list.html:59
+msgid "Paid"
+msgstr ""
+
+#: .\erp\models.py:195 .\erp\templates\erp\dashboard.html:230
+#: .\erp\templates\erp\invoice_detail.html:17
+#: .\erp\templates\erp\invoice_list.html:63
+msgid "Overdue"
+msgstr ""
+
+#: .\erp\models.py:206
+msgid "Invoice Number"
+msgstr ""
+
+#: .\erp\models.py:208
+msgid "Customer / Client Name"
+msgstr ""
+
+#: .\erp\models.py:209
+msgid "Customer Email"
+msgstr ""
+
+#: .\erp\models.py:210
+#, fuzzy
+#| msgid "Email Address"
+msgid "Customer Address"
+msgstr "Dirección de correo electrónico"
+
+#: .\erp\models.py:211 .\erp\templates\erp\invoice_list.html:35
+msgid "Issue Date"
+msgstr ""
+
+#: .\erp\models.py:212 .\erp\templates\erp\invoice_list.html:36
+msgid "Due Date"
+msgstr ""
+
+#: .\erp\models.py:223 .\erp\templates\erp\invoice_detail.html:98
+msgid "Subtotal"
+msgstr ""
+
+#: .\erp\models.py:229
+msgid "Tax Rate (%)"
+msgstr ""
+
+#: .\erp\models.py:235
+msgid "Tax Amount"
+msgstr ""
+
+#: .\erp\models.py:241
+msgid "Discount Amount"
+msgstr ""
+
+#: .\erp\models.py:247 .\erp\templates\erp\invoice_detail.html:114
+#: .\erp\templates\erp\invoice_list.html:37
+#, fuzzy
+#| msgid "Total Contacts"
+msgid "Total Amount"
+msgstr "Total de Contactos"
+
+#: .\erp\models.py:249
+msgid "Terms / Notes"
+msgstr ""
+
+#: .\erp\models.py:261 .\erp\models.py:301
+msgid "Invoice"
+msgstr ""
+
+#: .\erp\models.py:262 .\erp\templates\erp\base_erp.html:47
+#, fuzzy
+#| msgid "Services"
+msgid "Invoices"
+msgstr "Servicios"
+
+#: .\erp\models.py:311
+msgid "Item Description"
+msgstr ""
+
+#: .\erp\models.py:322 .\erp\templates\erp\inventory_dashboard.html:134
+#: .\erp\templates\erp\invoice_detail.html:63
+#: .\erp\templates\erp\product_detail.html:42
+msgid "Unit Price"
+msgstr ""
+
+#: .\erp\models.py:328 .\erp\templates\erp\invoice_detail.html:64
+msgid "Line Total"
+msgstr ""
+
+#: .\erp\models.py:332
+msgid "Invoice Item"
+msgstr ""
+
+#: .\erp\models.py:333 .\erp\templates\erp\invoice_detail.html:56
+msgid "Invoice Items"
+msgstr ""
+
+#: .\erp\plugin.py:9
+msgid "Enterprise Resource Planning (ERP)"
+msgstr ""
+
+#: .\erp\plugin.py:11
+msgid ""
+"Lightweight ERP core with product catalog, inventory tracking, invoice PDF "
+"generation, and executive financial metrics."
+msgstr ""
+
+#: .\erp\plugin.py:22 .\templates\base.html:124
+#: .\templates\themes\bootstrap5\partials\header.html:67
+msgid "ERP"
+msgstr ""
+
+#: .\erp\plugin.py:41
+msgid "ERP: Procurement & Suppliers"
+msgstr ""
+
+#: .\erp\plugin.py:43
+msgid ""
+"Supplier relationship management, purchase orders (PO), vendor pricing "
+"agreements, and incoming shipment inspection and receiving."
+msgstr ""
+
+#: .\erp\plugin.py:56
+msgid "ERP: Advanced Warehousing"
+msgstr ""
+
+#: .\erp\plugin.py:58
+msgid ""
+"Multi-facility warehouse topology, bin and aisle mapping, inter-warehouse "
+"stock transfer workflows, and batch/lot/serial number tracing."
+msgstr ""
+
+#: .\erp\plugin.py:71
+msgid "ERP: General Ledger & Accounting"
+msgstr ""
+
+#: .\erp\plugin.py:73
+msgid ""
+"Double-entry bookkeeping engine, customizable chart of accounts, accounts "
+"payable/receivable, trial balance, and automated P&L / balance sheet "
+"generation."
+msgstr ""
+
+#: .\erp\templates\erp\base_erp.html:16
+#, fuzzy
+#| msgid "Enterprise CRM"
+msgid "Enterprise ERP"
+msgstr "CRM Empresarial"
+
+#: .\erp\templates\erp\base_erp.html:17
+msgid "Core Engine"
+msgstr ""
+
+#: .\erp\templates\erp\base_erp.html:19
+msgid "Product Catalog, Inventory Valuation, Invoicing & Modular Extensions"
+msgstr ""
+
+#: .\erp\templates\erp\base_erp.html:32
+msgid "Inventory"
+msgstr ""
+
+#: .\erp\templates\erp\base_erp.html:42
+msgid "Movements"
+msgstr ""
+
+#: .\erp\templates\erp\base_erp.html:52
+msgid "Sub-Modules"
+msgstr ""
+
+#: .\erp\templates\erp\base_erp.html:61
+#: .\erp\templates\erp\inventory_dashboard.html:167
+#: .\erp\templates\erp\movement_list.html:23
+msgid "Record Movement"
+msgstr ""
+
+#: .\erp\templates\erp\base_erp.html:64
+#: .\erp\templates\erp\invoice_list.html:23
+msgid "New Invoice"
+msgstr ""
+
+#: .\erp\templates\erp\confirm_delete.html:14
+msgid "Are you sure you want to permanently delete"
+msgstr ""
+
+#: .\erp\templates\erp\confirm_delete.html:15
+msgid "This action cannot be undone."
+msgstr ""
+
+#: .\erp\templates\erp\confirm_delete.html:22
+msgid "Yes, Delete"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:11
+#, fuzzy
+#| msgid "Products"
+msgid "Active Products"
+msgstr "Productos"
+
+#: .\erp\templates\erp\dashboard.html:15
+msgid "In active catalog"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:24
+#: .\erp\templates\erp\inventory_dashboard.html:135
+#: .\erp\templates\erp\product_detail.html:78
+msgid "Stock Valuation"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:28
+msgid "Cost basis:"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:37
+msgid "Monthly Revenue"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:41
+msgid "Lifetime:"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:50
+msgid "Outstanding Receivables"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:54
+msgid "open invoice(s)"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:63
+#: .\erp\templates\erp\inventory_dashboard.html:47
+msgid "Low-Stock Alerts"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:71
+msgid "Review flagged items"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:73
+msgid "All stock levels healthy"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:87
+msgid "Revenue Trend (Last 6 Months)"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:89
+msgid "Paid Invoices"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:103
+msgid "Top Products by Value"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:120
+msgid "Inventory Stock Levels vs Reorder Thresholds"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:122
+msgid "Full Inventory Grid"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:139
+msgid "Recent Stock Movements"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:150
+#: .\erp\templates\erp\invoice_detail.html:62
+msgid "Qty"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:152
+#: .\erp\templates\erp\product_detail.html:132
+msgid "Date"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:160
+#: .\erp\templates\erp\movement_list.html:49
+#: .\erp\templates\erp\product_detail.html:146
+msgid "Stock In"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:162
+#: .\erp\templates\erp\movement_list.html:51
+#: .\erp\templates\erp\product_detail.html:148
+msgid "Stock Out"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:164
+#: .\erp\templates\erp\movement_list.html:53
+#: .\erp\templates\erp\product_detail.html:150
+msgid "Return"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:166
+#: .\erp\templates\erp\movement_list.html:55
+#: .\erp\templates\erp\product_detail.html:152
+msgid "Adjustment"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:181
+#: .\erp\templates\erp\movement_list.html:76
+msgid "No stock movements recorded yet."
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:195
+#, fuzzy
+#| msgid "Recent Deals"
+msgid "Recent Invoices"
+msgstr "Tratos Recientes"
+
+#: .\erp\templates\erp\dashboard.html:204
+#: .\erp\templates\erp\invoice_list.html:33
+msgid "Invoice #"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:205
+#: .\erp\templates\erp\invoice_list.html:34
+msgid "Customer"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:206
+msgid "Amount"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:208
+#: .\erp\templates\erp\invoice_list.html:73
+msgid "PDF"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:236
+msgid "Download PDF"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:243
+msgid "No invoices generated yet."
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:260
+#, fuzzy
+#| msgid "Modular Architecture"
+msgid "Modular Sub-Modules Architecture"
+msgstr "Arquitectura Modular"
+
+#: .\erp\templates\erp\dashboard.html:261
+msgid "Coming Soon / Pluggable"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:264
+msgid ""
+"The ERP Core is designed with pluggable extension boundaries registered "
+"directly inside the Enterprise Plugin Registry."
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:268
+msgid "View Sub-Module Specs"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:285
+#: .\erp\templates\erp\modules_overview.html:53
+#: .\erp\templates\erp\modules_overview.html:63
+#: .\erp\templates\erp\modules_overview.html:73
+#: .\erp\templates\erp\modules_overview.html:91
+#: .\erp\templates\erp\modules_overview.html:119
+#: .\erp\templates\erp\modules_overview.html:147
+msgid "Coming Soon"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:294
+msgid "Planned Features:"
+msgstr ""
+
+#: .\erp\templates\erp\dashboard.html:324
+msgid "Revenue ($)"
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:11
+msgid "Catalog SKUs"
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:23
+msgid "Inventory Valuation"
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:35
+msgid "Cost Basis"
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:65
+msgid "Low Stock Warning Detected"
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:67
+#, python-format
+msgid ""
+"\n"
+"          There is 1 product currently at or below its reorder threshold.\n"
+"          "
+msgid_plural ""
+"\n"
+"          There are %(count)s products currently at or below their reorder "
+"threshold.\n"
+"          "
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:76
+msgid "Replenish Stock"
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:89
+msgid "Search by product name or SKU..."
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:94
+#, fuzzy
+#| msgid "All Statuses"
+msgid "All Categories"
+msgstr "Todos los Estados"
+
+#: .\erp\templates\erp\inventory_dashboard.html:104
+msgid "Low Stock Only"
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:119
+msgid "Inventory Stock Status"
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:121
+#: .\erp\templates\erp\product_list.html:17
+#, fuzzy
+#| msgid "Products"
+msgid "Add Product"
+msgstr "Productos"
+
+#: .\erp\templates\erp\inventory_dashboard.html:129
+#: .\erp\templates\erp\product_list.html:27
+msgid "SKU"
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:132
+#: .\erp\templates\erp\product_list.html:32
+msgid "On-Hand Stock"
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:133
+msgid "Reorder Point"
+msgstr ""
+
+#: .\erp\templates\erp\inventory_dashboard.html:170
+#: .\erp\templates\erp\product_form.html:11
+#, fuzzy
+#| msgid "Products"
+msgid "Edit Product"
+msgstr "Productos"
+
+#: .\erp\templates\erp\inventory_dashboard.html:180
+msgid "No products match the selected criteria."
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:25
+msgid "Issued:"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:25
+msgid "Due:"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:31
+#, fuzzy
+#| msgid "View all"
+msgid "View PDF"
+msgstr "Ver todo"
+
+#: .\erp\templates\erp\invoice_detail.html:34
+msgid "Download"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:45
+msgid "Billed To"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:61
+msgid "Description / Product"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:86
+msgid "No line items added."
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:103
+msgid "Tax"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:109
+msgid "Discount"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:123
+msgid "Terms & Notes"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:137
+msgid "Email Delivery"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:142
+msgid ""
+"Dispatch the PDF invoice directly to the customer email address via "
+"background worker."
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:145
+msgid "Recipient:"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:150
+msgid "Send Invoice via Email"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:159
+#, fuzzy
+#| msgid "Menu Management"
+msgid "Status Management"
+msgstr "Gestión de Menús"
+
+#: .\erp\templates\erp\invoice_detail.html:162
+msgid "Change collection or accounting status:"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:168
+msgid "Mark as Paid"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:176
+msgid "Mark as Sent"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:184
+msgid "Mark as Overdue"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:192
+msgid "Cancel Invoice"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_detail.html:203
+msgid "Delete this invoice"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_form.html:11
+msgid "Edit Invoice"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_form.html:13
+msgid "Create New Invoice"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_form.html:16
+msgid "Specify customer billing details and itemized products or services"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_form.html:27
+msgid "Customer & Billing Info"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_form.html:67
+msgid "Line Items"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_form.html:73
+msgid "Product (Optional)"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_form.html:76
+msgid "Unit Price ($)"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_form.html:77
+msgid "Delete?"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_form.html:111
+msgid "Taxes, Discounts & Terms"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_form.html:135
+msgid "Save Invoice"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_form.html:135
+msgid "Generate Invoice"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_list.html:8
+msgid "Commercial Invoices & Billing"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_list.html:9
+msgid ""
+"Issue customer invoices, track collections, generate PDF copies, and email "
+"directly"
+msgstr ""
+
+#: .\erp\templates\erp\invoice_list.html:14
+#: .\task_runner\templates\task_runner\job_list.html:93
+msgid "All Statuses"
+msgstr "Todos los Estados"
+
+#: .\erp\templates\erp\invoice_list.html:19
+msgid "Search customer / invoice #..."
+msgstr ""
+
+#: .\erp\templates\erp\invoice_list.html:82
+msgid "No invoices found matching criteria."
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:13
+#, fuzzy
+#| msgid "Modular Architecture"
+msgid "ERP Modular Architecture & Sub-Modules"
+msgstr "Arquitectura Modular"
+
+#: .\erp\templates\erp\modules_overview.html:15
+msgid ""
+"The Enterprise ERP system uses a micro-modular starter architecture. The "
+"lightweight ERP Core provides cataloging, inventory stock valuation, and "
+"commercial invoicing, while dedicated domain extensions plug in via the "
+"Enterprise Plugin Registry."
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:26
+msgid "Module Topology & Extension Boundaries"
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:52 .\erp\views.py:61
+msgid "Procurement & Purchase Orders"
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:62
+msgid "Advanced Warehousing & Multi-Location"
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:72
+msgid "General Ledger & Double-Entry"
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:89
+msgid "Procurement"
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:95
+msgid ""
+"Expands core ERP to automate external vendor relationship management, "
+"purchase ordering, and dock receiving."
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:97
+#: .\erp\templates\erp\modules_overview.html:125
+#: .\erp\templates\erp\modules_overview.html:153
+msgid "Architecture Stubs & Models:"
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:105
+#: .\erp\templates\erp\modules_overview.html:133
+#: .\erp\templates\erp\modules_overview.html:161
+msgid "Plugin Class:"
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:117
+msgid "Warehousing"
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:123
+msgid ""
+"Multi-tier warehouse topology with spatial location tracking down to aisles, "
+"racks, and bin locations."
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:145
+msgid "Accounting"
+msgstr ""
+
+#: .\erp\templates\erp\modules_overview.html:151
+msgid ""
+"Full double-entry bookkeeping ledger integrating invoice payments, accounts "
+"payable, and financial audits."
+msgstr ""
+
+#: .\erp\templates\erp\movement_form.html:10
+msgid "Record Stock Movement"
+msgstr ""
+
+#: .\erp\templates\erp\movement_form.html:12
+msgid ""
+"Log incoming inventory, sales dispatches, customer returns, or physical "
+"counts"
+msgstr ""
+
+#: .\erp\templates\erp\movement_form.html:65
+msgid "Confirm Movement"
+msgstr ""
+
+#: .\erp\templates\erp\movement_list.html:8
+msgid "Stock Movement Journal"
+msgstr ""
+
+#: .\erp\templates\erp\movement_list.html:9
+msgid ""
+"Complete audit trail of stock receipts, customer sales, adjustments, and "
+"returns"
+msgstr ""
+
+#: .\erp\templates\erp\movement_list.html:14
+msgid "All Types"
+msgstr ""
+
+#: .\erp\templates\erp\movement_list.html:19
+msgid "Search product / ref..."
+msgstr ""
+
+#: .\erp\templates\erp\movement_list.html:38
+#: .\erp\templates\erp\product_detail.html:136
+msgid "Reference"
+msgstr ""
+
+#: .\erp\templates\erp\movement_list.html:40
+#: .\erp\templates\erp\product_detail.html:137
+msgid "Recorded By"
+msgstr ""
+
+#: .\erp\templates\erp\product_detail.html:16
+msgid "Move Stock"
+msgstr ""
+
+#: .\erp\templates\erp\product_detail.html:54
+msgid "Stock Status & Health"
+msgstr ""
+
+#: .\erp\templates\erp\product_detail.html:58
+msgid "Current On-Hand"
+msgstr ""
+
+#: .\erp\templates\erp\product_detail.html:91
+msgid "Financial Metrics"
+msgstr ""
+
+#: .\erp\templates\erp\product_detail.html:96
+msgid "Unit Margin"
+msgstr ""
+
+#: .\erp\templates\erp\product_detail.html:100
+msgid "Total Inventory Cost"
+msgstr ""
+
+#: .\erp\templates\erp\product_detail.html:104
+msgid "Catalog Created"
+msgstr ""
+
+#: .\erp\templates\erp\product_detail.html:108
+msgid "Last Updated"
+msgstr ""
+
+#: .\erp\templates\erp\product_detail.html:121
+msgid "Stock Movement History"
+msgstr ""
+
+#: .\erp\templates\erp\product_detail.html:124
+#, fuzzy
+#| msgid "Add Contact"
+msgid "Add Movement"
+msgstr "Agregar Contacto"
+
+#: .\erp\templates\erp\product_detail.html:163
+msgid "No stock movements recorded for this product yet."
+msgstr ""
+
+#: .\erp\templates\erp\product_form.html:13
+#, fuzzy
+#| msgid "Products"
+msgid "Add New Product"
+msgstr "Productos"
+
+#: .\erp\templates\erp\product_form.html:16
+msgid "Define catalog SKU, units, pricing, and initial stock limits"
+msgstr ""
+
+#: .\erp\templates\erp\product_form.html:97
+msgid "Save Changes"
+msgstr ""
+
+#: .\erp\templates\erp\product_form.html:97
+#, fuzzy
+#| msgid "Products"
+msgid "Create Product"
+msgstr "Productos"
+
+#: .\erp\templates\erp\product_list.html:8
+#, fuzzy
+#| msgid "Products"
+msgid "Product Catalog"
+msgstr "Productos"
+
+#: .\erp\templates\erp\product_list.html:9
+msgid "Manage product specifications, pricing tiers, and stock definitions"
+msgstr ""
+
+#: .\erp\templates\erp\product_list.html:13
+msgid "Search products..."
+msgstr ""
+
+#: .\erp\templates\erp\product_list.html:30
+msgid "Selling Price"
+msgstr ""
+
+#: .\erp\templates\erp\product_list.html:82
+msgid "No products found in the catalog."
+msgstr ""
+
+#: .\erp\views.py:63 .\erp\views.py:79 .\erp\views.py:95
+msgid "Modular Extension"
+msgstr ""
+
+#: .\erp\views.py:66
+msgid ""
+"Supplier relationship management, request for quotes (RFQ), purchase orders "
+"(PO), vendor catalog price lists, and receiving docks."
+msgstr ""
+
+#: .\erp\views.py:70
+msgid "Vendor management & evaluation"
+msgstr ""
+
+#: .\erp\views.py:71
+msgid "Purchase order generation & approvals"
+msgstr ""
+
+#: .\erp\views.py:72
+msgid "Shipment receiving & automatic stock intake"
+msgstr ""
+
+#: .\erp\views.py:77
+msgid "Advanced Multi-Location Warehouse"
+msgstr ""
+
+#: .\erp\views.py:82
+msgid ""
+"Multi-warehouse spatial topology, bin/aisle/shelf tracking, inter-warehouse "
+"transfer orders, and lot/serial number traceability."
+msgstr ""
+
+#: .\erp\views.py:86
+msgid "Multi-warehouse & bin locations"
+msgstr ""
+
+#: .\erp\views.py:87
+msgid "Inter-location stock transfer requisitions"
+msgstr ""
+
+#: .\erp\views.py:88
+msgid "Lot & serial tracking for traceability"
+msgstr ""
+
+#: .\erp\views.py:93
+msgid "General Ledger & Full Accounting"
+msgstr ""
+
+#: .\erp\views.py:98
+msgid ""
+"Complete double-entry bookkeeping engine with custom chart of accounts, "
+"journal entries, accounts payable/receivable, trial balance, and P&L."
+msgstr ""
+
+#: .\erp\views.py:102
+msgid "Double-entry journal ledger"
+msgstr ""
+
+#: .\erp\views.py:103
+msgid "Automated Balance Sheet & Income Statement"
+msgstr ""
+
+#: .\erp\views.py:104
+msgid "Accounts payable & receivable reconciliation"
+msgstr ""
+
+#: .\erp\views.py:193
+msgid "Product created successfully."
+msgstr ""
+
+#: .\erp\views.py:206
+msgid "Product updated successfully."
+msgstr ""
+
+#: .\erp\views.py:219
+msgid "Product deleted successfully."
+msgstr ""
+
+#: .\erp\views.py:263
+#, python-format
+msgid "Stock movement recorded: %(type)s %(qty)s for %(product)s."
+msgstr ""
+
+#: .\erp\views.py:331
+#, python-format
+msgid "Invoice %(number)s created successfully."
+msgstr ""
+
+#: .\erp\views.py:356
+#, python-format
+msgid "Invoice %(number)s updated successfully."
+msgstr ""
+
+#: .\erp\views.py:368
+msgid "Invoice deleted successfully."
+msgstr ""
+
+#: .\erp\views.py:382
+#, python-format
+msgid "Invoice %(number)s marked as %(status)s."
+msgstr ""
+
+#: .\erp\views.py:418
+#, python-format
+msgid "Invoice PDF email dispatched to %(email)s."
+msgstr ""
+
+#: .\erp\views.py:422
+#, python-format
+msgid "Error delivering invoice email: %(err)s"
+msgstr ""
 
 #: .\home\admin.py:4
 msgid "Page Administration"
@@ -1635,16 +2775,6 @@ msgstr "¿Quiénes somos?"
 msgid "Services"
 msgstr "Servicios"
 
-#: .\home\plugin.py:15 .\home\templates\home\products.html:14
-#: .\templates\base.html:117
-#: .\templates\themes\bootstrap5\partials\footer.html:17
-#: .\templates\themes\bootstrap5\partials\header.html:54
-#: .\templates\themes\minimal\partials\footer.html:11
-#: .\templates\themes\tailwind\partials\footer.html:16
-#: .\templates\themes\tailwind\partials\header.html:56
-msgid "Products"
-msgstr "Productos"
-
 #: .\home\templates\home\about.html:5
 msgid "About Us - Enterprise Website"
 msgstr "Sobre nosotros - Sitio web de la empresa"
@@ -1675,8 +2805,8 @@ msgid ""
 "data access through Django REST Framework."
 msgstr ""
 "Esta plataforma une aplicaciones web modulares en una interfaz empresarial "
-"unificada: incluye gestión dinámica de tareas (Todo), encuestas interactivas"
-" de decisión (Polls), ejecución de Python basada en navegador (Brython) y "
+"unificada: incluye gestión dinámica de tareas (Todo), encuestas interactivas "
+"de decisión (Polls), ejecución de Python basada en navegador (Brython) y "
 "acceso a datos programáticos a través de Django REST Framework."
 
 #: .\home\templates\home\about.html:38 .\home\templates\home\index.html:28
@@ -1722,8 +2852,8 @@ msgid ""
 "Clean app separation with dedicated models, views, and APIs ready for "
 "internationalization and multi-cloud deployment."
 msgstr ""
-"Separación limpia de aplicaciones con modelos dedicados, vistas y API listas"
-" para la internacionalización y la implementación en múltiples nubes."
+"Separación limpia de aplicaciones con modelos dedicados, vistas y API listas "
+"para la internacionalización y la implementación en múltiples nubes."
 
 #: .\home\templates\home\contact.html:5
 msgid "Contact Us - Enterprise Website"
@@ -1881,7 +3011,6 @@ msgid "Great Support"
 msgstr "Gran Soporte"
 
 #: .\home\templates\home\index.html:213
-#, fuzzy
 msgid "Technical Skills"
 msgstr ""
 
@@ -2106,7 +3235,7 @@ msgid "This language code is too long."
 msgstr "Este código de idioma es demasiado largo."
 
 #: .\language_management\templates\language_management\form.html:37
-#: .\templates\themes\bootstrap5\partials\header.html:92
+#: .\templates\themes\bootstrap5\partials\header.html:93
 msgid "Language"
 msgstr "Idioma"
 
@@ -2418,8 +3547,8 @@ msgstr ""
 msgid "Your vote for '%(choice)s' has been recorded!"
 msgstr ""
 
-#: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:126
-#: .\templates\themes\bootstrap5\partials\header.html:69
+#: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:127
+#: .\templates\themes\bootstrap5\partials\header.html:70
 msgid "REST API"
 msgstr ""
 
@@ -2557,12 +3686,6 @@ msgstr ""
 msgid "JSON-encoded output returned by the background task"
 msgstr ""
 
-#: .\task_runner\models.py:80
-#: .\task_runner\templates\task_runner\job_detail.html:53
-#: .\task_runner\templates\task_runner\job_list.html:123
-msgid "Created By"
-msgstr ""
-
 #: .\task_runner\models.py:93
 msgid "Background Task Job"
 msgstr ""
@@ -2582,8 +3705,8 @@ msgstr ""
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:103
 msgid ""
 "Specify any Python, Django management, or shell command to execute "
-"asynchronously inside a Celery worker. Output is streamed live via WebSocket"
-" to the job detail view."
+"asynchronously inside a Celery worker. Output is streamed live via WebSocket "
+"to the job detail view."
 msgstr ""
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:111
@@ -2604,7 +3727,7 @@ msgid "Background Task"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_detail.html:13
-#: .\templates\themes\bootstrap5\partials\header.html:130
+#: .\templates\themes\bootstrap5\partials\header.html:131
 #: .\templates\themes\tailwind\partials\header.html:121
 msgid "Task Runner"
 msgstr ""
@@ -2670,10 +3793,6 @@ msgstr ""
 #: .\task_runner\templates\task_runner\job_list.html:87
 msgid "Search by task name or task ID..."
 msgstr ""
-
-#: .\task_runner\templates\task_runner\job_list.html:93
-msgid "All Statuses"
-msgstr "Todos los Estados"
 
 #: .\task_runner\templates\task_runner\job_list.html:180
 msgid "No background tasks found."
@@ -2830,8 +3949,8 @@ msgstr ""
 msgid "Todo List"
 msgstr "Lista de Tareas"
 
-#: .\templates\base.html:124
-#: .\templates\themes\bootstrap5\partials\header.html:67
+#: .\templates\base.html:125
+#: .\templates\themes\bootstrap5\partials\header.html:68
 #: .\video_gallery\plugin.py:7 .\video_gallery\plugin.py:14
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:6
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:22
@@ -2839,52 +3958,52 @@ msgstr "Lista de Tareas"
 msgid "Media Gallery"
 msgstr ""
 
-#: .\templates\base.html:125
-#: .\templates\themes\bootstrap5\partials\header.html:68
+#: .\templates\base.html:126
+#: .\templates\themes\bootstrap5\partials\header.html:69
 #: .\webprogram\plugin.py:7 .\webprogram\plugin.py:14
 msgid "Brython WebProgram"
 msgstr ""
 
-#: .\templates\base.html:127 .\templates\base.html:149
-#: .\templates\themes\bootstrap5\partials\header.html:72
-#: .\templates\themes\bootstrap5\partials\header.html:125
+#: .\templates\base.html:128 .\templates\base.html:150
+#: .\templates\themes\bootstrap5\partials\header.html:73
+#: .\templates\themes\bootstrap5\partials\header.html:126
 #: .\templates\themes\tailwind\partials\header.html:118
 msgid "Site Admin"
 msgstr ""
 
-#: .\templates\base.html:147
-#: .\templates\themes\bootstrap5\partials\header.html:119
-#: .\templates\themes\minimal\partials\header.html:57
+#: .\templates\base.html:148
+#: .\templates\themes\bootstrap5\partials\header.html:120
+#: .\templates\themes\minimal\partials\header.html:78
 #: .\templates\themes\tailwind\partials\header.html:114
 #: .\user_management\templates\user_management\profile.html:14
 msgid "Profile"
 msgstr ""
 
-#: .\templates\base.html:150
-#: .\templates\themes\bootstrap5\partials\header.html:70
+#: .\templates\base.html:151
+#: .\templates\themes\bootstrap5\partials\header.html:71
 msgid "Background Tasks"
 msgstr ""
 
-#: .\templates\base.html:156
-#: .\templates\themes\bootstrap5\partials\header.html:140
-#: .\templates\themes\minimal\partials\header.html:66
+#: .\templates\base.html:157
+#: .\templates\themes\bootstrap5\partials\header.html:141
+#: .\templates\themes\minimal\partials\header.html:87
 #: .\templates\themes\tailwind\partials\header.html:128
 msgid "Logout"
 msgstr ""
 
-#: .\templates\base.html:161 .\templates\registration\login.html:4
+#: .\templates\base.html:162 .\templates\registration\login.html:4
 #: .\templates\registration\login.html:40
-#: .\templates\themes\bootstrap5\partials\header.html:147
-#: .\templates\themes\minimal\partials\header.html:72
+#: .\templates\themes\bootstrap5\partials\header.html:148
+#: .\templates\themes\minimal\partials\header.html:93
 #: .\templates\themes\tailwind\partials\header.html:134
 #: .\user_management\templates\user_management\login.html:4
 #: .\user_management\templates\user_management\login.html:18
 msgid "Login"
 msgstr ""
 
-#: .\templates\base.html:162
-#: .\templates\themes\bootstrap5\partials\header.html:150
-#: .\templates\themes\minimal\partials\header.html:73
+#: .\templates\base.html:163
+#: .\templates\themes\bootstrap5\partials\header.html:151
+#: .\templates\themes\minimal\partials\header.html:94
 #: .\templates\themes\tailwind\partials\header.html:135
 msgid "Signup"
 msgstr ""
@@ -2924,8 +4043,8 @@ msgstr ""
 
 #: .\templates\registration\login.html:20
 msgid ""
-"Your account doesn't have access to this page. To proceed, please login with"
-" an account that has access."
+"Your account doesn't have access to this page. To proceed, please login with "
+"an account that has access."
 msgstr ""
 
 #: .\templates\registration\login.html:22
@@ -2971,7 +4090,8 @@ msgstr ""
 msgid "About"
 msgstr "Quiénes somos"
 
-#: .\templates\themes\bootstrap5\partials\header.html:85
+#: .\templates\themes\bootstrap5\partials\header.html:86
+#: .\templates\themes\minimal\partials\header.html:53
 msgid "Switch Language"
 msgstr "Cambiar Idioma"
 
@@ -2991,11 +4111,11 @@ msgstr ""
 msgid "Modern Enterprise Web Application (Minimal Semantic Theme)"
 msgstr ""
 
-#: .\templates\themes\minimal\partials\header.html:59
+#: .\templates\themes\minimal\partials\header.html:80
 msgid "Admin"
 msgstr ""
 
-#: .\templates\themes\minimal\partials\header.html:60
+#: .\templates\themes\minimal\partials\header.html:81
 msgid "Tasks"
 msgstr ""
 
@@ -3492,10 +4612,6 @@ msgstr ""
 
 #: .\video_gallery\models.py:38
 msgid "URL-friendly slug for public gallery routing (e.g. product-demos)"
-msgstr ""
-
-#: .\video_gallery\models.py:41 .\video_gallery\models.py:132
-msgid "Is Active"
 msgstr ""
 
 #: .\video_gallery\models.py:47

@@ -1,0 +1,167 @@
+{% extends "erp/base_erp.html" %}
+{% load i18n %}
+
+{% block erp_content %}
+<!-- Architecture Header -->
+<div class="card shadow-sm border-0 rounded-3 mb-4">
+  <div class="card-body p-4">
+    <div class="d-flex align-items-center gap-3 mb-2">
+      <div class="bg-primary text-white rounded-3 p-3 d-flex align-items-center justify-content-center">
+        <i class="fa fa-sitemap fa-2x"></i>
+      </div>
+      <div>
+        <h3 class="fw-bold mb-1">{% trans "ERP Modular Architecture & Sub-Modules" %}</h3>
+        <p class="text-body-secondary mb-0">
+          {% trans "The Enterprise ERP system uses a micro-modular starter architecture. The lightweight ERP Core provides cataloging, inventory stock valuation, and commercial invoicing, while dedicated domain extensions plug in via the Enterprise Plugin Registry." %}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Architecture Diagram Card -->
+<div class="card shadow-sm border-0 rounded-3 mb-4">
+  <div class="card-header bg-transparent border-0 pt-3 px-4">
+    <h5 class="fw-bold mb-0">
+      <i class="fa fa-cubes text-primary me-2"></i>{% trans "Module Topology & Extension Boundaries" %}
+    </h5>
+  </div>
+  <div class="card-body px-4 pb-4">
+    <div class="p-4 bg-body-tertiary rounded-3 border">
+      <div class="row g-3 text-center">
+        <!-- Core -->
+        <div class="col-12">
+          <div class="p-3 bg-primary text-white rounded-3 shadow-sm">
+            <h5 class="fw-bold mb-1"><i class="fa fa-cube me-2"></i>ERP CORE (<code>erp</code>)</h5>
+            <small class="opacity-75">Product Catalog &bull; Inventory Stock Movements &bull; Invoices &bull; ReportLab PDF Engine &bull; Celery Low-Stock Alerts</small>
+            <div class="mt-2"><span class="badge bg-success">ACTIVE &bull; INSTALLED</span></div>
+          </div>
+        </div>
+
+        <!-- Connector arrows -->
+        <div class="col-12 py-1">
+          <i class="fa fa-arrows-v fa-2x text-body-secondary opacity-50"></i>
+          <span class="d-block small text-body-secondary fw-semibold">AppPlugin Extension Layer (<code>plugin_registry</code>)</span>
+        </div>
+
+        <!-- Sub-Module 1 -->
+        <div class="col-12 col-md-4">
+          <div class="p-3 bg-body border rounded-3 shadow-sm h-100">
+            <div class="text-primary mb-2"><i class="fa fa-truck fa-2x"></i></div>
+            <h6 class="fw-bold mb-1"><code>erp_procurement</code></h6>
+            <div class="small text-body-secondary mb-2">{% trans "Procurement & Purchase Orders" %}</div>
+            <span class="badge bg-warning text-dark">{% trans "Coming Soon" %}</span>
+          </div>
+        </div>
+
+        <!-- Sub-Module 2 -->
+        <div class="col-12 col-md-4">
+          <div class="p-3 bg-body border rounded-3 shadow-sm h-100">
+            <div class="text-primary mb-2"><i class="fa fa-building-o fa-2x"></i></div>
+            <h6 class="fw-bold mb-1"><code>erp_warehouse</code></h6>
+            <div class="small text-body-secondary mb-2">{% trans "Advanced Warehousing & Multi-Location" %}</div>
+            <span class="badge bg-warning text-dark">{% trans "Coming Soon" %}</span>
+          </div>
+        </div>
+
+        <!-- Sub-Module 3 -->
+        <div class="col-12 col-md-4">
+          <div class="p-3 bg-body border rounded-3 shadow-sm h-100">
+            <div class="text-primary mb-2"><i class="fa fa-calculator fa-2x"></i></div>
+            <h6 class="fw-bold mb-1"><code>erp_accounting</code></h6>
+            <div class="small text-body-secondary mb-2">{% trans "General Ledger & Double-Entry" %}</div>
+            <span class="badge bg-warning text-dark">{% trans "Coming Soon" %}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Detailed Sub-Module Specifications -->
+<div class="row g-4 mb-4">
+  <!-- Procurement -->
+  <div class="col-12 col-lg-4">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <i class="fa fa-truck text-primary fa-lg"></i>
+          <h5 class="fw-bold mb-0">{% trans "Procurement" %}</h5>
+        </div>
+        <span class="badge bg-warning text-dark">{% trans "Coming Soon" %}</span>
+      </div>
+      <div class="card-body px-4">
+        <p class="small text-body-secondary">
+          {% trans "Expands core ERP to automate external vendor relationship management, purchase ordering, and dock receiving." %}
+        </p>
+        <h6 class="fw-bold small text-body">{% trans "Architecture Stubs & Models:" %}</h6>
+        <ul class="list-unstyled small text-body-secondary">
+          <li><i class="fa fa-check-circle text-success me-1"></i><code>Supplier</code> / <code>Vendor</code> directory</li>
+          <li><i class="fa fa-check-circle text-success me-1"></i><code>PurchaseOrder</code> & <code>POItem</code></li>
+          <li><i class="fa fa-check-circle text-success me-1"></i><code>GoodsReceiptNote (GRN)</code></li>
+          <li><i class="fa fa-check-circle text-success me-1"></i>Automatic <code>StockMovement (IN)</code> creation</li>
+        </ul>
+        <div class="border-top pt-2">
+          <small class="text-body-secondary"><strong>{% trans "Plugin Class:" %}</strong> <code>ERPProcurementPlugin</code></small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Warehouse -->
+  <div class="col-12 col-lg-4">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <i class="fa fa-building-o text-primary fa-lg"></i>
+          <h5 class="fw-bold mb-0">{% trans "Warehousing" %}</h5>
+        </div>
+        <span class="badge bg-warning text-dark">{% trans "Coming Soon" %}</span>
+      </div>
+      <div class="card-body px-4">
+        <p class="small text-body-secondary">
+          {% trans "Multi-tier warehouse topology with spatial location tracking down to aisles, racks, and bin locations." %}
+        </p>
+        <h6 class="fw-bold small text-body">{% trans "Architecture Stubs & Models:" %}</h6>
+        <ul class="list-unstyled small text-body-secondary">
+          <li><i class="fa fa-check-circle text-success me-1"></i><code>WarehouseZone</code> & <code>BinLocation</code></li>
+          <li><i class="fa fa-check-circle text-success me-1"></i><code>TransferOrder</code> (inter-facility transfers)</li>
+          <li><i class="fa fa-check-circle text-success me-1"></i><code>LotNumber</code> & <code>SerialNumber</code> tracking</li>
+          <li><i class="fa fa-check-circle text-success me-1"></i>Pick, pack & dispatch workflows</li>
+        </ul>
+        <div class="border-top pt-2">
+          <small class="text-body-secondary"><strong>{% trans "Plugin Class:" %}</strong> <code>ERPWarehousePlugin</code></small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accounting -->
+  <div class="col-12 col-lg-4">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-2">
+          <i class="fa fa-calculator text-primary fa-lg"></i>
+          <h5 class="fw-bold mb-0">{% trans "Accounting" %}</h5>
+        </div>
+        <span class="badge bg-warning text-dark">{% trans "Coming Soon" %}</span>
+      </div>
+      <div class="card-body px-4">
+        <p class="small text-body-secondary">
+          {% trans "Full double-entry bookkeeping ledger integrating invoice payments, accounts payable, and financial audits." %}
+        </p>
+        <h6 class="fw-bold small text-body">{% trans "Architecture Stubs & Models:" %}</h6>
+        <ul class="list-unstyled small text-body-secondary">
+          <li><i class="fa fa-check-circle text-success me-1"></i><code>Account</code> (Chart of Accounts)</li>
+          <li><i class="fa fa-check-circle text-success me-1"></i><code>JournalEntry</code> & <code>JournalItem</code></li>
+          <li><i class="fa fa-check-circle text-success me-1"></i><code>TrialBalance</code> & general ledger</li>
+          <li><i class="fa fa-check-circle text-success me-1"></i>Balance Sheet and Income Statement (P&L)</li>
+        </ul>
+        <div class="border-top pt-2">
+          <small class="text-body-secondary"><strong>{% trans "Plugin Class:" %}</strong> <code>ERPAccountingPlugin</code></small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

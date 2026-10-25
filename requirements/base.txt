@@ -41,4 +41,5 @@ celery>=5.3.6
 redis>=5.0.0
 flower>=2.0.1
 channels-redis>=4.2.0
+reportlab>=5.0.0
 

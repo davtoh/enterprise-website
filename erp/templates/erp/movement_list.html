@@ -1,0 +1,101 @@
+{% extends "erp/base_erp.html" %}
+{% load i18n humanize %}
+
+{% block erp_content %}
+<div class="card shadow-sm border-0 rounded-3 mb-4">
+  <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+    <div>
+      <h5 class="fw-bold mb-0">{% trans "Stock Movement Journal" %}</h5>
+      <small class="text-body-secondary">{% trans "Complete audit trail of stock receipts, customer sales, adjustments, and returns" %}</small>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+      <form method="get" class="d-flex align-items-center gap-2">
+        <select name="type" class="form-select form-select-sm">
+          <option value="">{% trans "All Types" %}</option>
+          {% for val, label in movement_types %}
+          <option value="{{ val }}" {% if selected_type == val %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+        <input type="text" name="q" class="form-control form-control-sm" placeholder="{% trans 'Search product / ref...' %}" value="{{ search_query }}">
+        <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="fa fa-filter"></i></button>
+      </form>
+      <a href="{% url 'erp:movement_create' %}" class="btn btn-sm btn-primary text-nowrap">
+        <i class="fa fa-plus me-1"></i>{% trans "Record Movement" %}
+      </a>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light small">
+          <tr>
+            <th class="ps-4">{% trans "Timestamp" %}</th>
+            <th>{% trans "Type" %}</th>
+            <th>{% trans "Product" %}</th>
+            <th>{% trans "Quantity" %}</th>
+            <th>{% trans "Location" %}</th>
+            <th>{% trans "Reference" %}</th>
+            <th>{% trans "Notes" %}</th>
+            <th class="pe-4 text-end">{% trans "Recorded By" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in movements %}
+          <tr>
+            <td class="ps-4 text-body-secondary small">{{ m.created_at|date:"Y-m-d H:i" }}</td>
+            <td>
+              {% if m.movement_type == 'IN' %}
+              <span class="badge bg-success-subtle text-success border border-success-subtle">{% trans "Stock In" %}</span>
+              {% elif m.movement_type == 'OUT' %}
+              <span class="badge bg-danger-subtle text-danger border border-danger-subtle">{% trans "Stock Out" %}</span>
+              {% elif m.movement_type == 'RETURN' %}
+              <span class="badge bg-info-subtle text-info border border-info-subtle">{% trans "Return" %}</span>
+              {% else %}
+              <span class="badge bg-warning-subtle text-warning border border-warning-subtle">{% trans "Adjustment" %}</span>
+              {% endif %}
+            </td>
+            <td>
+              <a href="{% url 'erp:product_detail' m.product.pk %}" class="fw-semibold text-decoration-none text-body">
+                {{ m.product.name }}
+              </a>
+              <div class="small text-body-secondary">{{ m.product.sku }}</div>
+            </td>
+            <td class="fw-bold fs-6">
+              {% if m.movement_type == 'OUT' %}-{% elif m.movement_type == 'IN' or m.movement_type == 'RETURN' %}+{% endif %}{{ m.quantity }}
+            </td>
+            <td>{{ m.location.name|default:"-" }}</td>
+            <td><code class="text-body-secondary">{{ m.reference|default:"-" }}</code></td>
+            <td class="small text-body-secondary">{{ m.notes|truncatechars:40|default:"-" }}</td>
+            <td class="pe-4 text-end small text-body-secondary">{{ m.created_by.username|default:"System" }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="8" class="text-center py-5 text-body-secondary">
+              <i class="fa fa-exchange fa-3x mb-2 text-secondary d-block"></i>
+              {% trans "No stock movements recorded yet." %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {% if is_paginated %}
+  <div class="card-footer bg-transparent border-0 py-3">
+    <nav>
+      <ul class="pagination pagination-sm justify-content-center mb-0">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if selected_type %}&type={{ selected_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">&laquo;</a></li>
+        {% endif %}
+        <li class="page-item disabled"><span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if selected_type %}&type={{ selected_type }}{% endif %}{% if search_query %}&q={{ search_query }}{% endif %}">&raquo;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

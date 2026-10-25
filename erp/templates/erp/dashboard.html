@@ -1,0 +1,410 @@
+{% extends "erp/base_erp.html" %}
+{% load i18n humanize static %}
+
+{% block erp_content %}
+<!-- Executive KPI Summary Cards -->
+<div class="row g-3 mb-4">
+  <div class="col-12 col-sm-6 col-xl">
+    <div class="card shadow-sm border-0 h-100 rounded-3">
+      <div class="card-body p-3">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Active Products" %}</span>
+          <span class="badge bg-primary-subtle text-primary p-2 rounded-2"><i class="fa fa-barcode fa-lg"></i></span>
+        </div>
+        <h3 class="fw-bold mb-1">{{ metrics.total_products|intcomma }}</h3>
+        <small class="text-body-secondary">{% trans "In active catalog" %}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xl">
+    <div class="card shadow-sm border-0 h-100 rounded-3">
+      <div class="card-body p-3">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Stock Valuation" %}</span>
+          <span class="badge bg-success-subtle text-success p-2 rounded-2"><i class="fa fa-cubes fa-lg"></i></span>
+        </div>
+        <h3 class="fw-bold mb-1">${{ metrics.stock_value|floatformat:2|intcomma }}</h3>
+        <small class="text-body-secondary">{% trans "Cost basis:" %} ${{ metrics.cost_value|floatformat:2|intcomma }}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xl">
+    <div class="card shadow-sm border-0 h-100 rounded-3">
+      <div class="card-body p-3">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Monthly Revenue" %}</span>
+          <span class="badge bg-info-subtle text-info p-2 rounded-2"><i class="fa fa-line-chart fa-lg"></i></span>
+        </div>
+        <h3 class="fw-bold mb-1">${{ metrics.monthly_revenue|floatformat:2|intcomma }}</h3>
+        <small class="text-body-secondary">{% trans "Lifetime:" %} ${{ metrics.total_revenue|floatformat:2|intcomma }}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xl">
+    <div class="card shadow-sm border-0 h-100 rounded-3">
+      <div class="card-body p-3">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Outstanding Receivables" %}</span>
+          <span class="badge bg-warning-subtle text-warning p-2 rounded-2"><i class="fa fa-clock-o fa-lg"></i></span>
+        </div>
+        <h3 class="fw-bold mb-1">${{ metrics.outstanding_amount|floatformat:2|intcomma }}</h3>
+        <small class="text-body-secondary">{{ metrics.outstanding_invoices_count }} {% trans "open invoice(s)" %}</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xl">
+    <div class="card shadow-sm border-0 h-100 rounded-3">
+      <div class="card-body p-3">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <span class="text-uppercase text-body-secondary fw-semibold small">{% trans "Low-Stock Alerts" %}</span>
+          <span class="badge {% if metrics.low_stock_count > 0 %}bg-danger text-white{% else %}bg-success-subtle text-success{% endif %} p-2 rounded-2">
+            <i class="fa fa-exclamation-triangle fa-lg"></i>
+          </span>
+        </div>
+        <h3 class="fw-bold mb-1 {% if metrics.low_stock_count > 0 %}text-danger{% endif %}">{{ metrics.low_stock_count }}</h3>
+        <small class="text-body-secondary">
+          {% if metrics.low_stock_count > 0 %}
+          <a href="{% url 'erp:inventory_dashboard' %}?low_stock=1" class="text-danger fw-semibold">{% trans "Review flagged items" %} &rarr;</a>
+          {% else %}
+          {% trans "All stock levels healthy" %}
+          {% endif %}
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Interactive Analytics Charts (Chart.js) -->
+<div class="row g-4 mb-4">
+  <div class="col-12 col-lg-8">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex align-items-center justify-content-between">
+        <h5 class="fw-bold mb-0">
+          <i class="fa fa-area-chart text-primary me-2"></i>{% trans "Revenue Trend (Last 6 Months)" %}
+        </h5>
+        <span class="badge bg-body-secondary text-body">{% trans "Paid Invoices" %}</span>
+      </div>
+      <div class="card-body px-4 pb-4">
+        <div style="position: relative; height: 280px; width: 100%;">
+          <canvas id="erpRevenueChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-4">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex align-items-center justify-content-between">
+        <h5 class="fw-bold mb-0">
+          <i class="fa fa-pie-chart text-success me-2"></i>{% trans "Top Products by Value" %}
+        </h5>
+      </div>
+      <div class="card-body px-4 pb-4">
+        <div style="position: relative; height: 280px; width: 100%;">
+          <canvas id="erpTopProductsChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4 mb-4">
+  <div class="col-12">
+    <div class="card shadow-sm border-0 rounded-3">
+      <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex align-items-center justify-content-between">
+        <h5 class="fw-bold mb-0">
+          <i class="fa fa-bar-chart text-info me-2"></i>{% trans "Inventory Stock Levels vs Reorder Thresholds" %}
+        </h5>
+        <a href="{% url 'erp:inventory_dashboard' %}" class="btn btn-sm btn-outline-primary">{% trans "Full Inventory Grid" %}</a>
+      </div>
+      <div class="card-body px-4 pb-4">
+        <div style="position: relative; height: 250px; width: 100%;">
+          <canvas id="erpStockLevelsChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Operational Activity (Movements & Invoices) -->
+<div class="row g-4 mb-4">
+  <div class="col-12 col-lg-6">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex align-items-center justify-content-between">
+        <h5 class="fw-bold mb-0">
+          <i class="fa fa-exchange text-primary me-2"></i>{% trans "Recent Stock Movements" %}
+        </h5>
+        <a href="{% url 'erp:movement_list' %}" class="btn btn-sm btn-link text-decoration-none">{% trans "View all" %} &rarr;</a>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light small">
+              <tr>
+                <th class="ps-4">{% trans "Type" %}</th>
+                <th>{% trans "Product" %}</th>
+                <th>{% trans "Qty" %}</th>
+                <th>{% trans "Location" %}</th>
+                <th class="pe-4 text-end">{% trans "Date" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for movement in recent_movements %}
+              <tr>
+                <td class="ps-4">
+                  {% if movement.movement_type == 'IN' %}
+                  <span class="badge bg-success-subtle text-success border border-success-subtle">{% trans "Stock In" %}</span>
+                  {% elif movement.movement_type == 'OUT' %}
+                  <span class="badge bg-danger-subtle text-danger border border-danger-subtle">{% trans "Stock Out" %}</span>
+                  {% elif movement.movement_type == 'RETURN' %}
+                  <span class="badge bg-info-subtle text-info border border-info-subtle">{% trans "Return" %}</span>
+                  {% else %}
+                  <span class="badge bg-warning-subtle text-warning border border-warning-subtle">{% trans "Adjustment" %}</span>
+                  {% endif %}
+                </td>
+                <td>
+                  <a href="{% url 'erp:product_detail' movement.product.pk %}" class="fw-semibold text-decoration-none text-body">
+                    {{ movement.product.name }}
+                  </a>
+                  <div class="small text-body-secondary">{{ movement.product.sku }}</div>
+                </td>
+                <td class="fw-bold">{{ movement.quantity }}</td>
+                <td><small class="text-body-secondary">{{ movement.location.code|default:"-" }}</small></td>
+                <td class="pe-4 text-end small text-body-secondary">{{ movement.created_at|date:"M d, H:i" }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="5" class="text-center py-4 text-body-secondary">{% trans "No stock movements recorded yet." %}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex align-items-center justify-content-between">
+        <h5 class="fw-bold mb-0">
+          <i class="fa fa-file-text-o text-success me-2"></i>{% trans "Recent Invoices" %}
+        </h5>
+        <a href="{% url 'erp:invoice_list' %}" class="btn btn-sm btn-link text-decoration-none">{% trans "View all" %} &rarr;</a>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light small">
+              <tr>
+                <th class="ps-4">{% trans "Invoice #" %}</th>
+                <th>{% trans "Customer" %}</th>
+                <th>{% trans "Amount" %}</th>
+                <th>{% trans "Status" %}</th>
+                <th class="pe-4 text-end">{% trans "PDF" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for invoice in recent_invoices %}
+              <tr>
+                <td class="ps-4">
+                  <a href="{% url 'erp:invoice_detail' invoice.pk %}" class="fw-bold text-decoration-none text-primary">
+                    {{ invoice.invoice_number }}
+                  </a>
+                </td>
+                <td>
+                  <div class="fw-semibold">{{ invoice.customer_name }}</div>
+                  <small class="text-body-secondary">{{ invoice.issue_date|date:"M d, Y" }}</small>
+                </td>
+                <td class="fw-bold">${{ invoice.total_amount|floatformat:2|intcomma }}</td>
+                <td>
+                  {% if invoice.status == 'PAID' %}
+                  <span class="badge bg-success">{% trans "Paid" %}</span>
+                  {% elif invoice.status == 'SENT' %}
+                  <span class="badge bg-primary">{% trans "Sent" %}</span>
+                  {% elif invoice.status == 'OVERDUE' %}
+                  <span class="badge bg-danger">{% trans "Overdue" %}</span>
+                  {% else %}
+                  <span class="badge bg-secondary">{{ invoice.get_status_display }}</span>
+                  {% endif %}
+                </td>
+                <td class="pe-4 text-end">
+                  <a href="{% url 'erp:invoice_pdf' invoice.pk %}" target="_blank" class="btn btn-sm btn-outline-danger" title="{% trans 'Download PDF' %}">
+                    <i class="fa fa-file-pdf-o"></i>
+                  </a>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="5" class="text-center py-4 text-body-secondary">{% trans "No invoices generated yet." %}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modular Architecture: Future Sub-Modules Showcase -->
+<div class="card shadow-sm border-0 rounded-3 mb-4 bg-body-tertiary">
+  <div class="card-body p-4">
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4 gap-2">
+      <div>
+        <div class="d-flex align-items-center gap-2 mb-1">
+          <h5 class="fw-bold mb-0">{% trans "Modular Sub-Modules Architecture" %}</h5>
+          <span class="badge bg-warning text-dark">{% trans "Coming Soon / Pluggable" %}</span>
+        </div>
+        <p class="text-body-secondary mb-0 small">
+          {% trans "The ERP Core is designed with pluggable extension boundaries registered directly inside the Enterprise Plugin Registry." %}
+        </p>
+      </div>
+      <a href="{% url 'erp:modules_overview' %}" class="btn btn-sm btn-outline-primary">
+        <i class="fa fa-sitemap me-1"></i>{% trans "View Sub-Module Specs" %} &rarr;
+      </a>
+    </div>
+
+    <div class="row g-3">
+      {% for sub in submodules %}
+      <div class="col-12 col-lg-4">
+        <div class="card h-100 border rounded-3 bg-body shadow-sm">
+          <div class="card-body p-3 d-flex flex-column">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <div class="d-flex align-items-center gap-2">
+                <div class="bg-primary-subtle text-primary p-2 rounded-2">
+                  <i class="{{ sub.icon }} fa-lg"></i>
+                </div>
+                <h6 class="fw-bold mb-0">{{ sub.title }}</h6>
+              </div>
+              <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle">
+                {% trans "Coming Soon" %}
+              </span>
+            </div>
+
+            <p class="text-body-secondary small mb-3 flex-grow-1">
+              {{ sub.description }}
+            </p>
+
+            <div class="border-top pt-2">
+              <span class="small fw-semibold text-body-secondary d-block mb-1">{% trans "Planned Features:" %}</span>
+              <ul class="list-unstyled mb-0 small text-body-secondary">
+                {% for feat in sub.features %}
+                <li><i class="fa fa-check text-success me-1"></i>{{ feat }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- Chart.js Integration Script -->
+<script src="{% static 'js/vendor/chart.umd.min.js' %}"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  fetch("{% url 'erp:analytics_data' %}")
+    .then(response => response.json())
+    .then(data => {
+      // 1. Revenue Trend Chart
+      const ctxRev = document.getElementById('erpRevenueChart');
+      if (ctxRev && data.revenue_trend) {
+        new Chart(ctxRev, {
+          type: 'line',
+          data: {
+            labels: data.revenue_trend.labels,
+            datasets: [{
+              label: '{% trans "Revenue ($)" %}',
+              data: data.revenue_trend.data,
+              borderColor: '#2563eb',
+              backgroundColor: 'rgba(37, 99, 235, 0.1)',
+              borderWidth: 2,
+              fill: true,
+              tension: 0.35,
+              pointBackgroundColor: '#2563eb',
+              pointRadius: 4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  callback: function(value) { return '$' + Number(value).toLocaleString(); }
+                }
+              }
+            }
+          }
+        });
+      }
+
+      // 2. Top Products by Value Chart
+      const ctxTop = document.getElementById('erpTopProductsChart');
+      if (ctxTop && data.top_products) {
+        new Chart(ctxTop, {
+          type: 'doughnut',
+          data: {
+            labels: data.top_products.labels,
+            datasets: [{
+              data: data.top_products.data,
+              backgroundColor: [
+                '#2563eb', '#16a34a', '#0891b2', '#f59e0b', '#8b5cf6'
+              ]
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } }
+            }
+          }
+        });
+      }
+
+      // 3. Inventory Stock Levels vs Threshold Chart
+      const ctxStock = document.getElementById('erpStockLevelsChart');
+      if (ctxStock && data.inventory_levels) {
+        new Chart(ctxStock, {
+          type: 'bar',
+          data: {
+            labels: data.inventory_levels.labels,
+            datasets: [
+              {
+                label: '{% trans "Current Stock" %}',
+                data: data.inventory_levels.current,
+                backgroundColor: '#16a34a',
+                borderRadius: 4
+              },
+              {
+                label: '{% trans "Reorder Threshold" %}',
+                data: data.inventory_levels.threshold,
+                backgroundColor: '#f59e0b',
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: { beginAtZero: true }
+            }
+          }
+        });
+      }
+    })
+    .catch(err => console.error("Error loading ERP charts data:", err));
+});
+</script>
+{% endblock %}

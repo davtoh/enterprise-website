@@ -676,3 +676,66 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
     - `tests/test_language_management.py` → **12 passed in 1.74s**.
     - `tests/test_theme_management.py` → **17 passed in 2.70s**.
     - Full test suite `pytest` → **210 passed in 163.59s**, 0 failures.
+
+---
+
+## [Milestone 15] - ERP Module (Modular Starter)
+- **Date:** 2026-10-24
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - 15a: Product Catalog & Inventory:
+    - Created `erp` Django app with `Category`, `InventoryLocation`, `Product`, `StockMovement`, `StockMovementType` models.
+    - Automatic stock level recalculation on movements with atomic locking and transactions.
+    - Low-stock alerts Celery beat task (`erp.check_low_stock_alerts`) checking reorder thresholds with email dispatch.
+    - Comprehensive inventory dashboard (`/erp/inventory/`) with valuation KPIs, category selector, low-stock filter, and stock alert banners.
+  - 15b: Invoice Generation & Accounting:
+    - `Invoice`, `InvoiceItem`, `InvoiceStatus` models with dynamic subtotal, tax rate, discount, and total computation.
+    - ReportLab PDF generator (`erp/pdf.py`) creating clean, branded PDF invoices with line items and financial summaries.
+    - Invoice PDF view/download endpoint (`/erp/invoices/<id>/pdf/`).
+    - Invoice email delivery task (`erp.send_invoice_email`) attaching generated PDF and updating status from `DRAFT` to `SENT`.
+    - Financial KPI tracking: total revenue, outstanding receivables, collection status.
+  - 15c: ERP Dashboard & Modular Architecture:
+    - Central executive ERP dashboard (`/erp/`) with 5 KPI summary cards (Products, Stock Value, Revenue, Outstanding, Low Stock).
+    - Chart.js 4.4.4 interactive charts (Revenue Trend, Top Products by Valuation, Inventory Stock vs Reorder Thresholds).
+    - Modular architecture with future sub-module stubs in plugin registry:
+      - `erp_procurement`: Supplier management and purchase orders (`ERPProcurementPlugin`).
+      - `erp_warehouse`: Multi-location warehouse and bin management (`ERPWarehousePlugin`).
+      - `erp_accounting`: General ledger and chart of accounts (`ERPAccountingPlugin`).
+    - Dedicated architecture documentation UI (`/erp/modules/`) highlighting modular extension boundaries.
+  - Multi-language i18n support across all models, views, forms, and templates (`makemessages` & `compilemessages`).
+  - Automated test suite covering models, views, forms, PDF generation, email delivery, Celery tasks, and plugin registry.
+- **Files Created / Modified:**
+  - `requirements/base.txt` (added `reportlab>=5.0.0`)
+  - `enterprise_website/settings.py` (registered `erp.apps.ErpConfig`, configured `CELERY_BEAT_SCHEDULE` with hourly low-stock check)
+  - `enterprise_website/urls.py` (mounted `erp.urls` at `/erp/`)
+  - `templates/base.html` (added ERP link under Apps dropdown)
+  - `templates/themes/bootstrap5/partials/header.html` (added ERP dropdown item)
+  - `erp/__init__.py`, `erp/apps.py` (created ErpConfig)
+  - `erp/models.py` (created `Category`, `InventoryLocation`, `Product`, `StockMovement`, `StockMovementType`, `Invoice`, `InvoiceItem`, `InvoiceStatus`)
+  - `erp/pdf.py` (ReportLab PDF invoice generator engine)
+  - `erp/utils.py` (created `get_erp_dashboard_metrics` and `get_erp_chart_data`)
+  - `erp/tasks.py` (created `check_low_stock_alerts` and `send_invoice_email` tasks)
+  - `erp/forms.py` (created `ProductForm`, `CategoryForm`, `InventoryLocationForm`, `StockMovementForm`, `InvoiceForm`, `InvoiceItemFormSet`)
+  - `erp/views.py` (created `DashboardView`, `InventoryDashboardView`, Product CRUD, Movement views, Invoice CRUD, PDF download, email dispatch, `AnalyticsDataApiView`, `ModulesOverviewView`)
+  - `erp/urls.py` (created 19 routing endpoints)
+  - `erp/admin.py` (registered Category, Location, Product with stock status badges, Movement inline, and Invoice with InvoiceItem inline)
+  - `erp/plugin.py` (registered `ERPPlugin`, `ERPProcurementPlugin`, `ERPWarehousePlugin`, `ERPAccountingPlugin`)
+  - `erp/migrations/0001_initial.py` (database migration created and applied)
+  - `erp/templates/erp/base_erp.html` (ERP master sub-navigation and layout)
+  - `erp/templates/erp/dashboard.html` (KPI cards, Chart.js visualizations, recent activity, sub-modules showcase)
+  - `erp/templates/erp/inventory_dashboard.html` (inventory status grid, low-stock warning alert, category filters)
+  - `erp/templates/erp/product_list.html`, `product_detail.html`, `product_form.html` (product catalog management)
+  - `erp/templates/erp/movement_list.html`, `movement_form.html` (stock movement audit trail)
+  - `erp/templates/erp/invoice_list.html`, `invoice_detail.html`, `invoice_form.html` (invoice creation, PDF actions, email dispatch)
+  - `erp/templates/erp/confirm_delete.html` (generic confirmation modal)
+  - `erp/templates/erp/modules_overview.html` (architecture topology and sub-module technical specifications)
+  - `locale/*` (extracted and compiled translations across es, fr, it, ja, pt)
+  - `tests/test_erp.py` (20 comprehensive unit, task, integration, and UI endpoint tests)
+  - `milestone_plan.md`, `TODO_MODERNIZATION.md` (updated with Milestone 15 completion)
+- **Verification & Test Outcomes:**
+  - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
+  - `.\.venv\Scripts\python.exe manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean across all locales.
+  - `.\.venv\Scripts\python.exe manage.py sync_menus` → **Successfully synced plugins into menu 'main_navbar'**.
+  - `.\.venv\Scripts\python.exe -m pytest tests/test_erp.py --cov=erp` → **20 passed in 76.82s** with **91% statement coverage**.
+  - `.\.venv\Scripts\python.exe -m pytest` → **230 passed in 235.02s**, 0 failures across repository.
+

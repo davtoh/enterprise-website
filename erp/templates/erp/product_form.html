@@ -1,0 +1,105 @@
+{% extends "erp/base_erp.html" %}
+{% load i18n %}
+
+{% block erp_content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8">
+    <div class="card shadow-sm border-0 rounded-3">
+      <div class="card-header bg-transparent border-0 pt-4 px-4">
+        <h4 class="fw-bold mb-0">
+          {% if form.instance.pk %}
+          <i class="fa fa-pencil text-primary me-2"></i>{% trans "Edit Product" %}: {{ form.instance.name }}
+          {% else %}
+          <i class="fa fa-plus-circle text-primary me-2"></i>{% trans "Add New Product" %}
+          {% endif %}
+        </h4>
+        <small class="text-body-secondary">{% trans "Define catalog SKU, units, pricing, and initial stock limits" %}</small>
+      </div>
+
+      <div class="card-body px-4 pb-4">
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger">
+            {{ form.non_field_errors }}
+          </div>
+          {% endif %}
+
+          <div class="row g-3">
+            <div class="col-12 col-md-4">
+              <label class="form-label fw-semibold small">{{ form.sku.label }} *</label>
+              {{ form.sku }}
+              {% if form.sku.errors %}<div class="text-danger small mt-1">{{ form.sku.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-8">
+              <label class="form-label fw-semibold small">{{ form.name.label }} *</label>
+              {{ form.name }}
+              {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.category.label }}</label>
+              {{ form.category }}
+              {% if form.category.errors %}<div class="text-danger small mt-1">{{ form.category.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.unit.label }}</label>
+              {{ form.unit }}
+              {% if form.unit.errors %}<div class="text-danger small mt-1">{{ form.unit.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold small">{{ form.description.label }}</label>
+              {{ form.description }}
+              {% if form.description.errors %}<div class="text-danger small mt-1">{{ form.description.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.unit_price.label }} ($) *</label>
+              {{ form.unit_price }}
+              {% if form.unit_price.errors %}<div class="text-danger small mt-1">{{ form.unit_price.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.cost_price.label }} ($)</label>
+              {{ form.cost_price }}
+              {% if form.cost_price.errors %}<div class="text-danger small mt-1">{{ form.cost_price.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.current_stock.label }}</label>
+              {{ form.current_stock }}
+              {% if form.current_stock.errors %}<div class="text-danger small mt-1">{{ form.current_stock.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.reorder_threshold.label }}</label>
+              {{ form.reorder_threshold }}
+              {% if form.reorder_threshold.errors %}<div class="text-danger small mt-1">{{ form.reorder_threshold.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12">
+              <div class="form-check">
+                {{ form.is_active }}
+                <label class="form-check-label fw-semibold small" for="{{ form.is_active.id_for_label }}">
+                  {{ form.is_active.label }}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-end gap-2 mt-4 pt-3 border-top">
+            <a href="{% url 'erp:product_list' %}" class="btn btn-outline-secondary">{% trans "Cancel" %}</a>
+            <button type="submit" class="btn btn-primary px-4">
+              {% if form.instance.pk %}{% trans "Save Changes" %}{% else %}{% trans "Create Product" %}{% endif %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

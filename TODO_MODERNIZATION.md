@@ -219,5 +219,34 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
   - [x] Created `tests/test_crm.py` with 23 comprehensive tests (85% statement coverage on `crm` app).
   - [x] Total suite: **209 passed in 182.42s**, 0 failures across repository.
 
+---
+
+## 8. Milestone 15 — ERP Module (Modular Starter)
+- [x] **15a — Product Catalog & Inventory Management:**
+  - [x] Created `erp` Django app with `Product`, `Category`, `InventoryLocation`, `StockMovement`, and `StockMovementType` models.
+  - [x] Automatic on-hand stock recalculation on stock movement persistence (in/out/adjustment/return).
+  - [x] Dedicated inventory dashboard (`/erp/inventory/`) with valuation KPIs, category selector, low-stock filter, and stock alert banners.
+  - [x] Background Celery beat task (`erp.check_low_stock_alerts`) checking reorder thresholds with email alerting.
+  - [x] Product catalog CRUD (`/erp/products/`) with search, filter, and pagination.
+- [x] **15b — Invoice Generation & Financial Operations:**
+  - [x] `Invoice`, `InvoiceItem`, and `InvoiceStatus` models with subtotal, tax rate, discount, and total computation.
+  - [x] ReportLab PDF engine (`erp/pdf.py`) generating professional branded invoices with line item tables and financial summaries.
+  - [x] Invoice PDF download/preview endpoint (`/erp/invoices/<id>/pdf/`).
+  - [x] Invoice email delivery task (`erp.send_invoice_email`) attaching generated PDF and updating status from `DRAFT` to `SENT`.
+  - [x] Commercial invoice management (`/erp/invoices/`) with inline line item formsets and status transitions.
+- [x] **15c — Executive ERP Dashboard & Modular Architecture:**
+  - [x] Central ERP dashboard (`/erp/`) featuring 5 KPI summary cards (Products, Stock Value, Revenue, Outstanding, Low Stock).
+  - [x] Interactive Chart.js charts: 6-month revenue trend, top products by valuation, inventory stock vs reorder thresholds.
+  - [x] Sub-module pluggable extension stubs registered in `plugin_registry`:
+    - `erp_procurement`: Supplier management and purchase orders.
+    - `erp_warehouse`: Multi-location warehouse and bin topology.
+    - `erp_accounting`: General ledger and chart of accounts.
+  - [x] Architecture overview page (`/erp/modules/`) documenting plugin interfaces and technical specifications.
+- [x] **Verification & Quality:**
+  - [x] `manage.py check` → **0 issues identified**.
+  - [x] `manage.py makemessages` & `compilemessages` clean across all 5 supported locales (es, fr, it, ja, pt).
+  - [x] Created `tests/test_erp.py` with 20 comprehensive unit, task, view, PDF, and plugin tests (91% statement coverage on `erp`).
+  - [x] Full test suite: **230 passed in 235.02s**, 0 failures across repository.
+
 
 

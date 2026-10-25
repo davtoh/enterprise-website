@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'theme_management.apps.ThemeManagementConfig',
     'video_gallery.apps.VideoGalleryConfig',
     'crm.apps.CrmConfig',
+    'erp.apps.ErpConfig',
 ]
 
 # during the request phase, where middleware is applied first-to-last
@@ -362,6 +363,18 @@ CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60  # 30 minutes
 CELERY_TASK_ALWAYS_EAGER = os.getenv("CELERY_TASK_ALWAYS_EAGER", "False").lower() in ("true", "1", "t")
 CELERY_TASK_EAGER_PROPAGATES = True
+
+# Periodic Celery Beat Scheduled Tasks
+CELERY_BEAT_SCHEDULE = {
+    'crm_process_email_sequences': {
+        'task': 'crm.process_email_sequences',
+        'schedule': 300.0,  # every 5 minutes
+    },
+    'erp_check_low_stock_alerts': {
+        'task': 'erp.check_low_stock_alerts',
+        'schedule': 3600.0,  # every hour
+    },
+}
 
 # Security & Production Hardening
 # https://docs.djangoproject.com/en/5.0/topics/security/

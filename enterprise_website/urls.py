@@ -38,6 +38,7 @@ urlpatterns = [
     path('media/', include('video_gallery.urls')),
     path('videos/', RedirectView.as_view(url='/media/', permanent=False)),
     path('crm/', include('crm.urls')),
+    path('erp/', include('erp.urls')),
 
     #path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),

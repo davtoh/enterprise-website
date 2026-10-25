@@ -1,0 +1,107 @@
+{% extends "erp/base_erp.html" %}
+{% load i18n humanize %}
+
+{% block erp_content %}
+<div class="card shadow-sm border-0 rounded-3 mb-4">
+  <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+    <div>
+      <h5 class="fw-bold mb-0">{% trans "Product Catalog" %}</h5>
+      <small class="text-body-secondary">{% trans "Manage product specifications, pricing tiers, and stock definitions" %}</small>
+    </div>
+    <div class="d-flex align-items-center gap-2">
+      <form method="get" class="d-flex align-items-center gap-2">
+        <input type="text" name="q" class="form-control form-control-sm" placeholder="{% trans 'Search products...' %}" value="{{ search_query }}">
+        <button type="submit" class="btn btn-sm btn-outline-secondary"><i class="fa fa-search"></i></button>
+      </form>
+      <a href="{% url 'erp:product_create' %}" class="btn btn-sm btn-primary text-nowrap">
+        <i class="fa fa-plus me-1"></i>{% trans "Add Product" %}
+      </a>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light small">
+          <tr>
+            <th class="ps-4">{% trans "SKU" %}</th>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Category" %}</th>
+            <th>{% trans "Selling Price" %}</th>
+            <th>{% trans "Cost Price" %}</th>
+            <th>{% trans "On-Hand Stock" %}</th>
+            <th>{% trans "Status" %}</th>
+            <th class="pe-4 text-end">{% trans "Actions" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr>
+            <td class="ps-4 fw-semibold text-secondary">{{ product.sku }}</td>
+            <td>
+              <a href="{% url 'erp:product_detail' product.pk %}" class="fw-bold text-decoration-none text-body">
+                {{ product.name }}
+              </a>
+              {% if product.description %}
+              <div class="small text-body-secondary text-truncate" style="max-width: 250px;">{{ product.description }}</div>
+              {% endif %}
+            </td>
+            <td>
+              <span class="badge bg-body-secondary text-body">{{ product.category.name|default:"-" }}</span>
+            </td>
+            <td class="fw-bold">${{ product.unit_price|floatformat:2 }}</td>
+            <td class="text-body-secondary">${{ product.cost_price|floatformat:2 }}</td>
+            <td>
+              {% if product.current_stock <= 0 %}
+              <span class="badge bg-danger">{% trans "Out of Stock" %} (0)</span>
+              {% elif product.is_low_stock %}
+              <span class="badge bg-warning text-dark">{{ product.current_stock }} {{ product.unit }}</span>
+              {% else %}
+              <span class="badge bg-success">{{ product.current_stock }} {{ product.unit }}</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if product.is_active %}
+              <span class="badge bg-success-subtle text-success border border-success-subtle">{% trans "Active" %}</span>
+              {% else %}
+              <span class="badge bg-secondary-subtle text-secondary border border-secondary-subtle">{% trans "Inactive" %}</span>
+              {% endif %}
+            </td>
+            <td class="pe-4 text-end">
+              <div class="btn-group btn-group-sm">
+                <a href="{% url 'erp:product_detail' product.pk %}" class="btn btn-outline-secondary" title="{% trans 'View' %}"><i class="fa fa-eye"></i></a>
+                <a href="{% url 'erp:product_update' product.pk %}" class="btn btn-outline-secondary" title="{% trans 'Edit' %}"><i class="fa fa-pencil"></i></a>
+                <a href="{% url 'erp:product_delete' product.pk %}" class="btn btn-outline-danger" title="{% trans 'Delete' %}"><i class="fa fa-trash"></i></a>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="8" class="text-center py-5 text-body-secondary">
+              <i class="fa fa-folder-open-o fa-3x mb-2 text-secondary d-block"></i>
+              {% trans "No products found in the catalog." %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {% if is_paginated %}
+  <div class="card-footer bg-transparent border-0 py-3">
+    <nav>
+      <ul class="pagination pagination-sm justify-content-center mb-0">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">&laquo;</a></li>
+        {% endif %}
+        <li class="page-item disabled"><span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
+        {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}">&raquo;</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

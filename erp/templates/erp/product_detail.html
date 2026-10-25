@@ -1,0 +1,172 @@
+{% extends "erp/base_erp.html" %}
+{% load i18n humanize %}
+
+{% block erp_content %}
+<div class="row g-4 mb-4">
+  <!-- Product Overview Card -->
+  <div class="col-12 col-lg-8">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex align-items-center justify-content-between">
+        <div>
+          <span class="badge bg-body-secondary text-body mb-1">{{ product.sku }}</span>
+          <h4 class="fw-bold mb-0">{{ product.name }}</h4>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <a href="{% url 'erp:movement_create' %}?product={{ product.pk }}" class="btn btn-sm btn-outline-primary">
+            <i class="fa fa-exchange me-1"></i>{% trans "Move Stock" %}
+          </a>
+          <a href="{% url 'erp:product_update' product.pk %}" class="btn btn-sm btn-outline-secondary">
+            <i class="fa fa-pencil me-1"></i>{% trans "Edit" %}
+          </a>
+          <a href="{% url 'erp:product_delete' product.pk %}" class="btn btn-sm btn-outline-danger">
+            <i class="fa fa-trash"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="card-body px-4">
+        {% if product.description %}
+        <p class="text-body-secondary mb-4">{{ product.description }}</p>
+        {% endif %}
+
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-sm-3">
+            <small class="text-body-secondary d-block">{% trans "Category" %}</small>
+            <span class="fw-semibold">{{ product.category.name|default:"-" }}</span>
+          </div>
+          <div class="col-6 col-sm-3">
+            <small class="text-body-secondary d-block">{% trans "Unit of Measure" %}</small>
+            <span class="fw-semibold">{{ product.unit }}</span>
+          </div>
+          <div class="col-6 col-sm-3">
+            <small class="text-body-secondary d-block">{% trans "Unit Price" %}</small>
+            <span class="fw-bold text-success">${{ product.unit_price|floatformat:2 }}</span>
+          </div>
+          <div class="col-6 col-sm-3">
+            <small class="text-body-secondary d-block">{% trans "Cost Price" %}</small>
+            <span class="fw-semibold text-body-secondary">${{ product.cost_price|floatformat:2 }}</span>
+          </div>
+        </div>
+
+        <hr class="text-body-secondary opacity-25">
+
+        <!-- Stock Health Indicators -->
+        <h6 class="fw-bold mb-3">{% trans "Stock Status & Health" %}</h6>
+        <div class="row g-3">
+          <div class="col-12 col-sm-4">
+            <div class="p-3 rounded-3 bg-body-tertiary border">
+              <small class="text-body-secondary d-block mb-1">{% trans "Current On-Hand" %}</small>
+              <h4 class="fw-bold mb-0">
+                {% if product.current_stock <= 0 %}
+                <span class="text-danger">{{ product.current_stock }} {{ product.unit }}</span>
+                {% elif product.is_low_stock %}
+                <span class="text-warning">{{ product.current_stock }} {{ product.unit }}</span>
+                {% else %}
+                <span class="text-success">{{ product.current_stock }} {{ product.unit }}</span>
+                {% endif %}
+              </h4>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4">
+            <div class="p-3 rounded-3 bg-body-tertiary border">
+              <small class="text-body-secondary d-block mb-1">{% trans "Reorder Threshold" %}</small>
+              <h4 class="fw-bold mb-0">{{ product.reorder_threshold }} {{ product.unit }}</h4>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4">
+            <div class="p-3 rounded-3 bg-body-tertiary border">
+              <small class="text-body-secondary d-block mb-1">{% trans "Stock Valuation" %}</small>
+              <h4 class="fw-bold mb-0 text-primary">${{ product.stock_value|floatformat:2|intcomma }}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Info / Margin Card -->
+  <div class="col-12 col-lg-4">
+    <div class="card shadow-sm border-0 rounded-3 h-100">
+      <div class="card-header bg-transparent border-0 pt-3 px-4">
+        <h5 class="fw-bold mb-0">{% trans "Financial Metrics" %}</h5>
+      </div>
+      <div class="card-body px-4">
+        <ul class="list-group list-group-flush small">
+          <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+            <span class="text-body-secondary">{% trans "Unit Margin" %}</span>
+            <span class="fw-bold text-success">${{ product.margin|floatformat:2 }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+            <span class="text-body-secondary">{% trans "Total Inventory Cost" %}</span>
+            <span class="fw-semibold">${{ product.cost_value|floatformat:2|intcomma }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+            <span class="text-body-secondary">{% trans "Catalog Created" %}</span>
+            <span>{{ product.created_at|date:"M d, Y" }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+            <span class="text-body-secondary">{% trans "Last Updated" %}</span>
+            <span>{{ product.updated_at|date:"M d, Y H:i" }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Movement Log -->
+<div class="card shadow-sm border-0 rounded-3 mb-4">
+  <div class="card-header bg-transparent border-0 pt-3 px-4 d-flex align-items-center justify-content-between">
+    <h5 class="fw-bold mb-0">
+      <i class="fa fa-history text-secondary me-2"></i>{% trans "Stock Movement History" %}
+    </h5>
+    <a href="{% url 'erp:movement_create' %}?product={{ product.pk }}" class="btn btn-sm btn-outline-primary">
+      <i class="fa fa-plus me-1"></i>{% trans "Add Movement" %}
+    </a>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light small">
+          <tr>
+            <th class="ps-4">{% trans "Date" %}</th>
+            <th>{% trans "Type" %}</th>
+            <th>{% trans "Quantity" %}</th>
+            <th>{% trans "Location" %}</th>
+            <th>{% trans "Reference" %}</th>
+            <th class="pe-4 text-end">{% trans "Recorded By" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for m in movements %}
+          <tr>
+            <td class="ps-4 text-body-secondary small">{{ m.created_at|date:"Y-m-d H:i" }}</td>
+            <td>
+              {% if m.movement_type == 'IN' %}
+              <span class="badge bg-success-subtle text-success">{% trans "Stock In" %}</span>
+              {% elif m.movement_type == 'OUT' %}
+              <span class="badge bg-danger-subtle text-danger">{% trans "Stock Out" %}</span>
+              {% elif m.movement_type == 'RETURN' %}
+              <span class="badge bg-info-subtle text-info">{% trans "Return" %}</span>
+              {% else %}
+              <span class="badge bg-warning-subtle text-warning">{% trans "Adjustment" %}</span>
+              {% endif %}
+            </td>
+            <td class="fw-bold">{{ m.quantity }}</td>
+            <td>{{ m.location.name|default:"-" }}</td>
+            <td><small class="text-body-secondary">{{ m.reference|default:"-" }}</small></td>
+            <td class="pe-4 text-end small text-body-secondary">{{ m.created_by.username|default:"System" }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="text-center py-4 text-body-secondary">
+              {% trans "No stock movements recorded for this product yet." %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

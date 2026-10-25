@@ -1,0 +1,72 @@
+{% extends "erp/base_erp.html" %}
+{% load i18n %}
+
+{% block erp_content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-7">
+    <div class="card shadow-sm border-0 rounded-3">
+      <div class="card-header bg-transparent border-0 pt-4 px-4">
+        <h4 class="fw-bold mb-0">
+          <i class="fa fa-exchange text-primary me-2"></i>{% trans "Record Stock Movement" %}
+        </h4>
+        <small class="text-body-secondary">{% trans "Log incoming inventory, sales dispatches, customer returns, or physical counts" %}</small>
+      </div>
+
+      <div class="card-body px-4 pb-4">
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger">
+            {{ form.non_field_errors }}
+          </div>
+          {% endif %}
+
+          <div class="row g-3">
+            <div class="col-12">
+              <label class="form-label fw-semibold small">{{ form.product.label }} *</label>
+              {{ form.product }}
+              {% if form.product.errors %}<div class="text-danger small mt-1">{{ form.product.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.movement_type.label }} *</label>
+              {{ form.movement_type }}
+              {% if form.movement_type.errors %}<div class="text-danger small mt-1">{{ form.movement_type.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.quantity.label }} *</label>
+              {{ form.quantity }}
+              {% if form.quantity.errors %}<div class="text-danger small mt-1">{{ form.quantity.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.location.label }}</label>
+              {{ form.location }}
+              {% if form.location.errors %}<div class="text-danger small mt-1">{{ form.location.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.reference.label }}</label>
+              {{ form.reference }}
+              {% if form.reference.errors %}<div class="text-danger small mt-1">{{ form.reference.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold small">{{ form.notes.label }}</label>
+              {{ form.notes }}
+              {% if form.notes.errors %}<div class="text-danger small mt-1">{{ form.notes.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-end gap-2 mt-4 pt-3 border-top">
+            <a href="{% url 'erp:movement_list' %}" class="btn btn-outline-secondary">{% trans "Cancel" %}</a>
+            <button type="submit" class="btn btn-primary px-4">{% trans "Confirm Movement" %}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

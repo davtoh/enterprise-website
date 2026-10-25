@@ -1,0 +1,143 @@
+{% extends "erp/base_erp.html" %}
+{% load i18n %}
+
+{% block erp_content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-xl-10">
+    <div class="card shadow-sm border-0 rounded-3">
+      <div class="card-header bg-transparent border-0 pt-4 px-4">
+        <h4 class="fw-bold mb-0">
+          {% if invoice %}
+          <i class="fa fa-pencil text-primary me-2"></i>{% trans "Edit Invoice" %}: {{ invoice.invoice_number }}
+          {% else %}
+          <i class="fa fa-file-text-o text-primary me-2"></i>{% trans "Create New Invoice" %}
+          {% endif %}
+        </h4>
+        <small class="text-body-secondary">{% trans "Specify customer billing details and itemized products or services" %}</small>
+      </div>
+
+      <div class="card-body px-4 pb-4">
+        <form method="post" novalidate>
+          {% csrf_token %}
+
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
+
+          <h5 class="fw-bold mb-3 border-bottom pb-2">{% trans "Customer & Billing Info" %}</h5>
+          <div class="row g-3 mb-4">
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.customer_name.label }} *</label>
+              {{ form.customer_name }}
+              {% if form.customer_name.errors %}<div class="text-danger small mt-1">{{ form.customer_name.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.customer_email.label }} *</label>
+              {{ form.customer_email }}
+              {% if form.customer_email.errors %}<div class="text-danger small mt-1">{{ form.customer_email.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold small">{{ form.customer_address.label }}</label>
+              {{ form.customer_address }}
+              {% if form.customer_address.errors %}<div class="text-danger small mt-1">{{ form.customer_address.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label class="form-label fw-semibold small">{{ form.issue_date.label }} *</label>
+              {{ form.issue_date }}
+              {% if form.issue_date.errors %}<div class="text-danger small mt-1">{{ form.issue_date.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label class="form-label fw-semibold small">{{ form.due_date.label }}</label>
+              {{ form.due_date }}
+              {% if form.due_date.errors %}<div class="text-danger small mt-1">{{ form.due_date.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label class="form-label fw-semibold small">{{ form.status.label }}</label>
+              {{ form.status }}
+              {% if form.status.errors %}<div class="text-danger small mt-1">{{ form.status.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <!-- Line Items Formset -->
+          <h5 class="fw-bold mb-3 border-bottom pb-2">{% trans "Line Items" %}</h5>
+          {{ formset.management_form }}
+          <div class="table-responsive mb-4">
+            <table class="table table-bordered align-middle">
+              <thead class="table-light small">
+                <tr>
+                  <th style="width: 25%;">{% trans "Product (Optional)" %}</th>
+                  <th style="width: 35%;">{% trans "Description" %} *</th>
+                  <th style="width: 15%;">{% trans "Quantity" %} *</th>
+                  <th style="width: 15%;">{% trans "Unit Price ($)" %} *</th>
+                  <th class="text-center" style="width: 10%;">{% trans "Delete?" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item_form in formset %}
+                <tr>
+                  <td>
+                    {{ item_form.id }}
+                    {{ item_form.product }}
+                    {% if item_form.product.errors %}<div class="text-danger small">{{ item_form.product.errors }}</div>{% endif %}
+                  </td>
+                  <td>
+                    {{ item_form.description }}
+                    {% if item_form.description.errors %}<div class="text-danger small">{{ item_form.description.errors }}</div>{% endif %}
+                  </td>
+                  <td>
+                    {{ item_form.quantity }}
+                    {% if item_form.quantity.errors %}<div class="text-danger small">{{ item_form.quantity.errors }}</div>{% endif %}
+                  </td>
+                  <td>
+                    {{ item_form.unit_price }}
+                    {% if item_form.unit_price.errors %}<div class="text-danger small">{{ item_form.unit_price.errors }}</div>{% endif %}
+                  </td>
+                  <td class="text-center">
+                    {% if formset.can_delete %}
+                    {{ item_form.DELETE }}
+                    {% endif %}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <h5 class="fw-bold mb-3 border-bottom pb-2">{% trans "Taxes, Discounts & Terms" %}</h5>
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.tax_rate.label }} (%)</label>
+              {{ form.tax_rate }}
+              {% if form.tax_rate.errors %}<div class="text-danger small mt-1">{{ form.tax_rate.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label class="form-label fw-semibold small">{{ form.discount_amount.label }} ($)</label>
+              {{ form.discount_amount }}
+              {% if form.discount_amount.errors %}<div class="text-danger small mt-1">{{ form.discount_amount.errors }}</div>{% endif %}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-semibold small">{{ form.notes.label }}</label>
+              {{ form.notes }}
+              {% if form.notes.errors %}<div class="text-danger small mt-1">{{ form.notes.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-end gap-2 mt-4 pt-3 border-top">
+            <a href="{% url 'erp:invoice_list' %}" class="btn btn-outline-secondary">{% trans "Cancel" %}</a>
+            <button type="submit" class="btn btn-primary px-4">
+              {% if invoice %}{% trans "Save Invoice" %}{% else %}{% trans "Generate Invoice" %}{% endif %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
