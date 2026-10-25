@@ -635,3 +635,44 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `.\.venv\Scripts\python.exe manage.py sync_menus` → **Successfully synced plugins into menu 'main_navbar'**.
   - `.\.venv\Scripts\python.exe -m pytest tests/test_crm.py --cov=crm` → **23 passed in 150.17s** with **85% statement coverage**.
   - `.\.venv\Scripts\python.exe -m pytest` → **209 passed in 182.42s**, 0 failures across entire repository.
+
+---
+
+## [Hotfix / Maintenance] - Internationalization Catalog & Theme Banner Bugfix
+- **Date:** 2026-10-24
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Investigate and resolve bug where Spanish translations were not appearing on the live home page (specifically hero heading `"Improved <br>\n Production level <br>\n with Robotics"`).
+  - Uncover and fix underlying root causes across GNU gettext compilation, `auto_translate` command, `.po` catalogs, and theme templates.
+  - Fix 77 Spanish and 20 Portuguese translations stuck in uncompiled limbo due to `#, fuzzy` discard flags.
+  - Replace bad `msgmerge` heuristic fuzzy guesses with accurate Spanish/Portuguese terms (`Companies` → `Empresas`, `The Upper Eye` → `El Ojo Superior`, `Enterprise CRM` → `CRM Empresarial`, `Enterprise Security` → `Seguridad Empresarial`, etc.).
+  - Fix double line-break caused by stray `<br>` tag in the Spanish hero translation.
+  - Fix `auto_translate` command:
+    - Added `--unfuzzy-all` to strip fuzzy flags from non-empty translations and recompile catalogs.
+    - Added `--include-fuzzy` so existing fuzzy strings are re-evaluated rather than silently bypassed.
+    - Set non-fuzzy output as default so newly translated strings are compiled into `.mo` catalogs.
+    - Added `fuzzy=True` forwarding to `compilemessages` when `--mark-fuzzy` is explicitly requested.
+  - Eliminate disk mutation in `tests/test_language_management.py` by mocking `polib.POFile.save`.
+  - Fix theme base templates (`minimal` and `tailwind`) so `{% block banner %}` exposes the sub-blocks (`banner.content`, etc.) to prevent hero banner from disappearing when switching CSS frameworks.
+  - Add language selector to `templates/themes/minimal/partials/header.html`.
+  - Recompile all binary catalogs with `manage.py compilemessages --ignore=.venv`.
+- **Files Modified:**
+  - `language_management/management/commands/auto_translate.py` (enhanced with `--unfuzzy-all`, `--include-fuzzy`, `--mark-fuzzy`, and compiler kwargs)
+  - `tests/test_language_management.py` (prevented disk mutation with `mock_save` and added test for `--unfuzzy-all`)
+  - `locale/es/LC_MESSAGES/django.po` (corrected 77 fuzzy entries, fixed hero `<br>` line break)
+  - `locale/es/LC_MESSAGES/django.mo` (recompiled catalog: translated entries expanded from 41 to 118)
+  - `locale/pt/LC_MESSAGES/django.po` (corrected 20 fuzzy entries)
+  - `locale/pt/LC_MESSAGES/django.mo` (recompiled catalog)
+  - `templates/themes/minimal/base.html` (added banner sub-blocks hierarchy)
+  - `templates/themes/tailwind/base.html` (added banner sub-blocks hierarchy)
+  - `templates/themes/minimal/partials/header.html` (added Alpine.js language selector)
+- **Verification & Test Outcomes:**
+  - Live HTTP verification across `/`, `/about/`, `/contact/`:
+    - Hero heading renders `"Nivel de producción <br> mejorado <br> con robótica"`.
+    - Explore CTA renders `"Explorar servicios"`.
+    - About & Contact pages render clean Spanish text without `fuzzy` omissions.
+  - Multi-theme check across `bootstrap5`, `minimal`, and `tailwind`: all render Spanish hero banner successfully (HTTP 200).
+  - Automated test suites:
+    - `tests/test_language_management.py` → **12 passed in 1.74s**.
+    - `tests/test_theme_management.py` → **17 passed in 2.70s**.
+    - Full test suite `pytest` → **210 passed in 163.59s**, 0 failures.
