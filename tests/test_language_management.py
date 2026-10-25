@@ -51,15 +51,25 @@ class TestLanguageManagement:
         call_command("auto_translate", lang="invalid_code", stdout=out, stderr=err)
         assert "is not in settings.LANGUAGES" in err.getvalue()
 
+    @patch("polib.POFile.save")
     @patch.object(AutoTranslateCommand, "_translate_mymemory")
-    def test_auto_translate_with_mocked_backend(self, mock_translate):
+    def test_auto_translate_with_mocked_backend(self, mock_translate, mock_save):
         mock_translate.return_value = "Texto traducido de prueba"
         out = io.StringIO()
-        # Run with max=1 and no-compile to test the pipeline safely
+        # Run with max=1 and no-compile to test the pipeline safely without mutating disk
         call_command("auto_translate", lang="es", max=1, no_compile=True, stdout=out)
         output = out.getvalue()
         assert "Starting Auto-Translation Baseline Engine" in output
         assert "Processing [es]" in output
+        assert mock_save.called
+
+    @patch("polib.POFile.save")
+    def test_auto_translate_unfuzzy_all(self, mock_save):
+        out = io.StringIO()
+        call_command("auto_translate", lang="es", unfuzzy_all=True, no_compile=True, stdout=out)
+        output = out.getvalue()
+        assert "Stripping fuzzy flags from non-empty translated entries" in output
+        assert "Unfuzzied" in output
 
     def test_auto_translate_deepl_without_key(self):
         cmd = AutoTranslateCommand()

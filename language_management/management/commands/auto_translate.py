@@ -31,9 +31,26 @@ class Command(BaseCommand):
             help="Translation backend to use. Defaults to 'mymemory' (free tier, no API key required).",
         )
         parser.add_argument(
+            "--mark-fuzzy",
+            action="store_true",
+            default=False,
+            help="Mark auto-translated entries as fuzzy for manual Rosetta review (disabled by default so translations compile cleanly into .mo).",
+        )
+        parser.add_argument(
             "--no-fuzzy",
             action="store_true",
-            help="Do not mark auto-translated entries as fuzzy (by default they are marked fuzzy so translators can review in Rosetta).",
+            help="Ensure auto-translated entries are not marked fuzzy (default).",
+        )
+        parser.add_argument(
+            "--unfuzzy-all",
+            action="store_true",
+            help="Strip the fuzzy flag from all non-empty translated entries across catalogs and recompile .mo.",
+        )
+        parser.add_argument(
+            "--include-fuzzy",
+            action="store_true",
+            default=True,
+            help="Include existing fuzzy entries when translating so they do not get trapped in uncompiled limbo (default: True).",
         )
         parser.add_argument(
             "--skip-mismatched-fuzzy",
@@ -61,7 +78,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         target_lang = options.get("lang")
         backend = options.get("backend")
-        mark_fuzzy = not options.get("no_fuzzy")
+        mark_fuzzy = options.get("mark_fuzzy", False)
+        if options.get("no_fuzzy"):
+            mark_fuzzy = False
+        unfuzzy_all = options.get("unfuzzy_all", False)
+        include_fuzzy = options.get("include_fuzzy", True)
         skip_mismatched = options.get("skip_mismatched_fuzzy")
         auto_compile = not options.get("no_compile")
         max_entries = options.get("max")
@@ -88,6 +109,31 @@ class Command(BaseCommand):
         else:
             languages_to_process = available_languages
 
+        if unfuzzy_all:
+            self.stdout.write(self.style.MIGRATE_HEADING("Stripping fuzzy flags from non-empty translated entries..."))
+            total_unfuzzied = 0
+            for lang_code in languages_to_process:
+                po_file = locale_dir / lang_code / "LC_MESSAGES" / "django.po"
+                if not po_file.exists():
+                    continue
+                po = polib.pofile(str(po_file))
+                unfuzzied = 0
+                for entry in po:
+                    if "fuzzy" in entry.flags and entry.msgstr.strip():
+                        entry.flags.remove("fuzzy")
+                        if getattr(entry, "previous_msgid", None):
+                            entry.previous_msgid = None
+                        unfuzzied += 1
+                if unfuzzied > 0:
+                    po.save(str(po_file))
+                self.stdout.write(self.style.SUCCESS(f"Unfuzzied {unfuzzied} entries in [{lang_code}]."))
+                total_unfuzzied += unfuzzied
+            if auto_compile:
+                self.stdout.write(self.style.MIGRATE_HEADING("\nCompiling message catalogs (.mo)..."))
+                call_command("compilemessages", ignore=[".venv"])
+                self.stdout.write(self.style.SUCCESS(f"All message catalogs compiled successfully ({total_unfuzzied} entries unfuzzied)."))
+            return
+
         self.stdout.write(
             self.style.MIGRATE_HEADING(
                 f"Starting Auto-Translation Baseline Engine [Backend: {backend}]"
@@ -108,7 +154,7 @@ class Command(BaseCommand):
 
             po = polib.pofile(str(po_file))
             
-            # Find untranslated entries AND entries with mismatched previous_msgid
+            # Find untranslated entries, existing fuzzy entries, and mismatched previous_msgid
             entries_to_translate = []
             for entry in po:
                 if entry.obsolete:
@@ -116,6 +162,8 @@ class Command(BaseCommand):
                 if not entry.msgstr:
                     entries_to_translate.append(entry)
                 elif not skip_mismatched and getattr(entry, "previous_msgid", None):
+                    entries_to_translate.append(entry)
+                elif include_fuzzy and "fuzzy" in entry.flags:
                     entries_to_translate.append(entry)
 
             self.stdout.write(
@@ -180,7 +228,10 @@ class Command(BaseCommand):
         if auto_compile:
             self.stdout.write(self.style.MIGRATE_HEADING("\nCompiling message catalogs (.mo)..."))
             try:
-                call_command("compilemessages", ignore=[".venv"])
+                compile_kwargs = {"ignore": [".venv"]}
+                if mark_fuzzy:
+                    compile_kwargs["fuzzy"] = True
+                call_command("compilemessages", **compile_kwargs)
                 self.stdout.write(self.style.SUCCESS("All message catalogs compiled successfully."))
             except Exception as e:
                 self.stderr.write(self.style.ERROR(f"Error compiling messages: {e}"))
