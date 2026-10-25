@@ -35,6 +35,23 @@
 
     <main class="flex-grow {% block main.class %}site-main{% endblock %}">
         {% block banner %}
+        <!-- start banner Area -->
+        <section class="banner-area bg-gradient-to-r from-gray-900 to-indigo-900 text-white" id="home">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div {% block banner.attrs %} class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-8"{% endblock %}>
+                    <div {% block banner.content_attrs %} class="banner-content"{% endblock %}>
+                        {% block banner.content %}
+                        {% endblock %}
+                    </div>
+
+                    <div {% block banner.image_attrs %} class="banner-img"{% endblock %}>
+                        {% block banner.image %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End banner Area -->
         {% endblock %}
 
         {% block messaging %}
