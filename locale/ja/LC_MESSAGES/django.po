@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 20:24-0500\n"
+"POT-Creation-Date: 2026-10-26 17:27-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,8 +37,10 @@ msgstr ""
 #: .\crm\templates\crm\sequence_list.html:33 .\erp\admin.py:120
 #: .\erp\models.py:217 .\erp\templates\erp\dashboard.html:207
 #: .\erp\templates\erp\invoice_list.html:38
-#: .\erp\templates\erp\product_list.html:33 .\task_runner\admin.py:74
-#: .\task_runner\models.py:49
+#: .\erp\templates\erp\product_list.html:33
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:84
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:124
+#: .\task_runner\admin.py:74 .\task_runner\models.py:49
 #: .\task_runner\templates\task_runner\job_list.html:121
 #: .\user_management\templates\user_management\siteuser_list.html:36
 msgid "Status"
@@ -526,7 +528,9 @@ msgstr ""
 msgid "Opened At"
 msgstr ""
 
-#: .\crm\models.py:482 .\task_runner\models.py:65
+#: .\crm\models.py:482
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:76
+#: .\task_runner\models.py:65
 msgid "Error Message"
 msgstr ""
 
@@ -767,6 +771,7 @@ msgstr ""
 #: .\erp\templates\erp\invoice_form.html:133
 #: .\erp\templates\erp\movement_form.html:64
 #: .\erp\templates\erp\product_form.html:95
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:102
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:144
 #: .\task_runner\templates\task_runner\job_list.html:320
 #: .\user_management\templates\user_management\login.html:19
@@ -1126,6 +1131,8 @@ msgid "Activity Type"
 msgstr ""
 
 #: .\crm\templates\crm\lead_detail.html:185
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:26
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:173
 msgid "Details"
 msgstr ""
 
@@ -1176,6 +1183,7 @@ msgstr ""
 
 #: .\crm\templates\crm\lead_list.html:41
 #: .\erp\templates\erp\inventory_dashboard.html:107
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:97
 #: .\task_runner\templates\task_runner\job_list.html:101
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:56
 msgid "Filter"
@@ -1590,27 +1598,27 @@ msgstr ""
 msgid "Please provide a valid subject and message."
 msgstr ""
 
-#: .\enterprise_website\settings.py:224
+#: .\enterprise_website\settings.py:225
 msgid "English"
 msgstr ""
 
-#: .\enterprise_website\settings.py:225
+#: .\enterprise_website\settings.py:226
 msgid "Spanish"
 msgstr ""
 
-#: .\enterprise_website\settings.py:226
+#: .\enterprise_website\settings.py:227
 msgid "Portuguese"
 msgstr ""
 
-#: .\enterprise_website\settings.py:227
+#: .\enterprise_website\settings.py:228
 msgid "French"
 msgstr ""
 
-#: .\enterprise_website\settings.py:228
+#: .\enterprise_website\settings.py:229
 msgid "Italian"
 msgstr ""
 
-#: .\enterprise_website\settings.py:229
+#: .\enterprise_website\settings.py:230
 msgid "Japanese"
 msgstr ""
 
@@ -2359,6 +2367,7 @@ msgid ""
 msgstr ""
 
 #: .\erp\templates\erp\invoice_list.html:14
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:86
 #: .\task_runner\templates\task_runner\job_list.html:93
 msgid "All Statuses"
 msgstr ""
@@ -2512,6 +2521,7 @@ msgid "Catalog Created"
 msgstr ""
 
 #: .\erp\templates\erp\product_detail.html:108
+#: .\intelligent_tracker_hub\models.py:103
 msgid "Last Updated"
 msgstr ""
 
@@ -3150,6 +3160,541 @@ msgstr ""
 msgid "Please fill out all required fields."
 msgstr ""
 
+#: .\intelligent_tracker_hub\admin.py:25
+msgid "Event Information"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:38
+msgid "Evidence & Telemetry"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:48
+msgid "Resolution & Incident Handling"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:59
+msgid "Audit Timestamps"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:69
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:25
+msgid "Event ID"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:84
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:75
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:119
+msgid "Severity"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:93
+msgid "Snapshot"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:101
+msgid "No snapshot uploaded."
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:102
+msgid "Snapshot Preview"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:109
+msgid "Formatted Metadata"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:143
+msgid "HMAC Status"
+msgstr ""
+
+#: .\intelligent_tracker_hub\apps.py:8
+msgid "Intelligent Tracker Security Hub"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:10
+msgid "Intrusion Alert"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:11
+msgid "Restricted Entity Alert"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:12
+msgid "Occupancy Threshold Event"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:13
+msgid "Fall Detected Alert"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:14
+msgid "Loitering Alert"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:15
+msgid "Line Cross Alert"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:19
+msgid "Low"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:20
+msgid "Medium"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:21
+msgid "High"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:22
+msgid "Critical"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:35
+msgid "Event UUID"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:42
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:74
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:66
+msgid "Event Type"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:50
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:118
+msgid "Site / Facility"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:55
+msgid "Camera Identifier"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:60
+msgid "Event Timestamp"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:66
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:50
+msgid "Evidence Snapshot"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:71
+msgid "Telemetry & Dwell Metadata"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:78
+msgid "Severity Level"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:83
+msgid "Is Resolved"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:91
+msgid "Resolved By"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:96
+msgid "Resolved At"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:100
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:156
+msgid "Resolution Notes"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:102
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:132
+msgid "Ingested At"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:106
+msgid "Security Event"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:107
+msgid "Security Events"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:161
+msgid "Received At"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:162
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:21
+msgid "Client IP"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:163
+msgid "Endpoint"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:164
+msgid "HTTP Method"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:165
+msgid "X-Tracker-Signature Header"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:166
+msgid "Signature Valid"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:167
+msgid "Associated Event UUID"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:168
+msgid "Raw Request Body"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:169
+msgid "HTTP Status Code"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:170
+msgid "Error Details"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:171
+msgid "Processed Successfully"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:174
+msgid "Security Audit Log"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:175
+msgid "Security Audit Logs"
+msgstr ""
+
+#: .\intelligent_tracker_hub\plugin.py:12
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:4
+msgid "Edge AI Security Hub"
+msgstr ""
+
+#: .\intelligent_tracker_hub\plugin.py:14
+msgid ""
+"Spatial security command hub integrating real-time edge AI vision, intrusion "
+"webhooks, video evidence archiving, and access control."
+msgstr ""
+
+#: .\intelligent_tracker_hub\plugin.py:25 .\templates\base.html:125
+#: .\templates\themes\bootstrap5\partials\header.html:68
+msgid "Security Hub"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:8
+msgid "Edge AI Webhook Audit Trail"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:11
+msgid "Valid HMAC Only"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:12
+msgid "Failed HMAC Only"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:13
+msgid "All Logs"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:20
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:122
+msgid "Timestamp (UTC)"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:22
+msgid "Method & Endpoint"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:23
+msgid "HMAC Verdict"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:24
+msgid "Status Code"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:41
+msgid "HMAC Verified"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:45
+msgid "Invalid Signature"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:71
+msgid "Signature Header"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:81
+msgid "Payload Preview"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:91
+msgid "No audit logs recorded yet."
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:101
+msgid "Page"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:101
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:194
+msgid "of"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:15
+msgid "Edge AI Spatial Security Hub"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:17
+msgid "Integrated with"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:23
+msgid "Simulate Edge Alert"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:26
+msgid "Webhook Audit"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:29
+msgid "SOC Admin"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:38
+msgid "Operations Dashboard"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:43
+msgid "Webhook Audit Logs"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:48
+msgid "Telemetry API (JSON)"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:65
+msgid "Dispatch Test Edge Webhook"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:71
+msgid ""
+"Simulates an incoming edge alert from davtoh/intelligent-tracker with "
+"automated HMAC signing and audit trail recording."
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:76
+msgid "Intrusion Alert (High)"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:77
+msgid "Fall Detected Alert (Critical)"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:78
+msgid "Restricted Entity Alert (High)"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:79
+msgid "Occupancy Threshold Event (Medium)"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:80
+msgid "Loitering Alert (Medium)"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:84
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:92
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:122
+msgid "Camera ID"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:88
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:76
+msgid "Zone Name"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:92
+msgid "Location / Facility"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:94
+msgid "Default / Unassigned"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:104
+msgid "Trigger Simulated Event"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:14
+msgid "Total Events"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:27
+msgid "Unresolved"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:40
+msgid "Critical Alarms"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:53
+msgid "Active Cameras"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:68
+msgid "All Event Types"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:77
+msgid "All Severities"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:87
+msgid "Unresolved Only"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:88
+msgid "Resolved Only"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:99
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:97
+msgid "Reset Filters"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:111
+msgid "Spatial Security Events Log"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:113
+msgid "Events"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:120
+msgid "Event Type & Zone"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:121
+msgid "Location / Camera"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:123
+msgid "Evidence"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:125
+msgid "Action"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:145
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:119
+msgid "Default Site"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:157
+msgid "No Snapshot"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:163
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:21
+msgid "Resolved"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:167
+msgid "Active Alarm"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:181
+msgid "No security events recorded matching criteria."
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:182
+msgid ""
+"Edge AI vision alerts dispatched via Webhook will display in real time here."
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:194
+msgid "Showing"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:7
+msgid "Back to Events Dashboard"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:25
+msgid "Active Incident"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:59
+msgid "No evidence snapshot was attached to this edge webhook."
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:69
+msgid "Edge Telemetry & Bounding Box Data"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:82
+msgid "Dwell Duration"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:88
+msgid "Detection Confidence"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:94
+msgid "Entity Identifier"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:100
+msgid "Raw JSON Telemetry"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:112
+msgid "Facility & Camera"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:126
+msgid "City / State"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:143
+msgid "Incident Resolution & Audit"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:151
+msgid "Resolved by"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:163
+msgid "Operator Resolution Notes"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:164
+msgid "Enter investigative notes, verified identity, or action taken..."
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:167
+msgid "Acknowledge & Mark Resolved"
+msgstr ""
+
+#: .\intelligent_tracker_hub\views.py:109
+#, python-format
+msgid "Security event %s marked as resolved."
+msgstr ""
+
+#: .\intelligent_tracker_hub\views.py:180
+#, python-format
+msgid "Simulated security event %s created successfully."
+msgstr ""
+
 #: .\language_management\models.py:16
 msgid "User language"
 msgstr ""
@@ -3163,7 +3708,7 @@ msgid "This language code is too long."
 msgstr ""
 
 #: .\language_management\templates\language_management\form.html:37
-#: .\templates\themes\bootstrap5\partials\header.html:93
+#: .\templates\themes\bootstrap5\partials\header.html:94
 msgid "Language"
 msgstr ""
 
@@ -3226,20 +3771,69 @@ msgstr ""
 msgid "city name"
 msgstr ""
 
-#: .\location_management\models.py:38
+#: .\location_management\models.py:38 .\location_management\models.py:55
 msgid "latitude"
 msgstr ""
 
-#: .\location_management\models.py:39
+#: .\location_management\models.py:39 .\location_management\models.py:56
 msgid "longitude"
 msgstr ""
 
-#: .\location_management\models.py:43 .\user_management\models.py:55
+#: .\location_management\models.py:43 .\location_management\models.py:53
+#: .\user_management\models.py:55
 msgid "city"
 msgstr ""
 
 #: .\location_management\models.py:44
 msgid "cities"
+msgstr ""
+
+#: .\location_management\models.py:51
+msgid "location name"
+msgstr ""
+
+#: .\location_management\models.py:51
+msgid "Facility, campus, or site name (e.g. North HQ)"
+msgstr ""
+
+#: .\location_management\models.py:52
+msgid "location code"
+msgstr ""
+
+#: .\location_management\models.py:52
+msgid "Unique site identifier (e.g. SITE-NORTH-01)"
+msgstr ""
+
+#: .\location_management\models.py:53
+msgid "City location"
+msgstr ""
+
+#: .\location_management\models.py:54
+msgid "address"
+msgstr ""
+
+#: .\location_management\models.py:54
+msgid "Street address"
+msgstr ""
+
+#: .\location_management\models.py:55
+msgid "Site latitude coordinate"
+msgstr ""
+
+#: .\location_management\models.py:56
+msgid "Site longitude coordinate"
+msgstr ""
+
+#: .\location_management\models.py:57
+msgid "is active"
+msgstr ""
+
+#: .\location_management\models.py:63
+msgid "location"
+msgstr ""
+
+#: .\location_management\models.py:64
+msgid "locations"
 msgstr ""
 
 #: .\menu_management\admin.py:23
@@ -3474,8 +4068,8 @@ msgstr ""
 msgid "Your vote for '%(choice)s' has been recorded!"
 msgstr ""
 
-#: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:127
-#: .\templates\themes\bootstrap5\partials\header.html:70
+#: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:128
+#: .\templates\themes\bootstrap5\partials\header.html:71
 msgid "REST API"
 msgstr ""
 
@@ -3654,7 +4248,7 @@ msgid "Background Task"
 msgstr ""
 
 #: .\task_runner\templates\task_runner\job_detail.html:13
-#: .\templates\themes\bootstrap5\partials\header.html:131
+#: .\templates\themes\bootstrap5\partials\header.html:132
 #: .\templates\themes\tailwind\partials\header.html:121
 msgid "Task Runner"
 msgstr ""
@@ -3876,8 +4470,8 @@ msgstr ""
 msgid "Todo List"
 msgstr ""
 
-#: .\templates\base.html:125
-#: .\templates\themes\bootstrap5\partials\header.html:68
+#: .\templates\base.html:126
+#: .\templates\themes\bootstrap5\partials\header.html:69
 #: .\video_gallery\plugin.py:7 .\video_gallery\plugin.py:14
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:6
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:22
@@ -3885,42 +4479,42 @@ msgstr ""
 msgid "Media Gallery"
 msgstr ""
 
-#: .\templates\base.html:126
-#: .\templates\themes\bootstrap5\partials\header.html:69
+#: .\templates\base.html:127
+#: .\templates\themes\bootstrap5\partials\header.html:70
 #: .\webprogram\plugin.py:7 .\webprogram\plugin.py:14
 msgid "Brython WebProgram"
 msgstr ""
 
-#: .\templates\base.html:128 .\templates\base.html:150
-#: .\templates\themes\bootstrap5\partials\header.html:73
-#: .\templates\themes\bootstrap5\partials\header.html:126
+#: .\templates\base.html:129 .\templates\base.html:151
+#: .\templates\themes\bootstrap5\partials\header.html:74
+#: .\templates\themes\bootstrap5\partials\header.html:127
 #: .\templates\themes\tailwind\partials\header.html:118
 msgid "Site Admin"
 msgstr ""
 
-#: .\templates\base.html:148
-#: .\templates\themes\bootstrap5\partials\header.html:120
+#: .\templates\base.html:149
+#: .\templates\themes\bootstrap5\partials\header.html:121
 #: .\templates\themes\minimal\partials\header.html:78
 #: .\templates\themes\tailwind\partials\header.html:114
 #: .\user_management\templates\user_management\profile.html:14
 msgid "Profile"
 msgstr ""
 
-#: .\templates\base.html:151
-#: .\templates\themes\bootstrap5\partials\header.html:71
+#: .\templates\base.html:152
+#: .\templates\themes\bootstrap5\partials\header.html:72
 msgid "Background Tasks"
 msgstr ""
 
-#: .\templates\base.html:157
-#: .\templates\themes\bootstrap5\partials\header.html:141
+#: .\templates\base.html:158
+#: .\templates\themes\bootstrap5\partials\header.html:142
 #: .\templates\themes\minimal\partials\header.html:87
 #: .\templates\themes\tailwind\partials\header.html:128
 msgid "Logout"
 msgstr ""
 
-#: .\templates\base.html:162 .\templates\registration\login.html:4
+#: .\templates\base.html:163 .\templates\registration\login.html:4
 #: .\templates\registration\login.html:40
-#: .\templates\themes\bootstrap5\partials\header.html:148
+#: .\templates\themes\bootstrap5\partials\header.html:149
 #: .\templates\themes\minimal\partials\header.html:93
 #: .\templates\themes\tailwind\partials\header.html:134
 #: .\user_management\templates\user_management\login.html:4
@@ -3928,8 +4522,8 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: .\templates\base.html:163
-#: .\templates\themes\bootstrap5\partials\header.html:151
+#: .\templates\base.html:164
+#: .\templates\themes\bootstrap5\partials\header.html:152
 #: .\templates\themes\minimal\partials\header.html:94
 #: .\templates\themes\tailwind\partials\header.html:135
 msgid "Signup"
@@ -4017,7 +4611,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: .\templates\themes\bootstrap5\partials\header.html:86
+#: .\templates\themes\bootstrap5\partials\header.html:87
 #: .\templates\themes\minimal\partials\header.html:53
 msgid "Switch Language"
 msgstr ""
@@ -4630,10 +5224,6 @@ msgstr ""
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:71
 msgid "All"
-msgstr ""
-
-#: .\video_gallery\templates\video_gallery\gallery_detail.html:97
-msgid "Reset Filters"
 msgstr ""
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:122

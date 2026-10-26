@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Edge AI Security Hub" %} | Enterprise Website{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <!-- Top Navigation & Header -->
+  <div class="d-flex flex-wrap justify-content-between align-items-center pb-3 mb-4 border-bottom gap-2">
+    <div class="d-flex align-items-center gap-3">
+      <div class="bg-primary text-white p-3 rounded-3 shadow-sm d-flex align-items-center justify-content-center">
+        <i class="fa fa-shield fa-2x"></i>
+      </div>
+      <div>
+        <h2 class="h4 mb-0 fw-bold">{% trans "Edge AI Spatial Security Hub" %}</h2>
+        <span class="text-muted small">
+          <i class="fa fa-microchip me-1"></i>{% trans "Integrated with" %} <code>davtoh/intelligent-tracker</code>
+        </span>
+      </div>
+    </div>
+    <div class="d-flex gap-2 align-items-center">
+      <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#mockDispatchModal">
+        <i class="fa fa-bolt me-1"></i>{% trans "Simulate Edge Alert" %}
+      </button>
+      <a href="{% url 'intelligent_tracker_hub:audit_log' %}" class="btn btn-outline-secondary btn-sm">
+        <i class="fa fa-history me-1"></i>{% trans "Webhook Audit" %}
+      </a>
+      <a href="/admin/intelligent_tracker_hub/securityevent/" class="btn btn-dark btn-sm">
+        <i class="fa fa-cog me-1"></i>{% trans "SOC Admin" %}
+      </a>
+    </div>
+  </div>
+
+  <!-- Sub Navigation Pills -->
+  <ul class="nav nav-pills mb-4 gap-2">
+    <li class="nav-item">
+      <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'intelligent_tracker_hub:dashboard' %}">
+        <i class="fa fa-dashboard me-1"></i>{% trans "Operations Dashboard" %}
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {% if request.resolver_match.url_name == 'audit_log' %}active{% endif %}" href="{% url 'intelligent_tracker_hub:audit_log' %}">
+        <i class="fa fa-list-alt me-1"></i>{% trans "Webhook Audit Logs" %}
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'intelligent_tracker_api:security_stats' %}" target="_blank">
+        <i class="fa fa-code me-1"></i>{% trans "Telemetry API (JSON)" %}
+      </a>
+    </li>
+  </ul>
+
+  <!-- Main Sub-Content -->
+  {% block security_content %}{% endblock %}
+</div>
+
+<!-- Modal: Simulate Edge Alert -->
+<div class="modal fade" id="mockDispatchModal" tabindex="-1" aria-labelledby="mockDispatchModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form method="post" action="{% url 'intelligent_tracker_hub:simulate_dispatch' %}">
+        {% csrf_token %}
+        <div class="modal-header">
+          <h5 class="modal-title fw-bold" id="mockDispatchModalLabel">
+            <i class="fa fa-bolt text-primary me-2"></i>{% trans "Dispatch Test Edge Webhook" %}
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted small">
+            {% trans "Simulates an incoming edge alert from davtoh/intelligent-tracker with automated HMAC signing and audit trail recording." %}
+          </p>
+          <div class="mb-3">
+            <label class="form-label small fw-bold">{% trans "Event Type" %}</label>
+            <select name="event_type" class="form-select form-select-sm">
+              <option value="IntrusionAlert">{% trans "Intrusion Alert (High)" %}</option>
+              <option value="FallDetectedAlert">{% trans "Fall Detected Alert (Critical)" %}</option>
+              <option value="RestrictedEntityAlert">{% trans "Restricted Entity Alert (High)" %}</option>
+              <option value="OccupancyThresholdEvent">{% trans "Occupancy Threshold Event (Medium)" %}</option>
+              <option value="LoiteringAlert">{% trans "Loitering Alert (Medium)" %}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label small fw-bold">{% trans "Camera ID" %}</label>
+            <input type="text" name="camera_id" class="form-control form-control-sm" value="cam-perimeter-north-01" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label small fw-bold">{% trans "Zone Name" %}</label>
+            <input type="text" name="zone_name" class="form-control form-control-sm" value="Restricted Perimeter A" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label small fw-bold">{% trans "Location / Facility" %}</label>
+            <select name="site_id" class="form-select form-select-sm">
+              <option value="">-- {% trans "Default / Unassigned" %} --</option>
+              {% for loc in locations %}
+                <option value="{{ loc.id }}">{{ loc.name }} ({{ loc.code }})</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">{% trans "Cancel" %}</button>
+          <button type="submit" class="btn btn-primary btn-sm">
+            <i class="fa fa-send me-1"></i>{% trans "Trigger Simulated Event" %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

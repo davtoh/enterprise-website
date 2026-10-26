@@ -1,0 +1,180 @@
+import uuid
+from django.conf import settings
+from django.db import models
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+
+
+class SecurityEventType(models.TextChoices):
+    INTRUSION = "IntrusionAlert", _("Intrusion Alert")
+    RESTRICTED_ENTITY = "RestrictedEntityAlert", _("Restricted Entity Alert")
+    OCCUPANCY_THRESHOLD = "OccupancyThresholdEvent", _("Occupancy Threshold Event")
+    FALL_DETECTED = "FallDetectedAlert", _("Fall Detected Alert")
+    LOITERING = "LoiteringAlert", _("Loitering Alert")
+    LINE_CROSS = "LineCrossAlert", _("Line Cross Alert")
+
+
+class SecuritySeverity(models.TextChoices):
+    LOW = "LOW", _("Low")
+    MEDIUM = "MEDIUM", _("Medium")
+    HIGH = "HIGH", _("High")
+    CRITICAL = "CRITICAL", _("Critical")
+
+
+class SecurityEvent(models.Model):
+    """
+    Spatial security event ingested from Edge AI vision nodes (intelligent-tracker).
+    """
+
+    event_id = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name=_("Event UUID"),
+    )
+    event_type = models.CharField(
+        max_length=50,
+        choices=SecurityEventType.choices,
+        default=SecurityEventType.INTRUSION,
+        db_index=True,
+        verbose_name=_("Event Type"),
+    )
+    site = models.ForeignKey(
+        "location_management.Location",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="security_events",
+        verbose_name=_("Site / Facility"),
+    )
+    camera_id = models.CharField(
+        max_length=100,
+        db_index=True,
+        verbose_name=_("Camera Identifier"),
+    )
+    timestamp = models.DateTimeField(
+        default=timezone.now,
+        db_index=True,
+        verbose_name=_("Event Timestamp"),
+    )
+    snapshot = models.ImageField(
+        upload_to="security_events/%Y/%m/%d/",
+        blank=True,
+        null=True,
+        verbose_name=_("Evidence Snapshot"),
+    )
+    metadata = models.JSONField(
+        default=dict,
+        blank=True,
+        verbose_name=_("Telemetry & Dwell Metadata"),
+    )
+    severity = models.CharField(
+        max_length=20,
+        choices=SecuritySeverity.choices,
+        default=SecuritySeverity.HIGH,
+        db_index=True,
+        verbose_name=_("Severity Level"),
+    )
+    is_resolved = models.BooleanField(
+        default=False,
+        db_index=True,
+        verbose_name=_("Is Resolved"),
+    )
+    resolved_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="resolved_security_events",
+        verbose_name=_("Resolved By"),
+    )
+    resolved_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_("Resolved At"),
+    )
+    resolution_notes = models.TextField(
+        blank=True,
+        verbose_name=_("Resolution Notes"),
+    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Ingested At"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Last Updated"))
+
+    class Meta:
+        verbose_name = _("Security Event")
+        verbose_name_plural = _("Security Events")
+        ordering = ["-timestamp"]
+        indexes = [
+            models.Index(fields=["event_type", "timestamp"]),
+            models.Index(fields=["is_resolved", "severity"]),
+        ]
+
+    def __str__(self):
+        return f"[{self.severity}] {self.get_event_type_display()} - {self.camera_id} ({self.event_id})"
+
+    def get_absolute_url(self):
+        return reverse("intelligent_tracker_hub:event_detail", kwargs={"event_id": self.event_id})
+
+    def resolve(self, user, notes: str = ""):
+        """Mark event as resolved by an authorized operator."""
+        self.is_resolved = True
+        self.resolved_by = user
+        self.resolved_at = timezone.now()
+        if notes:
+            self.resolution_notes = notes
+        self.save(update_fields=["is_resolved", "resolved_by", "resolved_at", "resolution_notes", "updated_at"])
+
+    @property
+    def zone_name(self) -> str:
+        return self.metadata.get("zone_name", "")
+
+    @property
+    def dwell_seconds(self):
+        return self.metadata.get("dwell_seconds")
+
+    @property
+    def confidence(self):
+        return self.metadata.get("confidence")
+
+    @property
+    def entity_id(self) -> str:
+        return str(self.metadata.get("entity_id", ""))
+
+    @property
+    def severity_badge_class(self) -> str:
+        mapping = {
+            SecuritySeverity.CRITICAL: "danger",
+            SecuritySeverity.HIGH: "warning text-dark",
+            SecuritySeverity.MEDIUM: "info text-dark",
+            SecuritySeverity.LOW: "secondary",
+        }
+        return mapping.get(self.severity, "primary")
+
+
+class SecurityAuditLog(models.Model):
+    """
+    Immutable audit log of all edge webhook incoming requests, HMAC authentication verdicts, and error payloads.
+    """
+
+    received_at = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name=_("Received At"))
+    ip_address = models.GenericIPAddressField(null=True, blank=True, verbose_name=_("Client IP"))
+    endpoint = models.CharField(max_length=255, default="/api/v1/security/events/", verbose_name=_("Endpoint"))
+    http_method = models.CharField(max_length=10, default="POST", verbose_name=_("HTTP Method"))
+    signature_header = models.CharField(max_length=255, blank=True, verbose_name=_("X-Tracker-Signature Header"))
+    signature_valid = models.BooleanField(default=False, db_index=True, verbose_name=_("Signature Valid"))
+    event_id = models.CharField(max_length=100, blank=True, db_index=True, verbose_name=_("Associated Event UUID"))
+    raw_payload = models.TextField(blank=True, verbose_name=_("Raw Request Body"))
+    status_code = models.IntegerField(default=200, verbose_name=_("HTTP Status Code"))
+    error_message = models.TextField(blank=True, verbose_name=_("Error Details"))
+    processed_successfully = models.BooleanField(default=False, db_index=True, verbose_name=_("Processed Successfully"))
+
+    class Meta:
+        verbose_name = _("Security Audit Log")
+        verbose_name_plural = _("Security Audit Logs")
+        ordering = ["-received_at"]
+
+    def __str__(self):
+        status = "OK" if self.processed_successfully else "FAILED"
+        return f"{self.received_at:%Y-%m-%d %H:%M:%S} - {self.http_method} {self.endpoint} [{self.status_code}] ({status})"

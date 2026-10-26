@@ -252,12 +252,14 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
 ---
 
 ## 9. Milestone 16 — Intelligent Tracker Edge AI Security Hub Integration
-- [ ] **16a — Security REST API, Models & HMAC Webhook Receiver:**
-  - [ ] Create `intelligent_tracker_hub` app and register `IntelligentTrackerPlugin` with `plugin_registry`.
-  - [ ] Implement `SecurityAuditLog` and `SecurityEvent` models (UUID `event_id`, event types, site FK, camera ID, timestamp, snapshot crop, metadata JSON).
-  - [ ] Implement secure webhook endpoint `POST /api/v1/security/events/` in `rest_api`.
-  - [ ] Implement HMAC-SHA256 signature verification decorator/middleware (`X-Tracker-Signature`) validated against shared site secret.
-  - [ ] Automated test suite with simulated edge webhook dispatches.
+- [x] **16a — Security REST API, Models & HMAC Webhook Receiver:**
+  - [x] Created `intelligent_tracker_hub` app and registered `IntelligentTrackerPlugin` with `plugin_registry`.
+  - [x] Implemented `SecurityAuditLog` and `SecurityEvent` models (UUID `event_id`, event types, site FK, camera ID, timestamp, snapshot crop, metadata JSON, resolution lifecycle).
+  - [x] Implemented secure webhook endpoint `POST /api/v1/security/events/` in `rest_api` / `intelligent_tracker_hub`.
+  - [x] Implemented HMAC-SHA256 signature verification (`X-Tracker-Signature`) validated against shared site secret using timing-attack safe comparison (`hmac.compare_digest`).
+  - [x] Added `Location` model in `location_management` and registered in admin.
+  - [x] Created SOC Dashboard at `/security/`, event detail view, resolution POST handler, and simulated edge dispatch tool.
+  - [x] Automated test suite with 11 dedicated tests (90% statement coverage on `intelligent_tracker_hub`).
 - [ ] **16b — Video Evidence Auto-Ingestion (`video_gallery`):**
   - [ ] Implement edge upload endpoint `POST /api/v1/gallery/upload/` accepting MP4 journey and incident clips.
   - [ ] Auto-bind uploaded video to site gallery in `video_gallery.models.VideoGallery` (`security-audit-<site_slug>`).

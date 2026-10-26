@@ -1,0 +1,175 @@
+{% extends "intelligent_tracker_hub/base_security.html" %}
+{% load i18n %}
+
+{% block security_content %}
+<div class="mb-3">
+  <a href="{% url 'intelligent_tracker_hub:dashboard' %}" class="btn btn-outline-secondary btn-sm">
+    <i class="fa fa-arrow-left me-1"></i>{% trans "Back to Events Dashboard" %}
+  </a>
+</div>
+
+<!-- Header Card -->
+<div class="card shadow-sm border-0 mb-4">
+  <div class="card-body p-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div>
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span class="badge bg-{{ event.severity_badge_class }} fs-6">{{ event.severity }}</span>
+          <h4 class="h5 mb-0 fw-bold">{{ event.get_event_type_display }}</h4>
+          {% if event.is_resolved %}
+            <span class="badge bg-success-subtle text-success border border-success-subtle">
+              <i class="fa fa-check me-1"></i>{% trans "Resolved" %}
+            </span>
+          {% else %}
+            <span class="badge bg-danger-subtle text-danger border border-danger-subtle">
+              <i class="fa fa-exclamation-triangle me-1"></i>{% trans "Active Incident" %}
+            </span>
+          {% endif %}
+        </div>
+        <div class="text-muted small">
+          <span class="me-3"><i class="fa fa-id-badge me-1"></i><code>{{ event.event_id }}</code></span>
+          <span><i class="fa fa-clock-o me-1"></i>{{ event.timestamp|date:"Y-m-d H:i:s" }} UTC</span>
+        </div>
+      </div>
+      <div>
+        <span class="badge bg-light text-dark border p-2">
+          <i class="fa fa-video-camera text-primary me-1"></i>{{ event.camera_id }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  <!-- Left Column: Evidence & Telemetry -->
+  <div class="col-lg-7">
+    <!-- Evidence Snapshot -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-white py-3">
+        <h6 class="card-title mb-0 fw-bold">
+          <i class="fa fa-camera text-primary me-2"></i>{% trans "Evidence Snapshot" %}
+        </h6>
+      </div>
+      <div class="card-body text-center p-3">
+        {% if event.snapshot %}
+          <img src="{{ event.snapshot.url }}" alt="Evidence Snapshot" class="img-fluid rounded border shadow-sm">
+        {% else %}
+          <div class="py-5 text-muted">
+            <i class="fa fa-picture-o fa-3x mb-2 d-block text-secondary"></i>
+            <p class="mb-0">{% trans "No evidence snapshot was attached to this edge webhook." %}</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Telemetry Details -->
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-white py-3">
+        <h6 class="card-title mb-0 fw-bold">
+          <i class="fa fa-sliders text-primary me-2"></i>{% trans "Edge Telemetry & Bounding Box Data" %}
+        </h6>
+      </div>
+      <div class="card-body p-3">
+        <div class="row g-3 mb-3">
+          <div class="col-sm-6">
+            <div class="p-2 border rounded bg-light">
+              <small class="text-muted d-block">{% trans "Zone Name" %}</small>
+              <strong class="text-dark">{{ event.zone_name|default:"--" }}</strong>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="p-2 border rounded bg-light">
+              <small class="text-muted d-block">{% trans "Dwell Duration" %}</small>
+              <strong class="text-dark">{% if event.dwell_seconds %}{{ event.dwell_seconds }}s{% else %}--{% endif %}</strong>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="p-2 border rounded bg-light">
+              <small class="text-muted d-block">{% trans "Detection Confidence" %}</small>
+              <strong class="text-dark">{% if event.confidence %}{{ event.confidence }}{% else %}--{% endif %}</strong>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="p-2 border rounded bg-light">
+              <small class="text-muted d-block">{% trans "Entity Identifier" %}</small>
+              <strong class="text-dark">{{ event.entity_id|default:"--" }}</strong>
+            </div>
+          </div>
+        </div>
+
+        <h6 class="small fw-bold text-muted mb-2">{% trans "Raw JSON Telemetry" %}</h6>
+        <pre class="bg-light p-3 rounded border small mb-0 overflow-auto"><code>{{ metadata_formatted }}</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column: Location & Incident Handling -->
+  <div class="col-lg-5">
+    <!-- Location Card -->
+    <div class="card shadow-sm border-0 mb-4">
+      <div class="card-header bg-white py-3">
+        <h6 class="card-title mb-0 fw-bold">
+          <i class="fa fa-map-marker text-primary me-2"></i>{% trans "Facility & Camera" %}
+        </h6>
+      </div>
+      <div class="card-body p-3">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item px-0 d-flex justify-content-between">
+            <span class="text-muted small">{% trans "Site / Facility" %}:</span>
+            <span class="fw-semibold">{% if event.site %}{{ event.site.name }} ({{ event.site.code }}){% else %}{% trans "Default Site" %}{% endif %}</span>
+          </li>
+          <li class="list-group-item px-0 d-flex justify-content-between">
+            <span class="text-muted small">{% trans "Camera ID" %}:</span>
+            <span class="fw-semibold"><code>{{ event.camera_id }}</code></span>
+          </li>
+          <li class="list-group-item px-0 d-flex justify-content-between">
+            <span class="text-muted small">{% trans "City / State" %}:</span>
+            <span class="fw-semibold">
+              {% if event.site and event.site.city %}{{ event.site.city.name }}, {{ event.site.city.country.name }}{% else %}--{% endif %}
+            </span>
+          </li>
+          <li class="list-group-item px-0 d-flex justify-content-between">
+            <span class="text-muted small">{% trans "Ingested At" %}:</span>
+            <span class="small">{{ event.created_at|date:"Y-m-d H:i:s" }} UTC</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Incident Handling Card -->
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-white py-3">
+        <h6 class="card-title mb-0 fw-bold">
+          <i class="fa fa-check-square-o text-primary me-2"></i>{% trans "Incident Resolution & Audit" %}
+        </h6>
+      </div>
+      <div class="card-body p-3">
+        {% if event.is_resolved %}
+          <div class="alert alert-success d-flex align-items-center gap-2 mb-3">
+            <i class="fa fa-check-circle fa-lg"></i>
+            <div>
+              <strong>{% trans "Resolved by" %}:</strong> {{ event.resolved_by.username|default:"System" }}<br>
+              <small class="text-muted">{{ event.resolved_at|date:"Y-m-d H:i:s" }} UTC</small>
+            </div>
+          </div>
+          {% if event.resolution_notes %}
+            <h6 class="small fw-bold text-muted mb-1">{% trans "Resolution Notes" %}</h6>
+            <p class="p-2 border rounded bg-light mb-0">{{ event.resolution_notes }}</p>
+          {% endif %}
+        {% else %}
+          <form method="post" action="{% url 'intelligent_tracker_hub:event_resolve' event.event_id %}">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label small fw-bold">{% trans "Operator Resolution Notes" %}</label>
+              <textarea name="resolution_notes" class="form-control" rows="4" placeholder="{% trans 'Enter investigative notes, verified identity, or action taken...' %}"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success w-100">
+              <i class="fa fa-check me-1"></i>{% trans "Acknowledge & Mark Resolved" %}
+            </button>
+          </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

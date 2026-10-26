@@ -297,18 +297,23 @@
 > **Feasibility Assessment (Edge Independence):** Work on this milestone proceeds immediately on `enterprise_website` without waiting for `intelligent-tracker` completion. In this edge-cloud architecture, `enterprise_website` is the server defining the contracts (`POST /api/v1/security/events/`, `POST /api/v1/gallery/upload/`, `GET /api/v1/security/whitelist/`). All Hub models, webhook receivers, HMAC authentication, multi-site UI, and test suites are 100% testable via mock edge payloads and stream simulation.
 
 **16a (Phase E1) — Security REST API, Models & HMAC Webhook Receiver:**
-- [ ] Create `intelligent_tracker_hub` Django app and register `IntelligentTrackerPlugin` with `plugin_registry`.
-- [ ] Implement `SecurityAuditLog` and `SecurityEvent` models:
+- [x] Create `intelligent_tracker_hub` Django app and register `IntelligentTrackerPlugin` with `plugin_registry`.
+- [x] Implement `SecurityAuditLog` and `SecurityEvent` models:
   - `event_id`: Unique UUID.
-  - `event_type`: Choices (`IntrusionAlert`, `RestrictedEntityAlert`, `OccupancyThresholdEvent`, `FallDetectedAlert`).
-  - `site`: ForeignKey to `location_management.models.Location` (or `Cities`).
+  - `event_type`: Choices (`IntrusionAlert`, `RestrictedEntityAlert`, `OccupancyThresholdEvent`, `FallDetectedAlert`, `LoiteringAlert`, `LineCrossAlert`).
+  - `site`: ForeignKey to `location_management.models.Location`.
   - `camera_id`: Source camera feed identifier (e.g., `cam-north-01`).
   - `timestamp`: UTC ISO-8601 timestamp.
-  - `snapshot_evidence`: Evidence crop image field or base64 decoding storage.
+  - `snapshot`: Evidence crop image field with Base64 JPEG/PNG decoding storage.
   - `metadata`: JSONField storing zone name, dwell duration, confidence score, recognized entity ID/name.
-- [ ] Implement secure webhook endpoint: `POST /api/v1/security/events/` in `rest_api`.
-- [ ] Implement HMAC-SHA256 signature verification decorator/middleware (`X-Tracker-Signature`) validated against shared site secrets.
-- [ ] Automated test suite simulating edge webhook dispatches with valid and invalid HMAC signatures.
+  - `severity`: Choices (`LOW`, `MEDIUM`, `HIGH`, `CRITICAL`) with automatic type-based severity mapping.
+  - Resolution workflow: `is_resolved`, `resolved_by`, `resolved_at`, `resolution_notes`, and `resolve()` method.
+- [x] Implement secure webhook endpoint: `POST /api/v1/security/events/` in `rest_api` / `intelligent_tracker_hub`.
+- [x] Implement HMAC-SHA256 signature verification (`X-Tracker-Signature`) validated against shared site secret with timing-attack safe comparison (`hmac.compare_digest`).
+- [x] Register models in Django Admin with live thumbnail previews, severity badges, and formatted JSON telemetry.
+- [x] Build SOC Dashboard at `/security/` with real-time KPI metrics, filter bars, event detail inspection, incident resolution form, and interactive edge webhook simulation tool.
+- [x] Add `Location` model to `location_management` with code, city, and coordinates.
+- [x] Automated test suite (11 dedicated tests, 90% statement coverage on `intelligent_tracker_hub`) validating HMAC verification, tampering detection, payload schemas, model methods, and dashboard views.
 
 **16b (Phase E2) — Video Evidence Auto-Ingestion (`video_gallery`):**
 - [ ] Implement edge upload endpoint: `POST /api/v1/gallery/upload/` accepting MP4 video journey and incident clips.

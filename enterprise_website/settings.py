@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     'video_gallery.apps.VideoGalleryConfig',
     'crm.apps.CrmConfig',
     'erp.apps.ErpConfig',
+    'intelligent_tracker_hub.apps.IntelligentTrackerHubConfig',
 ]
 
 # during the request phase, where middleware is applied first-to-last
@@ -379,6 +380,12 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': 3600.0,  # every hour
     },
 }
+
+# Intelligent Tracker Edge AI Microservice Integration
+INTELLIGENT_TRACKER_SECRET_KEY = os.getenv(
+    "INTELLIGENT_TRACKER_SECRET_KEY",
+    KEYS.get("INTELLIGENT_TRACKER_SECRET_KEY", "tracker-secret-key-change-in-production-hmac-sha256"),
+)
 
 # Security & Production Hardening
 # https://docs.djangoproject.com/en/5.0/topics/security/

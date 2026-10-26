@@ -767,3 +767,37 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
   - `.\.venv\Scripts\python.exe -m pytest tests/test_crm.py` → **23 passed in 10.66s**.
   - All 230 test cases passing repository-wide.
+
+---
+
+## [Milestone 16a] - Security REST API, Models & HMAC Webhook Receiver
+- **Date:** 2026-10-26
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Implemented Phase E1 of the Intelligent Tracker Hub Integration Plan connecting `davtoh/enterprise-website` with `davtoh/intelligent-tracker`.
+  - Created `intelligent_tracker_hub` Django application with `SecurityEvent` and `SecurityAuditLog` models.
+  - Implemented cryptographic HMAC-SHA256 signature verification protocol (`X-Tracker-Signature`) supporting both raw hex and `sha256=` formatted digests using constant-time comparison (`hmac.compare_digest`).
+  - Implemented webhook receiver endpoint: `POST /api/v1/security/events/` validating incoming JSON payloads, auto-inferring event severity levels, decoding Base64 evidence snapshots, resolving location sites, and saving audit trail logs.
+  - Added `Location` model to `location_management` with unique site code, foreign key to `Cities`, coordinates, and admin registration.
+  - Registered `IntelligentTrackerPlugin` with `plugin_registry` exposing the Security Hub in the navbar Apps menu.
+  - Created central Security Operations Center (SOC) dashboard at `/security/`, event detail view with telemetry details, resolution action POST view, audit logs table, and an interactive simulated edge webhook dispatch tool.
+  - Configured `INTELLIGENT_TRACKER_SECRET_KEY` in `settings.py`, `.env`, and `.env.example`.
+  - Updated translation catalogs across 5 locales (`es`, `fr`, `it`, `ja`, `pt`) with `makemessages` and `compilemessages`.
+  - Created comprehensive test suite `tests/test_intelligent_tracker_hub.py` with 11 tests (90% statement coverage).
+- **Files Created / Modified:**
+  - `intelligent_tracker_hub/__init__.py`, `apps.py`, `models.py`, `security.py`, `serializers.py`, `api_views.py`, `api_urls.py`, `views.py`, `urls.py`, `admin.py`, `plugin.py`
+  - `intelligent_tracker_hub/templates/intelligent_tracker_hub/base_security.html`, `dashboard.html`, `event_detail.html`, `audit_log.html`
+  - `intelligent_tracker_hub/migrations/0001_initial.py`
+  - `location_management/models.py`, `admin.py`, `migrations/0004_location.py`
+  - `enterprise_website/settings.py` (registered `intelligent_tracker_hub`, configured `INTELLIGENT_TRACKER_SECRET_KEY`)
+  - `enterprise_website/urls.py` (mounted `/security/` and `/api/v1/`)
+  - `templates/base.html`, `templates/themes/bootstrap5/partials/header.html` (added Security Hub navigation link)
+  - `.env`, `.env.example` (added `INTELLIGENT_TRACKER_SECRET_KEY`)
+  - `tests/test_intelligent_tracker_hub.py` (11 tests covering HMAC cryptographic verification, webhook dispatches, Base64 snapshots, catalog/stats APIs, model methods, and views)
+  - `milestone_plan.md`, `TODO_MODERNIZATION.md`, `MIGRATION_LOG.md` (updated with Milestone 16a completion)
+- **Verification & Test Outcomes:**
+  - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
+  - `.\.venv\Scripts\python.exe manage.py sync_menus` → **Successfully synced plugins into menu 'main_navbar'**.
+  - `.\.venv\Scripts\python.exe -m pytest tests/test_intelligent_tracker_hub.py --cov=intelligent_tracker_hub` → **11 passed in 4.90s with 90% statement coverage**.
+  - `.\.venv\Scripts\python.exe -m pytest -q` → **241 passed in 45.48s**, 0 failures across repository.
+
