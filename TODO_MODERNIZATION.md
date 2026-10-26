@@ -249,4 +249,31 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
   - [x] Full test suite: **230 passed in 235.02s**, 0 failures across repository.
 
 
+---
+
+## 9. Milestone 16 — Intelligent Tracker Edge AI Security Hub Integration
+- [ ] **16a — Security REST API, Models & HMAC Webhook Receiver:**
+  - [ ] Create `intelligent_tracker_hub` app and register `IntelligentTrackerPlugin` with `plugin_registry`.
+  - [ ] Implement `SecurityAuditLog` and `SecurityEvent` models (UUID `event_id`, event types, site FK, camera ID, timestamp, snapshot crop, metadata JSON).
+  - [ ] Implement secure webhook endpoint `POST /api/v1/security/events/` in `rest_api`.
+  - [ ] Implement HMAC-SHA256 signature verification decorator/middleware (`X-Tracker-Signature`) validated against shared site secret.
+  - [ ] Automated test suite with simulated edge webhook dispatches.
+- [ ] **16b — Video Evidence Auto-Ingestion (`video_gallery`):**
+  - [ ] Implement edge upload endpoint `POST /api/v1/gallery/upload/` accepting MP4 journey and incident clips.
+  - [ ] Auto-bind uploaded video to site gallery in `video_gallery.models.VideoGallery` (`security-audit-<site_slug>`).
+  - [ ] Auto-generate thumbnails, duration metadata, and security alert tags (`severity`, `camera_sequence`, `entity_name`).
+- [ ] **16c — Central Multi-Site Dashboard & Live Stream Embed:**
+  - [ ] Multi-site security dashboard view at `/security/` (or `/tracker/`) with site/building/camera selector.
+  - [ ] Live camera card grid displaying connection status (online/offline heartbeat indicators).
+  - [ ] Live MJPEG video canvas embed with real-time WebSocket telemetry overlay.
+  - [ ] Built-in mock stream / canvas test loop for offline edge simulation and local development.
+  - [ ] Real-time incident alert feed with Bootstrap 5 toast notifications.
+- [ ] **16d — CRM Visitor Pass & Whitelist Synchronization (`crm`):**
+  - [ ] Extend CRM `Contact` with `face_profile_photo`, `license_plate`, `security_clearance`, `security_tag`.
+  - [ ] Expose whitelist endpoint `GET /api/v1/security/whitelist/?site_id={site_id}` for edge SQLite caching.
+  - [ ] Multilingual automated alerts via `language_management` catalogs (EN/ES) upon high-severity events.
+- [ ] **Verification & Quality:**
+  - [ ] Automated test suite covering webhook receivers, HMAC validation, video upload, whitelist JSON serialization, and dashboard rendering.
+  - [ ] `manage.py check` → 0 issues.
+  - [ ] Responsive Bootstrap 5.3+ security operations dashboard.
 

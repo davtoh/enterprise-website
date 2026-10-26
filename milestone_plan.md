@@ -20,13 +20,13 @@
 | **CSS framework** | Wizard choice: Bootstrap 5 (default), Tailwind, or minimal CSS |
 | **Video** | Embed galleries (YouTube, Vimeo, MP4) with admin-managed model |
 | **Background jobs** | Celery + Redis + Django Channels WebSockets for async tasks (FreeCAD/Blender/exports) |
-| **Face recognition** | Deferred to a future phase |
+| **Edge AI Vision & Security** | Microservice hub integration with `davtoh/intelligent-tracker` (Milestone 16) |
 | **DevOps** | Docker, automated tests, production security headers, GitHub Actions CI/CD |
 | **Future packaging** | `pip install create-enterprise-site` CLI that generates projects from this template |
 
 ---
 
-## Completed Milestones (1–7)
+## Completed Milestones (1–15)
 
 | # | Title | Status |
 |---|---|---|
@@ -37,14 +37,19 @@
 | 5 | Full Application Flash Messaging Integration | ✅ COMPLETE |
 | 6 | Internationalization, Rosetta Mapping & Auto-Translation | ✅ COMPLETE |
 | 7 | Documentation Consolidation & System Operations Manual | ✅ COMPLETE |
-
----
-
-## Upcoming Milestones
+| 8 | Plugin Registry & Dynamic Menus System | ✅ COMPLETE |
+| 9 | Automated Test Suite (106 tests, 80% coverage) | ✅ COMPLETE |
+| 10 | Docker, CI/CD & Production Security | ✅ COMPLETE |
+| 11 | Celery & Async Background Task Infrastructure | ✅ COMPLETE |
+| 12 | Dynamic Menus: CSS Selector, Bootstrap 5 Modernization & Custom Style Elimination | ✅ COMPLETE |
+| 13 | Video Gallery Module | ✅ COMPLETE |
+| 14 | CRM Module (Full-Featured: Contacts, Pipeline, Email Sequences, Segmentation, Analytics) | ✅ COMPLETE |
+| 15 | ERP Module (Modular Starter: Catalog, Inventory, Invoices, Dashboard) | ✅ COMPLETE |
 
 ---
 
 ### [Milestone 8] — Plugin Registry & Dynamic Menus System
+**Status:** **COMPLETE** (2026-10-21)  
 **Scope:** Architectural foundation. Every subsequent module plugs into this.
 
 **Objectives:**
@@ -282,7 +287,60 @@
 
 ---
 
-### [Milestone 16] — `create_site` Scaffolding Wizard
+## Upcoming Milestones
+
+---
+
+### [Milestone 16] — Intelligent Tracker Edge AI Security Hub Integration
+**Scope:** Edge AI Vision & Spatial Security Hub Integration connecting [davtoh/enterprise-website](https://github.com/davtoh/enterprise-website) with [davtoh/intelligent-tracker](https://github.com/davtoh/intelligent-tracker) (Edge AI Vision Microservice). Offloads GPU-heavy edge inference (YOLOv8/11 + OSNet + SORT tracking) to distributed edge nodes while `enterprise_website` serves as the centralized multi-site command and auditing hub.
+
+> **Feasibility Assessment (Edge Independence):** Work on this milestone proceeds immediately on `enterprise_website` without waiting for `intelligent-tracker` completion. In this edge-cloud architecture, `enterprise_website` is the server defining the contracts (`POST /api/v1/security/events/`, `POST /api/v1/gallery/upload/`, `GET /api/v1/security/whitelist/`). All Hub models, webhook receivers, HMAC authentication, multi-site UI, and test suites are 100% testable via mock edge payloads and stream simulation.
+
+**16a (Phase E1) — Security REST API, Models & HMAC Webhook Receiver:**
+- [ ] Create `intelligent_tracker_hub` Django app and register `IntelligentTrackerPlugin` with `plugin_registry`.
+- [ ] Implement `SecurityAuditLog` and `SecurityEvent` models:
+  - `event_id`: Unique UUID.
+  - `event_type`: Choices (`IntrusionAlert`, `RestrictedEntityAlert`, `OccupancyThresholdEvent`, `FallDetectedAlert`).
+  - `site`: ForeignKey to `location_management.models.Location` (or `Cities`).
+  - `camera_id`: Source camera feed identifier (e.g., `cam-north-01`).
+  - `timestamp`: UTC ISO-8601 timestamp.
+  - `snapshot_evidence`: Evidence crop image field or base64 decoding storage.
+  - `metadata`: JSONField storing zone name, dwell duration, confidence score, recognized entity ID/name.
+- [ ] Implement secure webhook endpoint: `POST /api/v1/security/events/` in `rest_api`.
+- [ ] Implement HMAC-SHA256 signature verification decorator/middleware (`X-Tracker-Signature`) validated against shared site secrets.
+- [ ] Automated test suite simulating edge webhook dispatches with valid and invalid HMAC signatures.
+
+**16b (Phase E2) — Video Evidence Auto-Ingestion (`video_gallery`):**
+- [ ] Implement edge upload endpoint: `POST /api/v1/gallery/upload/` accepting MP4 video journey and incident clips.
+- [ ] Auto-bind uploaded video to site gallery in `video_gallery.models.VideoGallery` (e.g. `security-audit-<site_slug>`).
+- [ ] Auto-generate video thumbnails, duration metadata, and security alert tags (`severity`, `camera_sequence`, `entity_name`).
+- [ ] Automated integration tests verifying MP4 ingestion and gallery binding.
+
+**16c (Phase E3) — Central Multi-Site Dashboard & Live Stream Embed:**
+- [ ] Multi-site security dashboard view at `/security/` (or `/tracker/`):
+  - Site, building, and camera selector connected to `location_management`.
+  - Live camera card grid displaying connection status (online/offline heartbeat indicators).
+  - Live MJPEG video canvas embed with real-time WebSocket telemetry overlay.
+  - Built-in mock stream / canvas test loop for local development and offline edge demonstration.
+  - Real-time incident alert feed with Bootstrap 5 toast notifications.
+
+**16d (Phase E4) — CRM Visitor Pass & Whitelist Synchronization (`crm`):**
+- [ ] Extend CRM `Contact` with security credentials:
+  - `face_profile_photo`: ImageField for edge facial vector generation.
+  - `license_plate`: CharField for ANPR / gate recognition.
+  - `security_clearance`: Choices (`VIP`, `STAFF`, `CONTRACTOR`, `VISITOR`, `RESTRICTED`).
+  - `security_tag`: CharField for edge tracking classifications.
+- [ ] Expose whitelist endpoint: `GET /api/v1/security/whitelist/?site_id={site_id}` returning active authorized personnel vectors and license plates for edge SQLite caching (offline WAN resilience).
+- [ ] Multilingual automated alerts via `language_management` catalogs (EN/ES) upon high-severity events.
+
+**Verification:**
+- Automated test suite covering webhook receivers, HMAC validation, video upload, whitelist JSON serialization, and dashboard rendering.
+- `python manage.py check` → 0 issues.
+- Responsive Bootstrap 5.3+ security operations dashboard.
+
+---
+
+### [Milestone 17] — `create_site` Scaffolding Wizard
 **Scope:** The flagship feature — the interactive `manage.py create_site` command that generates a new standalone Django project from this template.
 
 **Objectives:**
@@ -290,7 +348,7 @@
   - Prompts: project name, display name, description, target directory
   - CSS framework choice: Bootstrap 5 / Tailwind / Minimal
   - Language selection (supported locales)
-  - Module selection (checkboxes for each registered `AppPlugin`)
+  - Module selection (checkboxes for each registered `AppPlugin`, including CRM, ERP, Video, Intelligent Tracker Hub)
   - Database preference (SQLite / MySQL / PostgreSQL)
   - Docker support (yes/no)
   - Optional: `--ai` flag — calls Gemini/OpenAI with a project description prompt to auto-suggest module selection and generate homepage copy
@@ -313,7 +371,7 @@
 
 ---
 
-### [Milestone 17] — Packaging: `create-enterprise-site` pip CLI
+### [Milestone 18] — Packaging: `create-enterprise-site` pip CLI
 **Scope:** Make the starter kit consumable without cloning — via a pip package.
 
 **Objectives:**
@@ -334,7 +392,7 @@
 
 | Feature | Reason for Deferral |
 |---|---|
-| Face Recognition module | Niche, high complexity (ML deps, privacy), lower ROI for starter kit |
+| Face Recognition (In-Process ML) | Heavy deep-learning/PyTorch dependencies offloaded to Edge AI microservice (`davtoh/intelligent-tracker`) via Milestone 16 Hub integration |
 | `erp_procurement` sub-module | ERP core needed first; procurement is large scope |
 | `erp_accounting` sub-module | Requires accounting expertise, regulatory compliance |
 | FreeCAD / Blender rendering | Celery infra (Milestone 11) must be solid first; add as example Celery task after |
@@ -349,18 +407,14 @@
 M8 (Plugin Registry)
   └── M9 (Tests)
   └── M12 (Theme/CSS Selector)
-  └── M13 (Video Gallery)
-  └── M16 (create_site Wizard)
-      └── M17 (pip CLI)
-
-M10 (Docker + CI/CD)
-  └── M11 (Celery)
-      └── M14 (CRM — email sequences)
-      └── M15 (ERP — stock alerts, PDF)
-
-M14 (CRM)   ──┐
-M15 (ERP)   ──┤── M16 (create_site includes these as optional modules)
-M13 (Video) ──┘
+  └── M13 (Video Gallery) ─────────┐
+  └── M14 (CRM) ───────────────────┤
+  └── Location Management ─────────┼──> M16 (Intelligent Tracker Hub)
+                                   │      └── M17 (create_site Wizard)
+M10 (Docker + CI/CD)               │          └── M18 (pip CLI)
+  └── M11 (Celery)                 │
+      └── M14 (CRM)                │
+      └── M15 (ERP) ───────────────┘
 ```
 
 ---
@@ -374,5 +428,5 @@ M13 (Video) ──┘
 | `() CRM` | Milestone 14 |
 | `() Integrate video visualization` | Milestone 13 |
 | `() Integrate javascript` | Milestone 12 (HTMX + Alpine.js; React-ready architecture) |
-| `() Integrate face recognition` | Deferred |
+| `() Integrate face recognition` | Milestone 16 (Intelligent Tracker Edge AI Security Hub Integration) |
 | `WARNING bootstrap.min.css.map 404` | Fix in Milestone 9 (minor task alongside test setup) |

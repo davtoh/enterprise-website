@@ -739,3 +739,31 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `.\.venv\Scripts\python.exe -m pytest tests/test_erp.py --cov=erp` → **20 passed in 76.82s** with **91% statement coverage**.
   - `.\.venv\Scripts\python.exe -m pytest` → **230 passed in 235.02s**, 0 failures across repository.
 
+---
+
+## [Milestone 16 Planning] - Intelligent Tracker Edge AI Security Hub Integration
+- **Date:** 2026-10-26
+- **Status:** **PLANNED / READY FOR EXECUTION**
+- **Objectives & Feasibility Assessment:**
+  - Evaluated `INTELLIGENT_TRACKER_INTEGRATION_PLAN.md` to determine whether work can commence immediately in `enterprise_website` while development in `davtoh/intelligent-tracker` is still ongoing.
+  - **Verdict:** **Work can commence immediately on the Hub side.**
+  - **Architectural Rationale:**
+    1. *Decoupled Contract-First Microservice Topology:* `enterprise_website` is the central Cloud/Hub server that defines and hosts the API contract (`POST /api/v1/security/events/`, `POST /api/v1/gallery/upload/`, `GET /api/v1/security/whitelist/`). Edge trackers act as clients reporting events and synchronizing whitelists.
+    2. *Complete Testability via Mock Payloads & Stream Simulation:* All Hub endpoints, HMAC-SHA256 signature verifiers, models, CRM visitor extensions, and multi-site dashboard views can be validated with 100% fidelity using mock edge payloads and simulated video streams without requiring active physical cameras or running edge daemons.
+    3. *Foundational Maturity:* `enterprise_website` has all prerequisites already operational: `plugin_registry` (M8), `video_gallery` (M13), `crm` (M14), `location_management`, and `theme_management` (Bootstrap 5.3+).
+    4. *Unblocks Edge Node Development:* Delivering the Hub contract first provides `davtoh/intelligent-tracker` with a predictable, tested, and live backend to target.
+- **Milestone Structure (Integrated into `milestone_plan.md` as Milestone 16):**
+  - **16a (Phase E1):** Security REST API, `SecurityEvent` / `SecurityAuditLog` models, and HMAC-SHA256 signature webhook receiver.
+  - **16b (Phase E2):** Video evidence auto-ingestion endpoint (`POST /api/v1/gallery/upload/`) binding MP4 journey clips to `video_gallery.models.VideoGallery`.
+  - **16c (Phase E3):** Central multi-site dashboard (`/security/` or `/tracker/`) with location selector, camera status monitors, MJPEG stream embed, and mock stream simulation mode.
+  - **16d (Phase E4):** Two-way CRM visitor pass and whitelist synchronization (`GET /api/v1/security/whitelist/`) with facial photo and license plate fields.
+- **Files Modified / Updated:**
+  - `enterprise_website/settings.py` (enabled `CELERY_TASK_ALWAYS_EAGER` during test runner execution)
+  - `milestone_plan.md` (integrated Milestone 16, renumbered wizard to M17 and packaging to M18, updated dependency graph and NOTES mapping)
+  - `TODO_MODERNIZATION.md` (added Milestone 16 roadmap checklist)
+  - `documentation/README.md` (documented Edge AI Vision & Spatial Security Hub integration architecture and API contracts)
+  - `MIGRATION_LOG.md` (recorded feasibility analysis and planning checkpoint)
+- **Verification & Test Outcomes:**
+  - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
+  - `.\.venv\Scripts\python.exe -m pytest tests/test_crm.py` → **23 passed in 10.66s**.
+  - All 230 test cases passing repository-wide.

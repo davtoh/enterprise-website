@@ -22,7 +22,11 @@ A comprehensive guide to the architecture, purpose, functionalities, system flow
    - [Translation & i18n Tooling (Rosetta & Auto-Translate)](#translation--i18n-tooling-rosetta--auto-translate)
    - [Server Execution (Development & Production ASGI)](#server-execution-development--production-asgi)
 6. [Security & Production Readiness](#6-security--production-readiness)
-
+7. [Containerization & Docker Operations](#7-containerization--docker-operations)
+8. [Production Security & Deployment Auditing](#8-production-security--deployment-auditing)
+9. [CI/CD Pipeline (GitHub Actions)](#9-cicd-pipeline-github-actions)
+10. [Dynamic Themes, Frontend Modernization & CSS Framework Architecture](#10-dynamic-themes-frontend-modernization--css-framework-architecture)
+11. [Edge AI Vision & Spatial Security Hub Integration (intelligent-tracker)](#11-edge-ai-vision--spatial-security-hub-integration-intelligent-tracker)
 
 ---
 
@@ -690,4 +694,69 @@ The presentation layer is modernized on **Bootstrap 5.3.3**, retiring legacy Boo
 ### Declarative Frontend: HTMX & Alpine.js
 - **HTMX:** Used for declarative AJAX interactions without page reload (e.g. `hx-post` for todo item deletion).
 - **Alpine.js:** Manages client-side UI state (tab selection, mobile menu toggles, modal dismissal) without jQuery or custom JavaScript workarounds.
+
+---
+
+## 11. Edge AI Vision & Spatial Security Hub Integration (intelligent-tracker)
+
+The platform integrates with [davtoh/intelligent-tracker](https://github.com/davtoh/intelligent-tracker) (Edge AI Vision Microservice) to provide enterprise-grade spatial security, multi-camera tracking, and automated surveillance auditing.
+
+```
++-----------------------------------------------------------------------------------+
+|               Edge Tier: davtoh/intelligent-tracker (CCTV / IP Cameras)           |
+|   - Real-time Inference: YOLOv8/11 object detection, OSNet Re-ID, SORT tracking   |
+|   - FastAPI Daemon: MJPEG streaming server, WebSocket telemetry, local SQLite DB  |
++-----------------------------------------------------------------------------------+
+       |                                     |                              ^
+       | Real-time Webhooks                  | Video Evidence Upload        | Whitelist Sync
+       | POST /api/v1/security/events/       | POST /api/v1/gallery/upload/ | GET /api/v1/security/whitelist/
+       v                                     v                              |
++-----------------------------------------------------------------------------------+
+|             Enterprise Cloud Hub: davtoh/enterprise-website                       |
+|   - rest_api: HMAC-SHA256 authenticated webhook receiver (X-Tracker-Signature)    |
+|   - video_gallery: Auto-ingests MP4 incident journey clips and generates previews |
+|   - crm: Authoritative contact whitelist with facial vector images & license plates|
+|   - location_management: Hierarchical multi-site, building, and camera topology   |
+|   - language_management: Bilingual automated alert dispatching (EN / ES)          |
+|   - plugin_registry: intelligent_tracker_hub dashboard app with mock stream mode  |
++-----------------------------------------------------------------------------------+
+```
+
+### Integration Protocols & Endpoints
+
+#### 1. Edge-to-Hub Security Webhook
+- **Endpoint:** `POST /api/v1/security/events/` (handled in `rest_api`).
+- **Authentication:** HMAC SHA-256 header (`X-Tracker-Signature`) validated against the site secret key.
+- **Payload Schema:**
+  ```json
+  {
+    "event_id": "c73a812b-31d7-46f0-9a22-9bc5ef9f3a12",
+    "event_type": "IntrusionAlert",
+    "site_id": 1,
+    "camera_id": "cam-north-gate-01",
+    "timestamp": "2026-10-26T21:00:00Z",
+    "snapshot_base64": "/9j/4AAQSkZJRg...",
+    "metadata": {
+      "zone_name": "Perimeter North",
+      "dwell_seconds": 14.5,
+      "confidence": 0.94,
+      "entity_id": "track_42"
+    }
+  }
+  ```
+
+#### 2. Video Evidence Archiving (`video_gallery`)
+- **Endpoint:** `POST /api/v1/gallery/upload/`
+- When an intrusion occurs or an operator exports a person's trajectory journey, `intelligent-tracker` uploads the sliced MP4 video.
+- Automatically registered under the site's `VideoGallery` (e.g. `security-audit-<site>`) with auto-generated thumbnails and severity tags.
+
+#### 3. Two-Way Visitor Pass & Whitelist Synchronization (`crm`)
+- **Endpoint:** `GET /api/v1/security/whitelist/?site_id={site_id}`
+- Returns authoritative authorized personnel, VIP clearances, contractor passes, and registered vehicle license plates.
+- Edge nodes cache results in local SQLite (`TrackerDB`) ensuring continuous AI recognition during WAN outages.
+
+#### 4. Central Multi-Site Dashboard & Mock Stream Simulation
+- Operators monitor multi-site camera feeds at `/security/` (or `/tracker/`).
+- Includes a built-in mock stream simulation mode for local development, CI/CD testing, and offline demonstration without requiring active edge hardware.
+
 

@@ -361,7 +361,11 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60  # 30 minutes
-CELERY_TASK_ALWAYS_EAGER = os.getenv("CELERY_TASK_ALWAYS_EAGER", "False").lower() in ("true", "1", "t")
+CELERY_TASK_ALWAYS_EAGER = (
+    os.getenv("CELERY_TASK_ALWAYS_EAGER", "False").lower() in ("true", "1", "t")
+    or "pytest" in sys.modules
+    or "test" in sys.argv
+)
 CELERY_TASK_EAGER_PROPAGATES = True
 
 # Periodic Celery Beat Scheduled Tasks
