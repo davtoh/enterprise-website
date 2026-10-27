@@ -2,7 +2,7 @@ import json
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
-from .models import SecurityEvent, SecurityAuditLog, SecuritySeverity
+from .models import SecurityEvent, SecurityAuditLog, SecuritySeverity, Camera
 
 
 @admin.register(SecurityEvent)
@@ -142,3 +142,37 @@ class SecurityAuditLogAdmin(admin.ModelAdmin):
             return format_html('<span style="color: green; font-weight: bold;">&#10004; VALID</span>')
         return format_html('<span style="color: red; font-weight: bold;">&#10008; INVALID</span>')
     signature_valid_badge.short_description = _("HMAC Status")
+
+
+@admin.register(Camera)
+class CameraAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "camera_id",
+        "site",
+        "status_badge",
+        "fps",
+        "resolution",
+        "last_heartbeat",
+        "is_active",
+    )
+    list_filter = ("status", "site", "is_active")
+    search_fields = ("camera_id", "name", "stream_url")
+    readonly_fields = ("created_at", "updated_at", "last_heartbeat")
+
+    def status_badge(self, obj):
+        colors = {
+            "ONLINE": "#198754",
+            "OFFLINE": "#6c757d",
+            "CONNECTING": "#ffc107",
+            "DEGRADED": "#dc3545",
+        }
+        color = colors.get(obj.status, "#6c757d")
+        text_color = "black" if obj.status == "CONNECTING" else "white"
+        return format_html(
+            '<span style="background-color: {}; color: {}; padding: 2px 8px; border-radius: 4px; font-weight: bold;">{}</span>',
+            color,
+            text_color,
+            obj.get_status_display(),
+        )
+    status_badge.short_description = _("Status")

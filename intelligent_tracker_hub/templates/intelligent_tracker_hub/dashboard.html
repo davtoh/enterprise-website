@@ -46,22 +46,174 @@
   <div class="col-sm-6 col-lg-3">
     <div class="card shadow-sm border-0 h-100">
       <div class="card-body d-flex align-items-center gap-3">
-        <div class="bg-info bg-opacity-10 text-info p-3 rounded-circle d-flex align-items-center justify-content-center">
+        <div class="bg-success bg-opacity-10 text-success p-3 rounded-circle d-flex align-items-center justify-content-center">
           <i class="fa fa-video-camera fa-lg"></i>
         </div>
         <div>
-          <h6 class="card-subtitle text-muted small fw-bold text-uppercase">{% trans "Active Cameras" %}</h6>
-          <h3 class="card-title mb-0 fw-bold">{{ active_cameras }}</h3>
+          <h6 class="card-subtitle text-muted small fw-bold text-uppercase">{% trans "Cameras Online" %}</h6>
+          <h3 class="card-title mb-0 fw-bold">
+            {{ cameras_online }} <span class="text-muted fs-6 fw-normal">/ {{ cameras_total }}</span>
+          </h3>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Multi-Site Operations Toolbar -->
+<div class="card shadow-sm border-0 mb-4 bg-dark text-white">
+  <div class="card-body p-3 d-flex flex-wrap align-items-center justify-content-between gap-3">
+    <div class="d-flex align-items-center gap-2">
+      <span class="badge bg-danger d-inline-flex align-items-center gap-1 px-2 py-1">
+        <span class="spinner-grow spinner-grow-sm text-light" style="width: 8px; height: 8px;" role="status"></span>
+        <span class="small fw-bold">LIVE SOC FEED</span>
+      </span>
+      <h6 class="mb-0 fw-bold text-light ms-1">
+        <i class="fa fa-desktop me-1 text-info"></i>{% trans "Multi-Camera Surveillance Matrix" %}
+      </h6>
+    </div>
+
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <!-- Site Filter Dropdown -->
+      <form method="get" class="d-flex align-items-center gap-2 m-0" id="siteFilterForm">
+        <input type="hidden" name="layout" value="{{ layout_mode }}">
+        <label class="small text-muted mb-0 d-none d-md-inline">{% trans "Facility:" %}</label>
+        <select name="site_id" class="form-select form-select-sm bg-dark text-light border-secondary" style="min-width: 180px;" onchange="this.form.submit()">
+          <option value="">{% trans "All Facilities & Sites" %}</option>
+          {% for loc in locations %}
+            <option value="{{ loc.id }}" {% if selected_site_id == loc.id|stringformat:"s" %}selected{% endif %}>
+              {{ loc.name }} ({{ loc.code }})
+            </option>
+          {% endfor %}
+        </select>
+      </form>
+
+      <!-- Matrix Layout Switcher -->
+      <div class="btn-group btn-group-sm" role="group" aria-label="Grid Layout">
+        <a href="?layout=solo{% if selected_site_id %}&site_id={{ selected_site_id }}{% endif %}"
+           class="btn btn-outline-secondary {% if layout_mode == 'solo' %}active text-white border-primary bg-primary{% endif %}" title="{% trans 'Solo View (1 Camera)' %}">
+          <i class="fa fa-square"></i>
+        </a>
+        <a href="?layout=grid{% if selected_site_id %}&site_id={{ selected_site_id }}{% endif %}"
+           class="btn btn-outline-secondary {% if layout_mode == 'grid' or layout_mode == '2x2' or not layout_mode %}active text-white border-primary bg-primary{% endif %}" title="{% trans '2x2 Grid View' %}">
+          <i class="fa fa-th-large"></i>
+        </a>
+        <a href="?layout=3x3{% if selected_site_id %}&site_id={{ selected_site_id }}{% endif %}"
+           class="btn btn-outline-secondary {% if layout_mode == '3x3' %}active text-white border-primary bg-primary{% endif %}" title="{% trans '3x3 Matrix View' %}">
+          <i class="fa fa-th"></i>
+        </a>
+      </div>
+
+      <!-- Audible Alarm Toggle Button -->
+      <button type="button" class="btn btn-outline-warning btn-sm" id="btnAudioChime" onclick="toggleAudioAlarm()">
+        <i class="fa fa-volume-up me-1"></i><span id="audioStatusText">{% trans "Alarm Audio: ON" %}</span>
+      </button>
+
+      <!-- Quick Simulate Button -->
+      <a href="{% url 'intelligent_tracker_hub:simulate_dispatch' %}" class="btn btn-outline-info btn-sm">
+        <i class="fa fa-bolt me-1"></i>{% trans "Simulate Intrusion" %}
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Live Video Matrix Grid -->
+<div class="row g-3 mb-4" id="videoMatrixContainer">
+  {% for cam in cameras %}
+    <div class="{% if layout_mode == 'solo' %}col-12{% elif layout_mode == '3x3' %}col-md-6 col-lg-4{% else %}col-md-6{% endif %}">
+      <div class="card bg-dark text-white border-secondary shadow-sm h-100 camera-tile" id="tile-{{ cam.camera_id }}">
+        <!-- Camera Tile Header -->
+        <div class="card-header bg-black bg-opacity-50 py-2 px-3 d-flex justify-content-between align-items-center border-secondary">
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-{{ cam.status_badge_class }} py-1 px-2 d-flex align-items-center gap-1">
+              <i class="fa fa-circle small"></i>
+              <span>{{ cam.get_status_display }}</span>
+            </span>
+            <span class="fw-bold text-light small text-truncate" style="max-width: 180px;" title="{{ cam.name }}">
+              {{ cam.name }}
+            </span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-secondary bg-opacity-50 text-light small font-monospace">
+              {{ cam.camera_id }}
+            </span>
+            {% if cam.site %}
+              <span class="badge bg-info bg-opacity-25 text-info small text-truncate" style="max-width: 110px;">
+                {{ cam.site.name }}
+              </span>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Video Player Frame with Layered Canvas -->
+        <div class="card-body p-0 position-relative bg-black d-flex align-items-center justify-content-center" style="min-height: 240px; overflow: hidden;">
+          <!-- Live MJPEG Stream Image -->
+          <img src="{% url 'intelligent_tracker_api:camera_stream_live' cam.camera_id %}"
+               alt="Live Stream {{ cam.name }}"
+               id="stream-img-{{ cam.camera_id }}"
+               class="w-100 h-100 object-fit-contain d-block"
+               loading="lazy"
+               onerror="this.onerror=null; this.src='{% url 'intelligent_tracker_api:camera_stream_live' cam.camera_id %}?mock=1';">
+
+          <!-- Layered HTML5 Telemetry Canvas -->
+          <canvas id="canvas-overlay-{{ cam.camera_id }}"
+                  class="position-absolute top-0 start-0 w-100 h-100"
+                  style="pointer-events: none; z-index: 10;">
+          </canvas>
+
+          <!-- Telemetry HUD Badge Overlay -->
+          <div class="position-absolute bottom-0 start-0 p-2 d-flex gap-2" style="z-index: 15; background: rgba(0,0,0,0.4); border-top-right-radius: 6px;">
+            <span class="badge bg-black bg-opacity-75 text-success small font-monospace" id="fps-badge-{{ cam.camera_id }}">
+              FPS: {{ cam.fps }}
+            </span>
+            <span class="badge bg-black bg-opacity-75 text-light small font-monospace">
+              {{ cam.resolution }}
+            </span>
+            <span class="badge bg-black bg-opacity-75 text-info small font-monospace" id="occupancy-badge-{{ cam.camera_id }}">
+              OCC: 1
+            </span>
+          </div>
+        </div>
+
+        <!-- Camera Tile Footer Controls -->
+        <div class="card-footer bg-black bg-opacity-50 py-2 px-3 d-flex justify-content-between align-items-center border-secondary">
+          <small class="text-muted font-monospace">
+            <i class="fa fa-clock-o me-1"></i>
+            {% if cam.last_heartbeat %}{{ cam.last_heartbeat|date:"H:i:s" }} UTC{% else %}{% trans "Active" %}{% endif %}
+          </small>
+          <div class="btn-group btn-group-sm">
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="toggleStreamPlay('{{ cam.camera_id }}')" id="btn-play-{{ cam.camera_id }}" title="{% trans 'Pause/Resume Stream' %}">
+              <i class="fa fa-pause"></i>
+            </button>
+            <a href="{% url 'intelligent_tracker_api:camera_stream_live' cam.camera_id %}" target="_blank" class="btn btn-outline-secondary btn-sm" title="{% trans 'Open Raw Stream' %}">
+              <i class="fa fa-external-link"></i>
+            </a>
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="toggleTileFullscreen('tile-{{ cam.camera_id }}')" title="{% trans 'Fullscreen' %}">
+              <i class="fa fa-expand"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="col-12">
+      <div class="card bg-dark text-white border-secondary p-5 text-center">
+        <i class="fa fa-video-camera fa-3x text-muted mb-3 d-block"></i>
+        <h5 class="fw-bold">{% trans "No Active Cameras Configured for this Site." %}</h5>
+        <p class="text-muted small mb-3">
+          {% trans "Cameras report via edge heartbeats or can be registered in the admin console." %}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
 <!-- Filters Bar -->
 <div class="card shadow-sm border-0 mb-4">
   <div class="card-body p-3">
     <form method="get" class="row g-2 align-items-center">
+      <input type="hidden" name="layout" value="{{ layout_mode }}">
+      <input type="hidden" name="site_id" value="{{ selected_site_id }}">
       <div class="col-md-3">
         <label class="form-label small fw-bold mb-1">{% trans "Event Type" %}</label>
         <select name="event_type" class="form-select form-select-sm">
@@ -149,7 +301,11 @@
               <span class="small">{{ evt.timestamp|date:"Y-m-d H:i:s" }}</span>
             </td>
             <td>
-              {% if evt.snapshot %}
+              {% if evt.video_evidence %}
+                <a href="{% url 'intelligent_tracker_hub:event_detail' evt.event_id %}" class="btn btn-sm btn-outline-info p-1 px-2">
+                  <i class="fa fa-film me-1"></i>{% trans "Video" %}
+                </a>
+              {% elif evt.snapshot %}
                 <a href="{{ evt.snapshot.url }}" target="_blank" class="d-inline-block">
                   <img src="{{ evt.snapshot.url }}" alt="Evidence" class="rounded border" width="48" height="32">
                 </a>
@@ -197,7 +353,7 @@
         <ul class="pagination pagination-sm mb-0">
           {% if page_obj.has_previous %}
             <li class="page-item">
-              <a class="page-link" href="?page={{ page_obj.previous_page_number }}&event_type={{ selected_event_type }}&severity={{ selected_severity }}&status={{ selected_status }}&camera_id={{ selected_camera_id }}">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}&event_type={{ selected_event_type }}&severity={{ selected_severity }}&status={{ selected_status }}&camera_id={{ selected_camera_id }}&site_id={{ selected_site_id }}&layout={{ layout_mode }}">
                 &laquo;
               </a>
             </li>
@@ -207,7 +363,7 @@
           </li>
           {% if page_obj.has_next %}
             <li class="page-item">
-              <a class="page-link" href="?page={{ page_obj.next_page_number }}&event_type={{ selected_event_type }}&severity={{ selected_severity }}&status={{ selected_status }}&camera_id={{ selected_camera_id }}">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}&event_type={{ selected_event_type }}&severity={{ selected_severity }}&status={{ selected_status }}&camera_id={{ selected_camera_id }}&site_id={{ selected_site_id }}&layout={{ layout_mode }}">
                 &raquo;
               </a>
             </li>
@@ -217,4 +373,169 @@
     </div>
   {% endif %}
 </div>
+
+<!-- Telemetry Canvas & Web Audio Script -->
+<script>
+  let audioAlarmEnabled = true;
+  let audioCtx = null;
+
+  function initAudio() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  }
+
+  function playAlertChime() {
+    if (!audioAlarmEnabled) return;
+    try {
+      initAudio();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5
+      osc.frequency.setValueAtTime(1174.66, audioCtx.currentTime + 0.1); // D6
+      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.35);
+    } catch (e) {
+      console.warn("Audio chime prevented:", e);
+    }
+  }
+
+  function toggleAudioAlarm() {
+    audioAlarmEnabled = !audioAlarmEnabled;
+    const btn = document.getElementById("btnAudioChime");
+    const txt = document.getElementById("audioStatusText");
+    if (audioAlarmEnabled) {
+      btn.className = "btn btn-outline-warning btn-sm";
+      txt.textContent = "{% trans 'Alarm Audio: ON' %}";
+      playAlertChime();
+    } else {
+      btn.className = "btn btn-outline-secondary btn-sm";
+      txt.textContent = "{% trans 'Alarm Audio: MUTED' %}";
+    }
+  }
+
+  function toggleStreamPlay(cameraId) {
+    const img = document.getElementById(`stream-img-${cameraId}`);
+    const btn = document.getElementById(`btn-play-${cameraId}`);
+    if (!img) return;
+
+    if (img.dataset.paused === "true") {
+      img.src = img.dataset.origSrc;
+      img.dataset.paused = "false";
+      btn.innerHTML = '<i class="fa fa-pause"></i>';
+    } else {
+      img.dataset.origSrc = img.src;
+      img.src = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3Crect width='100%25' height='100%25' fill='%2312161c'/%3E%3Ctext x='50%25' y='50%25' fill='%239ca3af' font-size='16' text-anchor='middle' dominant-baseline='middle'%3ESTREAM PAUSED%3C/text%3E%3C/svg%3E";
+      img.dataset.paused = "true";
+      btn.innerHTML = '<i class="fa fa-play"></i>';
+    }
+  }
+
+  function toggleTileFullscreen(tileId) {
+    const tile = document.getElementById(tileId);
+    if (!tile) return;
+    if (!document.fullscreenElement) {
+      tile.requestFullscreen().catch(err => console.warn(err));
+    } else {
+      document.exitFullscreen().catch(err => console.warn(err));
+    }
+  }
+
+  // Telemetry Canvas Rendering Loop
+  const cameraIds = [{% for c in cameras %}"{{ c.camera_id }}",{% endfor %}];
+
+  function renderTelemetry(cameraId) {
+    const canvas = document.getElementById(`canvas-overlay-${cameraId}`);
+    if (!canvas) return;
+
+    // Synchronize canvas coordinate resolution with its display client dimensions
+    if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+    }
+
+    const ctx = canvas.getContext('2d');
+    const telemetryUrl = `/api/v1/security/stream/telemetry/${cameraId}/`;
+
+    fetch(telemetryUrl)
+      .then(res => res.json())
+      .then(data => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (data.active_tracks && data.active_tracks.length > 0) {
+          const occBadge = document.getElementById(`occupancy-badge-${cameraId}`);
+          if (occBadge) {
+            occBadge.textContent = `OCC: ${data.active_tracks.length}`;
+          }
+
+          data.active_tracks.forEach(track => {
+            const [ymin, xmin, ymax, xmax] = track.bbox;
+            const x = xmin * canvas.width;
+            const y = ymin * canvas.height;
+            const w = (xmax - xmin) * canvas.width;
+            const h = (ymax - ymin) * canvas.height;
+            const color = track.color || "#10b981";
+
+            // Draw bounding box
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = color;
+            ctx.strokeRect(x, y, w, h);
+
+            // Corner accent markers
+            const cornerLen = 10;
+            ctx.lineWidth = 3;
+            // Top-left
+            ctx.beginPath();
+            ctx.moveTo(x, y + cornerLen);
+            ctx.lineTo(x, y);
+            ctx.lineTo(x + cornerLen, y);
+            ctx.stroke();
+
+            // Bottom-right
+            ctx.beginPath();
+            ctx.moveTo(x + w, y + h - cornerLen);
+            ctx.lineTo(x + w, y + h);
+            ctx.lineTo(x + w - cornerLen, y + h);
+            ctx.stroke();
+
+            // Label tag banner
+            const labelText = `${track.label} [${Math.round(track.confidence * 100)}%]`;
+            ctx.font = '11px monospace';
+            const textWidth = ctx.measureText(labelText).width;
+            ctx.fillStyle = color;
+            ctx.fillRect(x, Math.max(0, y - 18), textWidth + 8, 18);
+
+            ctx.fillStyle = '#0f172a';
+            ctx.fillText(labelText, x + 4, Math.max(12, y - 5));
+
+            // If intrusion detected, trigger audio alert
+            if (track.status === 'intrusion') {
+              playAlertChime();
+            }
+          });
+        }
+      })
+      .catch(err => {
+        // Quietly catch network polling disconnects
+      });
+  }
+
+  // Poll telemetry every 1.5s for each camera tile
+  setInterval(() => {
+    cameraIds.forEach(id => renderTelemetry(id));
+  }, 1500);
+
+  // Initial draw
+  setTimeout(() => {
+    cameraIds.forEach(id => renderTelemetry(id));
+  }, 500);
+</script>
 {% endblock %}

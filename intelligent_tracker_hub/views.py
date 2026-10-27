@@ -10,7 +10,14 @@ from django.utils.translation import gettext_lazy as _, gettext as _
 from django.views import View
 from django.views.generic import DetailView, ListView, TemplateView
 
-from .models import SecurityEvent, SecurityEventType, SecuritySeverity, SecurityAuditLog
+from .models import (
+    SecurityEvent,
+    SecurityEventType,
+    SecuritySeverity,
+    SecurityAuditLog,
+    Camera,
+    CameraStatus,
+)
 from .security import calculate_hmac_signature, get_tracker_secret_key
 from location_management.models import Location
 
@@ -18,7 +25,7 @@ from location_management.models import Location
 class SecurityDashboardView(LoginRequiredMixin, TemplateView):
     """
     Central Security Operations Center (SOC) dashboard.
-    Visualizes edge AI spatial security events, active cameras, and telemetry metrics.
+    Visualizes edge AI spatial security events, multi-camera live video matrix, and telemetry metrics.
     """
 
     template_name = "intelligent_tracker_hub/dashboard.html"
@@ -33,7 +40,15 @@ class SecurityDashboardView(LoginRequiredMixin, TemplateView):
         severity = self.request.GET.get("severity")
         status_filter = self.request.GET.get("status")
         camera_id = self.request.GET.get("camera_id")
+        selected_site_id = self.request.GET.get("site_id")
+        layout_mode = self.request.GET.get("layout", "grid")
 
+        if selected_site_id:
+            try:
+                site_int = int(selected_site_id)
+                events_qs = events_qs.filter(site_id=site_int)
+            except ValueError:
+                pass
         if event_type:
             events_qs = events_qs.filter(event_type=event_type)
         if severity:
@@ -55,9 +70,32 @@ class SecurityDashboardView(LoginRequiredMixin, TemplateView):
         unresolved_count = SecurityEvent.objects.filter(is_resolved=False).count()
         critical_count = SecurityEvent.objects.filter(severity=SecuritySeverity.CRITICAL, is_resolved=False).count()
         high_count = SecurityEvent.objects.filter(severity=SecuritySeverity.HIGH, is_resolved=False).count()
-        active_cameras = (
-            SecurityEvent.objects.values("camera_id").distinct().count()
-        )
+
+        # Cameras & Multi-Site Video Grid
+        cameras_qs = Camera.objects.filter(is_active=True).select_related("site")
+        if selected_site_id:
+            try:
+                cameras_qs = cameras_qs.filter(site_id=int(selected_site_id))
+            except ValueError:
+                pass
+
+        cameras_list = list(cameras_qs)
+
+        # Auto-provision a default demo camera if database has none
+        if not cameras_list and not Camera.objects.exists():
+            default_cam = Camera.objects.create(
+                camera_id="cam-north-gate-01",
+                name=_("North Perimeter Gate"),
+                stream_url="mock://",
+                status=CameraStatus.ONLINE,
+                fps=30,
+                resolution="1920x1080",
+                last_heartbeat=timezone.now(),
+            )
+            cameras_list = [default_cam]
+
+        cameras_online = sum(1 for c in cameras_list if c.is_alive or c.status == CameraStatus.ONLINE)
+        cameras_total = len(cameras_list)
 
         ctx.update(
             {
@@ -67,13 +105,18 @@ class SecurityDashboardView(LoginRequiredMixin, TemplateView):
                 "unresolved_count": unresolved_count,
                 "critical_count": critical_count,
                 "high_count": high_count,
-                "active_cameras": active_cameras,
+                "cameras": cameras_list,
+                "cameras_online": cameras_online,
+                "cameras_total": cameras_total,
+                "active_cameras": cameras_total,
                 "event_types": SecurityEventType.choices,
                 "severities": SecuritySeverity.choices,
                 "selected_event_type": event_type or "",
                 "selected_severity": severity or "",
                 "selected_status": status_filter or "",
                 "selected_camera_id": camera_id or "",
+                "selected_site_id": selected_site_id or "",
+                "layout_mode": layout_mode,
                 "locations": Location.objects.filter(is_active=True),
             }
         )

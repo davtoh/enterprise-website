@@ -866,11 +866,58 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `documentation/README.md` (updated Section 11 architecture documentation, endpoint specifications, and caching protocols)
   - `MIGRATION_LOG.md` (logged Frontier Architect evaluation and checkpoint)
 - **Next Steps:**
-  - Proceed with Milestone 16c (Phase E3) implementation:
-    - Create `Camera` model in `intelligent_tracker_hub/models.py` and run migrations.
-    - Implement live stream proxy gateway `GET /api/v1/security/stream/live/<camera_id>/` with synthetic mock stream generator.
-    - Implement camera heartbeat receiver `POST /api/v1/security/cameras/heartbeat/` and telemetry stream.
-    - Upgrade SOC dashboard (`dashboard.html`) with multi-site selector, responsive matrix grid, live canvas overlay, and audio alert chime.
+  - Proceed with Milestone 16c (Phase E3) implementation.
+
+---
+
+## [Milestone 16c] - Central Multi-Site Dashboard, Live Stream Gateway & Telemetry Canvas
+- **Date:** 2026-10-26
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Implemented Phase E3 of the Intelligent Tracker Integration Plan, delivering the Frontier SOTA Central Multi-Site Operations Center (SOC) dashboard, Live Stream Reverse Proxy Gateway, Camera Registry & Heartbeat API, and HTML5 Canvas telemetry overlay.
+  - **Camera Registry & Dynamic Health Model:**
+    - Created `Camera` model with `camera_id`, `name`, `site` (FK to `location_management.Location`), `stream_url`, `status` (`ONLINE`, `OFFLINE`, `CONNECTING`, `DEGRADED`), `last_heartbeat`, `fps`, and `resolution`.
+    - Added helper properties `is_alive`, `status_badge_class`, `get_stream_proxy_url()`, and `get_telemetry_url()`.
+    - Added `camera_obj` dynamic resolution property on `SecurityEvent`.
+    - Created database migration `0003_camera.py` and applied to database.
+    - Registered `Camera` with Django Admin (`CameraAdmin`) featuring status badges and site filters.
+  - **Live Stream Reverse Proxy Gateway (`GET /api/v1/security/stream/live/<camera_id>/`):**
+    - Built authenticated streaming reverse proxy gateway streaming `multipart/x-mixed-replace; boundary=frame` MJPEG chunks.
+    - Solves the NAT/WAN traversal barrier without exposing private edge LAN IPs or overloading edge nodes with multi-client fan-out.
+    - Implemented high-fidelity synthetic surveillance stream generator (`generate_synthetic_mjpeg_stream`) with live UTC timestamps, blinking REC indicator, camera label, and animated target bounding box simulating YOLOv11 tracker output.
+    - Automatic graceful fallback to synthetic stream if edge camera connection fails, is unreachable, or has `mock://` configuration.
+  - **Camera Health Heartbeat API (`POST /api/v1/security/cameras/heartbeat/`):**
+    - Validates incoming edge heartbeats via HMAC-SHA256 (`X-Tracker-Signature`) or authenticated user.
+    - Updates camera status, target FPS, resolution, telemetry metadata, and `last_heartbeat` timestamp, creating an immutable audit trail in `SecurityAuditLog`.
+  - **Real-Time Telemetry Stream (`GET /api/v1/security/stream/telemetry/<camera_id>/`):**
+    - Returns active bounding boxes (`[ymin, xmin, ymax, xmax]`), track IDs, person labels, and clearance statuses.
+    - Automatically surfaces unresolved security intrusion events on the active camera stream with red danger badges.
+  - **Modernized SOC Operations Center Dashboard (`dashboard.html`):**
+    - Added top KPI card for active cameras online / total cameras.
+    - Multi-Site facility selector connected to `location_management.Location`.
+    - Responsive multi-camera matrix grid supporting 1-camera Solo view, 2x2 Grid view, and 3x3 Matrix view built on Bootstrap 5.3+.
+    - Synchronized HTML5 Canvas telemetry overlay running over video tiles, rendering corner-accented bounding boxes and classification banners at 30fps.
+    - Play/Pause toggle, raw stream popup, and browser Fullscreen controls.
+    - Audible alarm chime toggle using zero-dependency Web Audio API synthesizer for high-priority intrusion alerts.
+  - **Automated Test Suite & Verification:**
+    - Added 7 dedicated unit and integration tests to `tests/test_intelligent_tracker_hub.py` (28 total tests in file, 86% statement coverage).
+    - Verified full test suite repository-wide: **258 passed in 49.19s** (100% passing).
+    - Extracted and compiled bilingual translation catalogs across all 5 locales (`es`, `fr`, `it`, `ja`, `pt`).
+    - `python manage.py check` → 0 issues.
+- **Files Created / Modified:**
+  - `intelligent_tracker_hub/models.py` (added `CameraStatus`, `Camera`, `camera_obj` property on `SecurityEvent`)
+  - `intelligent_tracker_hub/migrations/0003_camera.py` (applied migration)
+  - `intelligent_tracker_hub/admin.py` (registered `CameraAdmin`)
+  - `intelligent_tracker_hub/serializers.py` (added `CameraSerializer`, `CameraHeartbeatSerializer`)
+  - `intelligent_tracker_hub/api_views.py` (implemented `LiveStreamProxyApiView`, `LiveTelemetryStreamApiView`, `CameraHeartbeatApiView`, `CameraViewSet`, and `generate_synthetic_mjpeg_stream`)
+  - `intelligent_tracker_hub/api_urls.py` (wired camera routes)
+  - `intelligent_tracker_hub/views.py` (updated `SecurityDashboardView` with camera querying, site filtering, and layout modes)
+  - `intelligent_tracker_hub/templates/intelligent_tracker_hub/dashboard.html` (embedded live camera matrix grid, telemetry canvas, and Web Audio alarm chime)
+  - `tests/test_intelligent_tracker_hub.py` (added 7 tests covering models, heartbeat API, live proxy, fallback, telemetry, and SOC dashboard)
+  - `INTELLIGENT_TRACKER_INTEGRATION_PLAN.md`, `milestone_plan.md`, `TODO_MODERNIZATION.md` (marked Milestone 16c complete)
+- **Next Steps:**
+  - Proceed with Milestone 16d (Phase E4): Temporal CRM Visitor Passes, Whitelist Delta-Sync & Bi-directional Access Loop.
+
 
 
 

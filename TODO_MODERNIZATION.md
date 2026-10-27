@@ -268,13 +268,13 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
   - [x] Auto-bound video to site gallery in `video_gallery.models.VideoGallery` (`security-audit-<site_slug>`) and linked to `SecurityEvent.video_evidence`.
   - [x] Updated SOC Event Detail UI (`event_detail.html`) to embed zero-copy video player with stream gateway URL and "Archive to Cloud Vault" action.
   - [x] Automated integration tests covering registration, stream proxy with range headers, archival trigger, and multipart upload (18 tests, 87% coverage).
-- [ ] **16c — Central Multi-Site Dashboard, Live Stream Gateway & Telemetry Canvas:**
-  - [ ] Create `Camera` model linked to `location_management.Location` with `camera_id`, `name`, `stream_url`, `status`, `last_heartbeat`, `fps`, and `resolution`.
-  - [ ] Implement camera heartbeat endpoint `POST /api/v1/security/cameras/heartbeat/` tracking live edge health and status.
-  - [ ] Implement authenticated live MJPEG streaming reverse proxy gateway `GET /api/v1/security/stream/live/<camera_id>/` traversing NAT/WAN firewalls without leaking edge private IPs.
-  - [ ] Implement synthetic mock MJPEG stream generator and telemetry loop for offline edge simulation and CI/CD testing.
-  - [ ] Implement real-time telemetry stream `GET /api/v1/security/stream/telemetry/<camera_id>/` and synchronized HTML5 Canvas overlay (30fps bounding boxes, track IDs, color-coded status).
-  - [ ] Modernize SOC Dashboard (`/security/`) with dynamic site selector, responsive multi-camera matrix grid (1x1, 2x2, 3x3), camera health badges, and live toast incident feed with Web Audio API chime.
+- [x] **16c — Central Multi-Site Dashboard, Live Stream Gateway & Telemetry Canvas:**
+  - [x] Created `Camera` model linked to `location_management.Location` with `camera_id`, `name`, `stream_url`, `status`, `last_heartbeat`, `fps`, and `resolution`.
+  - [x] Implemented camera heartbeat endpoint `POST /api/v1/security/cameras/heartbeat/` tracking live edge health and status.
+  - [x] Implemented authenticated live MJPEG streaming reverse proxy gateway `GET /api/v1/security/stream/live/<camera_id>/` traversing NAT/WAN firewalls without leaking edge private IPs.
+  - [x] Implemented synthetic mock MJPEG stream generator and telemetry loop for offline edge simulation and CI/CD testing.
+  - [x] Implemented real-time telemetry stream `GET /api/v1/security/stream/telemetry/<camera_id>/` and synchronized HTML5 Canvas overlay (30fps bounding boxes, track IDs, color-coded status).
+  - [x] Modernized SOC Dashboard (`/security/`) with dynamic site selector, responsive multi-camera matrix grid (1x1, 2x2, 3x3), camera health badges, and live toast incident feed with Web Audio API chime.
 - [ ] **16d — Temporal CRM Visitor Passes, Whitelist Delta-Sync & Bi-directional Access Loop:**
   - [ ] Extend CRM `Contact` with `security_clearance`, `valid_from`, `valid_until`, `license_plate`, `face_profile_photo`, `face_embedding_vector`, and `security_tag`.
   - [ ] Implement high-performance whitelist delta-sync API `GET /api/v1/security/whitelist/?site_id={site_id}` with HTTP ETag, `304 Not Modified`, and `?since=` delta filtering.

@@ -131,7 +131,7 @@ flowchart TD
   - Auto-bind to `video_gallery.models.VideoGallery` and link to `SecurityEvent`.
   - Embed zero-copy video player, homography trajectory indicator, and cloud archive/repair action in `event_detail.html`.
 
-- **Phase E3: Central Multi-Site Dashboard, Live Stream Gateway & Telemetry Canvas** *(Next)*
+- **Phase E3: Central Multi-Site Dashboard, Live Stream Gateway & Telemetry Canvas** *(Completed)*
   - **Data Model:** Create `Camera` model linked to `location_management.Location` with stream endpoints, telemetry resolution, and heartbeat state.
   - **Live Stream Proxy:** Implement `GET /api/v1/security/stream/live/<camera_id>/` proxying edge MJPEG feeds across NAT/WAN firewalls.
   - **Heartbeat & Health API:** Implement `POST /api/v1/security/cameras/heartbeat/` for camera online/offline/degraded state tracking.

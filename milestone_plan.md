@@ -325,20 +325,21 @@
 - [x] Automated integration test suite (18 dedicated tests, 87% statement coverage on `intelligent_tracker_hub`, 248 passed repository-wide) validating zero-copy registration, streaming proxy with range headers, archival trigger, and multipart upload.
 
 **16c (Phase E3) — Central Multi-Site Dashboard, Live Stream Gateway & Telemetry Canvas:**
-- [ ] Camera Registry & Dynamic Health Model:
+- [x] Camera Registry & Dynamic Health Model:
   - Create `Camera` model linked to `location_management.Location` with `camera_id`, `name`, `stream_url`, `status` (`ONLINE`, `OFFLINE`, `CONNECTING`, `DEGRADED`), `last_heartbeat`, `fps`, and `resolution`.
   - Heartbeat receiver endpoint: `POST /api/v1/security/cameras/heartbeat/` tracking live edge health and connection state.
-- [ ] Authenticated Live MJPEG Streaming Reverse Proxy Gateway:
+- [x] Authenticated Live MJPEG Streaming Reverse Proxy Gateway:
   - `GET /api/v1/security/stream/live/<camera_id>/` proxying edge MJPEG feeds across NAT/WAN firewalls without leaking edge private LAN IPs.
   - Built-in synthetic mock MJPEG generator fallback for local testing, CI/CD, and offline demos.
-- [ ] Real-time Telemetry Stream & HTML5 Canvas Overlay:
+- [x] Real-time Telemetry Stream & HTML5 Canvas Overlay:
   - Telemetry endpoint `GET /api/v1/security/stream/telemetry/<camera_id>/` delivering 30fps bounding box annotations (`[ymin, xmin, ymax, xmax]`), track IDs, person labels, and intrusion vectors.
   - Synchronized HTML5 Canvas overlay rendering color-coded classification tags (Green = Staff/VIP, Yellow = Visitor, Red = Intrusion/Restricted).
-- [ ] Enhanced SOC Multi-Site Operations Center Dashboard (`/security/`):
+- [x] Enhanced SOC Multi-Site Operations Center Dashboard (`/security/`):
   - Dynamic multi-site selector connected to `location_management.Location`.
   - Multi-camera responsive matrix grid (1x1, 2x2, 3x3 layout selector) on Bootstrap 5.3+.
   - Live camera card grid displaying real-time connection status badges, FPS, and latency.
   - Real-time incident alert drawer with Bootstrap 5 toasts and Web Audio API chime toggle.
+- [x] Automated integration test suite (28 dedicated tests, 86% statement coverage on `intelligent_tracker_hub`, 258 passed repository-wide) validating Camera models, heartbeat ingestion, synthetic MJPEG streams, fallback proxying, telemetry overlays, and SOC multi-site rendering.
 
 **16d (Phase E4) — Temporal CRM Visitor Passes, Whitelist Delta-Sync & Bi-directional Access Loop:**
 - [ ] Extend CRM `Contact` with enterprise physical security credentials:

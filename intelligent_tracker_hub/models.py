@@ -22,6 +22,114 @@ class SecuritySeverity(models.TextChoices):
     CRITICAL = "CRITICAL", _("Critical")
 
 
+class CameraStatus(models.TextChoices):
+    ONLINE = "ONLINE", _("Online")
+    OFFLINE = "OFFLINE", _("Offline")
+    CONNECTING = "CONNECTING", _("Connecting")
+    DEGRADED = "DEGRADED", _("Degraded")
+
+
+class Camera(models.Model):
+    """
+    Edge AI Camera Node connected to the Enterprise Security Hub.
+    Represents an IP camera / RTSP stream processed by intelligent-tracker.
+    """
+
+    camera_id = models.CharField(
+        max_length=100,
+        unique=True,
+        db_index=True,
+        verbose_name=_("Camera Identifier"),
+        help_text=_("Unique identifier (e.g. cam-north-gate-01)"),
+    )
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_("Camera Name"),
+        help_text=_("Human-readable label (e.g. North Perimeter Fence)"),
+    )
+    site = models.ForeignKey(
+        "location_management.Location",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="cameras",
+        verbose_name=_("Site / Facility"),
+    )
+    stream_url = models.CharField(
+        max_length=500,
+        blank=True,
+        default="",
+        verbose_name=_("Edge Stream URL"),
+        help_text=_("Edge MJPEG stream URL (e.g. http://edge-node:8000/live/cam-01/ or mock://)"),
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=CameraStatus.choices,
+        default=CameraStatus.OFFLINE,
+        db_index=True,
+        verbose_name=_("Connection Status"),
+    )
+    last_heartbeat = models.DateTimeField(
+        null=True,
+        blank=True,
+        db_index=True,
+        verbose_name=_("Last Heartbeat"),
+    )
+    fps = models.IntegerField(
+        default=30,
+        verbose_name=_("Target FPS"),
+    )
+    resolution = models.CharField(
+        max_length=50,
+        default="1920x1080",
+        verbose_name=_("Stream Resolution"),
+    )
+    is_active = models.BooleanField(
+        default=True,
+        db_index=True,
+        verbose_name=_("Is Active"),
+    )
+    metadata = models.JSONField(
+        default=dict,
+        blank=True,
+        verbose_name=_("Camera Telemetry Metadata"),
+        help_text=_("Dropped frames, bitrate, inference model, active trackers"),
+    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Last Updated"))
+
+    class Meta:
+        verbose_name = _("Camera")
+        verbose_name_plural = _("Cameras")
+        ordering = ["site", "name"]
+
+    def __str__(self):
+        return f"{self.name} ({self.camera_id})"
+
+    @property
+    def is_alive(self) -> bool:
+        """Returns True if a heartbeat was received within the last 90 seconds and status is ONLINE."""
+        if not self.last_heartbeat or self.status != CameraStatus.ONLINE:
+            return False
+        return (timezone.now() - self.last_heartbeat).total_seconds() < 90
+
+    @property
+    def status_badge_class(self) -> str:
+        mapping = {
+            CameraStatus.ONLINE: "success",
+            CameraStatus.OFFLINE: "secondary",
+            CameraStatus.CONNECTING: "warning text-dark",
+            CameraStatus.DEGRADED: "danger",
+        }
+        return mapping.get(self.status, "secondary")
+
+    def get_stream_proxy_url(self) -> str:
+        return reverse("intelligent_tracker_api:camera_stream_live", kwargs={"camera_id": self.camera_id})
+
+    def get_telemetry_url(self) -> str:
+        return reverse("intelligent_tracker_api:camera_telemetry_live", kwargs={"camera_id": self.camera_id})
+
+
 class SecurityEvent(models.Model):
     """
     Spatial security event ingested from Edge AI vision nodes (intelligent-tracker).
@@ -149,6 +257,11 @@ class SecurityEvent(models.Model):
     @property
     def entity_id(self) -> str:
         return str(self.metadata.get("entity_id", ""))
+
+    @property
+    def camera_obj(self):
+        """Resolves associated Camera entity if provisioned."""
+        return Camera.objects.filter(camera_id=self.camera_id).first()
 
     @property
     def severity_badge_class(self) -> str:

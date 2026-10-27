@@ -9,6 +9,10 @@ from .api_views import (
     VideoEvidenceUploadApiView,
     VideoEvidenceStreamGatewayApiView,
     VideoEvidenceArchiveApiView,
+    CameraViewSet,
+    CameraHeartbeatApiView,
+    LiveStreamProxyApiView,
+    LiveTelemetryStreamApiView,
 )
 
 app_name = "intelligent_tracker_api"
@@ -16,11 +20,15 @@ app_name = "intelligent_tracker_api"
 router = DefaultRouter()
 router.register(r"events/catalog", SecurityEventViewSet, basename="security-events-catalog")
 router.register(r"audit", SecurityAuditLogViewSet, basename="security-audit-logs")
+router.register(r"cameras", CameraViewSet, basename="cameras")
 
 urlpatterns = [
     # Primary edge webhook receiver specified in INTELLIGENT_TRACKER_INTEGRATION_PLAN.md
     path("security/events/", SecurityEventWebhookApiView.as_view(), name="security_event_webhook"),
     path("security/stats/", SecurityStatsApiView.as_view(), name="security_stats"),
+    path("security/cameras/heartbeat/", CameraHeartbeatApiView.as_view(), name="camera_heartbeat"),
+    path("security/stream/live/<str:camera_id>/", LiveStreamProxyApiView.as_view(), name="camera_stream_live"),
+    path("security/stream/telemetry/<str:camera_id>/", LiveTelemetryStreamApiView.as_view(), name="camera_telemetry_live"),
     path("security/", include(router.urls)),
 
     # Video Evidence Ingestion & Zero-Copy Stream Gateway (Milestone 16b / Phase E2)
