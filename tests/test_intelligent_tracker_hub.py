@@ -640,3 +640,85 @@ def test_event_detail_view_renders_video_evidence(client, auth_user, test_locati
     assert "Ground-Plane Homography Trajectory" in html
     assert "2 Waypoints" in html
 
+
+def test_video_evidence_corruption_auto_fallback_to_reference(client, db):
+    """
+    Validates that if local video file on disk is deleted or 0 bytes,
+    the streaming gateway and direct URL automatically recover by streaming from the source reference.
+    """
+    gallery = VideoGallery.objects.create(name="Resilience Gallery", slug="resilience-gallery")
+    # Empty 0-byte file simulating a corrupted or truncated write
+    empty_corrupted_file = ContentFile(b"", name="corrupted_0byte.mp4")
+    item = VideoItem.objects.create(
+        gallery=gallery,
+        title="Corrupted Local Clip",
+        source_type=VideoItem.SOURCE_MP4,
+        embed_url="http://192.168.1.150:8000/clips/int_42.mp4",
+        video_file=empty_corrupted_file,
+    )
+
+    # 1. VideoItem model health detection
+    assert item.is_local_file_healthy is False
+    # direct_media_url automatically falls back to source reference
+    assert item.direct_media_url == "http://192.168.1.150:8000/clips/int_42.mp4"
+
+    # 2. Gateway auto-fallback
+    mock_resp = MagicMock()
+    mock_resp.status_code = 200
+    mock_resp.headers = {
+        "Content-Type": "video/mp4",
+        "Content-Length": "28",
+        "Accept-Ranges": "bytes",
+    }
+    mock_resp.iter_content.return_value = [b"REMOTE_FALLBACK_VIDEO_STREAM"]
+
+    with patch("intelligent_tracker_hub.api_views.requests.get", return_value=mock_resp) as mock_get:
+        url = reverse("intelligent_tracker_api:video_gallery_stream", kwargs={"video_id": item.id})
+        response = client.get(url)
+
+        assert response.status_code == 200
+        assert response["X-Evidence-Source"] == "edge-fallback"
+        content = b"".join(response.streaming_content)
+        assert content == b"REMOTE_FALLBACK_VIDEO_STREAM"
+        mock_get.assert_called_once()
+
+
+def test_video_evidence_forced_repair_from_reference(client, db):
+    """
+    Validates that an operator or automated monitor can force repair
+    a local archive from the remote reference URL via ?force=true.
+    """
+    gallery = VideoGallery.objects.create(name="Repair Gallery", slug="repair-gallery")
+    item = VideoItem.objects.create(
+        gallery=gallery,
+        title="Corrupted File to Repair",
+        source_type=VideoItem.SOURCE_MP4,
+        embed_url="http://192.168.1.150:8000/clips/int_99.mp4",
+        video_file=ContentFile(b"OLD_DAMAGED_DATA", name="broken.mp4"),
+    )
+
+    # Calling without force when file exists returns already_archived
+    url = reverse("intelligent_tracker_api:video_gallery_archive", kwargs={"video_id": item.id})
+    resp_unforced = client.post(url)
+    assert resp_unforced.status_code == 200
+    assert resp_unforced.json()["status"] == "already_archived"
+
+    # Calling with ?force=true downloads fresh copy from source reference and verifies SHA-256
+    repaired_bytes = b"FRESH_VERIFIED_MP4_STREAM_CONTENT_9999"
+    mock_resp = MagicMock()
+    mock_resp.status_code = 200
+    mock_resp.content = repaired_bytes
+
+    with patch("intelligent_tracker_hub.api_views.requests.get", return_value=mock_resp):
+        resp_forced = client.post(f"{url}?force=true")
+        assert resp_forced.status_code == 200
+        data = resp_forced.json()
+        assert data["status"] == "archived"
+        assert data["repaired"] is True
+        assert data["size_bytes"] == len(repaired_bytes)
+        assert "sha256" in data
+
+        item.refresh_from_db()
+        assert item.video_file.read() == repaired_bytes
+
+

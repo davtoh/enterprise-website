@@ -212,9 +212,19 @@ class VideoItem(models.Model):
         return DEFAULT_THUMBNAIL_SVG
 
     @property
+    def is_local_file_healthy(self) -> bool:
+        """Returns True if video_file exists on storage and is non-empty (>0 bytes)."""
+        if not self.video_file:
+            return False
+        try:
+            return bool(self.video_file.storage.exists(self.video_file.name) and self.video_file.size > 0)
+        except Exception:
+            return False
+
+    @property
     def direct_media_url(self) -> str:
-        """Returns direct video file URL for HTML5 player."""
-        if self.video_file:
+        """Returns direct video file URL for HTML5 player, with automatic fallback to reference if file is missing."""
+        if self.video_file and self.is_local_file_healthy:
             try:
                 return self.video_file.url
             except Exception:

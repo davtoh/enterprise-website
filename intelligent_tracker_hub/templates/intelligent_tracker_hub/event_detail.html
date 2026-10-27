@@ -50,16 +50,26 @@
         <h6 class="card-title mb-0 fw-bold">
           <i class="fa fa-video-camera text-primary me-2"></i>{% trans "Video Evidence Stream" %}
         </h6>
-        <div id="vaultBadgeContainer">
-          {% if event.video_evidence.video_file %}
+        <div id="vaultBadgeContainer" class="d-flex align-items-center gap-2">
+          {% if event.video_evidence.video_file and event.video_evidence.is_local_file_healthy %}
             <span class="badge bg-success-subtle text-success border border-success-subtle">
               <i class="fa fa-lock me-1"></i>{% trans "Archived in Cloud Vault" %}
             </span>
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="archiveVaultBtn" data-video-id="{{ event.video_evidence.id }}" data-force="true" title="{% trans 'Re-sync from edge source reference' %}">
+              <i class="fa fa-refresh me-1"></i>{% trans "Re-sync" %}
+            </button>
+          {% elif event.video_evidence.video_file and not event.video_evidence.is_local_file_healthy %}
+            <span class="badge bg-warning-subtle text-warning border border-warning-subtle" title="{% trans 'Local vault file damaged or missing; streaming from edge reference' %}">
+              <i class="fa fa-exclamation-triangle me-1"></i>{% trans "Vault Damaged (Edge Stream Active)" %}
+            </span>
+            <button type="button" class="btn btn-warning btn-sm text-dark" id="archiveVaultBtn" data-video-id="{{ event.video_evidence.id }}" data-force="true">
+              <i class="fa fa-wrench me-1"></i>{% trans "Repair from Source" %}
+            </button>
           {% else %}
-            <span class="badge bg-info-subtle text-info border border-info-subtle me-2">
+            <span class="badge bg-info-subtle text-info border border-info-subtle">
               <i class="fa fa-cloud-download me-1"></i>{% trans "Zero-Copy Edge Stream" %}
             </span>
-            <button type="button" class="btn btn-outline-primary btn-sm" id="archiveVaultBtn" data-video-id="{{ event.video_evidence.id }}">
+            <button type="button" class="btn btn-outline-primary btn-sm" id="archiveVaultBtn" data-video-id="{{ event.video_evidence.id }}" data-force="false">
               <i class="fa fa-download me-1"></i>{% trans "Archive to Cloud Vault" %}
             </button>
           {% endif %}
@@ -223,7 +233,7 @@
     </div>
   </div>
 </div>
-{% if event.video_evidence and not event.video_evidence.video_file %}
+{% if event.video_evidence %}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const btn = document.getElementById('archiveVaultBtn');
@@ -232,10 +242,12 @@ document.addEventListener('DOMContentLoaded', function() {
   if (btn) {
     btn.addEventListener('click', async function() {
       const videoId = btn.getAttribute('data-video-id');
+      const isForce = btn.getAttribute('data-force') === 'true';
       btn.disabled = true;
-      btn.innerHTML = '<i class="fa fa-spinner fa-spin me-1"></i>{% trans "Archiving..." %}';
+      btn.innerHTML = '<i class="fa fa-spinner fa-spin me-1"></i>{% trans "Processing..." %}';
       try {
-        const resp = await fetch('/api/v1/gallery/archive/' + videoId + '/', {
+        const targetUrl = '/api/v1/gallery/archive/' + videoId + '/' + (isForce ? '?force=true' : '');
+        const resp = await fetch(targetUrl, {
           method: 'POST',
           headers: {
             'X-CSRFToken': '{{ csrf_token }}',
@@ -244,16 +256,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         const data = await resp.json();
         if (resp.ok) {
-          badgeContainer.innerHTML = '<span class="badge bg-success-subtle text-success border border-success-subtle"><i class="fa fa-lock me-1"></i>{% trans "Archived in Cloud Vault" %}</span>';
-          alertBox.innerHTML = '<div class="alert alert-success alert-dismissible py-2 px-3 small fade show mb-0 mt-2"><i class="fa fa-check-circle me-1"></i>{% trans "Video evidence permanently frozen into cloud storage." %}<button type="button" class="btn-close py-2" data-bs-dismiss="alert"></button></div>';
+          badgeContainer.innerHTML = '<span class="badge bg-success-subtle text-success border border-success-subtle"><i class="fa fa-lock me-1"></i>{% trans "Archived in Cloud Vault" %}</span> <button type="button" class="btn btn-outline-secondary btn-sm" id="archiveVaultBtn" data-video-id="' + videoId + '" data-force="true" title="{% trans "Re-sync from edge source reference" %}"><i class="fa fa-refresh me-1"></i>{% trans "Re-sync" %}</button>';
+          alertBox.innerHTML = '<div class="alert alert-success alert-dismissible py-2 px-3 small fade show mb-0 mt-2"><i class="fa fa-check-circle me-1"></i>' + (data.message || '{% trans "Video evidence permanently frozen into cloud storage." %}') + '<button type="button" class="btn-close py-2" data-bs-dismiss="alert"></button></div>';
         } else {
           btn.disabled = false;
-          btn.innerHTML = '<i class="fa fa-download me-1"></i>{% trans "Archive to Cloud Vault" %}';
+          btn.innerHTML = '<i class="fa fa-download me-1"></i>{% trans "Try Again" %}';
           alertBox.innerHTML = '<div class="alert alert-danger py-2 px-3 small mb-0 mt-2"><i class="fa fa-exclamation-circle me-1"></i>' + (data.error || '{% trans "Archival failed." %}') + '</div>';
         }
       } catch (err) {
         btn.disabled = false;
-        btn.innerHTML = '<i class="fa fa-download me-1"></i>{% trans "Archive to Cloud Vault" %}';
+        btn.innerHTML = '<i class="fa fa-download me-1"></i>{% trans "Try Again" %}';
         alertBox.innerHTML = '<div class="alert alert-danger py-2 px-3 small mb-0 mt-2"><i class="fa fa-exclamation-circle me-1"></i>{% trans "Network error during archival." %}</div>';
       }
     });

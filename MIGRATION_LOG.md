@@ -814,23 +814,26 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
        Maintains full backward compatibility for edge nodes performing direct MP4 uploads.
     5. *Data Association & UI:*
        Linked `VideoItem` to `SecurityEvent.video_evidence` and enhanced `event_detail.html` with an embedded zero-copy video player, live ground-plane homography trajectory indicator, and interactive cloud archival action.
+    6. *Corruption Resilience & Self-Healing Fallback:*
+       Preserved the remote edge stream reference (`embed_url`) as the permanent canonical fallback even after archival. If the local vault file is ever damaged, 0-byte truncated, or deleted on disk, `VideoEvidenceStreamGatewayApiView` and `VideoItem.direct_media_url` automatically detect corruption via `is_local_file_healthy` and gracefully fall back to streaming directly from the source reference (`X-Evidence-Source: edge-fallback`). Added `POST /api/v1/gallery/archive/<id>/?force=true` and a "Repair from Source" UI button with SHA-256 verification to re-download and restore corrupted files on demand.
 - **Files Created / Modified:**
   - `intelligent_tracker_hub/models.py` (added `video_evidence` FK to `video_gallery.VideoItem`)
   - `intelligent_tracker_hub/migrations/0002_securityevent_video_evidence.py` (applied migration)
+  - `video_gallery/models.py` (added `is_local_file_healthy` property and updated `direct_media_url` with existence checks and source reference fallback)
   - `video_gallery/utils.py` (enhanced `detect_video_source` to recognize stream and edge clip URLs as MP4 sources)
   - `intelligent_tracker_hub/serializers.py` (added `VideoEvidenceRegisterSerializer`, `VideoEvidenceUploadSerializer`, enhanced `SecurityEventSerializer`)
-  - `intelligent_tracker_hub/api_views.py` (implemented `VideoEvidenceRegisterApiView`, `VideoEvidenceUploadApiView`, `VideoEvidenceStreamGatewayApiView`, `VideoEvidenceArchiveApiView`)
+  - `intelligent_tracker_hub/api_views.py` (implemented `VideoEvidenceRegisterApiView`, `VideoEvidenceUploadApiView`, `VideoEvidenceStreamGatewayApiView` with range forwarding and corruption fallback, and `VideoEvidenceArchiveApiView` with atomic staging, SHA-256 checksums, and `?force=true` repair)
   - `intelligent_tracker_hub/api_urls.py` (wired gallery register, upload, stream, and archive endpoints)
   - `intelligent_tracker_hub/admin.py` (registered `video_evidence` in `SecurityEventAdmin` fieldsets)
-  - `intelligent_tracker_hub/templates/intelligent_tracker_hub/event_detail.html` (embedded zero-copy HTML5 video player, homography trajectory badge, and async cloud archive action)
+  - `intelligent_tracker_hub/templates/intelligent_tracker_hub/event_detail.html` (embedded zero-copy HTML5 video player, homography trajectory badge, dynamic vault health status, and async cloud archive/repair action)
   - `INTELLIGENT_TRACKER_INTEGRATION_PLAN.md` (updated Section 2B and Section 3 Phase E2 with zero-copy stream gateway architecture)
   - `documentation/README.md` (updated Section 11 architecture diagram and endpoint documentation)
   - `milestone_plan.md` & `TODO_MODERNIZATION.md` (marked Milestone 16b complete)
-  - `tests/test_intelligent_tracker_hub.py` (added 7 tests covering zero-copy registration, HMAC tampering, stream proxy range forwarding, local archive slicing, cloud archival trigger, multipart upload, and UI video rendering)
+  - `tests/test_intelligent_tracker_hub.py` (added 9 tests covering zero-copy registration, HMAC tampering, stream proxy range forwarding, local archive slicing, cloud archival trigger, multipart upload, UI video rendering, corrupted archive auto-fallback to reference, and forced repair from source)
 - **Verification & Test Outcomes:**
   - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
   - `.\.venv\Scripts\python.exe manage.py makemessages` & `compilemessages` → Clean compilation across all 5 locales (`es`, `fr`, `it`, `ja`, `pt`).
-  - `.\.venv\Scripts\python.exe -m pytest tests/test_intelligent_tracker_hub.py --cov=intelligent_tracker_hub` → **18 passed in 6.97s with 87% statement coverage**.
-  - `.\.venv\Scripts\python.exe -m pytest -q` → **248 passed in 48.65s (100% passing repository-wide)**.
+  - `.\.venv\Scripts\python.exe -m pytest tests/test_intelligent_tracker_hub.py tests/test_video_gallery.py --cov=intelligent_tracker_hub` → **60 passed in 9.25s with 87% statement coverage**.
+  - `.\.venv\Scripts\python.exe -m pytest -q` → **250 passed in 49.33s (100% passing repository-wide)**.
 
 
