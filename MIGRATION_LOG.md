@@ -836,4 +836,41 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `.\.venv\Scripts\python.exe -m pytest tests/test_intelligent_tracker_hub.py tests/test_video_gallery.py --cov=intelligent_tracker_hub` → **60 passed in 9.25s with 87% statement coverage**.
   - `.\.venv\Scripts\python.exe -m pytest -q` → **250 passed in 49.33s (100% passing repository-wide)**.
 
+---
+
+## [Frontier Architecture Review] - Milestone 16c & 16d Elevation (Phase E3 & Phase E4)
+- **Date:** 2026-10-26
+- **Status:** **ARCHITECTURE ELEVATED & SPECIFIED / READY FOR EXECUTION**
+- **Objectives & Architectural Audit:**
+  - Invoked Frontier Architect skill protocol to audit and elevate Phase E3 (Central Multi-Site Dashboard & Live Stream Embed) and Phase E4 (CRM Visitor Pass Synchronization) in `INTELLIGENT_TRACKER_INTEGRATION_PLAN.md`.
+  - Benchmarked baseline vs. Frontier SOTA paradigms:
+    1. *Live Video Stream & Network Traversal (Phase E3):*
+       - *Identified Trap:* Direct browser-to-edge MJPEG embedding fails across WAN/NAT boundaries when edge cameras are deployed on private LAN subnets (`192.168.x.x`), leaks edge IP addresses, and overloads edge device CPU/bandwidth on multi-client views.
+       - *Frontier SOTA Solution:* Architected an authenticated Live Stream Reverse Proxy Gateway (`GET /api/v1/security/stream/live/<camera_id>/`) streaming `multipart/x-mixed-replace; boundary=frame` to authorized operators with automatic fallback to synthetic mock MJPEG generation for offline/CI environments.
+    2. *Camera Registry & Heartbeat Health (Phase E3):*
+       - Architected `Camera` model linked to `location_management.Location` with real-time status (`ONLINE`, `OFFLINE`, `CONNECTING`, `DEGRADED`) and periodic edge heartbeat ingestion (`POST /api/v1/security/cameras/heartbeat/`).
+    3. *Real-time Telemetry & Dynamic Canvas Overlay (Phase E3):*
+       - Architected HTML5 Canvas telemetry overlay synchronized over video feeds, rendering 30fps bounding box annotations, track IDs, and color-coded entity status tags (Staff/VIP, Visitor, Intrusion).
+       - Added live alert drawer with Web Audio API chime and toast notifications on Bootstrap 5.3+.
+    4. *High-Performance Whitelist Delta-Sync (Phase E4):*
+       - *Identified Trap:* Periodic polling of full contact credentials creates redundant serialization and bandwidth spikes across WAN links.
+       - *Frontier SOTA Solution:* Architected HTTP ETag (`If-None-Match`) caching returning `HTTP 304 Not Modified` (0 bytes payload) when credentials are unchanged, with `?since=` timestamp filtering for incremental updates.
+    5. *Temporal Clearances & Access Control Credentials (Phase E4):*
+       - Extended CRM `Contact` with time-bound visitor passes (`valid_from`, `valid_until`), normalized ANPR vehicle license plates, facial reference photos, pre-computed 512-d biometric embeddings (`face_embedding_vector`), and clearance tiers.
+    6. *Bi-directional Closed Loop & CRM Presence Tracking (Phase E4):*
+       - Designed access log ingestion (`POST /api/v1/security/access/`) triggered upon gate recognition, automatically updating CRM contact presence to "On-Premises" / "Checked In" and dispatching bilingual host notifications (`language_management`).
+- **Files Modified / Updated:**
+  - `INTELLIGENT_TRACKER_INTEGRATION_PLAN.md` (fully expanded Section 2.C, 2.D, and Section 3 Phase E3 & Phase E4 specifications)
+  - `milestone_plan.md` (updated Milestone 16c and 16d task breakdowns and verification criteria)
+  - `TODO_MODERNIZATION.md` (updated Milestone 16c and 16d actionable checklists)
+  - `documentation/README.md` (updated Section 11 architecture documentation, endpoint specifications, and caching protocols)
+  - `MIGRATION_LOG.md` (logged Frontier Architect evaluation and checkpoint)
+- **Next Steps:**
+  - Proceed with Milestone 16c (Phase E3) implementation:
+    - Create `Camera` model in `intelligent_tracker_hub/models.py` and run migrations.
+    - Implement live stream proxy gateway `GET /api/v1/security/stream/live/<camera_id>/` with synthetic mock stream generator.
+    - Implement camera heartbeat receiver `POST /api/v1/security/cameras/heartbeat/` and telemetry stream.
+    - Upgrade SOC dashboard (`dashboard.html`) with multi-site selector, responsive matrix grid, live canvas overlay, and audio alert chime.
+
+
 

@@ -758,13 +758,35 @@ The platform integrates with [davtoh/intelligent-tracker](https://github.com/dav
 - **Multipart Upload Fallback:** `POST /api/v1/gallery/upload/`
   - Direct file upload for isolated edge nodes.
 
-#### 3. Two-Way Visitor Pass & Whitelist Synchronization (`crm`)
-- **Endpoint:** `GET /api/v1/security/whitelist/?site_id={site_id}`
-- Returns authoritative authorized personnel, VIP clearances, contractor passes, and registered vehicle license plates.
-- Edge nodes cache results in local SQLite (`TrackerDB`) ensuring continuous AI recognition during WAN outages.
+#### 3. Central Multi-Site Dashboard, Live Streaming Gateway & Telemetry Canvas (Phase E3)
+- **Live Stream Reverse Proxy Gateway:** `GET /api/v1/security/stream/live/<camera_id>/`
+  - Traverses NAT/WAN firewalls by proxying `multipart/x-mixed-replace; boundary=frame` MJPEG chunks from private edge LAN nodes to authenticated Hub operators.
+  - Shields edge nodes from exposure and eliminates multi-client stream replication bottlenecks on edge CPU/bandwidth.
+  - Automatically activates synthetic mock MJPEG stream generator when edge nodes are offline or during CI/CD demo testing.
+- **Camera Registry & Dynamic Health Heartbeats:**
+  - Dedicated `Camera` model linked to `location_management.Location` with fields: `camera_id`, `name`, `stream_url`, `status` (`ONLINE`, `OFFLINE`, `CONNECTING`, `DEGRADED`), `last_heartbeat`, `fps`, and `resolution`.
+  - Edge nodes emit periodic health pings via `POST /api/v1/security/cameras/heartbeat/`.
+- **Real-Time Telemetry & HTML5 Canvas Overlay:**
+  - Endpoint: `GET /api/v1/security/stream/telemetry/<camera_id>/` delivering 30fps bounding box annotations (`[ymin, xmin, ymax, xmax]`), track IDs, person labels, and intrusion vectors.
+  - Synchronized HTML5 Canvas overlays color-coded classification tags (Green = Staff/VIP, Yellow = Visitor, Red = Intrusion/Restricted) directly over video tiles.
+- **SOC Operations Center UI (`/security/`):**
+  - Dynamic multi-site selector connected to `location_management.Location`.
+  - Responsive multi-camera matrix grid (1x1, 2x2, 3x3 layout selector) built on Bootstrap 5.3+.
+  - Live toast incident feed with Web Audio API chime toggle and one-click incident drilldown.
 
-#### 4. Central Multi-Site Dashboard & Mock Stream Simulation
-- Operators monitor multi-site camera feeds at `/security/` (or `/tracker/`).
-- Includes a built-in mock stream simulation mode for local development, CI/CD testing, and offline demonstration without requiring active edge hardware.
+#### 4. Temporal CRM Visitor Passes, Whitelist Delta-Sync & Bi-directional Access Loop (Phase E4)
+- **Authoritative Database & Extended Credentials (`crm`):**
+  - Extends `crm.Contact` with `security_clearance` (`VIP`, `STAFF`, `CONTRACTOR`, `VISITOR`, `RESTRICTED`, `BANNED`), `valid_from`, `valid_until`, `license_plate` (ANPR normalized), `face_profile_photo`, `face_embedding_vector` (pre-computed 512-d float array), and `security_tag`.
+- **High-Performance Whitelist Delta-Sync API:**
+  - Endpoint: `GET /api/v1/security/whitelist/?site_id={site_id}`
+  - Supports HTTP ETag (`If-None-Match`), returning `HTTP 304 Not Modified` with 0 bytes if site credentials are unchanged.
+  - Supports `?since=<iso-timestamp>` incremental delta queries, minimizing WAN bandwidth and edge CPU.
+  - Automatically filters out expired visitor passes and revoked clearances.
+- **Bi-directional Access Loop & CRM Presence Tracking:**
+  - Ingestion endpoint: `POST /api/v1/security/access/`
+  - When edge gates recognize an authorized face or vehicle plate, the event automatically updates the contact's CRM status to "On-Premises" / "Checked In" with audit timeline entry.
+  - Dispatches automated bilingual arrival notifications (EN/ES) via `language_management`.
+- **Offline-First Edge Cache (`TrackerDB`):**
+  - Edge nodes mirror the whitelist in local SQLite `TrackerDB`, guaranteeing autonomous gate operation during WAN outages.
 
 

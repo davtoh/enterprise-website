@@ -324,25 +324,42 @@
 - [x] Update SOC Event Detail UI (`event_detail.html`) to embed zero-copy video player with stream gateway URL and "Archive to Cloud Vault" action.
 - [x] Automated integration test suite (18 dedicated tests, 87% statement coverage on `intelligent_tracker_hub`, 248 passed repository-wide) validating zero-copy registration, streaming proxy with range headers, archival trigger, and multipart upload.
 
-**16c (Phase E3) — Central Multi-Site Dashboard & Live Stream Embed:**
-- [ ] Multi-site security dashboard view at `/security/` (or `/tracker/`):
-  - Site, building, and camera selector connected to `location_management`.
-  - Live camera card grid displaying connection status (online/offline heartbeat indicators).
-  - Live MJPEG video canvas embed with real-time WebSocket telemetry overlay.
-  - Built-in mock stream / canvas test loop for local development and offline edge demonstration.
-  - Real-time incident alert feed with Bootstrap 5 toast notifications.
+**16c (Phase E3) — Central Multi-Site Dashboard, Live Stream Gateway & Telemetry Canvas:**
+- [ ] Camera Registry & Dynamic Health Model:
+  - Create `Camera` model linked to `location_management.Location` with `camera_id`, `name`, `stream_url`, `status` (`ONLINE`, `OFFLINE`, `CONNECTING`, `DEGRADED`), `last_heartbeat`, `fps`, and `resolution`.
+  - Heartbeat receiver endpoint: `POST /api/v1/security/cameras/heartbeat/` tracking live edge health and connection state.
+- [ ] Authenticated Live MJPEG Streaming Reverse Proxy Gateway:
+  - `GET /api/v1/security/stream/live/<camera_id>/` proxying edge MJPEG feeds across NAT/WAN firewalls without leaking edge private LAN IPs.
+  - Built-in synthetic mock MJPEG generator fallback for local testing, CI/CD, and offline demos.
+- [ ] Real-time Telemetry Stream & HTML5 Canvas Overlay:
+  - Telemetry endpoint `GET /api/v1/security/stream/telemetry/<camera_id>/` delivering 30fps bounding box annotations (`[ymin, xmin, ymax, xmax]`), track IDs, person labels, and intrusion vectors.
+  - Synchronized HTML5 Canvas overlay rendering color-coded classification tags (Green = Staff/VIP, Yellow = Visitor, Red = Intrusion/Restricted).
+- [ ] Enhanced SOC Multi-Site Operations Center Dashboard (`/security/`):
+  - Dynamic multi-site selector connected to `location_management.Location`.
+  - Multi-camera responsive matrix grid (1x1, 2x2, 3x3 layout selector) on Bootstrap 5.3+.
+  - Live camera card grid displaying real-time connection status badges, FPS, and latency.
+  - Real-time incident alert drawer with Bootstrap 5 toasts and Web Audio API chime toggle.
 
-**16d (Phase E4) — CRM Visitor Pass & Whitelist Synchronization (`crm`):**
-- [ ] Extend CRM `Contact` with security credentials:
-  - `face_profile_photo`: ImageField for edge facial vector generation.
-  - `license_plate`: CharField for ANPR / gate recognition.
-  - `security_clearance`: Choices (`VIP`, `STAFF`, `CONTRACTOR`, `VISITOR`, `RESTRICTED`).
-  - `security_tag`: CharField for edge tracking classifications.
-- [ ] Expose whitelist endpoint: `GET /api/v1/security/whitelist/?site_id={site_id}` returning active authorized personnel vectors and license plates for edge SQLite caching (offline WAN resilience).
-- [ ] Multilingual automated alerts via `language_management` catalogs (EN/ES) upon high-severity events.
+**16d (Phase E4) — Temporal CRM Visitor Passes, Whitelist Delta-Sync & Bi-directional Access Loop:**
+- [ ] Extend CRM `Contact` with enterprise physical security credentials:
+  - `security_clearance`: Choices (`VIP`, `STAFF`, `CONTRACTOR`, `VISITOR`, `RESTRICTED`, `BANNED`).
+  - `valid_from` & `valid_until`: Time-bound validity window for contractor passes and visitor clearances.
+  - `license_plate`: Alphanumeric normalized vehicle license plate for ANPR gate recognition.
+  - `face_profile_photo`: Biometric reference image for edge facial recognition vector generation.
+  - `face_embedding_vector`: Pre-computed 512-d biometric embedding for zero-latency edge startup.
+  - `security_tag`: Custom tag for edge tracker classification.
+- [ ] High-Performance Whitelist Delta-Sync API:
+  - `GET /api/v1/security/whitelist/?site_id={site_id}` supporting HTTP ETag (`If-None-Match`), `304 Not Modified`, and `?since=` delta-sync filtering to minimize WAN bandwidth.
+  - Automatically filters out expired visitor passes and revoked credentials.
+- [ ] Bi-directional Access Loop & CRM Presence Tracking:
+  - Ingestion endpoint: `POST /api/v1/security/access/` recording gate access events.
+  - Automatically updates contact CRM presence state to "On-Premises" / "Checked In" with audit timeline entry.
+  - Triggers automated bilingual arrival alerts via `language_management` catalogs (EN/ES).
+- [ ] Offline-First Edge Cache Architecture:
+  - Define local SQLite `TrackerDB` schema and sync specification for `davtoh/intelligent-tracker`.
 
 **Verification:**
-- Automated test suite covering webhook receivers, HMAC validation, video upload, whitelist JSON serialization, and dashboard rendering.
+- Automated test suite covering camera streams, heartbeats, whitelist ETag caching, visitor access logs, and CRM contact synchronization.
 - `python manage.py check` → 0 issues.
 - Responsive Bootstrap 5.3+ security operations dashboard.
 
