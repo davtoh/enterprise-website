@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 17:27-0500\n"
+"POT-Creation-Date: 2026-10-26 19:41-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2521,7 +2521,7 @@ msgid "Catalog Created"
 msgstr ""
 
 #: .\erp\templates\erp\product_detail.html:108
-#: .\intelligent_tracker_hub\models.py:103
+#: .\intelligent_tracker_hub\models.py:111
 msgid "Last Updated"
 msgstr ""
 
@@ -3168,42 +3168,42 @@ msgstr ""
 msgid "Evidence & Telemetry"
 msgstr ""
 
-#: .\intelligent_tracker_hub\admin.py:48
+#: .\intelligent_tracker_hub\admin.py:49
 msgid "Resolution & Incident Handling"
 msgstr ""
 
-#: .\intelligent_tracker_hub\admin.py:59
+#: .\intelligent_tracker_hub\admin.py:60
 msgid "Audit Timestamps"
 msgstr ""
 
-#: .\intelligent_tracker_hub\admin.py:69
+#: .\intelligent_tracker_hub\admin.py:70
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:25
 msgid "Event ID"
 msgstr ""
 
-#: .\intelligent_tracker_hub\admin.py:84
+#: .\intelligent_tracker_hub\admin.py:85
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:75
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:119
 msgid "Severity"
 msgstr ""
 
-#: .\intelligent_tracker_hub\admin.py:93
+#: .\intelligent_tracker_hub\admin.py:94
 msgid "Snapshot"
 msgstr ""
 
-#: .\intelligent_tracker_hub\admin.py:101
+#: .\intelligent_tracker_hub\admin.py:102
 msgid "No snapshot uploaded."
 msgstr ""
 
-#: .\intelligent_tracker_hub\admin.py:102
+#: .\intelligent_tracker_hub\admin.py:103
 msgid "Snapshot Preview"
 msgstr ""
 
-#: .\intelligent_tracker_hub\admin.py:109
+#: .\intelligent_tracker_hub\admin.py:110
 msgid "Formatted Metadata"
 msgstr ""
 
-#: .\intelligent_tracker_hub\admin.py:143
+#: .\intelligent_tracker_hub\admin.py:144
 msgid "HMAC Status"
 msgstr ""
 
@@ -3262,7 +3262,7 @@ msgid "Event Type"
 msgstr ""
 
 #: .\intelligent_tracker_hub\models.py:50
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:118
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:169
 msgid "Site / Facility"
 msgstr ""
 
@@ -3275,98 +3275,102 @@ msgid "Event Timestamp"
 msgstr ""
 
 #: .\intelligent_tracker_hub\models.py:66
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:50
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:90
 msgid "Evidence Snapshot"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:71
+#: .\intelligent_tracker_hub\models.py:74
+msgid "Video Evidence"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:79
 msgid "Telemetry & Dwell Metadata"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:78
+#: .\intelligent_tracker_hub\models.py:86
 msgid "Severity Level"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:83
+#: .\intelligent_tracker_hub\models.py:91
 msgid "Is Resolved"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:91
+#: .\intelligent_tracker_hub\models.py:99
 msgid "Resolved By"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:96
+#: .\intelligent_tracker_hub\models.py:104
 msgid "Resolved At"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:100
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:156
+#: .\intelligent_tracker_hub\models.py:108
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:207
 msgid "Resolution Notes"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:102
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:132
+#: .\intelligent_tracker_hub\models.py:110
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:183
 msgid "Ingested At"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:106
+#: .\intelligent_tracker_hub\models.py:114
 msgid "Security Event"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:107
+#: .\intelligent_tracker_hub\models.py:115
 msgid "Security Events"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:161
+#: .\intelligent_tracker_hub\models.py:169
 msgid "Received At"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:162
+#: .\intelligent_tracker_hub\models.py:170
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:21
 msgid "Client IP"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:163
+#: .\intelligent_tracker_hub\models.py:171
 msgid "Endpoint"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:164
+#: .\intelligent_tracker_hub\models.py:172
 msgid "HTTP Method"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:165
+#: .\intelligent_tracker_hub\models.py:173
 msgid "X-Tracker-Signature Header"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:166
+#: .\intelligent_tracker_hub\models.py:174
 msgid "Signature Valid"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:167
+#: .\intelligent_tracker_hub\models.py:175
 msgid "Associated Event UUID"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:168
+#: .\intelligent_tracker_hub\models.py:176
 msgid "Raw Request Body"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:169
+#: .\intelligent_tracker_hub\models.py:177
 msgid "HTTP Status Code"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:170
+#: .\intelligent_tracker_hub\models.py:178
 msgid "Error Details"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:171
+#: .\intelligent_tracker_hub\models.py:179
 msgid "Processed Successfully"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:174
+#: .\intelligent_tracker_hub\models.py:182
 msgid "Security Audit Log"
 msgstr ""
 
-#: .\intelligent_tracker_hub\models.py:175
+#: .\intelligent_tracker_hub\models.py:183
 msgid "Security Audit Logs"
 msgstr ""
 
@@ -3512,12 +3516,12 @@ msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:84
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:92
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:122
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:173
 msgid "Camera ID"
 msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:88
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:76
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:116
 msgid "Zone Name"
 msgstr ""
 
@@ -3595,7 +3599,7 @@ msgid "Action"
 msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:145
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:119
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:170
 msgid "Default Site"
 msgstr ""
 
@@ -3633,56 +3637,107 @@ msgstr ""
 msgid "Active Incident"
 msgstr ""
 
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:59
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:51
+msgid "Video Evidence Stream"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:56
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:247
+msgid "Archived in Cloud Vault"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:60
+msgid "Zero-Copy Edge Stream"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:63
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:251
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:256
+msgid "Archive to Cloud Vault"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:72
+msgid "Your browser does not support HTML5 video streaming."
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:99
 msgid "No evidence snapshot was attached to this edge webhook."
 msgstr ""
 
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:69
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:109
 msgid "Edge Telemetry & Bounding Box Data"
 msgstr ""
 
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:82
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:122
 msgid "Dwell Duration"
 msgstr ""
 
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:88
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:128
 msgid "Detection Confidence"
 msgstr ""
 
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:94
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:134
 msgid "Entity Identifier"
 msgstr ""
 
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:100
-msgid "Raw JSON Telemetry"
-msgstr ""
-
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:112
-msgid "Facility & Camera"
-msgstr ""
-
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:126
-msgid "City / State"
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:142
+msgid "Ground-Plane Homography Trajectory"
 msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:143
-msgid "Incident Resolution & Audit"
+msgid "Waypoints"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:145
+msgid "Calibrated spatial coordinates from World Scenario Studio."
 msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:151
-msgid "Resolved by"
+msgid "Raw JSON Telemetry"
 msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:163
+msgid "Facility & Camera"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:177
+msgid "City / State"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:194
+msgid "Incident Resolution & Audit"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:202
+msgid "Resolved by"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:214
 msgid "Operator Resolution Notes"
 msgstr ""
 
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:164
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:215
 msgid "Enter investigative notes, verified identity, or action taken..."
 msgstr ""
 
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:167
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:218
 msgid "Acknowledge & Mark Resolved"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:236
+msgid "Archiving..."
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:248
+msgid "Video evidence permanently frozen into cloud storage."
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:252
+msgid "Archival failed."
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:257
+msgid "Network error during archival."
 msgstr ""
 
 #: .\intelligent_tracker_hub\views.py:109

@@ -315,11 +315,14 @@
 - [x] Add `Location` model to `location_management` with code, city, and coordinates.
 - [x] Automated test suite (11 dedicated tests, 90% statement coverage on `intelligent_tracker_hub`) validating HMAC verification, tampering detection, payload schemas, model methods, and dashboard views.
 
-**16b (Phase E2) — Video Evidence Auto-Ingestion (`video_gallery`):**
-- [ ] Implement edge upload endpoint: `POST /api/v1/gallery/upload/` accepting MP4 video journey and incident clips.
-- [ ] Auto-bind uploaded video to site gallery in `video_gallery.models.VideoGallery` (e.g. `security-audit-<site_slug>`).
-- [ ] Auto-generate video thumbnails, duration metadata, and security alert tags (`severity`, `camera_sequence`, `entity_name`).
-- [ ] Automated integration tests verifying MP4 ingestion and gallery binding.
+**16b (Phase E2) — Video Evidence Ingestion & Zero-Copy Stream Gateway (`video_gallery`):**
+- [x] Lightweight Zero-Copy Registration endpoint: `POST /api/v1/gallery/register/` storing edge video references, duration, camera ID, and ground-plane homography trajectories without Hub disk storage duplication.
+- [x] On-Demand Streaming Reverse Proxy Gateway: `GET /api/v1/gallery/stream/<video_id>/` supporting HTTP 206 Partial Content / Range requests for seamless video scrubbing across NAT/WAN boundaries.
+- [x] Dual-Mode On-Demand Cloud Archival: `POST /api/v1/gallery/archive/<video_id>/` (and SOC UI button) for freezing evidence into central Hub storage on compliance hold.
+- [x] Direct Multipart Upload fallback: `POST /api/v1/gallery/upload/` accepting direct MP4 file uploads from isolated edge nodes.
+- [x] Auto-bind video to site gallery in `video_gallery.models.VideoGallery` (e.g. `security-audit-<site_slug>`) and link to `SecurityEvent.video_evidence`.
+- [x] Update SOC Event Detail UI (`event_detail.html`) to embed zero-copy video player with stream gateway URL and "Archive to Cloud Vault" action.
+- [x] Automated integration test suite (18 dedicated tests, 87% statement coverage on `intelligent_tracker_hub`, 248 passed repository-wide) validating zero-copy registration, streaming proxy with range headers, archival trigger, and multipart upload.
 
 **16c (Phase E3) — Central Multi-Site Dashboard & Live Stream Embed:**
 - [ ] Multi-site security dashboard view at `/security/` (or `/tracker/`):

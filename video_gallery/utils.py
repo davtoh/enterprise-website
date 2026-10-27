@@ -92,7 +92,13 @@ def detect_video_source(url: str = "", has_file: bool = False) -> str:
         return 'youtube'
     if 'vimeo' in cleaned:
         return 'vimeo'
-    if cleaned.endswith(('.mp4', '.webm', '.ogg', '.m4v')) or '/video/' in cleaned:
+    if (
+        cleaned.endswith(('.mp4', '.webm', '.ogg', '.m4v'))
+        or '.mp4' in cleaned
+        or '/video/' in cleaned
+        or '/clips/' in cleaned
+        or '/stream/' in cleaned
+    ):
         return 'mp4'
 
     return 'youtube'

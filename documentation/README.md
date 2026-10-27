@@ -708,13 +708,14 @@ The platform integrates with [davtoh/intelligent-tracker](https://github.com/dav
 |   - FastAPI Daemon: MJPEG streaming server, WebSocket telemetry, local SQLite DB  |
 +-----------------------------------------------------------------------------------+
        |                                     |                              ^
-       | Real-time Webhooks                  | Video Evidence Upload        | Whitelist Sync
-       | POST /api/v1/security/events/       | POST /api/v1/gallery/upload/ | GET /api/v1/security/whitelist/
-       v                                     v                              |
+       | Real-time Webhooks                  | Video Ref / Upload           | Whitelist Sync
+       | POST /api/v1/security/events/       | POST /api/v1/gallery/register| GET /api/v1/security/whitelist/
+       v                                     v (or /gallery/upload/)        |
 +-----------------------------------------------------------------------------------+
 |             Enterprise Cloud Hub: davtoh/enterprise-website                       |
 |   - rest_api: HMAC-SHA256 authenticated webhook receiver (X-Tracker-Signature)    |
-|   - video_gallery: Auto-ingests MP4 incident journey clips and generates previews |
+|   - video_gallery: Zero-Copy Stream Gateway (GET /api/v1/gallery/stream/<id>/)    |
+|     supporting HTTP 206 Partial Content / Range requests without Hub disk bloat   |
 |   - crm: Authoritative contact whitelist with facial vector images & license plates|
 |   - location_management: Hierarchical multi-site, building, and camera topology   |
 |   - language_management: Bilingual automated alert dispatching (EN / ES)          |
@@ -725,7 +726,7 @@ The platform integrates with [davtoh/intelligent-tracker](https://github.com/dav
 ### Integration Protocols & Endpoints
 
 #### 1. Edge-to-Hub Security Webhook
-- **Endpoint:** `POST /api/v1/security/events/` (handled in `rest_api`).
+- **Endpoint:** `POST /api/v1/security/events/` (handled in `rest_api` / `intelligent_tracker_hub`).
 - **Authentication:** HMAC SHA-256 header (`X-Tracker-Signature`) validated against the site secret key.
 - **Payload Schema:**
   ```json
@@ -745,10 +746,17 @@ The platform integrates with [davtoh/intelligent-tracker](https://github.com/dav
   }
   ```
 
-#### 2. Video Evidence Archiving (`video_gallery`)
-- **Endpoint:** `POST /api/v1/gallery/upload/`
-- When an intrusion occurs or an operator exports a person's trajectory journey, `intelligent-tracker` uploads the sliced MP4 video.
-- Automatically registered under the site's `VideoGallery` (e.g. `security-audit-<site>`) with auto-generated thumbnails and severity tags.
+#### 2. Video Evidence Archiving & Zero-Copy Stream Gateway (`video_gallery`)
+- **Zero-Copy Lightweight Registration:** `POST /api/v1/gallery/register/`
+  - Edge nodes register video clips by reference without transferring heavy MP4 files to the Hub's disk.
+  - Carries duration, camera ID, ground-plane homography trajectories (Milestone 8), and auto-binds to `VideoGallery(slug="security-audit-<site>")`.
+- **On-Demand Streaming Reverse Proxy Gateway:** `GET /api/v1/gallery/stream/<video_id>/`
+  - Browser video players stream video directly through the Hub gateway.
+  - Seamlessly handles HTTP 206 Partial Content / Range requests for smooth seeking and playback across NAT/WAN firewalls without leaking edge node private IPs.
+- **Dual-Mode Cloud Archival Hold:** `POST /api/v1/gallery/archive/<video_id>/`
+  - Operators can trigger permanent cloud evidence freezing on compliance hold, pulling the remote MP4 into Hub storage.
+- **Multipart Upload Fallback:** `POST /api/v1/gallery/upload/`
+  - Direct file upload for isolated edge nodes.
 
 #### 3. Two-Way Visitor Pass & Whitelist Synchronization (`crm`)
 - **Endpoint:** `GET /api/v1/security/whitelist/?site_id={site_id}`

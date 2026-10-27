@@ -65,6 +65,14 @@ class SecurityEvent(models.Model):
         null=True,
         verbose_name=_("Evidence Snapshot"),
     )
+    video_evidence = models.ForeignKey(
+        "video_gallery.VideoItem",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="security_events",
+        verbose_name=_("Video Evidence"),
+    )
     metadata = models.JSONField(
         default=dict,
         blank=True,

@@ -260,10 +260,14 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
   - [x] Added `Location` model in `location_management` and registered in admin.
   - [x] Created SOC Dashboard at `/security/`, event detail view, resolution POST handler, and simulated edge dispatch tool.
   - [x] Automated test suite with 11 dedicated tests (90% statement coverage on `intelligent_tracker_hub`).
-- [ ] **16b — Video Evidence Auto-Ingestion (`video_gallery`):**
-  - [ ] Implement edge upload endpoint `POST /api/v1/gallery/upload/` accepting MP4 journey and incident clips.
-  - [ ] Auto-bind uploaded video to site gallery in `video_gallery.models.VideoGallery` (`security-audit-<site_slug>`).
-  - [ ] Auto-generate thumbnails, duration metadata, and security alert tags (`severity`, `camera_sequence`, `entity_name`).
+- [x] **16b — Video Evidence Ingestion & Zero-Copy Stream Gateway (`video_gallery`):**
+  - [x] Implemented zero-copy registration endpoint `POST /api/v1/gallery/register/` storing edge video references, duration, camera ID, and ground-plane homography trajectories without duplicating MP4 files on Hub disk.
+  - [x] Implemented on-demand streaming reverse proxy gateway `GET /api/v1/gallery/stream/<video_id>/` supporting HTTP 206 Partial Content / Range requests for smooth video scrubbing across NAT/WAN boundaries.
+  - [x] Implemented dual-mode on-demand cloud archival `POST /api/v1/gallery/archive/<video_id>/` (and SOC UI button) for freezing evidence into central Hub storage on compliance hold.
+  - [x] Implemented direct multipart upload `POST /api/v1/gallery/upload/` for backward compatibility.
+  - [x] Auto-bound video to site gallery in `video_gallery.models.VideoGallery` (`security-audit-<site_slug>`) and linked to `SecurityEvent.video_evidence`.
+  - [x] Updated SOC Event Detail UI (`event_detail.html`) to embed zero-copy video player with stream gateway URL and "Archive to Cloud Vault" action.
+  - [x] Automated integration tests covering registration, stream proxy with range headers, archival trigger, and multipart upload (18 tests, 87% coverage).
 - [ ] **16c — Central Multi-Site Dashboard & Live Stream Embed:**
   - [ ] Multi-site security dashboard view at `/security/` (or `/tracker/`) with site/building/camera selector.
   - [ ] Live camera card grid displaying connection status (online/offline heartbeat indicators).

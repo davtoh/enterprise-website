@@ -36,7 +36,8 @@ flowchart TD
 ### 2. Integration Architecture & Protocols
 
 #### A. Edge-to-Hub Security Webhook
-- **Endpoint:** POST /api/v1/security/events/ (handled in est_api).
+- **Endpoint:** POST /api/v1/security/events/ (handled in 
+est_api).
 - **Authentication:** HMAC SHA-256 header (X-Tracker-Signature) validated against shared site secret.
 - **Payload Schema:**
   - event_id: Unique UUID.
@@ -47,12 +48,21 @@ flowchart TD
   - snapshot_base64: JPEG evidence crop of the event.
   - metadata: Zone name, dwell duration, confidence score, recognized entity ID/name.
 
-#### B. Video Evidence Archiving (ideo_gallery)
-- When an intrusion occurs or an operator exports a person's trajectory journey:
-  - intelligent-tracker uploads the sliced MP4 video to:
+#### B. Video Evidence Archiving & Zero-Copy Stream Gateway (video_gallery)
+- **Zero-Copy Lightweight Registration:**
+  - When an intrusion occurs or an operator exports a trajectory journey, the edge node registers the clip metadata without uploading heavy MP4 bytes:
+    POST /api/v1/gallery/register/
+  - Stores the remote edge URL (source_url), ground-plane homography coordinates (from Milestone 8), camera ID, and duration.
+  - Automatically binds a new VideoItem under the site's VideoGallery (e.g. slug: security-audit-north) and links to SecurityEvent.
+- **On-Demand Streaming Reverse Proxy Gateway:**
+  - Browser/web clients consume the video via the Hub's streaming proxy gateway:
+    GET /api/v1/gallery/stream/<video_id>/
+  - Forwards HTTP 206 Range requests to the edge node, enabling instant scrubbing/playback without exposing private edge LAN IPs or duplicating video files on the Hub's disk.
+- **Dual-Mode On-Demand Cloud Archival:**
+  - For legal/compliance holds or confirmed security incidents, operators can click 'Archive to Cloud Vault' (or call POST /api/v1/gallery/archive/<video_id>/) to asynchronously pull and freeze the MP4 into the central Hub vault.
+- **Backward-Compatible Multipart Upload:**
+  - Traditional edge clip upload remains supported for isolated nodes:
     POST /api/v1/gallery/upload/
-  - A new VideoItem is automatically registered under the site's VideoGallery (e.g. slug: security-audit-north).
-  - Automatically tagged with entity name, camera sequence, and severity badge.
 
 #### C. Two-Way Visitor & Whitelist Sync (crm)
 - enterprise-website maintains the authoritative database of authorized personnel, VIPs, contractors, and family vehicles.
@@ -73,9 +83,12 @@ flowchart TD
   - Implement POST /api/v1/security/events/ webhook receiver and audit model SecurityAuditLog.
   - Configure HMAC signature verification.
 
-- **Phase E2: Video Gallery Auto-Ingestion**
-  - Implement secure API endpoint POST /api/v1/gallery/upload/ accepting MP4 uploads from edge nodes.
-  - Auto-generate thumbnails and bind to ideo_gallery.models.VideoGallery.
+- **Phase E2: Video Gallery Auto-Ingestion & Zero-Copy Stream Gateway**
+  - Implement zero-copy registration endpoint POST /api/v1/gallery/register/ storing edge video references.
+  - Implement streaming reverse proxy gateway GET /api/v1/gallery/stream/<video_id>/ supporting HTTP 206 Partial Content / Range requests.
+  - Implement on-demand compliance freeze POST /api/v1/gallery/archive/<video_id>/.
+  - Implement direct multipart upload POST /api/v1/gallery/upload/ for backward compatibility.
+  - Auto-bind to ideo_gallery.models.VideoGallery and link to SecurityEvent.
 
 - **Phase E3: Central Multi-Site Dashboard & Live Stream Embed**
   - Django view embedding the live edge MJPEG canvas with WebSocket telemetry overlay.

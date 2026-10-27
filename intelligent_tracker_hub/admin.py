@@ -38,6 +38,7 @@ class SecurityEventAdmin(admin.ModelAdmin):
             _("Evidence & Telemetry"),
             {
                 "fields": (
+                    "video_evidence",
                     "snapshot",
                     "snapshot_thumb_large",
                     "metadata_pretty",

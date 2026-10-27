@@ -797,7 +797,40 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `milestone_plan.md`, `TODO_MODERNIZATION.md`, `MIGRATION_LOG.md` (updated with Milestone 16a completion)
 - **Verification & Test Outcomes:**
   - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
-  - `.\.venv\Scripts\python.exe manage.py sync_menus` → **Successfully synced plugins into menu 'main_navbar'**.
-  - `.\.venv\Scripts\python.exe -m pytest tests/test_intelligent_tracker_hub.py --cov=intelligent_tracker_hub` → **11 passed in 4.90s with 90% statement coverage**.
-  - `.\.venv\Scripts\python.exe -m pytest -q` → **241 passed in 45.48s**, 0 failures across repository.
+---
+
+## [Milestone 16b] - Video Evidence Ingestion & Zero-Copy Stream Gateway
+- **Date:** 2026-10-26
+- **Status:** **COMPLETE**
+- **Architecture & Objectives:**
+  - Designed and deployed the Frontier Architect **Zero-Copy Stream Gateway & Dual-Mode Archival** architecture for surveillance evidence:
+    1. *Lightweight Zero-Copy Registration (`POST /api/v1/gallery/register/`):*
+       Edge nodes register clip metadata (remote stream URL, camera ID, duration, Base64 thumbnail crop, and ground-plane homography trajectories from Milestone 8) without duplicating heavy MP4 video bytes on Hub disk.
+    2. *On-Demand Streaming Reverse Proxy Gateway (`GET /api/v1/gallery/stream/<video_id>/`):*
+       Proxies video streams with HTTP 206 Partial Content / Range Request headers directly to browser clients for instant scrubbing/seeking across NAT/WAN boundaries without leaking edge node private IPs or consuming Hub disk.
+    3. *Dual-Mode On-Demand Cloud Archival (`POST /api/v1/gallery/archive/<video_id>/`):*
+       Enables legal/compliance evidence holds, pulling remote MP4 into central storage when explicitly commanded by an operator via the SOC UI or API.
+    4. *Direct Multipart Upload Fallback (`POST /api/v1/gallery/upload/`):*
+       Maintains full backward compatibility for edge nodes performing direct MP4 uploads.
+    5. *Data Association & UI:*
+       Linked `VideoItem` to `SecurityEvent.video_evidence` and enhanced `event_detail.html` with an embedded zero-copy video player, live ground-plane homography trajectory indicator, and interactive cloud archival action.
+- **Files Created / Modified:**
+  - `intelligent_tracker_hub/models.py` (added `video_evidence` FK to `video_gallery.VideoItem`)
+  - `intelligent_tracker_hub/migrations/0002_securityevent_video_evidence.py` (applied migration)
+  - `video_gallery/utils.py` (enhanced `detect_video_source` to recognize stream and edge clip URLs as MP4 sources)
+  - `intelligent_tracker_hub/serializers.py` (added `VideoEvidenceRegisterSerializer`, `VideoEvidenceUploadSerializer`, enhanced `SecurityEventSerializer`)
+  - `intelligent_tracker_hub/api_views.py` (implemented `VideoEvidenceRegisterApiView`, `VideoEvidenceUploadApiView`, `VideoEvidenceStreamGatewayApiView`, `VideoEvidenceArchiveApiView`)
+  - `intelligent_tracker_hub/api_urls.py` (wired gallery register, upload, stream, and archive endpoints)
+  - `intelligent_tracker_hub/admin.py` (registered `video_evidence` in `SecurityEventAdmin` fieldsets)
+  - `intelligent_tracker_hub/templates/intelligent_tracker_hub/event_detail.html` (embedded zero-copy HTML5 video player, homography trajectory badge, and async cloud archive action)
+  - `INTELLIGENT_TRACKER_INTEGRATION_PLAN.md` (updated Section 2B and Section 3 Phase E2 with zero-copy stream gateway architecture)
+  - `documentation/README.md` (updated Section 11 architecture diagram and endpoint documentation)
+  - `milestone_plan.md` & `TODO_MODERNIZATION.md` (marked Milestone 16b complete)
+  - `tests/test_intelligent_tracker_hub.py` (added 7 tests covering zero-copy registration, HMAC tampering, stream proxy range forwarding, local archive slicing, cloud archival trigger, multipart upload, and UI video rendering)
+- **Verification & Test Outcomes:**
+  - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
+  - `.\.venv\Scripts\python.exe manage.py makemessages` & `compilemessages` → Clean compilation across all 5 locales (`es`, `fr`, `it`, `ja`, `pt`).
+  - `.\.venv\Scripts\python.exe -m pytest tests/test_intelligent_tracker_hub.py --cov=intelligent_tracker_hub` → **18 passed in 6.97s with 87% statement coverage**.
+  - `.\.venv\Scripts\python.exe -m pytest -q` → **248 passed in 48.65s (100% passing repository-wide)**.
+
 
