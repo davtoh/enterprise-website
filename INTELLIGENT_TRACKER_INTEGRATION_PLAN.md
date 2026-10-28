@@ -72,13 +72,14 @@ flowchart TD
 - **Live Stream Reverse Proxy Gateway:**
   - Solves the "NAT/Firewall Trap": Browsers cannot reach edge camera streams hosted on internal private LANs (`192.168.x.x`).
   - Hub exposes: `GET /api/v1/security/stream/live/<camera_id>/`
-  - Forwards `multipart/x-mixed-replace; boundary=frame` MJPEG chunks from the edge node to authenticated Hub operators, protecting edge nodes from WAN exposure and client multiplexing overload.
+  - Forwards `multipart/x-mixed-replace; boundary=frame` MJPEG chunks from the edge node's `/stream/<camera_id>` endpoint to authenticated Hub operators, protecting edge nodes from WAN exposure and client multiplexing overload.
 - **Camera Registry & Dynamic Health Heartbeats:**
   - Dedicated `Camera` model linked to `location_management.Location` with fields: `camera_id`, `name`, `stream_url`, `status` (`ONLINE`, `OFFLINE`, `CONNECTING`, `DEGRADED`), `last_heartbeat`, `fps`, and `resolution`.
   - Edge nodes emit periodic heartbeat pings:
     `POST /api/v1/security/cameras/heartbeat/` with status, drop rate, and active tracker count.
 - **Real-Time Telemetry & Canvas Overlay:**
   - Endpoint: `GET /api/v1/security/stream/telemetry/<camera_id>/` (SSE or polling).
+  - Edge node provides companion REST telemetry endpoint: `GET /api/cameras/<camera_id>/telemetry` returning JSON state: `fps`, `resolution`, `status`, `active_tracks` (`[id, bbox, centroid, ground_pos, velocity, label, confidence, dwell_time, entity_name, category]`), `zones`, `tripwires`, and `recent_alerts`.
   - High-performance HTML5 Canvas layered directly over the MJPEG canvas rendering 30fps bounding boxes (`[ymin, xmin, ymax, xmax]`), track IDs, dwell indicators, and color-coded entity status (Green = Staff/VIP, Yellow = Visitor, Red = Intrusion/Restricted).
 - **Mock Stream & Canvas Test Loop:**
   - Built-in synthetic MJPEG stream generator and telemetry mock loop allowing local development, CI/CD testing, and offline demos without requiring physical cameras.
@@ -152,4 +153,11 @@ flowchart TD
   - **Automated Localization Dispatch:** Implemented `intelligent_tracker_hub.notifications.send_visitor_arrival_notification` dispatching bilingual host arrival notifications (EN/ES).
   - **UI Modernization:** Modernized CRM Contact views (`contact_detail.html`, `contact_form.html`, `contact_list.html`) and SOC Operations Dashboard (`dashboard.html`) with access history, clearance badges, license plate pills, and live presence indicators.
   - **Comprehensive Test Suite:** 41 passed tests in `tests/test_intelligent_tracker_hub.py`, 23 passed tests in `tests/test_crm.py`, and 271 passed tests repository-wide (100% pass rate).
+
+- **Phase E5: Edge Node (intelligent_tracker) Milestone 10 Alignment & Hardening** *(In Progress)*
+  - **Webhook Signing:** Update `intelligent_tracker.events.WebhookDispatcher` to support `secret_key` and sign outbound security alerts with `X-Tracker-Signature` (HMAC-SHA256) and ISO-8601 timestamps.
+  - **REST Telemetry:** Expose `GET /api/cameras/<camera_id>/telemetry` in `dashboard/app.py` returning real-time bounding boxes, active tracks, and zone states for Hub polling/streaming.
+  - **Offline Cache DDL:** Add `tracker_sync_state`, `local_whitelist`, and `offline_access_queue` tables to `intelligent_tracker.database.TrackerDB` conforming to `INTELLIGENT_TRACKER_OFFLINE_DB_SPEC.md`.
+  - **VMS Edge UI Modernization:** Upgrade the local edge dashboard to match Hub ergonomics: responsive layout (desktop/tablet/mobile), standardized scroll-contained dialogs, unified live player HUD, hash routing, and in-page modal forms replacing legacy browser `prompt()` / `alert()` popups.
+
 
