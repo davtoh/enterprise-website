@@ -275,14 +275,19 @@ Identical behavior across **Linux**, **macOS**, and **Windows**:
   - [x] Implemented synthetic mock MJPEG stream generator and telemetry loop for offline edge simulation and CI/CD testing.
   - [x] Implemented real-time telemetry stream `GET /api/v1/security/stream/telemetry/<camera_id>/` and synchronized HTML5 Canvas overlay (30fps bounding boxes, track IDs, color-coded status).
   - [x] Modernized SOC Dashboard (`/security/`) with dynamic site selector, responsive multi-camera matrix grid (1x1, 2x2, 3x3), camera health badges, and live toast incident feed with Web Audio API chime.
-- [ ] **16d — Temporal CRM Visitor Passes, Whitelist Delta-Sync & Bi-directional Access Loop:**
-  - [ ] Extend CRM `Contact` with `security_clearance`, `valid_from`, `valid_until`, `license_plate`, `face_profile_photo`, `face_embedding_vector`, and `security_tag`.
-  - [ ] Implement high-performance whitelist delta-sync API `GET /api/v1/security/whitelist/?site_id={site_id}` with HTTP ETag, `304 Not Modified`, and `?since=` delta filtering.
-  - [ ] Implement gate access event ingestion endpoint `POST /api/v1/security/access/` updating CRM contact presence to "On-Premises" / "Checked In".
-  - [ ] Define offline-first edge SQLite `TrackerDB` schema and sync specification for `davtoh/intelligent-tracker`.
-  - [ ] Trigger bilingual host arrival notifications via `language_management` catalogs (EN/ES).
-- [ ] **Verification & Quality:**
-  - [ ] Automated test suite covering camera streams, heartbeats, whitelist ETag caching, visitor access logs, and CRM contact synchronization.
-  - [ ] `manage.py check` → 0 issues.
-  - [ ] Responsive Bootstrap 5.3+ security operations dashboard.
+- [x] **16d — Temporal CRM Visitor Passes, Whitelist Delta-Sync & Bi-directional Access Loop:**
+  - [x] Extended CRM `Contact` with `security_clearance`, `valid_from`, `valid_until`, `license_plate`, `face_profile_photo`, `face_embedding_vector`, `security_tag`, `presence_status`, `last_seen_at`, and `last_seen_location`.
+  - [x] Implemented helper methods: `is_pass_valid()`, `normalized_license_plate()`, `check_in()`, and `check_out()`.
+  - [x] Implemented high-performance whitelist delta-sync API `GET /api/v1/security/whitelist/?site_id={site_id}` with HTTP ETag, `304 Not Modified`, and `?since=` delta filtering.
+  - [x] Implemented gate access event ingestion endpoint `POST /api/v1/security/access/` updating CRM contact presence to "On-Premises" / "Checked In" (or "Off-Premises" on exit) and logging to `InteractionLog`.
+  - [x] Defined offline-first edge SQLite `TrackerDB` schema, indexing, and sync specification in `documentation/INTELLIGENT_TRACKER_OFFLINE_DB_SPEC.md`.
+  - [x] Triggered bilingual host arrival notifications via `intelligent_tracker_hub.notifications.send_visitor_arrival_notification` (EN/ES).
+  - [x] Escalated banned/restricted intrusion attempts to `SecurityEvent` (`RESTRICTED_ENTITY`, `CRITICAL`).
+  - [x] Modernized CRM Contact views (`contact_detail.html`, `contact_form.html`, `contact_list.html`) and SOC Operations Dashboard (`dashboard.html`).
+- [x] **Verification & Quality:**
+  - [x] Automated test suite covering whitelist ETag caching, delta sync, visitor access logs, ANPR matching, presence loops, and host notifications (41 tests in `tests/test_intelligent_tracker_hub.py`, 23 tests in `tests/test_crm.py`, 271 passed repository-wide).
+  - [x] `manage.py check` → 0 issues identified.
+  - [x] Translation catalogs compiled across all 5 locales.
+  - [x] Responsive Bootstrap 5.3+ security operations dashboard.
+
 

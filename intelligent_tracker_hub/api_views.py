@@ -9,12 +9,14 @@ import uuid
 import requests
 from django.core.files.base import ContentFile
 from django.db.models import Count, Q
-from django.http import StreamingHttpResponse
+from django.http import HttpResponse, StreamingHttpResponse
 
 logger = logging.getLogger(__name__)
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.utils.dateparse import parse_datetime
 from django.utils.text import slugify
+from django.utils.translation import gettext as _
 from rest_framework import status, viewsets
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
@@ -33,6 +35,9 @@ from .models import (
     SecurityAuditLog,
     Camera,
     CameraStatus,
+    VisitorAccessLog,
+    AccessDirection,
+    VerificationMethod,
 )
 from .serializers import (
     SecurityEventWebhookSerializer,
@@ -42,10 +47,16 @@ from .serializers import (
     VideoEvidenceUploadSerializer,
     CameraSerializer,
     CameraHeartbeatSerializer,
+    CRMContactWhitelistItemSerializer,
+    SecurityAccessIngestSerializer,
+    VisitorAccessLogSerializer,
 )
 from .security import verify_hmac_signature, get_client_ip, calculate_hmac_signature, get_tracker_secret_key
+from .notifications import send_visitor_arrival_notification
+from crm.models import Contact, SecurityClearance, PresenceStatus
 from location_management.models import Location
 from video_gallery.models import VideoGallery, VideoItem
+
 
 
 class SecurityEventWebhookApiView(APIView):
@@ -1208,4 +1219,351 @@ class CameraViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
     filterset_fields = ["site", "status", "is_active"]
     search_fields = ["camera_id", "name", "stream_url"]
+
+
+class WhitelistDeltaSyncApiView(APIView):
+    """
+    High-Performance CRM Contact Whitelist Delta-Sync API for edge AI vision nodes.
+    Supports HTTP ETag (If-None-Match), returning 304 Not Modified with 0 bytes if credentials have not changed.
+    Supports ?since=<iso_timestamp> for incremental updates.
+    Automatically filters out expired temporary visitor passes and handles banned entities.
+    """
+
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def get(self, request, *args, **kwargs):
+        client_ip = get_client_ip(request)
+        signature_header = (
+            request.headers.get("X-Tracker-Signature")
+            or request.META.get("HTTP_X_TRACKER_SIGNATURE", "")
+        )
+
+        # Authenticate via active Django session OR valid HMAC signature
+        if not request.user.is_authenticated:
+            expected_key = get_tracker_secret_key()
+            if signature_header:
+                valid = (
+                    verify_hmac_signature(request.body, signature_header)
+                    or verify_hmac_signature(b"", signature_header)
+                    or verify_hmac_signature(request.META.get("QUERY_STRING", "").encode("utf-8"), signature_header)
+                    or hmac.compare_digest(signature_header, expected_key)
+                )
+                if not valid:
+                    return Response(
+                        {"error": "Unauthorized", "detail": "Invalid HMAC signature."},
+                        status=status.HTTP_401_UNAUTHORIZED,
+                    )
+            else:
+                return Response(
+                    {"error": "Unauthorized", "detail": "HMAC signature or authenticated user required."},
+                    status=status.HTTP_401_UNAUTHORIZED,
+                )
+
+        site_id = request.GET.get("site_id")
+        site_code = request.GET.get("site_code")
+        since_param = request.GET.get("since")
+
+        site_obj = None
+        if site_id:
+            try:
+                site_obj = Location.objects.filter(id=int(site_id)).first()
+            except (ValueError, TypeError):
+                pass
+        if not site_obj and site_code:
+            site_obj = Location.objects.filter(code=site_code).first()
+
+        now = timezone.now()
+
+        # Query all active or clearance-bearing contacts
+        qs = Contact.objects.select_related("company").all()
+
+        # Filter out expired passes: if valid_until is set and is in the past, pass is expired
+        # Note: Banned contacts are kept so edge nodes recognize and intercept them immediately
+        qs = qs.exclude(
+            ~Q(security_clearance=SecurityClearance.BANNED),
+            valid_until__isnull=False,
+            valid_until__lt=now,
+        )
+
+        # Filter not-yet-valid passes
+        qs = qs.exclude(
+            ~Q(security_clearance=SecurityClearance.BANNED),
+            valid_from__isnull=False,
+            valid_from__gt=now,
+        )
+
+        # Incremental sync with ?since=
+        if since_param:
+            try:
+                since_clean = since_param.strip().replace(" ", "+").replace("Z", "+00:00")
+                since_dt = parse_datetime(since_clean)
+                if not since_dt:
+                    since_dt = timezone.datetime.fromisoformat(since_clean)
+                if timezone.is_naive(since_dt):
+                    since_dt = timezone.make_aware(since_dt, timezone.utc)
+                qs = qs.filter(updated_at__gte=since_dt)
+            except Exception as e:
+                logger.warning("Invalid ?since timestamp format '%s': %s", since_param, e)
+
+        contacts = list(qs.order_by("id"))
+
+        # Compute deterministic content digest for ETag
+        hash_input = []
+        for c in contacts:
+            ts = c.updated_at.isoformat() if c.updated_at else ""
+            hash_input.append(f"{c.id}:{ts}:{c.security_clearance}:{c.license_plate}")
+        version_hash = hashlib.sha256(";".join(hash_input).encode("utf-8")).hexdigest()
+        etag_val = f'"{version_hash}"'
+
+        # Check If-None-Match header for HTTP 304 Not Modified
+        if_none_match = request.headers.get("If-None-Match") or request.META.get("HTTP_IF_NONE_MATCH", "")
+        if if_none_match and if_none_match.strip() == etag_val:
+            response = HttpResponse(status=status.HTTP_304_NOT_MODIFIED)
+            response["ETag"] = etag_val
+            response["Cache-Control"] = "private, must-revalidate, max-age=10"
+            return response
+
+        # Query revoked or banned IDs for edge purge / deny list
+        banned_ids = list(Contact.objects.filter(security_clearance=SecurityClearance.BANNED).values_list("id", flat=True))
+        expired_ids = list(Contact.objects.filter(valid_until__isnull=False, valid_until__lt=now).values_list("id", flat=True))
+        revoked_ids = list(set(banned_ids + expired_ids))
+
+        serialized = CRMContactWhitelistItemSerializer(contacts, many=True).data
+
+        data = {
+            "site_id": site_obj.id if site_obj else None,
+            "site_code": site_obj.code if site_obj else (site_code or ""),
+            "version_hash": version_hash,
+            "server_time": now.isoformat(),
+            "total_count": len(serialized),
+            "whitelist": serialized,
+            "revoked_ids": revoked_ids,
+        }
+
+        response = Response(data, status=status.HTTP_200_OK)
+        response["ETag"] = etag_val
+        response["Cache-Control"] = "private, must-revalidate, max-age=10"
+        return response
+
+
+class SecurityAccessIngestApiView(APIView):
+    """
+    Ingestion endpoint for physical gate access events (POST /api/v1/security/access/).
+    Records entry/exit logs, validates credentials, updates CRM Contact presence to On-Premises,
+    creates CRM touchpoint interaction entries, and triggers bilingual host arrival notifications.
+    """
+
+    permission_classes = [AllowAny]
+    authentication_classes = []
+
+    def post(self, request, *args, **kwargs):
+        client_ip = get_client_ip(request)
+        raw_body = request.body
+        signature_header = (
+            request.headers.get("X-Tracker-Signature")
+            or request.META.get("HTTP_X_TRACKER_SIGNATURE", "")
+        )
+
+        # HMAC Authentication
+        if not request.user.is_authenticated:
+            expected_key = get_tracker_secret_key()
+            if signature_header:
+                valid = (
+                    verify_hmac_signature(raw_body, signature_header)
+                    or hmac.compare_digest(signature_header, expected_key)
+                )
+                if not valid:
+                    SecurityAuditLog.objects.create(
+                        ip_address=client_ip,
+                        endpoint=request.path,
+                        http_method=request.method,
+                        signature_header=signature_header,
+                        signature_valid=False,
+                        status_code=status.HTTP_401_UNAUTHORIZED,
+                        error_message="Invalid HMAC signature on gate access event.",
+                        raw_payload=raw_body.decode("utf-8", errors="replace")[:5000],
+                        processed_successfully=False,
+                    )
+                    return Response(
+                        {"error": "Unauthorized", "detail": "Invalid HMAC signature."},
+                        status=status.HTTP_401_UNAUTHORIZED,
+                    )
+            else:
+                return Response(
+                    {"error": "Unauthorized", "detail": "HMAC signature or authenticated user required."},
+                    status=status.HTTP_401_UNAUTHORIZED,
+                )
+
+        serializer = SecurityAccessIngestSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(
+                {"error": "Bad Request", "errors": serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        data = serializer.validated_data
+        camera_id = data["camera_id"]
+        direction = data.get("direction", "ENTRY")
+        verification_method = data.get("verification_method", "face")
+        confidence = data.get("confidence")
+        timestamp_val = data.get("timestamp") or timezone.now()
+        metadata = data.get("metadata", {})
+        snapshot_base64 = data.get("snapshot_base64")
+
+        # Resolve Site / Facility
+        site_id = data.get("site_id")
+        site_code = data.get("site_code")
+        site_obj = None
+        if site_id:
+            site_obj = Location.objects.filter(id=site_id).first()
+        if not site_obj and site_code:
+            site_obj = Location.objects.filter(code=site_code).first()
+        if not site_obj:
+            # Fallback to camera's site if camera exists
+            cam_obj = Camera.objects.filter(camera_id=camera_id).first()
+            if cam_obj and cam_obj.site:
+                site_obj = cam_obj.site
+            else:
+                site_obj = Location.objects.first()
+
+        # Resolve Contact
+        contact = None
+        contact_id = data.get("contact_id")
+        license_plate = data.get("license_plate", "").strip()
+        security_tag = data.get("security_tag", "").strip()
+
+        if contact_id:
+            contact = Contact.objects.filter(id=contact_id).first()
+        if not contact and license_plate:
+            import re
+            norm_input = re.sub(r"[^A-Z0-9]", "", license_plate.upper())
+            contact = Contact.objects.filter(license_plate__iexact=license_plate).first()
+            if not contact and norm_input:
+                for c in Contact.objects.exclude(license_plate=""):
+                    if c.normalized_license_plate == norm_input:
+                        contact = c
+                        break
+        if not contact and security_tag:
+            contact = Contact.objects.filter(security_tag__iexact=security_tag).first()
+
+        # Determine Access Permission & Denial Reason
+        access_granted = data.get("access_granted", True)
+        denial_reason = data.get("denial_reason", "")
+        recognized_id = ""
+
+        if contact:
+            recognized_id = contact.full_name
+            if contact.security_clearance == SecurityClearance.BANNED:
+                access_granted = False
+                denial_reason = denial_reason or _("Banned Entity - Gate Access Denied")
+            elif not contact.is_pass_valid:
+                access_granted = False
+                denial_reason = denial_reason or _("Visitor Pass Expired or Out of Window")
+        else:
+            recognized_id = license_plate or security_tag or "Unknown Identity"
+            if not data.get("access_granted"):
+                access_granted = False
+                denial_reason = denial_reason or _("Unrecognized Entity")
+
+        # Process snapshot if provided
+        snapshot_file = None
+        if snapshot_base64:
+            try:
+                clean_b64 = snapshot_base64
+                if "," in clean_b64:
+                    clean_b64 = clean_b64.split(",", 1)[1]
+                img_data = base64.b64decode(clean_b64)
+                snapshot_file = ContentFile(img_data, name=f"access_{uuid.uuid4().hex[:8]}.jpg")
+            except Exception as e:
+                logger.warning("Failed to decode access snapshot base64: %s", e)
+
+        # Create VisitorAccessLog
+        access_log = VisitorAccessLog.objects.create(
+            contact=contact,
+            site=site_obj,
+            camera_id=camera_id,
+            direction=direction,
+            verification_method=verification_method,
+            recognized_identifier=recognized_id,
+            confidence=confidence,
+            access_granted=access_granted,
+            denial_reason=denial_reason,
+            timestamp=timestamp_val,
+            snapshot=snapshot_file,
+            metadata=metadata,
+        )
+
+        # Update CRM Contact Presence & Activity Log
+        if contact and access_granted:
+            if direction == "ENTRY":
+                contact.check_in(
+                    location=site_obj,
+                    verification_method=verification_method,
+                    gate_camera_id=camera_id,
+                    notes=f"Gate access granted via {verification_method}. Camera: {camera_id}.",
+                )
+            else:
+                contact.check_out(
+                    location=site_obj,
+                    verification_method=verification_method,
+                    gate_camera_id=camera_id,
+                    notes=f"Gate exit recorded via {verification_method}. Camera: {camera_id}.",
+                )
+            # Dispatch bilingual host arrival notification
+            send_visitor_arrival_notification(contact, access_log)
+
+        elif not access_granted and (contact and contact.security_clearance == SecurityClearance.BANNED):
+            # Escalate critical banned entity attempt to SecurityEvent
+            SecurityEvent.objects.create(
+                event_type=SecurityEventType.RESTRICTED_ENTITY,
+                site=site_obj,
+                camera_id=camera_id,
+                timestamp=timestamp_val,
+                snapshot=snapshot_file,
+                severity=SecuritySeverity.CRITICAL,
+                metadata={
+                    "access_id": str(access_log.access_id),
+                    "contact_id": contact.id,
+                    "contact_name": contact.full_name,
+                    "denial_reason": denial_reason,
+                    "verification_method": verification_method,
+                    "confidence": confidence,
+                    "camera_id": camera_id,
+                    "gate_direction": direction,
+                },
+            )
+            # Also dispatch arrival alert notifying security of the intercepted attempt
+            send_visitor_arrival_notification(contact, access_log)
+
+        # Audit Log
+        SecurityAuditLog.objects.create(
+            ip_address=client_ip,
+            endpoint=request.path,
+            http_method=request.method,
+            signature_header=signature_header,
+            signature_valid=True,
+            event_id=str(access_log.access_id),
+            status_code=status.HTTP_201_CREATED,
+            raw_payload=json.dumps(request.data),
+            processed_successfully=True,
+        )
+
+        return Response(
+            VisitorAccessLogSerializer(access_log).data,
+            status=status.HTTP_201_CREATED,
+        )
+
+
+class VisitorAccessLogViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Read-only catalog of physical gate access events.
+    """
+
+    queryset = VisitorAccessLog.objects.select_related("contact", "site").all()
+    serializer_class = VisitorAccessLogSerializer
+    permission_classes = [AllowAny]
+    filterset_fields = ["site", "direction", "verification_method", "access_granted"]
+    search_fields = ["camera_id", "recognized_identifier", "contact__first_name", "contact__last_name"]
+
 

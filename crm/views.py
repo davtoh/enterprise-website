@@ -271,19 +271,27 @@ class ContactListView(CRMBaseView, ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        qs = Contact.objects.select_related("company")
+        qs = Contact.objects.select_related("company", "last_seen_location")
         q = self.request.GET.get("q", "").strip()
         tag = self.request.GET.get("tag", "").strip()
+        clearance = self.request.GET.get("clearance", "").strip()
+        presence = self.request.GET.get("presence", "").strip()
 
         if q:
             qs = qs.filter(
                 Q(first_name__icontains=q) |
                 Q(last_name__icontains=q) |
                 Q(email__icontains=q) |
-                Q(company__name__icontains=q)
+                Q(company__name__icontains=q) |
+                Q(license_plate__icontains=q) |
+                Q(security_tag__icontains=q)
             )
         if tag:
             qs = qs.filter(tags__icontains=tag)
+        if clearance:
+            qs = qs.filter(security_clearance=clearance)
+        if presence:
+            qs = qs.filter(presence_status=presence)
 
         return qs.order_by("last_name", "first_name")
 
@@ -291,6 +299,8 @@ class ContactListView(CRMBaseView, ListView):
         ctx = super().get_context_data(**kwargs)
         ctx["query"] = self.request.GET.get("q", "")
         ctx["current_tag"] = self.request.GET.get("tag", "")
+        ctx["current_clearance"] = self.request.GET.get("clearance", "")
+        ctx["current_presence"] = self.request.GET.get("presence", "")
         return ctx
 
 
@@ -304,8 +314,10 @@ class ContactDetailView(CRMBaseView, DetailView):
         ctx["leads"] = self.object.leads.select_related("company", "assigned_to")
         ctx["interactions"] = self.object.interactions.select_related("lead", "user").order_by("-timestamp")
         ctx["enrollments"] = self.object.sequence_enrollments.select_related("sequence")
+        ctx["access_logs"] = self.object.access_logs.select_related("site").order_by("-timestamp")[:10]
         ctx["interaction_form"] = InteractionLogForm()
         return ctx
+
 
 
 class ContactCreateView(CRMBaseView, CreateView):

@@ -57,11 +57,21 @@ class ContactForm(BaseBootstrapForm):
             "job_title",
             "is_subscribed",
             "tags",
+            "security_clearance",
+            "valid_from",
+            "valid_until",
+            "license_plate",
+            "face_profile_photo",
+            "security_tag",
+            "presence_status",
             "notes",
         ]
         widgets = {
+            "valid_from": forms.DateTimeInput(attrs={"type": "datetime-local"}),
+            "valid_until": forms.DateTimeInput(attrs={"type": "datetime-local"}),
             "notes": forms.Textarea(attrs={"rows": 3}),
         }
+
 
 
 class LeadForm(BaseBootstrapForm):

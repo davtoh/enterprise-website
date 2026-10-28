@@ -46,10 +46,62 @@ class CompanyAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ("full_name", "email", "phone", "company", "job_title", "is_subscribed", "created_at")
-    search_fields = ("first_name", "last_name", "email", "phone", "company__name", "tags")
-    list_filter = ("is_subscribed", "company")
+    list_display = (
+        "full_name",
+        "email",
+        "company",
+        "clearance_badge",
+        "presence_badge",
+        "license_plate",
+        "is_pass_valid_display",
+        "is_subscribed",
+        "created_at",
+    )
+    search_fields = (
+        "first_name",
+        "last_name",
+        "email",
+        "phone",
+        "company__name",
+        "license_plate",
+        "security_tag",
+        "tags",
+    )
+    list_filter = (
+        "security_clearance",
+        "presence_status",
+        "is_subscribed",
+        "company",
+    )
     inlines = [InteractionLogInline]
+
+    @admin.display(description=_("Clearance"))
+    def clearance_badge(self, obj):
+        colors = {
+            "VIP": "warning",
+            "STAFF": "success",
+            "CONTRACTOR": "info",
+            "VISITOR": "primary",
+            "RESTRICTED": "danger",
+            "BANNED": "dark",
+        }
+        color = colors.get(obj.security_clearance, "secondary")
+        return format_html(
+            '<span class="badge bg-{}">{}</span>',
+            color,
+            obj.get_security_clearance_display(),
+        )
+
+    @admin.display(description=_("Presence"))
+    def presence_badge(self, obj):
+        if obj.presence_status == "on_premises":
+            return format_html('<span class="badge bg-success">{}</span>', _("On-Premises"))
+        return format_html('<span class="badge bg-secondary">{}</span>', _("Off-Premises"))
+
+    @admin.display(description=_("Pass Valid"), boolean=True)
+    def is_pass_valid_display(self, obj):
+        return obj.is_pass_valid
+
 
 
 @admin.register(Lead)
@@ -94,6 +146,7 @@ class InteractionLogAdmin(admin.ModelAdmin):
             "stage_change": "dark",
             "sequence_step": "success",
             "broadcast": "danger",
+            "security_access": "info",
         }
         color = colors.get(obj.interaction_type, "secondary")
         return format_html(

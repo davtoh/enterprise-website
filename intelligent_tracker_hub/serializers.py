@@ -1,6 +1,15 @@
 import uuid
 from rest_framework import serializers
-from .models import SecurityEvent, SecurityEventType, SecuritySeverity, SecurityAuditLog, Camera, CameraStatus
+from .models import (
+    SecurityEvent,
+    SecurityEventType,
+    SecuritySeverity,
+    SecurityAuditLog,
+    Camera,
+    CameraStatus,
+    VisitorAccessLog,
+)
+
 from location_management.models import Location
 
 
@@ -170,4 +179,113 @@ class CameraHeartbeatSerializer(serializers.Serializer):
     site_id = serializers.IntegerField(required=False, allow_null=True)
     site_code = serializers.CharField(max_length=50, required=False, allow_blank=True)
     metadata = serializers.DictField(required=False, default=dict)
+
+
+class CRMContactWhitelistItemSerializer(serializers.Serializer):
+    """
+    Serializes an authoritative CRM contact record for edge whitelist synchronization.
+    """
+
+    contact_id = serializers.IntegerField(source="id")
+    full_name = serializers.CharField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    email = serializers.EmailField()
+    phone = serializers.CharField(allow_blank=True)
+    company_name = serializers.CharField(source="company.name", default="", allow_null=True)
+    security_clearance = serializers.CharField()
+    security_tag = serializers.CharField(allow_blank=True)
+    license_plate = serializers.CharField(allow_blank=True)
+    normalized_license_plate = serializers.CharField()
+    valid_from = serializers.DateTimeField(allow_null=True)
+    valid_until = serializers.DateTimeField(allow_null=True)
+    is_pass_valid = serializers.BooleanField()
+    is_banned = serializers.SerializerMethodField()
+    presence_status = serializers.CharField()
+    face_profile_photo_url = serializers.SerializerMethodField()
+    face_embedding_vector = serializers.ListField(child=serializers.FloatField(), default=list)
+    updated_at = serializers.DateTimeField()
+
+    def get_is_banned(self, obj) -> bool:
+        return obj.security_clearance == "BANNED"
+
+    def get_face_profile_photo_url(self, obj) -> str:
+        if obj.face_profile_photo:
+            try:
+                return obj.face_profile_photo.url
+            except Exception:
+                pass
+        return ""
+
+
+class SecurityAccessIngestSerializer(serializers.Serializer):
+    """
+    Validates physical gate access events ingested from edge AI vision nodes.
+    Supports recognition via contact ID, vehicle license plate, or security RFID/tag.
+    """
+
+    site_id = serializers.IntegerField(required=False, allow_null=True)
+    site_code = serializers.CharField(max_length=50, required=False, allow_blank=True)
+    camera_id = serializers.CharField(max_length=100)
+    contact_id = serializers.IntegerField(required=False, allow_null=True)
+    license_plate = serializers.CharField(max_length=30, required=False, allow_blank=True)
+    security_tag = serializers.CharField(max_length=100, required=False, allow_blank=True)
+    direction = serializers.ChoiceField(choices=["ENTRY", "EXIT"], default="ENTRY")
+    verification_method = serializers.ChoiceField(
+        choices=["face", "plate", "tag", "manual"],
+        default="face",
+    )
+    confidence = serializers.FloatField(required=False, allow_null=True)
+    access_granted = serializers.BooleanField(required=False, default=True)
+    denial_reason = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    timestamp = serializers.DateTimeField(required=False)
+    snapshot_base64 = serializers.CharField(required=False, allow_blank=True, allow_null=True)
+    metadata = serializers.DictField(required=False, default=dict)
+
+
+class VisitorAccessLogSerializer(serializers.ModelSerializer):
+    """
+    Detailed read representation of VisitorAccessLog records.
+    """
+
+    contact_name = serializers.CharField(source="contact.full_name", default="", read_only=True)
+    contact_clearance = serializers.CharField(source="contact.security_clearance", default="", read_only=True)
+    site_name = serializers.CharField(source="site.name", default="", read_only=True)
+    status_badge_class = serializers.CharField(read_only=True)
+    snapshot_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = VisitorAccessLog
+        fields = [
+            "id",
+            "access_id",
+            "contact",
+            "contact_name",
+            "contact_clearance",
+            "site",
+            "site_name",
+            "camera_id",
+            "direction",
+            "verification_method",
+            "recognized_identifier",
+            "confidence",
+            "access_granted",
+            "denial_reason",
+            "status_badge_class",
+            "timestamp",
+            "snapshot",
+            "snapshot_url",
+            "metadata",
+            "created_at",
+        ]
+        read_only_fields = ["id", "access_id", "created_at"]
+
+    def get_snapshot_url(self, obj) -> str:
+        if obj.snapshot:
+            try:
+                return obj.snapshot.url
+            except Exception:
+                pass
+        return ""
+
 

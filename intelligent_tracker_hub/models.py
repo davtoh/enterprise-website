@@ -299,3 +299,123 @@ class SecurityAuditLog(models.Model):
     def __str__(self):
         status = "OK" if self.processed_successfully else "FAILED"
         return f"{self.received_at:%Y-%m-%d %H:%M:%S} - {self.http_method} {self.endpoint} [{self.status_code}] ({status})"
+
+
+class AccessDirection(models.TextChoices):
+    ENTRY = "ENTRY", _("Entry")
+    EXIT = "EXIT", _("Exit")
+
+
+class VerificationMethod(models.TextChoices):
+    FACE = "face", _("Facial Recognition")
+    PLATE = "plate", _("License Plate (ANPR)")
+    TAG = "tag", _("Security Tag / RFID")
+    MANUAL = "manual", _("Manual Operator Override")
+
+
+class VisitorAccessLog(models.Model):
+    """
+    Physical security access log tracking gate entry and exit events processed by intelligent-tracker.
+    Provides bi-directional integration with CRM Contact presence and security clearances.
+    """
+
+    access_id = models.UUIDField(
+        default=uuid.uuid4,
+        unique=True,
+        editable=False,
+        db_index=True,
+        verbose_name=_("Access UUID"),
+    )
+    contact = models.ForeignKey(
+        "crm.Contact",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="access_logs",
+        verbose_name=_("CRM Contact"),
+    )
+    site = models.ForeignKey(
+        "location_management.Location",
+        on_delete=models.CASCADE,
+        related_name="access_logs",
+        verbose_name=_("Facility / Site"),
+    )
+    camera_id = models.CharField(
+        max_length=100,
+        db_index=True,
+        verbose_name=_("Gate Camera ID"),
+        help_text=_("Identifier of camera covering the access point (e.g. cam-north-gate-entry)"),
+    )
+    direction = models.CharField(
+        max_length=10,
+        choices=AccessDirection.choices,
+        default=AccessDirection.ENTRY,
+        db_index=True,
+        verbose_name=_("Access Direction"),
+    )
+    verification_method = models.CharField(
+        max_length=20,
+        choices=VerificationMethod.choices,
+        default=VerificationMethod.FACE,
+        db_index=True,
+        verbose_name=_("Verification Method"),
+    )
+    recognized_identifier = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name=_("Recognized Identifier"),
+        help_text=_("Plate string, face track ID, or RFID code matched at the edge"),
+    )
+    confidence = models.FloatField(
+        null=True,
+        blank=True,
+        verbose_name=_("Detection Confidence"),
+    )
+    access_granted = models.BooleanField(
+        default=True,
+        db_index=True,
+        verbose_name=_("Access Granted"),
+    )
+    denial_reason = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name=_("Denial Reason"),
+        help_text=_("Reason for access denial (e.g. Pass Expired, Banned Entity, Unrecognized)"),
+    )
+    timestamp = models.DateTimeField(
+        default=timezone.now,
+        db_index=True,
+        verbose_name=_("Event Timestamp"),
+    )
+    snapshot = models.ImageField(
+        upload_to="security_access/%Y/%m/%d/",
+        blank=True,
+        null=True,
+        verbose_name=_("Access Snapshot"),
+    )
+    metadata = models.JSONField(
+        default=dict,
+        blank=True,
+        verbose_name=_("Access Telemetry Metadata"),
+        help_text=_("Gate turnstile number, ambient temperature, vehicle make/model"),
+    )
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Ingested At"))
+
+    class Meta:
+        verbose_name = _("Visitor Access Log")
+        verbose_name_plural = _("Visitor Access Logs")
+        ordering = ["-timestamp"]
+        indexes = [
+            models.Index(fields=["site", "timestamp"]),
+            models.Index(fields=["access_granted", "direction"]),
+        ]
+
+    def __str__(self):
+        status = "GRANTED" if self.access_granted else f"DENIED ({self.denial_reason})"
+        person = self.contact.full_name if self.contact else (self.recognized_identifier or "Unknown")
+        return f"[{self.direction}] {person} @ {self.camera_id} - {status}"
+
+    @property
+    def status_badge_class(self) -> str:
+        return "success" if self.access_granted else "danger"
+

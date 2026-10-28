@@ -80,9 +80,91 @@
       </div>
     </div>
 
+    <!-- Physical Security & Access Pass Card (Phase E4) -->
+    <div class="card shadow-sm border-0 rounded-3 mb-4">
+      <div class="card-header bg-transparent border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-shield me-2 text-primary"></i>{% trans "Access Pass & Security" %}</h5>
+        <span class="badge bg-{{ contact.clearance_badge_class }} rounded-pill px-3 py-1">
+          {{ contact.get_security_clearance_display }}
+        </span>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <!-- Physical Presence Status Banner -->
+        <div class="p-3 mb-3 rounded-3 {% if contact.presence_status == 'on_premises' %}bg-success-subtle text-success border border-success-subtle{% else %}bg-secondary-subtle text-secondary border border-secondary-subtle{% endif %} d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-2">
+            <i class="fa {% if contact.presence_status == 'on_premises' %}fa-map-marker text-success{% else %}fa-circle-o text-secondary{% endif %} fa-lg"></i>
+            <div>
+              <div class="fw-bold small">{{ contact.get_presence_status_display }}</div>
+              {% if contact.last_seen_at %}
+                <small class="text-body-secondary d-block">
+                  {% trans "Last seen" %}: {{ contact.last_seen_at|date:"M d, Y H:i" }}
+                  {% if contact.last_seen_location %} &bull; {{ contact.last_seen_location.name }}{% endif %}
+                </small>
+              {% endif %}
+            </div>
+          </div>
+          {% if contact.presence_status == 'on_premises' %}
+            <span class="badge bg-success rounded-pill small">{% trans "Active" %}</span>
+          {% endif %}
+        </div>
+
+        <dl class="row mb-0 small">
+          <dt class="col-sm-5 text-body-secondary">{% trans "Pass Validity" %}:</dt>
+          <dd class="col-sm-7">
+            {% if contact.is_pass_valid %}
+              <span class="badge bg-success-subtle text-success rounded-pill">{% trans "Valid Pass" %}</span>
+            {% else %}
+              <span class="badge bg-danger-subtle text-danger rounded-pill">{% trans "Pass Expired / Invalid" %}</span>
+            {% endif %}
+            {% if contact.valid_from or contact.valid_until %}
+              <div class="text-body-secondary mt-1">
+                {{ contact.valid_from|date:"M d, Y"|default:_("Immediate") }} &rarr; {{ contact.valid_until|date:"M d, Y"|default:_("Indefinite") }}
+              </div>
+            {% endif %}
+          </dd>
+
+          <dt class="col-sm-5 text-body-secondary">{% trans "License Plate" %}:</dt>
+          <dd class="col-sm-7">
+            {% if contact.license_plate %}
+              <span class="badge bg-dark font-monospace text-light px-2 py-1"><i class="fa fa-car me-1 text-warning"></i>{{ contact.license_plate }}</span>
+            {% else %}
+              <span class="text-body-secondary">—</span>
+            {% endif %}
+          </dd>
+
+          <dt class="col-sm-5 text-body-secondary">{% trans "Security Tag" %}:</dt>
+          <dd class="col-sm-7">
+            {% if contact.security_tag %}
+              <span class="badge bg-info-subtle text-info border rounded-pill">{{ contact.security_tag }}</span>
+            {% else %}
+              <span class="text-body-secondary">—</span>
+            {% endif %}
+          </dd>
+
+          <dt class="col-sm-5 text-body-secondary">{% trans "Biometrics" %}:</dt>
+          <dd class="col-sm-7">
+            {% if contact.face_profile_photo %}
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <img src="{{ contact.face_profile_photo.url }}" class="rounded border" width="40" height="40" alt="Biometric Profile">
+                <span class="text-success small"><i class="fa fa-check-circle me-1"></i>{% trans "Photo Registered" %}</span>
+              </div>
+            {% else %}
+              <span class="text-body-secondary">—</span>
+            {% endif %}
+            {% if contact.face_embedding_vector %}
+              <span class="badge bg-primary-subtle text-primary border rounded-pill" title="Pre-computed 512-d feature vector">
+                <i class="fa fa-microchip me-1"></i>{% trans "512-d Vector Ready" %}
+              </span>
+            {% endif %}
+          </dd>
+        </dl>
+      </div>
+    </div>
+
     <!-- Active Deals for Contact -->
     <div class="card shadow-sm border-0 rounded-3 mb-4">
       <div class="card-header bg-transparent border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+
         <h5 class="mb-0 fw-bold"><i class="fa fa-bullseye me-2 text-primary"></i>{% trans "Associated Deals" %} ({{ leads.count }})</h5>
         <a href="{% url 'crm:lead_create' %}?contact={{ contact.pk }}" class="btn btn-sm btn-outline-primary rounded-pill">
           <i class="fa fa-plus me-1"></i>{% trans "Add Deal" %}
@@ -139,6 +221,36 @@
 
   <!-- Right Column: Interaction History & Add Note -->
   <div class="col-lg-7">
+    <!-- Physical Access Gate History (Phase E4) -->
+    {% if access_logs %}
+    <div class="card shadow-sm border-0 rounded-3 mb-4">
+      <div class="card-header bg-transparent border-0 py-3 px-4 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 fw-bold"><i class="fa fa-id-badge me-2 text-primary"></i>{% trans "Recent Gate Access History" %}</h5>
+        <span class="badge bg-light text-dark border rounded-pill small">{{ access_logs.count }} {% trans "events" %}</span>
+      </div>
+      <div class="card-body px-4 pt-0">
+        <div class="list-group list-group-flush">
+          {% for log in access_logs %}
+            <div class="list-group-item px-0 py-2 d-flex justify-content-between align-items-center">
+              <div>
+                <span class="badge {% if log.access_granted %}bg-success-subtle text-success{% else %}bg-danger-subtle text-danger{% endif %} rounded-pill me-1">
+                  {{ log.direction }}
+                </span>
+                <span class="fw-semibold small">{{ log.site.name }} ({{ log.camera_id }})</span>
+                <div class="text-body-secondary small" style="font-size: 0.8rem;">
+                  <i class="fa fa-bullseye me-1"></i>{{ log.get_verification_method_display }}
+                  {% if log.confidence %} &bull; {{ log.confidence|floatformat:2 }} {% trans "confidence" %}{% endif %}
+                  {% if not log.access_granted and log.denial_reason %} &bull; <span class="text-danger">{{ log.denial_reason }}</span>{% endif %}
+                </div>
+              </div>
+              <small class="text-body-secondary">{{ log.timestamp|date:"M d, H:i" }}</small>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
     <div class="card shadow-sm border-0 rounded-3">
       <div class="card-header bg-transparent border-0 py-3 px-4">
         <h5 class="mb-0 fw-bold"><i class="fa fa-history me-2 text-primary"></i>{% trans "Touchpoint History" %} ({{ interactions.count }})</h5>
@@ -154,11 +266,13 @@
                   {% elif item.interaction_type == 'email' %}bg-primary
                   {% elif item.interaction_type == 'meeting' %}bg-warning text-dark
                   {% elif item.interaction_type == 'sequence_step' %}bg-success
+                  {% elif item.interaction_type == 'security_access' %}bg-info-subtle text-info border border-info-subtle
                   {% else %}bg-secondary{% endif %}">
                   {{ item.get_interaction_type_display }}
                 </span>
                 <small class="text-body-secondary">{{ item.timestamp|date:"M d, Y H:i" }}</small>
               </div>
+
               <h6 class="fw-bold mb-1">{{ item.summary }}</h6>
               {% if item.details %}
                 <p class="small text-body-secondary mb-1">{{ item.details|linebreaksbr }}</p>

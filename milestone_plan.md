@@ -342,27 +342,34 @@
 - [x] Automated integration test suite (28 dedicated tests, 86% statement coverage on `intelligent_tracker_hub`, 258 passed repository-wide) validating Camera models, heartbeat ingestion, synthetic MJPEG streams, fallback proxying, telemetry overlays, and SOC multi-site rendering.
 
 **16d (Phase E4) — Temporal CRM Visitor Passes, Whitelist Delta-Sync & Bi-directional Access Loop:**
-- [ ] Extend CRM `Contact` with enterprise physical security credentials:
+- [x] Extend CRM `Contact` with enterprise physical security credentials:
   - `security_clearance`: Choices (`VIP`, `STAFF`, `CONTRACTOR`, `VISITOR`, `RESTRICTED`, `BANNED`).
   - `valid_from` & `valid_until`: Time-bound validity window for contractor passes and visitor clearances.
   - `license_plate`: Alphanumeric normalized vehicle license plate for ANPR gate recognition.
   - `face_profile_photo`: Biometric reference image for edge facial recognition vector generation.
   - `face_embedding_vector`: Pre-computed 512-d biometric embedding for zero-latency edge startup.
   - `security_tag`: Custom tag for edge tracker classification.
-- [ ] High-Performance Whitelist Delta-Sync API:
+  - `presence_status`: Real-time presence state (`ON_PREMISES`, `OFF_PREMISES`), `last_seen_at`, and `last_seen_location`.
+  - Helper methods: `is_pass_valid()`, `normalized_license_plate()`, `check_in()`, and `check_out()`.
+- [x] High-Performance Whitelist Delta-Sync API:
   - `GET /api/v1/security/whitelist/?site_id={site_id}` supporting HTTP ETag (`If-None-Match`), `304 Not Modified`, and `?since=` delta-sync filtering to minimize WAN bandwidth.
-  - Automatically filters out expired visitor passes and revoked credentials.
-- [ ] Bi-directional Access Loop & CRM Presence Tracking:
-  - Ingestion endpoint: `POST /api/v1/security/access/` recording gate access events.
-  - Automatically updates contact CRM presence state to "On-Premises" / "Checked In" with audit timeline entry.
-  - Triggers automated bilingual arrival alerts via `language_management` catalogs (EN/ES).
-- [ ] Offline-First Edge Cache Architecture:
-  - Define local SQLite `TrackerDB` schema and sync specification for `davtoh/intelligent-tracker`.
+  - Automatically filters out expired visitor passes, includes banned entity indicators, and enforces HMAC-SHA256 signature verification.
+- [x] Bi-directional Access Loop & CRM Presence Tracking:
+  - Ingestion endpoint: `POST /api/v1/security/access/` recording gate access events in `VisitorAccessLog`.
+  - Automatically updates contact CRM presence state to "On-Premises" / "Checked In" (or "Off-Premises" on exit) with audit timeline entry in `InteractionLog` (`SECURITY_ACCESS`).
+  - Triggers automated bilingual arrival alerts (EN/ES) via `intelligent_tracker_hub.notifications.send_visitor_arrival_notification`.
+  - Escalates banned/restricted intrusion attempts to `SecurityEvent` (`RESTRICTED_ENTITY`, `CRITICAL`).
+- [x] Offline-First Edge Cache Architecture:
+  - Define local SQLite `TrackerDB` schema, indexing, offline decision flowchart, and transactional outbox sync protocol in `documentation/INTELLIGENT_TRACKER_OFFLINE_DB_SPEC.md`.
+- [x] Modernized CRM & SOC Dashboard UI:
+  - Modernized `contact_detail.html`, `contact_form.html`, and `contact_list.html` with security badges, pass validity status, ANPR plate display, and presence pill indicators.
+  - Modernized SOC Operations Dashboard (`dashboard.html`) with real-time gate access feed table.
 
 **Verification:**
-- Automated test suite covering camera streams, heartbeats, whitelist ETag caching, visitor access logs, and CRM contact synchronization.
-- `python manage.py check` → 0 issues.
-- Responsive Bootstrap 5.3+ security operations dashboard.
+- [x] Automated test suite covering camera streams, heartbeats, whitelist ETag caching, visitor access logs, and CRM contact synchronization (41 tests in `test_intelligent_tracker_hub.py`, 23 tests in `test_crm.py`, 271 passed repository-wide).
+- [x] `python manage.py check` → 0 issues.
+- [x] Multi-language message compilation up to date across all 5 locales.
+- [x] Responsive Bootstrap 5.3+ security operations dashboard.
 
 ---
 

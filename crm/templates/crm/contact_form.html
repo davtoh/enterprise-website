@@ -15,7 +15,7 @@
         </h4>
       </div>
       <div class="card-body px-4 pt-0">
-        <form method="post" novalidate>
+        <form method="post" enctype="multipart/form-data" novalidate>
           {% csrf_token %}
           
           {% if form.non_field_errors %}
@@ -76,6 +76,61 @@
               {{ form.is_subscribed.label }}
             </label>
             <div class="form-text small">{{ form.is_subscribed.help_text }}</div>
+          </div>
+
+          <hr class="my-4">
+          <h5 class="fw-bold mb-3"><i class="fa fa-shield me-2 text-primary"></i>{% trans "Physical Security & Access Credentials" %}</h5>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.security_clearance.id_for_label }}">{{ form.security_clearance.label }}</label>
+              {{ form.security_clearance }}
+              <div class="form-text small">{{ form.security_clearance.help_text }}</div>
+              {% if form.security_clearance.errors %}<div class="text-danger small">{{ form.security_clearance.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.presence_status.id_for_label }}">{{ form.presence_status.label }}</label>
+              {{ form.presence_status }}
+              <div class="form-text small">{{ form.presence_status.help_text }}</div>
+              {% if form.presence_status.errors %}<div class="text-danger small">{{ form.presence_status.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.valid_from.id_for_label }}">{{ form.valid_from.label }}</label>
+              {{ form.valid_from }}
+              <div class="form-text small">{{ form.valid_from.help_text }}</div>
+              {% if form.valid_from.errors %}<div class="text-danger small">{{ form.valid_from.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.valid_until.id_for_label }}">{{ form.valid_until.label }}</label>
+              {{ form.valid_until }}
+              <div class="form-text small">{{ form.valid_until.help_text }}</div>
+              {% if form.valid_until.errors %}<div class="text-danger small">{{ form.valid_until.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.license_plate.id_for_label }}">{{ form.license_plate.label }}</label>
+              {{ form.license_plate }}
+              <div class="form-text small">{{ form.license_plate.help_text }}</div>
+              {% if form.license_plate.errors %}<div class="text-danger small">{{ form.license_plate.errors }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold" for="{{ form.security_tag.id_for_label }}">{{ form.security_tag.label }}</label>
+              {{ form.security_tag }}
+              <div class="form-text small">{{ form.security_tag.help_text }}</div>
+              {% if form.security_tag.errors %}<div class="text-danger small">{{ form.security_tag.errors }}</div>{% endif %}
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold" for="{{ form.face_profile_photo.id_for_label }}">{{ form.face_profile_photo.label }}</label>
+            {{ form.face_profile_photo }}
+            <div class="form-text small">{{ form.face_profile_photo.help_text }}</div>
+            {% if form.face_profile_photo.errors %}<div class="text-danger small">{{ form.face_profile_photo.errors }}</div>{% endif %}
           </div>
 
           <div class="mb-4">

@@ -144,10 +144,12 @@ flowchart TD
     - Live camera connection health indicators.
     - Live toast incident feed with Web Audio API chime toggle.
 
-- **Phase E4: CRM Visitor Pass & Bi-directional Whitelist Synchronization** *(Next)*
-  - **CRM Contact Credentials:** Extend `crm.models.Contact` with `security_clearance`, `valid_from`, `valid_until`, `license_plate`, `face_profile_photo`, `face_embedding_vector`, and `security_tag`.
-  - **Whitelist Delta-Sync API:** Implement `GET /api/v1/security/whitelist/?site_id={site_id}` with HTTP ETag, `304 Not Modified`, and `?since=` delta-sync filtering.
-  - **Access Log Ingestion API:** Implement `POST /api/v1/security/access/` recording gate access events and updating CRM contact presence to "On-Premises".
-  - **Offline SQLite Schema Spec:** Provide reference schema and sync algorithm for `davtoh/intelligent-tracker` local SQLite `TrackerDB`.
-  - **Automated Localization Dispatch:** Trigger bilingual host arrival notifications via `language_management`.
-  - **Comprehensive Test Suite:** Unit and integration tests covering camera streams, heartbeats, whitelist ETag caching, visitor access logs, and CRM contact synchronization.
+- **Phase E4: CRM Visitor Pass & Bi-directional Whitelist Synchronization** *(Completed)*
+  - **CRM Contact Credentials:** Extended `crm.models.Contact` with `security_clearance` (`VIP`, `STAFF`, `CONTRACTOR`, `VISITOR`, `RESTRICTED`, `BANNED`), `valid_from`, `valid_until`, `license_plate` (normalized alphanumeric), `face_profile_photo`, `face_embedding_vector` (512-d float list), `security_tag`, `presence_status` (`on_premises`, `off_premises`), `last_seen_at`, and `last_seen_location`. Added helper methods: `is_pass_valid()`, `normalized_license_plate()`, `check_in()`, and `check_out()`.
+  - **Whitelist Delta-Sync API:** Implemented `GET /api/v1/security/whitelist/?site_id={site_id}` with HTTP ETag (`If-None-Match`), `304 Not Modified`, and `?since=` delta-sync filtering to minimize WAN bandwidth. Filters out expired passes and marks banned entities.
+  - **Access Log Ingestion API:** Implemented `POST /api/v1/security/access/` recording gate access events in `VisitorAccessLog`, updating CRM contact presence to "On-Premises" (or "Off-Premises" on exit), appending `SECURITY_ACCESS` touchpoints in `InteractionLog`, and escalating banned/restricted intrusion attempts to `SecurityEvent` (`RESTRICTED_ENTITY`, `CRITICAL`).
+  - **Offline SQLite Schema Spec:** Created comprehensive offline-first DDL and synchronization protocol in `documentation/INTELLIGENT_TRACKER_OFFLINE_DB_SPEC.md` covering schema DDL, indexing, offline decision flowchart, and transactional outbox.
+  - **Automated Localization Dispatch:** Implemented `intelligent_tracker_hub.notifications.send_visitor_arrival_notification` dispatching bilingual host arrival notifications (EN/ES).
+  - **UI Modernization:** Modernized CRM Contact views (`contact_detail.html`, `contact_form.html`, `contact_list.html`) and SOC Operations Dashboard (`dashboard.html`) with access history, clearance badges, license plate pills, and live presence indicators.
+  - **Comprehensive Test Suite:** 41 passed tests in `tests/test_intelligent_tracker_hub.py`, 23 passed tests in `tests/test_crm.py`, and 271 passed tests repository-wide (100% pass rate).
+

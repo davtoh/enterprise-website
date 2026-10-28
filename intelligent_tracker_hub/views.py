@@ -17,6 +17,7 @@ from .models import (
     SecurityAuditLog,
     Camera,
     CameraStatus,
+    VisitorAccessLog,
 )
 from .security import calculate_hmac_signature, get_tracker_secret_key
 from location_management.models import Location
@@ -97,6 +98,15 @@ class SecurityDashboardView(LoginRequiredMixin, TemplateView):
         cameras_online = sum(1 for c in cameras_list if c.is_alive or c.status == CameraStatus.ONLINE)
         cameras_total = len(cameras_list)
 
+        # Recent Physical Access Logs (Phase E4)
+        recent_access_qs = VisitorAccessLog.objects.select_related("contact", "site")
+        if selected_site_id:
+            try:
+                recent_access_qs = recent_access_qs.filter(site_id=int(selected_site_id))
+            except ValueError:
+                pass
+        recent_access_logs = list(recent_access_qs.order_by("-timestamp")[:10])
+
         ctx.update(
             {
                 "page_obj": page_obj,
@@ -109,6 +119,7 @@ class SecurityDashboardView(LoginRequiredMixin, TemplateView):
                 "cameras_online": cameras_online,
                 "cameras_total": cameras_total,
                 "active_cameras": cameras_total,
+                "recent_access_logs": recent_access_logs,
                 "event_types": SecurityEventType.choices,
                 "severities": SecuritySeverity.choices,
                 "selected_event_type": event_type or "",

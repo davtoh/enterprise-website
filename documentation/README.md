@@ -776,17 +776,26 @@ The platform integrates with [davtoh/intelligent-tracker](https://github.com/dav
 
 #### 4. Temporal CRM Visitor Passes, Whitelist Delta-Sync & Bi-directional Access Loop (Phase E4)
 - **Authoritative Database & Extended Credentials (`crm`):**
-  - Extends `crm.Contact` with `security_clearance` (`VIP`, `STAFF`, `CONTRACTOR`, `VISITOR`, `RESTRICTED`, `BANNED`), `valid_from`, `valid_until`, `license_plate` (ANPR normalized), `face_profile_photo`, `face_embedding_vector` (pre-computed 512-d float array), and `security_tag`.
+  - Extends `crm.Contact` with `security_clearance` (`VIP`, `STAFF`, `CONTRACTOR`, `VISITOR`, `RESTRICTED`, `BANNED`), `valid_from`, `valid_until`, `license_plate` (ANPR normalized), `face_profile_photo`, `face_embedding_vector` (pre-computed 512-d float array), `security_tag`, `presence_status` (`on_premises`, `off_premises`), `last_seen_at`, and `last_seen_location`.
+  - Provides helper methods for validation and access: `is_pass_valid()`, `normalized_license_plate()`, `check_in()`, and `check_out()`.
 - **High-Performance Whitelist Delta-Sync API:**
   - Endpoint: `GET /api/v1/security/whitelist/?site_id={site_id}`
-  - Supports HTTP ETag (`If-None-Match`), returning `HTTP 304 Not Modified` with 0 bytes if site credentials are unchanged.
-  - Supports `?since=<iso-timestamp>` incremental delta queries, minimizing WAN bandwidth and edge CPU.
-  - Automatically filters out expired visitor passes and revoked clearances.
+  - Supports HTTP ETag (`If-None-Match`), returning `HTTP 304 Not Modified` with 0 payload bytes if site credentials remain unchanged.
+  - Supports `?since=<iso-timestamp>` incremental delta queries, minimizing WAN bandwidth and edge CPU load.
+  - Automatically filters out expired visitor passes and includes banned entity flags for edge threat mitigation.
+  - Authenticated via HMAC-SHA256 signature header (`X-Tracker-Signature`).
 - **Bi-directional Access Loop & CRM Presence Tracking:**
   - Ingestion endpoint: `POST /api/v1/security/access/`
-  - When edge gates recognize an authorized face or vehicle plate, the event automatically updates the contact's CRM status to "On-Premises" / "Checked In" with audit timeline entry.
-  - Dispatches automated bilingual arrival notifications (EN/ES) via `language_management`.
+  - Records gate access attempts in `VisitorAccessLog` (`ENTRY`/`EXIT`, verification method: `FACE`, `LICENSE_PLATE`, `SECURITY_TAG`, `MANUAL`).
+  - Automatically updates contact CRM presence state to "On-Premises" (or "Off-Premises" on exit) and appends a `SECURITY_ACCESS` touchpoint to `InteractionLog`.
+  - Dispatches automated bilingual host arrival notifications (EN/ES) via `intelligent_tracker_hub.notifications.send_visitor_arrival_notification`.
+  - Automatically escalates banned/restricted intrusion attempts to `SecurityEvent` (`RESTRICTED_ENTITY`, `CRITICAL`).
 - **Offline-First Edge Cache (`TrackerDB`):**
-  - Edge nodes mirror the whitelist in local SQLite `TrackerDB`, guaranteeing autonomous gate operation during WAN outages.
+  - Edge nodes mirror the whitelist in a local SQLite `TrackerDB`, guaranteeing autonomous sub-15ms gate decisions during WAN blackouts.
+  - Full schema DDL, indexing, offline decision flowchart, and transactional outbox sync protocol are documented in [INTELLIGENT_TRACKER_OFFLINE_DB_SPEC.md](INTELLIGENT_TRACKER_OFFLINE_DB_SPEC.md).
+- **Modernized CRM & SOC Dashboard:**
+  - CRM Contact Views (`contact_detail.html`, `contact_form.html`, `contact_list.html`) display security clearance badges, pass validity badges, ANPR plate pills, and live presence status.
+  - SOC Operations Dashboard (`dashboard.html`) incorporates a real-time "Recent Gate Access & Visitor Passes" monitoring table.
+
 
 

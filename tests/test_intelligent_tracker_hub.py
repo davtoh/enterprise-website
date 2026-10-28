@@ -14,15 +14,28 @@ from intelligent_tracker_hub.models import (
     SecurityAuditLog,
     Camera,
     CameraStatus,
+    VisitorAccessLog,
+    AccessDirection,
+    VerificationMethod,
 )
 from intelligent_tracker_hub.security import (
     calculate_hmac_signature,
     verify_hmac_signature,
     get_tracker_secret_key,
 )
+from intelligent_tracker_hub.notifications import send_visitor_arrival_notification
 from intelligent_tracker_hub.plugin import IntelligentTrackerPlugin
+from crm.models import (
+    Contact,
+    Company,
+    SecurityClearance,
+    PresenceStatus,
+    InteractionLog,
+    InteractionType,
+)
 from location_management.models import Countries, States, Cities, Location
 from plugin_registry import registry
+
 
 User = get_user_model()
 
@@ -969,5 +982,422 @@ def test_soc_dashboard_view_camera_grid(client, auth_user, test_location):
     resp_solo = client.get(f"{url}?layout=solo")
     assert resp_solo.status_code == 200
     assert "col-12" in resp_solo.content.decode("utf-8")
+
+
+# ==============================================================================
+# 5. Milestone 16d (Phase E4) CRM Visitor Passes & Whitelist Delta-Sync Tests
+# ==============================================================================
+
+@pytest.fixture
+def test_company(db):
+    return Company.objects.create(
+        name="Cyberdyne Systems",
+        industry="Autonomous Defense",
+        city="Austin",
+        country="United States",
+    )
+
+
+@pytest.fixture
+def test_contacts(db, test_company, test_location):
+    c1 = Contact.objects.create(
+        first_name="Sarah",
+        last_name="Connor",
+        email="sconnor@example.com",
+        company=test_company,
+        security_clearance=SecurityClearance.VIP,
+        license_plate="TX-999-VIP",
+        security_tag="exec-zone",
+        face_embedding_vector=[0.05] * 512,
+    )
+    c2 = Contact.objects.create(
+        first_name="Kyle",
+        last_name="Reese",
+        email="kreese@example.com",
+        company=test_company,
+        security_clearance=SecurityClearance.CONTRACTOR,
+        license_plate="CA-123-KLR",
+        security_tag="contractor-gate",
+        valid_from=timezone.now() - timezone.timedelta(days=2),
+        valid_until=timezone.now() + timezone.timedelta(days=5),
+    )
+    c3 = Contact.objects.create(
+        first_name="Expired",
+        last_name="Visitor",
+        email="expired@example.com",
+        company=test_company,
+        security_clearance=SecurityClearance.VISITOR,
+        valid_from=timezone.now() - timezone.timedelta(days=10),
+        valid_until=timezone.now() - timezone.timedelta(days=1),
+    )
+    c4 = Contact.objects.create(
+        first_name="Miles",
+        last_name="Dyson",
+        email="mdyson@example.com",
+        company=test_company,
+        security_clearance=SecurityClearance.BANNED,
+        license_plate="BANNED-01",
+    )
+    return [c1, c2, c3, c4]
+
+
+def test_crm_contact_physical_security_credentials_and_methods(db, test_location):
+    contact = Contact.objects.create(
+        first_name="John",
+        last_name="Doe",
+        email="john.doe@example.com",
+        security_clearance=SecurityClearance.VIP,
+        license_plate="abc-1234",
+        security_tag="secure-zone-a",
+        valid_from=timezone.now() - timezone.timedelta(hours=1),
+        valid_until=timezone.now() + timezone.timedelta(days=1),
+    )
+
+    assert contact.normalized_license_plate == "ABC1234"
+    assert contact.is_pass_valid is True
+    assert contact.presence_status == PresenceStatus.OFF_PREMISES
+    assert contact.presence_badge_class == "secondary"
+    assert "warning" in contact.clearance_badge_class
+
+    # Test check_in
+    contact.check_in(location=test_location, verification_method="face", gate_camera_id="cam-gate-01")
+    contact.refresh_from_db()
+    assert contact.presence_status == PresenceStatus.ON_PREMISES
+    assert contact.presence_badge_class == "success"
+    assert contact.last_seen_location == test_location
+    assert contact.last_seen_at is not None
+
+    # Verify InteractionLog
+    interaction = InteractionLog.objects.filter(contact=contact, interaction_type=InteractionType.SECURITY_ACCESS).first()
+    assert interaction is not None
+    assert "Entry" in interaction.summary
+    assert "Face" in interaction.summary
+
+    # Test check_out
+    contact.check_out(location=test_location, verification_method="plate", gate_camera_id="cam-gate-01")
+    contact.refresh_from_db()
+    assert contact.presence_status == PresenceStatus.OFF_PREMISES
+
+    # Test pass validity window
+    contact.valid_until = timezone.now() - timezone.timedelta(minutes=5)
+    contact.save()
+    assert contact.is_pass_valid is False
+
+    # Banned contact is always invalid
+    contact.valid_until = timezone.now() + timezone.timedelta(days=10)
+    contact.security_clearance = SecurityClearance.BANNED
+    contact.save()
+    assert contact.is_pass_valid is False
+
+
+def test_visitor_access_log_model(db, test_location):
+    contact = Contact.objects.create(
+        first_name="Alice",
+        last_name="Smith",
+        email="alice@example.com",
+        security_clearance=SecurityClearance.STAFF,
+    )
+    log = VisitorAccessLog.objects.create(
+        contact=contact,
+        site=test_location,
+        camera_id="cam-north-01",
+        direction=AccessDirection.ENTRY,
+        verification_method=VerificationMethod.FACE,
+        recognized_identifier=contact.full_name,
+        confidence=0.98,
+        access_granted=True,
+    )
+
+    assert str(log.access_id) in str(log) or "Alice Smith" in str(log)
+    assert log.status_badge_class == "success"
+    assert log.access_granted is True
+
+
+def test_whitelist_delta_sync_api_unauthorized(client):
+    url = reverse("intelligent_tracker_api:security_whitelist")
+    resp = client.get(url)
+    assert resp.status_code == 401
+
+
+def test_whitelist_delta_sync_api_success_and_etag(client, test_contacts, test_location):
+    url = reverse("intelligent_tracker_api:security_whitelist")
+    secret = get_tracker_secret_key()
+    sig = calculate_hmac_signature(b"", secret=secret)
+
+    # 1. Initial full fetch
+    resp = client.get(
+        f"{url}?site_id={test_location.id}",
+        HTTP_X_TRACKER_SIGNATURE=sig,
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "whitelist" in data
+    assert "version_hash" in data
+    assert "revoked_ids" in data
+    assert "ETag" in resp.headers
+
+    etag = resp.headers["ETag"]
+    assert len(etag) > 10
+
+    # 2. Re-request with matching If-None-Match header -> 304 Not Modified
+    resp_304 = client.get(
+        f"{url}?site_id={test_location.id}",
+        HTTP_X_TRACKER_SIGNATURE=sig,
+        HTTP_IF_NONE_MATCH=etag,
+    )
+    assert resp_304.status_code == 304
+    assert resp_304.content == b""
+
+
+def test_whitelist_delta_sync_api_filters_expired_passes_and_marks_banned(client, test_contacts, test_location):
+    url = reverse("intelligent_tracker_api:security_whitelist")
+    secret = get_tracker_secret_key()
+    sig = calculate_hmac_signature(b"", secret=secret)
+
+    resp = client.get(
+        f"{url}?site_id={test_location.id}",
+        HTTP_X_TRACKER_SIGNATURE=sig,
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+
+    whitelist = data["whitelist"]
+    contact_emails = [c["email"] for c in whitelist]
+
+    # Active VIP and Contractor are in whitelist
+    assert "sconnor@example.com" in contact_emails
+    assert "kreese@example.com" in contact_emails
+
+    # Expired Visitor pass is EXCLUDED from active whitelist
+    assert "expired@example.com" not in contact_emails
+
+    # Banned contact is included with is_banned: true so edge immediately denies
+    banned_item = next((c for c in whitelist if c["email"] == "mdyson@example.com"), None)
+    assert banned_item is not None
+    assert banned_item["is_banned"] is True
+    assert banned_item["security_clearance"] == "BANNED"
+
+    # Expired contact ID must be in revoked_ids
+    expired_contact = next(c for c in test_contacts if c.email == "expired@example.com")
+    assert expired_contact.id in data["revoked_ids"]
+
+
+def test_whitelist_delta_sync_api_since_parameter(client, test_contacts, test_location):
+    url = reverse("intelligent_tracker_api:security_whitelist")
+    secret = get_tracker_secret_key()
+    sig = calculate_hmac_signature(b"", secret=secret)
+
+    import time
+    import urllib.parse
+    time.sleep(0.02)
+    cutoff = timezone.now()
+    time.sleep(0.02)
+
+    # Update only one contact
+    c1 = test_contacts[0]
+    c1.security_tag = "new-updated-tag"
+    c1.save()
+
+    encoded_since = urllib.parse.quote(cutoff.isoformat())
+    resp = client.get(
+        f"{url}?since={encoded_since}",
+        HTTP_X_TRACKER_SIGNATURE=sig,
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert len(data["whitelist"]) == 1
+    assert data["whitelist"][0]["contact_id"] == c1.id
+    assert data["whitelist"][0]["security_tag"] == "new-updated-tag"
+
+
+def test_security_access_ingest_api_unauthorized(client):
+    url = reverse("intelligent_tracker_api:security_access")
+    resp = client.post(
+        url,
+        data={"camera_id": "cam-gate-01"},
+        content_type="application/json",
+    )
+    assert resp.status_code == 401
+
+
+def test_security_access_ingest_entry_granted_and_presence_update(client, test_contacts, test_location):
+    url = reverse("intelligent_tracker_api:security_access")
+    secret = get_tracker_secret_key()
+    contact = test_contacts[0]  # Sarah Connor (VIP)
+
+    payload = {
+        "site_id": test_location.id,
+        "camera_id": "cam-gate-entry-01",
+        "contact_id": contact.id,
+        "direction": "ENTRY",
+        "verification_method": "face",
+        "confidence": 0.99,
+        "access_granted": True,
+        "metadata": {"turnstile": 2},
+    }
+    raw_json = json.dumps(payload).encode("utf-8")
+    sig = calculate_hmac_signature(raw_json, secret=secret)
+
+    resp = client.post(
+        url,
+        data=raw_json,
+        content_type="application/json",
+        HTTP_X_TRACKER_SIGNATURE=sig,
+    )
+    assert resp.status_code == 201
+    data = resp.json()
+    assert data["access_granted"] is True
+    assert data["direction"] == "ENTRY"
+    assert data["contact"] == contact.id
+
+    # Verify contact presence in DB
+    contact.refresh_from_db()
+    assert contact.presence_status == PresenceStatus.ON_PREMISES
+    assert contact.last_seen_location == test_location
+
+    # Verify InteractionLog
+    interaction = InteractionLog.objects.filter(contact=contact, interaction_type=InteractionType.SECURITY_ACCESS).first()
+    assert interaction is not None
+    assert "cam-gate-entry-01" in interaction.details
+
+
+def test_security_access_ingest_exit_and_presence_update(client, test_contacts, test_location):
+    url = reverse("intelligent_tracker_api:security_access")
+    secret = get_tracker_secret_key()
+    contact = test_contacts[0]
+    contact.presence_status = PresenceStatus.ON_PREMISES
+    contact.save()
+
+    payload = {
+        "site_id": test_location.id,
+        "camera_id": "cam-gate-exit-01",
+        "contact_id": contact.id,
+        "direction": "EXIT",
+        "verification_method": "face",
+        "confidence": 0.97,
+        "access_granted": True,
+    }
+    raw_json = json.dumps(payload).encode("utf-8")
+    sig = calculate_hmac_signature(raw_json, secret=secret)
+
+    resp = client.post(
+        url,
+        data=raw_json,
+        content_type="application/json",
+        HTTP_X_TRACKER_SIGNATURE=sig,
+    )
+    assert resp.status_code == 201
+    contact.refresh_from_db()
+    assert contact.presence_status == PresenceStatus.OFF_PREMISES
+
+
+def test_security_access_ingest_by_license_plate_anpr(client, test_contacts, test_location):
+    url = reverse("intelligent_tracker_api:security_access")
+    secret = get_tracker_secret_key()
+    contact = test_contacts[1]  # Kyle Reese (CA-123-KLR)
+
+    payload = {
+        "site_id": test_location.id,
+        "camera_id": "cam-anpr-gate",
+        "license_plate": "CA 123 KLR",  # Spaced format
+        "direction": "ENTRY",
+        "verification_method": "plate",
+        "confidence": 0.94,
+        "access_granted": True,
+    }
+    raw_json = json.dumps(payload).encode("utf-8")
+    sig = calculate_hmac_signature(raw_json, secret=secret)
+
+    resp = client.post(
+        url,
+        data=raw_json,
+        content_type="application/json",
+        HTTP_X_TRACKER_SIGNATURE=sig,
+    )
+    assert resp.status_code == 201
+    data = resp.json()
+    assert data["contact"] == contact.id
+    contact.refresh_from_db()
+    assert contact.presence_status == PresenceStatus.ON_PREMISES
+
+
+def test_security_access_ingest_banned_contact_escalates_to_security_event(client, test_contacts, test_location):
+    url = reverse("intelligent_tracker_api:security_access")
+    secret = get_tracker_secret_key()
+    banned_contact = test_contacts[3]  # Miles Dyson (BANNED)
+
+    payload = {
+        "site_id": test_location.id,
+        "camera_id": "cam-gate-01",
+        "contact_id": banned_contact.id,
+        "direction": "ENTRY",
+        "verification_method": "face",
+        "confidence": 0.96,
+        "access_granted": True,  # Edge might optimistically request, hub must deny!
+    }
+    raw_json = json.dumps(payload).encode("utf-8")
+    sig = calculate_hmac_signature(raw_json, secret=secret)
+
+    resp = client.post(
+        url,
+        data=raw_json,
+        content_type="application/json",
+        HTTP_X_TRACKER_SIGNATURE=sig,
+    )
+    assert resp.status_code == 201
+    data = resp.json()
+    assert data["access_granted"] is False
+    assert "Banned" in data["denial_reason"]
+
+    # Contact must remain OFF_PREMISES
+    banned_contact.refresh_from_db()
+    assert banned_contact.presence_status == PresenceStatus.OFF_PREMISES
+
+    # Verify a CRITICAL SecurityEvent was automatically created!
+    sec_event = SecurityEvent.objects.filter(
+        event_type=SecurityEventType.RESTRICTED_ENTITY,
+        severity=SecuritySeverity.CRITICAL,
+    ).first()
+    assert sec_event is not None
+    assert sec_event.metadata.get("contact_id") == banned_contact.id
+
+
+def test_visitor_arrival_notification_service(db, test_contacts, test_location, mailoutbox):
+    contact = test_contacts[0]
+    log = VisitorAccessLog.objects.create(
+        contact=contact,
+        site=test_location,
+        camera_id="cam-gate-01",
+        direction=AccessDirection.ENTRY,
+        verification_method=VerificationMethod.FACE,
+        access_granted=True,
+    )
+
+    sent = send_visitor_arrival_notification(contact, log)
+    assert sent is True
+    assert len(mailoutbox) == 1
+    email = mailoutbox[0]
+    assert "Sarah Connor" in email.subject
+    assert "[ENGLISH]" in email.body
+    assert "[ESPAÑOL]" in email.body
+    assert "NOTIFICACIÓN DE ACCESO" in email.body.upper()
+
+
+def test_visitor_access_catalog_viewset(client, auth_user, test_contacts, test_location):
+    client.force_login(auth_user)
+    VisitorAccessLog.objects.create(
+        contact=test_contacts[0],
+        site=test_location,
+        camera_id="cam-catalog-01",
+        direction=AccessDirection.ENTRY,
+        verification_method=VerificationMethod.FACE,
+        access_granted=True,
+    )
+
+    url = "/api/v1/security/access/catalog/"
+    resp = client.get(url)
+    assert resp.status_code == 200
+    assert resp.json()["count"] >= 1
+
 
 

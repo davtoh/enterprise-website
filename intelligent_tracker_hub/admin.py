@@ -2,7 +2,7 @@ import json
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
-from .models import SecurityEvent, SecurityAuditLog, SecuritySeverity, Camera
+from .models import SecurityEvent, SecurityAuditLog, SecuritySeverity, Camera, VisitorAccessLog
 
 
 @admin.register(SecurityEvent)
@@ -176,3 +176,50 @@ class CameraAdmin(admin.ModelAdmin):
             obj.get_status_display(),
         )
     status_badge.short_description = _("Status")
+
+
+@admin.register(VisitorAccessLog)
+class VisitorAccessLogAdmin(admin.ModelAdmin):
+    list_display = (
+        "short_uuid",
+        "contact_display",
+        "direction",
+        "verification_method",
+        "site",
+        "camera_id",
+        "access_badge",
+        "timestamp",
+    )
+    list_filter = ("direction", "verification_method", "access_granted", "site", "timestamp")
+    search_fields = ("access_id", "contact__first_name", "contact__last_name", "recognized_identifier", "camera_id")
+    readonly_fields = ("access_id", "created_at", "snapshot_thumb_large", "metadata_pretty")
+
+    def short_uuid(self, obj):
+        return str(obj.access_id)[:8] + "..."
+    short_uuid.short_description = _("Access ID")
+
+    def contact_display(self, obj):
+        if obj.contact:
+            return obj.contact.full_name
+        return obj.recognized_identifier or _("Unrecognized")
+    contact_display.short_description = _("Contact / Entity")
+
+    def access_badge(self, obj):
+        if obj.access_granted:
+            return format_html('<span style="background-color: #198754; color: white; padding: 2px 8px; border-radius: 4px; font-weight: bold;">{}</span>', _("GRANTED"))
+        return format_html('<span style="background-color: #dc3545; color: white; padding: 2px 8px; border-radius: 4px; font-weight: bold;">{}</span>', _("DENIED"))
+    access_badge.short_description = _("Result")
+
+    def snapshot_thumb_large(self, obj):
+        if obj.snapshot:
+            return format_html(
+                '<img src="{}" style="max-width: 400px; height: auto; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);" />',
+                obj.snapshot.url,
+            )
+        return "-"
+    snapshot_thumb_large.short_description = _("Snapshot Preview")
+
+    def metadata_pretty(self, obj):
+        return format_html("<pre>{}</pre>", json.dumps(obj.metadata, indent=2))
+    metadata_pretty.short_description = _("Telemetry Metadata (JSON)")
+

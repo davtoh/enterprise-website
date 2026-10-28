@@ -18,18 +18,36 @@
   </div>
 
   <div class="card-body px-4 pt-0">
-    <!-- Search Bar -->
+    <!-- Search & Filter Bar -->
     <form method="get" class="row g-2 align-items-center mb-3">
-      <div class="col-md-6 col-lg-4">
+      <div class="col-md-5 col-lg-4">
         <div class="input-group">
           <span class="input-group-text bg-body border-end-0"><i class="fa fa-search text-body-secondary"></i></span>
-          <input type="text" name="q" value="{{ query }}" class="form-control border-start-0" placeholder="{% trans 'Search contacts by name, email, company...' %}">
+          <input type="text" name="q" value="{{ query }}" class="form-control border-start-0" placeholder="{% trans 'Search by name, email, company, plate...' %}">
         </div>
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-secondary rounded-pill">{% trans "Search" %}</button>
-        {% if query %}
-          <a href="{% url 'crm:contact_list' %}" class="btn btn-outline-secondary rounded-pill">{% trans "Reset" %}</a>
+        <select name="clearance" class="form-select form-select-sm" onchange="this.form.submit()">
+          <option value="">{% trans "All Clearances" %}</option>
+          <option value="VIP" {% if current_clearance == 'VIP' %}selected{% endif %}>VIP</option>
+          <option value="STAFF" {% if current_clearance == 'STAFF' %}selected{% endif %}>Staff</option>
+          <option value="CONTRACTOR" {% if current_clearance == 'CONTRACTOR' %}selected{% endif %}>Contractor</option>
+          <option value="VISITOR" {% if current_clearance == 'VISITOR' %}selected{% endif %}>Visitor</option>
+          <option value="RESTRICTED" {% if current_clearance == 'RESTRICTED' %}selected{% endif %}>Restricted</option>
+          <option value="BANNED" {% if current_clearance == 'BANNED' %}selected{% endif %}>Banned</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <select name="presence" class="form-select form-select-sm" onchange="this.form.submit()">
+          <option value="">{% trans "All Presence" %}</option>
+          <option value="on_premises" {% if current_presence == 'on_premises' %}selected{% endif %}>{% trans "On-Premises" %}</option>
+          <option value="off_premises" {% if current_presence == 'off_premises' %}selected{% endif %}>{% trans "Off-Premises" %}</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-secondary btn-sm rounded-pill">{% trans "Filter" %}</button>
+        {% if query or current_clearance or current_presence %}
+          <a href="{% url 'crm:contact_list' %}" class="btn btn-outline-secondary btn-sm rounded-pill">{% trans "Reset" %}</a>
         {% endif %}
       </div>
     </form>
@@ -40,11 +58,11 @@
           <tr>
             <th>{% trans "Name" %}</th>
             <th>{% trans "Email" %}</th>
-            <th>{% trans "Phone" %}</th>
             <th>{% trans "Company" %}</th>
-            <th>{% trans "Job Title" %}</th>
+            <th>{% trans "Security Clearance" %}</th>
+            <th>{% trans "Presence" %}</th>
+            <th>{% trans "Plate" %}</th>
             <th>{% trans "Subscription" %}</th>
-            <th>{% trans "Tags" %}</th>
             <th class="text-end">{% trans "Actions" %}</th>
           </tr>
         </thead>
@@ -61,7 +79,6 @@
                   {{ contact.email }}
                 </a>
               </td>
-              <td class="small">{{ contact.phone|default:"—" }}</td>
               <td>
                 {% if contact.company %}
                   <a href="{% url 'crm:company_detail' contact.company.pk %}" class="text-decoration-none small">
@@ -71,20 +88,36 @@
                   <span class="text-body-secondary small">—</span>
                 {% endif %}
               </td>
-              <td class="small">{{ contact.job_title|default:"—" }}</td>
+              <td>
+                <span class="badge bg-{{ contact.clearance_badge_class }} rounded-pill small">
+                  {{ contact.get_security_clearance_display }}
+                </span>
+              </td>
+              <td>
+                {% if contact.presence_status == 'on_premises' %}
+                  <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill small">
+                    <i class="fa fa-circle text-success me-1" style="font-size: 8px;"></i>{% trans "On-Premises" %}
+                  </span>
+                {% else %}
+                  <span class="badge bg-secondary-subtle text-secondary rounded-pill small">
+                    {% trans "Off-Premises" %}
+                  </span>
+                {% endif %}
+              </td>
+              <td>
+                {% if contact.license_plate %}
+                  <span class="badge bg-dark font-monospace text-warning px-2 py-1 small">{{ contact.license_plate }}</span>
+                {% else %}
+                  <span class="text-body-secondary small">—</span>
+                {% endif %}
+              </td>
               <td>
                 <span class="badge {% if contact.is_subscribed %}bg-success-subtle text-success{% else %}bg-secondary-subtle text-secondary{% endif %} rounded-pill small">
                   {% if contact.is_subscribed %}{% trans "Subscribed" %}{% else %}{% trans "Unsubscribed" %}{% endif %}
                 </span>
               </td>
-              <td>
-                {% for tag in contact.tag_list %}
-                  <span class="badge bg-light text-dark border rounded-pill small">{{ tag }}</span>
-                {% empty %}
-                  <span class="text-body-secondary small">—</span>
-                {% endfor %}
-              </td>
               <td class="text-end">
+
                 <a href="{% url 'crm:contact_detail' contact.pk %}" class="btn btn-sm btn-outline-primary rounded-circle" title="{% trans 'View' %}">
                   <i class="fa fa-eye"></i>
                 </a>

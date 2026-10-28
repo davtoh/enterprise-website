@@ -918,6 +918,75 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
 - **Next Steps:**
   - Proceed with Milestone 16d (Phase E4): Temporal CRM Visitor Passes, Whitelist Delta-Sync & Bi-directional Access Loop.
 
+---
+
+## [Milestone 16d] - Temporal CRM Visitor Passes, Whitelist Delta-Sync & Bi-directional Access Loop
+- **Date:** 2026-10-27
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Extend `crm.models.Contact` with physical access security credentials:
+    - `security_clearance` (`VIP`, `STAFF`, `CONTRACTOR`, `VISITOR`, `RESTRICTED`, `BANNED`).
+    - `valid_from` & `valid_until` time-bound validity windows.
+    - `license_plate` (normalized alphanumeric ANPR plate).
+    - `face_profile_photo` (reference biometric photo).
+    - `face_embedding_vector` (pre-computed 512-d float array).
+    - `security_tag` (custom zone/group classifier).
+    - `presence_status` (`on_premises`, `off_premises`), `last_seen_at`, and `last_seen_location`.
+    - Helper methods: `is_pass_valid`, `normalized_license_plate`, `check_in`, `check_out`.
+  - Create `VisitorAccessLog` model in `intelligent_tracker_hub.models`:
+    - Tracks gate entry/exit access events, verification method (face, plate, tag, manual), confidence, access decision, and denial reasons.
+    - Maintains immutable access history with direct link to CRM contact and location.
+  - Implement Whitelist Delta-Sync API (`GET /api/v1/security/whitelist/?site_id={site_id}`):
+    - Fast HTTP ETag caching (`If-None-Match`) returning `304 Not Modified` with 0 bytes when credentials are unmodified.
+    - `?since=<iso-timestamp>` incremental delta querying.
+    - Automatic exclusion of expired visitor passes and handling of banned entities.
+    - Cryptographic HMAC-SHA256 authentication header (`X-Tracker-Signature`) support.
+  - Implement Gate Access Event Ingestion API (`POST /api/v1/security/access/`):
+    - Ingests edge gate recognition events (face ID or plate match).
+    - Automatically updates CRM contact presence state to "On-Premises" / "Checked In" (or "Off-Premises" on exit).
+    - Logs touchpoint activity in CRM `InteractionLog` (`SECURITY_ACCESS`).
+    - Dispatches bilingual host arrival email notifications (EN/ES) to host user / security desk.
+    - Escalates unauthorized/banned intrusion attempts to `SecurityEvent` (`RESTRICTED_ENTITY`, `CRITICAL`).
+  - Offline SQLite `TrackerDB` Reference Schema Spec:
+    - Specify SQLite DDL and edge delta-sync algorithm in `documentation/INTELLIGENT_TRACKER_OFFLINE_DB_SPEC.md`.
+  - CRM & SOC Dashboard UI Modernization:
+    - Modernize `contact_detail.html`, `contact_form.html`, and `contact_list.html` with security badges, pass validity status, ANPR plate display, and presence pill indicators.
+    - Modernize SOC Dashboard (`dashboard.html`) with live gate access feed and access event indicators.
+  - **Automated Test Suite & Verification:**
+    - Added 13 dedicated unit and integration tests to `tests/test_intelligent_tracker_hub.py` (41 total tests in file).
+    - All 23 tests in `tests/test_crm.py` passing cleanly.
+    - Full repository test suite: **271 passed in 56.53s** (100% passing rate).
+    - Translation catalogs compiled cleanly across all 5 supported locales (`es`, `fr`, `it`, `ja`, `pt`).
+    - `manage.py check` → 0 issues.
+- **Files Created / Modified:**
+  - `crm/models.py` (added `SecurityClearance`, `PresenceStatus`, security fields, helper methods, `InteractionType.SECURITY_ACCESS`)
+  - `crm/migrations/0002_contact_face_embedding_vector_and_more.py` (database migration for security credentials)
+  - `crm/migrations/0003_alter_contact_presence_status_and_more.py` (database migration for blank=True support)
+  - `crm/forms.py` (updated `ContactForm` with clearance, pass validity widgets, license plate, presence status)
+  - `crm/admin.py` (registered security badges on `ContactAdmin` and `InteractionLogAdmin`)
+  - `crm/views.py` (added clearance and presence filters to `ContactListView` and passed access logs to `ContactDetailView`)
+  - `crm/templates/crm/contact_detail.html` (embedded "Access Pass & Security" card and "Recent Gate Access History")
+  - `crm/templates/crm/contact_form.html` (added `enctype="multipart/form-data"` and "Physical Security & Access Credentials" form section)
+  - `crm/templates/crm/contact_list.html` (added clearance, presence, and plate columns with filter dropdowns)
+  - `intelligent_tracker_hub/models.py` (added `AccessDirection`, `VerificationMethod`, and `VisitorAccessLog` model)
+  - `intelligent_tracker_hub/migrations/0004_visitoraccesslog.py` (applied migration for `VisitorAccessLog`)
+  - `intelligent_tracker_hub/notifications.py` (created bilingual `send_visitor_arrival_notification` mailer)
+  - `intelligent_tracker_hub/serializers.py` (added `CRMContactWhitelistItemSerializer`, `SecurityAccessIngestSerializer`, `VisitorAccessLogSerializer`)
+  - `intelligent_tracker_hub/api_views.py` (implemented `WhitelistDeltaSyncApiView`, `SecurityAccessIngestApiView`, `VisitorAccessLogViewSet`)
+  - `intelligent_tracker_hub/api_urls.py` (wired whitelist, access ingestion, and catalog routes)
+  - `intelligent_tracker_hub/admin.py` (registered `VisitorAccessLogAdmin`)
+  - `intelligent_tracker_hub/views.py` (passed `recent_access_logs` to `SecurityDashboardView`)
+  - `intelligent_tracker_hub/templates/intelligent_tracker_hub/dashboard.html` (embedded "Recent Gate Access & Visitor Passes" monitoring table)
+  - `documentation/INTELLIGENT_TRACKER_OFFLINE_DB_SPEC.md` (created comprehensive SQLite schema, index, flowchart, and outbox spec)
+  - `documentation/README.md` (updated Section 4 with Phase E4 details and spec references)
+  - `INTELLIGENT_TRACKER_INTEGRATION_PLAN.md` (marked Phase E4 complete)
+  - `milestone_plan.md` & `TODO_MODERNIZATION.md` (marked Milestone 16d items complete)
+  - `tests/test_intelligent_tracker_hub.py` (added 13 dedicated integration tests)
+- **Next Steps:**
+  - Proceed with Milestone 17: Enterprise Production Deployment, Observability & Container Hardening (or Milestone 17 Scaffolding Wizard).
+
+
+
 
 
 
