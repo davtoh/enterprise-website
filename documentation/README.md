@@ -701,6 +701,9 @@ The presentation layer is modernized on **Bootstrap 5.3.3**, retiring legacy Boo
 
 The platform integrates with [davtoh/intelligent-tracker](https://github.com/davtoh/intelligent-tracker) (Edge AI Vision Microservice) to provide enterprise-grade spatial security, multi-camera tracking, and automated surveillance auditing.
 
+> **Integration Manual:** For step-by-step edge connection recipes, HMAC-SHA256 signing code, ETag delta-sync polling samples, and offline cache specs, see [INTELLIGENT_TRACKER_INTEGRATION_GUIDE.md](INTELLIGENT_TRACKER_INTEGRATION_GUIDE.md).
+
+
 ```
 +-----------------------------------------------------------------------------------+
 |               Edge Tier: davtoh/intelligent-tracker (CCTV / IP Cameras)           |
