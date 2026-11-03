@@ -1087,3 +1087,34 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
 - **Next Steps:**
   - Proceed with Phase 3: ERP System & Settings Modularization (`erp/views.py`, `tests/test_erp.py`, `enterprise_website/settings.py`).
 
+
+---
+
+## [Refactor Campaign - Phase 3.1] - ERP Views & Test Suite Decomposition
+- **Date:** 2026-11-03
+- **Status:** **COMPLETE** (Sub-Phase 3.1 of 3.2)
+- **Objectives:**
+  - Decompose critical monolith `erp/views.py` (439 lines) into a domain-driven `erp/views/` package conforming strictly to quantitative modularity budgets ($\le 350$ lines per file, $\le 10$ methods per class, $\le 40$ lines per function).
+  - Decompose critical test monolith `tests/test_erp.py` (522 lines) into a focused `tests/erp/` modular package ($\le 350$ lines per test file, $\le 40$ lines per test function).
+  - Preserve 100% backward compatibility for existing consumers, URL routers (`erp/urls.py`), and test runners via re-export facades (`erp/views/__init__.py` and `tests/test_erp.py`).
+- **Files Created / Modified:**
+  - `erp/views/__init__.py`: Package entrypoint exporting all 19 ERP view classes and module logger (70 lines).
+  - `erp/views/dashboard.py`: `DashboardView`, `InventoryDashboardView`, `AnalyticsDataApiView`, `ModulesOverviewView`, and `FUTURE_SUBMODULES` metadata (138 lines).
+  - `erp/views/products.py`: `ProductListView`, `ProductDetailView`, `ProductCreateView`, `ProductUpdateView`, and `ProductDeleteView` (90 lines).
+  - `erp/views/inventory.py`: `StockMovementListView` and `StockMovementCreateView` (64 lines).
+  - `erp/views/invoices.py`: `InvoiceListView`, `InvoiceDetailView`, `InvoiceCreateView`, `InvoiceUpdateView`, `InvoiceDeleteView`, `InvoiceStatusUpdateView`, `InvoicePdfDownloadView`, and `InvoiceSendEmailView` (171 lines).
+  - `erp/views.py`: Removed monolithic file (replaced by `erp/views/` package).
+  - `tests/erp/__init__.py`: Modular test package initializer (9 lines).
+  - `tests/erp/conftest.py`: Shared fixtures (`auth_user`, `test_category`, `test_location`, `test_product`, `test_invoice`) (83 lines).
+  - `tests/erp/test_dashboard_and_analytics.py`: Dashboard KPIs, Chart.js telemetry, and modular plugin discovery tests (113 lines).
+  - `tests/erp/test_products_and_inventory.py`: Product model methods, stock movements, low-stock alerts, and CRUD views (170 lines).
+  - `tests/erp/test_invoices_and_pdf.py`: Invoice totals, ReportLab PDF rendering, email dispatch task, and CRUD lifecycle views (165 lines).
+  - `tests/test_erp.py`: Backward-compatible test facade maintaining 100% test discovery and execution parity (45 lines).
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created and decomposed files verified below the 350-line budget (0 Critical, 0 Warning across all 11 files and functions).
+  - `contract_snapshot.py verify --path erp --strict`: Confirmed 0 dropped DOM IDs, 0 dropped API routes, and 0 regression discrepancies.
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/erp/ tests/test_erp.py -v`: 40 of 40 ERP test executions passed in 22.75s.
+  - `pytest tests/ -q`: **354 of 354 tests passed in 71.46s (100% green)**.
+- **Next Steps:**
+  - Proceed with Phase 3.2: Modular Django Settings Package (`enterprise_website/settings.py` 416 lines -> `enterprise_website/settings/` package).
