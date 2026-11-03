@@ -1027,3 +1027,35 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `pytest tests/`: **311 of 311 tests passed in 57.39s (100% green)**.
 - **Next Steps:**
   - Proceed with Phase 2: CRM Core Architecture Decomposition (`crm/views.py`, `crm/models.py`, `tests/test_crm.py`).
+
+---
+
+## [Refactor Campaign - Phase 2.1] - CRM Views & Test Suite Decomposition
+- **Date:** 2026-11-03
+- **Status:** **COMPLETE** (Sub-Phase 2.1 of 2.2)
+- **Objectives:**
+  - Decompose critical monolith `crm/views.py` (730 lines) into a domain-driven `crm/views/` package conforming strictly to quantitative modularity budgets ($\le 350$ lines per file, $\le 10$ methods per class, $\le 40$ lines per function).
+  - Decompose critical test monolith `tests/test_crm.py` (621 lines) into a focused `tests/crm/` modular package ($\le 350$ lines per test file, $\le 40$ lines per test function).
+  - Preserve 100% backward compatibility for existing consumers, URL routers, and test runners via re-export facades (`crm/views/__init__.py` and `tests/test_crm.py`).
+- **Files Created / Modified:**
+  - `crm/views/__init__.py`: Package entrypoint exporting all 37 CRM view classes, base mixins, and transparent GIF asset (105 lines).
+  - `crm/views/base.py`: `CRMBaseView`, `DashboardView`, `PipelineView`, `AnalyticsView`, `AnalyticsDataApiView`, and `EmailTrackingPixelView` (131 lines).
+  - `crm/views/leads.py`: `LeadStageUpdateView`, `LeadListView`, `LeadDetailView`, `LeadCreateView`, `LeadUpdateView`, `LeadDeleteView`, and `LeadAddInteractionView` (169 lines).
+  - `crm/views/contacts.py`: `ContactListView`, `ContactDetailView`, `ContactCreateView`, `ContactUpdateView`, and `ContactDeleteView` (112 lines).
+  - `crm/views/companies.py`: `CompanyListView`, `CompanyDetailView`, `CompanyCreateView`, `CompanyUpdateView`, and `CompanyDeleteView` (93 lines).
+  - `crm/views/sequences.py`: `SequenceListView`, `SequenceDetailView`, `SequenceCreateView`, `SequenceUpdateView`, `SequenceDeleteView`, `EmailStepCreateView`, `EmailStepUpdateView`, `EmailStepDeleteView`, and `ProcessSequencesNowView` (153 lines).
+  - `crm/views/segments.py`: `SegmentListView`, `SegmentDetailView`, `SegmentCreateView`, `SegmentUpdateView`, `SegmentDeleteView`, and `SegmentBroadcastView` (115 lines).
+  - `crm/views.py`: Removed monolithic file (replaced by `crm/views/` package).
+  - `tests/crm/__init__.py`: Modular test package initializer (5 lines).
+  - `tests/crm/conftest.py`: Shared fixtures (`auth_user`, `test_company`, `test_contact`, `test_lead`) (57 lines).
+  - `tests/crm/test_models.py`: Model methods, validation, stage transitions, interaction logs, sequences, tracking, and segment filtering (184 lines).
+  - `tests/crm/test_tasks_and_utils.py`: Template rendering, sequence processing task, broadcast dispatch, and CRM analytics (121 lines).
+  - `tests/crm/test_views.py`: Auth redirects, pipeline Kanban, CRUD views for leads, contacts, companies, sequences, segments, analytics endpoints, and plugin discovery (275 lines).
+  - `tests/test_crm.py`: Backward-compatible test facade maintaining 100% discovery and execution parity (47 lines).
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created and decomposed files verified below the 350-line budget (0 Critical, 0 Warning across all 13 files and all functions).
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/crm/ tests/test_crm.py -v`: 46 of 46 CRM tests passed in 21.50s.
+  - `pytest tests/`: **334 of 334 tests passed in 62.67s (100% green)**.
+- **Next Steps:**
+  - Proceed with Phase 2.2: CRM Models Modularization (`crm/models.py` 779 lines -> `crm/models/` package).
