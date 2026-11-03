@@ -990,3 +990,40 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
 
 
 
+
+---
+
+## [Refactor Campaign - Phase 1] - Intelligent Tracker Hub API & Test Suite Decomposition
+- **Date:** 2026-11-03
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Decompose critical monolith `intelligent_tracker_hub/api_views.py` (1,569 lines) into a domain-driven `intelligent_tracker_hub/api/` package conforming strictly to quantitative modularity budgets ($\le 350$ lines per file).
+  - Decompose critical test monolith `tests/test_intelligent_tracker_hub.py` (1,403 lines) into a focused `tests/tracker/` modular package ($\le 350$ lines per test file).
+  - Preserve 100% backward compatibility for existing consumers, URL routers, and test runners via re-export facades (`api_views.py` and `tests/test_intelligent_tracker_hub.py`).
+  - Preserve `requests.get` mockability across existing test suites without breaking changes.
+- **Files Created / Modified:**
+  - `intelligent_tracker_hub/api/__init__.py`: Package entrypoint exporting all API views and streaming utilities (57 lines).
+  - `intelligent_tracker_hub/api/security_events.py`: Webhook receiver, REST catalog, audit log, and incident statistics (249 lines).
+  - `intelligent_tracker_hub/api/video_evidence.py`: Zero-copy edge registration and multipart MP4 uploads (336 lines).
+  - `intelligent_tracker_hub/api/video_streaming.py`: Range-request stream gateway and self-healing cloud archival (254 lines).
+  - `intelligent_tracker_hub/api/streaming.py`: Synthetic MJPEG stream generation, live reverse proxy, and telemetry streams (291 lines).
+  - `intelligent_tracker_hub/api/cameras.py`: Edge heartbeat ingestion and camera catalog management (147 lines).
+  - `intelligent_tracker_hub/api/whitelist_sync.py`: ETag-enabled contact delta-synchronization (146 lines).
+  - `intelligent_tracker_hub/api/access_control.py`: Physical gate access decision engine and access logs catalog (263 lines).
+  - `intelligent_tracker_hub/api_views.py`: Backward-compatible facade module re-exporting all endpoints and maintaining `requests` references (72 lines).
+  - `tests/tracker/__init__.py`: Modular test package initializer (3 lines).
+  - `tests/tracker/conftest.py`: Shared fixtures (`auth_user`, `test_location`, `test_company`, `test_contacts`, `SAMPLE_PNG_BASE64`) (96 lines).
+  - `tests/tracker/test_security_events.py`: HMAC cryptography and webhook receiver tests (251 lines).
+  - `tests/tracker/test_security_views.py`: Security catalog, statistics, dashboard, and plugin discovery tests (116 lines).
+  - `tests/tracker/test_video_evidence.py`: Zero-copy registration, range-request proxy, cloud archival, and self-healing tests (335 lines).
+  - `tests/tracker/test_cameras.py`: Camera properties, heartbeats, viewsets, synthetic MJPEG, proxy, and telemetry tests (257 lines).
+  - `tests/tracker/test_whitelist_sync.py`: Physical security credentials, ETag delta-sync, and since-parameter tests (197 lines).
+  - `tests/tracker/test_access_control.py`: Gate access ingestion, ANPR plate lookup, banned escalation, and visitor arrival notifications (231 lines).
+  - `tests/test_intelligent_tracker_hub.py`: Backward-compatible test facade maintaining 100% test discovery compatibility (70 lines).
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created and decomposed files verified below the 350-line budget (0 Critical, 0 Warning).
+  - `contract_snapshot.py verify`: Confirmed 0 dropped DOM IDs, 0 dropped API routes, and 0 regression discrepancies.
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/`: **311 of 311 tests passed in 57.39s (100% green)**.
+- **Next Steps:**
+  - Proceed with Phase 2: CRM Core Architecture Decomposition (`crm/views.py`, `crm/models.py`, `tests/test_crm.py`).
