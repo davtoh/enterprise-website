@@ -1144,3 +1144,34 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `pytest tests/ -q`: **354 of 354 tests passed in 72.79s (100% green)**.
 - **Next Steps:**
   - Proceed with Phase 4: Frontend Theme Stylesheets & JS Modernization (`static/scss/theme/` and `static/js/main.js`).
+
+
+---
+
+## [Refactor Campaign - Phase 4.1] - Main JS Controllers & Header SCSS Modularization
+- **Date:** 2026-11-04
+- **Status:** **COMPLETE** (Sub-Phase 4.1 of Phase 4)
+- **Objectives:**
+  - Decompose warning JavaScript monolith `static/js/main.js` (363 lines) into cohesive, single-responsibility controllers under `static/js/controllers/` conforming strictly to quantitative modularity budgets ($\le 350$ lines per file, $\le 40$ lines per function).
+  - Decompose critical SCSS monolith `static/scss/theme/_header.scss` (367 lines) into clean partials (`_header_top.scss`, `_nav_menu.scss`, `_mobile_nav.scss`) with a backward-compatible re-export facade.
+  - Maintain 100% contract parity (DOM IDs, selects, globals, routes) and ensure zero regressions across all frontend templates.
+- **Files Created / Modified:**
+  - `static/js/controllers/layout.js`: Viewport sizing (`.fullscreen`, `.fitscreen`), `niceSelect`, `magnificPopup` galleries/video modals, and `counterUp` metrics (69 lines).
+  - `static/js/controllers/navigation.js`: Superfish desktop navigation, mobile drawer creation, touch accordion toggles, smooth scrolling, location hash scroll, and header scroll state (141 lines).
+  - `static/js/controllers/carousels.js`: 7 responsive Owl Carousel instances with touch navigation and breakpoints (150 lines).
+  - `static/js/controllers/integrations.js`: Snazzy-styled Google Maps initialization (`#map`) and Mailchimp newsletter AJAX integration (82 lines).
+  - `static/js/main.js`: Re-export & orchestrator facade registering `window.EnterpriseApp` namespace and coordinating bootstrap lifecycle (30 lines, down from 363).
+  - `static/scss/theme/_header_top.scss`: Top bar info, `.header-top`, `.top-head-btn`, `#header` sticky navbar, and `#logo` branding (114 lines).
+  - `static/scss/theme/_nav_menu.scss`: Desktop `.nav-menu`, `.sf-arrows`, dropdown cascades, and hover transitions (110 lines).
+  - `static/scss/theme/_mobile_nav.scss`: Mobile hamburger button `#mobile-nav-toggle`, sliding drawer `#mobile-nav`, and backdrop `#mobile-body-overly` (125 lines).
+  - `static/scss/theme/_header.scss`: Re-export facade importing all 3 header submodules in strict cascade order (6 lines, down from 367).
+  - `templates/themes/bootstrap5/partials/scripts.html`: Updated script dependency tags in topological order.
+  - `templates/partials/scripts.html`: Updated script dependency tags in topological order.
+  - `todo/templates/todo/index.html`: Updated script dependency tags in topological order.
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created files verified below the 350-line budget (0 Critical, 0 Warning across all 7 files in `static/js/`).
+  - `contract_snapshot.py verify --path static --strict`: Confirmed **0 dropped DOM IDs, 0 dropped API routes, and 0 regression discrepancies**.
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/crm/ -q`: 23 of 23 tests passed in 12.01s (100% green).
+- **Next Steps:**
+  - Proceed with Sub-Phase 4.2: Remaining SCSS Theme Stylesheets (`_elements.scss`, `_home.scss`, `_pages.scss`).
