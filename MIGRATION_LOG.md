@@ -1175,3 +1175,35 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `pytest tests/crm/ -q`: 23 of 23 tests passed in 12.01s (100% green).
 - **Next Steps:**
   - Proceed with Sub-Phase 4.2: Remaining SCSS Theme Stylesheets (`_elements.scss`, `_home.scss`, `_pages.scss`).
+
+---
+
+## [Refactor Campaign - Phase 4.2] - Elements & Home Theme Stylesheets Decomposition
+- **Date:** 2026-11-04
+- **Status:** **COMPLETE** (Sub-Phase 4.2 of Phase 4)
+- **Objectives:**
+  - Decompose critical SCSS monolith `static/scss/theme/_elements.scss` (1,008 lines) into clean, focused partials (`_elements_typography.scss`, `_elements_buttons.scss`, `_elements_tables.scss`, `_elements_forms.scss`, `_elements_switches.scss`, `_elements_selection.scss`) conforming strictly to quantitative modularity budgets ($\le 350$ lines per file).
+  - Decompose critical SCSS monolith `static/scss/theme/_home.scss` (726 lines) into modular partials (`_home_banner.scss`, `_home_sections.scss`, `_home_generic.scss`) and extract the footer styles into `static/scss/theme/_footer.scss` (previously 0 bytes, already imported by `main.scss`).
+  - Preserve all developer reference comments, StackOverflow URLs, CodePen links, and CSS gradient notes verbatim.
+  - Maintain 100% backward compatibility via clean facade files (`_elements.scss` and `_home.scss`) preserving cascade and specificity rules.
+- **Files Created / Modified:**
+  - `static/scss/theme/_elements_typography.scss`: Typography, headings, text blocks, and lists (114 lines).
+  - `static/scss/theme/_elements_buttons.scss`: Button areas and `.genric-btn` variants (218 lines).
+  - `static/scss/theme/_elements_tables.scss`: Progress tables and gallery images (88 lines).
+  - `static/scss/theme/_elements_forms.scss`: Single inputs, textareas, nice-selects, and gradient border notes (214 lines).
+  - `static/scss/theme/_elements_switches.scss`: Default, primary, and confirm switches (167 lines).
+  - `static/scss/theme/_elements_selection.scss`: Checkbox and radio controls (225 lines).
+  - `static/scss/theme/_elements.scss`: Re-export facade importing all 6 element partials (9 lines, down from 1,008).
+  - `static/scss/theme/_home_banner.scss`: Hero section, gradient tokens, blend animations, and banner content (197 lines).
+  - `static/scss/theme/_home_sections.scss`: Products, home-about, about-video, feature, brand, and blog areas (235 lines).
+  - `static/scss/theme/_home_generic.scss`: Whole-wrap and generic page banner styling (69 lines).
+  - `static/scss/theme/_footer.scss`: Dedicated footer area, newsletter widget, copyright, and social links (220 lines, populated from 0).
+  - `static/scss/theme/_home.scss`: Re-export facade importing all 3 home submodules (6 lines, down from 726).
+  - `MIGRATION_LOG.md`: Updated refactoring progress log.
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created files verified below the 350-line budget (0 Critical, 0 Warning on file lengths; all $\le 235$ lines).
+  - `contract_snapshot.py verify --path static --strict`: Confirmed **0 dropped DOM IDs, 0 dropped API routes, and 0 regression discrepancies**.
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/crm/ -q`: 23 of 23 tests passed in 17.15s (100% green).
+- **Next Steps:**
+  - Proceed with Sub-Phase 4.3: Decompose final theme monolith `static/scss/theme/_pages.scss` (609 lines) to complete Phase 4 and the full refactoring campaign.

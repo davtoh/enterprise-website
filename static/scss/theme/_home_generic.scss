@@ -1,0 +1,70 @@
+//----------- Start Generic Page -------------//
+
+.whole-wrap{
+	background-color:$white;
+}
+
+
+.generic-banner {
+	margin-top:60px;
+	background-color:$primary-color;
+	text-align:center;
+	.height {
+		height: 600px;
+		@include media-breakpoint-down (sm) {
+			height: 400px;
+		}
+	}
+	.generic-banner-content {
+		h2 {
+			line-height: 1.2em;
+			margin-bottom: 20px;
+			br {
+				@include media-breakpoint-down (md) {
+					display: none;
+				}
+			}
+		}
+		p {
+			text-align:center;
+			font-size: 16px;
+			br {
+				@include media-breakpoint-down (md) {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+.generic-content{
+	h1{
+		font-weight:600;	
+	}
+}
+
+
+.about-generic-area {
+	background: $white;
+	.border-top-generic {
+
+	}
+	p {
+		margin-bottom: 20px;
+	}
+}
+.white-bg {
+	background: $white;
+}
+.section-top-border {
+	padding: 50px 0;
+	border-top: 1px dotted #eee;
+}
+.switch-wrap {
+	margin-bottom: 10px;
+	p {
+		margin: 0;
+	}
+}
+//----------- End Generic Page -------------//
+

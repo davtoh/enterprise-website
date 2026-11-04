@@ -1,0 +1,219 @@
+$default: #f9f9ff !default;
+$primary: $primary-color !default;
+$success: #4cd3e3 !default;
+$info   : #38a4ff !default;
+$warning: #f4e700 !default;
+$danger: #f44a40 !default;
+$link: #f9f9ff !default;
+$disable: (#222222, .3) !default;
+
+.button-area {
+	.border-top-generic {
+		padding: 70px 15px;
+		border-top: 1px dotted #eee;
+	}
+	background: $white;
+}
+.button-group-area {
+	.genric-btn {
+		margin-right: 10px;
+		margin-top: 10px;
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+.genric-btn {
+	display: inline-block;
+	outline: none;
+	line-height: 40px;
+	padding: 0 30px;
+	font-size: .8em;
+	text-align: center;
+	text-decoration: none;
+	font-weight: 500;
+	cursor: pointer;
+	@include transition();
+	&:focus {
+		outline: none;
+	}
+	&.e-large {
+		padding: 0 40px;
+		line-height: 50px;
+	}
+	&.large {
+		line-height: 45px;
+	}
+	&.medium {
+		line-height: 30px;
+	}
+	&.small {
+		line-height: 25px;
+	}
+	&.radius {
+		border-radius: 3px;
+	}
+	&.circle {
+		border-radius: 20px;
+	}
+	&.arrow {
+		display: -webkit-inline-box;
+		display: -ms-inline-flexbox;
+		display: inline-flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		span {
+			margin-left: 10px;
+		}
+	}
+	&.default {
+		color: $title-color;
+		background: $default;
+		border: 1px solid transparent;
+		&:hover {
+			border: 1px solid $default;
+			background: $white;
+		}
+	}
+	&.default-border {
+		border: 1px solid $default;
+		background: $white;
+		&:hover {
+		color: $title-color;
+		background: $default;
+		border: 1px solid transparent;
+		}
+	}
+	&.primary {
+		color: $white;
+		background: $primary;
+		border: 1px solid transparent;
+		&:hover {
+			color: $primary;
+			border: 1px solid $primary;
+			background: $white;
+		}
+	}
+	&.primary-border {
+		color: $primary;
+		border: 1px solid $primary;
+		background: $white;
+		&:hover {
+			color: $white;
+			background: $primary;
+			border: 1px solid transparent;
+		}
+	}
+	&.success {
+		color: $white;
+		background: $success;
+		border: 1px solid transparent;
+		&:hover {
+			color: $success;
+			border: 1px solid $success;
+			background: $white;
+		}
+	}
+	&.success-border {
+		color: $success;
+		border: 1px solid $success;
+		background: $white;
+		
+		&:hover {
+			color: $white;
+			background: $success;
+			border: 1px solid transparent;
+		}
+	}
+	&.info {
+		color: $white;
+		background: $info;
+		border: 1px solid transparent;
+		&:hover {
+			color: $info;
+			border: 1px solid $info;
+			background: $white;
+		}
+	}
+	&.info-border {
+		color: $info;
+		border: 1px solid $info;
+		background: $white;
+		
+		&:hover {
+			color: $white;
+			background: $info;
+			border: 1px solid transparent;
+		}
+	}
+	&.warning {
+		color: $white;
+		background: $warning;
+		border: 1px solid transparent;
+		&:hover {
+			color: $warning;
+			border: 1px solid $warning;
+			background: $white;
+		}
+	}
+	&.warning-border {
+		color: $warning;
+		border: 1px solid $warning;
+		background: $white;
+		&:hover {
+			color: $white;
+			background: $warning;
+			border: 1px solid transparent;
+		}
+	}
+	&.danger {
+		color: $white;
+		background: $danger;
+		border: 1px solid transparent;
+		&:hover {
+			color: $danger;
+			border: 1px solid $danger;
+			background: $white;
+		}
+	}
+	&.danger-border {
+		color: $danger;
+		border: 1px solid $danger;
+		background: $white;
+		&:hover {
+			color: $white;
+			background: $danger;
+			border: 1px solid transparent;
+		}
+	}
+	&.link {
+		color: $title-color;
+		background: $link;
+		text-decoration: underline;
+		border: 1px solid transparent;
+		&:hover {
+			color: $title-color;
+			border: 1px solid $link;
+			background: $white;
+		}
+	}
+	&.link-border {
+		color: $title-color;
+		border: 1px solid $link;
+		background: $white;
+		text-decoration: underline;
+		&:hover {
+			color: $title-color;
+			background: $link;
+			border: 1px solid transparent;
+		}
+	}
+	&.disable {
+		color: $disable;
+		background: $link;
+		border: 1px solid transparent;
+		cursor: not-allowed;
+	}
+}
+
