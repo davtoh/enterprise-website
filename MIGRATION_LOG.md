@@ -1118,3 +1118,29 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `pytest tests/ -q`: **354 of 354 tests passed in 71.46s (100% green)**.
 - **Next Steps:**
   - Proceed with Phase 3.2: Modular Django Settings Package (`enterprise_website/settings.py` 416 lines -> `enterprise_website/settings/` package).
+
+---
+
+## [Refactor Campaign - Phase 3.2] - Modular Django Settings Package
+- **Date:** 2026-11-03
+- **Status:** **COMPLETE** (Phase 3 ERP System & Settings 100% Complete)
+- **Objectives:**
+  - Decompose warning monolith `enterprise_website/settings.py` (416 lines) into a domain-driven `enterprise_website/settings/` package conforming strictly to quantitative modularity budgets ($\le 350$ lines per file, $\le 40$ lines per function).
+  - Eliminate monolith settings file while maintaining 100% backward compatibility for `DJANGO_SETTINGS_MODULE="enterprise_website.settings"` across `manage.py`, `wsgi.py`, `asgi.py`, `celery.py`, and `pytest.ini`.
+  - Preserve all developer reference comments, stack overflow links, timezone annotations, and docstrings.
+- **Files Created / Modified:**
+  - `enterprise_website/settings/__init__.py`: Package aggregator re-exporting all configuration symbols from modular domain submodules (16 lines).
+  - `enterprise_website/settings/base.py`: Core Django environment bootstrap, `BASE_DIR`, `DEBUG`, `SECRET_KEY`, `ALLOWED_HOSTS`, `MIDDLEWARE`, `TEMPLATES`, theme definitions, i18n/l10n, and Rosetta configuration (152 lines).
+  - `enterprise_website/settings/apps.py`: Application definitions grouped into `DJANGO_CORE_APPS`, `THIRD_PARTY_APPS`, `ENTERPRISE_APPS`, and aggregated `INSTALLED_APPS` (54 lines).
+  - `enterprise_website/settings/storage.py`: Database configuration (SQLite dev / MySQL & Postgres prod), static assets (`STATIC_ROOT`, `STATICFILES_DIRS`), media files, and Redis channel layer settings (61 lines).
+  - `enterprise_website/settings/security.py`: Custom auth model (`user_management.SiteUser`), password validators, X-Frame options, and conditional HTTPS/HSTS production security hardening (58 lines).
+  - `enterprise_website/settings/integrations.py`: Logging handlers and formatters, Django REST Framework defaults, Celery broker/backend settings, beat schedules, and Intelligent Tracker HMAC key (114 lines).
+  - `enterprise_website/settings.py`: Removed monolithic file (replaced by `enterprise_website/settings/` package).
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created files verified below the 350-line budget (0 Critical, 0 Warning across all 6 files; highest file is `base.py` at 152 lines).
+  - `contract_snapshot.py verify --path enterprise_website --strict`: Confirmed 0 dropped DOM IDs, 0 dropped API routes, and 0 regression discrepancies.
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/erp/ tests/crm/ -q`: 43 of 43 tests passed in 20.10s.
+  - `pytest tests/ -q`: **354 of 354 tests passed in 72.79s (100% green)**.
+- **Next Steps:**
+  - Proceed with Phase 4: Frontend Theme Stylesheets & JS Modernization (`static/scss/theme/` and `static/js/main.js`).
