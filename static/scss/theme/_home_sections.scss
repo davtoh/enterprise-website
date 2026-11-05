@@ -1,0 +1,236 @@
+//--------- Start products Area -------------//
+
+.single-product{
+  text-align:center;	
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 10px 30px 0px rgba(212, 150, 255, 0.2);
+  .thumb{
+	padding:40px;
+	border-bottom:1px solid #eee;
+  }
+  .details{
+  	padding:20px;
+  	background-color:$offwhite;
+  	h4{
+  		margin-bottom:20px;
+  	}
+  	.primary-btn{
+  		margin-top:10px;
+  		border-radius:0;
+  		background:$white;
+  		color:$black!important;
+  		font-weight:600;
+  	}
+  }
+	&:hover{
+		cursor:pointer;
+		.details{
+			.primary-btn{
+				@extend .p1-gradient-bg;
+				color:$white !important;
+			}
+		}
+	}
+	@media(max-width:960px){
+		margin-bottom:30px;
+	}
+}
+
+
+//--------- End products Area -------------//
+
+
+//--------- Start home-about Area -------------//
+
+.home-about-left{
+	img{
+		width:100%;
+	}
+}
+
+.home-about-right{
+	padding-right: 20%;
+	padding-left: 4%;
+	@media(max-width: 1366px){
+		padding-left:15px;
+		padding-right:15px;
+	}
+	h1{
+		padding:20px 0;	
+		@media(max-width:413px){
+			br{
+				display:none;
+			}
+		}	
+	}
+	h5{
+		margin-bottom:20px;
+		font-weight:300;
+	}
+	.primary-btn{
+		border-radius:0;
+	}
+
+	@media(max-width:960px){
+		margin-top:50px;
+	}	
+
+}
+
+
+//--------- End home-about Area -------------//
+
+
+//--------- Start about-video Area -------------//
+
+.about-video-left{
+	h6{
+		color:$primary-color;
+		font-weight:300;
+		letter-spacing:2px;
+		font-size:12px;
+	}
+	h1{
+		padding:20px 0;
+		@media(max-width:413px){
+			br{
+				display:none;
+			}
+		}
+	}
+	p{
+		span{
+			font-weight:600;
+			color:$black;
+		}
+	}
+	
+	.primary-btn{
+		border-radius:0;
+	}
+
+}
+
+
+.about-video-right{
+	background:url(../img/video-bg.jpg) no-repeat center;
+	background-size:cover;
+	height:330px;
+	.overlay-bg{
+		@extend .p1-gradient-bg;
+		opacity:.8;
+	}
+	.play-btn{
+		z-index: 2;
+	}
+	@media(max-width:960px){
+		margin-top:100px;
+	}
+}
+
+
+//--------- End about-video Area -------------//
+
+
+//--------- Start Feature Area -------------//
+
+.feature-area{
+	background:url(../img/feature-bg.jpg) center;
+	background-size:cover; 
+	.single-feature{
+		background:$white;
+		padding:35px;
+		border-radius:10px;
+		margin-bottom:30px;	
+		h4{
+			@include transition();
+		}
+		.title{
+			.lnr{
+				color:$black;
+				font-weight:600;
+				font-size:20px;
+				margin-right:10px;
+			}
+		}
+		p{
+			margin-bottom:0px;
+			margin-top:15px;
+		}
+		&:hover{
+			cursor:pointer;
+			h4,.lnr{
+				color:$primary-color;
+			}
+		}
+	}
+
+}
+
+//--------- End Feature Area -------------//
+
+
+//--------- Start Brand Area -------------//
+
+.single-brand{
+	img{
+		@include filter(grayscale, 100%);
+
+		@include transition();
+		&:hover{
+			@include filter(grayscale, 0%);
+		}
+		@media(max-width:800px){
+			margin-bottom:40px;
+		}
+	}
+}
+
+//--------- End Brand Area -------------//
+
+
+//--------- Start Blog Area -------------//
+
+.blog-area{
+	.thumb{
+		img{
+			border-radius:10px;
+		}
+	}
+	.detais{
+		.tags {
+			margin:15px 0; 
+			li{
+				display:inline-block;
+				@extend .p1-gradient-bg;
+				padding:4px 15px;
+				font-size:12px;
+				font-weight:400;
+				@include transition();
+				border:1px solid transparent;
+				a{
+					@include transition();
+					color:$white;
+				}
+				&:hover{
+					border-color:#eee;	
+					background:$white;
+					a{
+						color:$black;
+					}
+				}
+			}
+		}
+		h4{
+			margin-bottom:15px; 
+		}
+		.date{
+			color:$black;
+		}
+	}
+}
+
+
+//--------- End Blog Area -------------//
+

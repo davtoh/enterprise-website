@@ -1,0 +1,241 @@
+// ============= Start Aboutus Page Styles  =============  //
+
+
+//--------- Start Aboutus Area style -------------//
+
+.link-nav{
+	margin-top:10px;
+}
+
+.about-content{
+	margin-top: 120px;
+	padding: 120px 0px;	
+	text-align:center;
+	h1{
+		font-size: 48px;
+		font-weight:600;
+	}
+	a{
+		color:$white;
+		font-weight:300;
+		font-size:14px;
+	}
+	.lnr{
+		margin:0px 10px;
+		font-weight:600;
+	}	
+}
+
+.aboutus-about{
+	background: $white!important;
+}
+
+.aboutus-cat{
+	background: $offwhite!important;
+}
+
+.aboutus-feedback{
+	background:$white;
+
+}
+
+
+//--------- End Aboutus Area style -------------//
+
+
+// ============= End Aboutus Page Styles  =============  //
+
+
+// ============= Start Service Page Styles  =============  //
+
+
+//--------- Start offred-service Area style -------------//
+
+
+.single-offered-service{
+	img{
+		width:100%;
+	}
+	h4{
+		margin:20px 0;
+		@include transition();
+	}
+	&:hover{
+		h4{
+			color:$primary-color;
+		}
+	}
+	@media(max-width:960px){
+		padding-bottom: 50px;
+	}
+}
+
+//--------- End offred-service Area style -------------//
+
+
+// ============= End Service Page Styles  =============  //
+
+
+// ============= Start Products Page Styles  =============  //
+
+
+.product-page{
+	.single-product{
+		margin-bottom:30px;
+	}
+}
+
+
+// ============= End Products Page Styles  =============  //
+
+
+// ============= Start product Details Page Styles  =============  //
+
+//--------- Start price  Area -------------//
+
+.price-area{
+	background:$offwhite;
+	.single-price{
+		@include transition();		
+		text-align:center;
+		background-color:#fff;
+		border-radius:10px;
+		padding:40px 20px;
+		.package-no{
+			@include transition();	
+			font-weight: 300;
+			margin-left: auto;
+			margin-right: auto;
+			width: 140px;
+			height: 140px;
+			background-color:rgba($primary-color,.05);
+			border-radius:100px;
+			align-items: center;
+			display: grid;
+			border:30px solid #f4eeff;			
+		}
+		.top-part h4{
+			margin-top:20px;
+		}
+		.package-list{
+			padding:30px 0;
+			ul li{
+				padding:10px 0;
+				border-top:1px solid #eee;
+			}
+			ul li:last-child{
+				border-bottom: 1px solid #eee;
+			}
+		}
+		.bottom-part{
+				@include transition();
+
+		}
+
+		&:hover{
+  			box-shadow: 0px 20px 60px 0px rgba(101, 52, 254, 0.3);
+			cursor:pointer;		
+			.primary-btn{
+				display:block;
+			}
+			.bottom-part{
+				h1{
+					display:none;
+				}
+			}
+		}
+
+		.primary-btn{
+			font-size: 13px;
+			display:none;	
+			border-radius:0!important;
+		}
+
+		@media(max-width:960px){
+			margin-bottom:30px;
+		}
+		@media(max-width:736px){
+			margin:10px;
+		}
+	}
+}
+
+
+//--------- end price  Area -------------//
+
+
+// ============= End product Details Page Styles  =============  //
+
+
+// ============= Start contact Page Styles  =============  //
+
+.contact-page-area{
+	background:$offwhite;
+	.map-wrap{
+		margin-bottom:120px;
+		@media(max-width:960px){
+			margin-bottom:50px;	
+		}
+	}
+
+	.contact-btns{
+		font-size:18px;
+		font-weight:600;
+		text-align:center;
+		padding:40px;
+		color:$white;
+		margin-bottom:30px;
+		&:hover{
+			color:$white;
+		}
+	}
+
+	.form-area{
+		input{
+			padding: 15px;		
+		}
+		input,textarea{
+			border-radius:0;
+			font-size:12px;
+		}
+		textarea{
+			height: 190px;
+			margin-top: 0px;
+		}
+
+		.primary-btn{
+			@include transition();
+			&:hover{
+				border:1px solid $primary-color;
+				color:$primary-color!important;
+			}
+		}
+	}
+
+	@media(max-width: 960px){
+		.address-wrap{
+			margin-bottom: 50px;
+		}
+	}
+
+
+	.single-contact-address {
+		margin-bottom:20px;
+		h5{
+			font-weight:300;
+			font-size:16px;
+			margin-bottom:5px;
+		}	
+		.lnr{
+			font-size:30px;
+			font-weight:500;
+			color:$primary-color;
+			margin-right:30px;
+		}
+	}
+
+}
+
+
+// ============= End contact Page Styles  =============  //
+

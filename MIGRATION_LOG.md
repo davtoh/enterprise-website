@@ -990,3 +990,244 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
 
 
 
+
+---
+
+## [Refactor Campaign - Phase 1] - Intelligent Tracker Hub API & Test Suite Decomposition
+- **Date:** 2026-11-03
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Decompose critical monolith `intelligent_tracker_hub/api_views.py` (1,569 lines) into a domain-driven `intelligent_tracker_hub/api/` package conforming strictly to quantitative modularity budgets ($\le 350$ lines per file).
+  - Decompose critical test monolith `tests/test_intelligent_tracker_hub.py` (1,403 lines) into a focused `tests/tracker/` modular package ($\le 350$ lines per test file).
+  - Preserve 100% backward compatibility for existing consumers, URL routers, and test runners via re-export facades (`api_views.py` and `tests/test_intelligent_tracker_hub.py`).
+  - Preserve `requests.get` mockability across existing test suites without breaking changes.
+- **Files Created / Modified:**
+  - `intelligent_tracker_hub/api/__init__.py`: Package entrypoint exporting all API views and streaming utilities (57 lines).
+  - `intelligent_tracker_hub/api/security_events.py`: Webhook receiver, REST catalog, audit log, and incident statistics (249 lines).
+  - `intelligent_tracker_hub/api/video_evidence.py`: Zero-copy edge registration and multipart MP4 uploads (336 lines).
+  - `intelligent_tracker_hub/api/video_streaming.py`: Range-request stream gateway and self-healing cloud archival (254 lines).
+  - `intelligent_tracker_hub/api/streaming.py`: Synthetic MJPEG stream generation, live reverse proxy, and telemetry streams (291 lines).
+  - `intelligent_tracker_hub/api/cameras.py`: Edge heartbeat ingestion and camera catalog management (147 lines).
+  - `intelligent_tracker_hub/api/whitelist_sync.py`: ETag-enabled contact delta-synchronization (146 lines).
+  - `intelligent_tracker_hub/api/access_control.py`: Physical gate access decision engine and access logs catalog (263 lines).
+  - `intelligent_tracker_hub/api_views.py`: Backward-compatible facade module re-exporting all endpoints and maintaining `requests` references (72 lines).
+  - `tests/tracker/__init__.py`: Modular test package initializer (3 lines).
+  - `tests/tracker/conftest.py`: Shared fixtures (`auth_user`, `test_location`, `test_company`, `test_contacts`, `SAMPLE_PNG_BASE64`) (96 lines).
+  - `tests/tracker/test_security_events.py`: HMAC cryptography and webhook receiver tests (251 lines).
+  - `tests/tracker/test_security_views.py`: Security catalog, statistics, dashboard, and plugin discovery tests (116 lines).
+  - `tests/tracker/test_video_evidence.py`: Zero-copy registration, range-request proxy, cloud archival, and self-healing tests (335 lines).
+  - `tests/tracker/test_cameras.py`: Camera properties, heartbeats, viewsets, synthetic MJPEG, proxy, and telemetry tests (257 lines).
+  - `tests/tracker/test_whitelist_sync.py`: Physical security credentials, ETag delta-sync, and since-parameter tests (197 lines).
+  - `tests/tracker/test_access_control.py`: Gate access ingestion, ANPR plate lookup, banned escalation, and visitor arrival notifications (231 lines).
+  - `tests/test_intelligent_tracker_hub.py`: Backward-compatible test facade maintaining 100% test discovery compatibility (70 lines).
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created and decomposed files verified below the 350-line budget (0 Critical, 0 Warning).
+  - `contract_snapshot.py verify`: Confirmed 0 dropped DOM IDs, 0 dropped API routes, and 0 regression discrepancies.
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/`: **311 of 311 tests passed in 57.39s (100% green)**.
+- **Next Steps:**
+  - Proceed with Phase 2: CRM Core Architecture Decomposition (`crm/views.py`, `crm/models.py`, `tests/test_crm.py`).
+
+---
+
+## [Refactor Campaign - Phase 2.1] - CRM Views & Test Suite Decomposition
+- **Date:** 2026-11-03
+- **Status:** **COMPLETE** (Sub-Phase 2.1 of 2.2)
+- **Objectives:**
+  - Decompose critical monolith `crm/views.py` (730 lines) into a domain-driven `crm/views/` package conforming strictly to quantitative modularity budgets ($\le 350$ lines per file, $\le 10$ methods per class, $\le 40$ lines per function).
+  - Decompose critical test monolith `tests/test_crm.py` (621 lines) into a focused `tests/crm/` modular package ($\le 350$ lines per test file, $\le 40$ lines per test function).
+  - Preserve 100% backward compatibility for existing consumers, URL routers, and test runners via re-export facades (`crm/views/__init__.py` and `tests/test_crm.py`).
+- **Files Created / Modified:**
+  - `crm/views/__init__.py`: Package entrypoint exporting all 37 CRM view classes, base mixins, and transparent GIF asset (105 lines).
+  - `crm/views/base.py`: `CRMBaseView`, `DashboardView`, `PipelineView`, `AnalyticsView`, `AnalyticsDataApiView`, and `EmailTrackingPixelView` (131 lines).
+  - `crm/views/leads.py`: `LeadStageUpdateView`, `LeadListView`, `LeadDetailView`, `LeadCreateView`, `LeadUpdateView`, `LeadDeleteView`, and `LeadAddInteractionView` (169 lines).
+  - `crm/views/contacts.py`: `ContactListView`, `ContactDetailView`, `ContactCreateView`, `ContactUpdateView`, and `ContactDeleteView` (112 lines).
+  - `crm/views/companies.py`: `CompanyListView`, `CompanyDetailView`, `CompanyCreateView`, `CompanyUpdateView`, and `CompanyDeleteView` (93 lines).
+  - `crm/views/sequences.py`: `SequenceListView`, `SequenceDetailView`, `SequenceCreateView`, `SequenceUpdateView`, `SequenceDeleteView`, `EmailStepCreateView`, `EmailStepUpdateView`, `EmailStepDeleteView`, and `ProcessSequencesNowView` (153 lines).
+  - `crm/views/segments.py`: `SegmentListView`, `SegmentDetailView`, `SegmentCreateView`, `SegmentUpdateView`, `SegmentDeleteView`, and `SegmentBroadcastView` (115 lines).
+  - `crm/views.py`: Removed monolithic file (replaced by `crm/views/` package).
+  - `tests/crm/__init__.py`: Modular test package initializer (5 lines).
+  - `tests/crm/conftest.py`: Shared fixtures (`auth_user`, `test_company`, `test_contact`, `test_lead`) (57 lines).
+  - `tests/crm/test_models.py`: Model methods, validation, stage transitions, interaction logs, sequences, tracking, and segment filtering (184 lines).
+  - `tests/crm/test_tasks_and_utils.py`: Template rendering, sequence processing task, broadcast dispatch, and CRM analytics (121 lines).
+  - `tests/crm/test_views.py`: Auth redirects, pipeline Kanban, CRUD views for leads, contacts, companies, sequences, segments, analytics endpoints, and plugin discovery (275 lines).
+  - `tests/test_crm.py`: Backward-compatible test facade maintaining 100% discovery and execution parity (47 lines).
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created and decomposed files verified below the 350-line budget (0 Critical, 0 Warning across all 13 files and all functions).
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/crm/ tests/test_crm.py -v`: 46 of 46 CRM tests passed in 21.50s.
+  - `pytest tests/`: **334 of 334 tests passed in 62.67s (100% green)**.
+- **Next Steps:**
+  - Proceed with Phase 2.2: CRM Models Modularization (`crm/models.py` 779 lines -> `crm/models/` package).
+
+---
+
+## [Refactor Campaign - Phase 2.2] - CRM Models Modularization
+- **Date:** 2026-11-03
+- **Status:** **COMPLETE** (Phase 2 CRM Core Architecture 100% Complete)
+- **Objectives:**
+  - Decompose critical monolith `crm/models.py` (779 lines) into a domain-driven `crm/models/` package conforming strictly to quantitative modularity budgets ($\le 350$ lines per file, $\le 10$ methods per class, $\le 40$ lines per function).
+  - Preserve 100% backward compatibility for all model consumers across `crm`, `intelligent_tracker_hub`, and test suites via re-export facade `crm/models/__init__.py`.
+  - Ensure zero Django migration churn (`makemigrations --dry-run` reports `No changes detected`).
+- **Files Created / Modified:**
+  - `crm/models/__init__.py`: Package entrypoint exporting all 16 model classes and text choice enums (42 lines).
+  - `crm/models/companies.py`: `Company` model and `total_pipeline_value` property (43 lines).
+  - `crm/models/contacts.py`: `SecurityClearance`, `PresenceStatus`, `Contact` model with physical security credentials, badge helpers, check-in/out logic (236 lines).
+  - `crm/models/leads.py`: `LeadStage`, `LeadSource`, `Lead` model with pipeline stage transitions, `InteractionType`, `InteractionLog` (189 lines).
+  - `crm/models/sequences.py`: `EmailSequence`, `EmailStep`, `SequenceEnrollmentStatus`, `SequenceEnrollment`, `EmailDeliveryStatus`, `EmailDeliveryLog` (227 lines).
+  - `crm/models/segments.py`: `Segment` customer segmentation model with dynamic JSON rule evaluation (116 lines).
+  - `crm/models.py`: Removed monolithic file (replaced by `crm/models/` package).
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created files verified below the 350-line budget (0 Critical, 0 Warning across all 6 files).
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `python manage.py makemigrations --dry-run`: Confirmed `No changes detected`.
+  - `pytest tests/crm/ tests/test_crm.py -v`: 46 of 46 CRM tests passed in 19.88s.
+  - `pytest tests/tracker/ -q`: 50 of 50 tracker tests passed in 8.02s.
+  - `pytest tests/ -q`: **334 of 334 tests passed in 64.92s (100% green)**.
+- **Next Steps:**
+  - Proceed with Phase 3: ERP System & Settings Modularization (`erp/views.py`, `tests/test_erp.py`, `enterprise_website/settings.py`).
+
+
+---
+
+## [Refactor Campaign - Phase 3.1] - ERP Views & Test Suite Decomposition
+- **Date:** 2026-11-03
+- **Status:** **COMPLETE** (Sub-Phase 3.1 of 3.2)
+- **Objectives:**
+  - Decompose critical monolith `erp/views.py` (439 lines) into a domain-driven `erp/views/` package conforming strictly to quantitative modularity budgets ($\le 350$ lines per file, $\le 10$ methods per class, $\le 40$ lines per function).
+  - Decompose critical test monolith `tests/test_erp.py` (522 lines) into a focused `tests/erp/` modular package ($\le 350$ lines per test file, $\le 40$ lines per test function).
+  - Preserve 100% backward compatibility for existing consumers, URL routers (`erp/urls.py`), and test runners via re-export facades (`erp/views/__init__.py` and `tests/test_erp.py`).
+- **Files Created / Modified:**
+  - `erp/views/__init__.py`: Package entrypoint exporting all 19 ERP view classes and module logger (70 lines).
+  - `erp/views/dashboard.py`: `DashboardView`, `InventoryDashboardView`, `AnalyticsDataApiView`, `ModulesOverviewView`, and `FUTURE_SUBMODULES` metadata (138 lines).
+  - `erp/views/products.py`: `ProductListView`, `ProductDetailView`, `ProductCreateView`, `ProductUpdateView`, and `ProductDeleteView` (90 lines).
+  - `erp/views/inventory.py`: `StockMovementListView` and `StockMovementCreateView` (64 lines).
+  - `erp/views/invoices.py`: `InvoiceListView`, `InvoiceDetailView`, `InvoiceCreateView`, `InvoiceUpdateView`, `InvoiceDeleteView`, `InvoiceStatusUpdateView`, `InvoicePdfDownloadView`, and `InvoiceSendEmailView` (171 lines).
+  - `erp/views.py`: Removed monolithic file (replaced by `erp/views/` package).
+  - `tests/erp/__init__.py`: Modular test package initializer (9 lines).
+  - `tests/erp/conftest.py`: Shared fixtures (`auth_user`, `test_category`, `test_location`, `test_product`, `test_invoice`) (83 lines).
+  - `tests/erp/test_dashboard_and_analytics.py`: Dashboard KPIs, Chart.js telemetry, and modular plugin discovery tests (113 lines).
+  - `tests/erp/test_products_and_inventory.py`: Product model methods, stock movements, low-stock alerts, and CRUD views (170 lines).
+  - `tests/erp/test_invoices_and_pdf.py`: Invoice totals, ReportLab PDF rendering, email dispatch task, and CRUD lifecycle views (165 lines).
+  - `tests/test_erp.py`: Backward-compatible test facade maintaining 100% test discovery and execution parity (45 lines).
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created and decomposed files verified below the 350-line budget (0 Critical, 0 Warning across all 11 files and functions).
+  - `contract_snapshot.py verify --path erp --strict`: Confirmed 0 dropped DOM IDs, 0 dropped API routes, and 0 regression discrepancies.
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/erp/ tests/test_erp.py -v`: 40 of 40 ERP test executions passed in 22.75s.
+  - `pytest tests/ -q`: **354 of 354 tests passed in 71.46s (100% green)**.
+- **Next Steps:**
+  - Proceed with Phase 3.2: Modular Django Settings Package (`enterprise_website/settings.py` 416 lines -> `enterprise_website/settings/` package).
+
+---
+
+## [Refactor Campaign - Phase 3.2] - Modular Django Settings Package
+- **Date:** 2026-11-03
+- **Status:** **COMPLETE** (Phase 3 ERP System & Settings 100% Complete)
+- **Objectives:**
+  - Decompose warning monolith `enterprise_website/settings.py` (416 lines) into a domain-driven `enterprise_website/settings/` package conforming strictly to quantitative modularity budgets ($\le 350$ lines per file, $\le 40$ lines per function).
+  - Eliminate monolith settings file while maintaining 100% backward compatibility for `DJANGO_SETTINGS_MODULE="enterprise_website.settings"` across `manage.py`, `wsgi.py`, `asgi.py`, `celery.py`, and `pytest.ini`.
+  - Preserve all developer reference comments, stack overflow links, timezone annotations, and docstrings.
+- **Files Created / Modified:**
+  - `enterprise_website/settings/__init__.py`: Package aggregator re-exporting all configuration symbols from modular domain submodules (16 lines).
+  - `enterprise_website/settings/base.py`: Core Django environment bootstrap, `BASE_DIR`, `DEBUG`, `SECRET_KEY`, `ALLOWED_HOSTS`, `MIDDLEWARE`, `TEMPLATES`, theme definitions, i18n/l10n, and Rosetta configuration (152 lines).
+  - `enterprise_website/settings/apps.py`: Application definitions grouped into `DJANGO_CORE_APPS`, `THIRD_PARTY_APPS`, `ENTERPRISE_APPS`, and aggregated `INSTALLED_APPS` (54 lines).
+  - `enterprise_website/settings/storage.py`: Database configuration (SQLite dev / MySQL & Postgres prod), static assets (`STATIC_ROOT`, `STATICFILES_DIRS`), media files, and Redis channel layer settings (61 lines).
+  - `enterprise_website/settings/security.py`: Custom auth model (`user_management.SiteUser`), password validators, X-Frame options, and conditional HTTPS/HSTS production security hardening (58 lines).
+  - `enterprise_website/settings/integrations.py`: Logging handlers and formatters, Django REST Framework defaults, Celery broker/backend settings, beat schedules, and Intelligent Tracker HMAC key (114 lines).
+  - `enterprise_website/settings.py`: Removed monolithic file (replaced by `enterprise_website/settings/` package).
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created files verified below the 350-line budget (0 Critical, 0 Warning across all 6 files; highest file is `base.py` at 152 lines).
+  - `contract_snapshot.py verify --path enterprise_website --strict`: Confirmed 0 dropped DOM IDs, 0 dropped API routes, and 0 regression discrepancies.
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/erp/ tests/crm/ -q`: 43 of 43 tests passed in 20.10s.
+  - `pytest tests/ -q`: **354 of 354 tests passed in 72.79s (100% green)**.
+- **Next Steps:**
+  - Proceed with Phase 4: Frontend Theme Stylesheets & JS Modernization (`static/scss/theme/` and `static/js/main.js`).
+
+
+---
+
+## [Refactor Campaign - Phase 4.1] - Main JS Controllers & Header SCSS Modularization
+- **Date:** 2026-11-04
+- **Status:** **COMPLETE** (Sub-Phase 4.1 of Phase 4)
+- **Objectives:**
+  - Decompose warning JavaScript monolith `static/js/main.js` (363 lines) into cohesive, single-responsibility controllers under `static/js/controllers/` conforming strictly to quantitative modularity budgets ($\le 350$ lines per file, $\le 40$ lines per function).
+  - Decompose critical SCSS monolith `static/scss/theme/_header.scss` (367 lines) into clean partials (`_header_top.scss`, `_nav_menu.scss`, `_mobile_nav.scss`) with a backward-compatible re-export facade.
+  - Maintain 100% contract parity (DOM IDs, selects, globals, routes) and ensure zero regressions across all frontend templates.
+- **Files Created / Modified:**
+  - `static/js/controllers/layout.js`: Viewport sizing (`.fullscreen`, `.fitscreen`), `niceSelect`, `magnificPopup` galleries/video modals, and `counterUp` metrics (69 lines).
+  - `static/js/controllers/navigation.js`: Superfish desktop navigation, mobile drawer creation, touch accordion toggles, smooth scrolling, location hash scroll, and header scroll state (141 lines).
+  - `static/js/controllers/carousels.js`: 7 responsive Owl Carousel instances with touch navigation and breakpoints (150 lines).
+  - `static/js/controllers/integrations.js`: Snazzy-styled Google Maps initialization (`#map`) and Mailchimp newsletter AJAX integration (82 lines).
+  - `static/js/main.js`: Re-export & orchestrator facade registering `window.EnterpriseApp` namespace and coordinating bootstrap lifecycle (30 lines, down from 363).
+  - `static/scss/theme/_header_top.scss`: Top bar info, `.header-top`, `.top-head-btn`, `#header` sticky navbar, and `#logo` branding (114 lines).
+  - `static/scss/theme/_nav_menu.scss`: Desktop `.nav-menu`, `.sf-arrows`, dropdown cascades, and hover transitions (110 lines).
+  - `static/scss/theme/_mobile_nav.scss`: Mobile hamburger button `#mobile-nav-toggle`, sliding drawer `#mobile-nav`, and backdrop `#mobile-body-overly` (125 lines).
+  - `static/scss/theme/_header.scss`: Re-export facade importing all 3 header submodules in strict cascade order (6 lines, down from 367).
+  - `templates/themes/bootstrap5/partials/scripts.html`: Updated script dependency tags in topological order.
+  - `templates/partials/scripts.html`: Updated script dependency tags in topological order.
+  - `todo/templates/todo/index.html`: Updated script dependency tags in topological order.
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created files verified below the 350-line budget (0 Critical, 0 Warning across all 7 files in `static/js/`).
+  - `contract_snapshot.py verify --path static --strict`: Confirmed **0 dropped DOM IDs, 0 dropped API routes, and 0 regression discrepancies**.
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/crm/ -q`: 23 of 23 tests passed in 12.01s (100% green).
+- **Next Steps:**
+  - Proceed with Sub-Phase 4.2: Remaining SCSS Theme Stylesheets (`_elements.scss`, `_home.scss`, `_pages.scss`).
+
+---
+
+## [Refactor Campaign - Phase 4.2] - Elements & Home Theme Stylesheets Decomposition
+- **Date:** 2026-11-04
+- **Status:** **COMPLETE** (Sub-Phase 4.2 of Phase 4)
+- **Objectives:**
+  - Decompose critical SCSS monolith `static/scss/theme/_elements.scss` (1,008 lines) into clean, focused partials (`_elements_typography.scss`, `_elements_buttons.scss`, `_elements_tables.scss`, `_elements_forms.scss`, `_elements_switches.scss`, `_elements_selection.scss`) conforming strictly to quantitative modularity budgets ($\le 350$ lines per file).
+  - Decompose critical SCSS monolith `static/scss/theme/_home.scss` (726 lines) into modular partials (`_home_banner.scss`, `_home_sections.scss`, `_home_generic.scss`) and extract the footer styles into `static/scss/theme/_footer.scss` (previously 0 bytes, already imported by `main.scss`).
+  - Preserve all developer reference comments, StackOverflow URLs, CodePen links, and CSS gradient notes verbatim.
+  - Maintain 100% backward compatibility via clean facade files (`_elements.scss` and `_home.scss`) preserving cascade and specificity rules.
+- **Files Created / Modified:**
+  - `static/scss/theme/_elements_typography.scss`: Typography, headings, text blocks, and lists (114 lines).
+  - `static/scss/theme/_elements_buttons.scss`: Button areas and `.genric-btn` variants (218 lines).
+  - `static/scss/theme/_elements_tables.scss`: Progress tables and gallery images (88 lines).
+  - `static/scss/theme/_elements_forms.scss`: Single inputs, textareas, nice-selects, and gradient border notes (214 lines).
+  - `static/scss/theme/_elements_switches.scss`: Default, primary, and confirm switches (167 lines).
+  - `static/scss/theme/_elements_selection.scss`: Checkbox and radio controls (225 lines).
+  - `static/scss/theme/_elements.scss`: Re-export facade importing all 6 element partials (9 lines, down from 1,008).
+  - `static/scss/theme/_home_banner.scss`: Hero section, gradient tokens, blend animations, and banner content (197 lines).
+  - `static/scss/theme/_home_sections.scss`: Products, home-about, about-video, feature, brand, and blog areas (235 lines).
+  - `static/scss/theme/_home_generic.scss`: Whole-wrap and generic page banner styling (69 lines).
+  - `static/scss/theme/_footer.scss`: Dedicated footer area, newsletter widget, copyright, and social links (220 lines, populated from 0).
+  - `static/scss/theme/_home.scss`: Re-export facade importing all 3 home submodules (6 lines, down from 726).
+  - `MIGRATION_LOG.md`: Updated refactoring progress log.
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created files verified below the 350-line budget (0 Critical, 0 Warning on file lengths; all $\le 235$ lines).
+  - `contract_snapshot.py verify --path static --strict`: Confirmed **0 dropped DOM IDs, 0 dropped API routes, and 0 regression discrepancies**.
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/crm/ -q`: 23 of 23 tests passed in 17.15s (100% green).
+- **Next Steps:**
+  - Complete Phase 4 with Sub-Phase 4.3: Decompose final theme monolith `static/scss/theme/_pages.scss` (609 lines).
+
+---
+
+## [Refactor Campaign - Phase 4.3] - Inner Pages & Blog SCSS Theme Modularization
+- **Date:** 2026-11-04
+- **Status:** **COMPLETE** (Sub-Phase 4.3 of Phase 4 - Campaign Complete)
+- **Objectives:**
+  - Decompose critical SCSS monolith `static/scss/theme/_pages.scss` (609 lines) into cohesive, single-responsibility partials (`_pages_inner.scss`, `_pages_blog.scss`, `_pages_blog_widgets.scss`, `_pages_blog_details.scss`) conforming strictly to quantitative modularity budgets ($\le 350$ lines per file).
+  - Eliminate the final CSS/SCSS monolith in the theme layer, bringing 100% of the 25 stylesheet partials in `static/scss/theme/` well within budget.
+  - Maintain 100% backward compatibility via clean facade `_pages.scss` preserving cascade, mixins, and specificity rules.
+- **Files Created / Modified:**
+  - `static/scss/theme/_pages_inner.scss`: About us, services, products, pricing area, and contact section styles (240 lines).
+  - `static/scss/theme/_pages_blog.scss`: Blog hero banner and blog post list styling (101 lines).
+  - `static/scss/theme/_pages_blog_widgets.scss`: Blog sidebar widgets including search, portfolio, category, tags, and recent posts (151 lines).
+  - `static/scss/theme/_pages_blog_details.scss`: Single blog post pagination, comment list, reply buttons, and comment form (103 lines).
+  - `static/scss/theme/_pages.scss`: Re-export facade importing all 4 page submodules (7 lines, down from 609).
+  - `MIGRATION_LOG.md`: Updated refactoring progress log.
+- **Verification & Testing:**
+  - `code_health_audit.py`: 100% of newly created files verified below the 350-line budget (0 Critical, 0 Warning on file lengths; all $\le 240$ lines).
+  - `contract_snapshot.py verify --path static --strict`: Confirmed zero dropped DOM IDs or broken routes.
+  - `python manage.py check`: System check identified no issues (0 silenced).
+  - `pytest tests/crm/ -q`: 23 of 23 tests passed (100% green).
+- **Next Steps:**
+  - Refactoring campaign complete across all 4 phases (Intelligent Tracker Hub, CRM, ERP, and Frontend Theme & JS). Review unstaged changes and commit.

@@ -1,0 +1,115 @@
+/*--------------------------------------------------------------
+# Header Top & Base Shell
+--------------------------------------------------------------*/
+.header-top {
+  font-size: 12px;
+  padding: 8px;
+  background-color: #222222;
+  a {
+    color: #fff;
+  }
+  ul li {
+    display: inline-block;
+    margin-right: 30px;
+  }
+
+  .header-top-left {
+    i {
+      @include transition();
+    }
+    a:hover {
+      @include transition();
+      i {
+        color: $primary-color;
+      }
+    }
+  }
+
+  .header-top-right {
+    text-align: right;
+    a {
+      margin-right: 10px;
+    }
+  }
+
+  .lnr {
+    display: none;
+  }
+
+  @media (max-width: 588px) {
+    .lnr {
+      display: block;
+      font-weight: bold;
+      font-size: 16px;
+      color: $white;
+    }
+    .text {
+      display: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.top-head-btn {
+  background: $primary-color;
+  padding: 9px 26px;
+}
+
+.main-menu {
+  padding-top: 20px;
+}
+
+#header {
+  padding: 0px 0px 20px 0px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  transition: all 0.5s;
+  z-index: 997;
+}
+
+#header.header-scrolled {
+  background: rgba($primary-color, 0.9);
+  transition: all 0.5s;
+}
+
+@media (max-width: 673px) {
+  #logo {
+    margin-left: 20px;
+  }
+}
+
+#header #logo h1 {
+  font-size: 34px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+#header #logo h1 a,
+#header #logo h1 a:hover {
+  color: #fff;
+  padding-left: 10px;
+  border-left: 4px solid $primary-color;
+}
+
+#header #logo img {
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  #header #logo h1 {
+    font-size: 28px;
+  }
+  #header #logo img {
+    max-height: 40px;
+  }
+}
+
