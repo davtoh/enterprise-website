@@ -184,32 +184,56 @@ class Command(BaseCommand):
                     self.stdout.write(f"Reached max limit of {max_entries} entries.")
                     break
 
-                text_to_translate = entry.msgid.strip()
+                raw_msgid = entry.msgid
+                text_to_translate = raw_msgid.strip()
                 if not text_to_translate:
                     continue
 
+                is_python_format = "python-format" in entry.flags
                 translated_text = self._translate_string(
                     text_to_translate, target_lang=lang_code, backend=backend
                 )
 
                 if translated_text:
-                    entry.msgstr = translated_text
-                    if getattr(entry, "previous_msgid", None):
-                        entry.previous_msgid = None
-                    if mark_fuzzy and "fuzzy" not in entry.flags:
-                        entry.flags.append("fuzzy")
-                    elif not mark_fuzzy and "fuzzy" in entry.flags:
-                        entry.flags.remove("fuzzy")
-                    success_count += 1
+                    candidate_msgstr = self._preserve_boundary_whitespace(
+                        raw_msgid, translated_text
+                    )
+                    # Validate placeholders to prevent msgfmt fatal compile errors
+                    if self._validate_format_specs(
+                        raw_msgid, candidate_msgstr, is_python_format=is_python_format
+                    ):
+                        entry.msgstr = candidate_msgstr
+                        if getattr(entry, "previous_msgid", None):
+                            entry.previous_msgid = None
+                        if mark_fuzzy and "fuzzy" not in entry.flags:
+                            entry.flags.append("fuzzy")
+                        elif not mark_fuzzy and "fuzzy" in entry.flags:
+                            entry.flags.remove("fuzzy")
+                        success_count += 1
+                    else:
+                        self.stdout.write(
+                            self.style.WARNING(
+                                f"  [Format mismatch avoided] Skipping corrupt translation for: {raw_msgid[:40]}..."
+                            )
+                        )
 
                 # If plural entry exists, translate plural form as well
                 if entry.msgid_plural:
+                    raw_plural = entry.msgid_plural
                     translated_plural = self._translate_string(
-                        entry.msgid_plural.strip(), target_lang=lang_code, backend=backend
+                        raw_plural.strip(), target_lang=lang_code, backend=backend
                     )
                     if translated_plural:
-                        entry.msgstr_plural[0] = entry.msgstr or translated_text
-                        entry.msgstr_plural[1] = translated_plural
+                        candidate_plural = self._preserve_boundary_whitespace(
+                            raw_plural, translated_plural
+                        )
+                        if self._validate_format_specs(
+                            raw_plural,
+                            candidate_plural,
+                            is_python_format=is_python_format,
+                        ):
+                            entry.msgstr_plural[0] = entry.msgstr or candidate_msgstr
+                            entry.msgstr_plural[1] = candidate_plural
 
                 count += 1
                 if count % 15 == 0 or count == len(entries_to_translate):
@@ -242,7 +266,7 @@ class Command(BaseCommand):
 
         def repl(match):
             placeholders.append(match.group(0))
-            return f"[[PH{len(placeholders) - 1}]]"
+            return f"__PH_{len(placeholders) - 1}__"
 
         # Match Python %(name)s, %s, %d, Django {{ var }}, {% tag %}
         pattern = re.compile(
@@ -255,9 +279,65 @@ class Command(BaseCommand):
         """Restores protected placeholders from safe tokens."""
         result = text
         for i, ph in enumerate(placeholders):
-            token_pattern = re.compile(rf"\[\[\s*PH{i}\s*\]\]", re.IGNORECASE)
+            # Matches __PH_0__, [[PH0]], [PH0], etc., leniently
+            token_pattern = re.compile(
+                rf"(?:__|\[\[?)\s*PH_?\s*{i}\s*(?:__|\]\]?)", re.IGNORECASE
+            )
             result = token_pattern.sub(ph, result)
         return result
+
+    def _extract_format_specs(self, text):
+        """Extracts python-format specifications from a string."""
+        pattern = re.compile(
+            r"(%\([a-zA-Z0-9_]+\)[sfd]|%[sfd]|%[0-9]*\.[0-9]*[f]|%[0-9]+[sfd])"
+        )
+        return pattern.findall(text)
+
+    def _validate_format_specs(self, msgid, msgstr, is_python_format=False):
+        """
+        Validates that msgstr preserves all format specifiers present in msgid.
+        If python-format is required and placeholders were dropped or corrupted,
+        returns False to prevent msgfmt fatal compile errors.
+        """
+        if not msgstr:
+            return True
+
+        if is_python_format or "%" in msgid:
+            expected = sorted(self._extract_format_specs(msgid))
+            actual = sorted(self._extract_format_specs(msgstr))
+            if expected != actual:
+                return False
+
+        # Validate leading and trailing newlines matching msgid
+        if msgid.startswith("\n") and not msgstr.startswith("\n"):
+            return False
+        if msgid.endswith("\n") and not msgstr.endswith("\n"):
+            return False
+
+        return True
+
+    def _preserve_boundary_whitespace(self, original, translated):
+        """Ensures translated text matches the original's leading/trailing newlines and spaces."""
+        if not translated:
+            return translated
+
+        # Leading whitespace/newline preservation
+        leading_ws = ""
+        for char in original:
+            if char in " \t\r\n":
+                leading_ws += char
+            else:
+                break
+
+        # Trailing whitespace/newline preservation
+        trailing_ws = ""
+        for char in reversed(original):
+            if char in " \t\r\n":
+                trailing_ws = char + trailing_ws
+            else:
+                break
+
+        return f"{leading_ws}{translated.strip()}{trailing_ws}"
 
     def _translate_string(self, text, target_lang, backend):
         """Translates a single string using the selected backend with placeholder preservation."""

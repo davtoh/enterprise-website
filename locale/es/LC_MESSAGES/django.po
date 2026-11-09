@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-26 20:54-0500\n"
+"POT-Creation-Date: 2026-11-09 10:36-0500\n"
 "PO-Revision-Date: 2026-10-24 18:29-0500\n"
 "Last-Translator: <davsamirtor.projects@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,22 +19,46 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.10.3\n"
 
-#: .\crm\admin.py:62 .\crm\templates\crm\company_detail.html:117
+#: .\crm\admin.py:78
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:391
+msgid "Clearance"
+msgstr ""
+
+#: .\crm\admin.py:95 .\crm\templates\crm\contact_list.html:63
+msgid "Presence"
+msgstr ""
+
+#: .\crm\admin.py:98 .\crm\templates\crm\contact_list.html:43
+#: .\crm\templates\crm\contact_list.html:99
+msgid "On-Premises"
+msgstr ""
+
+#: .\crm\admin.py:99 .\crm\models\contacts.py:20
+#: .\crm\templates\crm\contact_list.html:44
+#: .\crm\templates\crm\contact_list.html:103
+msgid "Off-Premises"
+msgstr ""
+
+#: .\crm\admin.py:101
+msgid "Pass Valid"
+msgstr ""
+
+#: .\crm\admin.py:114 .\crm\templates\crm\company_detail.html:117
 #: .\crm\templates\crm\dashboard.html:145 .\crm\templates\crm\lead_list.html:55
 msgid "Stage"
 msgstr ""
 
-#: .\crm\admin.py:87 .\erp\templates\erp\dashboard.html:148
+#: .\crm\admin.py:139 .\erp\templates\erp\dashboard.html:148
 #: .\erp\templates\erp\movement_list.html:34
 #: .\erp\templates\erp\product_detail.html:133
 msgid "Type"
 msgstr ""
 
-#: .\crm\admin.py:113 .\crm\templates\crm\sequence_list.html:34
+#: .\crm\admin.py:166 .\crm\templates\crm\sequence_list.html:34
 msgid "Steps"
 msgstr ""
 
-#: .\crm\admin.py:139 .\crm\models.py:400
+#: .\crm\admin.py:192 .\crm\models\sequences.py:130
 #: .\crm\templates\crm\sequence_list.html:33 .\erp\admin.py:120
 #: .\erp\models.py:217 .\erp\templates\erp\dashboard.html:207
 #: .\erp\templates\erp\invoice_list.html:38
@@ -48,12 +72,12 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: .\crm\admin.py:159 .\crm\templates\crm\segment_detail.html:52
+#: .\crm\admin.py:212 .\crm\templates\crm\segment_detail.html:52
 #: .\crm\templates\crm\segment_list.html:27
 msgid "Matching Contacts"
 msgstr ""
 
-#: .\crm\admin.py:163
+#: .\crm\admin.py:216
 msgid "Matching Leads"
 msgstr ""
 
@@ -61,64 +85,63 @@ msgstr ""
 msgid "Customer Relationship Management (CRM)"
 msgstr ""
 
-#: .\crm\forms.py:92
+#: .\crm\forms.py:102
 msgid "Detailed notes about this interaction..."
 msgstr ""
 
-#: .\crm\forms.py:126 .\crm\models.py:342
+#: .\crm\forms.py:136 .\crm\models\sequences.py:72
 msgid "Email Subject"
 msgstr "Asunto del correo"
 
-#: .\crm\forms.py:127
+#: .\crm\forms.py:137
 msgid "Enter campaign subject..."
 msgstr "Ingrese el asunto de la campaña..."
 
-#: .\crm\forms.py:130
+#: .\crm\forms.py:140
 msgid "HTML / Plain Message"
 msgstr ""
 
-#: .\crm\forms.py:131
+#: .\crm\forms.py:141
 msgid "Write your email body here..."
 msgstr ""
 
-#: .\crm\models.py:13 .\crm\templates\crm\company_list.html:41
+#: .\crm\models\companies.py:10 .\crm\templates\crm\company_list.html:41
 msgid "Company Name"
 msgstr ""
 
-#: .\crm\models.py:14 .\crm\templates\crm\company_list.html:42
+#: .\crm\models\companies.py:11 .\crm\templates\crm\company_list.html:42
 msgid "Industry"
 msgstr ""
 
-#: .\crm\models.py:15
+#: .\crm\models\companies.py:12
 msgid "Website"
 msgstr ""
 
-#: .\crm\models.py:16 .\crm\templates\crm\company_detail.html:49
+#: .\crm\models\companies.py:13 .\crm\templates\crm\company_detail.html:49
 #: .\crm\templates\crm\company_list.html:44
 #: .\crm\templates\crm\contact_detail.html:53
-#: .\crm\templates\crm\contact_list.html:43
 msgid "Phone"
 msgstr ""
 
-#: .\crm\models.py:17 .\crm\templates\crm\company_detail.html:52
+#: .\crm\models\companies.py:14 .\crm\templates\crm\company_detail.html:52
 msgid "Address"
 msgstr ""
 
-#: .\crm\models.py:18
+#: .\crm\models\companies.py:15
 #: .\user_management\templates\user_management\siteuser_list.html:35
 msgid "City"
 msgstr ""
 
-#: .\crm\models.py:19
+#: .\crm\models\companies.py:16
 #: .\user_management\templates\user_management\siteuser_list.html:34
 msgid "Country"
 msgstr ""
 
-#: .\crm\models.py:25
+#: .\crm\models\companies.py:22
 msgid "Annual Revenue ($)"
 msgstr ""
 
-#: .\crm\models.py:27 .\crm\models.py:74
+#: .\crm\models\companies.py:24 .\crm\models\contacts.py:125
 #: .\crm\templates\crm\company_detail.html:69
 #: .\crm\templates\crm\contact_detail.html:76
 #: .\crm\templates\crm\lead_detail.html:156 .\erp\models.py:154
@@ -126,9 +149,10 @@ msgstr ""
 msgid "Notes"
 msgstr ""
 
-#: .\crm\models.py:28 .\crm\models.py:75 .\crm\models.py:170
-#: .\crm\models.py:302 .\crm\models.py:350 .\crm\models.py:520
-#: .\erp\models.py:16 .\erp\models.py:40 .\erp\models.py:83 .\erp\models.py:162
+#: .\crm\models\companies.py:25 .\crm\models\contacts.py:126
+#: .\crm\models\leads.py:82 .\crm\models\segments.py:32
+#: .\crm\models\sequences.py:32 .\crm\models\sequences.py:80 .\erp\models.py:16
+#: .\erp\models.py:40 .\erp\models.py:83 .\erp\models.py:162
 #: .\erp\models.py:257 .\intelligent_tracker_hub\models.py:98
 #: .\task_runner\models.py:84
 #: .\task_runner\templates\task_runner\job_list.html:124
@@ -136,65 +160,169 @@ msgstr ""
 msgid "Created At"
 msgstr ""
 
-#: .\crm\models.py:29 .\crm\models.py:76 .\crm\models.py:171
-#: .\crm\models.py:303 .\crm\models.py:351 .\crm\models.py:521
-#: .\erp\models.py:17 .\erp\models.py:41 .\erp\models.py:84 .\erp\models.py:258
+#: .\crm\models\companies.py:26 .\crm\models\contacts.py:127
+#: .\crm\models\leads.py:83 .\crm\models\segments.py:33
+#: .\crm\models\sequences.py:33 .\crm\models\sequences.py:81 .\erp\models.py:17
+#: .\erp\models.py:41 .\erp\models.py:84 .\erp\models.py:258
 #: .\task_runner\models.py:88 .\video_gallery\models.py:43
 #: .\video_gallery\models.py:134
 msgid "Updated At"
 msgstr ""
 
-#: .\crm\models.py:32 .\crm\models.py:60 .\crm\models.py:135
-#: .\crm\templates\crm\contact_detail.html:56
-#: .\crm\templates\crm\contact_list.html:44
+#: .\crm\models\companies.py:29 .\crm\models\contacts.py:36
+#: .\crm\models\leads.py:47 .\crm\templates\crm\contact_detail.html:56
+#: .\crm\templates\crm\contact_list.html:61
 #: .\crm\templates\crm\lead_list.html:54
 #: .\crm\templates\crm\segment_detail.html:61
 msgid "Company"
 msgstr ""
 
-#: .\crm\models.py:33 .\crm\templates\crm\base_crm.html:44
+#: .\crm\models\companies.py:30 .\crm\templates\crm\base_crm.html:44
 msgid "Companies"
 msgstr "Empresas"
 
-#: .\crm\models.py:50
+#: .\crm\models\contacts.py:11
+msgid "VIP Access"
+msgstr ""
+
+#: .\crm\models\contacts.py:12
+msgid "Staff Member"
+msgstr ""
+
+#: .\crm\models\contacts.py:13
+#, fuzzy
+#| msgid "Contact"
+msgid "Contractor"
+msgstr "Contacto"
+
+#: .\crm\models\contacts.py:14
+msgid "Visitor Pass"
+msgstr ""
+
+#: .\crm\models\contacts.py:15
+msgid "Restricted / Escort Required"
+msgstr ""
+
+#: .\crm\models\contacts.py:16
+msgid "Banned / Denied Entry"
+msgstr ""
+
+#: .\crm\models\contacts.py:21
+msgid "On-Premises / Checked In"
+msgstr ""
+
+#: .\crm\models\contacts.py:26
 msgid "First Name"
 msgstr ""
 
-#: .\crm\models.py:51
+#: .\crm\models\contacts.py:27
 msgid "Last Name"
 msgstr ""
 
-#: .\crm\models.py:52
+#: .\crm\models\contacts.py:28
 msgid "Email Address"
 msgstr "Dirección de correo electrónico"
 
-#: .\crm\models.py:53
+#: .\crm\models\contacts.py:29
 msgid "Phone Number"
 msgstr ""
 
-#: .\crm\models.py:62 .\crm\templates\crm\contact_list.html:45
+#: .\crm\models\contacts.py:38
 msgid "Job Title"
 msgstr ""
 
-#: .\crm\models.py:65 .\crm\templates\crm\lead_detail.html:94
+#: .\crm\models\contacts.py:41 .\crm\templates\crm\lead_detail.html:94
 msgid "Subscribed to Marketing"
 msgstr ""
 
-#: .\crm\models.py:66
+#: .\crm\models\contacts.py:42
 msgid "Designates whether this contact receives marketing broadcast emails."
 msgstr ""
 
-#: .\crm\models.py:71 .\crm\templates\crm\contact_detail.html:65
-#: .\crm\templates\crm\contact_list.html:47
+#: .\crm\models\contacts.py:47 .\crm\templates\crm\contact_detail.html:65
 #: .\crm\templates\crm\segment_detail.html:63
 msgid "Tags"
 msgstr ""
 
-#: .\crm\models.py:72
+#: .\crm\models\contacts.py:48
 msgid "Comma-separated tags (e.g. enterprise, vip, inbound, lead)."
 msgstr ""
 
-#: .\crm\models.py:79 .\crm\models.py:382
+#: .\crm\models\contacts.py:57 .\crm\templates\crm\contact_list.html:62
+msgid "Security Clearance"
+msgstr ""
+
+#: .\crm\models\contacts.py:58
+msgid "Physical site security clearance and access level."
+msgstr ""
+
+#: .\crm\models\contacts.py:64
+msgid "Access Valid From"
+msgstr ""
+
+#: .\crm\models\contacts.py:65
+msgid "Start of validity window for temporary guest or contractor pass."
+msgstr ""
+
+#: .\crm\models\contacts.py:71
+msgid "Access Valid Until"
+msgstr ""
+
+#: .\crm\models\contacts.py:72
+msgid "Expiration timestamp for temporary visitor passes."
+msgstr ""
+
+#: .\crm\models\contacts.py:78
+msgid "Vehicle License Plate"
+msgstr ""
+
+#: .\crm\models\contacts.py:79
+msgid "Vehicle license plate for automated gate ANPR recognition."
+msgstr ""
+
+#: .\crm\models\contacts.py:85
+msgid "Biometric Profile Photo"
+msgstr ""
+
+#: .\crm\models\contacts.py:86
+msgid "Reference photo for edge face recognition vector generation."
+msgstr ""
+
+#: .\crm\models\contacts.py:91
+msgid "Biometric Embedding Vector"
+msgstr ""
+
+#: .\crm\models\contacts.py:92
+msgid "Pre-computed 512-d biometric embedding for zero-latency edge startup."
+msgstr ""
+
+#: .\crm\models\contacts.py:98
+msgid "Security Classification Tag"
+msgstr ""
+
+#: .\crm\models\contacts.py:99
+msgid ""
+"Custom classification tag for edge tracker classification (e.g. exec-zone, "
+"server-room)."
+msgstr ""
+
+#: .\crm\models\contacts.py:107
+msgid "Presence Status"
+msgstr ""
+
+#: .\crm\models\contacts.py:108
+msgid "Real-time physical presence status at facilities."
+msgstr ""
+
+#: .\crm\models\contacts.py:114
+msgid "Last Seen At"
+msgstr ""
+
+#: .\crm\models\contacts.py:122
+msgid "Last Seen Location"
+msgstr ""
+
+#: .\crm\models\contacts.py:130 .\crm\models\sequences.py:112
 #: .\crm\templates\crm\company_detail.html:116
 #: .\crm\templates\crm\contact_detail.html:20
 #: .\crm\templates\crm\lead_detail.html:84 .\home\plugin.py:16
@@ -208,173 +336,182 @@ msgstr ""
 msgid "Contact"
 msgstr "Contacto"
 
-#: .\crm\models.py:80 .\crm\templates\crm\base_crm.html:39
+#: .\crm\models\contacts.py:131 .\crm\templates\crm\base_crm.html:39
 #: .\crm\templates\crm\company_detail.html:79
 #: .\crm\templates\crm\company_list.html:46
 msgid "Contacts"
 msgstr "Contactos"
 
-#: .\crm\models.py:101
+#: .\crm\models\contacts.py:200 .\crm\models\contacts.py:224
+msgid "Gate"
+msgstr ""
+
+#: .\crm\models\leads.py:13
 msgid "New"
 msgstr ""
 
-#: .\crm\models.py:102
+#: .\crm\models\leads.py:14
 msgid "Contacted"
 msgstr "Contactado"
 
-#: .\crm\models.py:103
+#: .\crm\models\leads.py:15
 msgid "Qualified"
 msgstr ""
 
-#: .\crm\models.py:104
+#: .\crm\models\leads.py:16
 msgid "Proposal"
 msgstr ""
 
-#: .\crm\models.py:105
+#: .\crm\models\leads.py:17
 msgid "Won"
 msgstr ""
 
-#: .\crm\models.py:106
+#: .\crm\models\leads.py:18
 msgid "Lost"
 msgstr ""
 
-#: .\crm\models.py:110
+#: .\crm\models\leads.py:22
 msgid "Website Form"
 msgstr ""
 
-#: .\crm\models.py:111
+#: .\crm\models\leads.py:23
 msgid "Referral"
 msgstr ""
 
-#: .\crm\models.py:112
+#: .\crm\models\leads.py:24
 msgid "Cold Outreach"
 msgstr ""
 
-#: .\crm\models.py:113
+#: .\crm\models\leads.py:25
 msgid "Inbound Email"
 msgstr ""
 
-#: .\crm\models.py:114
+#: .\crm\models\leads.py:26
 msgid "Event / Conference"
 msgstr ""
 
-#: .\crm\models.py:115
+#: .\crm\models\leads.py:27
 msgid "Other"
 msgstr ""
 
-#: .\crm\models.py:120
+#: .\crm\models\leads.py:32
 msgid "Deal / Lead Title"
 msgstr ""
 
-#: .\crm\models.py:127 .\crm\templates\crm\lead_detail.html:70
+#: .\crm\models\leads.py:39 .\crm\templates\crm\lead_detail.html:70
 #: .\crm\templates\crm\lead_list.html:53
 msgid "Primary Contact"
 msgstr "Contacto Principal"
 
-#: .\crm\models.py:142
+#: .\crm\models\leads.py:54
 msgid "Pipeline Stage"
 msgstr ""
 
-#: .\crm\models.py:148 .\crm\templates\crm\lead_detail.html:145
+#: .\crm\models\leads.py:60 .\crm\templates\crm\lead_detail.html:145
 msgid "Lead Source"
 msgstr ""
 
-#: .\crm\models.py:154
+#: .\crm\models\leads.py:66
 msgid "Estimated Value ($)"
 msgstr ""
 
-#: .\crm\models.py:159
+#: .\crm\models\leads.py:71
 msgid "Expected Close Date"
 msgstr ""
 
-#: .\crm\models.py:167
+#: .\crm\models\leads.py:79
 msgid "Assigned Sales Rep"
 msgstr ""
 
-#: .\crm\models.py:169
+#: .\crm\models\leads.py:81
 msgid "Deal Notes"
 msgstr ""
 
-#: .\crm\models.py:174
+#: .\crm\models\leads.py:86
 msgid "Lead / Deal"
 msgstr ""
 
-#: .\crm\models.py:175
+#: .\crm\models\leads.py:87
 msgid "Leads / Deals"
 msgstr ""
 
-#: .\crm\models.py:223
+#: .\crm\models\leads.py:132
 msgid "Note"
 msgstr ""
 
-#: .\crm\models.py:224
+#: .\crm\models\leads.py:133
 msgid "Phone Call"
 msgstr ""
 
-#: .\crm\models.py:225 .\crm\templates\crm\contact_detail.html:50
-#: .\crm\templates\crm\contact_list.html:42
+#: .\crm\models\leads.py:134 .\crm\templates\crm\contact_detail.html:50
+#: .\crm\templates\crm\contact_list.html:60
 #: .\crm\templates\crm\segment_detail.html:60
 #: .\user_management\templates\user_management\siteuser_list.html:33
 msgid "Email"
 msgstr ""
 
-#: .\crm\models.py:226
+#: .\crm\models\leads.py:135
 msgid "Meeting"
 msgstr ""
 
-#: .\crm\models.py:227
+#: .\crm\models\leads.py:136
 msgid "Stage Change"
 msgstr ""
 
-#: .\crm\models.py:228
+#: .\crm\models\leads.py:137
 msgid "Sequence Drip Step"
 msgstr ""
 
-#: .\crm\models.py:229
+#: .\crm\models\leads.py:138
 msgid "Broadcast Campaign"
 msgstr ""
 
-#: .\crm\models.py:240
+#: .\crm\models\leads.py:139
+msgid "Physical Security Access"
+msgstr ""
+
+#: .\crm\models\leads.py:150
 msgid "Associated Lead / Deal"
 msgstr ""
 
-#: .\crm\models.py:248
+#: .\crm\models\leads.py:158
 msgid "Associated Contact"
 msgstr ""
 
-#: .\crm\models.py:256
+#: .\crm\models\leads.py:166
 msgid "Staff User"
 msgstr ""
 
-#: .\crm\models.py:262
+#: .\crm\models\leads.py:172
 msgid "Interaction Type"
 msgstr ""
 
-#: .\crm\models.py:264 .\crm\templates\crm\lead_detail.html:180
+#: .\crm\models\leads.py:174 .\crm\templates\crm\lead_detail.html:180
 msgid "Summary"
 msgstr ""
 
-#: .\crm\models.py:265
+#: .\crm\models\leads.py:175
 msgid "Details / Notes"
 msgstr ""
 
-#: .\crm\models.py:269 .\erp\templates\erp\movement_list.html:33
+#: .\crm\models\leads.py:179 .\erp\templates\erp\movement_list.html:33
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:395
 msgid "Timestamp"
 msgstr ""
 
-#: .\crm\models.py:273
+#: .\crm\models\leads.py:183
 msgid "Interaction Log"
 msgstr ""
 
-#: .\crm\models.py:274
+#: .\crm\models\leads.py:184
 msgid "Interaction Logs"
 msgstr ""
 
-#: .\crm\models.py:287 .\crm\templates\crm\sequence_list.html:31
-msgid "Sequence Name"
+#: .\crm\models\segments.py:21 .\crm\templates\crm\segment_list.html:25
+msgid "Segment Name"
 msgstr ""
 
-#: .\crm\models.py:288 .\crm\models.py:510
+#: .\crm\models\segments.py:22 .\crm\models\sequences.py:18
 #: .\crm\templates\crm\segment_list.html:26 .\erp\models.py:15
 #: .\erp\models.py:66 .\erp\templates\erp\invoice_form.html:74
 #: .\menu_management\models.py:10 .\video_gallery\models.py:40
@@ -382,19 +519,43 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: .\crm\models.py:291
+#: .\crm\models\segments.py:26
+msgid "Filter Rules (JSON)"
+msgstr ""
+
+#: .\crm\models\segments.py:28
+msgid ""
+"Filters applied to contacts/leads. Supported keys: 'stage' (e.g. "
+"'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), "
+"'min_value' (number), 'subscribed' (bool)."
+msgstr ""
+
+#: .\crm\models\segments.py:36
+msgid "Customer Segment"
+msgstr ""
+
+#: .\crm\models\segments.py:37 .\crm\templates\crm\segment_list.html:9
+msgid "Customer Segments"
+msgstr ""
+
+#: .\crm\models\sequences.py:17 .\crm\templates\crm\sequence_list.html:31
+msgid "Sequence Name"
+msgstr ""
+
+#: .\crm\models\sequences.py:21
 msgid "Manual Enrollment Only"
 msgstr ""
 
-#: .\crm\models.py:294
+#: .\crm\models\sequences.py:24
 msgid "Auto-Enroll On Stage Entry"
 msgstr ""
 
-#: .\crm\models.py:295
+#: .\crm\models\sequences.py:25
 msgid "When a lead moves to this stage, automatically enroll primary contact."
 msgstr ""
 
-#: .\crm\models.py:299 .\crm\models.py:364
+#: .\crm\models\sequences.py:29 .\crm\models\sequences.py:94
+#: .\crm\templates\crm\contact_detail.html:107
 #: .\crm\templates\crm\sequence_detail.html:12
 #: .\crm\templates\crm\sequence_list.html:62
 #: .\erp\templates\erp\product_list.html:65
@@ -403,170 +564,147 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: .\crm\models.py:300
+#: .\crm\models\sequences.py:30
 msgid "When inactive, scheduled emails in this sequence will be skipped."
 msgstr ""
 
-#: .\crm\models.py:306 .\crm\models.py:331
+#: .\crm\models\sequences.py:36 .\crm\models\sequences.py:61
 msgid "Email Sequence"
 msgstr ""
 
-#: .\crm\models.py:307
+#: .\crm\models\sequences.py:37
 msgid "Email Sequences"
 msgstr ""
 
-#: .\crm\models.py:335
+#: .\crm\models\sequences.py:65
 msgid "Step Number"
 msgstr ""
 
-#: .\crm\models.py:339
+#: .\crm\models\sequences.py:69
 msgid "Delay (Days)"
 msgstr ""
 
-#: .\crm\models.py:340
+#: .\crm\models\sequences.py:70
 msgid "Days to wait after enrollment or previous step before sending."
 msgstr ""
 
-#: .\crm\models.py:344
+#: .\crm\models\sequences.py:74
 msgid "Email Body (Template)"
 msgstr ""
 
-#: .\crm\models.py:346
+#: .\crm\models\sequences.py:76
 msgid ""
 "Supports placeholders: {{ contact.first_name }}, {{ contact.last_name }}, "
 "{{ contact.email }}, {{ company.name }}, {{ lead.title }}, "
 "{{ tracking_pixel }}"
 msgstr ""
 
-#: .\crm\models.py:354 .\crm\models.py:445
+#: .\crm\models\sequences.py:84 .\crm\models\sequences.py:175
 msgid "Email Step"
 msgstr ""
 
-#: .\crm\models.py:355
+#: .\crm\models\sequences.py:85
 msgid "Email Steps"
 msgstr ""
 
-#: .\crm\models.py:365
+#: .\crm\models\sequences.py:95
 msgid "Completed"
 msgstr ""
 
-#: .\crm\models.py:366
+#: .\crm\models\sequences.py:96
 msgid "Paused"
 msgstr ""
 
-#: .\crm\models.py:367 .\erp\models.py:196
+#: .\crm\models\sequences.py:97 .\erp\models.py:196
 msgid "Cancelled"
 msgstr ""
 
-#: .\crm\models.py:376
+#: .\crm\models\sequences.py:106
 msgid "Sequence"
 msgstr ""
 
-#: .\crm\models.py:390 .\crm\models.py:459
+#: .\crm\models\sequences.py:120 .\crm\models\sequences.py:189
 msgid "Associated Lead"
 msgstr ""
 
-#: .\crm\models.py:394
+#: .\crm\models\sequences.py:124
 msgid "Current Step Number"
 msgstr ""
 
-#: .\crm\models.py:402
+#: .\crm\models\sequences.py:132
 msgid "Enrolled At"
 msgstr ""
 
-#: .\crm\models.py:406
+#: .\crm\models\sequences.py:136
 msgid "Next Send Scheduled At"
 msgstr ""
 
-#: .\crm\models.py:411
+#: .\crm\models\sequences.py:141
 msgid "Completed At"
 msgstr ""
 
-#: .\crm\models.py:415 .\crm\models.py:437
+#: .\crm\models\sequences.py:145 .\crm\models\sequences.py:167
 msgid "Sequence Enrollment"
 msgstr ""
 
-#: .\crm\models.py:416
+#: .\crm\models\sequences.py:146
 msgid "Sequence Enrollments"
 msgstr ""
 
-#: .\crm\models.py:424 .\erp\templates\erp\dashboard.html:228
+#: .\crm\models\sequences.py:154 .\erp\templates\erp\dashboard.html:228
 #: .\erp\templates\erp\invoice_detail.html:15
 #: .\erp\templates\erp\invoice_list.html:61
 msgid "Sent"
 msgstr ""
 
-#: .\crm\models.py:425
+#: .\crm\models\sequences.py:155
 msgid "Opened"
 msgstr ""
 
-#: .\crm\models.py:426
+#: .\crm\models\sequences.py:156
 msgid "Failed"
 msgstr ""
 
-#: .\crm\models.py:451
+#: .\crm\models\sequences.py:181
 msgid "Recipient Contact"
 msgstr ""
 
-#: .\crm\models.py:461
+#: .\crm\models\sequences.py:191
 msgid "Recipient Email"
 msgstr ""
 
-#: .\crm\models.py:462
+#: .\crm\models\sequences.py:192
 msgid "Subject"
 msgstr "Asunto"
 
-#: .\crm\models.py:467
+#: .\crm\models\sequences.py:197
 msgid "Tracking Token"
 msgstr ""
 
-#: .\crm\models.py:474
+#: .\crm\models\sequences.py:204
 msgid "Delivery Status"
 msgstr ""
 
-#: .\crm\models.py:476
+#: .\crm\models\sequences.py:206
 msgid "Sent At"
 msgstr ""
 
-#: .\crm\models.py:480
+#: .\crm\models\sequences.py:210
 msgid "Opened At"
 msgstr ""
 
-#: .\crm\models.py:482
+#: .\crm\models\sequences.py:212
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:76
 #: .\task_runner\models.py:65
 msgid "Error Message"
 msgstr "Mensaje de error"
 
-#: .\crm\models.py:485
+#: .\crm\models\sequences.py:215
 msgid "Email Delivery Log"
 msgstr ""
 
-#: .\crm\models.py:486
+#: .\crm\models\sequences.py:216
 msgid "Email Delivery Logs"
-msgstr ""
-
-#: .\crm\models.py:509 .\crm\templates\crm\segment_list.html:25
-msgid "Segment Name"
-msgstr ""
-
-#: .\crm\models.py:514
-msgid "Filter Rules (JSON)"
-msgstr ""
-
-#: .\crm\models.py:516
-msgid ""
-"Filters applied to contacts/leads. Supported keys: 'stage' (e.g. "
-"'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), "
-"'min_value' (number), 'subscribed' (bool)."
-msgstr ""
-
-#: .\crm\models.py:524
-msgid "Customer Segment"
-msgstr ""
-
-#: .\crm\models.py:525 .\crm\templates\crm\segment_list.html:9
-msgid "Customer Segments"
 msgstr ""
 
 #: .\crm\plugin.py:9
@@ -696,7 +834,7 @@ msgstr ""
 #: .\crm\templates\crm\company_detail.html:33
 #: .\crm\templates\crm\company_list.html:83
 #: .\crm\templates\crm\contact_detail.html:33
-#: .\crm\templates\crm\contact_list.html:94
+#: .\crm\templates\crm\contact_list.html:127
 #: .\crm\templates\crm\lead_detail.html:35
 #: .\crm\templates\crm\lead_list.html:119
 #: .\crm\templates\crm\segment_detail.html:28
@@ -765,7 +903,7 @@ msgstr ""
 
 #: .\crm\templates\crm\company_form.html:85
 #: .\crm\templates\crm\confirm_delete.html:20
-#: .\crm\templates\crm\contact_form.html:89
+#: .\crm\templates\crm\contact_form.html:144
 #: .\crm\templates\crm\lead_form.html:85
 #: .\crm\templates\crm\segment_detail.html:129
 #: .\crm\templates\crm\segment_form.html:51
@@ -805,13 +943,12 @@ msgid "Search by company, industry, city..."
 msgstr ""
 
 #: .\crm\templates\crm\company_list.html:30
-#: .\crm\templates\crm\contact_list.html:30
 #: .\video_gallery\templates\video_gallery\gallery_list.html:61
 msgid "Search"
 msgstr ""
 
 #: .\crm\templates\crm\company_list.html:32
-#: .\crm\templates\crm\contact_list.html:32
+#: .\crm\templates\crm\contact_list.html:50
 #: .\crm\templates\crm\lead_list.html:43
 #: .\erp\templates\erp\inventory_dashboard.html:109
 msgid "Reset"
@@ -825,7 +962,7 @@ msgid "Location"
 msgstr ""
 
 #: .\crm\templates\crm\company_list.html:47
-#: .\crm\templates\crm\contact_list.html:48
+#: .\crm\templates\crm\contact_list.html:66
 #: .\crm\templates\crm\lead_list.html:59
 #: .\crm\templates\crm\segment_list.html:30
 #: .\crm\templates\crm\sequence_list.html:37
@@ -841,7 +978,7 @@ msgid "Visit website"
 msgstr ""
 
 #: .\crm\templates\crm\company_list.html:77
-#: .\crm\templates\crm\contact_list.html:88
+#: .\crm\templates\crm\contact_list.html:121
 #: .\crm\templates\crm\lead_list.html:113
 #: .\erp\templates\erp\invoice_list.html:72
 #: .\erp\templates\erp\product_list.html:72
@@ -850,7 +987,7 @@ msgid "View"
 msgstr ""
 
 #: .\crm\templates\crm\company_list.html:80
-#: .\crm\templates\crm\contact_list.html:91
+#: .\crm\templates\crm\contact_list.html:124
 #: .\crm\templates\crm\lead_list.html:116
 #: .\crm\templates\crm\segment_list.html:57
 #: .\crm\templates\crm\sequence_list.html:76
@@ -882,13 +1019,13 @@ msgid "Delete Permanently"
 msgstr ""
 
 #: .\crm\templates\crm\contact_detail.html:16
-#: .\crm\templates\crm\contact_list.html:77
+#: .\crm\templates\crm\contact_list.html:116
 #: .\crm\templates\crm\segment_detail.html:78
 msgid "Subscribed"
 msgstr ""
 
 #: .\crm\templates\crm\contact_detail.html:16
-#: .\crm\templates\crm\contact_list.html:77
+#: .\crm\templates\crm\contact_list.html:116
 #: .\crm\templates\crm\lead_detail.html:94
 #: .\crm\templates\crm\segment_detail.html:78
 msgid "Unsubscribed"
@@ -904,44 +1041,104 @@ msgid "Contact Details"
 msgstr "Detalles del Contacto"
 
 #: .\crm\templates\crm\contact_detail.html:86
+msgid "Access Pass & Security"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:100
+msgid "Last seen"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:112
+msgid "Pass Validity"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:115
+msgid "Valid Pass"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:117
+msgid "Pass Expired / Invalid"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:121
+msgid "Immediate"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:121
+msgid "Indefinite"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:126
+msgid "License Plate"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:135
+msgid "Security Tag"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:144
+msgid "Biometrics"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:149
+msgid "Photo Registered"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:156
+msgid "512-d Vector Ready"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:168
 msgid "Associated Deals"
 msgstr ""
 
-#: .\crm\templates\crm\contact_detail.html:88
+#: .\crm\templates\crm\contact_detail.html:170
 #: .\crm\templates\crm\pipeline.html:12
 msgid "Add Deal"
 msgstr ""
 
-#: .\crm\templates\crm\contact_detail.html:106
+#: .\crm\templates\crm\contact_detail.html:188
 msgid "No deals associated with this contact yet."
 msgstr ""
 
-#: .\crm\templates\crm\contact_detail.html:116
+#: .\crm\templates\crm\contact_detail.html:198
 msgid "Email Drip Enrollments"
 msgstr ""
 
-#: .\crm\templates\crm\contact_detail.html:127
+#: .\crm\templates\crm\contact_detail.html:209
 msgid "Step"
 msgstr ""
 
-#: .\crm\templates\crm\contact_detail.html:127
+#: .\crm\templates\crm\contact_detail.html:209
 msgid "Next send"
 msgstr ""
 
-#: .\crm\templates\crm\contact_detail.html:132
+#: .\crm\templates\crm\contact_detail.html:214
 msgid "Not enrolled in any email sequences."
 msgstr ""
 
-#: .\crm\templates\crm\contact_detail.html:144
+#: .\crm\templates\crm\contact_detail.html:228
+msgid "Recent Gate Access History"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:229
+msgid "events"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:242
+msgid "confidence"
+msgstr ""
+
+#: .\crm\templates\crm\contact_detail.html:256
 msgid "Touchpoint History"
 msgstr ""
 
-#: .\crm\templates\crm\contact_detail.html:167
+#: .\crm\templates\crm\contact_detail.html:281
 #: .\crm\templates\crm\lead_detail.html:223
 msgid "System"
 msgstr ""
 
-#: .\crm\templates\crm\contact_detail.html:173
+#: .\crm\templates\crm\contact_detail.html:287
 msgid "No activities recorded for this contact."
 msgstr ""
 
@@ -949,7 +1146,11 @@ msgstr ""
 msgid "Create New Contact"
 msgstr ""
 
-#: .\crm\templates\crm\contact_form.html:92
+#: .\crm\templates\crm\contact_form.html:82
+msgid "Physical Security & Access Credentials"
+msgstr ""
+
+#: .\crm\templates\crm\contact_form.html:147
 msgid "Save Contact"
 msgstr "Guardar Contacto"
 
@@ -962,19 +1163,42 @@ msgid "Individual persons, buyers, champions, and sales stakeholders."
 msgstr ""
 
 #: .\crm\templates\crm\contact_list.html:26
-msgid "Search contacts by name, email, company..."
+msgid "Search by name, email, company, plate..."
 msgstr ""
 
-#: .\crm\templates\crm\contact_list.html:41
+#: .\crm\templates\crm\contact_list.html:31
+#, fuzzy
+#| msgid "All Statuses"
+msgid "All Clearances"
+msgstr "Todos los Estados"
+
+#: .\crm\templates\crm\contact_list.html:42
+msgid "All Presence"
+msgstr ""
+
+#: .\crm\templates\crm\contact_list.html:48
+#: .\crm\templates\crm\lead_list.html:41
+#: .\erp\templates\erp\inventory_dashboard.html:107
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:249
+#: .\task_runner\templates\task_runner\job_list.html:101
+#: .\video_gallery\templates\video_gallery\gallery_detail.html:56
+msgid "Filter"
+msgstr ""
+
+#: .\crm\templates\crm\contact_list.html:59
 #: .\erp\templates\erp\product_list.html:28 .\video_gallery\models.py:33
 msgid "Name"
 msgstr ""
 
-#: .\crm\templates\crm\contact_list.html:46
+#: .\crm\templates\crm\contact_list.html:64
+msgid "Plate"
+msgstr ""
+
+#: .\crm\templates\crm\contact_list.html:65
 msgid "Subscription"
 msgstr ""
 
-#: .\crm\templates\crm\contact_list.html:103
+#: .\crm\templates\crm\contact_list.html:136
 msgid "No contacts found."
 msgstr ""
 
@@ -1183,14 +1407,6 @@ msgstr ""
 
 #: .\crm\templates\crm\lead_list.html:34
 msgid "All Pipeline Stages"
-msgstr ""
-
-#: .\crm\templates\crm\lead_list.html:41
-#: .\erp\templates\erp\inventory_dashboard.html:107
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:249
-#: .\task_runner\templates\task_runner\job_list.html:101
-#: .\video_gallery\templates\video_gallery\gallery_detail.html:56
-msgid "Filter"
 msgstr ""
 
 #: .\crm\templates\crm\lead_list.html:128
@@ -1474,155 +1690,155 @@ msgstr ""
 msgid "Save Step"
 msgstr ""
 
-#: .\crm\views.py:124
-msgid "Invalid stage specified."
-msgstr ""
-
-#: .\crm\views.py:144
-#, python-format
-msgid "Lead stage updated successfully to '%s'."
-msgstr ""
-
-#: .\crm\views.py:203
-#, python-format
-msgid "Lead '%s' created successfully."
-msgstr ""
-
-#: .\crm\views.py:210
-msgid "Lead created"
-msgstr ""
-
-#: .\crm\views.py:211
-#, python-format
-msgid "Initial lead creation in stage: %s"
-msgstr ""
-
-#: .\crm\views.py:226
-#, python-format
-msgid "Lead '%s' updated successfully."
-msgstr ""
-
-#: .\crm\views.py:242
-#, python-format
-msgid "Lead '%s' deleted successfully."
-msgstr ""
-
-#: .\crm\views.py:257
-msgid "Interaction logged successfully."
-msgstr ""
-
-#: .\crm\views.py:259
-msgid "Failed to log interaction. Please check the form."
-msgstr ""
-
-#: .\crm\views.py:318
-#, python-format
-msgid "Contact '%s' created successfully."
-msgstr ""
-
-#: .\crm\views.py:332
-#, python-format
-msgid "Contact '%s' updated successfully."
-msgstr ""
-
-#: .\crm\views.py:348
-#, python-format
-msgid "Contact '%s' deleted successfully."
-msgstr ""
-
-#: .\crm\views.py:399
+#: .\crm\views\companies.py:61
 #, python-format
 msgid "Company '%s' created successfully."
 msgstr ""
 
-#: .\crm\views.py:413
+#: .\crm\views\companies.py:75
 #, python-format
 msgid "Company '%s' updated successfully."
 msgstr ""
 
-#: .\crm\views.py:429
+#: .\crm\views\companies.py:91
 #, python-format
 msgid "Company '%s' deleted successfully."
 msgstr ""
 
-#: .\crm\views.py:469
+#: .\crm\views\contacts.py:80
 #, python-format
-msgid "Sequence '%s' created successfully."
+msgid "Contact '%s' created successfully."
 msgstr ""
 
-#: .\crm\views.py:483
+#: .\crm\views\contacts.py:94
 #, python-format
-msgid "Sequence '%s' updated successfully."
+msgid "Contact '%s' updated successfully."
 msgstr ""
 
-#: .\crm\views.py:499
+#: .\crm\views\contacts.py:110
 #, python-format
-msgid "Sequence '%s' deleted successfully."
+msgid "Contact '%s' deleted successfully."
 msgstr ""
 
-#: .\crm\views.py:512
+#: .\crm\views\leads.py:32
+msgid "Invalid stage specified."
+msgstr ""
+
+#: .\crm\views\leads.py:52
 #, python-format
-msgid "Email step added to '%s'."
+msgid "Lead stage updated successfully to '%s'."
 msgstr ""
 
-#: .\crm\views.py:530
-msgid "Email step updated."
-msgstr ""
-
-#: .\crm\views.py:547
-msgid "Email step deleted."
-msgstr ""
-
-#: .\crm\views.py:566
+#: .\crm\views\leads.py:111
 #, python-format
-msgid "Email sequence dispatch task launched (Task ID: %s)."
+msgid "Lead '%s' created successfully."
 msgstr ""
 
-#: .\crm\views.py:603
+#: .\crm\views\leads.py:118
+msgid "Lead created"
+msgstr ""
+
+#: .\crm\views\leads.py:119
+#, python-format
+msgid "Initial lead creation in stage: %s"
+msgstr ""
+
+#: .\crm\views\leads.py:134
+#, python-format
+msgid "Lead '%s' updated successfully."
+msgstr ""
+
+#: .\crm\views\leads.py:150
+#, python-format
+msgid "Lead '%s' deleted successfully."
+msgstr ""
+
+#: .\crm\views\leads.py:165
+msgid "Interaction logged successfully."
+msgstr ""
+
+#: .\crm\views\leads.py:167
+msgid "Failed to log interaction. Please check the form."
+msgstr ""
+
+#: .\crm\views\segments.py:48
 #, python-format
 msgid "Segment '%s' created successfully."
 msgstr ""
 
-#: .\crm\views.py:617
+#: .\crm\views\segments.py:62
 #, python-format
 msgid "Segment '%s' updated successfully."
 msgstr ""
 
-#: .\crm\views.py:633
+#: .\crm\views\segments.py:78
 #, python-format
 msgid "Segment '%s' deleted successfully."
 msgstr ""
 
-#: .\crm\views.py:664
+#: .\crm\views\segments.py:109
 #, python-format
 msgid "Broadcast campaign launched to segment '%s' (Task ID: %s)."
 msgstr ""
 
-#: .\crm\views.py:667
+#: .\crm\views\segments.py:112
 msgid "Please provide a valid subject and message."
 msgstr ""
 
-#: .\enterprise_website\settings.py:225
+#: .\crm\views\sequences.py:53
+#, python-format
+msgid "Sequence '%s' created successfully."
+msgstr ""
+
+#: .\crm\views\sequences.py:67
+#, python-format
+msgid "Sequence '%s' updated successfully."
+msgstr ""
+
+#: .\crm\views\sequences.py:83
+#, python-format
+msgid "Sequence '%s' deleted successfully."
+msgstr ""
+
+#: .\crm\views\sequences.py:96
+#, python-format
+msgid "Email step added to '%s'."
+msgstr ""
+
+#: .\crm\views\sequences.py:114
+msgid "Email step updated."
+msgstr ""
+
+#: .\crm\views\sequences.py:131
+msgid "Email step deleted."
+msgstr ""
+
+#: .\crm\views\sequences.py:150
+#, python-format
+msgid "Email sequence dispatch task launched (Task ID: %s)."
+msgstr ""
+
+#: .\enterprise_website\settings\base.py:123
 msgid "English"
 msgstr "Inglés"
 
-#: .\enterprise_website\settings.py:226
+#: .\enterprise_website\settings\base.py:124
 msgid "Spanish"
 msgstr "Español"
 
-#: .\enterprise_website\settings.py:227
+#: .\enterprise_website\settings\base.py:125
 msgid "Portuguese"
 msgstr "Portugués"
 
-#: .\enterprise_website\settings.py:228
+#: .\enterprise_website\settings\base.py:126
 msgid "French"
 msgstr "Francés"
 
-#: .\enterprise_website\settings.py:229
+#: .\enterprise_website\settings\base.py:127
 msgid "Italian"
 msgstr "Italiano"
 
-#: .\enterprise_website\settings.py:230
+#: .\enterprise_website\settings\base.py:128
 msgid "Japanese"
 msgstr "Japonés"
 
@@ -2437,7 +2653,7 @@ msgstr ""
 msgid "Module Topology & Extension Boundaries"
 msgstr ""
 
-#: .\erp\templates\erp\modules_overview.html:52 .\erp\views.py:61
+#: .\erp\templates\erp\modules_overview.html:52 .\erp\views\dashboard.py:23
 msgid "Procurement & Purchase Orders"
 msgstr ""
 
@@ -2623,116 +2839,117 @@ msgstr ""
 msgid "No products found in the catalog."
 msgstr ""
 
-#: .\erp\views.py:63 .\erp\views.py:79 .\erp\views.py:95
+#: .\erp\views\dashboard.py:25 .\erp\views\dashboard.py:41
+#: .\erp\views\dashboard.py:57
 msgid "Modular Extension"
 msgstr ""
 
-#: .\erp\views.py:66
+#: .\erp\views\dashboard.py:28
 msgid ""
 "Supplier relationship management, request for quotes (RFQ), purchase orders "
 "(PO), vendor catalog price lists, and receiving docks."
 msgstr ""
 
-#: .\erp\views.py:70
+#: .\erp\views\dashboard.py:32
 msgid "Vendor management & evaluation"
 msgstr ""
 
-#: .\erp\views.py:71
+#: .\erp\views\dashboard.py:33
 msgid "Purchase order generation & approvals"
 msgstr ""
 
-#: .\erp\views.py:72
+#: .\erp\views\dashboard.py:34
 msgid "Shipment receiving & automatic stock intake"
 msgstr ""
 
-#: .\erp\views.py:77
+#: .\erp\views\dashboard.py:39
 msgid "Advanced Multi-Location Warehouse"
 msgstr ""
 
-#: .\erp\views.py:82
+#: .\erp\views\dashboard.py:44
 msgid ""
 "Multi-warehouse spatial topology, bin/aisle/shelf tracking, inter-warehouse "
 "transfer orders, and lot/serial number traceability."
 msgstr ""
 
-#: .\erp\views.py:86
+#: .\erp\views\dashboard.py:48
 msgid "Multi-warehouse & bin locations"
 msgstr ""
 
-#: .\erp\views.py:87
+#: .\erp\views\dashboard.py:49
 msgid "Inter-location stock transfer requisitions"
 msgstr ""
 
-#: .\erp\views.py:88
+#: .\erp\views\dashboard.py:50
 msgid "Lot & serial tracking for traceability"
 msgstr ""
 
-#: .\erp\views.py:93
+#: .\erp\views\dashboard.py:55
 msgid "General Ledger & Full Accounting"
 msgstr ""
 
-#: .\erp\views.py:98
+#: .\erp\views\dashboard.py:60
 msgid ""
 "Complete double-entry bookkeeping engine with custom chart of accounts, "
 "journal entries, accounts payable/receivable, trial balance, and P&L."
 msgstr ""
 
-#: .\erp\views.py:102
+#: .\erp\views\dashboard.py:64
 msgid "Double-entry journal ledger"
 msgstr ""
 
-#: .\erp\views.py:103
+#: .\erp\views\dashboard.py:65
 msgid "Automated Balance Sheet & Income Statement"
 msgstr ""
 
-#: .\erp\views.py:104
+#: .\erp\views\dashboard.py:66
 msgid "Accounts payable & receivable reconciliation"
 msgstr ""
 
-#: .\erp\views.py:193
-msgid "Product created successfully."
-msgstr ""
-
-#: .\erp\views.py:206
-msgid "Product updated successfully."
-msgstr ""
-
-#: .\erp\views.py:219
-msgid "Product deleted successfully."
-msgstr ""
-
-#: .\erp\views.py:263
+#: .\erp\views\inventory.py:56
 #, python-format
 msgid "Stock movement recorded: %(type)s %(qty)s for %(product)s."
 msgstr ""
 
-#: .\erp\views.py:331
+#: .\erp\views\invoices.py:78
 #, python-format
 msgid "Invoice %(number)s created successfully."
 msgstr ""
 
-#: .\erp\views.py:356
+#: .\erp\views\invoices.py:103
 #, python-format
 msgid "Invoice %(number)s updated successfully."
 msgstr ""
 
-#: .\erp\views.py:368
+#: .\erp\views\invoices.py:115
 msgid "Invoice deleted successfully."
 msgstr ""
 
-#: .\erp\views.py:382
+#: .\erp\views\invoices.py:129
 #, python-format
 msgid "Invoice %(number)s marked as %(status)s."
 msgstr ""
 
-#: .\erp\views.py:418
+#: .\erp\views\invoices.py:165
 #, python-format
 msgid "Invoice PDF email dispatched to %(email)s."
 msgstr ""
 
-#: .\erp\views.py:422
+#: .\erp\views\invoices.py:169
 #, python-format
 msgid "Error delivering invoice email: %(err)s"
+msgstr ""
+
+#: .\erp\views\products.py:63
+msgid "Product created successfully."
+msgstr ""
+
+#: .\erp\views\products.py:76
+msgid "Product updated successfully."
+msgstr ""
+
+#: .\erp\views\products.py:89
+msgid "Product deleted successfully."
 msgstr ""
 
 #: .\home\admin.py:4
@@ -3272,6 +3489,7 @@ msgid "No snapshot uploaded."
 msgstr ""
 
 #: .\intelligent_tracker_hub\admin.py:103
+#: .\intelligent_tracker_hub\admin.py:220
 msgid "Snapshot Preview"
 msgstr ""
 
@@ -3284,6 +3502,50 @@ msgstr ""
 #| msgid "All Statuses"
 msgid "HMAC Status"
 msgstr "Todos los Estados"
+
+#: .\intelligent_tracker_hub\admin.py:199
+msgid "Access ID"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:204
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:421
+msgid "Unrecognized"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:205
+#, fuzzy
+#| msgid "Contact Details"
+msgid "Contact / Entity"
+msgstr "Detalles del Contacto"
+
+#: .\intelligent_tracker_hub\admin.py:209
+msgid "GRANTED"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:210
+msgid "DENIED"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:211
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:389
+msgid "Result"
+msgstr ""
+
+#: .\intelligent_tracker_hub\admin.py:224
+msgid "Telemetry Metadata (JSON)"
+msgstr ""
+
+#: .\intelligent_tracker_hub\api\access_control.py:155
+msgid "Banned Entity - Gate Access Denied"
+msgstr ""
+
+#: .\intelligent_tracker_hub\api\access_control.py:158
+msgid "Visitor Pass Expired or Out of Window"
+msgstr ""
+
+#: .\intelligent_tracker_hub\api\access_control.py:163
+msgid "Unrecognized Entity"
+msgstr ""
 
 #: .\intelligent_tracker_hub\apps.py:8
 msgid "Intelligent Tracker Security Hub"
@@ -3427,6 +3689,7 @@ msgid "Event Type"
 msgstr ""
 
 #: .\intelligent_tracker_hub\models.py:168
+#: .\intelligent_tracker_hub\models.py:388
 msgid "Event Timestamp"
 msgstr ""
 
@@ -3465,6 +3728,7 @@ msgid "Resolution Notes"
 msgstr ""
 
 #: .\intelligent_tracker_hub\models.py:218
+#: .\intelligent_tracker_hub\models.py:402
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:193
 msgid "Ingested At"
 msgstr ""
@@ -3530,6 +3794,109 @@ msgstr ""
 
 #: .\intelligent_tracker_hub\models.py:296
 msgid "Security Audit Logs"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:305
+msgid "Entry"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:306
+msgid "Exit"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:310
+msgid "Facial Recognition"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:311
+msgid "License Plate (ANPR)"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:312
+msgid "Security Tag / RFID"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:313
+msgid "Manual Operator Override"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:327
+msgid "Access UUID"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:335
+#, fuzzy
+#| msgid "Contact"
+msgid "CRM Contact"
+msgstr "Contacto"
+
+#: .\intelligent_tracker_hub\models.py:341
+msgid "Facility / Site"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:346
+#, fuzzy
+#| msgid "Products"
+msgid "Gate Camera ID"
+msgstr "Productos"
+
+#: .\intelligent_tracker_hub\models.py:347
+msgid ""
+"Identifier of camera covering the access point (e.g. cam-north-gate-entry)"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:354
+msgid "Access Direction"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:361
+msgid "Verification Method"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:366
+msgid "Recognized Identifier"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:367
+msgid "Plate string, face track ID, or RFID code matched at the edge"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:372
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:138
+msgid "Detection Confidence"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:377
+msgid "Access Granted"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:382
+msgid "Denial Reason"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:383
+msgid ""
+"Reason for access denial (e.g. Pass Expired, Banned Entity, Unrecognized)"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:394
+msgid "Access Snapshot"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:399
+msgid "Access Telemetry Metadata"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:400
+msgid "Gate turnstile number, ambient temperature, vehicle make/model"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:405
+msgid "Visitor Access Log"
+msgstr ""
+
+#: .\intelligent_tracker_hub\models.py:406
+msgid "Visitor Access Logs"
 msgstr ""
 
 #: .\intelligent_tracker_hub\plugin.py:12
@@ -3746,7 +4113,7 @@ msgid "3x3 Matrix View"
 msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:109
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:417
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:506
 msgid "Alarm Audio: ON"
 msgstr ""
 
@@ -3803,6 +4170,7 @@ msgid "Spatial Security Events Log"
 msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:265
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:383
 msgid "Events"
 msgstr ""
 
@@ -3860,7 +4228,41 @@ msgstr ""
 msgid "Showing"
 msgstr ""
 
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:421
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:381
+msgid "Recent Gate Access & Visitor Passes"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:390
+#, fuzzy
+#| msgid "Contact Name"
+msgid "Contact / Plate"
+msgstr "Nombre del Contacto"
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:392
+msgid "Facility & Gate"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:393
+msgid "Method"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:394
+msgid "Direction"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:404
+msgid "Granted"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:408
+msgid "Denied"
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:456
+msgid "No physical gate access events recorded yet."
+msgstr ""
+
+#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:510
 msgid "Alarm Audio: MUTED"
 msgstr ""
 
@@ -3927,10 +4329,6 @@ msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:132
 msgid "Dwell Duration"
-msgstr ""
-
-#: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:138
-msgid "Detection Confidence"
 msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:144
@@ -4002,16 +4400,16 @@ msgstr ""
 msgid "Network error during archival."
 msgstr ""
 
-#: .\intelligent_tracker_hub\views.py:88
+#: .\intelligent_tracker_hub\views.py:89
 msgid "North Perimeter Gate"
 msgstr ""
 
-#: .\intelligent_tracker_hub\views.py:152
+#: .\intelligent_tracker_hub\views.py:163
 #, python-format
 msgid "Security event %s marked as resolved."
 msgstr ""
 
-#: .\intelligent_tracker_hub\views.py:223
+#: .\intelligent_tracker_hub\views.py:234
 #, python-format
 msgid "Simulated security event %s created successfully."
 msgstr ""
