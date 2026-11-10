@@ -14,6 +14,7 @@ services:
       - DEBUG=${DEBUG:-False}
       - SECRET_KEY=${SECRET_KEY:-django-insecure-production-super-secret-key-change-in-env}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1,nginx,web}
+      - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS:-}
       - USE_SQLITE=False
       - DB_ENGINE=django.db.backends.postgresql
       - DB_NAME=${DB_NAME:-enterprise_db}

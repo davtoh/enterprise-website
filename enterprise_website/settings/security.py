@@ -36,6 +36,14 @@ AUTH_PASSWORD_VALIDATORS = [
 X_FRAME_OPTIONS = os.getenv("X_FRAME_OPTIONS", "DENY")
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
+# CSRF Trusted Origins (Required for Django 4.0+ when running behind reverse proxies or on non-standard ports)
+# https://docs.djangoproject.com/en/5.0/ref/settings/#csrf-trusted-origins
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
+    if origin.strip()
+]
+
 if not DEBUG:
     # Production HTTPS & Cookie Security
     SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "True").lower() in ("true", "1", "t")

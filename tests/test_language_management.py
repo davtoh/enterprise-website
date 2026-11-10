@@ -2,6 +2,7 @@ import io
 from unittest.mock import patch
 import pytest
 from django.core.management import call_command
+from django.test import Client, override_settings
 from django.urls import reverse
 
 from language_management.management.commands.auto_translate import Command as AutoTranslateCommand
@@ -29,6 +30,40 @@ class TestLanguageManagement:
         url = reverse("set_language")
         response = client.post(url, {"language": "fr", "next": "/about/"})
         assert response.status_code == 302
+        assert response.cookies["django_language"].value == "fr"
+
+    @override_settings(CSRF_TRUSTED_ORIGINS=[])
+    def test_language_switch_dynamic_port_same_origin(self):
+        """Verify that language switch succeeds on any dynamic port (e.g. 3000) via Host header."""
+        client = Client(enforce_csrf_checks=True)
+        get_res = client.get("/", HTTP_HOST="localhost:3000")
+        csrf_token = get_res.cookies.get("csrftoken").value
+        response = client.post(
+            reverse("set_language"),
+            {"language": "es", "next": "/", "csrfmiddlewaretoken": csrf_token},
+            HTTP_HOST="localhost:3000",
+            HTTP_ORIGIN="http://localhost:3000",
+            headers={"referer": "http://localhost:3000/"},
+        )
+        assert response.status_code == 302
+        assert response.cookies.get("django_language") is not None
+        assert response.cookies["django_language"].value == "es"
+
+    @override_settings(CSRF_TRUSTED_ORIGINS=["https://trusted.example.com"])
+    def test_language_switch_csrf_trusted_origin_fallback(self):
+        """Verify that language switch succeeds when Host differs from Origin but matches CSRF_TRUSTED_ORIGINS."""
+        client = Client(enforce_csrf_checks=True)
+        get_res = client.get("/")
+        csrf_token = get_res.cookies.get("csrftoken").value
+        response = client.post(
+            reverse("set_language"),
+            {"language": "fr", "next": "/", "csrfmiddlewaretoken": csrf_token},
+            HTTP_HOST="testserver",
+            HTTP_ORIGIN="https://trusted.example.com",
+            headers={"referer": "https://trusted.example.com/"},
+        )
+        assert response.status_code == 302
+        assert response.cookies.get("django_language") is not None
         assert response.cookies["django_language"].value == "fr"
 
     def test_auto_translate_placeholder_protection(self):

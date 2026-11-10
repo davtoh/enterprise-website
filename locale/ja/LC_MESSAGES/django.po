@@ -43,7 +43,8 @@ msgid "Pass Valid"
 msgstr ""
 
 #: .\crm\admin.py:114 .\crm\templates\crm\company_detail.html:117
-#: .\crm\templates\crm\dashboard.html:145 .\crm\templates\crm\lead_list.html:55
+#: .\crm\templates\crm\dashboard.html:145
+#: .\crm\templates\crm\lead_list.html:55
 msgid "Stage"
 msgstr ""
 
@@ -150,10 +151,10 @@ msgstr ""
 
 #: .\crm\models\companies.py:25 .\crm\models\contacts.py:126
 #: .\crm\models\leads.py:82 .\crm\models\segments.py:32
-#: .\crm\models\sequences.py:32 .\crm\models\sequences.py:80 .\erp\models.py:16
-#: .\erp\models.py:40 .\erp\models.py:83 .\erp\models.py:162
-#: .\erp\models.py:257 .\intelligent_tracker_hub\models.py:98
-#: .\task_runner\models.py:84
+#: .\crm\models\sequences.py:32 .\crm\models\sequences.py:80
+#: .\erp\models.py:16 .\erp\models.py:40 .\erp\models.py:83
+#: .\erp\models.py:162 .\erp\models.py:257
+#: .\intelligent_tracker_hub\models.py:98 .\task_runner\models.py:84
 #: .\task_runner\templates\task_runner\job_list.html:124
 #: .\video_gallery\models.py:42 .\video_gallery\models.py:133
 msgid "Created At"
@@ -161,9 +162,9 @@ msgstr ""
 
 #: .\crm\models\companies.py:26 .\crm\models\contacts.py:127
 #: .\crm\models\leads.py:83 .\crm\models\segments.py:33
-#: .\crm\models\sequences.py:33 .\crm\models\sequences.py:81 .\erp\models.py:17
-#: .\erp\models.py:41 .\erp\models.py:84 .\erp\models.py:258
-#: .\task_runner\models.py:88 .\video_gallery\models.py:43
+#: .\crm\models\sequences.py:33 .\crm\models\sequences.py:81
+#: .\erp\models.py:17 .\erp\models.py:41 .\erp\models.py:84
+#: .\erp\models.py:258 .\task_runner\models.py:88 .\video_gallery\models.py:43
 #: .\video_gallery\models.py:134
 msgid "Updated At"
 msgstr ""
@@ -523,8 +524,8 @@ msgstr ""
 #: .\crm\models\segments.py:28
 msgid ""
 "Filters applied to contacts/leads. Supported keys: 'stage' (e.g. "
-"'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), "
-"'min_value' (number), 'subscribed' (bool)."
+"'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), 'min_value' "
+"(number), 'subscribed' (bool)."
 msgstr ""
 
 #: .\crm\models\segments.py:36
@@ -591,9 +592,9 @@ msgstr ""
 
 #: .\crm\models\sequences.py:76
 msgid ""
-"Supports placeholders: {{ contact.first_name }}, {{ contact.last_name }}, "
-"{{ contact.email }}, {{ company.name }}, {{ lead.title }}, "
-"{{ tracking_pixel }}"
+"Supports placeholders: {{ contact.first_name }}, {{ contact.last_name }}, {{"
+" contact.email }}, {{ company.name }}, {{ lead.title }}, {{ tracking_pixel "
+"}}"
 msgstr ""
 
 #: .\crm\models\sequences.py:84 .\crm\models\sequences.py:175
@@ -881,12 +882,14 @@ msgid "New Deal"
 msgstr ""
 
 #: .\crm\templates\crm\company_detail.html:115
-#: .\crm\templates\crm\dashboard.html:143 .\crm\templates\crm\lead_list.html:52
+#: .\crm\templates\crm\dashboard.html:143
+#: .\crm\templates\crm\lead_list.html:52
 msgid "Deal Title"
 msgstr ""
 
 #: .\crm\templates\crm\company_detail.html:118
-#: .\crm\templates\crm\dashboard.html:146 .\crm\templates\crm\lead_list.html:56
+#: .\crm\templates\crm\dashboard.html:146
+#: .\crm\templates\crm\lead_list.html:56
 msgid "Value"
 msgstr ""
 
@@ -1900,8 +1903,9 @@ msgstr ""
 msgid "Address / Bin Location"
 msgstr ""
 
-#: .\erp\models.py:39 .\erp\models.py:82 .\intelligent_tracker_hub\models.py:90
-#: .\video_gallery\models.py:41 .\video_gallery\models.py:132
+#: .\erp\models.py:39 .\erp\models.py:82
+#: .\intelligent_tracker_hub\models.py:90 .\video_gallery\models.py:41
+#: .\video_gallery\models.py:132
 msgid "Is Active"
 msgstr ""
 
@@ -2388,8 +2392,7 @@ msgid ""
 "          "
 msgid_plural ""
 "\n"
-"          There are %(count)s products currently at or below their reorder "
-"threshold.\n"
+"          There are %(count)s products currently at or below their reorder threshold.\n"
 "          "
 msgstr[0] ""
 
@@ -2651,8 +2654,8 @@ msgstr ""
 
 #: .\erp\templates\erp\modules_overview.html:123
 msgid ""
-"Multi-tier warehouse topology with spatial location tracking down to aisles, "
-"racks, and bin locations."
+"Multi-tier warehouse topology with spatial location tracking down to aisles,"
+" racks, and bin locations."
 msgstr ""
 
 #: .\erp\templates\erp\modules_overview.html:145
@@ -3814,8 +3817,8 @@ msgstr ""
 
 #: .\intelligent_tracker_hub\plugin.py:14
 msgid ""
-"Spatial security command hub integrating real-time edge AI vision, intrusion "
-"webhooks, video evidence archiving, and access control."
+"Spatial security command hub integrating real-time edge AI vision, intrusion"
+" webhooks, video evidence archiving, and access control."
 msgstr ""
 
 #: .\intelligent_tracker_hub\plugin.py:25 .\templates\base.html:125
@@ -4037,7 +4040,8 @@ msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:204
 msgid ""
-"Cameras report via edge heartbeats or can be registered in the admin console."
+"Cameras report via edge heartbeats or can be registered in the admin "
+"console."
 msgstr ""
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:220
@@ -4835,8 +4839,8 @@ msgstr ""
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:103
 msgid ""
 "Specify any Python, Django management, or shell command to execute "
-"asynchronously inside a Celery worker. Output is streamed live via WebSocket "
-"to the job detail view."
+"asynchronously inside a Celery worker. Output is streamed live via WebSocket"
+" to the job detail view."
 msgstr ""
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:111
@@ -5169,8 +5173,8 @@ msgstr ""
 
 #: .\templates\registration\login.html:20
 msgid ""
-"Your account doesn't have access to this page. To proceed, please login with "
-"an account that has access."
+"Your account doesn't have access to this page. To proceed, please login with"
+" an account that has access."
 msgstr ""
 
 #: .\templates\registration\login.html:22

@@ -1231,3 +1231,28 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `pytest tests/crm/ -q`: 23 of 23 tests passed (100% green).
 - **Next Steps:**
   - Refactoring campaign complete across all 4 phases (Intelligent Tracker Hub, CRM, ERP, and Frontend Theme & JS). Review unstaged changes and commit.
+
+---
+
+## [Bugfix & Architectural Hardening] - Dynamic Reverse Proxy Host Header & Django CSRF Origins
+- **Date:** 2026-11-09
+- **Status:** **COMPLETE**
+- **Symptom:**
+  - Submitting language switcher form to `/i18n/setlang/` on `http://localhost:8080/` (or any non-standard `$PORT`) failed with HTTP 403 Forbidden: `Origin checking failed - http://localhost:8080 does not match any trusted origins.`
+- **Root Cause & Architectural Solution:**
+  - Root Cause: In `nginx/default.conf`, `proxy_set_header Host $host;` stripped the client's external port (`$host` has no port), causing a mismatch between the browser's `Origin: http://localhost:<port>` and Django's inferred host `localhost`.
+  - Architectural Fix: In `nginx/default.conf`, changed `Host` and `X-Forwarded-Host` to `$http_host` (preserving incoming client port dynamically across any `$env:PORT` binding).
+  - Configured 12-factor `CSRF_TRUSTED_ORIGINS` in `enterprise_website/settings/security.py` strictly loaded from `os.getenv("CSRF_TRUSTED_ORIGINS", "")` with empty default `[]` for zero hardcoded ports.
+  - In `docker-compose.yml`, passed `CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS:-}` without hardcoding ports.
+  - Documented optional production/cross-origin use of `CSRF_TRUSTED_ORIGINS` in `.env.example`.
+- **Files Modified:**
+  - `nginx/default.conf`: Changed `Host` and `X-Forwarded-Host` headers to use `$http_host` so the client's port is preserved across proxy passes.
+  - `enterprise_website/settings/security.py`: Added `CSRF_TRUSTED_ORIGINS` loaded from `os.getenv("CSRF_TRUSTED_ORIGINS", "")`.
+  - `docker-compose.yml`: Passed `CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS:-}` without hardcoded fallbacks.
+  - `.env` & `.env.example`: Configured clean 12-factor template for optional production/cross-origin usage.
+  - `tests/test_language_management.py`: Added tests verifying: 1) native same-origin matching on arbitrary ports (`HTTP_HOST="localhost:3000"`) with empty trusted origins, and 2) cross-origin fallback via `@override_settings`.
+- **Verification:**
+  - Verified live container on port 8080 via Python/urllib request through Nginx (`POST /i18n/setlang/` -> HTTP 200, `django_language=es`).
+  - Unit tests in `tests/test_language_management.py`: 14 of 14 passed in 3.00s.
+  - Full pytest test suite: 369 of 369 passed.
+
