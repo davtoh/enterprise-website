@@ -22,41 +22,42 @@ msgstr ""
 #: .\crm\admin.py:78
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:391
 msgid "Clearance"
-msgstr ""
+msgstr "Liquidación"
 
 #: .\crm\admin.py:95 .\crm\templates\crm\contact_list.html:63
 msgid "Presence"
-msgstr ""
+msgstr "Presencia"
 
 #: .\crm\admin.py:98 .\crm\templates\crm\contact_list.html:43
 #: .\crm\templates\crm\contact_list.html:99
 msgid "On-Premises"
-msgstr ""
+msgstr "Local"
 
 #: .\crm\admin.py:99 .\crm\models\contacts.py:20
 #: .\crm\templates\crm\contact_list.html:44
 #: .\crm\templates\crm\contact_list.html:103
 msgid "Off-Premises"
-msgstr ""
+msgstr "Fuera de las instalaciones"
 
 #: .\crm\admin.py:101
 msgid "Pass Valid"
-msgstr ""
+msgstr "Pase válido"
 
 #: .\crm\admin.py:114 .\crm\templates\crm\company_detail.html:117
-#: .\crm\templates\crm\dashboard.html:145 .\crm\templates\crm\lead_list.html:55
+#: .\crm\templates\crm\dashboard.html:145
+#: .\crm\templates\crm\lead_list.html:55
 msgid "Stage"
-msgstr ""
+msgstr "etapa"
 
 #: .\crm\admin.py:139 .\erp\templates\erp\dashboard.html:148
 #: .\erp\templates\erp\movement_list.html:34
 #: .\erp\templates\erp\product_detail.html:133
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: .\crm\admin.py:166 .\crm\templates\crm\sequence_list.html:34
 msgid "Steps"
-msgstr ""
+msgstr "Pasos"
 
 #: .\crm\admin.py:192 .\crm\models\sequences.py:130
 #: .\crm\templates\crm\sequence_list.html:33 .\erp\admin.py:120
@@ -70,24 +71,24 @@ msgstr ""
 #: .\task_runner\templates\task_runner\job_list.html:121
 #: .\user_management\templates\user_management\siteuser_list.html:36
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #: .\crm\admin.py:212 .\crm\templates\crm\segment_detail.html:52
 #: .\crm\templates\crm\segment_list.html:27
 msgid "Matching Contacts"
-msgstr ""
+msgstr "Contactos coincidentes"
 
 #: .\crm\admin.py:216
 msgid "Matching Leads"
-msgstr ""
+msgstr "Clientes potenciales coincidentes"
 
 #: .\crm\apps.py:8
 msgid "Customer Relationship Management (CRM)"
-msgstr ""
+msgstr "Gestión de relaciones con el cliente (CRM)"
 
 #: .\crm\forms.py:102
 msgid "Detailed notes about this interaction..."
-msgstr ""
+msgstr "Notas detalladas sobre esta interacción..."
 
 #: .\crm\forms.py:136 .\crm\models\sequences.py:72
 msgid "Email Subject"
@@ -99,47 +100,47 @@ msgstr "Ingrese el asunto de la campaña..."
 
 #: .\crm\forms.py:140
 msgid "HTML / Plain Message"
-msgstr ""
+msgstr "HTML / Mensaje simple"
 
 #: .\crm\forms.py:141
 msgid "Write your email body here..."
-msgstr ""
+msgstr "Escribe aquí el cuerpo de tu correo electrónico..."
 
 #: .\crm\models\companies.py:10 .\crm\templates\crm\company_list.html:41
 msgid "Company Name"
-msgstr ""
+msgstr "Nombre de la empresa"
 
 #: .\crm\models\companies.py:11 .\crm\templates\crm\company_list.html:42
 msgid "Industry"
-msgstr ""
+msgstr "Industria"
 
 #: .\crm\models\companies.py:12
 msgid "Website"
-msgstr ""
+msgstr "Sitio web"
 
 #: .\crm\models\companies.py:13 .\crm\templates\crm\company_detail.html:49
 #: .\crm\templates\crm\company_list.html:44
 #: .\crm\templates\crm\contact_detail.html:53
 msgid "Phone"
-msgstr ""
+msgstr "Teléfono"
 
 #: .\crm\models\companies.py:14 .\crm\templates\crm\company_detail.html:52
 msgid "Address"
-msgstr ""
+msgstr "Dirección"
 
 #: .\crm\models\companies.py:15
 #: .\user_management\templates\user_management\siteuser_list.html:35
 msgid "City"
-msgstr ""
+msgstr "ciudad"
 
 #: .\crm\models\companies.py:16
 #: .\user_management\templates\user_management\siteuser_list.html:34
 msgid "Country"
-msgstr ""
+msgstr "País"
 
 #: .\crm\models\companies.py:22
 msgid "Annual Revenue ($)"
-msgstr ""
+msgstr "Ingresos anuales ($)"
 
 #: .\crm\models\companies.py:24 .\crm\models\contacts.py:125
 #: .\crm\templates\crm\company_detail.html:69
@@ -147,27 +148,27 @@ msgstr ""
 #: .\crm\templates\crm\lead_detail.html:156 .\erp\models.py:154
 #: .\erp\templates\erp\movement_list.html:39
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 #: .\crm\models\companies.py:25 .\crm\models\contacts.py:126
 #: .\crm\models\leads.py:82 .\crm\models\segments.py:32
-#: .\crm\models\sequences.py:32 .\crm\models\sequences.py:80 .\erp\models.py:16
-#: .\erp\models.py:40 .\erp\models.py:83 .\erp\models.py:162
-#: .\erp\models.py:257 .\intelligent_tracker_hub\models.py:98
-#: .\task_runner\models.py:84
+#: .\crm\models\sequences.py:32 .\crm\models\sequences.py:80
+#: .\erp\models.py:16 .\erp\models.py:40 .\erp\models.py:83
+#: .\erp\models.py:162 .\erp\models.py:257
+#: .\intelligent_tracker_hub\models.py:98 .\task_runner\models.py:84
 #: .\task_runner\templates\task_runner\job_list.html:124
 #: .\video_gallery\models.py:42 .\video_gallery\models.py:133
 msgid "Created At"
-msgstr ""
+msgstr "Creado en"
 
 #: .\crm\models\companies.py:26 .\crm\models\contacts.py:127
 #: .\crm\models\leads.py:83 .\crm\models\segments.py:33
-#: .\crm\models\sequences.py:33 .\crm\models\sequences.py:81 .\erp\models.py:17
-#: .\erp\models.py:41 .\erp\models.py:84 .\erp\models.py:258
-#: .\task_runner\models.py:88 .\video_gallery\models.py:43
+#: .\crm\models\sequences.py:33 .\crm\models\sequences.py:81
+#: .\erp\models.py:17 .\erp\models.py:41 .\erp\models.py:84
+#: .\erp\models.py:258 .\task_runner\models.py:88 .\video_gallery\models.py:43
 #: .\video_gallery\models.py:134
 msgid "Updated At"
-msgstr ""
+msgstr "Actualizado en"
 
 #: .\crm\models\companies.py:29 .\crm\models\contacts.py:36
 #: .\crm\models\leads.py:47 .\crm\templates\crm\contact_detail.html:56
@@ -175,7 +176,7 @@ msgstr ""
 #: .\crm\templates\crm\lead_list.html:54
 #: .\crm\templates\crm\segment_detail.html:61
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #: .\crm\models\companies.py:30 .\crm\templates\crm\base_crm.html:44
 msgid "Companies"
@@ -183,41 +184,39 @@ msgstr "Empresas"
 
 #: .\crm\models\contacts.py:11
 msgid "VIP Access"
-msgstr ""
+msgstr "Acceso VIP"
 
 #: .\crm\models\contacts.py:12
 msgid "Staff Member"
-msgstr ""
+msgstr "Miembro del personal"
 
 #: .\crm\models\contacts.py:13
-#, fuzzy
-#| msgid "Contact"
 msgid "Contractor"
-msgstr "Contacto"
+msgstr "Contratista"
 
 #: .\crm\models\contacts.py:14
 msgid "Visitor Pass"
-msgstr ""
+msgstr "Pase de visitante"
 
 #: .\crm\models\contacts.py:15
 msgid "Restricted / Escort Required"
-msgstr ""
+msgstr "Restringido / Se requiere acompañante"
 
 #: .\crm\models\contacts.py:16
 msgid "Banned / Denied Entry"
-msgstr ""
+msgstr "Entrada prohibida/denegada"
 
 #: .\crm\models\contacts.py:21
 msgid "On-Premises / Checked In"
-msgstr ""
+msgstr "En las instalaciones/registrado"
 
 #: .\crm\models\contacts.py:26
 msgid "First Name"
-msgstr ""
+msgstr "Nombre"
 
 #: .\crm\models\contacts.py:27
 msgid "Last Name"
-msgstr ""
+msgstr "Apellido"
 
 #: .\crm\models\contacts.py:28
 msgid "Email Address"
@@ -225,102 +224,115 @@ msgstr "Dirección de correo electrónico"
 
 #: .\crm\models\contacts.py:29
 msgid "Phone Number"
-msgstr ""
+msgstr "Número de teléfono"
 
 #: .\crm\models\contacts.py:38
 msgid "Job Title"
-msgstr ""
+msgstr "Título del trabajo"
 
 #: .\crm\models\contacts.py:41 .\crm\templates\crm\lead_detail.html:94
 msgid "Subscribed to Marketing"
-msgstr ""
+msgstr "Suscrito a Marketing"
 
 #: .\crm\models\contacts.py:42
 msgid "Designates whether this contact receives marketing broadcast emails."
 msgstr ""
+"Designa si este contacto recibe correos electrónicos de difusión de "
+"marketing."
 
 #: .\crm\models\contacts.py:47 .\crm\templates\crm\contact_detail.html:65
 #: .\crm\templates\crm\segment_detail.html:63
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 #: .\crm\models\contacts.py:48
 msgid "Comma-separated tags (e.g. enterprise, vip, inbound, lead)."
 msgstr ""
+"Etiquetas separadas por comas (por ejemplo, empresa, vip, entrante, cliente "
+"potencial)."
 
 #: .\crm\models\contacts.py:57 .\crm\templates\crm\contact_list.html:62
 msgid "Security Clearance"
-msgstr ""
+msgstr "Autorización de seguridad"
 
 #: .\crm\models\contacts.py:58
 msgid "Physical site security clearance and access level."
-msgstr ""
+msgstr "Autorización de seguridad del sitio físico y nivel de acceso."
 
 #: .\crm\models\contacts.py:64
 msgid "Access Valid From"
-msgstr ""
+msgstr "Acceso Válido Desde"
 
 #: .\crm\models\contacts.py:65
 msgid "Start of validity window for temporary guest or contractor pass."
 msgstr ""
+"Inicio de la ventana de validez para el pase de invitado temporal o "
+"contratista."
 
 #: .\crm\models\contacts.py:71
 msgid "Access Valid Until"
-msgstr ""
+msgstr "Acceso Válido Hasta"
 
 #: .\crm\models\contacts.py:72
 msgid "Expiration timestamp for temporary visitor passes."
-msgstr ""
+msgstr "Marca de tiempo de vencimiento para pases de visitante temporal."
 
 #: .\crm\models\contacts.py:78
 msgid "Vehicle License Plate"
-msgstr ""
+msgstr "Matrícula del vehículo"
 
 #: .\crm\models\contacts.py:79
 msgid "Vehicle license plate for automated gate ANPR recognition."
 msgstr ""
+"Matrícula de vehículo para reconocimiento ANPR de portón automatizado."
 
 #: .\crm\models\contacts.py:85
 msgid "Biometric Profile Photo"
-msgstr ""
+msgstr "Foto de perfil biométrico"
 
 #: .\crm\models\contacts.py:86
 msgid "Reference photo for edge face recognition vector generation."
 msgstr ""
+"Foto de referencia para la generación de vectores de reconocimiento de caras"
+" de bordes."
 
 #: .\crm\models\contacts.py:91
 msgid "Biometric Embedding Vector"
-msgstr ""
+msgstr "Vector de incrustación biométrica"
 
 #: .\crm\models\contacts.py:92
 msgid "Pre-computed 512-d biometric embedding for zero-latency edge startup."
 msgstr ""
+"Incrustación biométrica 512-d precalculada para un inicio de borde con "
+"latencia cero."
 
 #: .\crm\models\contacts.py:98
 msgid "Security Classification Tag"
-msgstr ""
+msgstr "Etiqueta de clasificación de seguridad"
 
 #: .\crm\models\contacts.py:99
 msgid ""
 "Custom classification tag for edge tracker classification (e.g. exec-zone, "
 "server-room)."
 msgstr ""
+"Etiqueta de clasificación personalizada para la clasificación del rastreador"
+" de borde (por ejemplo, zona ejecutiva, sala de servidores)."
 
 #: .\crm\models\contacts.py:107
 msgid "Presence Status"
-msgstr ""
+msgstr "Estado de presencia"
 
 #: .\crm\models\contacts.py:108
 msgid "Real-time physical presence status at facilities."
-msgstr ""
+msgstr "Estado de presencia física en las instalaciones en tiempo real."
 
 #: .\crm\models\contacts.py:114
 msgid "Last Seen At"
-msgstr ""
+msgstr "Visto por última vez en"
 
 #: .\crm\models\contacts.py:122
 msgid "Last Seen Location"
-msgstr ""
+msgstr "Ubicación vista por última vez"
 
 #: .\crm\models\contacts.py:130 .\crm\models\sequences.py:112
 #: .\crm\templates\crm\company_detail.html:116
@@ -344,11 +356,11 @@ msgstr "Contactos"
 
 #: .\crm\models\contacts.py:200 .\crm\models\contacts.py:224
 msgid "Gate"
-msgstr ""
+msgstr "puerta"
 
 #: .\crm\models\leads.py:13
 msgid "New"
-msgstr ""
+msgstr "Nuevo"
 
 #: .\crm\models\leads.py:14
 msgid "Contacted"
@@ -356,47 +368,47 @@ msgstr "Contactado"
 
 #: .\crm\models\leads.py:15
 msgid "Qualified"
-msgstr ""
+msgstr "Calificado"
 
 #: .\crm\models\leads.py:16
 msgid "Proposal"
-msgstr ""
+msgstr "Propuesta"
 
 #: .\crm\models\leads.py:17
 msgid "Won"
-msgstr ""
+msgstr "Ganado"
 
 #: .\crm\models\leads.py:18
 msgid "Lost"
-msgstr ""
+msgstr "perdido"
 
 #: .\crm\models\leads.py:22
 msgid "Website Form"
-msgstr ""
+msgstr "Formulario de sitio web"
 
 #: .\crm\models\leads.py:23
 msgid "Referral"
-msgstr ""
+msgstr "Referencia"
 
 #: .\crm\models\leads.py:24
 msgid "Cold Outreach"
-msgstr ""
+msgstr "Alcance frío"
 
 #: .\crm\models\leads.py:25
 msgid "Inbound Email"
-msgstr ""
+msgstr "Correo electrónico entrante"
 
 #: .\crm\models\leads.py:26
 msgid "Event / Conference"
-msgstr ""
+msgstr "Evento / Conferencia"
 
 #: .\crm\models\leads.py:27
 msgid "Other"
-msgstr ""
+msgstr "Otro"
 
 #: .\crm\models\leads.py:32
 msgid "Deal / Lead Title"
-msgstr ""
+msgstr "Título de la oferta/cliente principal"
 
 #: .\crm\models\leads.py:39 .\crm\templates\crm\lead_detail.html:70
 #: .\crm\templates\crm\lead_list.html:53
@@ -405,111 +417,111 @@ msgstr "Contacto Principal"
 
 #: .\crm\models\leads.py:54
 msgid "Pipeline Stage"
-msgstr ""
+msgstr "Etapa de canalización"
 
 #: .\crm\models\leads.py:60 .\crm\templates\crm\lead_detail.html:145
 msgid "Lead Source"
-msgstr ""
+msgstr "Fuente principal"
 
 #: .\crm\models\leads.py:66
 msgid "Estimated Value ($)"
-msgstr ""
+msgstr "Valor estimado ($)"
 
 #: .\crm\models\leads.py:71
 msgid "Expected Close Date"
-msgstr ""
+msgstr "Fecha de cierre prevista"
 
 #: .\crm\models\leads.py:79
 msgid "Assigned Sales Rep"
-msgstr ""
+msgstr "Representante de ventas asignado"
 
 #: .\crm\models\leads.py:81
 msgid "Deal Notes"
-msgstr ""
+msgstr "Notas de la oferta"
 
 #: .\crm\models\leads.py:86
 msgid "Lead / Deal"
-msgstr ""
+msgstr "Liderar/tratar"
 
 #: .\crm\models\leads.py:87
 msgid "Leads / Deals"
-msgstr ""
+msgstr "Clientes potenciales / ofertas"
 
 #: .\crm\models\leads.py:132
 msgid "Note"
-msgstr ""
+msgstr "Nota"
 
 #: .\crm\models\leads.py:133
 msgid "Phone Call"
-msgstr ""
+msgstr "llamada telefónica"
 
 #: .\crm\models\leads.py:134 .\crm\templates\crm\contact_detail.html:50
 #: .\crm\templates\crm\contact_list.html:60
 #: .\crm\templates\crm\segment_detail.html:60
 #: .\user_management\templates\user_management\siteuser_list.html:33
 msgid "Email"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: .\crm\models\leads.py:135
 msgid "Meeting"
-msgstr ""
+msgstr "reunión"
 
 #: .\crm\models\leads.py:136
 msgid "Stage Change"
-msgstr ""
+msgstr "Cambio de escenario"
 
 #: .\crm\models\leads.py:137
 msgid "Sequence Drip Step"
-msgstr ""
+msgstr "Paso de goteo de secuencia"
 
 #: .\crm\models\leads.py:138
 msgid "Broadcast Campaign"
-msgstr ""
+msgstr "Campaña de difusión"
 
 #: .\crm\models\leads.py:139
 msgid "Physical Security Access"
-msgstr ""
+msgstr "Acceso de seguridad física"
 
 #: .\crm\models\leads.py:150
 msgid "Associated Lead / Deal"
-msgstr ""
+msgstr "Cliente potencial asociado/trato"
 
 #: .\crm\models\leads.py:158
 msgid "Associated Contact"
-msgstr ""
+msgstr "Contacto asociado"
 
 #: .\crm\models\leads.py:166
 msgid "Staff User"
-msgstr ""
+msgstr "Usuario del personal"
 
 #: .\crm\models\leads.py:172
 msgid "Interaction Type"
-msgstr ""
+msgstr "Tipo de interacción"
 
 #: .\crm\models\leads.py:174 .\crm\templates\crm\lead_detail.html:180
 msgid "Summary"
-msgstr ""
+msgstr "Resumen"
 
 #: .\crm\models\leads.py:175
 msgid "Details / Notes"
-msgstr ""
+msgstr "Detalles / Notas"
 
 #: .\crm\models\leads.py:179 .\erp\templates\erp\movement_list.html:33
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:395
 msgid "Timestamp"
-msgstr ""
+msgstr "Marca de tiempo"
 
 #: .\crm\models\leads.py:183
 msgid "Interaction Log"
-msgstr ""
+msgstr "Registro de interacción"
 
 #: .\crm\models\leads.py:184
 msgid "Interaction Logs"
-msgstr ""
+msgstr "Registros de interacción"
 
 #: .\crm\models\segments.py:21 .\crm\templates\crm\segment_list.html:25
 msgid "Segment Name"
-msgstr ""
+msgstr "Nombre del segmento"
 
 #: .\crm\models\segments.py:22 .\crm\models\sequences.py:18
 #: .\crm\templates\crm\segment_list.html:26 .\erp\models.py:15
@@ -517,42 +529,47 @@ msgstr ""
 #: .\menu_management\models.py:10 .\video_gallery\models.py:40
 #: .\video_gallery\models.py:104
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: .\crm\models\segments.py:26
 msgid "Filter Rules (JSON)"
-msgstr ""
+msgstr "Reglas de filtrado (JSON)"
 
 #: .\crm\models\segments.py:28
 msgid ""
 "Filters applied to contacts/leads. Supported keys: 'stage' (e.g. "
-"'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), "
-"'min_value' (number), 'subscribed' (bool)."
+"'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), 'min_value' "
+"(number), 'subscribed' (bool)."
 msgstr ""
+"Filtros aplicados a contactos/leads. Claves admitidas: 'etapa' (por ejemplo,"
+" 'calificado'), 'país' (por ejemplo, 'EE. UU.'), 'etiqueta' (por ejemplo, "
+"'empresa'), 'valor_mínimo' (número), 'suscrito' (bool)."
 
 #: .\crm\models\segments.py:36
 msgid "Customer Segment"
-msgstr ""
+msgstr "Segmento de clientes"
 
 #: .\crm\models\segments.py:37 .\crm\templates\crm\segment_list.html:9
 msgid "Customer Segments"
-msgstr ""
+msgstr "Segmentos de clientes"
 
 #: .\crm\models\sequences.py:17 .\crm\templates\crm\sequence_list.html:31
 msgid "Sequence Name"
-msgstr ""
+msgstr "Nombre de secuencia"
 
 #: .\crm\models\sequences.py:21
 msgid "Manual Enrollment Only"
-msgstr ""
+msgstr "Inscripción manual únicamente"
 
 #: .\crm\models\sequences.py:24
 msgid "Auto-Enroll On Stage Entry"
-msgstr ""
+msgstr "Inscripción automática en la entrada al escenario"
 
 #: .\crm\models\sequences.py:25
 msgid "When a lead moves to this stage, automatically enroll primary contact."
 msgstr ""
+"Cuando un cliente potencial pasa a esta etapa, inscribe automáticamente el "
+"contacto principal."
 
 #: .\crm\models\sequences.py:29 .\crm\models\sequences.py:94
 #: .\crm\templates\crm\contact_detail.html:107
@@ -562,116 +579,121 @@ msgstr ""
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:182
 #: .\user_management\templates\user_management\siteuser_list.html:48
 msgid "Active"
-msgstr ""
+msgstr "Activo"
 
 #: .\crm\models\sequences.py:30
 msgid "When inactive, scheduled emails in this sequence will be skipped."
 msgstr ""
+"Cuando esté inactivo, se omitirán los correos electrónicos programados en "
+"esta secuencia."
 
 #: .\crm\models\sequences.py:36 .\crm\models\sequences.py:61
 msgid "Email Sequence"
-msgstr ""
+msgstr "Secuencia de correo electrónico"
 
 #: .\crm\models\sequences.py:37
 msgid "Email Sequences"
-msgstr ""
+msgstr "Secuencias de correo electrónico"
 
 #: .\crm\models\sequences.py:65
 msgid "Step Number"
-msgstr ""
+msgstr "Número de paso"
 
 #: .\crm\models\sequences.py:69
 msgid "Delay (Days)"
-msgstr ""
+msgstr "Retraso (días)"
 
 #: .\crm\models\sequences.py:70
 msgid "Days to wait after enrollment or previous step before sending."
-msgstr ""
+msgstr "Días de espera tras la inscripción o paso previo al envío."
 
 #: .\crm\models\sequences.py:74
 msgid "Email Body (Template)"
-msgstr ""
+msgstr "Cuerpo del correo electrónico (plantilla)"
 
 #: .\crm\models\sequences.py:76
 msgid ""
-"Supports placeholders: {{ contact.first_name }}, {{ contact.last_name }}, "
-"{{ contact.email }}, {{ company.name }}, {{ lead.title }}, "
-"{{ tracking_pixel }}"
+"Supports placeholders: {{ contact.first_name }}, {{ contact.last_name }}, {{"
+" contact.email }}, {{ company.name }}, {{ lead.title }}, {{ tracking_pixel "
+"}}"
 msgstr ""
+"Admite marcadores de posición: {{ contact.first_name }}, {{ "
+"contact.last_name }}, {{ contact.email }}, {{ company.name }}, {{ lead.title"
+" }}, {{ tracking_pixel }}"
 
 #: .\crm\models\sequences.py:84 .\crm\models\sequences.py:175
 msgid "Email Step"
-msgstr ""
+msgstr "Paso de correo electrónico"
 
 #: .\crm\models\sequences.py:85
 msgid "Email Steps"
-msgstr ""
+msgstr "Pasos por correo electrónico"
 
 #: .\crm\models\sequences.py:95
 msgid "Completed"
-msgstr ""
+msgstr "Completado"
 
 #: .\crm\models\sequences.py:96
 msgid "Paused"
-msgstr ""
+msgstr "En pausa"
 
 #: .\crm\models\sequences.py:97 .\erp\models.py:196
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancelado"
 
 #: .\crm\models\sequences.py:106
 msgid "Sequence"
-msgstr ""
+msgstr "secuencia"
 
 #: .\crm\models\sequences.py:120 .\crm\models\sequences.py:189
 msgid "Associated Lead"
-msgstr ""
+msgstr "Líder asociado"
 
 #: .\crm\models\sequences.py:124
 msgid "Current Step Number"
-msgstr ""
+msgstr "Número de paso actual"
 
 #: .\crm\models\sequences.py:132
 msgid "Enrolled At"
-msgstr ""
+msgstr "Inscrito en"
 
 #: .\crm\models\sequences.py:136
 msgid "Next Send Scheduled At"
-msgstr ""
+msgstr "Siguiente envío programado a las"
 
 #: .\crm\models\sequences.py:141
 msgid "Completed At"
-msgstr ""
+msgstr "Completado en"
 
 #: .\crm\models\sequences.py:145 .\crm\models\sequences.py:167
 msgid "Sequence Enrollment"
-msgstr ""
+msgstr "Inscripción de secuencia"
 
 #: .\crm\models\sequences.py:146
 msgid "Sequence Enrollments"
-msgstr ""
+msgstr "Inscripciones de secuencia"
 
 #: .\crm\models\sequences.py:154 .\erp\templates\erp\dashboard.html:228
 #: .\erp\templates\erp\invoice_detail.html:15
 #: .\erp\templates\erp\invoice_list.html:61
 msgid "Sent"
-msgstr ""
+msgstr "Enviado"
 
 #: .\crm\models\sequences.py:155
 msgid "Opened"
-msgstr ""
+msgstr "Abierto"
 
 #: .\crm\models\sequences.py:156
 msgid "Failed"
-msgstr ""
+msgstr "Fallido"
 
 #: .\crm\models\sequences.py:181
 msgid "Recipient Contact"
-msgstr ""
+msgstr "Contacto del destinatario"
 
 #: .\crm\models\sequences.py:191
 msgid "Recipient Email"
-msgstr ""
+msgstr "Correo electrónico del destinatario"
 
 #: .\crm\models\sequences.py:192
 msgid "Subject"
@@ -679,19 +701,19 @@ msgstr "Asunto"
 
 #: .\crm\models\sequences.py:197
 msgid "Tracking Token"
-msgstr ""
+msgstr "Ficha de seguimiento"
 
 #: .\crm\models\sequences.py:204
 msgid "Delivery Status"
-msgstr ""
+msgstr "Estado de entrega"
 
 #: .\crm\models\sequences.py:206
 msgid "Sent At"
-msgstr ""
+msgstr "Enviado a"
 
 #: .\crm\models\sequences.py:210
 msgid "Opened At"
-msgstr ""
+msgstr "Abierto en"
 
 #: .\crm\models\sequences.py:212
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:76
@@ -701,86 +723,88 @@ msgstr "Mensaje de error"
 
 #: .\crm\models\sequences.py:215
 msgid "Email Delivery Log"
-msgstr ""
+msgstr "Registro de entrega de correo electrónico"
 
 #: .\crm\models\sequences.py:216
 msgid "Email Delivery Logs"
-msgstr ""
+msgstr "Registros de entrega de correo electrónico"
 
 #: .\crm\plugin.py:9
 msgid "Customer Relationship Management"
-msgstr ""
+msgstr "Gestión de relaciones con el cliente"
 
 #: .\crm\plugin.py:10
 msgid ""
 "Full-featured CRM with pipeline Kanban, email sequences, customer "
 "segmentation, and analytics."
 msgstr ""
+"CRM con todas las funciones con canal Kanban, secuencias de correo "
+"electrónico, segmentación de clientes y análisis."
 
 #: .\crm\plugin.py:19 .\templates\base.html:123
 #: .\templates\themes\bootstrap5\partials\header.html:66
 msgid "CRM"
-msgstr ""
+msgstr "CRM"
 
 #: .\crm\templates\crm\analytics.html:10
 msgid "Total Pipeline"
-msgstr ""
+msgstr "Tubería total"
 
 #: .\crm\templates\crm\analytics.html:12
 msgid "tracked deals"
-msgstr ""
+msgstr "ofertas rastreadas"
 
 #: .\crm\templates\crm\analytics.html:20
 msgid "Won Revenue Deals"
-msgstr ""
+msgstr "Ofertas de ingresos ganados"
 
 #: .\crm\templates\crm\analytics.html:22
 msgid "Closed-won opportunities"
-msgstr ""
+msgstr "Oportunidades ganadas cerradas"
 
 #: .\crm\templates\crm\analytics.html:30
 msgid "Funnel Win Rate"
-msgstr ""
+msgstr "Tasa de ganancias del embudo"
 
 #: .\crm\templates\crm\analytics.html:32
 msgid "Won vs Total pipeline"
-msgstr ""
+msgstr "Ganado vs canalización total"
 
 #: .\crm\templates\crm\analytics.html:40
 msgid "Email Open Rate"
-msgstr ""
+msgstr "Tasa de apertura de correo electrónico"
 
 #: .\crm\templates\crm\analytics.html:42
 msgid "emails opened"
-msgstr ""
+msgstr "correos electrónicos abiertos"
 
 #: .\crm\templates\crm\analytics.html:54
 msgid "Lead Funnel Conversion"
-msgstr ""
+msgstr "Conversión de embudo de clientes potenciales"
 
 #: .\crm\templates\crm\analytics.html:55
 msgid "Stage Counts"
-msgstr ""
+msgstr "Recuentos de etapas"
 
 #: .\crm\templates\crm\analytics.html:69
 msgid "Pipeline Value by Stage ($)"
-msgstr ""
+msgstr "Valor del pipeline por etapa ($)"
 
 #: .\crm\templates\crm\analytics.html:70
 msgid "Dollar Volume"
-msgstr ""
+msgstr "Volumen en dólares"
 
 #: .\crm\templates\crm\analytics.html:86
 msgid "Contact Acquisition Growth"
-msgstr ""
+msgstr "Contacto Adquisición Crecimiento"
 
 #: .\crm\templates\crm\analytics.html:87
 msgid "Monthly Trend"
-msgstr ""
+msgstr "Tendencia mensual"
 
 #: .\crm\templates\crm\analytics.html:101
 msgid "Email Deliveries & Open Rate"
-msgstr ""
+msgstr "Entregas de correo electrónico y tasa de apertura"
 
 #: .\crm\templates\crm\analytics.html:102
 msgid "Engagement"
@@ -788,7 +812,7 @@ msgstr "Interacción"
 
 #: .\crm\templates\crm\analytics.html:127
 msgid "Deals"
-msgstr ""
+msgstr "Ofertas"
 
 #: .\crm\templates\crm\analytics.html:193
 msgid "New Contacts"
@@ -800,36 +824,36 @@ msgstr "CRM Empresarial"
 
 #: .\crm\templates\crm\base_crm.html:16
 msgid "Pipeline, Contacts, Sequences & Revenue Intelligence"
-msgstr ""
+msgstr "Canalización, contactos, secuencias e inteligencia de ingresos"
 
 #: .\crm\templates\crm\base_crm.html:24 .\erp\templates\erp\base_erp.html:27
 msgid "Dashboard"
-msgstr ""
+msgstr "Panel de control"
 
 #: .\crm\templates\crm\base_crm.html:29
 msgid "Kanban Pipeline"
-msgstr ""
+msgstr "Canalización Kanban"
 
 #: .\crm\templates\crm\base_crm.html:34
 msgid "Deals / Leads"
-msgstr ""
+msgstr "Ofertas / Clientes potenciales"
 
 #: .\crm\templates\crm\base_crm.html:49
 msgid "Email Drips"
-msgstr ""
+msgstr "Goteo de correo electrónico"
 
 #: .\crm\templates\crm\base_crm.html:54
 msgid "Segments"
-msgstr ""
+msgstr "Segmentos"
 
 #: .\crm\templates\crm\base_crm.html:59
 msgid "Analytics"
-msgstr ""
+msgstr "Analítica"
 
 #: .\crm\templates\crm\company_detail.html:30
 #: .\crm\templates\crm\company_form.html:11
 msgid "Edit Company"
-msgstr ""
+msgstr "Editar empresa"
 
 #: .\crm\templates\crm\company_detail.html:33
 #: .\crm\templates\crm\company_list.html:83
@@ -844,21 +868,21 @@ msgstr ""
 #: .\erp\templates\erp\invoice_detail.html:205
 #: .\erp\templates\erp\product_list.html:74
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 #: .\crm\templates\crm\company_detail.html:45
 msgid "Company Particulars"
-msgstr ""
+msgstr "Detalles de la empresa"
 
 #: .\crm\templates\crm\company_detail.html:55
 #: .\crm\templates\crm\company_list.html:45
 msgid "Annual Revenue"
-msgstr ""
+msgstr "Ingresos anuales"
 
 #: .\crm\templates\crm\company_detail.html:64
 #: .\crm\templates\crm\dashboard.html:26
 msgid "Pipeline Value"
-msgstr ""
+msgstr "Valor de canalización"
 
 #: .\crm\templates\crm\company_detail.html:81
 #: .\crm\templates\crm\contact_list.html:14
@@ -868,15 +892,15 @@ msgstr "Agregar Contacto"
 
 #: .\crm\templates\crm\company_detail.html:89
 msgid "Staff"
-msgstr ""
+msgstr "Personal"
 
 #: .\crm\templates\crm\company_detail.html:93
 msgid "No contacts registered under this company yet."
-msgstr ""
+msgstr "Aún no hay contactos registrados bajo esta empresa."
 
 #: .\crm\templates\crm\company_detail.html:105
 msgid "Deals & Opportunities"
-msgstr ""
+msgstr "Ofertas y oportunidades"
 
 #: .\crm\templates\crm\company_detail.html:107
 #: .\crm\templates\crm\lead_list.html:17
@@ -884,22 +908,24 @@ msgid "New Deal"
 msgstr "Nuevo Trato"
 
 #: .\crm\templates\crm\company_detail.html:115
-#: .\crm\templates\crm\dashboard.html:143 .\crm\templates\crm\lead_list.html:52
+#: .\crm\templates\crm\dashboard.html:143
+#: .\crm\templates\crm\lead_list.html:52
 msgid "Deal Title"
-msgstr ""
+msgstr "Título de la oferta"
 
 #: .\crm\templates\crm\company_detail.html:118
-#: .\crm\templates\crm\dashboard.html:146 .\crm\templates\crm\lead_list.html:56
+#: .\crm\templates\crm\dashboard.html:146
+#: .\crm\templates\crm\lead_list.html:56
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 #: .\crm\templates\crm\company_detail.html:148
 msgid "No deals associated with this company."
-msgstr ""
+msgstr "No hay ofertas asociadas con esta empresa."
 
 #: .\crm\templates\crm\company_form.html:13
 msgid "Create New Company"
-msgstr ""
+msgstr "Crear nueva empresa"
 
 #: .\crm\templates\crm\company_form.html:85
 #: .\crm\templates\crm\confirm_delete.html:20
@@ -919,47 +945,47 @@ msgstr ""
 #: .\user_management\templates\user_management\login.html:19
 #: .\user_management\templates\user_management\signup.html:18
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: .\crm\templates\crm\company_form.html:88
 msgid "Save Company"
-msgstr ""
+msgstr "Guardar empresa"
 
 #: .\crm\templates\crm\company_list.html:9
 msgid "Companies & Accounts"
-msgstr ""
+msgstr "Empresas y cuentas"
 
 #: .\crm\templates\crm\company_list.html:10
 msgid "Organizations, enterprise clients, and business accounts."
-msgstr ""
+msgstr "Organizaciones, clientes empresariales y cuentas comerciales."
 
 #: .\crm\templates\crm\company_list.html:14
 #: .\crm\templates\crm\dashboard.html:113
 msgid "Add Company"
-msgstr ""
+msgstr "Agregar empresa"
 
 #: .\crm\templates\crm\company_list.html:26
 msgid "Search by company, industry, city..."
-msgstr ""
+msgstr "Búsqueda por empresa, sector, ciudad..."
 
 #: .\crm\templates\crm\company_list.html:30
 #: .\video_gallery\templates\video_gallery\gallery_list.html:61
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: .\crm\templates\crm\company_list.html:32
 #: .\crm\templates\crm\contact_list.html:50
 #: .\crm\templates\crm\lead_list.html:43
 #: .\erp\templates\erp\inventory_dashboard.html:109
 msgid "Reset"
-msgstr ""
+msgstr "Reiniciar"
 
 #: .\crm\templates\crm\company_list.html:43 .\erp\models.py:144
 #: .\erp\templates\erp\dashboard.html:151
 #: .\erp\templates\erp\movement_list.html:37
 #: .\erp\templates\erp\product_detail.html:135
 msgid "Location"
-msgstr ""
+msgstr "Ubicación"
 
 #: .\crm\templates\crm\company_list.html:47
 #: .\crm\templates\crm\contact_list.html:66
@@ -971,11 +997,11 @@ msgstr ""
 #: .\erp\templates\erp\product_list.html:34
 #: .\task_runner\templates\task_runner\job_list.html:125
 msgid "Actions"
-msgstr ""
+msgstr "Acciones"
 
 #: .\crm\templates\crm\company_list.html:58
 msgid "Visit website"
-msgstr ""
+msgstr "Visitar sitio web"
 
 #: .\crm\templates\crm\company_list.html:77
 #: .\crm\templates\crm\contact_list.html:121
@@ -984,7 +1010,7 @@ msgstr ""
 #: .\erp\templates\erp\product_list.html:72
 #: .\task_runner\templates\task_runner\job_list.html:172
 msgid "View"
-msgstr ""
+msgstr "Ver"
 
 #: .\crm\templates\crm\company_list.html:80
 #: .\crm\templates\crm\contact_list.html:124
@@ -996,16 +1022,16 @@ msgstr ""
 #: .\erp\templates\erp\product_detail.html:19
 #: .\erp\templates\erp\product_list.html:73
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: .\crm\templates\crm\company_list.html:92
 msgid "No companies registered yet."
-msgstr ""
+msgstr "Aún no hay empresas registradas."
 
 #: .\crm\templates\crm\confirm_delete.html:12
 #: .\erp\templates\erp\confirm_delete.html:12
 msgid "Confirm Deletion"
-msgstr ""
+msgstr "Confirmar eliminación"
 
 #: .\crm\templates\crm\confirm_delete.html:14
 #, python-format
@@ -1013,23 +1039,25 @@ msgid ""
 "Are you sure you want to permanently delete <strong>\"%(name)s\"</strong>? "
 "This action cannot be undone."
 msgstr ""
+"¿Está seguro de que desea eliminar permanentemente "
+"<strong>\"%(name)s\"</strong>? Esta acción no se puede deshacer."
 
 #: .\crm\templates\crm\confirm_delete.html:23
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Eliminar permanentemente"
 
 #: .\crm\templates\crm\contact_detail.html:16
 #: .\crm\templates\crm\contact_list.html:116
 #: .\crm\templates\crm\segment_detail.html:78
 msgid "Subscribed"
-msgstr ""
+msgstr "suscrito"
 
 #: .\crm\templates\crm\contact_detail.html:16
 #: .\crm\templates\crm\contact_list.html:116
 #: .\crm\templates\crm\lead_detail.html:94
 #: .\crm\templates\crm\segment_detail.html:78
 msgid "Unsubscribed"
-msgstr ""
+msgstr "Cancelar suscripción"
 
 #: .\crm\templates\crm\contact_detail.html:30
 #: .\crm\templates\crm\contact_form.html:11
@@ -1042,113 +1070,113 @@ msgstr "Detalles del Contacto"
 
 #: .\crm\templates\crm\contact_detail.html:86
 msgid "Access Pass & Security"
-msgstr ""
+msgstr "Pase de acceso y seguridad"
 
 #: .\crm\templates\crm\contact_detail.html:100
 msgid "Last seen"
-msgstr ""
+msgstr "visto por última vez"
 
 #: .\crm\templates\crm\contact_detail.html:112
 msgid "Pass Validity"
-msgstr ""
+msgstr "Validez del pase"
 
 #: .\crm\templates\crm\contact_detail.html:115
 msgid "Valid Pass"
-msgstr ""
+msgstr "Pase válido"
 
 #: .\crm\templates\crm\contact_detail.html:117
 msgid "Pass Expired / Invalid"
-msgstr ""
+msgstr "Pase caducado/no válido"
 
 #: .\crm\templates\crm\contact_detail.html:121
 msgid "Immediate"
-msgstr ""
+msgstr "Inmediato"
 
 #: .\crm\templates\crm\contact_detail.html:121
 msgid "Indefinite"
-msgstr ""
+msgstr "indefinido"
 
 #: .\crm\templates\crm\contact_detail.html:126
 msgid "License Plate"
-msgstr ""
+msgstr "Matrícula"
 
 #: .\crm\templates\crm\contact_detail.html:135
 msgid "Security Tag"
-msgstr ""
+msgstr "Etiqueta de seguridad"
 
 #: .\crm\templates\crm\contact_detail.html:144
 msgid "Biometrics"
-msgstr ""
+msgstr "Biometría"
 
 #: .\crm\templates\crm\contact_detail.html:149
 msgid "Photo Registered"
-msgstr ""
+msgstr "Foto registrada"
 
 #: .\crm\templates\crm\contact_detail.html:156
 msgid "512-d Vector Ready"
-msgstr ""
+msgstr "Listo para vectores 512-d"
 
 #: .\crm\templates\crm\contact_detail.html:168
 msgid "Associated Deals"
-msgstr ""
+msgstr "Ofertas asociadas"
 
 #: .\crm\templates\crm\contact_detail.html:170
 #: .\crm\templates\crm\pipeline.html:12
 msgid "Add Deal"
-msgstr ""
+msgstr "Agregar oferta"
 
 #: .\crm\templates\crm\contact_detail.html:188
 msgid "No deals associated with this contact yet."
-msgstr ""
+msgstr "Aún no hay ofertas asociadas con este contacto."
 
 #: .\crm\templates\crm\contact_detail.html:198
 msgid "Email Drip Enrollments"
-msgstr ""
+msgstr "Inscripciones por goteo por correo electrónico"
 
 #: .\crm\templates\crm\contact_detail.html:209
 msgid "Step"
-msgstr ""
+msgstr "paso"
 
 #: .\crm\templates\crm\contact_detail.html:209
 msgid "Next send"
-msgstr ""
+msgstr "Siguiente envío"
 
 #: .\crm\templates\crm\contact_detail.html:214
 msgid "Not enrolled in any email sequences."
-msgstr ""
+msgstr "No inscrito en ninguna secuencia de correo electrónico."
 
 #: .\crm\templates\crm\contact_detail.html:228
 msgid "Recent Gate Access History"
-msgstr ""
+msgstr "Historial reciente de acceso a la puerta"
 
 #: .\crm\templates\crm\contact_detail.html:229
 msgid "events"
-msgstr ""
+msgstr "eventos"
 
 #: .\crm\templates\crm\contact_detail.html:242
 msgid "confidence"
-msgstr ""
+msgstr "confianza"
 
 #: .\crm\templates\crm\contact_detail.html:256
 msgid "Touchpoint History"
-msgstr ""
+msgstr "Historial de puntos de contacto"
 
 #: .\crm\templates\crm\contact_detail.html:281
 #: .\crm\templates\crm\lead_detail.html:223
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #: .\crm\templates\crm\contact_detail.html:287
 msgid "No activities recorded for this contact."
-msgstr ""
+msgstr "No se registraron actividades para este contacto."
 
 #: .\crm\templates\crm\contact_form.html:13
 msgid "Create New Contact"
-msgstr ""
+msgstr "Crear nuevo contacto"
 
 #: .\crm\templates\crm\contact_form.html:82
 msgid "Physical Security & Access Credentials"
-msgstr ""
+msgstr "Credenciales de acceso y seguridad física"
 
 #: .\crm\templates\crm\contact_form.html:147
 msgid "Save Contact"
@@ -1156,25 +1184,25 @@ msgstr "Guardar Contacto"
 
 #: .\crm\templates\crm\contact_list.html:9
 msgid "Contacts Directory"
-msgstr ""
+msgstr "Directorio de contactos"
 
 #: .\crm\templates\crm\contact_list.html:10
 msgid "Individual persons, buyers, champions, and sales stakeholders."
 msgstr ""
+"Personas individuales, compradores, defensores y partes interesadas en las "
+"ventas."
 
 #: .\crm\templates\crm\contact_list.html:26
 msgid "Search by name, email, company, plate..."
-msgstr ""
+msgstr "Busca por nombre, email, empresa, matrícula..."
 
 #: .\crm\templates\crm\contact_list.html:31
-#, fuzzy
-#| msgid "All Statuses"
 msgid "All Clearances"
-msgstr "Todos los Estados"
+msgstr "Todas las autorizaciones"
 
 #: .\crm\templates\crm\contact_list.html:42
 msgid "All Presence"
-msgstr ""
+msgstr "Toda Presencia"
 
 #: .\crm\templates\crm\contact_list.html:48
 #: .\crm\templates\crm\lead_list.html:41
@@ -1183,44 +1211,44 @@ msgstr ""
 #: .\task_runner\templates\task_runner\job_list.html:101
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:56
 msgid "Filter"
-msgstr ""
+msgstr "Filtrar"
 
 #: .\crm\templates\crm\contact_list.html:59
 #: .\erp\templates\erp\product_list.html:28 .\video_gallery\models.py:33
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: .\crm\templates\crm\contact_list.html:64
 msgid "Plate"
-msgstr ""
+msgstr "plato"
 
 #: .\crm\templates\crm\contact_list.html:65
 msgid "Subscription"
-msgstr ""
+msgstr "Suscripción"
 
 #: .\crm\templates\crm\contact_list.html:136
 msgid "No contacts found."
-msgstr ""
+msgstr "No se encontraron contactos."
 
 #: .\crm\templates\crm\dashboard.html:11
 msgid "Active Deals"
-msgstr ""
+msgstr "Ofertas activas"
 
 #: .\crm\templates\crm\dashboard.html:16
 msgid "deals won"
-msgstr ""
+msgstr "acuerdos ganados"
 
 #: .\crm\templates\crm\dashboard.html:31
 msgid "Excludes lost deals"
-msgstr ""
+msgstr "Excluye acuerdos perdidos"
 
 #: .\crm\templates\crm\dashboard.html:41
 msgid "Win Rate"
-msgstr ""
+msgstr "Tasa de victorias"
 
 #: .\crm\templates\crm\dashboard.html:46
 msgid "Conversion efficiency"
-msgstr ""
+msgstr "Eficiencia de conversión"
 
 #: .\crm\templates\crm\dashboard.html:56
 msgid "Total Contacts"
@@ -1228,11 +1256,11 @@ msgstr "Total de Contactos"
 
 #: .\crm\templates\crm\dashboard.html:61
 msgid "emails sent"
-msgstr ""
+msgstr "correos electrónicos enviados"
 
 #: .\crm\templates\crm\dashboard.html:61
 msgid "opened"
-msgstr ""
+msgstr "abierto"
 
 #: .\crm\templates\crm\dashboard.html:74
 msgid "Pipeline Distribution"
@@ -1240,23 +1268,23 @@ msgstr "Distribución del Pipeline"
 
 #: .\crm\templates\crm\dashboard.html:76
 msgid "Open Kanban"
-msgstr ""
+msgstr "Kanban abierto"
 
 #: .\crm\templates\crm\dashboard.html:101
 msgid "Quick Actions"
-msgstr ""
+msgstr "Acciones rápidas"
 
 #: .\crm\templates\crm\dashboard.html:105
 msgid "Create Deal / Lead"
-msgstr ""
+msgstr "Crear trato/cliente potencial"
 
 #: .\crm\templates\crm\dashboard.html:117
 msgid "New Email Drip"
-msgstr ""
+msgstr "Nuevo goteo de correo electrónico"
 
 #: .\crm\templates\crm\dashboard.html:121
 msgid "View Full Analytics"
-msgstr ""
+msgstr "Ver análisis completos"
 
 #: .\crm\templates\crm\dashboard.html:135
 msgid "Recent Deals"
@@ -1270,34 +1298,34 @@ msgstr "Ver todo"
 
 #: .\crm\templates\crm\dashboard.html:144
 msgid "Contact / Company"
-msgstr ""
+msgstr "Contacto / Empresa"
 
 #: .\crm\templates\crm\dashboard.html:179
 msgid "No deals found. Create your first deal to get started."
-msgstr ""
+msgstr "No se encontraron ofertas. Crea tu primera oferta para empezar."
 
 #: .\crm\templates\crm\dashboard.html:194
 msgid "Recent Activities"
-msgstr ""
+msgstr "Actividades recientes"
 
 #: .\crm\templates\crm\dashboard.html:210
 #: .\crm\templates\crm\lead_detail.html:23
 msgid "ago"
-msgstr ""
+msgstr "hace"
 
 #: .\crm\templates\crm\dashboard.html:229
 msgid "No recent activities recorded."
-msgstr ""
+msgstr "No se registraron actividades recientes."
 
 #: .\crm\templates\crm\lead_detail.html:23
 #: .\crm\templates\crm\segment_list.html:29
 #: .\crm\templates\crm\sequence_list.html:36
 msgid "Created"
-msgstr ""
+msgstr "Creado"
 
 #: .\crm\templates\crm\lead_detail.html:23
 msgid "Last updated"
-msgstr ""
+msgstr "Última actualización"
 
 #: .\crm\templates\crm\lead_detail.html:32
 #: .\crm\templates\crm\partials\lead_kanban_card.html:41
@@ -1306,57 +1334,57 @@ msgstr "Editar Trato"
 
 #: .\crm\templates\crm\lead_detail.html:43
 msgid "Pipeline Stage Progression"
-msgstr ""
+msgstr "Progresión de la etapa del pipeline"
 
 #: .\crm\templates\crm\lead_detail.html:99
 msgid "No contact linked to this deal."
-msgstr ""
+msgstr "No hay contacto vinculado a este acuerdo."
 
 #: .\crm\templates\crm\lead_detail.html:107
 msgid "Company / Account"
-msgstr ""
+msgstr "Empresa / Cuenta"
 
 #: .\crm\templates\crm\lead_detail.html:121
 msgid "General"
-msgstr ""
+msgstr "generales"
 
 #: .\crm\templates\crm\lead_detail.html:133
 msgid "No company assigned."
-msgstr ""
+msgstr "Ninguna empresa asignada."
 
 #: .\crm\templates\crm\lead_detail.html:141
 msgid "Deal Particulars"
-msgstr ""
+msgstr "Detalles de la oferta"
 
 #: .\crm\templates\crm\lead_detail.html:148
 #: .\crm\templates\crm\lead_list.html:57
 #: .\crm\templates\crm\partials\lead_kanban_card.html:66
 msgid "Assigned Rep"
-msgstr ""
+msgstr "Representante asignado"
 
 #: .\crm\templates\crm\lead_detail.html:149
 #: .\crm\templates\crm\lead_list.html:106
 msgid "Unassigned"
-msgstr ""
+msgstr "No asignado"
 
 #: .\crm\templates\crm\lead_detail.html:151
 #: .\crm\templates\crm\lead_list.html:58
 msgid "Expected Close"
-msgstr ""
+msgstr "Cierre esperado"
 
 #: .\crm\templates\crm\lead_detail.html:152
 #: .\user_management\templates\user_management\profile.html:45
 #: .\user_management\templates\user_management\profile.html:49
 msgid "Not specified"
-msgstr ""
+msgstr "No especificado"
 
 #: .\crm\templates\crm\lead_detail.html:169
 msgid "Log New Activity"
-msgstr ""
+msgstr "Registrar nueva actividad"
 
 #: .\crm\templates\crm\lead_detail.html:176
 msgid "Activity Type"
-msgstr ""
+msgstr "Tipo de actividad"
 
 #: .\crm\templates\crm\lead_detail.html:185
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:26
@@ -1366,60 +1394,62 @@ msgstr "Detalles"
 
 #: .\crm\templates\crm\lead_detail.html:190
 msgid "Record Activity"
-msgstr ""
+msgstr "Actividad de registro"
 
 #: .\crm\templates\crm\lead_detail.html:200
 msgid "Interaction History"
-msgstr ""
+msgstr "Historial de interacciones"
 
 #: .\crm\templates\crm\lead_detail.html:229
 msgid "No activities recorded for this deal yet."
-msgstr ""
+msgstr "Aún no se han registrado actividades para este acuerdo."
 
 #: .\crm\templates\crm\lead_form.html:11
 msgid "Edit Deal / Lead"
-msgstr ""
+msgstr "Editar trato/cliente potencial"
 
 #: .\crm\templates\crm\lead_form.html:13
 msgid "Create New Deal / Lead"
-msgstr ""
+msgstr "Crear nuevo acuerdo/cliente potencial"
 
 #: .\crm\templates\crm\lead_form.html:88
 msgid "Save Deal"
-msgstr ""
+msgstr "Guardar oferta"
 
 #: .\crm\templates\crm\lead_list.html:9
 msgid "Deals & Leads Directory"
-msgstr ""
+msgstr "Directorio de ofertas y clientes potenciales"
 
 #: .\crm\templates\crm\lead_list.html:10
 msgid ""
 "Track and manage opportunities across all stages of your sales pipeline."
 msgstr ""
+"Realice un seguimiento y gestione oportunidades en todas las etapas de su "
+"proceso de ventas."
 
 #: .\crm\templates\crm\lead_list.html:14
 msgid "Kanban Board"
-msgstr ""
+msgstr "Tablero Kanban"
 
 #: .\crm\templates\crm\lead_list.html:29
 msgid "Search by title, contact, company..."
-msgstr ""
+msgstr "Búsqueda por título, contacto, empresa..."
 
 #: .\crm\templates\crm\lead_list.html:34
 msgid "All Pipeline Stages"
-msgstr ""
+msgstr "Todas las etapas del proceso"
 
 #: .\crm\templates\crm\lead_list.html:128
 msgid "No deals found matching your query."
-msgstr ""
+msgstr "No se encontraron ofertas que coincidan con su consulta."
 
 #: .\crm\templates\crm\partials\lead_kanban_card.html:14
 msgid "Move stage"
-msgstr ""
+msgstr "Mover escenario"
 
 #: .\crm\templates\crm\partials\lead_kanban_card.html:18
 msgid "Move to Stage"
-msgstr ""
+msgstr "Mover al escenario"
 
 #: .\crm\templates\crm\partials\lead_kanban_card.html:36
 #: .\home\templates\home\index.html:61 .\home\templates\home\index.html:75
@@ -1429,29 +1459,32 @@ msgstr "Ver Detalles"
 
 #: .\crm\templates\crm\pipeline.html:7
 msgid "Deals Pipeline (Kanban)"
-msgstr ""
+msgstr "Canalización de ofertas (Kanban)"
 
 #: .\crm\templates\crm\pipeline.html:8
 msgid ""
 "Drag and drop cards between stages to update deal progress and trigger "
 "automated sequences."
 msgstr ""
+"Arrastre y suelte tarjetas entre etapas para actualizar el progreso del "
+"trato y activar secuencias automatizadas."
 
 #: .\crm\templates\crm\pipeline.html:15
 msgid "List View"
-msgstr ""
+msgstr "Vista de lista"
 
 #: .\crm\templates\crm\pipeline.html:63
 msgid "No deals in this stage"
-msgstr ""
+msgstr "No hay ofertas en esta etapa"
 
 #: .\crm\templates\crm\pipeline.html:145
 msgid "Failed to update deal stage. Please try again."
 msgstr ""
+"No se pudo actualizar la etapa del acuerdo. Por favor inténtalo de nuevo."
 
 #: .\crm\templates\crm\pipeline.html:150
 msgid "Network error occurred while moving deal."
-msgstr ""
+msgstr "Se produjo un error de red al mover la oferta."
 
 #: .\crm\templates\crm\segment_detail.html:12
 msgid "contacts"
@@ -1459,23 +1492,23 @@ msgstr "contactos"
 
 #: .\crm\templates\crm\segment_detail.html:16
 msgid "Customer segment dynamically evaluated against filter rules."
-msgstr ""
+msgstr "Segmento de clientes evaluado dinámicamente según reglas de filtrado."
 
 #: .\crm\templates\crm\segment_detail.html:22
 msgid "Send Broadcast Campaign"
-msgstr ""
+msgstr "Enviar campaña de difusión"
 
 #: .\crm\templates\crm\segment_detail.html:25
 msgid "Edit Rules"
-msgstr ""
+msgstr "Editar reglas"
 
 #: .\crm\templates\crm\segment_detail.html:35
 msgid "Active Filter Rules"
-msgstr ""
+msgstr "Reglas de filtro activo"
 
 #: .\crm\templates\crm\segment_detail.html:42
 msgid "All subscribed contacts (no filters applied)"
-msgstr ""
+msgstr "Todos los contactos suscritos (no se aplican filtros)"
 
 #: .\crm\templates\crm\segment_detail.html:59
 msgid "Contact Name"
@@ -1483,15 +1516,17 @@ msgstr "Nombre del Contacto"
 
 #: .\crm\templates\crm\segment_detail.html:62
 msgid "Marketing Status"
-msgstr ""
+msgstr "Estado de comercialización"
 
 #: .\crm\templates\crm\segment_detail.html:92
 msgid "No contacts currently match this segment's filter criteria."
 msgstr ""
+"Actualmente ningún contacto coincide con los criterios de filtro de este "
+"segmento."
 
 #: .\crm\templates\crm\segment_detail.html:110
 msgid "Broadcast Campaign to Segment"
-msgstr ""
+msgstr "Campaña de difusión para segmentar"
 
 #: .\crm\templates\crm\segment_detail.html:117
 #, python-format
@@ -1499,324 +1534,340 @@ msgid ""
 "This message will be dispatched in the background to all %(count)s "
 "subscribed contacts in \"<strong>%(name)s</strong>\"."
 msgstr ""
+"Este mensaje se enviará en segundo plano a todos los %(count)s contactos "
+"suscritos en \"<strong>%(name)s</strong>\"."
 
 #: .\crm\templates\crm\segment_detail.html:131
 msgid "Launch Campaign"
-msgstr ""
+msgstr "Campaña de lanzamiento"
 
 #: .\crm\templates\crm\segment_form.html:11
 msgid "Edit Customer Segment"
-msgstr ""
+msgstr "Editar segmento de clientes"
 
 #: .\crm\templates\crm\segment_form.html:13
 msgid "Create New Customer Segment"
-msgstr ""
+msgstr "Crear nuevo segmento de clientes"
 
 #: .\crm\templates\crm\segment_form.html:43
 msgid "Filter JSON Reference"
-msgstr ""
+msgstr "Filtrar referencia JSON"
 
 #: .\crm\templates\crm\segment_form.html:54
 msgid "Save Segment"
-msgstr ""
+msgstr "Guardar segmento"
 
 #: .\crm\templates\crm\segment_list.html:10
 msgid ""
 "Dynamic contact groups filtered by country, deal stage, tag, value, or "
 "industry for targeted campaigns."
 msgstr ""
+"Grupos de contactos dinámicos filtrados por país, etapa del acuerdo, "
+"etiqueta, valor o industria para campañas específicas."
 
 #: .\crm\templates\crm\segment_list.html:14
 msgid "New Segment"
-msgstr ""
+msgstr "Nuevo segmento"
 
 #: .\crm\templates\crm\segment_list.html:28
 msgid "Matching Deals"
-msgstr ""
+msgstr "Ofertas coincidentes"
 
 #: .\crm\templates\crm\segment_list.html:54
 msgid "View & Broadcast"
-msgstr ""
+msgstr "Ver y transmitir"
 
 #: .\crm\templates\crm\segment_list.html:69
 msgid ""
 "No customer segments configured yet. Create a segment to start targeted "
 "marketing."
 msgstr ""
+"Aún no hay segmentos de clientes configurados. Cree un segmento para iniciar"
+" el marketing dirigido."
 
 #: .\crm\templates\crm\sequence_detail.html:12
 #: .\crm\templates\crm\sequence_list.html:62
 #: .\erp\templates\erp\product_list.html:67
 #: .\user_management\templates\user_management\siteuser_list.html:50
 msgid "Inactive"
-msgstr ""
+msgstr "Inactivo"
 
 #: .\crm\templates\crm\sequence_detail.html:17
 msgid "Auto-enrolls leads reaching stage:"
-msgstr ""
+msgstr "Inscripción automática de clientes potenciales que llegan a la etapa:"
 
 #: .\crm\templates\crm\sequence_detail.html:19
 msgid "Manual enrollment sequence"
-msgstr ""
+msgstr "Secuencia de inscripción manual"
 
 #: .\crm\templates\crm\sequence_detail.html:21
 msgid "scheduled steps"
-msgstr ""
+msgstr "pasos programados"
 
 #: .\crm\templates\crm\sequence_detail.html:30
 msgid "Dispatch Queue"
-msgstr ""
+msgstr "Cola de despacho"
 
 #: .\crm\templates\crm\sequence_detail.html:34
 #: .\crm\templates\crm\sequence_detail.html:54
 msgid "Add Step"
-msgstr ""
+msgstr "Agregar paso"
 
 #: .\crm\templates\crm\sequence_detail.html:37
 msgid "Edit Sequence"
-msgstr ""
+msgstr "Editar secuencia"
 
 #: .\crm\templates\crm\sequence_detail.html:52
 msgid "Email Steps Timeline"
-msgstr ""
+msgstr "Cronología de los pasos del correo electrónico"
 
 #: .\crm\templates\crm\sequence_detail.html:70
 #, python-format
 msgid "Delay: %(days)s days"
-msgstr ""
+msgstr "Retraso: %(days)s días"
 
 #: .\crm\templates\crm\sequence_detail.html:72
 msgid "Edit step"
-msgstr ""
+msgstr "Editar paso"
 
 #: .\crm\templates\crm\sequence_detail.html:75
 msgid "Delete step"
-msgstr ""
+msgstr "Eliminar paso"
 
 #: .\crm\templates\crm\sequence_detail.html:87
 msgid "No steps added to this sequence yet. Add Step 1 to begin."
 msgstr ""
+"Aún no se han agregado pasos a esta secuencia. Agregue el Paso 1 para "
+"comenzar."
 
 #: .\crm\templates\crm\sequence_detail.html:90
 msgid "Add First Step"
-msgstr ""
+msgstr "Agregar primer paso"
 
 #: .\crm\templates\crm\sequence_detail.html:104
 #: .\crm\templates\crm\sequence_list.html:35
 msgid "Active Enrollments"
-msgstr ""
+msgstr "Inscripciones activas"
 
 #: .\crm\templates\crm\sequence_detail.html:125
 msgid "Current Step"
-msgstr ""
+msgstr "Paso actual"
 
 #: .\crm\templates\crm\sequence_detail.html:125
 msgid "Next dispatch"
-msgstr ""
+msgstr "Próximo envío"
 
 #: .\crm\templates\crm\sequence_detail.html:135
 msgid "No contacts currently enrolled in this sequence."
-msgstr ""
+msgstr "No hay contactos actualmente inscritos en esta secuencia."
 
 #: .\crm\templates\crm\sequence_form.html:11
 msgid "Edit Email Sequence"
-msgstr ""
+msgstr "Editar secuencia de correo electrónico"
 
 #: .\crm\templates\crm\sequence_form.html:13
 msgid "Create New Email Sequence"
-msgstr ""
+msgstr "Crear nueva secuencia de correo electrónico"
 
 #: .\crm\templates\crm\sequence_form.html:59
 msgid "Save Sequence"
-msgstr ""
+msgstr "Guardar secuencia"
 
 #: .\crm\templates\crm\sequence_list.html:9
 msgid "Automated Email Sequences (Drips)"
-msgstr ""
+msgstr "Secuencias de correo electrónico automatizadas (goteo)"
 
 #: .\crm\templates\crm\sequence_list.html:10
 msgid ""
 "Multi-step automated email campaigns triggered by lead stage transitions or "
 "enrolled contacts."
 msgstr ""
+"Campañas de correo electrónico automatizadas de varios pasos activadas por "
+"transiciones de etapa de clientes potenciales o contactos inscritos."
 
 #: .\crm\templates\crm\sequence_list.html:15
 msgid ""
 "Triggers the Celery background worker to process scheduled drip emails "
 "immediately"
 msgstr ""
+"Hace que el trabajador en segundo plano de Apio procese los correos "
+"electrónicos de goteo programados inmediatamente"
 
 #: .\crm\templates\crm\sequence_list.html:16
 msgid "Process Drip Queue Now"
-msgstr ""
+msgstr "Procesar cola de goteo ahora"
 
 #: .\crm\templates\crm\sequence_list.html:20
 msgid "New Sequence"
-msgstr ""
+msgstr "Nueva secuencia"
 
 #: .\crm\templates\crm\sequence_list.html:32
 msgid "Trigger Stage"
-msgstr ""
+msgstr "Etapa de activación"
 
 #: .\crm\templates\crm\sequence_list.html:57
 msgid "Manual Only"
-msgstr ""
+msgstr "Sólo manuales"
 
 #: .\crm\templates\crm\sequence_list.html:66
 msgid "steps"
-msgstr ""
+msgstr "pasos"
 
 #: .\crm\templates\crm\sequence_list.html:73
 msgid "Manage Steps"
-msgstr ""
+msgstr "Administrar pasos"
 
 #: .\crm\templates\crm\sequence_list.html:88
 msgid "No email sequences created yet. Set up your first drip campaign."
 msgstr ""
+"Aún no se han creado secuencias de correo electrónico. Configure su primera "
+"campaña de goteo."
 
 #: .\crm\templates\crm\step_form.html:11
 msgid "Edit Email Step"
-msgstr ""
+msgstr "Editar paso de correo electrónico"
 
 #: .\crm\templates\crm\step_form.html:13
 msgid "Add Step to Sequence"
-msgstr ""
+msgstr "Agregar paso a la secuencia"
 
 #: .\crm\templates\crm\step_form.html:51
 msgid "Available Placeholders"
-msgstr ""
+msgstr "Marcadores de posición disponibles"
 
 #: .\crm\templates\crm\step_form.html:67
 msgid "Save Step"
-msgstr ""
+msgstr "Guardar paso"
 
 #: .\crm\views\companies.py:61
 #, python-format
 msgid "Company '%s' created successfully."
-msgstr ""
+msgstr "La empresa '%s' se creó correctamente."
 
 #: .\crm\views\companies.py:75
 #, python-format
 msgid "Company '%s' updated successfully."
-msgstr ""
+msgstr "La empresa '%s' se actualizó correctamente."
 
 #: .\crm\views\companies.py:91
 #, python-format
 msgid "Company '%s' deleted successfully."
-msgstr ""
+msgstr "La empresa '%s' se eliminó correctamente."
 
 #: .\crm\views\contacts.py:80
 #, python-format
 msgid "Contact '%s' created successfully."
-msgstr ""
+msgstr "El contacto '%s' se creó correctamente."
 
 #: .\crm\views\contacts.py:94
 #, python-format
 msgid "Contact '%s' updated successfully."
-msgstr ""
+msgstr "El contacto '%s' se actualizó correctamente."
 
 #: .\crm\views\contacts.py:110
 #, python-format
 msgid "Contact '%s' deleted successfully."
-msgstr ""
+msgstr "El contacto '%s' se eliminó correctamente."
 
 #: .\crm\views\leads.py:32
 msgid "Invalid stage specified."
-msgstr ""
+msgstr "Etapa especificada no válida."
 
 #: .\crm\views\leads.py:52
 #, python-format
 msgid "Lead stage updated successfully to '%s'."
-msgstr ""
+msgstr "La etapa principal se actualizó correctamente a '%s'."
 
 #: .\crm\views\leads.py:111
 #, python-format
 msgid "Lead '%s' created successfully."
-msgstr ""
+msgstr "El cliente potencial '%s' se creó correctamente."
 
 #: .\crm\views\leads.py:118
 msgid "Lead created"
-msgstr ""
+msgstr "Cliente potencial creado"
 
 #: .\crm\views\leads.py:119
 #, python-format
 msgid "Initial lead creation in stage: %s"
-msgstr ""
+msgstr "Creación inicial de leads en la etapa: %s"
 
 #: .\crm\views\leads.py:134
 #, python-format
 msgid "Lead '%s' updated successfully."
-msgstr ""
+msgstr "El cliente potencial '%s' se actualizó correctamente."
 
 #: .\crm\views\leads.py:150
 #, python-format
 msgid "Lead '%s' deleted successfully."
-msgstr ""
+msgstr "Cliente potencial '%s' eliminado correctamente."
 
 #: .\crm\views\leads.py:165
 msgid "Interaction logged successfully."
-msgstr ""
+msgstr "La interacción se registró correctamente."
 
 #: .\crm\views\leads.py:167
 msgid "Failed to log interaction. Please check the form."
-msgstr ""
+msgstr "No se pudo registrar la interacción. Por favor revisa el formulario."
 
 #: .\crm\views\segments.py:48
 #, python-format
 msgid "Segment '%s' created successfully."
-msgstr ""
+msgstr "El segmento '%s' se creó correctamente."
 
 #: .\crm\views\segments.py:62
 #, python-format
 msgid "Segment '%s' updated successfully."
-msgstr ""
+msgstr "El segmento '%s' se actualizó correctamente."
 
 #: .\crm\views\segments.py:78
 #, python-format
 msgid "Segment '%s' deleted successfully."
-msgstr ""
+msgstr "El segmento '%s' se eliminó correctamente."
 
 #: .\crm\views\segments.py:109
 #, python-format
 msgid "Broadcast campaign launched to segment '%s' (Task ID: %s)."
-msgstr ""
+msgstr "Campaña de difusión lanzada para el segmento '%s' (ID de tarea: %s)."
 
 #: .\crm\views\segments.py:112
 msgid "Please provide a valid subject and message."
-msgstr ""
+msgstr "Proporcione un asunto y mensaje válidos."
 
 #: .\crm\views\sequences.py:53
 #, python-format
 msgid "Sequence '%s' created successfully."
-msgstr ""
+msgstr "La secuencia '%s' se creó correctamente."
 
 #: .\crm\views\sequences.py:67
 #, python-format
 msgid "Sequence '%s' updated successfully."
-msgstr ""
+msgstr "La secuencia '%s' se actualizó correctamente."
 
 #: .\crm\views\sequences.py:83
 #, python-format
 msgid "Sequence '%s' deleted successfully."
-msgstr ""
+msgstr "La secuencia '%s' se eliminó correctamente."
 
 #: .\crm\views\sequences.py:96
 #, python-format
 msgid "Email step added to '%s'."
-msgstr ""
+msgstr "Paso de correo electrónico agregado a '%s'."
 
 #: .\crm\views\sequences.py:114
 msgid "Email step updated."
-msgstr ""
+msgstr "Paso de correo electrónico actualizado."
 
 #: .\crm\views\sequences.py:131
 msgid "Email step deleted."
-msgstr ""
+msgstr "Paso de correo electrónico eliminado."
 
 #: .\crm\views\sequences.py:150
 #, python-format
 msgid "Email sequence dispatch task launched (Task ID: %s)."
 msgstr ""
+"Se lanzó la tarea de envío de secuencia de correo electrónico (ID de tarea: "
+"%s)."
 
 #: .\enterprise_website\settings\base.py:123
 msgid "English"
@@ -1856,303 +1907,295 @@ msgstr "Productos"
 #: .\erp\admin.py:60 .\erp\templates\erp\inventory_dashboard.html:153
 #: .\erp\templates\erp\product_list.html:56
 msgid "Out of Stock"
-msgstr ""
+msgstr "Agotado"
 
 #: .\erp\admin.py:62
 msgid "Low Stock"
-msgstr ""
+msgstr "Existencias bajas"
 
 #: .\erp\admin.py:63
 msgid "In Stock"
-msgstr ""
+msgstr "En stock"
 
 #: .\erp\admin.py:64
-#, fuzzy
-#| msgid "Poll status"
 msgid "Stock Status"
-msgstr "Estado de la Encuesta"
+msgstr "Estado del stock"
 
 #: .\erp\apps.py:8
 msgid "ERP & Inventory"
-msgstr ""
+msgstr "ERP e inventario"
 
 #: .\erp\forms.py:83
 msgid "Quantity must be a non-zero integer."
-msgstr ""
+msgstr "La cantidad debe ser un número entero distinto de cero."
 
 #: .\erp\models.py:13
-#, fuzzy
-#| msgid "Contact Name"
 msgid "Category Name"
-msgstr "Nombre del Contacto"
+msgstr "Nombre de categoría"
 
 #: .\erp\models.py:20 .\erp\models.py:64
 #: .\erp\templates\erp\inventory_dashboard.html:131
 #: .\erp\templates\erp\product_detail.html:34
 #: .\erp\templates\erp\product_list.html:29
 msgid "Category"
-msgstr ""
+msgstr "categoría"
 
 #: .\erp\models.py:21
 msgid "Categories"
-msgstr ""
+msgstr "Categorías"
 
 #: .\erp\models.py:36
-#, fuzzy
-#| msgid "Contact Name"
 msgid "Location Name"
-msgstr "Nombre del Contacto"
+msgstr "Nombre de la ubicación"
 
 #: .\erp\models.py:37
 msgid "Location Code"
-msgstr ""
+msgstr "Código de ubicación"
 
 #: .\erp\models.py:38
 msgid "Address / Bin Location"
-msgstr ""
+msgstr "Dirección / Ubicación del contenedor"
 
-#: .\erp\models.py:39 .\erp\models.py:82 .\intelligent_tracker_hub\models.py:90
-#: .\video_gallery\models.py:41 .\video_gallery\models.py:132
+#: .\erp\models.py:39 .\erp\models.py:82
+#: .\intelligent_tracker_hub\models.py:90 .\video_gallery\models.py:41
+#: .\video_gallery\models.py:132
 msgid "Is Active"
-msgstr ""
+msgstr "esta activo"
 
 #: .\erp\models.py:44
 msgid "Inventory Location"
-msgstr ""
+msgstr "Ubicación del inventario"
 
 #: .\erp\models.py:45
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Ubicaciones de inventario"
 
 #: .\erp\models.py:55
 msgid "SKU / Item Code"
-msgstr ""
+msgstr "SKU / Código de artículo"
 
 #: .\erp\models.py:56 .\erp\templates\erp\inventory_dashboard.html:130
-#, fuzzy
-#| msgid "Products"
 msgid "Product Name"
-msgstr "Productos"
+msgstr "Nombre del producto"
 
 #: .\erp\models.py:67 .\erp\templates\erp\product_detail.html:38
 msgid "Unit of Measure"
-msgstr ""
+msgstr "Unidad de medida"
 
 #: .\erp\models.py:72
 msgid "Selling Unit Price"
-msgstr ""
+msgstr "Precio unitario de venta"
 
 #: .\erp\models.py:78 .\erp\templates\erp\product_detail.html:46
 #: .\erp\templates\erp\product_list.html:31
 msgid "Cost Price"
-msgstr ""
+msgstr "Precio de costo"
 
 #: .\erp\models.py:80 .\erp\templates\erp\dashboard.html:384
 msgid "Current Stock"
-msgstr ""
+msgstr "Existencias actuales"
 
 #: .\erp\models.py:81 .\erp\templates\erp\dashboard.html:390
 #: .\erp\templates\erp\product_detail.html:72
 msgid "Reorder Threshold"
-msgstr ""
+msgstr "Umbral de reordenamiento"
 
 #: .\erp\models.py:87 .\erp\models.py:136 .\erp\models.py:309
 #: .\erp\templates\erp\dashboard.html:149
 #: .\erp\templates\erp\movement_list.html:35
-#, fuzzy
-#| msgid "Products"
 msgid "Product"
-msgstr "Productos"
+msgstr "Producto"
 
 #: .\erp\models.py:123
 msgid "Stock In / Received"
-msgstr ""
+msgstr "Stock ingresado/recibido"
 
 #: .\erp\models.py:124
 msgid "Stock Out / Sold"
-msgstr ""
+msgstr "Stock agotado/vendido"
 
 #: .\erp\models.py:125
 msgid "Adjustment / Audit"
-msgstr ""
+msgstr "Ajuste / Auditoría"
 
 #: .\erp\models.py:126
 msgid "Customer Return"
-msgstr ""
+msgstr "Devolución del cliente"
 
 #: .\erp\models.py:150
 msgid "Movement Type"
-msgstr ""
+msgstr "Tipo de movimiento"
 
 #: .\erp\models.py:152 .\erp\models.py:316
 #: .\erp\templates\erp\invoice_form.html:75
 #: .\erp\templates\erp\movement_list.html:36
 #: .\erp\templates\erp\product_detail.html:134
 msgid "Quantity"
-msgstr ""
+msgstr "Cantidad"
 
 #: .\erp\models.py:153
 msgid "Reference / Document #"
-msgstr ""
+msgstr "Referencia / Documento #"
 
 #: .\erp\models.py:160 .\erp\models.py:255 .\task_runner\models.py:80
 #: .\task_runner\templates\task_runner\job_detail.html:53
 #: .\task_runner\templates\task_runner\job_list.html:123
 msgid "Created By"
-msgstr ""
+msgstr "Creado por"
 
 #: .\erp\models.py:165
 msgid "Stock Movement"
-msgstr ""
+msgstr "Movimiento de acciones"
 
 #: .\erp\models.py:166
 msgid "Stock Movements"
-msgstr ""
+msgstr "Movimientos bursátiles"
 
 #: .\erp\models.py:192 .\erp\templates\erp\invoice_detail.html:19
 #: .\erp\templates\erp\invoice_list.html:65
 msgid "Draft"
-msgstr ""
+msgstr "Borrador"
 
 #: .\erp\models.py:193
 msgid "Sent / Issued"
-msgstr ""
+msgstr "Enviado / Emitido"
 
 #: .\erp\models.py:194 .\erp\templates\erp\dashboard.html:226
 #: .\erp\templates\erp\invoice_detail.html:13
 #: .\erp\templates\erp\invoice_list.html:59
 msgid "Paid"
-msgstr ""
+msgstr "Pagado"
 
 #: .\erp\models.py:195 .\erp\templates\erp\dashboard.html:230
 #: .\erp\templates\erp\invoice_detail.html:17
 #: .\erp\templates\erp\invoice_list.html:63
 msgid "Overdue"
-msgstr ""
+msgstr "Vencido"
 
 #: .\erp\models.py:206
 msgid "Invoice Number"
-msgstr ""
+msgstr "Número de factura"
 
 #: .\erp\models.py:208
 msgid "Customer / Client Name"
-msgstr ""
+msgstr "Cliente / Nombre del cliente"
 
 #: .\erp\models.py:209
 msgid "Customer Email"
-msgstr ""
+msgstr "Correo electrónico del cliente"
 
 #: .\erp\models.py:210
-#, fuzzy
-#| msgid "Email Address"
 msgid "Customer Address"
-msgstr "Dirección de correo electrónico"
+msgstr "Dirección del cliente"
 
 #: .\erp\models.py:211 .\erp\templates\erp\invoice_list.html:35
 msgid "Issue Date"
-msgstr ""
+msgstr "Fecha de emisión"
 
 #: .\erp\models.py:212 .\erp\templates\erp\invoice_list.html:36
 msgid "Due Date"
-msgstr ""
+msgstr "Fecha de vencimiento"
 
 #: .\erp\models.py:223 .\erp\templates\erp\invoice_detail.html:98
 msgid "Subtotal"
-msgstr ""
+msgstr "Subtotal"
 
 #: .\erp\models.py:229
 msgid "Tax Rate (%)"
-msgstr ""
+msgstr "Tasa impositiva (%)"
 
 #: .\erp\models.py:235
 msgid "Tax Amount"
-msgstr ""
+msgstr "Monto del impuesto"
 
 #: .\erp\models.py:241
 msgid "Discount Amount"
-msgstr ""
+msgstr "Cantidad de descuento"
 
 #: .\erp\models.py:247 .\erp\templates\erp\invoice_detail.html:114
 #: .\erp\templates\erp\invoice_list.html:37
-#, fuzzy
-#| msgid "Total Contacts"
 msgid "Total Amount"
-msgstr "Total de Contactos"
+msgstr "Monto Total"
 
 #: .\erp\models.py:249
 msgid "Terms / Notes"
-msgstr ""
+msgstr "Términos / Notas"
 
 #: .\erp\models.py:261 .\erp\models.py:301
 msgid "Invoice"
-msgstr ""
+msgstr "factura"
 
 #: .\erp\models.py:262 .\erp\templates\erp\base_erp.html:47
-#, fuzzy
-#| msgid "Services"
 msgid "Invoices"
-msgstr "Servicios"
+msgstr "Facturas"
 
 #: .\erp\models.py:311
 msgid "Item Description"
-msgstr ""
+msgstr "Descripción del artículo"
 
 #: .\erp\models.py:322 .\erp\templates\erp\inventory_dashboard.html:134
 #: .\erp\templates\erp\invoice_detail.html:63
 #: .\erp\templates\erp\product_detail.html:42
 msgid "Unit Price"
-msgstr ""
+msgstr "Precio unitario"
 
 #: .\erp\models.py:328 .\erp\templates\erp\invoice_detail.html:64
 msgid "Line Total"
-msgstr ""
+msgstr "Total de línea"
 
 #: .\erp\models.py:332
 msgid "Invoice Item"
-msgstr ""
+msgstr "Artículo de factura"
 
 #: .\erp\models.py:333 .\erp\templates\erp\invoice_detail.html:56
 msgid "Invoice Items"
-msgstr ""
+msgstr "Artículos de factura"
 
 #: .\erp\plugin.py:9
 msgid "Enterprise Resource Planning (ERP)"
-msgstr ""
+msgstr "Planificación de recursos empresariales (ERP)"
 
 #: .\erp\plugin.py:11
 msgid ""
 "Lightweight ERP core with product catalog, inventory tracking, invoice PDF "
 "generation, and executive financial metrics."
 msgstr ""
+"Núcleo ERP liviano con catálogo de productos, seguimiento de inventario, "
+"generación de facturas en PDF y métricas financieras ejecutivas."
 
 #: .\erp\plugin.py:22 .\templates\base.html:124
 #: .\templates\themes\bootstrap5\partials\header.html:67
 msgid "ERP"
-msgstr ""
+msgstr "ERP"
 
 #: .\erp\plugin.py:41
 msgid "ERP: Procurement & Suppliers"
-msgstr ""
+msgstr "ERP: Adquisiciones y Proveedores"
 
 #: .\erp\plugin.py:43
 msgid ""
 "Supplier relationship management, purchase orders (PO), vendor pricing "
 "agreements, and incoming shipment inspection and receiving."
 msgstr ""
+"Gestión de relaciones con proveedores, órdenes de compra (PO), acuerdos de "
+"precios con proveedores e inspección y recepción de envíos entrantes."
 
 #: .\erp\plugin.py:56
 msgid "ERP: Advanced Warehousing"
-msgstr ""
+msgstr "ERP: Almacenamiento avanzado"
 
 #: .\erp\plugin.py:58
 msgid ""
 "Multi-facility warehouse topology, bin and aisle mapping, inter-warehouse "
 "stock transfer workflows, and batch/lot/serial number tracing."
 msgstr ""
+"Topología de almacén de múltiples instalaciones, mapeo de contenedores y "
+"pasillos, flujos de trabajo de transferencia de stock entre almacenes y "
+"seguimiento de lotes/números de serie."
 
 #: .\erp\plugin.py:71
 msgid "ERP: General Ledger & Accounting"
-msgstr ""
+msgstr "ERP: Libro mayor y contabilidad"
 
 #: .\erp\plugin.py:73
 msgid ""
@@ -2160,220 +2203,219 @@ msgid ""
 "payable/receivable, trial balance, and automated P&L / balance sheet "
 "generation."
 msgstr ""
+"Motor de contabilidad de doble entrada, plan de cuentas personalizable, "
+"cuentas por pagar/por cobrar, balance de comprobación y generación "
+"automatizada de pérdidas y ganancias/balance."
 
 #: .\erp\templates\erp\base_erp.html:16
-#, fuzzy
-#| msgid "Enterprise CRM"
 msgid "Enterprise ERP"
-msgstr "CRM Empresarial"
+msgstr "ERP empresarial"
 
 #: .\erp\templates\erp\base_erp.html:17
 msgid "Core Engine"
-msgstr ""
+msgstr "Motor central"
 
 #: .\erp\templates\erp\base_erp.html:19
 msgid "Product Catalog, Inventory Valuation, Invoicing & Modular Extensions"
 msgstr ""
+"Catálogo de productos, valoración de inventarios, facturación y extensiones "
+"modulares"
 
 #: .\erp\templates\erp\base_erp.html:32
 msgid "Inventory"
-msgstr ""
+msgstr "inventario"
 
 #: .\erp\templates\erp\base_erp.html:42
 msgid "Movements"
-msgstr ""
+msgstr "Movimientos"
 
 #: .\erp\templates\erp\base_erp.html:52
 msgid "Sub-Modules"
-msgstr ""
+msgstr "Submódulos"
 
 #: .\erp\templates\erp\base_erp.html:61
 #: .\erp\templates\erp\inventory_dashboard.html:167
 #: .\erp\templates\erp\movement_list.html:23
 msgid "Record Movement"
-msgstr ""
+msgstr "Movimiento récord"
 
 #: .\erp\templates\erp\base_erp.html:64
 #: .\erp\templates\erp\invoice_list.html:23
 msgid "New Invoice"
-msgstr ""
+msgstr "Nueva factura"
 
 #: .\erp\templates\erp\confirm_delete.html:14
 msgid "Are you sure you want to permanently delete"
-msgstr ""
+msgstr "¿Estás seguro de que deseas eliminar permanentemente?"
 
 #: .\erp\templates\erp\confirm_delete.html:15
 msgid "This action cannot be undone."
-msgstr ""
+msgstr "Esta acción no se puede deshacer."
 
 #: .\erp\templates\erp\confirm_delete.html:22
 msgid "Yes, Delete"
-msgstr ""
+msgstr "Sí, eliminar"
 
 #: .\erp\templates\erp\dashboard.html:11
-#, fuzzy
-#| msgid "Products"
 msgid "Active Products"
-msgstr "Productos"
+msgstr "Productos activos"
 
 #: .\erp\templates\erp\dashboard.html:15
 msgid "In active catalog"
-msgstr ""
+msgstr "En catálogo activo"
 
 #: .\erp\templates\erp\dashboard.html:24
 #: .\erp\templates\erp\inventory_dashboard.html:135
 #: .\erp\templates\erp\product_detail.html:78
 msgid "Stock Valuation"
-msgstr ""
+msgstr "Valoración de acciones"
 
 #: .\erp\templates\erp\dashboard.html:28
 msgid "Cost basis:"
-msgstr ""
+msgstr "Base de costos:"
 
 #: .\erp\templates\erp\dashboard.html:37
 msgid "Monthly Revenue"
-msgstr ""
+msgstr "Ingresos mensuales"
 
 #: .\erp\templates\erp\dashboard.html:41
 msgid "Lifetime:"
-msgstr ""
+msgstr "Vida útil:"
 
 #: .\erp\templates\erp\dashboard.html:50
 msgid "Outstanding Receivables"
-msgstr ""
+msgstr "Cuentas por cobrar pendientes"
 
 #: .\erp\templates\erp\dashboard.html:54
 msgid "open invoice(s)"
-msgstr ""
+msgstr "factura(s) abierta(s)"
 
 #: .\erp\templates\erp\dashboard.html:63
 #: .\erp\templates\erp\inventory_dashboard.html:47
 msgid "Low-Stock Alerts"
-msgstr ""
+msgstr "Alertas de existencias bajas"
 
 #: .\erp\templates\erp\dashboard.html:71
 msgid "Review flagged items"
-msgstr ""
+msgstr "Revisar elementos marcados"
 
 #: .\erp\templates\erp\dashboard.html:73
 msgid "All stock levels healthy"
-msgstr ""
+msgstr "Todos los niveles de existencias saludables"
 
 #: .\erp\templates\erp\dashboard.html:87
 msgid "Revenue Trend (Last 6 Months)"
-msgstr ""
+msgstr "Tendencia de ingresos (últimos 6 meses)"
 
 #: .\erp\templates\erp\dashboard.html:89
 msgid "Paid Invoices"
-msgstr ""
+msgstr "Facturas pagadas"
 
 #: .\erp\templates\erp\dashboard.html:103
 msgid "Top Products by Value"
-msgstr ""
+msgstr "Productos principales por valor"
 
 #: .\erp\templates\erp\dashboard.html:120
 msgid "Inventory Stock Levels vs Reorder Thresholds"
-msgstr ""
+msgstr "Niveles de existencias de inventario frente a umbrales de reorden"
 
 #: .\erp\templates\erp\dashboard.html:122
 msgid "Full Inventory Grid"
-msgstr ""
+msgstr "Cuadrícula de inventario completa"
 
 #: .\erp\templates\erp\dashboard.html:139
 msgid "Recent Stock Movements"
-msgstr ""
+msgstr "Movimientos bursátiles recientes"
 
 #: .\erp\templates\erp\dashboard.html:150
 #: .\erp\templates\erp\invoice_detail.html:62
 msgid "Qty"
-msgstr ""
+msgstr "Cantidad"
 
 #: .\erp\templates\erp\dashboard.html:152
 #: .\erp\templates\erp\product_detail.html:132
 msgid "Date"
-msgstr ""
+msgstr "Fecha"
 
 #: .\erp\templates\erp\dashboard.html:160
 #: .\erp\templates\erp\movement_list.html:49
 #: .\erp\templates\erp\product_detail.html:146
 msgid "Stock In"
-msgstr ""
+msgstr "Stock en"
 
 #: .\erp\templates\erp\dashboard.html:162
 #: .\erp\templates\erp\movement_list.html:51
 #: .\erp\templates\erp\product_detail.html:148
 msgid "Stock Out"
-msgstr ""
+msgstr "Stock agotado"
 
 #: .\erp\templates\erp\dashboard.html:164
 #: .\erp\templates\erp\movement_list.html:53
 #: .\erp\templates\erp\product_detail.html:150
 msgid "Return"
-msgstr ""
+msgstr "Regresar"
 
 #: .\erp\templates\erp\dashboard.html:166
 #: .\erp\templates\erp\movement_list.html:55
 #: .\erp\templates\erp\product_detail.html:152
 msgid "Adjustment"
-msgstr ""
+msgstr "Ajuste"
 
 #: .\erp\templates\erp\dashboard.html:181
 #: .\erp\templates\erp\movement_list.html:76
 msgid "No stock movements recorded yet."
-msgstr ""
+msgstr "Aún no se han registrado movimientos bursátiles."
 
 #: .\erp\templates\erp\dashboard.html:195
-#, fuzzy
-#| msgid "Recent Deals"
 msgid "Recent Invoices"
-msgstr "Tratos Recientes"
+msgstr "Facturas recientes"
 
 #: .\erp\templates\erp\dashboard.html:204
 #: .\erp\templates\erp\invoice_list.html:33
 msgid "Invoice #"
-msgstr ""
+msgstr "Factura #"
 
 #: .\erp\templates\erp\dashboard.html:205
 #: .\erp\templates\erp\invoice_list.html:34
 msgid "Customer"
-msgstr ""
+msgstr "Cliente"
 
 #: .\erp\templates\erp\dashboard.html:206
 msgid "Amount"
-msgstr ""
+msgstr "Cantidad"
 
 #: .\erp\templates\erp\dashboard.html:208
 #: .\erp\templates\erp\invoice_list.html:73
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: .\erp\templates\erp\dashboard.html:236
 msgid "Download PDF"
-msgstr ""
+msgstr "Descargar PDF"
 
 #: .\erp\templates\erp\dashboard.html:243
 msgid "No invoices generated yet."
-msgstr ""
+msgstr "Aún no se han generado facturas."
 
 #: .\erp\templates\erp\dashboard.html:260
-#, fuzzy
-#| msgid "Modular Architecture"
 msgid "Modular Sub-Modules Architecture"
-msgstr "Arquitectura Modular"
+msgstr "Arquitectura de submódulos modulares"
 
 #: .\erp\templates\erp\dashboard.html:261
 msgid "Coming Soon / Pluggable"
-msgstr ""
+msgstr "Próximamente / Conectable"
 
 #: .\erp\templates\erp\dashboard.html:264
 msgid ""
 "The ERP Core is designed with pluggable extension boundaries registered "
 "directly inside the Enterprise Plugin Registry."
 msgstr ""
+"El ERP Core está diseñado con límites de extensión conectables registrados "
+"directamente dentro del Registro de complementos empresariales."
 
 #: .\erp\templates\erp\dashboard.html:268
 msgid "View Sub-Module Specs"
-msgstr ""
+msgstr "Ver especificaciones del submódulo"
 
 #: .\erp\templates\erp\dashboard.html:285
 #: .\erp\templates\erp\modules_overview.html:53
@@ -2383,31 +2425,31 @@ msgstr ""
 #: .\erp\templates\erp\modules_overview.html:119
 #: .\erp\templates\erp\modules_overview.html:147
 msgid "Coming Soon"
-msgstr ""
+msgstr "Próximamente"
 
 #: .\erp\templates\erp\dashboard.html:294
 msgid "Planned Features:"
-msgstr ""
+msgstr "Características planificadas:"
 
 #: .\erp\templates\erp\dashboard.html:324
 msgid "Revenue ($)"
-msgstr ""
+msgstr "Ingresos ($)"
 
 #: .\erp\templates\erp\inventory_dashboard.html:11
 msgid "Catalog SKUs"
-msgstr ""
+msgstr "SKU del catálogo"
 
 #: .\erp\templates\erp\inventory_dashboard.html:23
 msgid "Inventory Valuation"
-msgstr ""
+msgstr "Valoración de inventario"
 
 #: .\erp\templates\erp\inventory_dashboard.html:35
 msgid "Cost Basis"
-msgstr ""
+msgstr "Base del costo"
 
 #: .\erp\templates\erp\inventory_dashboard.html:65
 msgid "Low Stock Warning Detected"
-msgstr ""
+msgstr "Advertencia de stock bajo detectada"
 
 #: .\erp\templates\erp\inventory_dashboard.html:67
 #, python-format
@@ -2417,209 +2459,210 @@ msgid ""
 "          "
 msgid_plural ""
 "\n"
-"          There are %(count)s products currently at or below their reorder "
-"threshold.\n"
+"          There are %(count)s products currently at or below their reorder threshold.\n"
 "          "
 msgstr[0] ""
+"\n"
+"          Actualmente hay 1 producto en su umbral de reorden o por debajo de él.\n"
+"          "
 msgstr[1] ""
+"\n"
+"          Hay %(count)s productos actualmente en su umbral de pedido o por debajo de él.\n"
+"          "
 
 #: .\erp\templates\erp\inventory_dashboard.html:76
 msgid "Replenish Stock"
-msgstr ""
+msgstr "Reponer existencias"
 
 #: .\erp\templates\erp\inventory_dashboard.html:89
 msgid "Search by product name or SKU..."
-msgstr ""
+msgstr "Buscar por nombre de producto o SKU..."
 
 #: .\erp\templates\erp\inventory_dashboard.html:94
-#, fuzzy
-#| msgid "All Statuses"
 msgid "All Categories"
-msgstr "Todos los Estados"
+msgstr "Todas las categorías"
 
 #: .\erp\templates\erp\inventory_dashboard.html:104
 msgid "Low Stock Only"
-msgstr ""
+msgstr "Sólo existencias bajas"
 
 #: .\erp\templates\erp\inventory_dashboard.html:119
 msgid "Inventory Stock Status"
-msgstr ""
+msgstr "Estado del inventario"
 
 #: .\erp\templates\erp\inventory_dashboard.html:121
 #: .\erp\templates\erp\product_list.html:17
-#, fuzzy
-#| msgid "Products"
 msgid "Add Product"
-msgstr "Productos"
+msgstr "Agregar producto"
 
 #: .\erp\templates\erp\inventory_dashboard.html:129
 #: .\erp\templates\erp\product_list.html:27
 msgid "SKU"
-msgstr ""
+msgstr "SKU"
 
 #: .\erp\templates\erp\inventory_dashboard.html:132
 #: .\erp\templates\erp\product_list.html:32
 msgid "On-Hand Stock"
-msgstr ""
+msgstr "Stock disponible"
 
 #: .\erp\templates\erp\inventory_dashboard.html:133
 msgid "Reorder Point"
-msgstr ""
+msgstr "Punto de reorden"
 
 #: .\erp\templates\erp\inventory_dashboard.html:170
 #: .\erp\templates\erp\product_form.html:11
-#, fuzzy
-#| msgid "Products"
 msgid "Edit Product"
-msgstr "Productos"
+msgstr "Editar producto"
 
 #: .\erp\templates\erp\inventory_dashboard.html:180
 msgid "No products match the selected criteria."
-msgstr ""
+msgstr "Ningún producto coincide con los criterios seleccionados."
 
 #: .\erp\templates\erp\invoice_detail.html:25
 msgid "Issued:"
-msgstr ""
+msgstr "Emitido:"
 
 #: .\erp\templates\erp\invoice_detail.html:25
 msgid "Due:"
-msgstr ""
+msgstr "Vencimiento:"
 
 #: .\erp\templates\erp\invoice_detail.html:31
-#, fuzzy
-#| msgid "View all"
 msgid "View PDF"
-msgstr "Ver todo"
+msgstr "Ver PDF"
 
 #: .\erp\templates\erp\invoice_detail.html:34
 msgid "Download"
-msgstr ""
+msgstr "Descargar"
 
 #: .\erp\templates\erp\invoice_detail.html:45
 msgid "Billed To"
-msgstr ""
+msgstr "Facturado a"
 
 #: .\erp\templates\erp\invoice_detail.html:61
 msgid "Description / Product"
-msgstr ""
+msgstr "Descripción / Producto"
 
 #: .\erp\templates\erp\invoice_detail.html:86
 msgid "No line items added."
-msgstr ""
+msgstr "No se agregaron líneas de pedido."
 
 #: .\erp\templates\erp\invoice_detail.html:103
 msgid "Tax"
-msgstr ""
+msgstr "Impuesto"
 
 #: .\erp\templates\erp\invoice_detail.html:109
 msgid "Discount"
-msgstr ""
+msgstr "Descuento"
 
 #: .\erp\templates\erp\invoice_detail.html:123
 msgid "Terms & Notes"
-msgstr ""
+msgstr "Términos y notas"
 
 #: .\erp\templates\erp\invoice_detail.html:137
 msgid "Email Delivery"
-msgstr ""
+msgstr "Entrega de correo electrónico"
 
 #: .\erp\templates\erp\invoice_detail.html:142
 msgid ""
 "Dispatch the PDF invoice directly to the customer email address via "
 "background worker."
 msgstr ""
+"Envíe la factura en PDF directamente a la dirección de correo electrónico "
+"del cliente a través del trabajador en segundo plano."
 
 #: .\erp\templates\erp\invoice_detail.html:145
 msgid "Recipient:"
-msgstr ""
+msgstr "Destinatario:"
 
 #: .\erp\templates\erp\invoice_detail.html:150
 msgid "Send Invoice via Email"
-msgstr ""
+msgstr "Enviar factura por correo electrónico"
 
 #: .\erp\templates\erp\invoice_detail.html:159
-#, fuzzy
-#| msgid "Menu Management"
 msgid "Status Management"
-msgstr "Gestión de Menús"
+msgstr "Gestión de estado"
 
 #: .\erp\templates\erp\invoice_detail.html:162
 msgid "Change collection or accounting status:"
-msgstr ""
+msgstr "Cambiar estado de cobranza o contabilidad:"
 
 #: .\erp\templates\erp\invoice_detail.html:168
 msgid "Mark as Paid"
-msgstr ""
+msgstr "Marcar como pagado"
 
 #: .\erp\templates\erp\invoice_detail.html:176
 msgid "Mark as Sent"
-msgstr ""
+msgstr "Marcar como enviado"
 
 #: .\erp\templates\erp\invoice_detail.html:184
 msgid "Mark as Overdue"
-msgstr ""
+msgstr "Marcar como vencido"
 
 #: .\erp\templates\erp\invoice_detail.html:192
 msgid "Cancel Invoice"
-msgstr ""
+msgstr "Cancelar factura"
 
 #: .\erp\templates\erp\invoice_detail.html:203
 msgid "Delete this invoice"
-msgstr ""
+msgstr "Eliminar esta factura"
 
 #: .\erp\templates\erp\invoice_form.html:11
 msgid "Edit Invoice"
-msgstr ""
+msgstr "Editar factura"
 
 #: .\erp\templates\erp\invoice_form.html:13
 msgid "Create New Invoice"
-msgstr ""
+msgstr "Crear nueva factura"
 
 #: .\erp\templates\erp\invoice_form.html:16
 msgid "Specify customer billing details and itemized products or services"
 msgstr ""
+"Especificar los detalles de facturación del cliente y los productos o "
+"servicios detallados."
 
 #: .\erp\templates\erp\invoice_form.html:27
 msgid "Customer & Billing Info"
-msgstr ""
+msgstr "Información de cliente y facturación"
 
 #: .\erp\templates\erp\invoice_form.html:67
 msgid "Line Items"
-msgstr ""
+msgstr "Artículos de línea"
 
 #: .\erp\templates\erp\invoice_form.html:73
 msgid "Product (Optional)"
-msgstr ""
+msgstr "Producto (Opcional)"
 
 #: .\erp\templates\erp\invoice_form.html:76
 msgid "Unit Price ($)"
-msgstr ""
+msgstr "Precio unitario ($)"
 
 #: .\erp\templates\erp\invoice_form.html:77
 msgid "Delete?"
-msgstr ""
+msgstr "¿Eliminar?"
 
 #: .\erp\templates\erp\invoice_form.html:111
 msgid "Taxes, Discounts & Terms"
-msgstr ""
+msgstr "Impuestos, descuentos y términos"
 
 #: .\erp\templates\erp\invoice_form.html:135
 msgid "Save Invoice"
-msgstr ""
+msgstr "Guardar factura"
 
 #: .\erp\templates\erp\invoice_form.html:135
 msgid "Generate Invoice"
-msgstr ""
+msgstr "Generar factura"
 
 #: .\erp\templates\erp\invoice_list.html:8
 msgid "Commercial Invoices & Billing"
-msgstr ""
+msgstr "Facturas Comerciales y Facturación"
 
 #: .\erp\templates\erp\invoice_list.html:9
 msgid ""
 "Issue customer invoices, track collections, generate PDF copies, and email "
 "directly"
 msgstr ""
+"Emita facturas de clientes, realice un seguimiento de cobros, genere copias "
+"en PDF y envíelas por correo electrónico directamente"
 
 #: .\erp\templates\erp\invoice_list.html:14
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:238
@@ -2629,17 +2672,15 @@ msgstr "Todos los Estados"
 
 #: .\erp\templates\erp\invoice_list.html:19
 msgid "Search customer / invoice #..."
-msgstr ""
+msgstr "Buscar cliente / factura #..."
 
 #: .\erp\templates\erp\invoice_list.html:82
 msgid "No invoices found matching criteria."
-msgstr ""
+msgstr "No se encontraron facturas que coincidan con los criterios."
 
 #: .\erp\templates\erp\modules_overview.html:13
-#, fuzzy
-#| msgid "Modular Architecture"
 msgid "ERP Modular Architecture & Sub-Modules"
-msgstr "Arquitectura Modular"
+msgstr "Arquitectura modular y submódulos de ERP"
 
 #: .\erp\templates\erp\modules_overview.html:15
 msgid ""
@@ -2648,309 +2689,326 @@ msgid ""
 "commercial invoicing, while dedicated domain extensions plug in via the "
 "Enterprise Plugin Registry."
 msgstr ""
+"El sistema Enterprise ERP utiliza una arquitectura inicial micromodular. El "
+"ligero ERP Core proporciona catalogación, valoración de existencias de "
+"inventario y facturación comercial, mientras que las extensiones de dominio "
+"dedicadas se conectan a través del Registro de complementos empresariales."
 
 #: .\erp\templates\erp\modules_overview.html:26
 msgid "Module Topology & Extension Boundaries"
-msgstr ""
+msgstr "Topología del módulo y límites de extensión"
 
 #: .\erp\templates\erp\modules_overview.html:52 .\erp\views\dashboard.py:23
 msgid "Procurement & Purchase Orders"
-msgstr ""
+msgstr "Adquisiciones y Órdenes de Compra"
 
 #: .\erp\templates\erp\modules_overview.html:62
 msgid "Advanced Warehousing & Multi-Location"
-msgstr ""
+msgstr "Almacenamiento avanzado y múltiples ubicaciones"
 
 #: .\erp\templates\erp\modules_overview.html:72
 msgid "General Ledger & Double-Entry"
-msgstr ""
+msgstr "Libro mayor general y partida doble"
 
 #: .\erp\templates\erp\modules_overview.html:89
 msgid "Procurement"
-msgstr ""
+msgstr "Adquisiciones"
 
 #: .\erp\templates\erp\modules_overview.html:95
 msgid ""
 "Expands core ERP to automate external vendor relationship management, "
 "purchase ordering, and dock receiving."
 msgstr ""
+"Amplía el ERP central para automatizar la gestión de relaciones con "
+"proveedores externos, pedidos de compra y recepción en muelle."
 
 #: .\erp\templates\erp\modules_overview.html:97
 #: .\erp\templates\erp\modules_overview.html:125
 #: .\erp\templates\erp\modules_overview.html:153
 msgid "Architecture Stubs & Models:"
-msgstr ""
+msgstr "Talones y modelos de arquitectura:"
 
 #: .\erp\templates\erp\modules_overview.html:105
 #: .\erp\templates\erp\modules_overview.html:133
 #: .\erp\templates\erp\modules_overview.html:161
 msgid "Plugin Class:"
-msgstr ""
+msgstr "Clase de complemento:"
 
 #: .\erp\templates\erp\modules_overview.html:117
 msgid "Warehousing"
-msgstr ""
+msgstr "almacenamiento"
 
 #: .\erp\templates\erp\modules_overview.html:123
 msgid ""
-"Multi-tier warehouse topology with spatial location tracking down to aisles, "
-"racks, and bin locations."
+"Multi-tier warehouse topology with spatial location tracking down to aisles,"
+" racks, and bin locations."
 msgstr ""
+"Topología de almacén de varios niveles con ubicación espacial que llega "
+"hasta pasillos, estantes y ubicaciones de contenedores."
 
 #: .\erp\templates\erp\modules_overview.html:145
 msgid "Accounting"
-msgstr ""
+msgstr "contabilidad"
 
 #: .\erp\templates\erp\modules_overview.html:151
 msgid ""
 "Full double-entry bookkeeping ledger integrating invoice payments, accounts "
 "payable, and financial audits."
 msgstr ""
+"Libro mayor de contabilidad completo por partida doble que integra pagos de "
+"facturas, cuentas por pagar y auditorías financieras."
 
 #: .\erp\templates\erp\movement_form.html:10
 msgid "Record Stock Movement"
-msgstr ""
+msgstr "Movimiento récord de acciones"
 
 #: .\erp\templates\erp\movement_form.html:12
 msgid ""
 "Log incoming inventory, sales dispatches, customer returns, or physical "
 "counts"
 msgstr ""
+"Registre el inventario entrante, despachos de ventas, devoluciones de "
+"clientes o recuentos físicos"
 
 #: .\erp\templates\erp\movement_form.html:65
 msgid "Confirm Movement"
-msgstr ""
+msgstr "Confirmar movimiento"
 
 #: .\erp\templates\erp\movement_list.html:8
 msgid "Stock Movement Journal"
-msgstr ""
+msgstr "Diario de movimiento de acciones"
 
 #: .\erp\templates\erp\movement_list.html:9
 msgid ""
 "Complete audit trail of stock receipts, customer sales, adjustments, and "
 "returns"
 msgstr ""
+"Registro de auditoría completo de recibos de existencias, ventas de "
+"clientes, ajustes y devoluciones"
 
 #: .\erp\templates\erp\movement_list.html:14
 msgid "All Types"
-msgstr ""
+msgstr "Todos los tipos"
 
 #: .\erp\templates\erp\movement_list.html:19
 msgid "Search product / ref..."
-msgstr ""
+msgstr "Buscar producto / ref..."
 
 #: .\erp\templates\erp\movement_list.html:38
 #: .\erp\templates\erp\product_detail.html:136
 msgid "Reference"
-msgstr ""
+msgstr "Referencia"
 
 #: .\erp\templates\erp\movement_list.html:40
 #: .\erp\templates\erp\product_detail.html:137
 msgid "Recorded By"
-msgstr ""
+msgstr "Grabado por"
 
 #: .\erp\templates\erp\product_detail.html:16
 msgid "Move Stock"
-msgstr ""
+msgstr "Mover acciones"
 
 #: .\erp\templates\erp\product_detail.html:54
 msgid "Stock Status & Health"
-msgstr ""
+msgstr "Estado y salud del stock"
 
 #: .\erp\templates\erp\product_detail.html:58
 msgid "Current On-Hand"
-msgstr ""
+msgstr "Actualmente disponible"
 
 #: .\erp\templates\erp\product_detail.html:91
 msgid "Financial Metrics"
-msgstr ""
+msgstr "Métricas financieras"
 
 #: .\erp\templates\erp\product_detail.html:96
 msgid "Unit Margin"
-msgstr ""
+msgstr "Margen unitario"
 
 #: .\erp\templates\erp\product_detail.html:100
 msgid "Total Inventory Cost"
-msgstr ""
+msgstr "Costo total del inventario"
 
 #: .\erp\templates\erp\product_detail.html:104
 msgid "Catalog Created"
-msgstr ""
+msgstr "Catálogo creado"
 
 #: .\erp\templates\erp\product_detail.html:108
 #: .\intelligent_tracker_hub\models.py:99
 #: .\intelligent_tracker_hub\models.py:219
 msgid "Last Updated"
-msgstr ""
+msgstr "Última actualización"
 
 #: .\erp\templates\erp\product_detail.html:121
 msgid "Stock Movement History"
-msgstr ""
+msgstr "Historia del movimiento de acciones"
 
 #: .\erp\templates\erp\product_detail.html:124
-#, fuzzy
-#| msgid "Add Contact"
 msgid "Add Movement"
-msgstr "Agregar Contacto"
+msgstr "Agregar movimiento"
 
 #: .\erp\templates\erp\product_detail.html:163
 msgid "No stock movements recorded for this product yet."
-msgstr ""
+msgstr "Aún no se han registrado movimientos de stock para este producto."
 
 #: .\erp\templates\erp\product_form.html:13
-#, fuzzy
-#| msgid "Products"
 msgid "Add New Product"
-msgstr "Productos"
+msgstr "Agregar nuevo producto"
 
 #: .\erp\templates\erp\product_form.html:16
 msgid "Define catalog SKU, units, pricing, and initial stock limits"
-msgstr ""
+msgstr "Definir catálogo SKU, unidades, precios y límites de stock inicial."
 
 #: .\erp\templates\erp\product_form.html:97
 msgid "Save Changes"
-msgstr ""
+msgstr "Guardar cambios"
 
 #: .\erp\templates\erp\product_form.html:97
-#, fuzzy
-#| msgid "Products"
 msgid "Create Product"
-msgstr "Productos"
+msgstr "Crear producto"
 
 #: .\erp\templates\erp\product_list.html:8
-#, fuzzy
-#| msgid "Products"
 msgid "Product Catalog"
-msgstr "Productos"
+msgstr "Catálogo de productos"
 
 #: .\erp\templates\erp\product_list.html:9
 msgid "Manage product specifications, pricing tiers, and stock definitions"
 msgstr ""
+"Administre especificaciones de productos, niveles de precios y definiciones "
+"de existencias."
 
 #: .\erp\templates\erp\product_list.html:13
 msgid "Search products..."
-msgstr ""
+msgstr "Buscar productos..."
 
 #: .\erp\templates\erp\product_list.html:30
 msgid "Selling Price"
-msgstr ""
+msgstr "Precio de venta"
 
 #: .\erp\templates\erp\product_list.html:82
 msgid "No products found in the catalog."
-msgstr ""
+msgstr "No se encontraron productos en el catálogo."
 
 #: .\erp\views\dashboard.py:25 .\erp\views\dashboard.py:41
 #: .\erp\views\dashboard.py:57
 msgid "Modular Extension"
-msgstr ""
+msgstr "Ampliación modular"
 
 #: .\erp\views\dashboard.py:28
 msgid ""
 "Supplier relationship management, request for quotes (RFQ), purchase orders "
 "(PO), vendor catalog price lists, and receiving docks."
 msgstr ""
+"Gestión de relaciones con proveedores, solicitud de cotizaciones (RFQ), "
+"órdenes de compra (PO), listas de precios de catálogo de proveedores y "
+"muelles de recepción."
 
 #: .\erp\views\dashboard.py:32
 msgid "Vendor management & evaluation"
-msgstr ""
+msgstr "Gestión y evaluación de proveedores"
 
 #: .\erp\views\dashboard.py:33
 msgid "Purchase order generation & approvals"
-msgstr ""
+msgstr "Generación y aprobaciones de órdenes de compra."
 
 #: .\erp\views\dashboard.py:34
 msgid "Shipment receiving & automatic stock intake"
-msgstr ""
+msgstr "Recepción de envíos y entrada automática de stock."
 
 #: .\erp\views\dashboard.py:39
 msgid "Advanced Multi-Location Warehouse"
-msgstr ""
+msgstr "Almacén avanzado con múltiples ubicaciones"
 
 #: .\erp\views\dashboard.py:44
 msgid ""
 "Multi-warehouse spatial topology, bin/aisle/shelf tracking, inter-warehouse "
 "transfer orders, and lot/serial number traceability."
 msgstr ""
+"Topología espacial de múltiples almacenes, seguimiento de "
+"contenedores/pasillos/estanterías, órdenes de transferencia entre almacenes "
+"y trazabilidad de números de lote/serie."
 
 #: .\erp\views\dashboard.py:48
 msgid "Multi-warehouse & bin locations"
-msgstr ""
+msgstr "Ubicaciones de múltiples almacenes y contenedores"
 
 #: .\erp\views\dashboard.py:49
 msgid "Inter-location stock transfer requisitions"
-msgstr ""
+msgstr "Solicitudes de transferencia de existencias entre ubicaciones"
 
 #: .\erp\views\dashboard.py:50
 msgid "Lot & serial tracking for traceability"
-msgstr ""
+msgstr "Seguimiento de lotes y series para trazabilidad"
 
 #: .\erp\views\dashboard.py:55
 msgid "General Ledger & Full Accounting"
-msgstr ""
+msgstr "Libro mayor general y contabilidad completa"
 
 #: .\erp\views\dashboard.py:60
 msgid ""
 "Complete double-entry bookkeeping engine with custom chart of accounts, "
 "journal entries, accounts payable/receivable, trial balance, and P&L."
 msgstr ""
+"Completo motor de contabilidad de partida doble con plan de cuentas "
+"personalizado, asientos de diario, cuentas por pagar/por cobrar, balance de "
+"comprobación y pérdidas y ganancias."
 
 #: .\erp\views\dashboard.py:64
 msgid "Double-entry journal ledger"
-msgstr ""
+msgstr "Libro mayor de diario de doble entrada"
 
 #: .\erp\views\dashboard.py:65
 msgid "Automated Balance Sheet & Income Statement"
-msgstr ""
+msgstr "Balance y estado de resultados automatizados"
 
 #: .\erp\views\dashboard.py:66
 msgid "Accounts payable & receivable reconciliation"
-msgstr ""
+msgstr "Conciliación de cuentas por pagar y por cobrar"
 
 #: .\erp\views\inventory.py:56
 #, python-format
 msgid "Stock movement recorded: %(type)s %(qty)s for %(product)s."
-msgstr ""
+msgstr "Movimiento de stock registrado: %(type)s %(qty)s para %(product)s."
 
 #: .\erp\views\invoices.py:78
 #, python-format
 msgid "Invoice %(number)s created successfully."
-msgstr ""
+msgstr "Factura %(number)s creada correctamente."
 
 #: .\erp\views\invoices.py:103
 #, python-format
 msgid "Invoice %(number)s updated successfully."
-msgstr ""
+msgstr "Factura %(number)s actualizada correctamente."
 
 #: .\erp\views\invoices.py:115
 msgid "Invoice deleted successfully."
-msgstr ""
+msgstr "Factura eliminada exitosamente."
 
 #: .\erp\views\invoices.py:129
 #, python-format
 msgid "Invoice %(number)s marked as %(status)s."
-msgstr ""
+msgstr "Factura %(number)s marcada como %(status)s."
 
 #: .\erp\views\invoices.py:165
 #, python-format
 msgid "Invoice PDF email dispatched to %(email)s."
-msgstr ""
+msgstr "Correo electrónico en PDF de la factura enviado a %(email)s."
 
 #: .\erp\views\invoices.py:169
 #, python-format
 msgid "Error delivering invoice email: %(err)s"
-msgstr ""
+msgstr "Error al entregar el correo electrónico de la factura: %(err)s"
 
 #: .\erp\views\products.py:63
 msgid "Product created successfully."
-msgstr ""
+msgstr "Producto creado exitosamente."
 
 #: .\erp\views\products.py:76
 msgid "Product updated successfully."
-msgstr ""
+msgstr "Producto actualizado exitosamente."
 
 #: .\erp\views\products.py:89
 msgid "Product deleted successfully."
-msgstr ""
+msgstr "Producto eliminado exitosamente."
 
 #: .\home\admin.py:4
 msgid "Page Administration"
@@ -3036,8 +3094,8 @@ msgid ""
 "data access through Django REST Framework."
 msgstr ""
 "Esta plataforma une aplicaciones web modulares en una interfaz empresarial "
-"unificada: incluye gestión dinámica de tareas (Todo), encuestas interactivas "
-"de decisión (Polls), ejecución de Python basada en navegador (Brython) y "
+"unificada: incluye gestión dinámica de tareas (Todo), encuestas interactivas"
+" de decisión (Polls), ejecución de Python basada en navegador (Brython) y "
 "acceso a datos programáticos a través de Django REST Framework."
 
 #: .\home\templates\home\about.html:38 .\home\templates\home\index.html:28
@@ -3083,8 +3141,8 @@ msgid ""
 "Clean app separation with dedicated models, views, and APIs ready for "
 "internationalization and multi-cloud deployment."
 msgstr ""
-"Separación limpia de aplicaciones con modelos dedicados, vistas y API listas "
-"para la internacionalización y la implementación en múltiples nubes."
+"Separación limpia de aplicaciones con modelos dedicados, vistas y API listas"
+" para la internacionalización y la implementación en múltiples nubes."
 
 #: .\home\templates\home\contact.html:5
 msgid "Contact Us - Enterprise Website"
@@ -3243,1176 +3301,1197 @@ msgstr "Gran Soporte"
 
 #: .\home\templates\home\index.html:213
 msgid "Technical Skills"
-msgstr ""
+msgstr "Habilidades técnicas"
 
 #: .\home\templates\home\index.html:224
 msgid "Highly Recomended"
-msgstr ""
+msgstr "Altamente recomendado"
 
 #: .\home\templates\home\index.html:235
 msgid "Positive Reviews"
-msgstr ""
+msgstr "Reseñas positivas"
 
 #: .\home\templates\home\index.html:279
 msgid "Latest News from our Blog"
-msgstr ""
+msgstr "Últimas noticias de nuestro Blog"
 
 #: .\home\templates\home\index.html:292 .\home\templates\home\index.html:308
 msgid "Travel"
-msgstr ""
+msgstr "viajar"
 
 #: .\home\templates\home\index.html:293 .\home\templates\home\index.html:309
 msgid "Life Style"
-msgstr ""
+msgstr "Estilo de vida"
 
 #: .\home\templates\home\index.html:295 .\home\templates\home\index.html:311
 msgid "Portable latest Fashion for young women"
-msgstr ""
+msgstr "Última moda portátil para mujeres jóvenes."
 
 #: .\home\templates\home\index.html:332
 msgid "Top Products"
-msgstr ""
+msgstr "Productos principales"
 
 #: .\home\templates\home\index.html:335
 msgid "Our Services"
-msgstr ""
+msgstr "Nuestros Servicios"
 
 #: .\home\templates\home\index.html:336
 msgid "Products Catalog"
-msgstr ""
+msgstr "Catálogo de productos"
 
 #: .\home\templates\home\index.html:337
 msgid "Contact & Support"
-msgstr ""
+msgstr "Contacto y soporte"
 
 #: .\home\templates\home\index.html:343
 msgid "Newsletter"
-msgstr ""
+msgstr "Boletín"
 
 #: .\home\templates\home\index.html:344
 msgid "You can trust us. we only send promo offers, not a single spam."
 msgstr ""
+"Puedes confiar en nosotros. Solo enviamos ofertas promocionales, ni un solo "
+"spam."
 
 #: .\home\templates\home\index.html:350
 msgid "Enter Email"
-msgstr ""
+msgstr "Ingrese el correo electrónico"
 
 #: .\home\templates\home\index.html:358
 msgid "Subscribe"
-msgstr ""
+msgstr "Suscríbete"
 
 #: .\home\templates\home\index.html:368
 msgid "Instragram Feed"
-msgstr ""
+msgstr "Feed de Instagram"
 
 #: .\home\templates\home\products.html:5
 msgid "Products - Enterprise Website"
-msgstr ""
+msgstr "Productos - Sitio web empresarial"
 
 #: .\home\templates\home\products.html:12
 msgid "Featured Products & Systems"
-msgstr ""
+msgstr "Productos y sistemas destacados"
 
 #: .\home\templates\home\products.html:17
 msgid ""
 "Engineered hardware and automation solutions for high-precision environments"
 msgstr ""
+"Soluciones de automatización y hardware de ingeniería para entornos de alta "
+"precisión"
 
 #: .\home\templates\home\products.html:30
 msgid "Featured Robotics & Systems Catalog"
-msgstr ""
+msgstr "Catálogo Destacado de Robótica y Sistemas"
 
 #: .\home\templates\home\products.html:32
 msgid ""
 "High precision, energy-efficient robotic hardware integrated with our web "
 "telemetry endpoints."
 msgstr ""
+"Hardware robótico de alta precisión y eficiencia energética integrado con "
+"nuestros puntos finales de telemetría web."
 
 #: .\home\templates\home\products.html:45
 msgid ""
 "Optical vision sensor with low latency edge telemetry streaming to Django "
 "REST endpoints."
 msgstr ""
+"Sensor de visión óptica con transmisión de telemetría de borde de baja "
+"latencia a puntos finales Django REST."
 
 #: .\home\templates\home\products.html:47
 msgid "Industrial Grade"
-msgstr ""
+msgstr "Grado industrial"
 
 #: .\home\templates\home\products.html:59
 msgid ""
 "Omnidirectional navigation chassis designed for automated warehouse "
 "coordination."
 msgstr ""
+"Chasis de navegación omnidireccional diseñado para la coordinación "
+"automatizada del almacén."
 
 #: .\home\templates\home\products.html:61
 msgid "Automated AGV"
-msgstr ""
+msgstr "AGV automatizado"
 
 #: .\home\templates\home\products.html:73
 msgid ""
 "Modular smart connector hub bridging microcontrollers to cloud WebSocket "
 "channels."
 msgstr ""
+"Concentrador de conector inteligente modular que conecta microcontroladores "
+"con canales WebSocket en la nube."
 
 #: .\home\templates\home\products.html:75
 msgid "IoT Gateway"
-msgstr ""
+msgstr "Puerta de enlace de IoT"
 
 #: .\home\templates\home\products.html:85
 msgid "The Master Controller"
-msgstr ""
+msgstr "El controlador maestro"
 
 #: .\home\templates\home\products.html:87
 msgid ""
 "Dual-core industrial computing unit running embedded Linux with remote "
 "Django API sync."
 msgstr ""
+"Unidad informática industrial de doble núcleo que ejecuta Linux integrado "
+"con sincronización API remota de Django."
 
 #: .\home\templates\home\products.html:89
 msgid "Core Processor"
-msgstr ""
+msgstr "Procesador central"
 
 #: .\home\templates\home\services.html:5
 msgid "Services - Enterprise Website"
-msgstr ""
+msgstr "Servicios - Sitio web empresarial"
 
 #: .\home\templates\home\services.html:12
 msgid "Our Services & Applications"
-msgstr ""
+msgstr "Nuestros servicios y aplicaciones"
 
 #: .\home\templates\home\services.html:17
 msgid "Modular enterprise services integrated into a cohesive web suite"
 msgstr ""
+"Servicios empresariales modulares integrados en una suite web cohesiva"
 
 #: .\home\templates\home\services.html:30
 msgid "Integrated Platform Capabilities"
-msgstr ""
+msgstr "Capacidades de plataforma integradas"
 
 #: .\home\templates\home\services.html:32
 msgid ""
 "High-availability modules designed for modern operations, workflow "
 "automation, and data exchange."
 msgstr ""
+"Módulos de alta disponibilidad diseñados para operaciones modernas, "
+"automatización del flujo de trabajo e intercambio de datos."
 
 #: .\home\templates\home\services.html:44
 msgid "Todo & Task Manager"
-msgstr ""
+msgstr "Administrador de tareas y tareas pendientes"
 
 #: .\home\templates\home\services.html:46
 msgid ""
 "Manage daily operational tasks with persistent timezone-aware tracking, "
 "custom tags, and detailed status auditing."
 msgstr ""
+"Administre las tareas operativas diarias con seguimiento persistente con "
+"reconocimiento de zona horaria, etiquetas personalizadas y auditoría de "
+"estado detallada."
 
 #: .\home\templates\home\services.html:48
 #: .\home\templates\home\services.html:64
 #: .\home\templates\home\services.html:80
 msgid "Open App"
-msgstr ""
+msgstr "Abrir aplicación"
 
 #: .\home\templates\home\services.html:60
 msgid "Polls & Voting Engine"
-msgstr ""
+msgstr "Encuestas y motor de votación"
 
 #: .\home\templates\home\services.html:62
 msgid ""
 "Real-time dynamic opinion gathering with concurrency-safe atomic voting "
 "(Django F-expressions) and visual analytics."
 msgstr ""
+"Recopilación dinámica de opiniones en tiempo real con votación atómica "
+"segura para la concurrencia (expresiones F de Django) y análisis visual."
 
 #: .\home\templates\home\services.html:76
 msgid "Brython Web Programming"
-msgstr ""
+msgstr "Programación web británica"
 
 #: .\home\templates\home\services.html:78
 msgid ""
 "Run Python in the browser without plugins. Experience seamless DOM "
 "manipulation using Python 3 client scripts."
 msgstr ""
+"Ejecute Python en el navegador sin complementos. Experimente una "
+"manipulación DOM perfecta utilizando scripts de cliente Python 3."
 
 #: .\home\templates\home\services.html:92
 msgid "RESTful API Gateway"
-msgstr ""
+msgstr "Puerta de enlace API RESTful"
 
 #: .\home\templates\home\services.html:94
 msgid ""
 "Standards-based REST API powered by Django REST Framework with interactive "
 "schema navigation and token authentication."
 msgstr ""
+"API REST basada en estándares impulsada por Django REST Framework con "
+"navegación de esquema interactiva y autenticación de token."
 
 #: .\home\templates\home\services.html:96
 msgid "Open API"
-msgstr ""
+msgstr "API abierta"
 
 #: .\home\views.py:63
 #, python-format
 msgid "Thank you, %(name)s! Your message has been received."
-msgstr ""
+msgstr "¡Gracias, %(name)s! Su mensaje ha sido recibido."
 
 #: .\home\views.py:65
 msgid "Please fill out all required fields."
-msgstr ""
+msgstr "Por favor complete todos los campos requeridos."
 
 #: .\intelligent_tracker_hub\admin.py:25
 msgid "Event Information"
-msgstr ""
+msgstr "Información del evento"
 
 #: .\intelligent_tracker_hub\admin.py:38
 msgid "Evidence & Telemetry"
-msgstr ""
+msgstr "Evidencia y telemetría"
 
 #: .\intelligent_tracker_hub\admin.py:49
 msgid "Resolution & Incident Handling"
-msgstr ""
+msgstr "Resolución y manejo de incidentes"
 
 #: .\intelligent_tracker_hub\admin.py:60
 msgid "Audit Timestamps"
-msgstr ""
+msgstr "Marcas de tiempo de auditoría"
 
 #: .\intelligent_tracker_hub\admin.py:70
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:25
 msgid "Event ID"
-msgstr ""
+msgstr "ID de evento"
 
 #: .\intelligent_tracker_hub\admin.py:85
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:227
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:271
 msgid "Severity"
-msgstr ""
+msgstr "Gravedad"
 
 #: .\intelligent_tracker_hub\admin.py:94
 msgid "Snapshot"
-msgstr ""
+msgstr "Instantánea"
 
 #: .\intelligent_tracker_hub\admin.py:102
 msgid "No snapshot uploaded."
-msgstr ""
+msgstr "No se ha subido ninguna instantánea."
 
 #: .\intelligent_tracker_hub\admin.py:103
 #: .\intelligent_tracker_hub\admin.py:220
 msgid "Snapshot Preview"
-msgstr ""
+msgstr "Vista previa de instantánea"
 
 #: .\intelligent_tracker_hub\admin.py:110
 msgid "Formatted Metadata"
-msgstr ""
+msgstr "Metadatos formateados"
 
 #: .\intelligent_tracker_hub\admin.py:144
-#, fuzzy
-#| msgid "All Statuses"
 msgid "HMAC Status"
-msgstr "Todos los Estados"
+msgstr "Estado HMAC"
 
 #: .\intelligent_tracker_hub\admin.py:199
 msgid "Access ID"
-msgstr ""
+msgstr "ID de acceso"
 
 #: .\intelligent_tracker_hub\admin.py:204
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:421
 msgid "Unrecognized"
-msgstr ""
+msgstr "no reconocido"
 
 #: .\intelligent_tracker_hub\admin.py:205
-#, fuzzy
-#| msgid "Contact Details"
 msgid "Contact / Entity"
-msgstr "Detalles del Contacto"
+msgstr "Contacto / Entidad"
 
 #: .\intelligent_tracker_hub\admin.py:209
 msgid "GRANTED"
-msgstr ""
+msgstr "CONCEDIDO"
 
 #: .\intelligent_tracker_hub\admin.py:210
 msgid "DENIED"
-msgstr ""
+msgstr "NEGADO"
 
 #: .\intelligent_tracker_hub\admin.py:211
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:389
 msgid "Result"
-msgstr ""
+msgstr "Resultado"
 
 #: .\intelligent_tracker_hub\admin.py:224
 msgid "Telemetry Metadata (JSON)"
-msgstr ""
+msgstr "Metadatos de telemetría (JSON)"
 
 #: .\intelligent_tracker_hub\api\access_control.py:155
 msgid "Banned Entity - Gate Access Denied"
-msgstr ""
+msgstr "Entidad prohibida: acceso denegado a la puerta"
 
 #: .\intelligent_tracker_hub\api\access_control.py:158
 msgid "Visitor Pass Expired or Out of Window"
-msgstr ""
+msgstr "Pase de visitante vencido o fuera de la ventana"
 
 #: .\intelligent_tracker_hub\api\access_control.py:163
 msgid "Unrecognized Entity"
-msgstr ""
+msgstr "Entidad no reconocida"
 
 #: .\intelligent_tracker_hub\apps.py:8
 msgid "Intelligent Tracker Security Hub"
-msgstr ""
+msgstr "Centro de seguridad de seguimiento inteligente"
 
 #: .\intelligent_tracker_hub\models.py:10
 msgid "Intrusion Alert"
-msgstr ""
+msgstr "Alerta de intrusión"
 
 #: .\intelligent_tracker_hub\models.py:11
 msgid "Restricted Entity Alert"
-msgstr ""
+msgstr "Alerta de entidad restringida"
 
 #: .\intelligent_tracker_hub\models.py:12
 msgid "Occupancy Threshold Event"
-msgstr ""
+msgstr "Evento de umbral de ocupación"
 
 #: .\intelligent_tracker_hub\models.py:13
 msgid "Fall Detected Alert"
-msgstr ""
+msgstr "Alerta de caída detectada"
 
 #: .\intelligent_tracker_hub\models.py:14
 msgid "Loitering Alert"
-msgstr ""
+msgstr "Alerta de merodeo"
 
 #: .\intelligent_tracker_hub\models.py:15
 msgid "Line Cross Alert"
-msgstr ""
+msgstr "Alerta de cruce de línea"
 
 #: .\intelligent_tracker_hub\models.py:19
 msgid "Low"
-msgstr ""
+msgstr "Bajo"
 
 #: .\intelligent_tracker_hub\models.py:20
 msgid "Medium"
-msgstr ""
+msgstr "Medio"
 
 #: .\intelligent_tracker_hub\models.py:21
 msgid "High"
-msgstr ""
+msgstr "Alto"
 
 #: .\intelligent_tracker_hub\models.py:22
 msgid "Critical"
-msgstr ""
+msgstr "Crítico"
 
 #: .\intelligent_tracker_hub\models.py:26
 msgid "Online"
-msgstr ""
+msgstr "En línea"
 
 #: .\intelligent_tracker_hub\models.py:27
 msgid "Offline"
-msgstr ""
+msgstr "Sin conexión"
 
 #: .\intelligent_tracker_hub\models.py:28
 msgid "Connecting"
-msgstr ""
+msgstr "Conectando"
 
 #: .\intelligent_tracker_hub\models.py:29
 msgid "Degraded"
-msgstr ""
+msgstr "degradado"
 
 #: .\intelligent_tracker_hub\models.py:42
 #: .\intelligent_tracker_hub\models.py:163
 msgid "Camera Identifier"
-msgstr ""
+msgstr "Identificador de cámara"
 
 #: .\intelligent_tracker_hub\models.py:43
 msgid "Unique identifier (e.g. cam-north-gate-01)"
-msgstr ""
+msgstr "Identificador único (por ejemplo, cam-north-gate-01)"
 
 #: .\intelligent_tracker_hub\models.py:47
-#, fuzzy
-#| msgid "Contact Name"
 msgid "Camera Name"
-msgstr "Nombre del Contacto"
+msgstr "Nombre de la cámara"
 
 #: .\intelligent_tracker_hub\models.py:48
 msgid "Human-readable label (e.g. North Perimeter Fence)"
-msgstr ""
+msgstr "Etiqueta legible por humanos (por ejemplo, valla perimetral norte)"
 
 #: .\intelligent_tracker_hub\models.py:56
 #: .\intelligent_tracker_hub\models.py:158
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:179
 msgid "Site / Facility"
-msgstr ""
+msgstr "Sitio / Instalación"
 
 #: .\intelligent_tracker_hub\models.py:62
 msgid "Edge Stream URL"
-msgstr ""
+msgstr "URL de flujo perimetral"
 
 #: .\intelligent_tracker_hub\models.py:63
 msgid ""
 "Edge MJPEG stream URL (e.g. http://edge-node:8000/live/cam-01/ or mock://)"
 msgstr ""
+"URL de transmisión de Edge MJPEG (por ejemplo, http://edge-"
+"node:8000/live/cam-01/ o simulado://)"
 
 #: .\intelligent_tracker_hub\models.py:70
 #: .\task_runner\templates\task_runner\task_progress_widget.html:13
 msgid "Connection Status"
-msgstr ""
+msgstr "Estado de conexión"
 
 #: .\intelligent_tracker_hub\models.py:76
 msgid "Last Heartbeat"
-msgstr ""
+msgstr "último latido"
 
 #: .\intelligent_tracker_hub\models.py:80
 msgid "Target FPS"
-msgstr ""
+msgstr "FPS objetivo"
 
 #: .\intelligent_tracker_hub\models.py:85
 msgid "Stream Resolution"
-msgstr ""
+msgstr "Resolución de transmisión"
 
 #: .\intelligent_tracker_hub\models.py:95
 msgid "Camera Telemetry Metadata"
-msgstr ""
+msgstr "Metadatos de telemetría de la cámara"
 
 #: .\intelligent_tracker_hub\models.py:96
 msgid "Dropped frames, bitrate, inference model, active trackers"
 msgstr ""
+"Cuadros descartados, tasa de bits, modelo de inferencia, rastreadores "
+"activos"
 
 #: .\intelligent_tracker_hub\models.py:102
-#, fuzzy
-#| msgid "Products"
 msgid "Camera"
-msgstr "Productos"
+msgstr "cámara"
 
 #: .\intelligent_tracker_hub\models.py:103
-#, fuzzy
-#| msgid "Products"
 msgid "Cameras"
-msgstr "Productos"
+msgstr "Cámaras"
 
 #: .\intelligent_tracker_hub\models.py:143
 msgid "Event UUID"
-msgstr ""
+msgstr "UUID del evento"
 
 #: .\intelligent_tracker_hub\models.py:150
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:74
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:218
 msgid "Event Type"
-msgstr ""
+msgstr "Tipo de evento"
 
 #: .\intelligent_tracker_hub\models.py:168
 #: .\intelligent_tracker_hub\models.py:388
 msgid "Event Timestamp"
-msgstr ""
+msgstr "Marca de tiempo del evento"
 
 #: .\intelligent_tracker_hub\models.py:174
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:100
 msgid "Evidence Snapshot"
-msgstr ""
+msgstr "Instantánea de la evidencia"
 
 #: .\intelligent_tracker_hub\models.py:182
 msgid "Video Evidence"
-msgstr ""
+msgstr "Evidencia en vídeo"
 
 #: .\intelligent_tracker_hub\models.py:187
 msgid "Telemetry & Dwell Metadata"
-msgstr ""
+msgstr "Telemetría y metadatos de permanencia"
 
 #: .\intelligent_tracker_hub\models.py:194
 msgid "Severity Level"
-msgstr ""
+msgstr "Nivel de gravedad"
 
 #: .\intelligent_tracker_hub\models.py:199
 msgid "Is Resolved"
-msgstr ""
+msgstr "Se resuelve"
 
 #: .\intelligent_tracker_hub\models.py:207
 msgid "Resolved By"
-msgstr ""
+msgstr "Resuelto por"
 
 #: .\intelligent_tracker_hub\models.py:212
 msgid "Resolved At"
-msgstr ""
+msgstr "Resuelto en"
 
 #: .\intelligent_tracker_hub\models.py:216
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:217
 msgid "Resolution Notes"
-msgstr ""
+msgstr "Notas de resolución"
 
 #: .\intelligent_tracker_hub\models.py:218
 #: .\intelligent_tracker_hub\models.py:402
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:193
 msgid "Ingested At"
-msgstr ""
+msgstr "Ingerido en"
 
 #: .\intelligent_tracker_hub\models.py:222
 msgid "Security Event"
-msgstr ""
+msgstr "Evento de seguridad"
 
 #: .\intelligent_tracker_hub\models.py:223
 msgid "Security Events"
-msgstr ""
+msgstr "Eventos de seguridad"
 
 #: .\intelligent_tracker_hub\models.py:282
 msgid "Received At"
-msgstr ""
+msgstr "Recibido en"
 
 #: .\intelligent_tracker_hub\models.py:283
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:21
 msgid "Client IP"
-msgstr ""
+msgstr "IP del cliente"
 
 #: .\intelligent_tracker_hub\models.py:284
 msgid "Endpoint"
-msgstr ""
+msgstr "Punto final"
 
 #: .\intelligent_tracker_hub\models.py:285
 msgid "HTTP Method"
-msgstr ""
+msgstr "Método HTTP"
 
 #: .\intelligent_tracker_hub\models.py:286
 msgid "X-Tracker-Signature Header"
-msgstr ""
+msgstr "Encabezado de firma X-Tracker"
 
 #: .\intelligent_tracker_hub\models.py:287
 msgid "Signature Valid"
-msgstr ""
+msgstr "Firma válida"
 
 #: .\intelligent_tracker_hub\models.py:288
 msgid "Associated Event UUID"
-msgstr ""
+msgstr "UUID de evento asociado"
 
 #: .\intelligent_tracker_hub\models.py:289
 msgid "Raw Request Body"
-msgstr ""
+msgstr "Cuerpo de solicitud sin procesar"
 
 #: .\intelligent_tracker_hub\models.py:290
 msgid "HTTP Status Code"
-msgstr ""
+msgstr "Código de estado HTTP"
 
 #: .\intelligent_tracker_hub\models.py:291
-#, fuzzy
-#| msgid "Details"
 msgid "Error Details"
-msgstr "Detalles"
+msgstr "Detalles del error"
 
 #: .\intelligent_tracker_hub\models.py:292
 msgid "Processed Successfully"
-msgstr ""
+msgstr "Procesado con éxito"
 
 #: .\intelligent_tracker_hub\models.py:295
 msgid "Security Audit Log"
-msgstr ""
+msgstr "Registro de auditoría de seguridad"
 
 #: .\intelligent_tracker_hub\models.py:296
 msgid "Security Audit Logs"
-msgstr ""
+msgstr "Registros de auditoría de seguridad"
 
 #: .\intelligent_tracker_hub\models.py:305
 msgid "Entry"
-msgstr ""
+msgstr "Entrada"
 
 #: .\intelligent_tracker_hub\models.py:306
 msgid "Exit"
-msgstr ""
+msgstr "Salir"
 
 #: .\intelligent_tracker_hub\models.py:310
 msgid "Facial Recognition"
-msgstr ""
+msgstr "Reconocimiento facial"
 
 #: .\intelligent_tracker_hub\models.py:311
 msgid "License Plate (ANPR)"
-msgstr ""
+msgstr "Matrícula (ANPR)"
 
 #: .\intelligent_tracker_hub\models.py:312
 msgid "Security Tag / RFID"
-msgstr ""
+msgstr "Etiqueta de seguridad / RFID"
 
 #: .\intelligent_tracker_hub\models.py:313
 msgid "Manual Operator Override"
-msgstr ""
+msgstr "Anulación manual del operador"
 
 #: .\intelligent_tracker_hub\models.py:327
 msgid "Access UUID"
-msgstr ""
+msgstr "Acceder al UUID"
 
 #: .\intelligent_tracker_hub\models.py:335
-#, fuzzy
-#| msgid "Contact"
 msgid "CRM Contact"
-msgstr "Contacto"
+msgstr "Contacto CRM"
 
 #: .\intelligent_tracker_hub\models.py:341
 msgid "Facility / Site"
-msgstr ""
+msgstr "Instalación / Sitio"
 
 #: .\intelligent_tracker_hub\models.py:346
-#, fuzzy
-#| msgid "Products"
 msgid "Gate Camera ID"
-msgstr "Productos"
+msgstr "ID de cámara de puerta"
 
 #: .\intelligent_tracker_hub\models.py:347
 msgid ""
 "Identifier of camera covering the access point (e.g. cam-north-gate-entry)"
 msgstr ""
+"Identificador de la cámara que cubre el punto de acceso (por ejemplo, cam-"
+"north-gate-entry)"
 
 #: .\intelligent_tracker_hub\models.py:354
 msgid "Access Direction"
-msgstr ""
+msgstr "Dirección de acceso"
 
 #: .\intelligent_tracker_hub\models.py:361
 msgid "Verification Method"
-msgstr ""
+msgstr "Método de verificación"
 
 #: .\intelligent_tracker_hub\models.py:366
 msgid "Recognized Identifier"
-msgstr ""
+msgstr "Identificador reconocido"
 
 #: .\intelligent_tracker_hub\models.py:367
 msgid "Plate string, face track ID, or RFID code matched at the edge"
 msgstr ""
+"Cadena de placas, ID de seguimiento frontal o código RFID coincidente en el "
+"borde"
 
 #: .\intelligent_tracker_hub\models.py:372
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:138
 msgid "Detection Confidence"
-msgstr ""
+msgstr "Confianza en la detección"
 
 #: .\intelligent_tracker_hub\models.py:377
 msgid "Access Granted"
-msgstr ""
+msgstr "Acceso concedido"
 
 #: .\intelligent_tracker_hub\models.py:382
 msgid "Denial Reason"
-msgstr ""
+msgstr "Razón de denegación"
 
 #: .\intelligent_tracker_hub\models.py:383
 msgid ""
 "Reason for access denial (e.g. Pass Expired, Banned Entity, Unrecognized)"
 msgstr ""
+"Motivo de la denegación de acceso (por ejemplo, pase caducado, entidad "
+"prohibida, no reconocido)"
 
 #: .\intelligent_tracker_hub\models.py:394
 msgid "Access Snapshot"
-msgstr ""
+msgstr "Acceder a la instantánea"
 
 #: .\intelligent_tracker_hub\models.py:399
 msgid "Access Telemetry Metadata"
-msgstr ""
+msgstr "Acceder a metadatos de telemetría"
 
 #: .\intelligent_tracker_hub\models.py:400
 msgid "Gate turnstile number, ambient temperature, vehicle make/model"
 msgstr ""
+"Número de torniquete de puerta, temperatura ambiente, marca/modelo del "
+"vehículo"
 
 #: .\intelligent_tracker_hub\models.py:405
 msgid "Visitor Access Log"
-msgstr ""
+msgstr "Registro de acceso de visitantes"
 
 #: .\intelligent_tracker_hub\models.py:406
 msgid "Visitor Access Logs"
-msgstr ""
+msgstr "Registros de acceso de visitantes"
 
 #: .\intelligent_tracker_hub\plugin.py:12
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:4
 msgid "Edge AI Security Hub"
-msgstr ""
+msgstr "Centro de seguridad de IA perimetral"
 
 #: .\intelligent_tracker_hub\plugin.py:14
 msgid ""
-"Spatial security command hub integrating real-time edge AI vision, intrusion "
-"webhooks, video evidence archiving, and access control."
+"Spatial security command hub integrating real-time edge AI vision, intrusion"
+" webhooks, video evidence archiving, and access control."
 msgstr ""
+"Centro de comando de seguridad espacial que integra visión de IA en el borde"
+" en tiempo real, webhooks de intrusión, archivo de evidencia de video y "
+"control de acceso."
 
 #: .\intelligent_tracker_hub\plugin.py:25 .\templates\base.html:125
 #: .\templates\themes\bootstrap5\partials\header.html:68
 msgid "Security Hub"
-msgstr ""
+msgstr "Centro de seguridad"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:8
 msgid "Edge AI Webhook Audit Trail"
-msgstr ""
+msgstr "Seguimiento de auditoría de webhook de Edge AI"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:11
 msgid "Valid HMAC Only"
-msgstr ""
+msgstr "HMAC válido únicamente"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:12
 msgid "Failed HMAC Only"
-msgstr ""
+msgstr "Sólo HMAC falló"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:13
-#, fuzzy
-#| msgid "All Polls"
 msgid "All Logs"
-msgstr "Todas las Encuestas"
+msgstr "Todos los registros"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:20
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:274
 msgid "Timestamp (UTC)"
-msgstr ""
+msgstr "Marca de tiempo (UTC)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:22
 msgid "Method & Endpoint"
-msgstr ""
+msgstr "Método y punto final"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:23
 msgid "HMAC Verdict"
-msgstr ""
+msgstr "Veredicto HMAC"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:24
-#, fuzzy
-#| msgid "All Statuses"
 msgid "Status Code"
-msgstr "Todos los Estados"
+msgstr "Código de estado"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:41
 msgid "HMAC Verified"
-msgstr ""
+msgstr "HMAC verificado"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:45
 msgid "Invalid Signature"
-msgstr ""
+msgstr "Firma no válida"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:71
 msgid "Signature Header"
-msgstr ""
+msgstr "Encabezado de firma"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:81
 msgid "Payload Preview"
-msgstr ""
+msgstr "Vista previa de carga útil"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:91
 msgid "No audit logs recorded yet."
-msgstr ""
+msgstr "Aún no se han registrado registros de auditoría."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:101
 msgid "Page"
-msgstr ""
+msgstr "Página"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:101
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:350
 msgid "of"
-msgstr ""
+msgstr "de"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:15
 msgid "Edge AI Spatial Security Hub"
-msgstr ""
+msgstr "Centro de seguridad espacial de Edge AI"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:17
 msgid "Integrated with"
-msgstr ""
+msgstr "Integrado con"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:23
 msgid "Simulate Edge Alert"
-msgstr ""
+msgstr "Simular alerta de borde"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:26
 msgid "Webhook Audit"
-msgstr ""
+msgstr "Auditoría de webhook"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:29
 msgid "SOC Admin"
-msgstr ""
+msgstr "Administrador de SOC"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:38
 msgid "Operations Dashboard"
-msgstr ""
+msgstr "Panel de operaciones"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:43
 msgid "Webhook Audit Logs"
-msgstr ""
+msgstr "Registros de auditoría de webhook"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:48
 msgid "Telemetry API (JSON)"
-msgstr ""
+msgstr "API de telemetría (JSON)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:65
 msgid "Dispatch Test Edge Webhook"
-msgstr ""
+msgstr "Webhook de borde de prueba de despacho"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:71
 msgid ""
 "Simulates an incoming edge alert from davtoh/intelligent-tracker with "
 "automated HMAC signing and audit trail recording."
 msgstr ""
+"Simula una alerta de borde entrante de davtoh/intelligent-tracker con firma "
+"HMAC automatizada y grabación de seguimiento de auditoría."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:76
 msgid "Intrusion Alert (High)"
-msgstr ""
+msgstr "Alerta de intrusión (alta)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:77
 msgid "Fall Detected Alert (Critical)"
-msgstr ""
+msgstr "Alerta de caída detectada (crítica)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:78
 msgid "Restricted Entity Alert (High)"
-msgstr ""
+msgstr "Alerta de entidad restringida (alta)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:79
 msgid "Occupancy Threshold Event (Medium)"
-msgstr ""
+msgstr "Evento de umbral de ocupación (medio)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:80
 msgid "Loitering Alert (Medium)"
-msgstr ""
+msgstr "Alerta de merodeo (mediana)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:84
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:244
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:183
 msgid "Camera ID"
-msgstr ""
+msgstr "Identificación de la cámara"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:88
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:126
-#, fuzzy
-#| msgid "Contact Name"
 msgid "Zone Name"
-msgstr "Nombre del Contacto"
+msgstr "Nombre de zona"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:92
-#, fuzzy
-#| msgid "Contact Name"
 msgid "Location / Facility"
-msgstr "Nombre del Contacto"
+msgstr "Ubicación / Instalaciones"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:94
 msgid "Default / Unassigned"
-msgstr ""
+msgstr "Predeterminado/No asignado"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:104
 msgid "Trigger Simulated Event"
-msgstr ""
+msgstr "Activar evento simulado"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:14
-#, fuzzy
-#| msgid "Total Contacts"
 msgid "Total Events"
-msgstr "Total de Contactos"
+msgstr "Eventos totales"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:27
 msgid "Unresolved"
-msgstr ""
+msgstr "Sin resolver"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:40
 msgid "Critical Alarms"
-msgstr ""
+msgstr "Alarmas críticas"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:53
 msgid "Cameras Online"
-msgstr ""
+msgstr "Cámaras en línea"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:72
 msgid "Multi-Camera Surveillance Matrix"
-msgstr ""
+msgstr "Matriz de vigilancia multicámara"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:80
 msgid "Facility:"
-msgstr ""
+msgstr "Instalación:"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:82
 msgid "All Facilities & Sites"
-msgstr ""
+msgstr "Todas las instalaciones y sitios"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:94
 msgid "Solo View (1 Camera)"
-msgstr ""
+msgstr "Vista individual (1 cámara)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:98
 msgid "2x2 Grid View"
-msgstr ""
+msgstr "Vista de cuadrícula 2x2"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:102
 msgid "3x3 Matrix View"
-msgstr ""
+msgstr "Vista de matriz 3x3"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:109
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:506
 msgid "Alarm Audio: ON"
-msgstr ""
+msgstr "Audio de alarma: ENCENDIDO"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:114
 msgid "Simulate Intrusion"
-msgstr ""
+msgstr "Simular intrusión"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:185
 msgid "Pause/Resume Stream"
-msgstr ""
+msgstr "Pausar/reanudar transmisión"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:188
 msgid "Open Raw Stream"
-msgstr ""
+msgstr "Abrir transmisión sin formato"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:191
 msgid "Fullscreen"
-msgstr ""
+msgstr "Pantalla completa"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:202
 msgid "No Active Cameras Configured for this Site."
-msgstr ""
+msgstr "No hay cámaras activas configuradas para este sitio."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:204
 msgid ""
-"Cameras report via edge heartbeats or can be registered in the admin console."
+"Cameras report via edge heartbeats or can be registered in the admin "
+"console."
 msgstr ""
+"Las cámaras informan a través de latidos de borde o se pueden registrar en "
+"la consola de administración."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:220
 msgid "All Event Types"
-msgstr ""
+msgstr "Todos los tipos de eventos"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:229
-#, fuzzy
-#| msgid "All Statuses"
 msgid "All Severities"
-msgstr "Todos los Estados"
+msgstr "Todas las gravedades"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:239
 msgid "Unresolved Only"
-msgstr ""
+msgstr "Sólo sin resolver"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:240
 msgid "Resolved Only"
-msgstr ""
+msgstr "Sólo resuelto"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:251
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:97
 msgid "Reset Filters"
-msgstr ""
+msgstr "Restablecer filtros"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:263
 msgid "Spatial Security Events Log"
-msgstr ""
+msgstr "Registro de eventos de seguridad espacial"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:265
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:383
 msgid "Events"
-msgstr ""
+msgstr "Eventos"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:272
 msgid "Event Type & Zone"
-msgstr ""
+msgstr "Tipo de evento y zona"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:273
-#, fuzzy
-#| msgid "Contact Name"
 msgid "Location / Camera"
-msgstr "Nombre del Contacto"
+msgstr "Ubicación / Cámara"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:275
 msgid "Evidence"
-msgstr ""
+msgstr "evidencia"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:277
 msgid "Action"
-msgstr ""
+msgstr "acción"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:297
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:180
 msgid "Default Site"
-msgstr ""
+msgstr "Sitio predeterminado"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:306
 #: .\video_gallery\templates\video_gallery\partials\player_modal.html:12
 msgid "Video"
-msgstr ""
+msgstr "Vídeo"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:313
 msgid "No Snapshot"
-msgstr ""
+msgstr "Sin instantánea"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:319
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:21
 msgid "Resolved"
-msgstr ""
+msgstr "Resuelto"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:323
 msgid "Active Alarm"
-msgstr ""
+msgstr "Alarma activa"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:337
 msgid "No security events recorded matching criteria."
 msgstr ""
+"No se registraron eventos de seguridad que coincidan con los criterios."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:338
 msgid ""
 "Edge AI vision alerts dispatched via Webhook will display in real time here."
 msgstr ""
+"Las alertas de visión de Edge AI enviadas a través de Webhook se mostrarán "
+"en tiempo real aquí."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:350
 msgid "Showing"
-msgstr ""
+msgstr "Mostrando"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:381
 msgid "Recent Gate Access & Visitor Passes"
-msgstr ""
+msgstr "Acceso reciente a la puerta y pases para visitantes"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:390
-#, fuzzy
-#| msgid "Contact Name"
 msgid "Contact / Plate"
-msgstr "Nombre del Contacto"
+msgstr "Contacto / Placa"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:392
 msgid "Facility & Gate"
-msgstr ""
+msgstr "Instalaciones y puerta"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:393
 msgid "Method"
-msgstr ""
+msgstr "Método"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:394
 msgid "Direction"
-msgstr ""
+msgstr "Dirección"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:404
 msgid "Granted"
-msgstr ""
+msgstr "Concedido"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:408
 msgid "Denied"
-msgstr ""
+msgstr "denegado"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:456
 msgid "No physical gate access events recorded yet."
-msgstr ""
+msgstr "Aún no se han registrado eventos de acceso físico a la puerta."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:510
 msgid "Alarm Audio: MUTED"
-msgstr ""
+msgstr "Audio de alarma: SILENCIOSO"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:7
 msgid "Back to Events Dashboard"
-msgstr ""
+msgstr "Volver al panel de eventos"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:25
-#, fuzzy
-#| msgid "Products"
 msgid "Active Incident"
-msgstr "Productos"
+msgstr "Incidente activo"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:51
 msgid "Video Evidence Stream"
-msgstr ""
+msgstr "Transmisión de evidencia en video"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:56
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:259
 msgid "Archived in Cloud Vault"
-msgstr ""
+msgstr "Archivado en Cloud Vault"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:58
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:259
 msgid "Re-sync from edge source reference"
-msgstr ""
+msgstr "Volver a sincronizar desde la referencia de origen perimetral"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:59
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:259
 msgid "Re-sync"
-msgstr ""
+msgstr "Volver a sincronizar"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:62
 msgid "Local vault file damaged or missing; streaming from edge reference"
 msgstr ""
+"Archivo de bóveda local dañado o faltante; streaming desde referencia de "
+"borde"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:63
 msgid "Vault Damaged (Edge Stream Active)"
-msgstr ""
+msgstr "Bóveda dañada (Edge Stream activo)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:66
 msgid "Repair from Source"
-msgstr ""
+msgstr "Reparación desde la fuente"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:70
 msgid "Zero-Copy Edge Stream"
-msgstr ""
+msgstr "Flujo perimetral sin copia"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:73
 msgid "Archive to Cloud Vault"
-msgstr ""
+msgstr "Archivar en Cloud Vault"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:82
 msgid "Your browser does not support HTML5 video streaming."
-msgstr ""
+msgstr "Su navegador no admite la transmisión de video HTML5."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:109
 msgid "No evidence snapshot was attached to this edge webhook."
 msgstr ""
+"No se adjuntó ninguna instantánea de evidencia a este webhook de borde."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:119
 msgid "Edge Telemetry & Bounding Box Data"
-msgstr ""
+msgstr "Telemetría perimetral y datos del cuadro delimitador"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:132
 msgid "Dwell Duration"
-msgstr ""
+msgstr "Duración de la permanencia"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:144
 msgid "Entity Identifier"
-msgstr ""
+msgstr "Identificador de entidad"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:152
 msgid "Ground-Plane Homography Trajectory"
-msgstr ""
+msgstr "Trayectoria de homografía en el plano terrestre"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:153
 msgid "Waypoints"
-msgstr ""
+msgstr "Puntos de referencia"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:155
 msgid "Calibrated spatial coordinates from World Scenario Studio."
-msgstr ""
+msgstr "Coordenadas espaciales calibradas de World Scenario Studio."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:161
 msgid "Raw JSON Telemetry"
-msgstr ""
+msgstr "Telemetría JSON sin formato"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:173
 msgid "Facility & Camera"
-msgstr ""
+msgstr "Instalaciones y cámara"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:187
 msgid "City / State"
-msgstr ""
+msgstr "Ciudad / Estado"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:204
 msgid "Incident Resolution & Audit"
-msgstr ""
+msgstr "Resolución y auditoría de incidentes"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:212
 msgid "Resolved by"
-msgstr ""
+msgstr "Resuelto por"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:224
 msgid "Operator Resolution Notes"
-msgstr ""
+msgstr "Notas de resolución del operador"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:225
 msgid "Enter investigative notes, verified identity, or action taken..."
 msgstr ""
+"Ingrese notas de investigación, identidad verificada o acción tomada..."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:228
 msgid "Acknowledge & Mark Resolved"
-msgstr ""
+msgstr "Reconocer y marcar resuelto"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:247
 msgid "Processing..."
-msgstr ""
+msgstr "Procesando..."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:260
 msgid "Video evidence permanently frozen into cloud storage."
 msgstr ""
+"Evidencia en video congelada permanentemente en el almacenamiento en la "
+"nube."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:263
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:268
 msgid "Try Again"
-msgstr ""
+msgstr "Inténtalo de nuevo"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:264
 msgid "Archival failed."
-msgstr ""
+msgstr "El archivo falló."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:269
 msgid "Network error during archival."
-msgstr ""
+msgstr "Error de red durante el archivado."
 
 #: .\intelligent_tracker_hub\views.py:89
 msgid "North Perimeter Gate"
-msgstr ""
+msgstr "Puerta perimetral norte"
 
 #: .\intelligent_tracker_hub\views.py:163
 #, python-format
 msgid "Security event %s marked as resolved."
-msgstr ""
+msgstr "Evento de seguridad %s marcado como resuelto."
 
 #: .\intelligent_tracker_hub\views.py:234
 #, python-format
 msgid "Simulated security event %s created successfully."
-msgstr ""
+msgstr "El evento de seguridad simulado %s se creó correctamente."
 
 #: .\language_management\models.py:16
 msgid "User language"
@@ -4437,11 +4516,11 @@ msgstr "Gestión de Idiomas"
 
 #: .\location_management\apps.py:7
 msgid "Location management"
-msgstr ""
+msgstr "Gestión de ubicación"
 
 #: .\location_management\models.py:8
 msgid "country name"
-msgstr ""
+msgstr "nombre del país"
 
 #: .\location_management\models.py:8 .\location_management\models.py:9
 #: .\location_management\models.py:21 .\location_management\models.py:22
@@ -4454,130 +4533,118 @@ msgstr ""
 #: .\user_management\models.py:53 .\user_management\models.py:54
 #: .\user_management\models.py:55 .\user_management\models.py:56
 msgid "This is the help text"
-msgstr ""
+msgstr "Este es el texto de ayuda"
 
 #: .\location_management\models.py:9
 msgid "country code"
-msgstr ""
+msgstr "código de país"
 
 #: .\location_management\models.py:13 .\location_management\models.py:21
 #: .\location_management\models.py:35 .\user_management\models.py:53
 msgid "country"
-msgstr ""
+msgstr "país"
 
 #: .\location_management\models.py:14
 msgid "countries"
-msgstr ""
+msgstr "países"
 
 #: .\location_management\models.py:22
 msgid "state name"
-msgstr ""
+msgstr "nombre del estado"
 
 #: .\location_management\models.py:23
 msgid "state code"
-msgstr ""
+msgstr "código de estado"
 
 #: .\location_management\models.py:27 .\location_management\models.py:36
 #: .\user_management\models.py:54
 msgid "state"
-msgstr ""
+msgstr "estado"
 
 #: .\location_management\models.py:28
 msgid "states"
-msgstr ""
+msgstr "estados"
 
 #: .\location_management\models.py:37
 msgid "city name"
-msgstr ""
+msgstr "nombre de la ciudad"
 
 #: .\location_management\models.py:38 .\location_management\models.py:55
 msgid "latitude"
-msgstr ""
+msgstr "latitud"
 
 #: .\location_management\models.py:39 .\location_management\models.py:56
 msgid "longitude"
-msgstr ""
+msgstr "longitud"
 
 #: .\location_management\models.py:43 .\location_management\models.py:53
 #: .\user_management\models.py:55
 msgid "city"
-msgstr ""
+msgstr "ciudad"
 
 #: .\location_management\models.py:44
 msgid "cities"
-msgstr ""
+msgstr "ciudades"
 
 #: .\location_management\models.py:51
-#, fuzzy
-#| msgid "Contact Name"
 msgid "location name"
-msgstr "Nombre del Contacto"
+msgstr "nombre de la ubicación"
 
 #: .\location_management\models.py:51
 msgid "Facility, campus, or site name (e.g. North HQ)"
-msgstr ""
+msgstr "Nombre de la instalación, campus o sitio (por ejemplo, sede norte)"
 
 #: .\location_management\models.py:52
-#, fuzzy
-#| msgid "Contact Name"
 msgid "location code"
-msgstr "Nombre del Contacto"
+msgstr "código de ubicación"
 
 #: .\location_management\models.py:52
 msgid "Unique site identifier (e.g. SITE-NORTH-01)"
-msgstr ""
+msgstr "Identificador de sitio único (por ejemplo, SITIO-NORTE-01)"
 
 #: .\location_management\models.py:53
 msgid "City location"
-msgstr ""
+msgstr "Ubicación de la ciudad"
 
 #: .\location_management\models.py:54
-#, fuzzy
-#| msgid "Email Address"
 msgid "address"
-msgstr "Dirección de correo electrónico"
+msgstr "dirección"
 
 #: .\location_management\models.py:54
-#, fuzzy
-#| msgid "Enter email address"
 msgid "Street address"
-msgstr "Ingrese la dirección de correo"
+msgstr "dirección postal"
 
 #: .\location_management\models.py:55
 msgid "Site latitude coordinate"
-msgstr ""
+msgstr "Coordenada de latitud del sitio"
 
 #: .\location_management\models.py:56
 msgid "Site longitude coordinate"
-msgstr ""
+msgstr "Coordenada de longitud del sitio"
 
 #: .\location_management\models.py:57
 msgid "is active"
-msgstr ""
+msgstr "esta activo"
 
 #: .\location_management\models.py:63
-#, fuzzy
-#| msgid "Contact Name"
 msgid "location"
-msgstr "Nombre del Contacto"
+msgstr "ubicación"
 
 #: .\location_management\models.py:64
-#, fuzzy
-#| msgid "Contact Name"
 msgid "locations"
-msgstr "Nombre del Contacto"
+msgstr "ubicaciones"
 
 #: .\menu_management\admin.py:23
 msgid "Items"
-msgstr ""
+msgstr "Artículos"
 
 #: .\menu_management\admin.py:25
 msgid "Sync discovered plugins into this menu"
-msgstr ""
+msgstr "Sincronizar complementos descubiertos en este menú"
 
 #: .\menu_management\admin.py:29
 msgid "Successfully synced plugin menu items."
-msgstr ""
+msgstr "Elementos del menú de complementos sincronizados correctamente."
 
 #: .\menu_management\apps.py:8
 msgid "Menu Management"
@@ -4585,113 +4652,116 @@ msgstr "Gestión de Menús"
 
 #: .\menu_management\models.py:8 .\video_gallery\models.py:35
 msgid "Slug"
-msgstr ""
+msgstr "babosa"
 
 #: .\menu_management\models.py:8
 msgid "Unique identifier, e.g. main_navbar"
-msgstr ""
+msgstr "Identificador único, p.e. barra_nav.principal"
 
 #: .\menu_management\models.py:9 .\menu_management\models.py:31
 #: .\todo\models.py:9 .\todo\templates\todo\add.html:19
 #: .\video_gallery\models.py:103
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: .\menu_management\models.py:11
 msgid "Is active"
-msgstr ""
+msgstr "esta activo"
 
 #: .\menu_management\models.py:14 .\menu_management\models.py:28
 msgid "Menu"
-msgstr ""
+msgstr "Menú"
 
 #: .\menu_management\models.py:15
 msgid "Menus"
-msgstr ""
+msgstr "Menús"
 
 #: .\menu_management\models.py:29
 msgid "Parent item"
-msgstr ""
+msgstr "elemento principal"
 
 #: .\menu_management\models.py:31
 msgid "Display label for the menu item"
-msgstr ""
+msgstr "Mostrar etiqueta para el elemento del menú"
 
 #: .\menu_management\models.py:32
 msgid "Named URL"
-msgstr ""
+msgstr "URL nombrada"
 
 #: .\menu_management\models.py:32
 msgid "Django reverse URL name, e.g., home:about"
-msgstr ""
+msgstr "Nombre de URL inversa de Django, por ejemplo, inicio:acerca de"
 
 #: .\menu_management\models.py:33
 msgid "Explicit URL / Path"
-msgstr ""
+msgstr "URL/ruta explícita"
 
 #: .\menu_management\models.py:33
 msgid "External or explicit URL, e.g., /about/ or https://..."
-msgstr ""
+msgstr "URL externa o explícita, por ejemplo, /acerca de/ o https://..."
 
 #: .\menu_management\models.py:34
 msgid "Icon CSS class"
-msgstr ""
+msgstr "Clase de icono CSS"
 
 #: .\menu_management\models.py:34
 msgid "FontAwesome or Linearicons class, e.g., fa fa-tasks"
-msgstr ""
+msgstr "Clase FontAwesome o Linearicons, por ejemplo, fa fa-tasks"
 
 #: .\menu_management\models.py:36
 msgid "Order"
-msgstr ""
+msgstr "Orden"
 
 #: .\menu_management\models.py:36
 msgid "Display order (lower numbers appear first)"
-msgstr ""
+msgstr "Orden de visualización (los números más bajos aparecen primero)"
 
 #: .\menu_management\models.py:37
 msgid "Visible"
-msgstr ""
+msgstr "Visibles"
 
 #: .\menu_management\models.py:37
 msgid "Toggle to hide or show this item"
-msgstr ""
+msgstr "Alternar para ocultar o mostrar este elemento"
 
 #: .\menu_management\models.py:40
 msgid "Requires authentication"
-msgstr ""
+msgstr "Requiere autenticación"
 
 #: .\menu_management\models.py:41
 msgid "Requires staff access"
-msgstr ""
+msgstr "Requiere acceso del personal"
 
 #: .\menu_management\models.py:44
 msgid "Plugin source"
-msgstr ""
+msgstr "Fuente del complemento"
 
 #: .\menu_management\models.py:44
 msgid "Originating plugin ID, e.g., todo, polls"
 msgstr ""
+"ID del complemento de origen, por ejemplo, tareas pendientes, encuestas"
 
 #: .\menu_management\models.py:45
 msgid "Custom user item"
-msgstr ""
+msgstr "Elemento de usuario personalizado"
 
 #: .\menu_management\models.py:45
 msgid "True if created manually by admin rather than auto-discovered"
 msgstr ""
+"Verdadero si lo crea manualmente el administrador en lugar de descubrirlo "
+"automáticamente"
 
 #: .\menu_management\models.py:48
 msgid "Menu Item"
-msgstr ""
+msgstr "Elemento del menú"
 
 #: .\menu_management\models.py:49
 msgid "Menu Items"
-msgstr ""
+msgstr "Elementos del menú"
 
 #: .\plugin_registry\apps.py:8
 msgid "Plugin Registry"
-msgstr ""
+msgstr "Registro de complementos"
 
 #: .\polls\apps.py:7 .\polls\plugin.py:14 .\polls\templates\polls\index.html:6
 #: .\templates\base.html:122
@@ -4701,11 +4771,11 @@ msgstr "Encuestas"
 
 #: .\polls\models.py:10
 msgid "Question text"
-msgstr ""
+msgstr "Texto de la pregunta"
 
 #: .\polls\models.py:11
 msgid "Date published"
-msgstr ""
+msgstr "Fecha de publicación"
 
 #: .\polls\models.py:12
 msgid "Poll status"
@@ -4713,56 +4783,58 @@ msgstr "Estado de la Encuesta"
 
 #: .\polls\models.py:15 .\polls\models.py:31
 msgid "Question"
-msgstr ""
+msgstr "Pregunta"
 
 #: .\polls\models.py:16
 msgid "Questions"
-msgstr ""
+msgstr "Preguntas"
 
 #: .\polls\models.py:27
 msgid "Published recently?"
-msgstr ""
+msgstr "¿Publicado recientemente?"
 
 #: .\polls\models.py:32
 msgid "Choice text"
-msgstr ""
+msgstr "Texto de elección"
 
 #: .\polls\models.py:33
 msgid "Votes"
-msgstr ""
+msgstr "Votos"
 
 #: .\polls\models.py:36
 msgid "Choice"
-msgstr ""
+msgstr "Elección"
 
 #: .\polls\models.py:37
 msgid "Choices"
-msgstr ""
+msgstr "Opciones"
 
 #: .\polls\plugin.py:7
 msgid "Polls & Voting"
-msgstr ""
+msgstr "Encuestas y votación"
 
 #: .\polls\plugin.py:8
 msgid "Interactive voting system with fraud prevention and results charts"
 msgstr ""
+"Sistema de votación interactivo con prevención de fraude y gráficos de "
+"resultados."
 
 #: .\polls\templates\polls\detail.html:5
 msgid "Poll details"
-msgstr ""
+msgstr "Detalles de la encuesta"
 
 #: .\polls\templates\polls\detail.html:14
 #: .\polls\templates\polls\results.html:14
 msgid "Back to Polls"
-msgstr ""
+msgstr "Volver a las encuestas"
 
 #: .\polls\templates\polls\detail.html:31
 msgid "Submit Vote"
-msgstr ""
+msgstr "Enviar voto"
 
 #: .\polls\templates\polls\index.html:17
 msgid "Community Polls"
-msgstr ""
+msgstr "Encuestas comunitarias"
 
 #: .\polls\templates\polls\index.html:31
 msgid "No polls are available."
@@ -4770,18 +4842,18 @@ msgstr "No hay encuestas disponibles."
 
 #: .\polls\templates\polls\results.html:5
 msgid "Poll results"
-msgstr ""
+msgstr "Resultados de la encuesta"
 
 #: .\polls\templates\polls\results.html:22
 #, python-format
 msgid "%(votes)s vote"
 msgid_plural "%(votes)s votes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(votes)s voto"
+msgstr[1] "%(votes)s votos"
 
 #: .\polls\templates\polls\results.html:29
 msgid "Vote Again"
-msgstr ""
+msgstr "Votar de nuevo"
 
 #: .\polls\templates\polls\results.html:30
 msgid "All Polls"
@@ -4789,209 +4861,215 @@ msgstr "Todas las Encuestas"
 
 #: .\polls\views.py:72
 msgid "Please select an option before submitting your vote."
-msgstr ""
+msgstr "Seleccione una opción antes de enviar su voto."
 
 #: .\polls\views.py:75
 msgid "You didn't select a choice."
-msgstr ""
+msgstr "No seleccionaste ninguna opción."
 
 #: .\polls\views.py:83
 #, python-format
 msgid "Your vote for '%(choice)s' has been recorded!"
-msgstr ""
+msgstr "¡Su voto por '%(choice)s' ha sido registrado!"
 
 #: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:128
 #: .\templates\themes\bootstrap5\partials\header.html:71
 msgid "REST API"
-msgstr ""
+msgstr "API DESCANSO"
 
 #: .\rest_api\plugin.py:8
 msgid "Django REST Framework browsable and serialized endpoints"
-msgstr ""
+msgstr "Puntos finales serializados y navegables de Django REST Framework"
 
 #: .\task_runner\admin.py:37
 msgid "Task Overview"
-msgstr ""
+msgstr "Descripción general de la tarea"
 
 #: .\task_runner\admin.py:51
 msgid "Live Monitoring"
-msgstr ""
+msgstr "Monitoreo en vivo"
 
 #: .\task_runner\admin.py:57
 msgid "Task Logs & Result"
-msgstr ""
+msgstr "Registros de tareas y resultados"
 
 #: .\task_runner\admin.py:70 .\task_runner\models.py:36
 #: .\task_runner\templates\task_runner\job_detail.html:47
 #: .\task_runner\templates\task_runner\job_list.html:120
 msgid "Task ID"
-msgstr ""
+msgstr "ID de tarea"
 
 #: .\task_runner\admin.py:91
 #: .\task_runner\templates\task_runner\job_list.html:122
 msgid "Progress"
-msgstr ""
+msgstr "Progreso"
 
 #: .\task_runner\admin.py:100
 msgid "Real-time Task Monitor"
-msgstr ""
+msgstr "Monitor de tareas en tiempo real"
 
 #: .\task_runner\admin.py:103
 msgid "Save task first to display live stream."
-msgstr ""
+msgstr "Guarde la tarea primero para mostrar la transmisión en vivo."
 
 #: .\task_runner\admin.py:120
 msgid "Trigger Collectstatic in background"
-msgstr ""
+msgstr "Activar Collectstatic en segundo plano"
 
 #: .\task_runner\admin.py:123
 msgid "Background collectstatic task queued."
-msgstr ""
+msgstr "Tarea estática de recopilación en segundo plano en cola."
 
 #: .\task_runner\admin.py:125
 msgid "Trigger Auto-Translate (Spanish baseline)"
-msgstr ""
+msgstr "Activar traducción automática (línea base en español)"
 
 #: .\task_runner\admin.py:128
 msgid "Background auto-translate task for Spanish queued."
-msgstr ""
+msgstr "Tarea de traducción automática en segundo plano para español en cola."
 
 #: .\task_runner\admin.py:130 .\task_runner\admin.py:172
 #: .\task_runner\templates\admin\task_runner\taskjob\change_list.html:17
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:9
 msgid "Launch External Script"
-msgstr ""
+msgstr "Iniciar secuencia de comandos externa"
 
 #: .\task_runner\admin.py:150
 msgid "Please provide a valid command."
-msgstr ""
+msgstr "Proporcione un comando válido."
 
 #: .\task_runner\admin.py:163
 #, python-brace-format
 msgid "External script '{0}' queued successfully with Task ID: {1}"
 msgstr ""
+"El script externo '{0}' se puso en cola correctamente con el ID de tarea: "
+"{1}"
 
 #: .\task_runner\apps.py:8 .\task_runner\templates\task_runner\job_list.html:4
 #: .\task_runner\templates\task_runner\job_list.html:12
 msgid "Background Task Runner"
-msgstr ""
+msgstr "Ejecutor de tareas en segundo plano"
 
 #: .\task_runner\models.py:25
 msgid "Pending"
-msgstr ""
+msgstr "Pendiente"
 
 #: .\task_runner\models.py:26
 msgid "Running"
-msgstr ""
+msgstr "corriendo"
 
 #: .\task_runner\models.py:27
 msgid "Success"
-msgstr ""
+msgstr "Éxito"
 
 #: .\task_runner\models.py:28
 msgid "Failure"
-msgstr ""
+msgstr "fracaso"
 
 #: .\task_runner\models.py:29
 msgid "Revoked"
-msgstr ""
+msgstr "Revocado"
 
 #: .\task_runner\models.py:37
 msgid "Celery task UUID or unique identifier"
-msgstr ""
+msgstr "UUID o identificador único de la tarea de apio"
 
 #: .\task_runner\models.py:41
 #: .\task_runner\templates\task_runner\job_detail.html:50
 #: .\task_runner\templates\task_runner\job_list.html:119
 msgid "Task Name"
-msgstr ""
+msgstr "Nombre de la tarea"
 
 #: .\task_runner\models.py:42
 msgid "Human-readable name or task function path"
-msgstr ""
+msgstr "Nombre legible por humanos o ruta de función de tarea"
 
 #: .\task_runner\models.py:53
 msgid "Progress (%)"
-msgstr ""
+msgstr "Progreso (%)"
 
 #: .\task_runner\models.py:54
 msgid "Completion percentage between 0 and 100"
-msgstr ""
+msgstr "Porcentaje de finalización entre 0 y 100"
 
 #: .\task_runner\models.py:59
 msgid "Log Output"
-msgstr ""
+msgstr "Salida de registro"
 
 #: .\task_runner\models.py:60
 msgid "Captured stdout, stderr, or lifecycle log stream"
-msgstr ""
+msgstr "Secuencia de registro de ciclo de vida, stdout o stderr capturada"
 
 #: .\task_runner\models.py:66
 msgid "Exception message or stack trace if the task failed"
-msgstr ""
+msgstr "Mensaje de excepción o seguimiento de pila si la tarea falló"
 
 #: .\task_runner\models.py:71
 #: .\task_runner\templates\task_runner\job_detail.html:69
 msgid "Result Data"
-msgstr ""
+msgstr "Datos de resultados"
 
 #: .\task_runner\models.py:72
 msgid "JSON-encoded output returned by the background task"
-msgstr ""
+msgstr "Salida codificada en JSON devuelta por la tarea en segundo plano"
 
 #: .\task_runner\models.py:93
 msgid "Background Task Job"
-msgstr ""
+msgstr "Trabajo de tarea en segundo plano"
 
 #: .\task_runner\models.py:94
 msgid "Background Task Jobs"
-msgstr ""
+msgstr "Trabajos de tareas en segundo plano"
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:8
 msgid "Task jobs"
-msgstr ""
+msgstr "Trabajos de tarea"
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:100
 msgid "Queue External Script in Background"
-msgstr ""
+msgstr "Cola de secuencia de comandos externa en segundo plano"
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:103
 msgid ""
 "Specify any Python, Django management, or shell command to execute "
-"asynchronously inside a Celery worker. Output is streamed live via WebSocket "
-"to the job detail view."
+"asynchronously inside a Celery worker. Output is streamed live via WebSocket"
+" to the job detail view."
 msgstr ""
+"Especifique cualquier comando de Python, administración de Django o shell "
+"para ejecutarlo de forma asincrónica dentro de un trabajador de Celery. La "
+"salida se transmite en vivo a través de WebSocket a la vista de detalles del"
+" trabajo."
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:111
 #: .\task_runner\templates\task_runner\job_list.html:267
 msgid "Command to Execute:"
-msgstr ""
+msgstr "Comando a ejecutar:"
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:126
 msgid "Quick Presets (Click to autofill):"
-msgstr ""
+msgstr "Ajustes preestablecidos rápidos (haga clic para autocompletar):"
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:140
 msgid "Queue Script Now"
-msgstr ""
+msgstr "Cola de comandos ahora"
 
 #: .\task_runner\templates\task_runner\job_detail.html:4
 msgid "Background Task"
-msgstr ""
+msgstr "Tarea en segundo plano"
 
 #: .\task_runner\templates\task_runner\job_detail.html:13
 #: .\templates\themes\bootstrap5\partials\header.html:132
 #: .\templates\themes\tailwind\partials\header.html:121
 msgid "Task Runner"
-msgstr ""
+msgstr "Corredor de tareas"
 
 #: .\task_runner\templates\task_runner\job_detail.html:23
 msgid "Back to Task List"
-msgstr ""
+msgstr "Volver a la lista de tareas"
 
 #: .\task_runner\templates\task_runner\job_detail.html:26
 msgid "Edit in Admin"
-msgstr ""
+msgstr "Editar en administrador"
 
 #: .\task_runner\templates\task_runner\job_detail.html:42
 msgid "Task Details"
@@ -5008,48 +5086,52 @@ msgstr "Iniciada En"
 
 #: .\task_runner\templates\task_runner\job_detail.html:65
 msgid "Last Update"
-msgstr ""
+msgstr "Última actualización"
 
 #: .\task_runner\templates\task_runner\job_list.html:14
 msgid ""
 "Monitor, launch, and inspect Celery asynchronous jobs with live streaming."
 msgstr ""
+"Supervise, inicie e inspeccione trabajos asincrónicos de Celery con "
+"transmisión en vivo."
 
 #: .\task_runner\templates\task_runner\job_list.html:23
 msgid "Launch New Task"
-msgstr ""
+msgstr "Iniciar nueva tarea"
 
 #: .\task_runner\templates\task_runner\job_list.html:26
 msgid "Admin Script Launcher"
-msgstr ""
+msgstr "Lanzador de secuencias de comandos de administración"
 
 #: .\task_runner\templates\task_runner\job_list.html:29
 msgid "Django Admin"
-msgstr ""
+msgstr "Administrador de Django"
 
 #: .\task_runner\templates\task_runner\job_list.html:39
 msgid "Quick Script Execution (Celery Background Task)"
-msgstr ""
+msgstr "Ejecución rápida de script (tarea de fondo de apio)"
 
 #: .\task_runner\templates\task_runner\job_list.html:41
 msgid "Runs asynchronously via Celery worker & streams output live."
 msgstr ""
+"Se ejecuta de forma asincrónica a través de Celery Workers y transmite la "
+"salida en vivo."
 
 #: .\task_runner\templates\task_runner\job_list.html:61
 msgid "Run Script"
-msgstr ""
+msgstr "Ejecutar secuencia de comandos"
 
 #: .\task_runner\templates\task_runner\job_list.html:65
 msgid "Presets:"
-msgstr ""
+msgstr "Preajustes:"
 
 #: .\task_runner\templates\task_runner\job_list.html:87
 msgid "Search by task name or task ID..."
-msgstr ""
+msgstr "Buscar por nombre de tarea o ID de tarea..."
 
 #: .\task_runner\templates\task_runner\job_list.html:180
 msgid "No background tasks found."
-msgstr ""
+msgstr "No se encontraron tareas en segundo plano."
 
 #: .\task_runner\templates\task_runner\job_list.html:190
 #: .\video_gallery\templates\video_gallery\gallery_list.html:149
@@ -5059,116 +5141,120 @@ msgstr "Navegación de Página"
 #: .\task_runner\templates\task_runner\job_list.html:194
 #: .\video_gallery\templates\video_gallery\gallery_list.html:154
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #: .\task_runner\templates\task_runner\job_list.html:202
 #: .\video_gallery\templates\video_gallery\gallery_list.html:172
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 #: .\task_runner\templates\task_runner\job_list.html:220
 msgid "Queue New Background Task"
-msgstr ""
+msgstr "Nueva tarea en segundo plano en cola"
 
 #: .\task_runner\templates\task_runner\job_list.html:232
 msgid "Choose Task to Queue:"
-msgstr ""
+msgstr "Elija Tarea para poner en cola:"
 
 #: .\task_runner\templates\task_runner\job_list.html:240
 msgid "Run External Script"
-msgstr ""
+msgstr "Ejecutar secuencia de comandos externa"
 
 #: .\task_runner\templates\task_runner\job_list.html:249
 msgid "Auto-Translate"
-msgstr ""
+msgstr "Traducir automáticamente"
 
 #: .\task_runner\templates\task_runner\job_list.html:258
 msgid "Collect Static"
-msgstr ""
+msgstr "Recoger estática"
 
 #: .\task_runner\templates\task_runner\job_list.html:276
 msgid ""
 "The command runs inside a background Celery worker subprocess. Output is "
 "streamed live via WebSocket."
 msgstr ""
+"El comando se ejecuta dentro de un subproceso de trabajo de Celery en "
+"segundo plano. La salida se transmite en vivo a través de WebSocket."
 
 #: .\task_runner\templates\task_runner\job_list.html:280
 msgid "Click to fill preset:"
-msgstr ""
+msgstr "Haga clic para completar el ajuste preestablecido:"
 
 #: .\task_runner\templates\task_runner\job_list.html:292
 msgid "Target Language (Optional)"
-msgstr ""
+msgstr "Idioma de destino (opcional)"
 
 #: .\task_runner\templates\task_runner\job_list.html:296
 msgid "Translation Backend"
-msgstr ""
+msgstr "Backend de traducción"
 
 #: .\task_runner\templates\task_runner\job_list.html:304
 msgid "Max Strings (Optional test limit)"
-msgstr ""
+msgstr "Cadenas máximas (límite de prueba opcional)"
 
 #: .\task_runner\templates\task_runner\job_list.html:313
 msgid ""
 "Collects all static assets into STATIC_ROOT in the background without "
 "blocking the web worker."
 msgstr ""
+"Recopila todos los activos estáticos en STATIC_ROOT en segundo plano sin "
+"bloquear al trabajador web."
 
 #: .\task_runner\templates\task_runner\job_list.html:323
 msgid "Queue Task Now"
-msgstr ""
+msgstr "Tarea en cola ahora"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:23
 msgid "Execution Progress"
-msgstr ""
+msgstr "Progreso de ejecución"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:47
 msgid "Task Error:"
-msgstr ""
+msgstr "Error de tarea:"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:56
 msgid "Live Console Output"
-msgstr ""
+msgstr "Salida de consola en vivo"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:57
 msgid "Copy Log"
-msgstr ""
+msgstr "Copiar registro"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:71
 msgid "Task initialized. Waiting for stream output..."
-msgstr ""
+msgstr "Tarea inicializada. Esperando la salida de la transmisión..."
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:227
 msgid "Live WebSocket Connected"
-msgstr ""
+msgstr "WebSocket en vivo conectado"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:248
 msgid "Live Sync Active (HTTP Poll)"
-msgstr ""
+msgstr "Sincronización en vivo activa (encuesta HTTP)"
 
 #: .\task_runner\views.py:64
 msgid "Task not found"
-msgstr ""
+msgstr "Tarea no encontrada"
 
 #: .\task_runner\views.py:92
 msgid "Auto-translate task queued successfully."
-msgstr ""
+msgstr "La tarea de traducción automática se puso en cola correctamente."
 
 #: .\task_runner\views.py:102
 msgid "Collectstatic task queued successfully."
-msgstr ""
+msgstr "La tarea Collectstatic se puso en cola correctamente."
 
 #: .\task_runner\views.py:107
 msgid "Please provide a command to run."
-msgstr ""
+msgstr "Proporcione un comando para ejecutar."
 
 #: .\task_runner\views.py:117
 msgid "External script queued successfully."
-msgstr ""
+msgstr "El script externo se puso en cola correctamente."
 
 #: .\task_runner\views.py:120
 msgid "Unknown task type specified."
-msgstr ""
+msgstr "Se ha especificado un tipo de tarea desconocido."
 
 #: .\templates\base.html:93 .\templates\themes\bootstrap5\base.html:14
 #: .\templates\themes\bootstrap5\partials\footer.html:7
@@ -5186,12 +5272,12 @@ msgstr ""
 #: .\templates\themes\tailwind\partials\header.html:10
 #: .\templates\themes\tailwind\partials\header.html:11
 msgid "Enterprise Website"
-msgstr ""
+msgstr "Sitio web empresarial"
 
 #: .\templates\base.html:119
 #: .\templates\themes\bootstrap5\partials\header.html:61
 msgid "Apps"
-msgstr ""
+msgstr "Aplicaciones"
 
 #: .\templates\base.html:121
 #: .\templates\themes\bootstrap5\partials\header.html:64 .\todo\plugin.py:14
@@ -5205,20 +5291,20 @@ msgstr "Lista de Tareas"
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:22
 #: .\video_gallery\templates\video_gallery\gallery_list.html:24
 msgid "Media Gallery"
-msgstr ""
+msgstr "Galería multimedia"
 
 #: .\templates\base.html:127
 #: .\templates\themes\bootstrap5\partials\header.html:70
 #: .\webprogram\plugin.py:7 .\webprogram\plugin.py:14
 msgid "Brython WebProgram"
-msgstr ""
+msgstr "Programa web Brython"
 
 #: .\templates\base.html:129 .\templates\base.html:151
 #: .\templates\themes\bootstrap5\partials\header.html:74
 #: .\templates\themes\bootstrap5\partials\header.html:127
 #: .\templates\themes\tailwind\partials\header.html:118
 msgid "Site Admin"
-msgstr ""
+msgstr "Administrador del sitio"
 
 #: .\templates\base.html:149
 #: .\templates\themes\bootstrap5\partials\header.html:121
@@ -5226,19 +5312,19 @@ msgstr ""
 #: .\templates\themes\tailwind\partials\header.html:114
 #: .\user_management\templates\user_management\profile.html:14
 msgid "Profile"
-msgstr ""
+msgstr "Perfil"
 
 #: .\templates\base.html:152
 #: .\templates\themes\bootstrap5\partials\header.html:72
 msgid "Background Tasks"
-msgstr ""
+msgstr "Tareas en segundo plano"
 
 #: .\templates\base.html:158
 #: .\templates\themes\bootstrap5\partials\header.html:142
 #: .\templates\themes\minimal\partials\header.html:87
 #: .\templates\themes\tailwind\partials\header.html:128
 msgid "Logout"
-msgstr ""
+msgstr "Cerrar sesión"
 
 #: .\templates\base.html:163 .\templates\registration\login.html:4
 #: .\templates\registration\login.html:40
@@ -5248,61 +5334,65 @@ msgstr ""
 #: .\user_management\templates\user_management\login.html:4
 #: .\user_management\templates\user_management\login.html:18
 msgid "Login"
-msgstr ""
+msgstr "Iniciar sesión"
 
 #: .\templates\base.html:164
 #: .\templates\themes\bootstrap5\partials\header.html:152
 #: .\templates\themes\minimal\partials\header.html:94
 #: .\templates\themes\tailwind\partials\header.html:135
 msgid "Signup"
-msgstr ""
+msgstr "Regístrate"
 
 #: .\templates\base_form.html:5
 msgid "Form"
-msgstr ""
+msgstr "Formulario"
 
 #: .\templates\base_form.html:34 .\templates\base_form.html:38
 #: .\templates\signup.html:9 .\templates\signup.html:13
 msgid "Sign up"
-msgstr ""
+msgstr "Regístrate"
 
 #: .\templates\registration\logged_out.html:4
 #: .\user_management\templates\user_management\logout.html:12
 #: .\user_management\templates\user_management\logout.html:14
 msgid "Logged Out"
-msgstr ""
+msgstr "Cerrado sesión"
 
 #: .\templates\registration\logged_out.html:9
 msgid "You are logged out"
-msgstr ""
+msgstr "Estás desconectado"
 
 #: .\templates\registration\logged_out.html:11
 #: .\user_management\templates\user_management\logout.html:28
 msgid "Log In Again"
-msgstr ""
+msgstr "Iniciar sesión nuevamente"
 
 #: .\templates\registration\login.html:12
 #: .\user_management\templates\user_management\login.html:12
 msgid "Sign In"
-msgstr ""
+msgstr "Iniciar sesión"
 
 #: .\templates\registration\login.html:15
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
+"Su nombre de usuario y contraseña no coinciden. Por favor inténtalo de "
+"nuevo."
 
 #: .\templates\registration\login.html:20
 msgid ""
-"Your account doesn't have access to this page. To proceed, please login with "
-"an account that has access."
+"Your account doesn't have access to this page. To proceed, please login with"
+" an account that has access."
 msgstr ""
+"Su cuenta no tiene acceso a esta página. Para continuar, inicie sesión con "
+"una cuenta que tenga acceso."
 
 #: .\templates\registration\login.html:22
 msgid "Please login to see this page."
-msgstr ""
+msgstr "Por favor inicie sesión para ver esta página."
 
 #: .\templates\registration\login.html:42
 msgid "Lost password?"
-msgstr ""
+msgstr "¿Perdiste tu contraseña?"
 
 #: .\templates\registration\password_reset_email.html:1
 #: .\user_management\templates\user_management\password_reset_email.html:5
@@ -5310,27 +5400,29 @@ msgstr ""
 msgid ""
 "Someone asked for password reset for email %(email)s. Follow the link below:"
 msgstr ""
+"Alguien solicitó restablecer la contraseña del correo electrónico %(email)s."
+" Siga el siguiente enlace:"
 
 #: .\templates\signup.html:4
 #: .\user_management\templates\user_management\signup.html:5
 msgid "Sign Up"
-msgstr ""
+msgstr "Regístrate"
 
 #: .\templates\themes\bootstrap5\base.html:10
 msgid "Modern Enterprise Web Application"
-msgstr ""
+msgstr "Aplicación web empresarial moderna"
 
 #: .\templates\themes\bootstrap5\partials\footer.html:7
 #: .\templates\themes\minimal\partials\footer.html:5
 #: .\templates\themes\tailwind\partials\footer.html:7
 msgid "All rights reserved."
-msgstr ""
+msgstr "Todos los derechos reservados."
 
 #: .\templates\themes\bootstrap5\partials\footer.html:10
 #: .\templates\themes\minimal\partials\footer.html:6
 #: .\templates\themes\tailwind\partials\footer.html:10
 msgid "Active CSS Framework:"
-msgstr ""
+msgstr "Marco CSS activo:"
 
 #: .\templates\themes\bootstrap5\partials\footer.html:15
 #: .\templates\themes\minimal\partials\footer.html:9
@@ -5348,33 +5440,33 @@ msgstr "Cambiar Idioma"
 #: .\templates\themes\minimal\partials\theme_selector.html:8
 #: .\templates\themes\tailwind\partials\theme_selector.html:8
 msgid "Switch CSS Framework"
-msgstr ""
+msgstr "Cambiar marco CSS"
 
 #: .\templates\themes\bootstrap5\partials\theme_selector.html:8
 #: .\templates\themes\minimal\partials\theme_selector.html:17
 #: .\templates\themes\tailwind\partials\theme_selector.html:25
 msgid "CSS Framework"
-msgstr ""
+msgstr "Marco CSS"
 
 #: .\templates\themes\minimal\base.html:10
 msgid "Modern Enterprise Web Application (Minimal Semantic Theme)"
-msgstr ""
+msgstr "Aplicación web empresarial moderna (tema semántico mínimo)"
 
 #: .\templates\themes\minimal\partials\header.html:80
 msgid "Admin"
-msgstr ""
+msgstr "administrador"
 
 #: .\templates\themes\minimal\partials\header.html:81
 msgid "Tasks"
-msgstr ""
+msgstr "Tareas"
 
 #: .\templates\themes\tailwind\base.html:10
 msgid "Modern Enterprise Web Application (Tailwind CSS Theme)"
-msgstr ""
+msgstr "Aplicación web empresarial moderna (tema CSS Tailwind)"
 
 #: .\theme_management\apps.py:8
 msgid "Theme & CSS Framework Management"
-msgstr ""
+msgstr "Gestión de temas y marcos CSS"
 
 #: .\timezone_management\models.py:41 .\user_management\models.py:52
 msgid "timezone"
@@ -5398,7 +5490,7 @@ msgstr "Zona horaria:"
 
 #: .\timezone_management\templates\timezone_management\select.html:12
 msgid "Set"
-msgstr ""
+msgstr "conjunto"
 
 #: .\todo\apps.py:7
 msgid "Todo's"
@@ -5406,11 +5498,11 @@ msgstr "Tareas"
 
 #: .\todo\models.py:10
 msgid "Text"
-msgstr ""
+msgstr "Texto"
 
 #: .\todo\models.py:11
 msgid "Created at"
-msgstr ""
+msgstr "Creado en"
 
 #: .\todo\models.py:14
 msgid "Todo"
@@ -5422,104 +5514,106 @@ msgstr "Tareas"
 
 #: .\todo\plugin.py:7
 msgid "Todo Task Manager"
-msgstr ""
+msgstr "Administrador de tareas pendientes"
 
 #: .\todo\plugin.py:8
 msgid "Interactive task management app with due dates and completion states"
 msgstr ""
+"Aplicación interactiva de gestión de tareas con fechas de vencimiento y "
+"estados de finalización."
 
 #: .\todo\templates\todo\add.html:5
 msgid "Add to Todo list"
-msgstr ""
+msgstr "Agregar a la lista de tareas pendientes"
 
 #: .\todo\templates\todo\add.html:14 .\todo\templates\todo\details.html:13
 msgid "Back to Todo List"
-msgstr ""
+msgstr "Volver a la lista de tareas pendientes"
 
 #: .\todo\templates\todo\add.html:15
 msgid "Create New Task"
-msgstr ""
+msgstr "Crear nueva tarea"
 
 #: .\todo\templates\todo\add.html:20
 msgid "Enter task title"
-msgstr ""
+msgstr "Ingrese el título de la tarea"
 
 #: .\todo\templates\todo\add.html:23
 msgid "Description / Notes"
-msgstr ""
+msgstr "Descripción / Notas"
 
 #: .\todo\templates\todo\add.html:24
 msgid "Enter task description..."
-msgstr ""
+msgstr "Introduzca la descripción de la tarea..."
 
 #: .\todo\templates\todo\add.html:27
 msgid "Save Task"
-msgstr ""
+msgstr "Guardar tarea"
 
 #: .\todo\templates\todo\details.html:5
 msgid "Todo details"
-msgstr ""
+msgstr "Todo los detalles"
 
 #: .\todo\templates\todo\details.html:18
 msgid "Timezone & Timestamp Diagnostics:"
-msgstr ""
+msgstr "Diagnóstico de zona horaria y marca de tiempo:"
 
 #: .\todo\templates\todo\index.html:6
 msgid "Todo Index"
-msgstr ""
+msgstr "Índice de tareas pendientes"
 
 #: .\todo\templates\todo\index.html:20
 #, python-format
 msgid "Welcome, %(username)s!"
-msgstr ""
+msgstr "¡Bienvenido, %(username)s!"
 
 #: .\todo\templates\todo\index.html:22
 msgid "Welcome to Your Todo List"
-msgstr ""
+msgstr "Bienvenido a tu lista de tareas pendientes"
 
 #: .\todo\templates\todo\index.html:24
 msgid "Add Todo"
-msgstr ""
+msgstr "Agregar todo"
 
 #: .\todo\templates\todo\index.html:41
 msgid "Are you sure you want to delete this task?"
-msgstr ""
+msgstr "¿Estás seguro de que deseas eliminar esta tarea?"
 
 #: .\todo\templates\todo\index.html:42
 msgid "Delete Task"
-msgstr ""
+msgstr "Eliminar tarea"
 
 #: .\todo\templates\todo\index.html:52
 msgid "No tasks yet. Create your first task to get started!"
-msgstr ""
+msgstr "Aún no hay tareas. ¡Crea tu primera tarea para comenzar!"
 
 #: .\todo\templates\todo\index.html:53
 msgid "Create Task"
-msgstr ""
+msgstr "Crear tarea"
 
 #: .\todo\views.py:58
 msgid "Todo title cannot be empty."
-msgstr ""
+msgstr "El título de todo no puede estar vacío."
 
 #: .\todo\views.py:67
 msgid "Task created successfully!"
-msgstr ""
+msgstr "¡Tarea creada exitosamente!"
 
 #: .\todo\views.py:81
 msgid "Task deleted successfully!"
-msgstr ""
+msgstr "¡Tarea eliminada exitosamente!"
 
 #: .\user_management\admin.py:16
 msgid "Personal info"
-msgstr ""
+msgstr "información personal"
 
 #: .\user_management\admin.py:17
 msgid "Permissions"
-msgstr ""
+msgstr "Permisos"
 
 #: .\user_management\admin.py:19
 msgid "Important dates"
-msgstr ""
+msgstr "Fechas importantes"
 
 #: .\user_management\apps.py:7
 msgid "User management"
@@ -5528,176 +5622,186 @@ msgstr "Gestión de Usuarios"
 #: .\user_management\forms.py:45
 #, python-format
 msgid "Please use an image that is %(w)d x %(h)d pixels or smaller."
-msgstr ""
+msgstr "Utilice una imagen de %(w)d x %(h)d píxeles o menos."
 
 #: .\user_management\forms.py:53 .\user_management\forms.py:55
 msgid "Please use a JPEG, GIF or PNG image."
-msgstr ""
+msgstr "Utilice una imagen JPEG, GIF o PNG."
 
 #: .\user_management\forms.py:61
 #, python-format
 msgid "Avatar file size may not exceed %s."
-msgstr ""
+msgstr "El tamaño del archivo de avatar no puede exceder %s."
 
 #: .\user_management\forms.py:81
 msgid "Invalid date - unless you come from the future"
-msgstr ""
+msgstr "Fecha no válida - a menos que vengas del futuro"
 
 #: .\user_management\forms.py:86
 #, python-format
 msgid "Invalid date - you must older than %d"
-msgstr ""
+msgstr "Fecha no válida: debe ser mayor que %d"
 
 #: .\user_management\forms.py:139
 msgid "Image"
-msgstr ""
+msgstr "Imagen"
 
 #: .\user_management\models.py:29 .\user_management\models.py:48
 msgid "gender"
-msgstr ""
+msgstr "género"
 
 #: .\user_management\models.py:47
 msgid "birthdate"
-msgstr ""
+msgstr "fecha de nacimiento"
 
 #: .\user_management\models.py:49
 msgid "profile picture"
-msgstr ""
+msgstr "foto de perfil"
 
 #: .\user_management\models.py:56
 msgid "phone"
-msgstr ""
+msgstr "telefono"
 
 #: .\user_management\models.py:69
 msgid "site user"
-msgstr ""
+msgstr "usuario del sitio"
 
 #: .\user_management\models.py:70
 msgid "site users"
-msgstr ""
+msgstr "usuarios del sitio"
 
 #: .\user_management\templates\emails\user_management\activation.html:3
 msgid "Email Activation"
-msgstr ""
+msgstr "Activación de correo electrónico"
 
 #: .\user_management\templates\emails\user_management\activation.html:5
 #, python-format
 msgid "Dear %(username)s"
-msgstr ""
+msgstr "Estimado %(username)s"
 
 #: .\user_management\templates\emails\user_management\activation.html:6
 msgid ""
 "Your account has been successfully created. Please click the link below to "
 "activate your account."
 msgstr ""
+"Su cuenta ha sido creada exitosamente. Haga clic en el enlace a continuación"
+" para activar su cuenta."
 
 #: .\user_management\templates\emails\user_management\activation.html:7
 msgid "Activate your account"
-msgstr ""
+msgstr "Activa tu cuenta"
 
 #: .\user_management\templates\user_management\logout.html:5
 msgid "Logged Out - Enterprise Website"
-msgstr ""
+msgstr "Cerrado sesión - Sitio web empresarial"
 
 #: .\user_management\templates\user_management\logout.html:25
 msgid "You have been successfully logged out"
-msgstr ""
+msgstr "Has cerrado sesión correctamente"
 
 #: .\user_management\templates\user_management\logout.html:26
 msgid ""
 "Thank you for visiting Enterprise Website. We hope to see you again soon!"
 msgstr ""
+"Gracias por visitar el sitio web empresarial. ¡Esperamos volver a verte "
+"pronto!"
 
 #: .\user_management\templates\user_management\password_reset_complete.html:4
 msgid "Password Changed"
-msgstr ""
+msgstr "Contraseña cambiada"
 
 #: .\user_management\templates\user_management\password_reset_complete.html:13
 msgid "The password has been changed!"
-msgstr ""
+msgstr "¡La contraseña ha sido cambiada!"
 
 #: .\user_management\templates\user_management\password_reset_complete.html:14
 msgid "Log in now"
-msgstr ""
+msgstr "Inicia sesión ahora"
 
 #: .\user_management\templates\user_management\password_reset_confirm.html:4
 #: .\user_management\templates\user_management\password_reset_confirm.html:13
 msgid "Set New Password"
-msgstr ""
+msgstr "Establecer nueva contraseña"
 
 #: .\user_management\templates\user_management\password_reset_confirm.html:14
 msgid "Please enter (and confirm) your new password."
-msgstr ""
+msgstr "Ingrese (y confirme) su nueva contraseña."
 
 #: .\user_management\templates\user_management\password_reset_confirm.html:20
 msgid "New password:"
-msgstr ""
+msgstr "Nueva contraseña:"
 
 #: .\user_management\templates\user_management\password_reset_confirm.html:25
 msgid "Confirm password:"
-msgstr ""
+msgstr "Confirmar contraseña:"
 
 #: .\user_management\templates\user_management\password_reset_confirm.html:30
 msgid "Change my password"
-msgstr ""
+msgstr "cambiar mi contraseña"
 
 #: .\user_management\templates\user_management\password_reset_confirm.html:35
 msgid "Password reset failed"
-msgstr ""
+msgstr "Error al restablecer la contraseña"
 
 #: .\user_management\templates\user_management\password_reset_confirm.html:36
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
 msgstr ""
+"El enlace para restablecer la contraseña no era válido, posiblemente porque "
+"ya se había utilizado. Solicite un nuevo restablecimiento de contraseña."
 
 #: .\user_management\templates\user_management\password_reset_confirm.html:37
 msgid "Request New Reset"
-msgstr ""
+msgstr "Solicitar nuevo reinicio"
 
 #: .\user_management\templates\user_management\password_reset_done.html:4
 msgid "Password Reset Sent"
-msgstr ""
+msgstr "Restablecimiento de contraseña enviado"
 
 #: .\user_management\templates\user_management\password_reset_done.html:13
 msgid "Password Reset Instructions Sent"
-msgstr ""
+msgstr "Instrucciones para restablecer la contraseña enviadas"
 
 #: .\user_management\templates\user_management\password_reset_done.html:14
 msgid ""
 "We've emailed you instructions for setting your password. If they haven't "
 "arrived in a few minutes, check your spam folder."
 msgstr ""
+"Le hemos enviado por correo electrónico instrucciones para configurar su "
+"contraseña. Si no han llegado en unos minutos, revisa tu carpeta de spam."
 
 #: .\user_management\templates\user_management\password_reset_form.html:4
 msgid "Reset Password"
-msgstr ""
+msgstr "Restablecer contraseña"
 
 #: .\user_management\templates\user_management\password_reset_form.html:12
 msgid "Reset Your Password"
-msgstr ""
+msgstr "Restablecer su contraseña"
 
 #: .\user_management\templates\user_management\password_reset_form.html:13
 msgid ""
 "Enter your email address and we will send you a link to reset your password."
 msgstr ""
+"Ingrese su dirección de correo electrónico y le enviaremos un enlace para "
+"restablecer su contraseña."
 
 #: .\user_management\templates\user_management\password_reset_form.html:20
 msgid "Reset password"
-msgstr ""
+msgstr "Restablecer contraseña"
 
 #: .\user_management\templates\user_management\profile.html:5
 msgid "User Profile - Enterprise Website"
-msgstr ""
+msgstr "Perfil de usuario: sitio web empresarial"
 
 #: .\user_management\templates\user_management\profile.html:12
 #, python-format
 msgid "%(username)s's Profile"
-msgstr ""
+msgstr "Perfil de %(username)s"
 
 #: .\user_management\templates\user_management\profile.html:30
 msgid "No email set"
-msgstr ""
+msgstr "No hay correo electrónico configurado"
 
 #: .\user_management\templates\user_management\profile.html:36
 msgid "Username:"
@@ -5705,51 +5809,51 @@ msgstr "Nombre de usuario:"
 
 #: .\user_management\templates\user_management\profile.html:40
 msgid "Date Joined:"
-msgstr ""
+msgstr "Fecha de incorporación:"
 
 #: .\user_management\templates\user_management\profile.html:44
 msgid "Country:"
-msgstr ""
+msgstr "País:"
 
 #: .\user_management\templates\user_management\profile.html:48
 msgid "City:"
-msgstr ""
+msgstr "Ciudad:"
 
 #: .\user_management\templates\user_management\profile.html:53
 msgid "Edit Profile"
-msgstr ""
+msgstr "Editar perfil"
 
 #: .\user_management\templates\user_management\profile.html:54
 msgid "Back to Home"
-msgstr ""
+msgstr "Volver a Inicio"
 
 #: .\user_management\templates\user_management\signup.html:8
 msgid "User Form"
-msgstr ""
+msgstr "Formulario de usuario"
 
 #: .\user_management\templates\user_management\signup.html:16
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 #: .\user_management\templates\user_management\siteuser_list.html:5
 msgid "User Directory - Enterprise Website"
-msgstr ""
+msgstr "Directorio de usuarios: sitio web empresarial"
 
 #: .\user_management\templates\user_management\siteuser_list.html:12
 msgid "User Directory"
-msgstr ""
+msgstr "Directorio de usuarios"
 
 #: .\user_management\templates\user_management\siteuser_list.html:14
 msgid "Users"
-msgstr ""
+msgstr "Usuarios"
 
 #: .\user_management\templates\user_management\siteuser_list.html:25
 msgid "Registered Platform Users"
-msgstr ""
+msgstr "Usuarios registrados de la plataforma"
 
 #: .\user_management\templates\user_management\siteuser_list.html:26
 msgid "Add User"
-msgstr ""
+msgstr "Agregar usuario"
 
 #: .\user_management\templates\user_management\siteuser_list.html:32
 msgid "Username"
@@ -5757,263 +5861,286 @@ msgstr "Nombre de usuario"
 
 #: .\user_management\templates\user_management\siteuser_list.html:56
 msgid "No users found."
-msgstr ""
+msgstr "No se encontraron usuarios."
 
 #: .\user_management\templates\user_management\upload_image_form.html:6
 msgid "Submit"
-msgstr ""
+msgstr "Enviar"
 
 #: .\user_management\views.py:77
 #, python-format
 msgid "Welcome, %(username)s! Your account has been successfully activated."
-msgstr ""
+msgstr "¡Bienvenido, %(username)s! Su cuenta ha sido activada exitosamente."
 
 #: .\user_management\views.py:80
 msgid ""
 "The activation link is invalid or has expired. Please log in or request a "
 "new activation."
 msgstr ""
+"El enlace de activación no es válido o ha caducado. Inicie sesión o solicite"
+" una nueva activación."
 
 #: .\user_management\views.py:90
 #, python-format
 msgid "Welcome back, %(name)s!"
-msgstr ""
+msgstr "¡Bienvenido de nuevo, %(name)s!"
 
 #: .\user_management\views.py:94
 msgid ""
 "Invalid username or password. Please check your credentials and try again."
 msgstr ""
+"Nombre de usuario o contraseña no válidos. Por favor verifique sus "
+"credenciales e inténtelo nuevamente."
 
 #: .\user_management\views.py:104
 msgid "You have been successfully logged out. See you soon!"
-msgstr ""
+msgstr "Has cerrado tu sesión correctamente. ¡Nos vemos pronto!"
 
 #: .\user_management\views.py:133
 msgid "Account created successfully! You can now log in."
-msgstr ""
+msgstr "¡Cuenta creada exitosamente! Ahora puedes iniciar sesión."
 
 #: .\user_management\views.py:137
 msgid "Please correct the errors below to complete your registration."
-msgstr ""
+msgstr "Corrija los errores a continuación para completar su registro."
 
 #: .\user_management\views.py:176
 msgid "Your profile has been updated successfully."
-msgstr ""
+msgstr "Su perfil ha sido actualizado exitosamente."
 
 #: .\user_management\views.py:180
 msgid "Unable to save profile changes. Please review the highlighted fields."
 msgstr ""
+"No se pueden guardar los cambios del perfil. Por favor revise los campos "
+"resaltados."
 
 #: .\video_gallery\admin.py:32
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatura"
 
 #: .\video_gallery\admin.py:49
 #: .\video_gallery\templates\video_gallery\gallery_list.html:36
 msgid "Videos"
-msgstr ""
+msgstr "Vídeos"
 
 #: .\video_gallery\admin.py:73
 msgid "Video Information"
-msgstr ""
+msgstr "Información de vídeo"
 
 #: .\video_gallery\admin.py:77
 msgid "Media Source"
-msgstr ""
+msgstr "Fuente de medios"
 
 #: .\video_gallery\admin.py:85
 msgid ""
 "Paste a YouTube or Vimeo share link, or upload an MP4 file. For YouTube, "
 "thumbnails are derived automatically if left blank."
 msgstr ""
+"Pegue un enlace para compartir de YouTube o Vimeo, o cargue un archivo MP4. "
+"Para YouTube, las miniaturas se obtienen automáticamente si se dejan en "
+"blanco."
 
 #: .\video_gallery\admin.py:91
 msgid "Media Previews"
-msgstr ""
+msgstr "Vistas previas de medios"
 
 #: .\video_gallery\admin.py:98
 msgid "Display & Publishing"
-msgstr ""
+msgstr "Exhibición y publicación"
 
 #: .\video_gallery\admin.py:112
 msgid "Thumb"
-msgstr ""
+msgstr "pulgar"
 
 #: .\video_gallery\admin.py:116
 msgid "Save item first to generate preview."
-msgstr ""
+msgstr "Guarde el elemento primero para generar una vista previa."
 
 #: .\video_gallery\admin.py:125
 msgid "Thumbnail Preview"
-msgstr ""
+msgstr "Vista previa en miniatura"
 
 #: .\video_gallery\admin.py:129
 msgid "Save item first to view embed player."
-msgstr ""
+msgstr "Guarde el elemento primero para ver el reproductor integrado."
 
 #: .\video_gallery\admin.py:148
 msgid "Live Player Preview"
-msgstr ""
+msgstr "Vista previa del jugador en vivo"
 
 #: .\video_gallery\apps.py:8 .\video_gallery\models.py:46
 msgid "Video Gallery"
-msgstr ""
+msgstr "Galería de vídeos"
 
 #: .\video_gallery\models.py:38
 msgid "URL-friendly slug for public gallery routing (e.g. product-demos)"
 msgstr ""
+"Slug compatible con URL para enrutamiento de galerías públicas (por ejemplo,"
+" demostraciones de productos)"
 
 #: .\video_gallery\models.py:47
 msgid "Video Galleries"
-msgstr ""
+msgstr "Galerías de vídeos"
 
 #: .\video_gallery\models.py:92
 msgid "YouTube"
-msgstr ""
+msgstr "youtube"
 
 #: .\video_gallery\models.py:93
 msgid "Vimeo"
-msgstr ""
+msgstr "Vimeo"
 
 #: .\video_gallery\models.py:94
 msgid "MP4 Video"
-msgstr ""
+msgstr "Vídeo MP4"
 
 #: .\video_gallery\models.py:101
 msgid "Gallery"
-msgstr ""
+msgstr "Galería"
 
 #: .\video_gallery\models.py:106
 msgid "Source Type"
-msgstr ""
+msgstr "Tipo de fuente"
 
 #: .\video_gallery\models.py:112
 msgid "Embed URL or Share Link"
-msgstr ""
+msgstr "Insertar URL o compartir enlace"
 
 #: .\video_gallery\models.py:115
 msgid "YouTube or Vimeo watch/share link, or direct MP4 URL"
-msgstr ""
+msgstr "Enlace para ver/compartir en YouTube o Vimeo, o URL directa de MP4"
 
 #: .\video_gallery\models.py:118
 msgid "Video File (MP4)"
-msgstr ""
+msgstr "Archivo de vídeo (MP4)"
 
 #: .\video_gallery\models.py:122
 msgid "Upload an MP4 file if not using an external link"
-msgstr ""
+msgstr "Cargue un archivo MP4 si no utiliza un enlace externo"
 
 #: .\video_gallery\models.py:125
 msgid "Custom Thumbnail"
-msgstr ""
+msgstr "Miniatura personalizada"
 
 #: .\video_gallery\models.py:129
 msgid "Optional custom thumbnail. Auto-derived for YouTube if left blank."
 msgstr ""
+"Miniatura personalizada opcional. Derivado automáticamente para YouTube si "
+"se deja en blanco."
 
 #: .\video_gallery\models.py:131
 msgid "Display Order"
-msgstr ""
+msgstr "Orden de visualización"
 
 #: .\video_gallery\models.py:137
 msgid "Video Item"
-msgstr ""
+msgstr "Artículo de vídeo"
 
 #: .\video_gallery\models.py:138
 msgid "Video Items"
-msgstr ""
+msgstr "Elementos de vídeo"
 
 #: .\video_gallery\models.py:149
 msgid ""
 "You must specify either an Embed URL / Share Link or upload a Video File."
 msgstr ""
+"Debe especificar una URL para insertar/enlace para compartir o cargar un "
+"archivo de vídeo."
 
 #: .\video_gallery\plugin.py:8
 msgid ""
 "Admin-managed embed-based video galleries supporting YouTube, Vimeo, and MP4"
 msgstr ""
+"Galerías de videos integradas administradas por administradores que admiten "
+"YouTube, Vimeo y MP4"
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:32
 #: .\video_gallery\templates\video_gallery\gallery_list.html:110
 msgid "videos"
-msgstr ""
+msgstr "vídeos"
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:39
 msgid "Published"
-msgstr ""
+msgstr "Publicado"
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:55
 msgid "Filter within gallery..."
-msgstr ""
+msgstr "Filtrar dentro de la galería..."
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:67
 msgid "Filter Source"
-msgstr ""
+msgstr "Fuente del filtro"
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:71
 msgid "All"
-msgstr ""
+msgstr "Todos"
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:122
 msgid "No Videos Found"
-msgstr ""
+msgstr "No se encontraron vídeos"
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:125
 msgid "No videos match the selected filters or search query."
 msgstr ""
+"Ningún vídeo coincide con los filtros seleccionados o la consulta de "
+"búsqueda."
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:127
 msgid "This gallery currently has no active videos published."
-msgstr ""
+msgstr "Esta galería actualmente no tiene videos activos publicados."
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:132
 msgid "Show All Gallery Videos"
-msgstr ""
+msgstr "Mostrar todos los vídeos de la galería"
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:136
 msgid "Add First Video"
-msgstr ""
+msgstr "Agregar el primer video"
 
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:146
 msgid "Back to All Galleries"
-msgstr ""
+msgstr "Volver a todas las galerías"
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:6
 #: .\video_gallery\templates\video_gallery\gallery_list.html:27
 msgid "Media & Video Galleries"
-msgstr ""
+msgstr "Galerías de medios y vídeos"
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:9
 msgid ""
 "Explore our collections of product showcases, technical walkthroughs, and "
 "executive presentations."
 msgstr ""
+"Explore nuestras colecciones de exhibiciones de productos, recorridos "
+"técnicos y presentaciones ejecutivas."
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:29
 msgid ""
 "Browse our collections of product demos, technical tutorials, and corporate "
 "presentations."
 msgstr ""
+"Explore nuestras colecciones de demostraciones de productos, tutoriales "
+"técnicos y presentaciones corporativas."
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:33
 msgid "Galleries"
-msgstr ""
+msgstr "Galerías"
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:40
 msgid "New Gallery"
-msgstr ""
+msgstr "Nueva galería"
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:51
 msgid "Search Media"
-msgstr ""
+msgstr "Buscar medios"
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:60
 msgid "Search by title or topic..."
-msgstr ""
+msgstr "Buscar por título o tema..."
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:69
 msgid "Clear search"
-msgstr ""
+msgstr "Borrar búsqueda"
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:86
 #, python-format
@@ -6026,11 +6153,17 @@ msgid_plural ""
 "                        Found %(counter)s galleries matching \"%(query)s\"\n"
 "                    "
 msgstr[0] ""
+"\n"
+"                        Se encontró la galería %(counter)s que coincide con \"%(query)s\"\n"
+"                    "
 msgstr[1] ""
+"\n"
+"                        Se encontraron %(counter)s galerías que coinciden con \"%(query)s\"\n"
+"                    "
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:129
 msgid "Curated video playlist."
-msgstr ""
+msgstr "Lista de reproducción de vídeos seleccionados."
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:138
 msgid "Explore Gallery"
@@ -6038,56 +6171,60 @@ msgstr "Explorar Galería"
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:189
 msgid "No Video Galleries Found"
-msgstr ""
+msgstr "No se encontraron galerías de videos"
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:192
 msgid ""
 "No galleries match your search query. Try searching with different keywords."
 msgstr ""
+"Ninguna galería coincide con su consulta de búsqueda. Intente buscar con "
+"diferentes palabras clave."
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:194
 msgid ""
 "There are currently no active video galleries published. Check back soon or "
 "create one in the admin panel."
 msgstr ""
+"Actualmente no hay galerías de videos activas publicadas. Vuelve pronto o "
+"crea uno en el panel de administración."
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:199
 msgid "Clear Search"
-msgstr ""
+msgstr "Borrar búsqueda"
 
 #: .\video_gallery\templates\video_gallery\gallery_list.html:203
 msgid "Add First Gallery"
-msgstr ""
+msgstr "Agregar primera galería"
 
 #: .\video_gallery\templates\video_gallery\partials\player_modal.html:18
 #: .\video_gallery\templates\video_gallery\partials\player_modal.html:55
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
 #: .\video_gallery\templates\video_gallery\partials\player_modal.html:28
 msgid "Video Player"
-msgstr ""
+msgstr "Reproductor de vídeo"
 
 #: .\video_gallery\templates\video_gallery\partials\player_modal.html:46
 msgid "About this video"
-msgstr ""
+msgstr "Acerca de este vídeo"
 
 #: .\video_gallery\templates\video_gallery\partials\player_modal.html:53
 msgid "Press ESC or click outside to close"
-msgstr ""
+msgstr "Presione ESC o haga clic afuera para cerrar"
 
 #: .\video_gallery\templates\video_gallery\partials\video_card.html:57
 msgid "Play Video"
-msgstr ""
+msgstr "Reproducir vídeo"
 
 #: .\video_gallery\templates\video_gallery\partials\video_card.html:88
 msgid "No description provided."
-msgstr ""
+msgstr "No se proporciona descripción."
 
 #: .\video_gallery\templates\video_gallery\partials\video_card.html:97
 msgid "Watch"
-msgstr ""
+msgstr "ver"
 
 #: .\webprogram\plugin.py:8
 msgid "In-browser client-side Python execution environment"
-msgstr ""
+msgstr "Entorno de ejecución de Python del lado del cliente en el navegador"

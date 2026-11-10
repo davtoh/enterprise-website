@@ -21,42 +21,42 @@ msgstr ""
 #: .\crm\admin.py:78
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:391
 msgid "Clearance"
-msgstr ""
+msgstr "クリアランス"
 
 #: .\crm\admin.py:95 .\crm\templates\crm\contact_list.html:63
 msgid "Presence"
-msgstr ""
+msgstr "面前"
 
 #: .\crm\admin.py:98 .\crm\templates\crm\contact_list.html:43
 #: .\crm\templates\crm\contact_list.html:99
 msgid "On-Premises"
-msgstr ""
+msgstr "オンプレミス"
 
 #: .\crm\admin.py:99 .\crm\models\contacts.py:20
 #: .\crm\templates\crm\contact_list.html:44
 #: .\crm\templates\crm\contact_list.html:103
 msgid "Off-Premises"
-msgstr ""
+msgstr "社外"
 
 #: .\crm\admin.py:101
 msgid "Pass Valid"
-msgstr ""
+msgstr "有効なパス"
 
 #: .\crm\admin.py:114 .\crm\templates\crm\company_detail.html:117
 #: .\crm\templates\crm\dashboard.html:145
 #: .\crm\templates\crm\lead_list.html:55
 msgid "Stage"
-msgstr ""
+msgstr "ステージ"
 
 #: .\crm\admin.py:139 .\erp\templates\erp\dashboard.html:148
 #: .\erp\templates\erp\movement_list.html:34
 #: .\erp\templates\erp\product_detail.html:133
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 #: .\crm\admin.py:166 .\crm\templates\crm\sequence_list.html:34
 msgid "Steps"
-msgstr ""
+msgstr "ステップ"
 
 #: .\crm\admin.py:192 .\crm\models\sequences.py:130
 #: .\crm\templates\crm\sequence_list.html:33 .\erp\admin.py:120
@@ -70,76 +70,76 @@ msgstr ""
 #: .\task_runner\templates\task_runner\job_list.html:121
 #: .\user_management\templates\user_management\siteuser_list.html:36
 msgid "Status"
-msgstr ""
+msgstr "状態"
 
 #: .\crm\admin.py:212 .\crm\templates\crm\segment_detail.html:52
 #: .\crm\templates\crm\segment_list.html:27
 msgid "Matching Contacts"
-msgstr ""
+msgstr "一致する連絡先"
 
 #: .\crm\admin.py:216
 msgid "Matching Leads"
-msgstr ""
+msgstr "リードのマッチング"
 
 #: .\crm\apps.py:8
 msgid "Customer Relationship Management (CRM)"
-msgstr ""
+msgstr "顧客関係管理 (CRM)"
 
 #: .\crm\forms.py:102
 msgid "Detailed notes about this interaction..."
-msgstr ""
+msgstr "このインタラクションに関する詳細なメモ..."
 
 #: .\crm\forms.py:136 .\crm\models\sequences.py:72
 msgid "Email Subject"
-msgstr ""
+msgstr "メールの件名"
 
 #: .\crm\forms.py:137
 msgid "Enter campaign subject..."
-msgstr ""
+msgstr "キャンペーンの件名を入力してください..."
 
 #: .\crm\forms.py:140
 msgid "HTML / Plain Message"
-msgstr ""
+msgstr "HTML / プレーンメッセージ"
 
 #: .\crm\forms.py:141
 msgid "Write your email body here..."
-msgstr ""
+msgstr "ここにメール本文を記入してください..."
 
 #: .\crm\models\companies.py:10 .\crm\templates\crm\company_list.html:41
 msgid "Company Name"
-msgstr ""
+msgstr "会社名"
 
 #: .\crm\models\companies.py:11 .\crm\templates\crm\company_list.html:42
 msgid "Industry"
-msgstr ""
+msgstr "業界"
 
 #: .\crm\models\companies.py:12
 msgid "Website"
-msgstr ""
+msgstr "Webサイト"
 
 #: .\crm\models\companies.py:13 .\crm\templates\crm\company_detail.html:49
 #: .\crm\templates\crm\company_list.html:44
 #: .\crm\templates\crm\contact_detail.html:53
 msgid "Phone"
-msgstr ""
+msgstr "電話"
 
 #: .\crm\models\companies.py:14 .\crm\templates\crm\company_detail.html:52
 msgid "Address"
-msgstr ""
+msgstr "住所"
 
 #: .\crm\models\companies.py:15
 #: .\user_management\templates\user_management\siteuser_list.html:35
 msgid "City"
-msgstr ""
+msgstr "市"
 
 #: .\crm\models\companies.py:16
 #: .\user_management\templates\user_management\siteuser_list.html:34
 msgid "Country"
-msgstr ""
+msgstr "国"
 
 #: .\crm\models\companies.py:22
 msgid "Annual Revenue ($)"
-msgstr ""
+msgstr "年間収益 ($)"
 
 #: .\crm\models\companies.py:24 .\crm\models\contacts.py:125
 #: .\crm\templates\crm\company_detail.html:69
@@ -147,7 +147,7 @@ msgstr ""
 #: .\crm\templates\crm\lead_detail.html:156 .\erp\models.py:154
 #: .\erp\templates\erp\movement_list.html:39
 msgid "Notes"
-msgstr ""
+msgstr "注意事項"
 
 #: .\crm\models\companies.py:25 .\crm\models\contacts.py:126
 #: .\crm\models\leads.py:82 .\crm\models\segments.py:32
@@ -158,7 +158,7 @@ msgstr ""
 #: .\task_runner\templates\task_runner\job_list.html:124
 #: .\video_gallery\models.py:42 .\video_gallery\models.py:133
 msgid "Created At"
-msgstr ""
+msgstr "作成日"
 
 #: .\crm\models\companies.py:26 .\crm\models\contacts.py:127
 #: .\crm\models\leads.py:83 .\crm\models\segments.py:33
@@ -167,7 +167,7 @@ msgstr ""
 #: .\erp\models.py:258 .\task_runner\models.py:88 .\video_gallery\models.py:43
 #: .\video_gallery\models.py:134
 msgid "Updated At"
-msgstr ""
+msgstr "更新日"
 
 #: .\crm\models\companies.py:29 .\crm\models\contacts.py:36
 #: .\crm\models\leads.py:47 .\crm\templates\crm\contact_detail.html:56
@@ -175,150 +175,150 @@ msgstr ""
 #: .\crm\templates\crm\lead_list.html:54
 #: .\crm\templates\crm\segment_detail.html:61
 msgid "Company"
-msgstr ""
+msgstr "会社"
 
 #: .\crm\models\companies.py:30 .\crm\templates\crm\base_crm.html:44
 msgid "Companies"
-msgstr ""
+msgstr "企業"
 
 #: .\crm\models\contacts.py:11
 msgid "VIP Access"
-msgstr ""
+msgstr "VIPアクセス"
 
 #: .\crm\models\contacts.py:12
 msgid "Staff Member"
-msgstr ""
+msgstr "スタッフ"
 
 #: .\crm\models\contacts.py:13
 msgid "Contractor"
-msgstr ""
+msgstr "請負業者"
 
 #: .\crm\models\contacts.py:14
 msgid "Visitor Pass"
-msgstr ""
+msgstr "ビジターパス"
 
 #: .\crm\models\contacts.py:15
 msgid "Restricted / Escort Required"
-msgstr ""
+msgstr "制限あり/要付き添い"
 
 #: .\crm\models\contacts.py:16
 msgid "Banned / Denied Entry"
-msgstr ""
+msgstr "禁止/拒否された入場"
 
 #: .\crm\models\contacts.py:21
 msgid "On-Premises / Checked In"
-msgstr ""
+msgstr "オンプレミス/チェックイン済み"
 
 #: .\crm\models\contacts.py:26
 msgid "First Name"
-msgstr ""
+msgstr "ファーストネーム"
 
 #: .\crm\models\contacts.py:27
 msgid "Last Name"
-msgstr ""
+msgstr "苗字"
 
 #: .\crm\models\contacts.py:28
 msgid "Email Address"
-msgstr ""
+msgstr "電子メールアドレス"
 
 #: .\crm\models\contacts.py:29
 msgid "Phone Number"
-msgstr ""
+msgstr "電話番号"
 
 #: .\crm\models\contacts.py:38
 msgid "Job Title"
-msgstr ""
+msgstr "役職"
 
 #: .\crm\models\contacts.py:41 .\crm\templates\crm\lead_detail.html:94
 msgid "Subscribed to Marketing"
-msgstr ""
+msgstr "マーケティングを購読しました"
 
 #: .\crm\models\contacts.py:42
 msgid "Designates whether this contact receives marketing broadcast emails."
-msgstr ""
+msgstr "この連絡先がマーケティング ブロードキャスト電子メールを受信するかどうかを指定します。"
 
 #: .\crm\models\contacts.py:47 .\crm\templates\crm\contact_detail.html:65
 #: .\crm\templates\crm\segment_detail.html:63
 msgid "Tags"
-msgstr ""
+msgstr "タグ"
 
 #: .\crm\models\contacts.py:48
 msgid "Comma-separated tags (e.g. enterprise, vip, inbound, lead)."
-msgstr ""
+msgstr "カンマ区切りのタグ (エンタープライズ、VIP、インバウンド、リードなど)。"
 
 #: .\crm\models\contacts.py:57 .\crm\templates\crm\contact_list.html:62
 msgid "Security Clearance"
-msgstr ""
+msgstr "セキュリティクリアランス"
 
 #: .\crm\models\contacts.py:58
 msgid "Physical site security clearance and access level."
-msgstr ""
+msgstr "物理的なサイトのセキュリティ クリアランスとアクセス レベル。"
 
 #: .\crm\models\contacts.py:64
 msgid "Access Valid From"
-msgstr ""
+msgstr "アクセス有効期間"
 
 #: .\crm\models\contacts.py:65
 msgid "Start of validity window for temporary guest or contractor pass."
-msgstr ""
+msgstr "一時的なゲストまたは契約者パスの有効期間の開始。"
 
 #: .\crm\models\contacts.py:71
 msgid "Access Valid Until"
-msgstr ""
+msgstr "アクセス有効期限"
 
 #: .\crm\models\contacts.py:72
 msgid "Expiration timestamp for temporary visitor passes."
-msgstr ""
+msgstr "一時的な訪問者パスの有効期限のタイムスタンプ。"
 
 #: .\crm\models\contacts.py:78
 msgid "Vehicle License Plate"
-msgstr ""
+msgstr "車のナンバープレート"
 
 #: .\crm\models\contacts.py:79
 msgid "Vehicle license plate for automated gate ANPR recognition."
-msgstr ""
+msgstr "自動化ゲート ANPR 認識用の車両ナンバー プレート。"
 
 #: .\crm\models\contacts.py:85
 msgid "Biometric Profile Photo"
-msgstr ""
+msgstr "生体認証プロフィール写真"
 
 #: .\crm\models\contacts.py:86
 msgid "Reference photo for edge face recognition vector generation."
-msgstr ""
+msgstr "エッジ面認識ベクトル生成の参考写真。"
 
 #: .\crm\models\contacts.py:91
 msgid "Biometric Embedding Vector"
-msgstr ""
+msgstr "生体認証埋め込みベクトル"
 
 #: .\crm\models\contacts.py:92
 msgid "Pre-computed 512-d biometric embedding for zero-latency edge startup."
-msgstr ""
+msgstr "事前に計算された 512-d 生体認証埋め込みにより、遅延ゼロのエッジ起動を実現します。"
 
 #: .\crm\models\contacts.py:98
 msgid "Security Classification Tag"
-msgstr ""
+msgstr "セキュリティ分類タグ"
 
 #: .\crm\models\contacts.py:99
 msgid ""
 "Custom classification tag for edge tracker classification (e.g. exec-zone, "
 "server-room)."
-msgstr ""
+msgstr "エッジトラッカー分類用のカスタム分類タグ (例: exec-zone、server-room)。"
 
 #: .\crm\models\contacts.py:107
 msgid "Presence Status"
-msgstr ""
+msgstr "プレゼンスステータス"
 
 #: .\crm\models\contacts.py:108
 msgid "Real-time physical presence status at facilities."
-msgstr ""
+msgstr "施設におけるリアルタイムの物理的な在席状況。"
 
 #: .\crm\models\contacts.py:114
 msgid "Last Seen At"
-msgstr ""
+msgstr "最後に見た時間"
 
 #: .\crm\models\contacts.py:122
 msgid "Last Seen Location"
-msgstr ""
+msgstr "最後に見た場所"
 
 #: .\crm\models\contacts.py:130 .\crm\models\sequences.py:112
 #: .\crm\templates\crm\company_detail.html:116
@@ -332,182 +332,182 @@ msgstr ""
 #: .\templates\themes\tailwind\partials\footer.html:17
 #: .\templates\themes\tailwind\partials\header.html:57
 msgid "Contact"
-msgstr ""
+msgstr "接触"
 
 #: .\crm\models\contacts.py:131 .\crm\templates\crm\base_crm.html:39
 #: .\crm\templates\crm\company_detail.html:79
 #: .\crm\templates\crm\company_list.html:46
 msgid "Contacts"
-msgstr ""
+msgstr "連絡先"
 
 #: .\crm\models\contacts.py:200 .\crm\models\contacts.py:224
 msgid "Gate"
-msgstr ""
+msgstr "ゲート"
 
 #: .\crm\models\leads.py:13
 msgid "New"
-msgstr ""
+msgstr "新しい"
 
 #: .\crm\models\leads.py:14
 msgid "Contacted"
-msgstr ""
+msgstr "連絡済み"
 
 #: .\crm\models\leads.py:15
 msgid "Qualified"
-msgstr ""
+msgstr "資格のある"
 
 #: .\crm\models\leads.py:16
 msgid "Proposal"
-msgstr ""
+msgstr "提案"
 
 #: .\crm\models\leads.py:17
 msgid "Won"
-msgstr ""
+msgstr "勝利した"
 
 #: .\crm\models\leads.py:18
 msgid "Lost"
-msgstr ""
+msgstr "失った"
 
 #: .\crm\models\leads.py:22
 msgid "Website Form"
-msgstr ""
+msgstr "ウェブサイトフォーム"
 
 #: .\crm\models\leads.py:23
 msgid "Referral"
-msgstr ""
+msgstr "紹介"
 
 #: .\crm\models\leads.py:24
 msgid "Cold Outreach"
-msgstr ""
+msgstr "コールドアウトリーチ"
 
 #: .\crm\models\leads.py:25
 msgid "Inbound Email"
-msgstr ""
+msgstr "受信メール"
 
 #: .\crm\models\leads.py:26
 msgid "Event / Conference"
-msgstr ""
+msgstr "イベント/カンファレンス"
 
 #: .\crm\models\leads.py:27
 msgid "Other"
-msgstr ""
+msgstr "他の"
 
 #: .\crm\models\leads.py:32
 msgid "Deal / Lead Title"
-msgstr ""
+msgstr "取引/リードのタイトル"
 
 #: .\crm\models\leads.py:39 .\crm\templates\crm\lead_detail.html:70
 #: .\crm\templates\crm\lead_list.html:53
 msgid "Primary Contact"
-msgstr ""
+msgstr "主な連絡先"
 
 #: .\crm\models\leads.py:54
 msgid "Pipeline Stage"
-msgstr ""
+msgstr "パイプラインステージ"
 
 #: .\crm\models\leads.py:60 .\crm\templates\crm\lead_detail.html:145
 msgid "Lead Source"
-msgstr ""
+msgstr "鉛源"
 
 #: .\crm\models\leads.py:66
 msgid "Estimated Value ($)"
-msgstr ""
+msgstr "推定値 ($)"
 
 #: .\crm\models\leads.py:71
 msgid "Expected Close Date"
-msgstr ""
+msgstr "終了予定日"
 
 #: .\crm\models\leads.py:79
 msgid "Assigned Sales Rep"
-msgstr ""
+msgstr "担当営業担当者"
 
 #: .\crm\models\leads.py:81
 msgid "Deal Notes"
-msgstr ""
+msgstr "取引メモ"
 
 #: .\crm\models\leads.py:86
 msgid "Lead / Deal"
-msgstr ""
+msgstr "リード/ディール"
 
 #: .\crm\models\leads.py:87
 msgid "Leads / Deals"
-msgstr ""
+msgstr "見込み客/取引"
 
 #: .\crm\models\leads.py:132
 msgid "Note"
-msgstr ""
+msgstr "注記"
 
 #: .\crm\models\leads.py:133
 msgid "Phone Call"
-msgstr ""
+msgstr "電話"
 
 #: .\crm\models\leads.py:134 .\crm\templates\crm\contact_detail.html:50
 #: .\crm\templates\crm\contact_list.html:60
 #: .\crm\templates\crm\segment_detail.html:60
 #: .\user_management\templates\user_management\siteuser_list.html:33
 msgid "Email"
-msgstr ""
+msgstr "電子メール"
 
 #: .\crm\models\leads.py:135
 msgid "Meeting"
-msgstr ""
+msgstr "ミーティング"
 
 #: .\crm\models\leads.py:136
 msgid "Stage Change"
-msgstr ""
+msgstr "ステージチェンジ"
 
 #: .\crm\models\leads.py:137
 msgid "Sequence Drip Step"
-msgstr ""
+msgstr "シーケンスドリップステップ"
 
 #: .\crm\models\leads.py:138
 msgid "Broadcast Campaign"
-msgstr ""
+msgstr "ブロードキャストキャンペーン"
 
 #: .\crm\models\leads.py:139
 msgid "Physical Security Access"
-msgstr ""
+msgstr "物理的セキュリティアクセス"
 
 #: .\crm\models\leads.py:150
 msgid "Associated Lead / Deal"
-msgstr ""
+msgstr "関連するリード/取引"
 
 #: .\crm\models\leads.py:158
 msgid "Associated Contact"
-msgstr ""
+msgstr "関連連絡先"
 
 #: .\crm\models\leads.py:166
 msgid "Staff User"
-msgstr ""
+msgstr "スタッフユーザー"
 
 #: .\crm\models\leads.py:172
 msgid "Interaction Type"
-msgstr ""
+msgstr "インタラクションタイプ"
 
 #: .\crm\models\leads.py:174 .\crm\templates\crm\lead_detail.html:180
 msgid "Summary"
-msgstr ""
+msgstr "まとめ"
 
 #: .\crm\models\leads.py:175
 msgid "Details / Notes"
-msgstr ""
+msgstr "詳細・注意事項"
 
 #: .\crm\models\leads.py:179 .\erp\templates\erp\movement_list.html:33
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:395
 msgid "Timestamp"
-msgstr ""
+msgstr "タイムスタンプ"
 
 #: .\crm\models\leads.py:183
 msgid "Interaction Log"
-msgstr ""
+msgstr "インタラクションログ"
 
 #: .\crm\models\leads.py:184
 msgid "Interaction Logs"
-msgstr ""
+msgstr "インタラクションログ"
 
 #: .\crm\models\segments.py:21 .\crm\templates\crm\segment_list.html:25
 msgid "Segment Name"
-msgstr ""
+msgstr "セグメント名"
 
 #: .\crm\models\segments.py:22 .\crm\models\sequences.py:18
 #: .\crm\templates\crm\segment_list.html:26 .\erp\models.py:15
@@ -515,11 +515,11 @@ msgstr ""
 #: .\menu_management\models.py:10 .\video_gallery\models.py:40
 #: .\video_gallery\models.py:104
 msgid "Description"
-msgstr ""
+msgstr "説明"
 
 #: .\crm\models\segments.py:26
 msgid "Filter Rules (JSON)"
-msgstr ""
+msgstr "フィルタルール(JSON)"
 
 #: .\crm\models\segments.py:28
 msgid ""
@@ -527,30 +527,32 @@ msgid ""
 "'qualified'), 'country' (e.g. 'US'), 'tag' (e.g. 'enterprise'), 'min_value' "
 "(number), 'subscribed' (bool)."
 msgstr ""
+"連絡先/リードに適用されるフィルター。サポートされているキー: 'stage' (例: 'qualified')、'country' (例: "
+"'US')、'tag' (例: 'enterprise')、'min_value' (数値)、'subscribed' (bool)。"
 
 #: .\crm\models\segments.py:36
 msgid "Customer Segment"
-msgstr ""
+msgstr "顧客セグメント"
 
 #: .\crm\models\segments.py:37 .\crm\templates\crm\segment_list.html:9
 msgid "Customer Segments"
-msgstr ""
+msgstr "顧客セグメント"
 
 #: .\crm\models\sequences.py:17 .\crm\templates\crm\sequence_list.html:31
 msgid "Sequence Name"
-msgstr ""
+msgstr "シーケンス名"
 
 #: .\crm\models\sequences.py:21
 msgid "Manual Enrollment Only"
-msgstr ""
+msgstr "手動登録のみ"
 
 #: .\crm\models\sequences.py:24
 msgid "Auto-Enroll On Stage Entry"
-msgstr ""
+msgstr "ステージ入場時の自動登録"
 
 #: .\crm\models\sequences.py:25
 msgid "When a lead moves to this stage, automatically enroll primary contact."
-msgstr ""
+msgstr "見込み客がこのステージに移行すると、主連絡先が自動的に登録されます。"
 
 #: .\crm\models\sequences.py:29 .\crm\models\sequences.py:94
 #: .\crm\templates\crm\contact_detail.html:107
@@ -560,35 +562,35 @@ msgstr ""
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:182
 #: .\user_management\templates\user_management\siteuser_list.html:48
 msgid "Active"
-msgstr ""
+msgstr "アクティブ"
 
 #: .\crm\models\sequences.py:30
 msgid "When inactive, scheduled emails in this sequence will be skipped."
-msgstr ""
+msgstr "非アクティブな場合、このシーケンスでスケジュールされた電子メールはスキップされます。"
 
 #: .\crm\models\sequences.py:36 .\crm\models\sequences.py:61
 msgid "Email Sequence"
-msgstr ""
+msgstr "電子メールのシーケンス"
 
 #: .\crm\models\sequences.py:37
 msgid "Email Sequences"
-msgstr ""
+msgstr "電子メールのシーケンス"
 
 #: .\crm\models\sequences.py:65
 msgid "Step Number"
-msgstr ""
+msgstr "ステップ番号"
 
 #: .\crm\models\sequences.py:69
 msgid "Delay (Days)"
-msgstr ""
+msgstr "遅延 (日)"
 
 #: .\crm\models\sequences.py:70
 msgid "Days to wait after enrollment or previous step before sending."
-msgstr ""
+msgstr "登録後、または前のステップから送信までに待機する日数。"
 
 #: .\crm\models\sequences.py:74
 msgid "Email Body (Template)"
-msgstr ""
+msgstr "メール本文（テンプレート）"
 
 #: .\crm\models\sequences.py:76
 msgid ""
@@ -596,238 +598,240 @@ msgid ""
 " contact.email }}, {{ company.name }}, {{ lead.title }}, {{ tracking_pixel "
 "}}"
 msgstr ""
+"プレースホルダーのサポート: {{ contact.first_name }}、{{ contact.last_name }}、{{ "
+"contact.email }}、{{ company.name }}、{{ lead.title }}、{{ tracking_pixel }}"
 
 #: .\crm\models\sequences.py:84 .\crm\models\sequences.py:175
 msgid "Email Step"
-msgstr ""
+msgstr "電子メールステップ"
 
 #: .\crm\models\sequences.py:85
 msgid "Email Steps"
-msgstr ""
+msgstr "メールでの手順"
 
 #: .\crm\models\sequences.py:95
 msgid "Completed"
-msgstr ""
+msgstr "完了しました"
 
 #: .\crm\models\sequences.py:96
 msgid "Paused"
-msgstr ""
+msgstr "一時停止中"
 
 #: .\crm\models\sequences.py:97 .\erp\models.py:196
 msgid "Cancelled"
-msgstr ""
+msgstr "キャンセル"
 
 #: .\crm\models\sequences.py:106
 msgid "Sequence"
-msgstr ""
+msgstr "順序"
 
 #: .\crm\models\sequences.py:120 .\crm\models\sequences.py:189
 msgid "Associated Lead"
-msgstr ""
+msgstr "関連リード"
 
 #: .\crm\models\sequences.py:124
 msgid "Current Step Number"
-msgstr ""
+msgstr "現在のステップ番号"
 
 #: .\crm\models\sequences.py:132
 msgid "Enrolled At"
-msgstr ""
+msgstr "登録先"
 
 #: .\crm\models\sequences.py:136
 msgid "Next Send Scheduled At"
-msgstr ""
+msgstr "次回の送信予定時刻"
 
 #: .\crm\models\sequences.py:141
 msgid "Completed At"
-msgstr ""
+msgstr "完了日"
 
 #: .\crm\models\sequences.py:145 .\crm\models\sequences.py:167
 msgid "Sequence Enrollment"
-msgstr ""
+msgstr "シーケンス登録"
 
 #: .\crm\models\sequences.py:146
 msgid "Sequence Enrollments"
-msgstr ""
+msgstr "シーケンス登録"
 
 #: .\crm\models\sequences.py:154 .\erp\templates\erp\dashboard.html:228
 #: .\erp\templates\erp\invoice_detail.html:15
 #: .\erp\templates\erp\invoice_list.html:61
 msgid "Sent"
-msgstr ""
+msgstr "送信済み"
 
 #: .\crm\models\sequences.py:155
 msgid "Opened"
-msgstr ""
+msgstr "開いた"
 
 #: .\crm\models\sequences.py:156
 msgid "Failed"
-msgstr ""
+msgstr "失敗した"
 
 #: .\crm\models\sequences.py:181
 msgid "Recipient Contact"
-msgstr ""
+msgstr "受取人の連絡先"
 
 #: .\crm\models\sequences.py:191
 msgid "Recipient Email"
-msgstr ""
+msgstr "受信者の電子メール"
 
 #: .\crm\models\sequences.py:192
 msgid "Subject"
-msgstr ""
+msgstr "主題"
 
 #: .\crm\models\sequences.py:197
 msgid "Tracking Token"
-msgstr ""
+msgstr "トラッキングトークン"
 
 #: .\crm\models\sequences.py:204
 msgid "Delivery Status"
-msgstr ""
+msgstr "配送状況"
 
 #: .\crm\models\sequences.py:206
 msgid "Sent At"
-msgstr ""
+msgstr "送信先"
 
 #: .\crm\models\sequences.py:210
 msgid "Opened At"
-msgstr ""
+msgstr "開店時間"
 
 #: .\crm\models\sequences.py:212
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:76
 #: .\task_runner\models.py:65
 msgid "Error Message"
-msgstr ""
+msgstr "エラーメッセージ"
 
 #: .\crm\models\sequences.py:215
 msgid "Email Delivery Log"
-msgstr ""
+msgstr "電子メール配信ログ"
 
 #: .\crm\models\sequences.py:216
 msgid "Email Delivery Logs"
-msgstr ""
+msgstr "電子メール配信ログ"
 
 #: .\crm\plugin.py:9
 msgid "Customer Relationship Management"
-msgstr ""
+msgstr "顧客関係管理"
 
 #: .\crm\plugin.py:10
 msgid ""
 "Full-featured CRM with pipeline Kanban, email sequences, customer "
 "segmentation, and analytics."
-msgstr ""
+msgstr "パイプライン カンバン、電子メール シーケンス、顧客セグメント化、分析を備えたフル機能の CRM。"
 
 #: .\crm\plugin.py:19 .\templates\base.html:123
 #: .\templates\themes\bootstrap5\partials\header.html:66
 msgid "CRM"
-msgstr ""
+msgstr "CRM"
 
 #: .\crm\templates\crm\analytics.html:10
 msgid "Total Pipeline"
-msgstr ""
+msgstr "パイプライン全体"
 
 #: .\crm\templates\crm\analytics.html:12
 msgid "tracked deals"
-msgstr ""
+msgstr "追跡された取引"
 
 #: .\crm\templates\crm\analytics.html:20
 msgid "Won Revenue Deals"
-msgstr ""
+msgstr "収益取引の獲得"
 
 #: .\crm\templates\crm\analytics.html:22
 msgid "Closed-won opportunities"
-msgstr ""
+msgstr "クローズド獲得の機会"
 
 #: .\crm\templates\crm\analytics.html:30
 msgid "Funnel Win Rate"
-msgstr ""
+msgstr "ファネル勝率"
 
 #: .\crm\templates\crm\analytics.html:32
 msgid "Won vs Total pipeline"
-msgstr ""
+msgstr "獲得したパイプラインと総パイプライン"
 
 #: .\crm\templates\crm\analytics.html:40
 msgid "Email Open Rate"
-msgstr ""
+msgstr "メール開封率"
 
 #: .\crm\templates\crm\analytics.html:42
 msgid "emails opened"
-msgstr ""
+msgstr "開封されたメール"
 
 #: .\crm\templates\crm\analytics.html:54
 msgid "Lead Funnel Conversion"
-msgstr ""
+msgstr "リードファネルの変換"
 
 #: .\crm\templates\crm\analytics.html:55
 msgid "Stage Counts"
-msgstr ""
+msgstr "ステージ数"
 
 #: .\crm\templates\crm\analytics.html:69
 msgid "Pipeline Value by Stage ($)"
-msgstr ""
+msgstr "ステージ別のパイプライン価値 ($)"
 
 #: .\crm\templates\crm\analytics.html:70
 msgid "Dollar Volume"
-msgstr ""
+msgstr "ドル取引額"
 
 #: .\crm\templates\crm\analytics.html:86
 msgid "Contact Acquisition Growth"
-msgstr ""
+msgstr "コンタクト獲得の成長"
 
 #: .\crm\templates\crm\analytics.html:87
 msgid "Monthly Trend"
-msgstr ""
+msgstr "月次傾向"
 
 #: .\crm\templates\crm\analytics.html:101
 msgid "Email Deliveries & Open Rate"
-msgstr ""
+msgstr "メール配信数と開封率"
 
 #: .\crm\templates\crm\analytics.html:102
 msgid "Engagement"
-msgstr ""
+msgstr "婚約"
 
 #: .\crm\templates\crm\analytics.html:127
 msgid "Deals"
-msgstr ""
+msgstr "お得情報"
 
 #: .\crm\templates\crm\analytics.html:193
 msgid "New Contacts"
-msgstr ""
+msgstr "新しい連絡先"
 
 #: .\crm\templates\crm\base_crm.html:15
 msgid "Enterprise CRM"
-msgstr ""
+msgstr "エンタープライズCRM"
 
 #: .\crm\templates\crm\base_crm.html:16
 msgid "Pipeline, Contacts, Sequences & Revenue Intelligence"
-msgstr ""
+msgstr "パイプライン、連絡先、シーケンス、収益インテリジェンス"
 
 #: .\crm\templates\crm\base_crm.html:24 .\erp\templates\erp\base_erp.html:27
 msgid "Dashboard"
-msgstr ""
+msgstr "ダッシュボード"
 
 #: .\crm\templates\crm\base_crm.html:29
 msgid "Kanban Pipeline"
-msgstr ""
+msgstr "カンバンパイプライン"
 
 #: .\crm\templates\crm\base_crm.html:34
 msgid "Deals / Leads"
-msgstr ""
+msgstr "取引/リード"
 
 #: .\crm\templates\crm\base_crm.html:49
 msgid "Email Drips"
-msgstr ""
+msgstr "メールドリップ"
 
 #: .\crm\templates\crm\base_crm.html:54
 msgid "Segments"
-msgstr ""
+msgstr "セグメント"
 
 #: .\crm\templates\crm\base_crm.html:59
 msgid "Analytics"
-msgstr ""
+msgstr "分析"
 
 #: .\crm\templates\crm\company_detail.html:30
 #: .\crm\templates\crm\company_form.html:11
 msgid "Edit Company"
-msgstr ""
+msgstr "会社の編集"
 
 #: .\crm\templates\crm\company_detail.html:33
 #: .\crm\templates\crm\company_list.html:83
@@ -842,64 +846,64 @@ msgstr ""
 #: .\erp\templates\erp\invoice_detail.html:205
 #: .\erp\templates\erp\product_list.html:74
 msgid "Delete"
-msgstr ""
+msgstr "消去"
 
 #: .\crm\templates\crm\company_detail.html:45
 msgid "Company Particulars"
-msgstr ""
+msgstr "会社概要"
 
 #: .\crm\templates\crm\company_detail.html:55
 #: .\crm\templates\crm\company_list.html:45
 msgid "Annual Revenue"
-msgstr ""
+msgstr "年間収益"
 
 #: .\crm\templates\crm\company_detail.html:64
 #: .\crm\templates\crm\dashboard.html:26
 msgid "Pipeline Value"
-msgstr ""
+msgstr "パイプラインの価値"
 
 #: .\crm\templates\crm\company_detail.html:81
 #: .\crm\templates\crm\contact_list.html:14
 #: .\crm\templates\crm\dashboard.html:109
 msgid "Add Contact"
-msgstr ""
+msgstr "連絡先を追加"
 
 #: .\crm\templates\crm\company_detail.html:89
 msgid "Staff"
-msgstr ""
+msgstr "スタッフ"
 
 #: .\crm\templates\crm\company_detail.html:93
 msgid "No contacts registered under this company yet."
-msgstr ""
+msgstr "この会社にはまだ連絡先が登録されていません。"
 
 #: .\crm\templates\crm\company_detail.html:105
 msgid "Deals & Opportunities"
-msgstr ""
+msgstr "セールとチャンス"
 
 #: .\crm\templates\crm\company_detail.html:107
 #: .\crm\templates\crm\lead_list.html:17
 msgid "New Deal"
-msgstr ""
+msgstr "ニューディール"
 
 #: .\crm\templates\crm\company_detail.html:115
 #: .\crm\templates\crm\dashboard.html:143
 #: .\crm\templates\crm\lead_list.html:52
 msgid "Deal Title"
-msgstr ""
+msgstr "取引タイトル"
 
 #: .\crm\templates\crm\company_detail.html:118
 #: .\crm\templates\crm\dashboard.html:146
 #: .\crm\templates\crm\lead_list.html:56
 msgid "Value"
-msgstr ""
+msgstr "価値"
 
 #: .\crm\templates\crm\company_detail.html:148
 msgid "No deals associated with this company."
-msgstr ""
+msgstr "この会社と関連する取引はありません。"
 
 #: .\crm\templates\crm\company_form.html:13
 msgid "Create New Company"
-msgstr ""
+msgstr "新しい会社を作成する"
 
 #: .\crm\templates\crm\company_form.html:85
 #: .\crm\templates\crm\confirm_delete.html:20
@@ -919,47 +923,47 @@ msgstr ""
 #: .\user_management\templates\user_management\login.html:19
 #: .\user_management\templates\user_management\signup.html:18
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: .\crm\templates\crm\company_form.html:88
 msgid "Save Company"
-msgstr ""
+msgstr "会社を保存する"
 
 #: .\crm\templates\crm\company_list.html:9
 msgid "Companies & Accounts"
-msgstr ""
+msgstr "会社とアカウント"
 
 #: .\crm\templates\crm\company_list.html:10
 msgid "Organizations, enterprise clients, and business accounts."
-msgstr ""
+msgstr "組織、企業クライアント、ビジネスアカウント。"
 
 #: .\crm\templates\crm\company_list.html:14
 #: .\crm\templates\crm\dashboard.html:113
 msgid "Add Company"
-msgstr ""
+msgstr "会社を追加"
 
 #: .\crm\templates\crm\company_list.html:26
 msgid "Search by company, industry, city..."
-msgstr ""
+msgstr "企業、業種、都市から検索..."
 
 #: .\crm\templates\crm\company_list.html:30
 #: .\video_gallery\templates\video_gallery\gallery_list.html:61
 msgid "Search"
-msgstr ""
+msgstr "検索"
 
 #: .\crm\templates\crm\company_list.html:32
 #: .\crm\templates\crm\contact_list.html:50
 #: .\crm\templates\crm\lead_list.html:43
 #: .\erp\templates\erp\inventory_dashboard.html:109
 msgid "Reset"
-msgstr ""
+msgstr "リセット"
 
 #: .\crm\templates\crm\company_list.html:43 .\erp\models.py:144
 #: .\erp\templates\erp\dashboard.html:151
 #: .\erp\templates\erp\movement_list.html:37
 #: .\erp\templates\erp\product_detail.html:135
 msgid "Location"
-msgstr ""
+msgstr "位置"
 
 #: .\crm\templates\crm\company_list.html:47
 #: .\crm\templates\crm\contact_list.html:66
@@ -971,11 +975,11 @@ msgstr ""
 #: .\erp\templates\erp\product_list.html:34
 #: .\task_runner\templates\task_runner\job_list.html:125
 msgid "Actions"
-msgstr ""
+msgstr "アクション"
 
 #: .\crm\templates\crm\company_list.html:58
 msgid "Visit website"
-msgstr ""
+msgstr "ウェブサイトにアクセス"
 
 #: .\crm\templates\crm\company_list.html:77
 #: .\crm\templates\crm\contact_list.html:121
@@ -984,7 +988,7 @@ msgstr ""
 #: .\erp\templates\erp\product_list.html:72
 #: .\task_runner\templates\task_runner\job_list.html:172
 msgid "View"
-msgstr ""
+msgstr "ビュー"
 
 #: .\crm\templates\crm\company_list.html:80
 #: .\crm\templates\crm\contact_list.html:124
@@ -996,183 +1000,183 @@ msgstr ""
 #: .\erp\templates\erp\product_detail.html:19
 #: .\erp\templates\erp\product_list.html:73
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 #: .\crm\templates\crm\company_list.html:92
 msgid "No companies registered yet."
-msgstr ""
+msgstr "まだ登録されている企業はありません。"
 
 #: .\crm\templates\crm\confirm_delete.html:12
 #: .\erp\templates\erp\confirm_delete.html:12
 msgid "Confirm Deletion"
-msgstr ""
+msgstr "削除の確認"
 
 #: .\crm\templates\crm\confirm_delete.html:14
 #, python-format
 msgid ""
 "Are you sure you want to permanently delete <strong>\"%(name)s\"</strong>? "
 "This action cannot be undone."
-msgstr ""
+msgstr "<strong>「%(name)s」</strong>を完全に削除してもよろしいですか?この操作は元に戻すことができません。"
 
 #: .\crm\templates\crm\confirm_delete.html:23
 msgid "Delete Permanently"
-msgstr ""
+msgstr "完全に削除"
 
 #: .\crm\templates\crm\contact_detail.html:16
 #: .\crm\templates\crm\contact_list.html:116
 #: .\crm\templates\crm\segment_detail.html:78
 msgid "Subscribed"
-msgstr ""
+msgstr "購読しました"
 
 #: .\crm\templates\crm\contact_detail.html:16
 #: .\crm\templates\crm\contact_list.html:116
 #: .\crm\templates\crm\lead_detail.html:94
 #: .\crm\templates\crm\segment_detail.html:78
 msgid "Unsubscribed"
-msgstr ""
+msgstr "購読解除済み"
 
 #: .\crm\templates\crm\contact_detail.html:30
 #: .\crm\templates\crm\contact_form.html:11
 msgid "Edit Contact"
-msgstr ""
+msgstr "連絡先の編集"
 
 #: .\crm\templates\crm\contact_detail.html:46
 msgid "Contact Details"
-msgstr ""
+msgstr "連絡先の詳細"
 
 #: .\crm\templates\crm\contact_detail.html:86
 msgid "Access Pass & Security"
-msgstr ""
+msgstr "アクセスパスとセキュリティ"
 
 #: .\crm\templates\crm\contact_detail.html:100
 msgid "Last seen"
-msgstr ""
+msgstr "最後に見た"
 
 #: .\crm\templates\crm\contact_detail.html:112
 msgid "Pass Validity"
-msgstr ""
+msgstr "パスの有効期限"
 
 #: .\crm\templates\crm\contact_detail.html:115
 msgid "Valid Pass"
-msgstr ""
+msgstr "有効なパス"
 
 #: .\crm\templates\crm\contact_detail.html:117
 msgid "Pass Expired / Invalid"
-msgstr ""
+msgstr "パスが期限切れ/無効です"
 
 #: .\crm\templates\crm\contact_detail.html:121
 msgid "Immediate"
-msgstr ""
+msgstr "すぐに"
 
 #: .\crm\templates\crm\contact_detail.html:121
 msgid "Indefinite"
-msgstr ""
+msgstr "不定"
 
 #: .\crm\templates\crm\contact_detail.html:126
 msgid "License Plate"
-msgstr ""
+msgstr "ナンバープレート"
 
 #: .\crm\templates\crm\contact_detail.html:135
 msgid "Security Tag"
-msgstr ""
+msgstr "セキュリティタグ"
 
 #: .\crm\templates\crm\contact_detail.html:144
 msgid "Biometrics"
-msgstr ""
+msgstr "生体認証"
 
 #: .\crm\templates\crm\contact_detail.html:149
 msgid "Photo Registered"
-msgstr ""
+msgstr "写真登録済み"
 
 #: .\crm\templates\crm\contact_detail.html:156
 msgid "512-d Vector Ready"
-msgstr ""
+msgstr "512-d ベクター対応"
 
 #: .\crm\templates\crm\contact_detail.html:168
 msgid "Associated Deals"
-msgstr ""
+msgstr "関連する取引"
 
 #: .\crm\templates\crm\contact_detail.html:170
 #: .\crm\templates\crm\pipeline.html:12
 msgid "Add Deal"
-msgstr ""
+msgstr "取引を追加"
 
 #: .\crm\templates\crm\contact_detail.html:188
 msgid "No deals associated with this contact yet."
-msgstr ""
+msgstr "この連絡先に関連付けられた取引はまだありません。"
 
 #: .\crm\templates\crm\contact_detail.html:198
 msgid "Email Drip Enrollments"
-msgstr ""
+msgstr "メールによる点滴登録"
 
 #: .\crm\templates\crm\contact_detail.html:209
 msgid "Step"
-msgstr ""
+msgstr "ステップ"
 
 #: .\crm\templates\crm\contact_detail.html:209
 msgid "Next send"
-msgstr ""
+msgstr "次の送信"
 
 #: .\crm\templates\crm\contact_detail.html:214
 msgid "Not enrolled in any email sequences."
-msgstr ""
+msgstr "どの電子メール シーケンスにも登録されていません。"
 
 #: .\crm\templates\crm\contact_detail.html:228
 msgid "Recent Gate Access History"
-msgstr ""
+msgstr "最近のゲートアクセス履歴"
 
 #: .\crm\templates\crm\contact_detail.html:229
 msgid "events"
-msgstr ""
+msgstr "イベント"
 
 #: .\crm\templates\crm\contact_detail.html:242
 msgid "confidence"
-msgstr ""
+msgstr "自信"
 
 #: .\crm\templates\crm\contact_detail.html:256
 msgid "Touchpoint History"
-msgstr ""
+msgstr "タッチポイント履歴"
 
 #: .\crm\templates\crm\contact_detail.html:281
 #: .\crm\templates\crm\lead_detail.html:223
 msgid "System"
-msgstr ""
+msgstr "システム"
 
 #: .\crm\templates\crm\contact_detail.html:287
 msgid "No activities recorded for this contact."
-msgstr ""
+msgstr "この連絡先にはアクティビティが記録されていません。"
 
 #: .\crm\templates\crm\contact_form.html:13
 msgid "Create New Contact"
-msgstr ""
+msgstr "新しい連絡先の作成"
 
 #: .\crm\templates\crm\contact_form.html:82
 msgid "Physical Security & Access Credentials"
-msgstr ""
+msgstr "物理的なセキュリティとアクセス認証情報"
 
 #: .\crm\templates\crm\contact_form.html:147
 msgid "Save Contact"
-msgstr ""
+msgstr "連絡先の保存"
 
 #: .\crm\templates\crm\contact_list.html:9
 msgid "Contacts Directory"
-msgstr ""
+msgstr "連絡先ディレクトリ"
 
 #: .\crm\templates\crm\contact_list.html:10
 msgid "Individual persons, buyers, champions, and sales stakeholders."
-msgstr ""
+msgstr "個人、バイヤー、チャンピオン、販売関係者。"
 
 #: .\crm\templates\crm\contact_list.html:26
 msgid "Search by name, email, company, plate..."
-msgstr ""
+msgstr "名前、メールアドレス、会社名、プレートなどで検索します。"
 
 #: .\crm\templates\crm\contact_list.html:31
 msgid "All Clearances"
-msgstr ""
+msgstr "すべてのクリアランス"
 
 #: .\crm\templates\crm\contact_list.html:42
 msgid "All Presence"
-msgstr ""
+msgstr "オールプレゼンス"
 
 #: .\crm\templates\crm\contact_list.html:48
 #: .\crm\templates\crm\lead_list.html:41
@@ -1181,315 +1185,315 @@ msgstr ""
 #: .\task_runner\templates\task_runner\job_list.html:101
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:56
 msgid "Filter"
-msgstr ""
+msgstr "フィルター"
 
 #: .\crm\templates\crm\contact_list.html:59
 #: .\erp\templates\erp\product_list.html:28 .\video_gallery\models.py:33
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
 #: .\crm\templates\crm\contact_list.html:64
 msgid "Plate"
-msgstr ""
+msgstr "皿"
 
 #: .\crm\templates\crm\contact_list.html:65
 msgid "Subscription"
-msgstr ""
+msgstr "サブスクリプション"
 
 #: .\crm\templates\crm\contact_list.html:136
 msgid "No contacts found."
-msgstr ""
+msgstr "連絡先が見つかりませんでした。"
 
 #: .\crm\templates\crm\dashboard.html:11
 msgid "Active Deals"
-msgstr ""
+msgstr "アクティブな取引"
 
 #: .\crm\templates\crm\dashboard.html:16
 msgid "deals won"
-msgstr ""
+msgstr "取引が成立しました"
 
 #: .\crm\templates\crm\dashboard.html:31
 msgid "Excludes lost deals"
-msgstr ""
+msgstr "失われた取引を除く"
 
 #: .\crm\templates\crm\dashboard.html:41
 msgid "Win Rate"
-msgstr ""
+msgstr "勝率"
 
 #: .\crm\templates\crm\dashboard.html:46
 msgid "Conversion efficiency"
-msgstr ""
+msgstr "変換効率"
 
 #: .\crm\templates\crm\dashboard.html:56
 msgid "Total Contacts"
-msgstr ""
+msgstr "連絡先の総数"
 
 #: .\crm\templates\crm\dashboard.html:61
 msgid "emails sent"
-msgstr ""
+msgstr "送信されたメール"
 
 #: .\crm\templates\crm\dashboard.html:61
 msgid "opened"
-msgstr ""
+msgstr "開かれた"
 
 #: .\crm\templates\crm\dashboard.html:74
 msgid "Pipeline Distribution"
-msgstr ""
+msgstr "パイプラインの配布"
 
 #: .\crm\templates\crm\dashboard.html:76
 msgid "Open Kanban"
-msgstr ""
+msgstr "オープンカンバン"
 
 #: .\crm\templates\crm\dashboard.html:101
 msgid "Quick Actions"
-msgstr ""
+msgstr "クイックアクション"
 
 #: .\crm\templates\crm\dashboard.html:105
 msgid "Create Deal / Lead"
-msgstr ""
+msgstr "取引/リードの作成"
 
 #: .\crm\templates\crm\dashboard.html:117
 msgid "New Email Drip"
-msgstr ""
+msgstr "新しいメールドリップ"
 
 #: .\crm\templates\crm\dashboard.html:121
 msgid "View Full Analytics"
-msgstr ""
+msgstr "完全な分析を表示"
 
 #: .\crm\templates\crm\dashboard.html:135
 msgid "Recent Deals"
-msgstr ""
+msgstr "最近の取引"
 
 #: .\crm\templates\crm\dashboard.html:136
 #: .\erp\templates\erp\dashboard.html:141
 #: .\erp\templates\erp\dashboard.html:197
 msgid "View all"
-msgstr ""
+msgstr "すべて見る"
 
 #: .\crm\templates\crm\dashboard.html:144
 msgid "Contact / Company"
-msgstr ""
+msgstr "連絡先・会社名"
 
 #: .\crm\templates\crm\dashboard.html:179
 msgid "No deals found. Create your first deal to get started."
-msgstr ""
+msgstr "取引が見つかりませんでした。まずは最初の取引を作成してください。"
 
 #: .\crm\templates\crm\dashboard.html:194
 msgid "Recent Activities"
-msgstr ""
+msgstr "最近の活動"
 
 #: .\crm\templates\crm\dashboard.html:210
 #: .\crm\templates\crm\lead_detail.html:23
 msgid "ago"
-msgstr ""
+msgstr "前"
 
 #: .\crm\templates\crm\dashboard.html:229
 msgid "No recent activities recorded."
-msgstr ""
+msgstr "最近の活動は記録されていません。"
 
 #: .\crm\templates\crm\lead_detail.html:23
 #: .\crm\templates\crm\segment_list.html:29
 #: .\crm\templates\crm\sequence_list.html:36
 msgid "Created"
-msgstr ""
+msgstr "作成されました"
 
 #: .\crm\templates\crm\lead_detail.html:23
 msgid "Last updated"
-msgstr ""
+msgstr "最終更新日"
 
 #: .\crm\templates\crm\lead_detail.html:32
 #: .\crm\templates\crm\partials\lead_kanban_card.html:41
 msgid "Edit Deal"
-msgstr ""
+msgstr "取引の編集"
 
 #: .\crm\templates\crm\lead_detail.html:43
 msgid "Pipeline Stage Progression"
-msgstr ""
+msgstr "パイプラインステージの進行"
 
 #: .\crm\templates\crm\lead_detail.html:99
 msgid "No contact linked to this deal."
-msgstr ""
+msgstr "この取引にリンクされた連絡先はありません。"
 
 #: .\crm\templates\crm\lead_detail.html:107
 msgid "Company / Account"
-msgstr ""
+msgstr "会社/アカウント"
 
 #: .\crm\templates\crm\lead_detail.html:121
 msgid "General"
-msgstr ""
+msgstr "一般的な"
 
 #: .\crm\templates\crm\lead_detail.html:133
 msgid "No company assigned."
-msgstr ""
+msgstr "指定された会社はありません。"
 
 #: .\crm\templates\crm\lead_detail.html:141
 msgid "Deal Particulars"
-msgstr ""
+msgstr "取引の詳細"
 
 #: .\crm\templates\crm\lead_detail.html:148
 #: .\crm\templates\crm\lead_list.html:57
 #: .\crm\templates\crm\partials\lead_kanban_card.html:66
 msgid "Assigned Rep"
-msgstr ""
+msgstr "割り当てられた担当者"
 
 #: .\crm\templates\crm\lead_detail.html:149
 #: .\crm\templates\crm\lead_list.html:106
 msgid "Unassigned"
-msgstr ""
+msgstr "未割り当て"
 
 #: .\crm\templates\crm\lead_detail.html:151
 #: .\crm\templates\crm\lead_list.html:58
 msgid "Expected Close"
-msgstr ""
+msgstr "予想終値"
 
 #: .\crm\templates\crm\lead_detail.html:152
 #: .\user_management\templates\user_management\profile.html:45
 #: .\user_management\templates\user_management\profile.html:49
 msgid "Not specified"
-msgstr ""
+msgstr "指定されていない"
 
 #: .\crm\templates\crm\lead_detail.html:169
 msgid "Log New Activity"
-msgstr ""
+msgstr "新しいアクティビティをログに記録する"
 
 #: .\crm\templates\crm\lead_detail.html:176
 msgid "Activity Type"
-msgstr ""
+msgstr "アクティビティの種類"
 
 #: .\crm\templates\crm\lead_detail.html:185
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:26
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:329
 msgid "Details"
-msgstr ""
+msgstr "詳細"
 
 #: .\crm\templates\crm\lead_detail.html:190
 msgid "Record Activity"
-msgstr ""
+msgstr "アクティビティを記録する"
 
 #: .\crm\templates\crm\lead_detail.html:200
 msgid "Interaction History"
-msgstr ""
+msgstr "インタラクション履歴"
 
 #: .\crm\templates\crm\lead_detail.html:229
 msgid "No activities recorded for this deal yet."
-msgstr ""
+msgstr "この取引に関して記録されたアクティビティはまだありません。"
 
 #: .\crm\templates\crm\lead_form.html:11
 msgid "Edit Deal / Lead"
-msgstr ""
+msgstr "取引/リードの編集"
 
 #: .\crm\templates\crm\lead_form.html:13
 msgid "Create New Deal / Lead"
-msgstr ""
+msgstr "新しい取引/リードの作成"
 
 #: .\crm\templates\crm\lead_form.html:88
 msgid "Save Deal"
-msgstr ""
+msgstr "取引を保存"
 
 #: .\crm\templates\crm\lead_list.html:9
 msgid "Deals & Leads Directory"
-msgstr ""
+msgstr "取引および見込み客ディレクトリ"
 
 #: .\crm\templates\crm\lead_list.html:10
 msgid ""
 "Track and manage opportunities across all stages of your sales pipeline."
-msgstr ""
+msgstr "販売パイプラインのすべての段階で機会を追跡および管理します。"
 
 #: .\crm\templates\crm\lead_list.html:14
 msgid "Kanban Board"
-msgstr ""
+msgstr "かんばんボード"
 
 #: .\crm\templates\crm\lead_list.html:29
 msgid "Search by title, contact, company..."
-msgstr ""
+msgstr "タイトル、連絡先、会社名で検索..."
 
 #: .\crm\templates\crm\lead_list.html:34
 msgid "All Pipeline Stages"
-msgstr ""
+msgstr "すべてのパイプラインステージ"
 
 #: .\crm\templates\crm\lead_list.html:128
 msgid "No deals found matching your query."
-msgstr ""
+msgstr "クエリに一致する取引は見つかりませんでした。"
 
 #: .\crm\templates\crm\partials\lead_kanban_card.html:14
 msgid "Move stage"
-msgstr ""
+msgstr "ステージの移動"
 
 #: .\crm\templates\crm\partials\lead_kanban_card.html:18
 msgid "Move to Stage"
-msgstr ""
+msgstr "ステージへ移動"
 
 #: .\crm\templates\crm\partials\lead_kanban_card.html:36
 #: .\home\templates\home\index.html:61 .\home\templates\home\index.html:75
 #: .\home\templates\home\index.html:89 .\home\templates\home\index.html:103
 msgid "View Details"
-msgstr ""
+msgstr "詳細を見る"
 
 #: .\crm\templates\crm\pipeline.html:7
 msgid "Deals Pipeline (Kanban)"
-msgstr ""
+msgstr "取引パイプライン (カンバン)"
 
 #: .\crm\templates\crm\pipeline.html:8
 msgid ""
 "Drag and drop cards between stages to update deal progress and trigger "
 "automated sequences."
-msgstr ""
+msgstr "ステージ間でカードをドラッグ アンド ドロップして取引の進行状況を更新し、自動シーケンスをトリガーします。"
 
 #: .\crm\templates\crm\pipeline.html:15
 msgid "List View"
-msgstr ""
+msgstr "リストビュー"
 
 #: .\crm\templates\crm\pipeline.html:63
 msgid "No deals in this stage"
-msgstr ""
+msgstr "この段階では取引はありません"
 
 #: .\crm\templates\crm\pipeline.html:145
 msgid "Failed to update deal stage. Please try again."
-msgstr ""
+msgstr "取引ステージを更新できませんでした。もう一度試してください。"
 
 #: .\crm\templates\crm\pipeline.html:150
 msgid "Network error occurred while moving deal."
-msgstr ""
+msgstr "取引の移動中にネットワーク エラーが発生しました。"
 
 #: .\crm\templates\crm\segment_detail.html:12
 msgid "contacts"
-msgstr ""
+msgstr "連絡先"
 
 #: .\crm\templates\crm\segment_detail.html:16
 msgid "Customer segment dynamically evaluated against filter rules."
-msgstr ""
+msgstr "顧客セグメントはフィルター ルールに対して動的に評価されます。"
 
 #: .\crm\templates\crm\segment_detail.html:22
 msgid "Send Broadcast Campaign"
-msgstr ""
+msgstr "ブロードキャストキャンペーンを送信する"
 
 #: .\crm\templates\crm\segment_detail.html:25
 msgid "Edit Rules"
-msgstr ""
+msgstr "ルールの編集"
 
 #: .\crm\templates\crm\segment_detail.html:35
 msgid "Active Filter Rules"
-msgstr ""
+msgstr "アクティブなフィルタールール"
 
 #: .\crm\templates\crm\segment_detail.html:42
 msgid "All subscribed contacts (no filters applied)"
-msgstr ""
+msgstr "登録されているすべての連絡先 (フィルターは適用されていません)"
 
 #: .\crm\templates\crm\segment_detail.html:59
 msgid "Contact Name"
-msgstr ""
+msgstr "連絡先名"
 
 #: .\crm\templates\crm\segment_detail.html:62
 msgid "Marketing Status"
-msgstr ""
+msgstr "マーケティングステータス"
 
 #: .\crm\templates\crm\segment_detail.html:92
 msgid "No contacts currently match this segment's filter criteria."
-msgstr ""
+msgstr "現在、このセグメントのフィルタ条件に一致する連絡先はありません。"
 
 #: .\crm\templates\crm\segment_detail.html:110
 msgid "Broadcast Campaign to Segment"
-msgstr ""
+msgstr "キャンペーンをセグメントにブロードキャストする"
 
 #: .\crm\templates\crm\segment_detail.html:117
 #, python-format
@@ -1497,348 +1501,349 @@ msgid ""
 "This message will be dispatched in the background to all %(count)s "
 "subscribed contacts in \"<strong>%(name)s</strong>\"."
 msgstr ""
+"このメッセージは、「<strong>%(name)s</strong>」のすべての %(count)s 件の登録連絡先にバックグラウンドで送信されます。"
 
 #: .\crm\templates\crm\segment_detail.html:131
 msgid "Launch Campaign"
-msgstr ""
+msgstr "キャンペーン開​​始"
 
 #: .\crm\templates\crm\segment_form.html:11
 msgid "Edit Customer Segment"
-msgstr ""
+msgstr "顧客セグメントの編集"
 
 #: .\crm\templates\crm\segment_form.html:13
 msgid "Create New Customer Segment"
-msgstr ""
+msgstr "新しい顧客セグメントの作成"
 
 #: .\crm\templates\crm\segment_form.html:43
 msgid "Filter JSON Reference"
-msgstr ""
+msgstr "フィルター JSON リファレンス"
 
 #: .\crm\templates\crm\segment_form.html:54
 msgid "Save Segment"
-msgstr ""
+msgstr "セグメントの保存"
 
 #: .\crm\templates\crm\segment_list.html:10
 msgid ""
 "Dynamic contact groups filtered by country, deal stage, tag, value, or "
 "industry for targeted campaigns."
-msgstr ""
+msgstr "国、取引ステージ、タグ、値、またはターゲットを絞ったキャンペーンの業界ごとにフィルタリングされた動的な連絡先グループ。"
 
 #: .\crm\templates\crm\segment_list.html:14
 msgid "New Segment"
-msgstr ""
+msgstr "新しいセグメント"
 
 #: .\crm\templates\crm\segment_list.html:28
 msgid "Matching Deals"
-msgstr ""
+msgstr "マッチング取引"
 
 #: .\crm\templates\crm\segment_list.html:54
 msgid "View & Broadcast"
-msgstr ""
+msgstr "視聴とブロードキャスト"
 
 #: .\crm\templates\crm\segment_list.html:69
 msgid ""
 "No customer segments configured yet. Create a segment to start targeted "
 "marketing."
-msgstr ""
+msgstr "顧客セグメントはまだ設定されていません。セグメントを作成して、ターゲットを絞ったマーケティングを開始します。"
 
 #: .\crm\templates\crm\sequence_detail.html:12
 #: .\crm\templates\crm\sequence_list.html:62
 #: .\erp\templates\erp\product_list.html:67
 #: .\user_management\templates\user_management\siteuser_list.html:50
 msgid "Inactive"
-msgstr ""
+msgstr "非アクティブ"
 
 #: .\crm\templates\crm\sequence_detail.html:17
 msgid "Auto-enrolls leads reaching stage:"
-msgstr ""
+msgstr "ステージに到達したリードを自動登録します:"
 
 #: .\crm\templates\crm\sequence_detail.html:19
 msgid "Manual enrollment sequence"
-msgstr ""
+msgstr "手動登録シーケンス"
 
 #: .\crm\templates\crm\sequence_detail.html:21
 msgid "scheduled steps"
-msgstr ""
+msgstr "スケジュールされたステップ"
 
 #: .\crm\templates\crm\sequence_detail.html:30
 msgid "Dispatch Queue"
-msgstr ""
+msgstr "ディスパッチキュー"
 
 #: .\crm\templates\crm\sequence_detail.html:34
 #: .\crm\templates\crm\sequence_detail.html:54
 msgid "Add Step"
-msgstr ""
+msgstr "ステップの追加"
 
 #: .\crm\templates\crm\sequence_detail.html:37
 msgid "Edit Sequence"
-msgstr ""
+msgstr "シーケンスの編集"
 
 #: .\crm\templates\crm\sequence_detail.html:52
 msgid "Email Steps Timeline"
-msgstr ""
+msgstr "メールでのステップのタイムライン"
 
 #: .\crm\templates\crm\sequence_detail.html:70
 #, python-format
 msgid "Delay: %(days)s days"
-msgstr ""
+msgstr "遅延: %(days)s 日"
 
 #: .\crm\templates\crm\sequence_detail.html:72
 msgid "Edit step"
-msgstr ""
+msgstr "ステップの編集"
 
 #: .\crm\templates\crm\sequence_detail.html:75
 msgid "Delete step"
-msgstr ""
+msgstr "ステップの削除"
 
 #: .\crm\templates\crm\sequence_detail.html:87
 msgid "No steps added to this sequence yet. Add Step 1 to begin."
-msgstr ""
+msgstr "このシーケンスにはまだステップが追加されていません。ステップ 1 を追加して開始します。"
 
 #: .\crm\templates\crm\sequence_detail.html:90
 msgid "Add First Step"
-msgstr ""
+msgstr "最初のステップを追加"
 
 #: .\crm\templates\crm\sequence_detail.html:104
 #: .\crm\templates\crm\sequence_list.html:35
 msgid "Active Enrollments"
-msgstr ""
+msgstr "アクティブな登録数"
 
 #: .\crm\templates\crm\sequence_detail.html:125
 msgid "Current Step"
-msgstr ""
+msgstr "現在のステップ"
 
 #: .\crm\templates\crm\sequence_detail.html:125
 msgid "Next dispatch"
-msgstr ""
+msgstr "次回の発送"
 
 #: .\crm\templates\crm\sequence_detail.html:135
 msgid "No contacts currently enrolled in this sequence."
-msgstr ""
+msgstr "現在このシーケンスに登録されている連絡先はありません。"
 
 #: .\crm\templates\crm\sequence_form.html:11
 msgid "Edit Email Sequence"
-msgstr ""
+msgstr "電子メールシーケンスの編集"
 
 #: .\crm\templates\crm\sequence_form.html:13
 msgid "Create New Email Sequence"
-msgstr ""
+msgstr "新しい電子メールシーケンスの作成"
 
 #: .\crm\templates\crm\sequence_form.html:59
 msgid "Save Sequence"
-msgstr ""
+msgstr "シーケンスの保存"
 
 #: .\crm\templates\crm\sequence_list.html:9
 msgid "Automated Email Sequences (Drips)"
-msgstr ""
+msgstr "自動化された電子メール シーケンス (ドリップ)"
 
 #: .\crm\templates\crm\sequence_list.html:10
 msgid ""
 "Multi-step automated email campaigns triggered by lead stage transitions or "
 "enrolled contacts."
-msgstr ""
+msgstr "リードステージの移行または登録された連絡先によってトリガーされる、複数ステップの自動電子メールキャンペーン。"
 
 #: .\crm\templates\crm\sequence_list.html:15
 msgid ""
 "Triggers the Celery background worker to process scheduled drip emails "
 "immediately"
-msgstr ""
+msgstr "Celery バックグラウンド ワーカーをトリガーして、スケジュールされたドリップ メールをすぐに処理します"
 
 #: .\crm\templates\crm\sequence_list.html:16
 msgid "Process Drip Queue Now"
-msgstr ""
+msgstr "今すぐドリップキューを処理する"
 
 #: .\crm\templates\crm\sequence_list.html:20
 msgid "New Sequence"
-msgstr ""
+msgstr "新しいシーケンス"
 
 #: .\crm\templates\crm\sequence_list.html:32
 msgid "Trigger Stage"
-msgstr ""
+msgstr "トリガーステージ"
 
 #: .\crm\templates\crm\sequence_list.html:57
 msgid "Manual Only"
-msgstr ""
+msgstr "マニュアルのみ"
 
 #: .\crm\templates\crm\sequence_list.html:66
 msgid "steps"
-msgstr ""
+msgstr "ステップ"
 
 #: .\crm\templates\crm\sequence_list.html:73
 msgid "Manage Steps"
-msgstr ""
+msgstr "ステップの管理"
 
 #: .\crm\templates\crm\sequence_list.html:88
 msgid "No email sequences created yet. Set up your first drip campaign."
-msgstr ""
+msgstr "電子メール シーケンスはまだ作成されていません。最初の点滴キャンペーンを設定します。"
 
 #: .\crm\templates\crm\step_form.html:11
 msgid "Edit Email Step"
-msgstr ""
+msgstr "電子メールの編集ステップ"
 
 #: .\crm\templates\crm\step_form.html:13
 msgid "Add Step to Sequence"
-msgstr ""
+msgstr "シーケンスにステップを追加"
 
 #: .\crm\templates\crm\step_form.html:51
 msgid "Available Placeholders"
-msgstr ""
+msgstr "利用可能なプレースホルダー"
 
 #: .\crm\templates\crm\step_form.html:67
 msgid "Save Step"
-msgstr ""
+msgstr "ステップの保存"
 
 #: .\crm\views\companies.py:61
 #, python-format
 msgid "Company '%s' created successfully."
-msgstr ""
+msgstr "会社「%s」が正常に作成されました。"
 
 #: .\crm\views\companies.py:75
 #, python-format
 msgid "Company '%s' updated successfully."
-msgstr ""
+msgstr "会社「%s」は正常に更新されました。"
 
 #: .\crm\views\companies.py:91
 #, python-format
 msgid "Company '%s' deleted successfully."
-msgstr ""
+msgstr "会社「%s」は正常に削除されました。"
 
 #: .\crm\views\contacts.py:80
 #, python-format
 msgid "Contact '%s' created successfully."
-msgstr ""
+msgstr "連絡先「%s」が正常に作成されました。"
 
 #: .\crm\views\contacts.py:94
 #, python-format
 msgid "Contact '%s' updated successfully."
-msgstr ""
+msgstr "連絡先「%s」が正常に更新されました。"
 
 #: .\crm\views\contacts.py:110
 #, python-format
 msgid "Contact '%s' deleted successfully."
-msgstr ""
+msgstr "連絡先「%s」は正常に削除されました。"
 
 #: .\crm\views\leads.py:32
 msgid "Invalid stage specified."
-msgstr ""
+msgstr "無効なステージが指定されました。"
 
 #: .\crm\views\leads.py:52
 #, python-format
 msgid "Lead stage updated successfully to '%s'."
-msgstr ""
+msgstr "リードステージが「%s」に正常に更新されました。"
 
 #: .\crm\views\leads.py:111
 #, python-format
 msgid "Lead '%s' created successfully."
-msgstr ""
+msgstr "リード「%s」が正常に作成されました。"
 
 #: .\crm\views\leads.py:118
 msgid "Lead created"
-msgstr ""
+msgstr "リードが作成されました"
 
 #: .\crm\views\leads.py:119
 #, python-format
 msgid "Initial lead creation in stage: %s"
-msgstr ""
+msgstr "段階中の最初のリード作成: %s"
 
 #: .\crm\views\leads.py:134
 #, python-format
 msgid "Lead '%s' updated successfully."
-msgstr ""
+msgstr "リード「%s」が正常に更新されました。"
 
 #: .\crm\views\leads.py:150
 #, python-format
 msgid "Lead '%s' deleted successfully."
-msgstr ""
+msgstr "リード「%s」は正常に削除されました。"
 
 #: .\crm\views\leads.py:165
 msgid "Interaction logged successfully."
-msgstr ""
+msgstr "インタラクションが正常に記録されました。"
 
 #: .\crm\views\leads.py:167
 msgid "Failed to log interaction. Please check the form."
-msgstr ""
+msgstr "インタラクションをログに記録できませんでした。フォームをご確認ください。"
 
 #: .\crm\views\segments.py:48
 #, python-format
 msgid "Segment '%s' created successfully."
-msgstr ""
+msgstr "セグメント「%s」が正常に作成されました。"
 
 #: .\crm\views\segments.py:62
 #, python-format
 msgid "Segment '%s' updated successfully."
-msgstr ""
+msgstr "セグメント「%s」が正常に更新されました。"
 
 #: .\crm\views\segments.py:78
 #, python-format
 msgid "Segment '%s' deleted successfully."
-msgstr ""
+msgstr "セグメント「%s」は正常に削除されました。"
 
 #: .\crm\views\segments.py:109
 #, python-format
 msgid "Broadcast campaign launched to segment '%s' (Task ID: %s)."
-msgstr ""
+msgstr "「%s」をセグメント化するためにブロードキャスト キャンペーンが開始されました (タスク ID: %s)。"
 
 #: .\crm\views\segments.py:112
 msgid "Please provide a valid subject and message."
-msgstr ""
+msgstr "有効な件名とメッセージを入力してください。"
 
 #: .\crm\views\sequences.py:53
 #, python-format
 msgid "Sequence '%s' created successfully."
-msgstr ""
+msgstr "シーケンス「%s」が正常に作成されました。"
 
 #: .\crm\views\sequences.py:67
 #, python-format
 msgid "Sequence '%s' updated successfully."
-msgstr ""
+msgstr "シーケンス「%s」は正常に更新されました。"
 
 #: .\crm\views\sequences.py:83
 #, python-format
 msgid "Sequence '%s' deleted successfully."
-msgstr ""
+msgstr "シーケンス「%s」は正常に削除されました。"
 
 #: .\crm\views\sequences.py:96
 #, python-format
 msgid "Email step added to '%s'."
-msgstr ""
+msgstr "電子メールのステップが「%s」に追加されました。"
 
 #: .\crm\views\sequences.py:114
 msgid "Email step updated."
-msgstr ""
+msgstr "電子メールのステップが更新されました。"
 
 #: .\crm\views\sequences.py:131
 msgid "Email step deleted."
-msgstr ""
+msgstr "電子メールステップが削除されました。"
 
 #: .\crm\views\sequences.py:150
 #, python-format
 msgid "Email sequence dispatch task launched (Task ID: %s)."
-msgstr ""
+msgstr "電子メール シーケンス ディスパッチ タスクが開始されました (タスク ID: %s)。"
 
 #: .\enterprise_website\settings\base.py:123
 msgid "English"
-msgstr ""
+msgstr "英語"
 
 #: .\enterprise_website\settings\base.py:124
 msgid "Spanish"
-msgstr ""
+msgstr "スペイン語"
 
 #: .\enterprise_website\settings\base.py:125
 msgid "Portuguese"
-msgstr ""
+msgstr "ポルトガル語"
 
 #: .\enterprise_website\settings\base.py:126
 msgid "French"
-msgstr ""
+msgstr "フランス語"
 
 #: .\enterprise_website\settings\base.py:127
 msgid "Italian"
-msgstr ""
+msgstr "イタリア語"
 
 #: .\enterprise_website\settings\base.py:128
 msgid "Japanese"
-msgstr ""
+msgstr "日本語"
 
 #: .\erp\admin.py:22 .\erp\models.py:88 .\erp\templates\erp\base_erp.html:37
 #: .\home\plugin.py:15 .\home\templates\home\products.html:14
@@ -1849,506 +1854,506 @@ msgstr ""
 #: .\templates\themes\tailwind\partials\footer.html:16
 #: .\templates\themes\tailwind\partials\header.html:56
 msgid "Products"
-msgstr ""
+msgstr "製品"
 
 #: .\erp\admin.py:60 .\erp\templates\erp\inventory_dashboard.html:153
 #: .\erp\templates\erp\product_list.html:56
 msgid "Out of Stock"
-msgstr ""
+msgstr "在庫切れ"
 
 #: .\erp\admin.py:62
 msgid "Low Stock"
-msgstr ""
+msgstr "在庫僅少"
 
 #: .\erp\admin.py:63
 msgid "In Stock"
-msgstr ""
+msgstr "在庫あり"
 
 #: .\erp\admin.py:64
 msgid "Stock Status"
-msgstr ""
+msgstr "在庫状況"
 
 #: .\erp\apps.py:8
 msgid "ERP & Inventory"
-msgstr ""
+msgstr "ERPと在庫"
 
 #: .\erp\forms.py:83
 msgid "Quantity must be a non-zero integer."
-msgstr ""
+msgstr "数量はゼロ以外の整数である必要があります。"
 
 #: .\erp\models.py:13
 msgid "Category Name"
-msgstr ""
+msgstr "カテゴリ名"
 
 #: .\erp\models.py:20 .\erp\models.py:64
 #: .\erp\templates\erp\inventory_dashboard.html:131
 #: .\erp\templates\erp\product_detail.html:34
 #: .\erp\templates\erp\product_list.html:29
 msgid "Category"
-msgstr ""
+msgstr "カテゴリ"
 
 #: .\erp\models.py:21
 msgid "Categories"
-msgstr ""
+msgstr "カテゴリー"
 
 #: .\erp\models.py:36
 msgid "Location Name"
-msgstr ""
+msgstr "地名"
 
 #: .\erp\models.py:37
 msgid "Location Code"
-msgstr ""
+msgstr "場所コード"
 
 #: .\erp\models.py:38
 msgid "Address / Bin Location"
-msgstr ""
+msgstr "住所/箱の場所"
 
 #: .\erp\models.py:39 .\erp\models.py:82
 #: .\intelligent_tracker_hub\models.py:90 .\video_gallery\models.py:41
 #: .\video_gallery\models.py:132
 msgid "Is Active"
-msgstr ""
+msgstr "アクティブです"
 
 #: .\erp\models.py:44
 msgid "Inventory Location"
-msgstr ""
+msgstr "在庫の場所"
 
 #: .\erp\models.py:45
 msgid "Inventory Locations"
-msgstr ""
+msgstr "在庫の場所"
 
 #: .\erp\models.py:55
 msgid "SKU / Item Code"
-msgstr ""
+msgstr "SKU / アイテムコード"
 
 #: .\erp\models.py:56 .\erp\templates\erp\inventory_dashboard.html:130
 msgid "Product Name"
-msgstr ""
+msgstr "製品名"
 
 #: .\erp\models.py:67 .\erp\templates\erp\product_detail.html:38
 msgid "Unit of Measure"
-msgstr ""
+msgstr "測定単位"
 
 #: .\erp\models.py:72
 msgid "Selling Unit Price"
-msgstr ""
+msgstr "販売単価"
 
 #: .\erp\models.py:78 .\erp\templates\erp\product_detail.html:46
 #: .\erp\templates\erp\product_list.html:31
 msgid "Cost Price"
-msgstr ""
+msgstr "原価価格"
 
 #: .\erp\models.py:80 .\erp\templates\erp\dashboard.html:384
 msgid "Current Stock"
-msgstr ""
+msgstr "現在の在庫"
 
 #: .\erp\models.py:81 .\erp\templates\erp\dashboard.html:390
 #: .\erp\templates\erp\product_detail.html:72
 msgid "Reorder Threshold"
-msgstr ""
+msgstr "並べ替えのしきい値"
 
 #: .\erp\models.py:87 .\erp\models.py:136 .\erp\models.py:309
 #: .\erp\templates\erp\dashboard.html:149
 #: .\erp\templates\erp\movement_list.html:35
 msgid "Product"
-msgstr ""
+msgstr "製品"
 
 #: .\erp\models.py:123
 msgid "Stock In / Received"
-msgstr ""
+msgstr "在庫あり/入荷済み"
 
 #: .\erp\models.py:124
 msgid "Stock Out / Sold"
-msgstr ""
+msgstr "在庫切れ/完売"
 
 #: .\erp\models.py:125
 msgid "Adjustment / Audit"
-msgstr ""
+msgstr "調整・監査"
 
 #: .\erp\models.py:126
 msgid "Customer Return"
-msgstr ""
+msgstr "顧客の返品"
 
 #: .\erp\models.py:150
 msgid "Movement Type"
-msgstr ""
+msgstr "移動タイプ"
 
 #: .\erp\models.py:152 .\erp\models.py:316
 #: .\erp\templates\erp\invoice_form.html:75
 #: .\erp\templates\erp\movement_list.html:36
 #: .\erp\templates\erp\product_detail.html:134
 msgid "Quantity"
-msgstr ""
+msgstr "量"
 
 #: .\erp\models.py:153
 msgid "Reference / Document #"
-msgstr ""
+msgstr "参照/文書番号"
 
 #: .\erp\models.py:160 .\erp\models.py:255 .\task_runner\models.py:80
 #: .\task_runner\templates\task_runner\job_detail.html:53
 #: .\task_runner\templates\task_runner\job_list.html:123
 msgid "Created By"
-msgstr ""
+msgstr "作成者"
 
 #: .\erp\models.py:165
 msgid "Stock Movement"
-msgstr ""
+msgstr "株価の動き"
 
 #: .\erp\models.py:166
 msgid "Stock Movements"
-msgstr ""
+msgstr "株価の動き"
 
 #: .\erp\models.py:192 .\erp\templates\erp\invoice_detail.html:19
 #: .\erp\templates\erp\invoice_list.html:65
 msgid "Draft"
-msgstr ""
+msgstr "下書き"
 
 #: .\erp\models.py:193
 msgid "Sent / Issued"
-msgstr ""
+msgstr "送信/発行"
 
 #: .\erp\models.py:194 .\erp\templates\erp\dashboard.html:226
 #: .\erp\templates\erp\invoice_detail.html:13
 #: .\erp\templates\erp\invoice_list.html:59
 msgid "Paid"
-msgstr ""
+msgstr "有料"
 
 #: .\erp\models.py:195 .\erp\templates\erp\dashboard.html:230
 #: .\erp\templates\erp\invoice_detail.html:17
 #: .\erp\templates\erp\invoice_list.html:63
 msgid "Overdue"
-msgstr ""
+msgstr "期限を過ぎました"
 
 #: .\erp\models.py:206
 msgid "Invoice Number"
-msgstr ""
+msgstr "請求書番号"
 
 #: .\erp\models.py:208
 msgid "Customer / Client Name"
-msgstr ""
+msgstr "顧客/クライアント名"
 
 #: .\erp\models.py:209
 msgid "Customer Email"
-msgstr ""
+msgstr "顧客の電子メール"
 
 #: .\erp\models.py:210
 msgid "Customer Address"
-msgstr ""
+msgstr "顧客の住所"
 
 #: .\erp\models.py:211 .\erp\templates\erp\invoice_list.html:35
 msgid "Issue Date"
-msgstr ""
+msgstr "発行日"
 
 #: .\erp\models.py:212 .\erp\templates\erp\invoice_list.html:36
 msgid "Due Date"
-msgstr ""
+msgstr "期日"
 
 #: .\erp\models.py:223 .\erp\templates\erp\invoice_detail.html:98
 msgid "Subtotal"
-msgstr ""
+msgstr "小計"
 
 #: .\erp\models.py:229
 msgid "Tax Rate (%)"
-msgstr ""
+msgstr "税率(%)"
 
 #: .\erp\models.py:235
 msgid "Tax Amount"
-msgstr ""
+msgstr "税額"
 
 #: .\erp\models.py:241
 msgid "Discount Amount"
-msgstr ""
+msgstr "割引額"
 
 #: .\erp\models.py:247 .\erp\templates\erp\invoice_detail.html:114
 #: .\erp\templates\erp\invoice_list.html:37
 msgid "Total Amount"
-msgstr ""
+msgstr "合計金額"
 
 #: .\erp\models.py:249
 msgid "Terms / Notes"
-msgstr ""
+msgstr "規約・注意事項"
 
 #: .\erp\models.py:261 .\erp\models.py:301
 msgid "Invoice"
-msgstr ""
+msgstr "請求書"
 
 #: .\erp\models.py:262 .\erp\templates\erp\base_erp.html:47
 msgid "Invoices"
-msgstr ""
+msgstr "請求書"
 
 #: .\erp\models.py:311
 msgid "Item Description"
-msgstr ""
+msgstr "項目の説明"
 
 #: .\erp\models.py:322 .\erp\templates\erp\inventory_dashboard.html:134
 #: .\erp\templates\erp\invoice_detail.html:63
 #: .\erp\templates\erp\product_detail.html:42
 msgid "Unit Price"
-msgstr ""
+msgstr "単価"
 
 #: .\erp\models.py:328 .\erp\templates\erp\invoice_detail.html:64
 msgid "Line Total"
-msgstr ""
+msgstr "行合計"
 
 #: .\erp\models.py:332
 msgid "Invoice Item"
-msgstr ""
+msgstr "請求書項目"
 
 #: .\erp\models.py:333 .\erp\templates\erp\invoice_detail.html:56
 msgid "Invoice Items"
-msgstr ""
+msgstr "請求書項目"
 
 #: .\erp\plugin.py:9
 msgid "Enterprise Resource Planning (ERP)"
-msgstr ""
+msgstr "エンタープライズ リソース プランニング (ERP)"
 
 #: .\erp\plugin.py:11
 msgid ""
 "Lightweight ERP core with product catalog, inventory tracking, invoice PDF "
 "generation, and executive financial metrics."
-msgstr ""
+msgstr "製品カタログ、在庫追跡、請求書の PDF 生成、経営幹部の財務指標を備えた軽量の ERP コア。"
 
 #: .\erp\plugin.py:22 .\templates\base.html:124
 #: .\templates\themes\bootstrap5\partials\header.html:67
 msgid "ERP"
-msgstr ""
+msgstr "ERP"
 
 #: .\erp\plugin.py:41
 msgid "ERP: Procurement & Suppliers"
-msgstr ""
+msgstr "ERP: 調達とサプライヤー"
 
 #: .\erp\plugin.py:43
 msgid ""
 "Supplier relationship management, purchase orders (PO), vendor pricing "
 "agreements, and incoming shipment inspection and receiving."
-msgstr ""
+msgstr "サプライヤー関係管理、発注書 (PO)、ベンダー価格契約、入荷検査と受領。"
 
 #: .\erp\plugin.py:56
 msgid "ERP: Advanced Warehousing"
-msgstr ""
+msgstr "ERP: 高度な倉庫管理"
 
 #: .\erp\plugin.py:58
 msgid ""
 "Multi-facility warehouse topology, bin and aisle mapping, inter-warehouse "
 "stock transfer workflows, and batch/lot/serial number tracing."
-msgstr ""
+msgstr "複数施設の倉庫トポロジー、棚と通路のマッピング、倉庫間の在庫転送ワークフロー、バッチ/ロット/シリアル番号の追跡。"
 
 #: .\erp\plugin.py:71
 msgid "ERP: General Ledger & Accounting"
-msgstr ""
+msgstr "ERP: 総勘定元帳と会計"
 
 #: .\erp\plugin.py:73
 msgid ""
 "Double-entry bookkeeping engine, customizable chart of accounts, accounts "
 "payable/receivable, trial balance, and automated P&L / balance sheet "
 "generation."
-msgstr ""
+msgstr "複式簿記エンジン、カスタマイズ可能な勘定科目表、買掛金/売掛金、試算表、損益計算書/貸借対照表の自動生成。"
 
 #: .\erp\templates\erp\base_erp.html:16
 msgid "Enterprise ERP"
-msgstr ""
+msgstr "エンタープライズERP"
 
 #: .\erp\templates\erp\base_erp.html:17
 msgid "Core Engine"
-msgstr ""
+msgstr "コアエンジン"
 
 #: .\erp\templates\erp\base_erp.html:19
 msgid "Product Catalog, Inventory Valuation, Invoicing & Modular Extensions"
-msgstr ""
+msgstr "製品カタログ、在庫評価、請求書発行およびモジュール拡張機能"
 
 #: .\erp\templates\erp\base_erp.html:32
 msgid "Inventory"
-msgstr ""
+msgstr "在庫"
 
 #: .\erp\templates\erp\base_erp.html:42
 msgid "Movements"
-msgstr ""
+msgstr "動き"
 
 #: .\erp\templates\erp\base_erp.html:52
 msgid "Sub-Modules"
-msgstr ""
+msgstr "サブモジュール"
 
 #: .\erp\templates\erp\base_erp.html:61
 #: .\erp\templates\erp\inventory_dashboard.html:167
 #: .\erp\templates\erp\movement_list.html:23
 msgid "Record Movement"
-msgstr ""
+msgstr "動きを記録する"
 
 #: .\erp\templates\erp\base_erp.html:64
 #: .\erp\templates\erp\invoice_list.html:23
 msgid "New Invoice"
-msgstr ""
+msgstr "新しい請求書"
 
 #: .\erp\templates\erp\confirm_delete.html:14
 msgid "Are you sure you want to permanently delete"
-msgstr ""
+msgstr "完全に削除してもよろしいですか"
 
 #: .\erp\templates\erp\confirm_delete.html:15
 msgid "This action cannot be undone."
-msgstr ""
+msgstr "この操作は元に戻すことができません。"
 
 #: .\erp\templates\erp\confirm_delete.html:22
 msgid "Yes, Delete"
-msgstr ""
+msgstr "はい、削除します"
 
 #: .\erp\templates\erp\dashboard.html:11
 msgid "Active Products"
-msgstr ""
+msgstr "アクティブな製品"
 
 #: .\erp\templates\erp\dashboard.html:15
 msgid "In active catalog"
-msgstr ""
+msgstr "アクティブなカタログ内"
 
 #: .\erp\templates\erp\dashboard.html:24
 #: .\erp\templates\erp\inventory_dashboard.html:135
 #: .\erp\templates\erp\product_detail.html:78
 msgid "Stock Valuation"
-msgstr ""
+msgstr "株式評価"
 
 #: .\erp\templates\erp\dashboard.html:28
 msgid "Cost basis:"
-msgstr ""
+msgstr "コストベース:"
 
 #: .\erp\templates\erp\dashboard.html:37
 msgid "Monthly Revenue"
-msgstr ""
+msgstr "月収"
 
 #: .\erp\templates\erp\dashboard.html:41
 msgid "Lifetime:"
-msgstr ""
+msgstr "一生："
 
 #: .\erp\templates\erp\dashboard.html:50
 msgid "Outstanding Receivables"
-msgstr ""
+msgstr "売掛金残高"
 
 #: .\erp\templates\erp\dashboard.html:54
 msgid "open invoice(s)"
-msgstr ""
+msgstr "オープン請求書"
 
 #: .\erp\templates\erp\dashboard.html:63
 #: .\erp\templates\erp\inventory_dashboard.html:47
 msgid "Low-Stock Alerts"
-msgstr ""
+msgstr "在庫不足のアラート"
 
 #: .\erp\templates\erp\dashboard.html:71
 msgid "Review flagged items"
-msgstr ""
+msgstr "フラグが立てられた項目を確認する"
 
 #: .\erp\templates\erp\dashboard.html:73
 msgid "All stock levels healthy"
-msgstr ""
+msgstr "すべての在庫レベルは健全です"
 
 #: .\erp\templates\erp\dashboard.html:87
 msgid "Revenue Trend (Last 6 Months)"
-msgstr ""
+msgstr "収益傾向 (過去 6 か月)"
 
 #: .\erp\templates\erp\dashboard.html:89
 msgid "Paid Invoices"
-msgstr ""
+msgstr "支払い済みの請求書"
 
 #: .\erp\templates\erp\dashboard.html:103
 msgid "Top Products by Value"
-msgstr ""
+msgstr "価値別トップ製品"
 
 #: .\erp\templates\erp\dashboard.html:120
 msgid "Inventory Stock Levels vs Reorder Thresholds"
-msgstr ""
+msgstr "在庫レベルと再注文のしきい値"
 
 #: .\erp\templates\erp\dashboard.html:122
 msgid "Full Inventory Grid"
-msgstr ""
+msgstr "完全な在庫グリッド"
 
 #: .\erp\templates\erp\dashboard.html:139
 msgid "Recent Stock Movements"
-msgstr ""
+msgstr "最近の株価動向"
 
 #: .\erp\templates\erp\dashboard.html:150
 #: .\erp\templates\erp\invoice_detail.html:62
 msgid "Qty"
-msgstr ""
+msgstr "数量"
 
 #: .\erp\templates\erp\dashboard.html:152
 #: .\erp\templates\erp\product_detail.html:132
 msgid "Date"
-msgstr ""
+msgstr "日付"
 
 #: .\erp\templates\erp\dashboard.html:160
 #: .\erp\templates\erp\movement_list.html:49
 #: .\erp\templates\erp\product_detail.html:146
 msgid "Stock In"
-msgstr ""
+msgstr "在庫あり"
 
 #: .\erp\templates\erp\dashboard.html:162
 #: .\erp\templates\erp\movement_list.html:51
 #: .\erp\templates\erp\product_detail.html:148
 msgid "Stock Out"
-msgstr ""
+msgstr "在庫切れ"
 
 #: .\erp\templates\erp\dashboard.html:164
 #: .\erp\templates\erp\movement_list.html:53
 #: .\erp\templates\erp\product_detail.html:150
 msgid "Return"
-msgstr ""
+msgstr "戻る"
 
 #: .\erp\templates\erp\dashboard.html:166
 #: .\erp\templates\erp\movement_list.html:55
 #: .\erp\templates\erp\product_detail.html:152
 msgid "Adjustment"
-msgstr ""
+msgstr "調整"
 
 #: .\erp\templates\erp\dashboard.html:181
 #: .\erp\templates\erp\movement_list.html:76
 msgid "No stock movements recorded yet."
-msgstr ""
+msgstr "株式の動きはまだ記録されていません。"
 
 #: .\erp\templates\erp\dashboard.html:195
 msgid "Recent Invoices"
-msgstr ""
+msgstr "最近の請求書"
 
 #: .\erp\templates\erp\dashboard.html:204
 #: .\erp\templates\erp\invoice_list.html:33
 msgid "Invoice #"
-msgstr ""
+msgstr "請求書 ＃"
 
 #: .\erp\templates\erp\dashboard.html:205
 #: .\erp\templates\erp\invoice_list.html:34
 msgid "Customer"
-msgstr ""
+msgstr "お客様"
 
 #: .\erp\templates\erp\dashboard.html:206
 msgid "Amount"
-msgstr ""
+msgstr "額"
 
 #: .\erp\templates\erp\dashboard.html:208
 #: .\erp\templates\erp\invoice_list.html:73
 msgid "PDF"
-msgstr ""
+msgstr "PDF"
 
 #: .\erp\templates\erp\dashboard.html:236
 msgid "Download PDF"
-msgstr ""
+msgstr "PDFをダウンロード"
 
 #: .\erp\templates\erp\dashboard.html:243
 msgid "No invoices generated yet."
-msgstr ""
+msgstr "請求書はまだ生成されていません。"
 
 #: .\erp\templates\erp\dashboard.html:260
 msgid "Modular Sub-Modules Architecture"
-msgstr ""
+msgstr "モジュール式サブモジュールのアーキテクチャ"
 
 #: .\erp\templates\erp\dashboard.html:261
 msgid "Coming Soon / Pluggable"
-msgstr ""
+msgstr "近日発売 / プラグイン可能"
 
 #: .\erp\templates\erp\dashboard.html:264
 msgid ""
 "The ERP Core is designed with pluggable extension boundaries registered "
 "directly inside the Enterprise Plugin Registry."
-msgstr ""
+msgstr "ERP コアは、エンタープライズ プラグイン レジストリ内に直接登録されたプラグ可能な拡張境界を使用して設計されています。"
 
 #: .\erp\templates\erp\dashboard.html:268
 msgid "View Sub-Module Specs"
-msgstr ""
+msgstr "サブモジュールの仕様を表示する"
 
 #: .\erp\templates\erp\dashboard.html:285
 #: .\erp\templates\erp\modules_overview.html:53
@@ -2358,31 +2363,31 @@ msgstr ""
 #: .\erp\templates\erp\modules_overview.html:119
 #: .\erp\templates\erp\modules_overview.html:147
 msgid "Coming Soon"
-msgstr ""
+msgstr "近日公開"
 
 #: .\erp\templates\erp\dashboard.html:294
 msgid "Planned Features:"
-msgstr ""
+msgstr "計画されている機能:"
 
 #: .\erp\templates\erp\dashboard.html:324
 msgid "Revenue ($)"
-msgstr ""
+msgstr "収益 ($)"
 
 #: .\erp\templates\erp\inventory_dashboard.html:11
 msgid "Catalog SKUs"
-msgstr ""
+msgstr "カタログSKU"
 
 #: .\erp\templates\erp\inventory_dashboard.html:23
 msgid "Inventory Valuation"
-msgstr ""
+msgstr "在庫評価"
 
 #: .\erp\templates\erp\inventory_dashboard.html:35
 msgid "Cost Basis"
-msgstr ""
+msgstr "コストベース"
 
 #: .\erp\templates\erp\inventory_dashboard.html:65
 msgid "Low Stock Warning Detected"
-msgstr ""
+msgstr "在庫不足の警告が検出されました"
 
 #: .\erp\templates\erp\inventory_dashboard.html:67
 #, python-format
@@ -2395,212 +2400,219 @@ msgid_plural ""
 "          There are %(count)s products currently at or below their reorder threshold.\n"
 "          "
 msgstr[0] ""
+"\n"
+"          現在、再注文基準値以下の製品が 1 つあります。\n"
+"          "
+msgstr[1] ""
+"\n"
+"          現在再注文基準値以下の %(count)s 製品があります。\n"
+"          "
 
 #: .\erp\templates\erp\inventory_dashboard.html:76
 msgid "Replenish Stock"
-msgstr ""
+msgstr "在庫を補充する"
 
 #: .\erp\templates\erp\inventory_dashboard.html:89
 msgid "Search by product name or SKU..."
-msgstr ""
+msgstr "製品名またはSKUで検索..."
 
 #: .\erp\templates\erp\inventory_dashboard.html:94
 msgid "All Categories"
-msgstr ""
+msgstr "すべてのカテゴリ"
 
 #: .\erp\templates\erp\inventory_dashboard.html:104
 msgid "Low Stock Only"
-msgstr ""
+msgstr "在庫僅少のみ"
 
 #: .\erp\templates\erp\inventory_dashboard.html:119
 msgid "Inventory Stock Status"
-msgstr ""
+msgstr "在庫 在庫状況"
 
 #: .\erp\templates\erp\inventory_dashboard.html:121
 #: .\erp\templates\erp\product_list.html:17
 msgid "Add Product"
-msgstr ""
+msgstr "製品の追加"
 
 #: .\erp\templates\erp\inventory_dashboard.html:129
 #: .\erp\templates\erp\product_list.html:27
 msgid "SKU"
-msgstr ""
+msgstr "SKU"
 
 #: .\erp\templates\erp\inventory_dashboard.html:132
 #: .\erp\templates\erp\product_list.html:32
 msgid "On-Hand Stock"
-msgstr ""
+msgstr "手持在庫"
 
 #: .\erp\templates\erp\inventory_dashboard.html:133
 msgid "Reorder Point"
-msgstr ""
+msgstr "再注文ポイント"
 
 #: .\erp\templates\erp\inventory_dashboard.html:170
 #: .\erp\templates\erp\product_form.html:11
 msgid "Edit Product"
-msgstr ""
+msgstr "製品の編集"
 
 #: .\erp\templates\erp\inventory_dashboard.html:180
 msgid "No products match the selected criteria."
-msgstr ""
+msgstr "選択した基準に一致する製品はありません。"
 
 #: .\erp\templates\erp\invoice_detail.html:25
 msgid "Issued:"
-msgstr ""
+msgstr "発行済み："
 
 #: .\erp\templates\erp\invoice_detail.html:25
 msgid "Due:"
-msgstr ""
+msgstr "期限："
 
 #: .\erp\templates\erp\invoice_detail.html:31
 msgid "View PDF"
-msgstr ""
+msgstr "PDFを見る"
 
 #: .\erp\templates\erp\invoice_detail.html:34
 msgid "Download"
-msgstr ""
+msgstr "ダウンロード"
 
 #: .\erp\templates\erp\invoice_detail.html:45
 msgid "Billed To"
-msgstr ""
+msgstr "請求先"
 
 #: .\erp\templates\erp\invoice_detail.html:61
 msgid "Description / Product"
-msgstr ""
+msgstr "説明/製品"
 
 #: .\erp\templates\erp\invoice_detail.html:86
 msgid "No line items added."
-msgstr ""
+msgstr "項目は追加されませんでした。"
 
 #: .\erp\templates\erp\invoice_detail.html:103
 msgid "Tax"
-msgstr ""
+msgstr "税"
 
 #: .\erp\templates\erp\invoice_detail.html:109
 msgid "Discount"
-msgstr ""
+msgstr "割引"
 
 #: .\erp\templates\erp\invoice_detail.html:123
 msgid "Terms & Notes"
-msgstr ""
+msgstr "規約と注意事項"
 
 #: .\erp\templates\erp\invoice_detail.html:137
 msgid "Email Delivery"
-msgstr ""
+msgstr "メール配信"
 
 #: .\erp\templates\erp\invoice_detail.html:142
 msgid ""
 "Dispatch the PDF invoice directly to the customer email address via "
 "background worker."
-msgstr ""
+msgstr "バックグラウンド ワーカーを介して PDF 請求書を顧客の電子メール アドレスに直接送信します。"
 
 #: .\erp\templates\erp\invoice_detail.html:145
 msgid "Recipient:"
-msgstr ""
+msgstr "受信者:"
 
 #: .\erp\templates\erp\invoice_detail.html:150
 msgid "Send Invoice via Email"
-msgstr ""
+msgstr "電子メールで請求書を送信する"
 
 #: .\erp\templates\erp\invoice_detail.html:159
 msgid "Status Management"
-msgstr ""
+msgstr "ステータス管理"
 
 #: .\erp\templates\erp\invoice_detail.html:162
 msgid "Change collection or accounting status:"
-msgstr ""
+msgstr "収集または会計ステータスを変更します。"
 
 #: .\erp\templates\erp\invoice_detail.html:168
 msgid "Mark as Paid"
-msgstr ""
+msgstr "有料としてマークする"
 
 #: .\erp\templates\erp\invoice_detail.html:176
 msgid "Mark as Sent"
-msgstr ""
+msgstr "送信済みとしてマークする"
 
 #: .\erp\templates\erp\invoice_detail.html:184
 msgid "Mark as Overdue"
-msgstr ""
+msgstr "期限切れとしてマークする"
 
 #: .\erp\templates\erp\invoice_detail.html:192
 msgid "Cancel Invoice"
-msgstr ""
+msgstr "請求書のキャンセル"
 
 #: .\erp\templates\erp\invoice_detail.html:203
 msgid "Delete this invoice"
-msgstr ""
+msgstr "この請求書を削除します"
 
 #: .\erp\templates\erp\invoice_form.html:11
 msgid "Edit Invoice"
-msgstr ""
+msgstr "請求書の編集"
 
 #: .\erp\templates\erp\invoice_form.html:13
 msgid "Create New Invoice"
-msgstr ""
+msgstr "新しい請求書の作成"
 
 #: .\erp\templates\erp\invoice_form.html:16
 msgid "Specify customer billing details and itemized products or services"
-msgstr ""
+msgstr "顧客の請求詳細と項目別の製品またはサービスを指定する"
 
 #: .\erp\templates\erp\invoice_form.html:27
 msgid "Customer & Billing Info"
-msgstr ""
+msgstr "顧客および請求情報"
 
 #: .\erp\templates\erp\invoice_form.html:67
 msgid "Line Items"
-msgstr ""
+msgstr "品目"
 
 #: .\erp\templates\erp\invoice_form.html:73
 msgid "Product (Optional)"
-msgstr ""
+msgstr "製品（オプション）"
 
 #: .\erp\templates\erp\invoice_form.html:76
 msgid "Unit Price ($)"
-msgstr ""
+msgstr "単価 ($)"
 
 #: .\erp\templates\erp\invoice_form.html:77
 msgid "Delete?"
-msgstr ""
+msgstr "消去？"
 
 #: .\erp\templates\erp\invoice_form.html:111
 msgid "Taxes, Discounts & Terms"
-msgstr ""
+msgstr "税金、割引、規約"
 
 #: .\erp\templates\erp\invoice_form.html:135
 msgid "Save Invoice"
-msgstr ""
+msgstr "請求書の保存"
 
 #: .\erp\templates\erp\invoice_form.html:135
 msgid "Generate Invoice"
-msgstr ""
+msgstr "請求書の生成"
 
 #: .\erp\templates\erp\invoice_list.html:8
 msgid "Commercial Invoices & Billing"
-msgstr ""
+msgstr "コマーシャルインボイスと請求書"
 
 #: .\erp\templates\erp\invoice_list.html:9
 msgid ""
 "Issue customer invoices, track collections, generate PDF copies, and email "
 "directly"
-msgstr ""
+msgstr "顧客への請求書の発行、回収の追跡、PDF コピーの生成、および直接電子メール送信"
 
 #: .\erp\templates\erp\invoice_list.html:14
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:238
 #: .\task_runner\templates\task_runner\job_list.html:93
 msgid "All Statuses"
-msgstr ""
+msgstr "すべてのステータス"
 
 #: .\erp\templates\erp\invoice_list.html:19
 msgid "Search customer / invoice #..."
-msgstr ""
+msgstr "顧客/請求書番号を検索..."
 
 #: .\erp\templates\erp\invoice_list.html:82
 msgid "No invoices found matching criteria."
-msgstr ""
+msgstr "条件に一致する請求書が見つかりませんでした。"
 
 #: .\erp\templates\erp\modules_overview.html:13
 msgid "ERP Modular Architecture & Sub-Modules"
-msgstr ""
+msgstr "ERP モジュラー アーキテクチャとサブモジュール"
 
 #: .\erp\templates\erp\modules_overview.html:15
 msgid ""
@@ -2609,318 +2621,320 @@ msgid ""
 "commercial invoicing, while dedicated domain extensions plug in via the "
 "Enterprise Plugin Registry."
 msgstr ""
+"Enterprise ERP システムは、マイクロモジュラー スターター アーキテクチャを使用しています。軽量の ERP "
+"コアは、カタログ作成、在庫評価、商用請求書発行を提供し、専用のドメイン拡張機能はエンタープライズ プラグイン レジストリ経由でプラグインされます。"
 
 #: .\erp\templates\erp\modules_overview.html:26
 msgid "Module Topology & Extension Boundaries"
-msgstr ""
+msgstr "モジュールトポロジーと拡張境界"
 
 #: .\erp\templates\erp\modules_overview.html:52 .\erp\views\dashboard.py:23
 msgid "Procurement & Purchase Orders"
-msgstr ""
+msgstr "調達と注文書"
 
 #: .\erp\templates\erp\modules_overview.html:62
 msgid "Advanced Warehousing & Multi-Location"
-msgstr ""
+msgstr "高度な倉庫保管と複数のロケーション"
 
 #: .\erp\templates\erp\modules_overview.html:72
 msgid "General Ledger & Double-Entry"
-msgstr ""
+msgstr "総勘定元帳と複式簿記"
 
 #: .\erp\templates\erp\modules_overview.html:89
 msgid "Procurement"
-msgstr ""
+msgstr "調達"
 
 #: .\erp\templates\erp\modules_overview.html:95
 msgid ""
 "Expands core ERP to automate external vendor relationship management, "
 "purchase ordering, and dock receiving."
-msgstr ""
+msgstr "コア ERP を拡張して、外部ベンダー関係管理、発注、ドックの受け取りを自動化します。"
 
 #: .\erp\templates\erp\modules_overview.html:97
 #: .\erp\templates\erp\modules_overview.html:125
 #: .\erp\templates\erp\modules_overview.html:153
 msgid "Architecture Stubs & Models:"
-msgstr ""
+msgstr "アーキテクチャのスタブとモデル:"
 
 #: .\erp\templates\erp\modules_overview.html:105
 #: .\erp\templates\erp\modules_overview.html:133
 #: .\erp\templates\erp\modules_overview.html:161
 msgid "Plugin Class:"
-msgstr ""
+msgstr "プラグインクラス:"
 
 #: .\erp\templates\erp\modules_overview.html:117
 msgid "Warehousing"
-msgstr ""
+msgstr "倉庫保管"
 
 #: .\erp\templates\erp\modules_overview.html:123
 msgid ""
 "Multi-tier warehouse topology with spatial location tracking down to aisles,"
 " racks, and bin locations."
-msgstr ""
+msgstr "通路、ラック、棚の位置まで空間位置を追跡する多層倉庫トポロジ。"
 
 #: .\erp\templates\erp\modules_overview.html:145
 msgid "Accounting"
-msgstr ""
+msgstr "会計"
 
 #: .\erp\templates\erp\modules_overview.html:151
 msgid ""
 "Full double-entry bookkeeping ledger integrating invoice payments, accounts "
 "payable, and financial audits."
-msgstr ""
+msgstr "請求書支払、買掛金、財務監査を統合した完全複式簿記台帳です。"
 
 #: .\erp\templates\erp\movement_form.html:10
 msgid "Record Stock Movement"
-msgstr ""
+msgstr "記録的な株価変動"
 
 #: .\erp\templates\erp\movement_form.html:12
 msgid ""
 "Log incoming inventory, sales dispatches, customer returns, or physical "
 "counts"
-msgstr ""
+msgstr "入荷在庫、販売発送、顧客返品、または物理的な数を記録します"
 
 #: .\erp\templates\erp\movement_form.html:65
 msgid "Confirm Movement"
-msgstr ""
+msgstr "動きを確認する"
 
 #: .\erp\templates\erp\movement_list.html:8
 msgid "Stock Movement Journal"
-msgstr ""
+msgstr "株価変動ジャーナル"
 
 #: .\erp\templates\erp\movement_list.html:9
 msgid ""
 "Complete audit trail of stock receipts, customer sales, adjustments, and "
 "returns"
-msgstr ""
+msgstr "在庫の受領、顧客の販売、調整、返品の完全な監査証跡"
 
 #: .\erp\templates\erp\movement_list.html:14
 msgid "All Types"
-msgstr ""
+msgstr "全種類"
 
 #: .\erp\templates\erp\movement_list.html:19
 msgid "Search product / ref..."
-msgstr ""
+msgstr "製品/リファレンスを検索..."
 
 #: .\erp\templates\erp\movement_list.html:38
 #: .\erp\templates\erp\product_detail.html:136
 msgid "Reference"
-msgstr ""
+msgstr "参照"
 
 #: .\erp\templates\erp\movement_list.html:40
 #: .\erp\templates\erp\product_detail.html:137
 msgid "Recorded By"
-msgstr ""
+msgstr "録音者"
 
 #: .\erp\templates\erp\product_detail.html:16
 msgid "Move Stock"
-msgstr ""
+msgstr "在庫の移動"
 
 #: .\erp\templates\erp\product_detail.html:54
 msgid "Stock Status & Health"
-msgstr ""
+msgstr "在庫状況と健全性"
 
 #: .\erp\templates\erp\product_detail.html:58
 msgid "Current On-Hand"
-msgstr ""
+msgstr "現在の手持品"
 
 #: .\erp\templates\erp\product_detail.html:91
 msgid "Financial Metrics"
-msgstr ""
+msgstr "財務指標"
 
 #: .\erp\templates\erp\product_detail.html:96
 msgid "Unit Margin"
-msgstr ""
+msgstr "ユニットマージン"
 
 #: .\erp\templates\erp\product_detail.html:100
 msgid "Total Inventory Cost"
-msgstr ""
+msgstr "総在庫コスト"
 
 #: .\erp\templates\erp\product_detail.html:104
 msgid "Catalog Created"
-msgstr ""
+msgstr "カタログが作成されました"
 
 #: .\erp\templates\erp\product_detail.html:108
 #: .\intelligent_tracker_hub\models.py:99
 #: .\intelligent_tracker_hub\models.py:219
 msgid "Last Updated"
-msgstr ""
+msgstr "最終更新日"
 
 #: .\erp\templates\erp\product_detail.html:121
 msgid "Stock Movement History"
-msgstr ""
+msgstr "株価変動履歴"
 
 #: .\erp\templates\erp\product_detail.html:124
 msgid "Add Movement"
-msgstr ""
+msgstr "動きを加える"
 
 #: .\erp\templates\erp\product_detail.html:163
 msgid "No stock movements recorded for this product yet."
-msgstr ""
+msgstr "この製品の在庫変動はまだ記録されていません。"
 
 #: .\erp\templates\erp\product_form.html:13
 msgid "Add New Product"
-msgstr ""
+msgstr "新しい製品を追加"
 
 #: .\erp\templates\erp\product_form.html:16
 msgid "Define catalog SKU, units, pricing, and initial stock limits"
-msgstr ""
+msgstr "カタログ SKU、単位、価格設定、および初期在庫制限を定義する"
 
 #: .\erp\templates\erp\product_form.html:97
 msgid "Save Changes"
-msgstr ""
+msgstr "変更を保存"
 
 #: .\erp\templates\erp\product_form.html:97
 msgid "Create Product"
-msgstr ""
+msgstr "製品の作成"
 
 #: .\erp\templates\erp\product_list.html:8
 msgid "Product Catalog"
-msgstr ""
+msgstr "製品カタログ"
 
 #: .\erp\templates\erp\product_list.html:9
 msgid "Manage product specifications, pricing tiers, and stock definitions"
-msgstr ""
+msgstr "製品仕様、価格帯、在庫定義を管理する"
 
 #: .\erp\templates\erp\product_list.html:13
 msgid "Search products..."
-msgstr ""
+msgstr "製品を検索..."
 
 #: .\erp\templates\erp\product_list.html:30
 msgid "Selling Price"
-msgstr ""
+msgstr "販売価格"
 
 #: .\erp\templates\erp\product_list.html:82
 msgid "No products found in the catalog."
-msgstr ""
+msgstr "カタログに製品が見つかりませんでした。"
 
 #: .\erp\views\dashboard.py:25 .\erp\views\dashboard.py:41
 #: .\erp\views\dashboard.py:57
 msgid "Modular Extension"
-msgstr ""
+msgstr "モジュラー拡張"
 
 #: .\erp\views\dashboard.py:28
 msgid ""
 "Supplier relationship management, request for quotes (RFQ), purchase orders "
 "(PO), vendor catalog price lists, and receiving docks."
-msgstr ""
+msgstr "サプライヤー関係管理、見積依頼 (RFQ)、発注書 (PO)、ベンダー カタログ価格表、および受け取りドック。"
 
 #: .\erp\views\dashboard.py:32
 msgid "Vendor management & evaluation"
-msgstr ""
+msgstr "ベンダーの管理と評価"
 
 #: .\erp\views\dashboard.py:33
 msgid "Purchase order generation & approvals"
-msgstr ""
+msgstr "注文書の生成と承認"
 
 #: .\erp\views\dashboard.py:34
 msgid "Shipment receiving & automatic stock intake"
-msgstr ""
+msgstr "出荷受け取りと自動在庫入庫"
 
 #: .\erp\views\dashboard.py:39
 msgid "Advanced Multi-Location Warehouse"
-msgstr ""
+msgstr "高度な複数拠点の倉庫"
 
 #: .\erp\views\dashboard.py:44
 msgid ""
 "Multi-warehouse spatial topology, bin/aisle/shelf tracking, inter-warehouse "
 "transfer orders, and lot/serial number traceability."
-msgstr ""
+msgstr "複数の倉庫の空間トポロジ、棚/通路/棚の追跡、倉庫間転送オーダー、ロット/シリアル番号のトレーサビリティ。"
 
 #: .\erp\views\dashboard.py:48
 msgid "Multi-warehouse & bin locations"
-msgstr ""
+msgstr "複数の倉庫と棚の場所"
 
 #: .\erp\views\dashboard.py:49
 msgid "Inter-location stock transfer requisitions"
-msgstr ""
+msgstr "拠点間在庫転送依頼"
 
 #: .\erp\views\dashboard.py:50
 msgid "Lot & serial tracking for traceability"
-msgstr ""
+msgstr "トレーサビリティのためのロットとシリアルの追跡"
 
 #: .\erp\views\dashboard.py:55
 msgid "General Ledger & Full Accounting"
-msgstr ""
+msgstr "総勘定元帳と完全な会計"
 
 #: .\erp\views\dashboard.py:60
 msgid ""
 "Complete double-entry bookkeeping engine with custom chart of accounts, "
 "journal entries, accounts payable/receivable, trial balance, and P&L."
-msgstr ""
+msgstr "カスタム勘定科目表、仕訳、買掛金/売掛金、試算表、損益計算書を備えた完全な複式簿記エンジン。"
 
 #: .\erp\views\dashboard.py:64
 msgid "Double-entry journal ledger"
-msgstr ""
+msgstr "複式仕訳帳"
 
 #: .\erp\views\dashboard.py:65
 msgid "Automated Balance Sheet & Income Statement"
-msgstr ""
+msgstr "自動化された貸借対照表と損益計算書"
 
 #: .\erp\views\dashboard.py:66
 msgid "Accounts payable & receivable reconciliation"
-msgstr ""
+msgstr "買掛金と売掛金の調整"
 
 #: .\erp\views\inventory.py:56
 #, python-format
 msgid "Stock movement recorded: %(type)s %(qty)s for %(product)s."
-msgstr ""
+msgstr "記録された在庫の動き: %(type)s %(qty)s、%(product)s。"
 
 #: .\erp\views\invoices.py:78
 #, python-format
 msgid "Invoice %(number)s created successfully."
-msgstr ""
+msgstr "請求書 %(number)s が正常に作成されました。"
 
 #: .\erp\views\invoices.py:103
 #, python-format
 msgid "Invoice %(number)s updated successfully."
-msgstr ""
+msgstr "請求書 %(number)s が正常に更新されました。"
 
 #: .\erp\views\invoices.py:115
 msgid "Invoice deleted successfully."
-msgstr ""
+msgstr "請求書は正常に削除されました。"
 
 #: .\erp\views\invoices.py:129
 #, python-format
 msgid "Invoice %(number)s marked as %(status)s."
-msgstr ""
+msgstr "請求書 %(number)s は %(status)s としてマークされています。"
 
 #: .\erp\views\invoices.py:165
 #, python-format
 msgid "Invoice PDF email dispatched to %(email)s."
-msgstr ""
+msgstr "請求書の PDF 電子メールが %(email)s に送信されました。"
 
 #: .\erp\views\invoices.py:169
 #, python-format
 msgid "Error delivering invoice email: %(err)s"
-msgstr ""
+msgstr "請求書メール配信エラー: %(err)s"
 
 #: .\erp\views\products.py:63
 msgid "Product created successfully."
-msgstr ""
+msgstr "製品が正常に作成されました。"
 
 #: .\erp\views\products.py:76
 msgid "Product updated successfully."
-msgstr ""
+msgstr "製品は正常に更新されました。"
 
 #: .\erp\views\products.py:89
 msgid "Product deleted successfully."
-msgstr ""
+msgstr "製品は正常に削除されました。"
 
 #: .\home\admin.py:4
 msgid "Page Administration"
-msgstr ""
+msgstr "ページ管理"
 
 #: .\home\admin.py:5 .\templates\admin\base_site.html:5
 #: .\templates\admin\base_site.html:18
 msgid "Administration"
-msgstr ""
+msgstr "管理"
 
 #: .\home\plugin.py:7
 msgid "Corporate Showcase"
-msgstr ""
+msgstr "企業ショーケース"
 
 #: .\home\plugin.py:8
 msgid "Corporate showcase pages: Home, About, Services, Products, Contact"
-msgstr ""
+msgstr "企業紹介ページ: ホーム、会社概要、サービス、製品、お問い合わせ"
 
 #: .\home\plugin.py:12 .\home\templates\home\about.html:14
 #: .\home\templates\home\contact.html:14 .\home\templates\home\index.html:5
@@ -2938,14 +2952,14 @@ msgstr ""
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:21
 #: .\video_gallery\templates\video_gallery\gallery_list.html:23
 msgid "Home"
-msgstr ""
+msgstr "家"
 
 #: .\home\plugin.py:13 .\home\templates\home\about.html:14
 #: .\home\templates\home\index.html:334 .\templates\base.html:115
 #: .\templates\themes\bootstrap5\partials\header.html:48
 #: .\templates\themes\tailwind\partials\header.html:54
 msgid "About Us"
-msgstr ""
+msgstr "私たちについて"
 
 #: .\home\plugin.py:14 .\home\templates\home\services.html:14
 #: .\templates\base.html:116
@@ -2956,27 +2970,27 @@ msgstr ""
 #: .\templates\themes\tailwind\partials\footer.html:15
 #: .\templates\themes\tailwind\partials\header.html:55
 msgid "Services"
-msgstr ""
+msgstr "サービス"
 
 #: .\home\templates\home\about.html:5
 msgid "About Us - Enterprise Website"
-msgstr ""
+msgstr "私たちについて - エンタープライズ Web サイト"
 
 #: .\home\templates\home\about.html:12
 msgid "About Our Platform"
-msgstr ""
+msgstr "当社のプラットフォームについて"
 
 #: .\home\templates\home\about.html:17
 msgid "Empowering modern web services, automation, and intelligent tools"
-msgstr ""
+msgstr "最新の Web サービス、自動化、インテリジェント ツールを強化"
 
 #: .\home\templates\home\about.html:33
 msgid "Enterprise Grade Innovation <br>Powered by Modern Django"
-msgstr ""
+msgstr "エンタープライズ グレードのイノベーション<br>最新の Django を活用"
 
 #: .\home\templates\home\about.html:34
 msgid "Modernized with Python 3.12 and Django 5.0"
-msgstr ""
+msgstr "Python 3.12 と Django 5.0 で最新化"
 
 #: .\home\templates\home\about.html:36
 msgid ""
@@ -2985,98 +2999,101 @@ msgid ""
 "surveys (Polls), browser-based Python execution (Brython), and programmatic "
 "data access through Django REST Framework."
 msgstr ""
+"このプラットフォームは、動的タスク管理 (Todo)、インタラクティブな意思決定調査 (Polls)、ブラウザベースの Python 実行 "
+"(Brython)、Django REST フレームワークを介したプログラムによるデータ アクセスなど、モジュラー Web "
+"アプリケーションを統合エンタープライズ インターフェイスに統合します。"
 
 #: .\home\templates\home\about.html:38 .\home\templates\home\index.html:28
 msgid "Explore Services"
-msgstr ""
+msgstr "サービスを調べる"
 
 #: .\home\templates\home\about.html:50
 msgid "Our Engineering Principles"
-msgstr ""
+msgstr "当社のエンジニアリング原則"
 
 #: .\home\templates\home\about.html:52
 msgid "Standards-compliant, secure, and built for cross-platform resilience."
-msgstr ""
+msgstr "標準に準拠し、安全で、クロスプラットフォームの復元力を備えて構築されています。"
 
 #: .\home\templates\home\about.html:64
 msgid ""
 "Modern asynchronous and synchronous runtime supporting robust database "
 "interactions and secure session authentication."
-msgstr ""
+msgstr "堅牢なデータベース対話と安全なセッション認証をサポートする最新の非同期および同期ランタイム。"
 
 #: .\home\templates\home\about.html:72
 msgid "Enterprise Security"
-msgstr ""
+msgstr "エンタープライズセキュリティ"
 
 #: .\home\templates\home\about.html:75
 msgid ""
 "OWASP Top 10 compliance, 12-Factor isolated environment credentials, "
 "parameterized queries, and CSRF protection."
-msgstr ""
+msgstr "OWASP トップ 10 コンプライアンス、12 要素分離環境認証情報、パラメータ化されたクエリ、および CSRF 保護。"
 
 #: .\home\templates\home\about.html:83
 msgid "Modular Architecture"
-msgstr ""
+msgstr "モジュラーアーキテクチャ"
 
 #: .\home\templates\home\about.html:86
 msgid ""
 "Clean app separation with dedicated models, views, and APIs ready for "
 "internationalization and multi-cloud deployment."
-msgstr ""
+msgstr "専用のモデル、ビュー、API を使用してアプリを明確に分離し、国際化とマルチクラウド展開に対応します。"
 
 #: .\home\templates\home\contact.html:5
 msgid "Contact Us - Enterprise Website"
-msgstr ""
+msgstr "お問い合わせ - エンタープライズ Web サイト"
 
 #: .\home\templates\home\contact.html:12
 msgid "Get in Touch"
-msgstr ""
+msgstr "連絡する"
 
 #: .\home\templates\home\contact.html:17
 msgid ""
 "Have questions about platform integration or custom solutions? We are here "
 "to help."
-msgstr ""
+msgstr "プラットフォームの統合またはカスタム ソリューションについて質問がありますか?私たちはお手伝いをするためにここにいます。"
 
 #: .\home\templates\home\contact.html:35
 msgid "Enterprise Technology Lab"
-msgstr ""
+msgstr "エンタープライズテクノロジーラボ"
 
 #: .\home\templates\home\contact.html:36
 msgid "Global Engineering Center"
-msgstr ""
+msgstr "グローバルエンジニアリングセンター"
 
 #: .\home\templates\home\contact.html:44
 msgid "Local Support Services"
-msgstr ""
+msgstr "ローカルサポートサービス"
 
 #: .\home\templates\home\contact.html:45
 msgid "Mon to Fri 9am to 6pm"
-msgstr ""
+msgstr "月曜～金曜 午前9時～午後6時"
 
 #: .\home\templates\home\contact.html:54
 msgid "Send us your query anytime!"
-msgstr ""
+msgstr "いつでもご質問をお送りください。"
 
 #: .\home\templates\home\contact.html:63
 msgid "Enter your name"
-msgstr ""
+msgstr "あなたの名前を入力してください"
 
 #: .\home\templates\home\contact.html:64
 msgid "Enter email address"
-msgstr ""
+msgstr "メールアドレスを入力してください"
 
 #: .\home\templates\home\contact.html:65
 msgid "Enter subject"
-msgstr ""
+msgstr "件名を入力してください"
 
 #: .\home\templates\home\contact.html:71
 msgid "Enter Message"
-msgstr ""
+msgstr "メッセージを入力してください"
 
 #: .\home\templates\home\contact.html:75
 msgid "Send Message"
-msgstr ""
+msgstr "メッセージを送信する"
 
 #: .\home\templates\home\index.html:13
 msgid ""
@@ -3084,73 +3101,80 @@ msgid ""
 "        Production level <br>\n"
 "        with Robotics"
 msgstr ""
+"改善されました<br>\n"
+"        生産レベル<br>\n"
+"        ロボティクスを活用した"
 
 #: .\home\templates\home\index.html:24
 msgid "Everyone wants the innovation through robotics"
-msgstr ""
+msgstr "誰もがロボティクスによるイノベーションを望んでいます"
 
 #: .\home\templates\home\index.html:44
 msgid "Featured Robotics Products to Show"
-msgstr ""
+msgstr "展示される注目のロボット製品"
 
 #: .\home\templates\home\index.html:46 .\home\templates\home\index.html:59
 #: .\home\templates\home\index.html:73 .\home\templates\home\index.html:87
 #: .\home\templates\home\index.html:101 .\home\templates\home\index.html:171
 #: .\home\templates\home\index.html:281
 msgid "Who are in extremely love with eco friendly system."
-msgstr ""
+msgstr "環境に優しいシステムをこよなく愛する人。"
 
 #: .\home\templates\home\index.html:57 .\home\templates\home\products.html:43
 msgid "The Upper Eye"
-msgstr ""
+msgstr "上の目"
 
 #: .\home\templates\home\index.html:71 .\home\templates\home\products.html:57
 msgid "The Crab Wheel"
-msgstr ""
+msgstr "カニの車輪"
 
 #: .\home\templates\home\index.html:85 .\home\templates\home\products.html:71
 msgid "The Plug Ninja"
-msgstr ""
+msgstr "プラグ忍者"
 
 #: .\home\templates\home\index.html:99
 msgid "The Controller"
-msgstr ""
+msgstr "コントローラー"
 
 #: .\home\templates\home\index.html:120
 msgid ""
 "Globally Connected <br>\n"
 "                    by Large Network"
 msgstr ""
+"世界中につながる<br>\n"
+"                    大規模ネットワークによる"
 
 #: .\home\templates\home\index.html:123 .\home\templates\home\index.html:147
 msgid "We are here to listen from you deliver exellence"
-msgstr ""
+msgstr "私たちは、あなたが卓越性を提供することを聞くためにここにいます"
 
 #: .\home\templates\home\index.html:128
 msgid "Get Details"
-msgstr ""
+msgstr "詳細を取得する"
 
 #: .\home\templates\home\index.html:141
 msgid "Brand new app to blow your mind"
-msgstr ""
+msgstr "あなたの心を驚かせる真新しいアプリ"
 
 #: .\home\templates\home\index.html:143
 msgid ""
 "We’ve made a life <br>\n"
 "                        that will change you"
 msgstr ""
+"私たちは人生を築いてきました<br>\n"
+"                        それがあなたを変えるでしょう"
 
 #: .\home\templates\home\index.html:152
 msgid "Get Started Now"
-msgstr ""
+msgstr "今すぐ始めましょう"
 
 #: .\home\templates\home\index.html:169
 msgid "Some Features that Made us Unique"
-msgstr ""
+msgstr "当社をユニークなものにしたいくつかの機能"
 
 #: .\home\templates\home\index.html:180
 msgid "Expert Technicians"
-msgstr ""
+msgstr "専門技術者"
 
 #: .\home\templates\home\index.html:183 .\home\templates\home\index.html:194
 #: .\home\templates\home\index.html:205 .\home\templates\home\index.html:216
@@ -3158,1184 +3182,1191 @@ msgstr ""
 msgid ""
 "Usage of the Internet is becoming more common due to rapid advancement of "
 "technology and power."
-msgstr ""
+msgstr "テクノロジーと電力の急速な進歩により、インターネットの使用はますます一般的になってきています。"
 
 #: .\home\templates\home\index.html:191
 msgid "Professional Service"
-msgstr ""
+msgstr "プロフェッショナルなサービス"
 
 #: .\home\templates\home\index.html:202
 msgid "Great Support"
-msgstr ""
+msgstr "素晴らしいサポート"
 
 #: .\home\templates\home\index.html:213
 msgid "Technical Skills"
-msgstr ""
+msgstr "技術スキル"
 
 #: .\home\templates\home\index.html:224
 msgid "Highly Recomended"
-msgstr ""
+msgstr "強くお勧めします"
 
 #: .\home\templates\home\index.html:235
 msgid "Positive Reviews"
-msgstr ""
+msgstr "肯定的なレビュー"
 
 #: .\home\templates\home\index.html:279
 msgid "Latest News from our Blog"
-msgstr ""
+msgstr "ブログからの最新ニュース"
 
 #: .\home\templates\home\index.html:292 .\home\templates\home\index.html:308
 msgid "Travel"
-msgstr ""
+msgstr "旅行"
 
 #: .\home\templates\home\index.html:293 .\home\templates\home\index.html:309
 msgid "Life Style"
-msgstr ""
+msgstr "ライフスタイル"
 
 #: .\home\templates\home\index.html:295 .\home\templates\home\index.html:311
 msgid "Portable latest Fashion for young women"
-msgstr ""
+msgstr "若い女性のためのポータブルな最新ファッション"
 
 #: .\home\templates\home\index.html:332
 msgid "Top Products"
-msgstr ""
+msgstr "人気の製品"
 
 #: .\home\templates\home\index.html:335
 msgid "Our Services"
-msgstr ""
+msgstr "当社のサービス"
 
 #: .\home\templates\home\index.html:336
 msgid "Products Catalog"
-msgstr ""
+msgstr "製品カタログ"
 
 #: .\home\templates\home\index.html:337
 msgid "Contact & Support"
-msgstr ""
+msgstr "お問い合わせとサポート"
 
 #: .\home\templates\home\index.html:343
 msgid "Newsletter"
-msgstr ""
+msgstr "ニュースレター"
 
 #: .\home\templates\home\index.html:344
 msgid "You can trust us. we only send promo offers, not a single spam."
-msgstr ""
+msgstr "私たちを信頼していただけます。私たちはプロモーションのオファーのみを送信し、スパムは 1 通も送信しません。"
 
 #: .\home\templates\home\index.html:350
 msgid "Enter Email"
-msgstr ""
+msgstr "メールアドレスを入力してください"
 
 #: .\home\templates\home\index.html:358
 msgid "Subscribe"
-msgstr ""
+msgstr "購読する"
 
 #: .\home\templates\home\index.html:368
 msgid "Instragram Feed"
-msgstr ""
+msgstr "インスタグラムフィード"
 
 #: .\home\templates\home\products.html:5
 msgid "Products - Enterprise Website"
-msgstr ""
+msgstr "製品 - エンタープライズ Web サイト"
 
 #: .\home\templates\home\products.html:12
 msgid "Featured Products & Systems"
-msgstr ""
+msgstr "注目の製品とシステム"
 
 #: .\home\templates\home\products.html:17
 msgid ""
 "Engineered hardware and automation solutions for high-precision environments"
-msgstr ""
+msgstr "高精度環境向けに設計されたハードウェアと自動化ソリューション"
 
 #: .\home\templates\home\products.html:30
 msgid "Featured Robotics & Systems Catalog"
-msgstr ""
+msgstr "注目のロボティクスとシステムのカタログ"
 
 #: .\home\templates\home\products.html:32
 msgid ""
 "High precision, energy-efficient robotic hardware integrated with our web "
 "telemetry endpoints."
-msgstr ""
+msgstr "当社の Web テレメトリ エンドポイントと統合された、高精度でエネルギー効率の高いロボット ハードウェア。"
 
 #: .\home\templates\home\products.html:45
 msgid ""
 "Optical vision sensor with low latency edge telemetry streaming to Django "
 "REST endpoints."
-msgstr ""
+msgstr "Django REST エンドポイントへの低遅延エッジ テレメトリ ストリーミングを備えた光学式ビジョン センサー。"
 
 #: .\home\templates\home\products.html:47
 msgid "Industrial Grade"
-msgstr ""
+msgstr "工業用グレード"
 
 #: .\home\templates\home\products.html:59
 msgid ""
 "Omnidirectional navigation chassis designed for automated warehouse "
 "coordination."
-msgstr ""
+msgstr "自動倉庫連携用に設計された全方位ナビゲーションシャーシ。"
 
 #: .\home\templates\home\products.html:61
 msgid "Automated AGV"
-msgstr ""
+msgstr "自動AGV"
 
 #: .\home\templates\home\products.html:73
 msgid ""
 "Modular smart connector hub bridging microcontrollers to cloud WebSocket "
 "channels."
-msgstr ""
+msgstr "マイクロコントローラーをクラウド WebSocket チャネルにブリッジするモジュール式スマート コネクタ ハブ。"
 
 #: .\home\templates\home\products.html:75
 msgid "IoT Gateway"
-msgstr ""
+msgstr "IoTゲートウェイ"
 
 #: .\home\templates\home\products.html:85
 msgid "The Master Controller"
-msgstr ""
+msgstr "マスターコントローラー"
 
 #: .\home\templates\home\products.html:87
 msgid ""
 "Dual-core industrial computing unit running embedded Linux with remote "
 "Django API sync."
-msgstr ""
+msgstr "リモート Django API 同期を備えた組み込み Linux を実行するデュアルコア産業用コンピューティング ユニット。"
 
 #: .\home\templates\home\products.html:89
 msgid "Core Processor"
-msgstr ""
+msgstr "コアプロセッサ"
 
 #: .\home\templates\home\services.html:5
 msgid "Services - Enterprise Website"
-msgstr ""
+msgstr "サービス - エンタープライズ Web サイト"
 
 #: .\home\templates\home\services.html:12
 msgid "Our Services & Applications"
-msgstr ""
+msgstr "当社のサービスとアプリケーション"
 
 #: .\home\templates\home\services.html:17
 msgid "Modular enterprise services integrated into a cohesive web suite"
-msgstr ""
+msgstr "一貫した Web スイートに統合されたモジュール式エンタープライズ サービス"
 
 #: .\home\templates\home\services.html:30
 msgid "Integrated Platform Capabilities"
-msgstr ""
+msgstr "統合されたプラットフォーム機能"
 
 #: .\home\templates\home\services.html:32
 msgid ""
 "High-availability modules designed for modern operations, workflow "
 "automation, and data exchange."
-msgstr ""
+msgstr "最新の運用、ワークフローの自動化、データ交換向けに設計された高可用性モジュール。"
 
 #: .\home\templates\home\services.html:44
 msgid "Todo & Task Manager"
-msgstr ""
+msgstr "Todo とタスクマネージャー"
 
 #: .\home\templates\home\services.html:46
 msgid ""
 "Manage daily operational tasks with persistent timezone-aware tracking, "
 "custom tags, and detailed status auditing."
-msgstr ""
+msgstr "永続的なタイムゾーン対応の追跡、カスタム タグ、および詳細なステータス監査により、日々の運用タスクを管理します。"
 
 #: .\home\templates\home\services.html:48
 #: .\home\templates\home\services.html:64
 #: .\home\templates\home\services.html:80
 msgid "Open App"
-msgstr ""
+msgstr "アプリを開く"
 
 #: .\home\templates\home\services.html:60
 msgid "Polls & Voting Engine"
-msgstr ""
+msgstr "世論調査と投票エンジン"
 
 #: .\home\templates\home\services.html:62
 msgid ""
 "Real-time dynamic opinion gathering with concurrency-safe atomic voting "
 "(Django F-expressions) and visual analytics."
-msgstr ""
+msgstr "同時実行性を考慮したアトミック投票 (Django F 式) とビジュアル分析によるリアルタイムの動的な意見収集。"
 
 #: .\home\templates\home\services.html:76
 msgid "Brython Web Programming"
-msgstr ""
+msgstr "Brython Web プログラミング"
 
 #: .\home\templates\home\services.html:78
 msgid ""
 "Run Python in the browser without plugins. Experience seamless DOM "
 "manipulation using Python 3 client scripts."
 msgstr ""
+"プラグインを使用せずにブラウザーで Python を実行します。 Python 3 クライアント スクリプトを使用したシームレスな DOM "
+"操作を体験してください。"
 
 #: .\home\templates\home\services.html:92
 msgid "RESTful API Gateway"
-msgstr ""
+msgstr "RESTful APIゲートウェイ"
 
 #: .\home\templates\home\services.html:94
 msgid ""
 "Standards-based REST API powered by Django REST Framework with interactive "
 "schema navigation and token authentication."
 msgstr ""
+"インタラクティブなスキーマ ナビゲーションとトークン認証を備えた Django REST フレームワークを利用した標準ベースの REST API。"
 
 #: .\home\templates\home\services.html:96
 msgid "Open API"
-msgstr ""
+msgstr "オープンAPI"
 
 #: .\home\views.py:63
 #, python-format
 msgid "Thank you, %(name)s! Your message has been received."
-msgstr ""
+msgstr "%(name)s さん、ありがとう！あなたのメッセージは受信されました。"
 
 #: .\home\views.py:65
 msgid "Please fill out all required fields."
-msgstr ""
+msgstr "すべての必須フィールドに入力してください。"
 
 #: .\intelligent_tracker_hub\admin.py:25
 msgid "Event Information"
-msgstr ""
+msgstr "イベント情報"
 
 #: .\intelligent_tracker_hub\admin.py:38
 msgid "Evidence & Telemetry"
-msgstr ""
+msgstr "証拠とテレメトリ"
 
 #: .\intelligent_tracker_hub\admin.py:49
 msgid "Resolution & Incident Handling"
-msgstr ""
+msgstr "解決とインシデントの処理"
 
 #: .\intelligent_tracker_hub\admin.py:60
 msgid "Audit Timestamps"
-msgstr ""
+msgstr "監査タイムスタンプ"
 
 #: .\intelligent_tracker_hub\admin.py:70
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:25
 msgid "Event ID"
-msgstr ""
+msgstr "イベントID"
 
 #: .\intelligent_tracker_hub\admin.py:85
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:227
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:271
 msgid "Severity"
-msgstr ""
+msgstr "重大度"
 
 #: .\intelligent_tracker_hub\admin.py:94
 msgid "Snapshot"
-msgstr ""
+msgstr "スナップショット"
 
 #: .\intelligent_tracker_hub\admin.py:102
 msgid "No snapshot uploaded."
-msgstr ""
+msgstr "スナップショットがアップロードされていません。"
 
 #: .\intelligent_tracker_hub\admin.py:103
 #: .\intelligent_tracker_hub\admin.py:220
 msgid "Snapshot Preview"
-msgstr ""
+msgstr "スナップショットのプレビュー"
 
 #: .\intelligent_tracker_hub\admin.py:110
 msgid "Formatted Metadata"
-msgstr ""
+msgstr "フォーマットされたメタデータ"
 
 #: .\intelligent_tracker_hub\admin.py:144
 msgid "HMAC Status"
-msgstr ""
+msgstr "HMAC ステータス"
 
 #: .\intelligent_tracker_hub\admin.py:199
 msgid "Access ID"
-msgstr ""
+msgstr "アクセスID"
 
 #: .\intelligent_tracker_hub\admin.py:204
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:421
 msgid "Unrecognized"
-msgstr ""
+msgstr "認識されない"
 
 #: .\intelligent_tracker_hub\admin.py:205
 msgid "Contact / Entity"
-msgstr ""
+msgstr "連絡先/団体"
 
 #: .\intelligent_tracker_hub\admin.py:209
 msgid "GRANTED"
-msgstr ""
+msgstr "付与された"
 
 #: .\intelligent_tracker_hub\admin.py:210
 msgid "DENIED"
-msgstr ""
+msgstr "拒否されました"
 
 #: .\intelligent_tracker_hub\admin.py:211
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:389
 msgid "Result"
-msgstr ""
+msgstr "結果"
 
 #: .\intelligent_tracker_hub\admin.py:224
 msgid "Telemetry Metadata (JSON)"
-msgstr ""
+msgstr "テレメトリメタデータ (JSON)"
 
 #: .\intelligent_tracker_hub\api\access_control.py:155
 msgid "Banned Entity - Gate Access Denied"
-msgstr ""
+msgstr "禁止されたエンティティ - ゲートアクセスが拒否されました"
 
 #: .\intelligent_tracker_hub\api\access_control.py:158
 msgid "Visitor Pass Expired or Out of Window"
-msgstr ""
+msgstr "ビジターパスの有効期限が切れているか期限切れです"
 
 #: .\intelligent_tracker_hub\api\access_control.py:163
 msgid "Unrecognized Entity"
-msgstr ""
+msgstr "認識されないエンティティ"
 
 #: .\intelligent_tracker_hub\apps.py:8
 msgid "Intelligent Tracker Security Hub"
-msgstr ""
+msgstr "インテリジェント トラッカー セキュリティ ハブ"
 
 #: .\intelligent_tracker_hub\models.py:10
 msgid "Intrusion Alert"
-msgstr ""
+msgstr "侵入警報"
 
 #: .\intelligent_tracker_hub\models.py:11
 msgid "Restricted Entity Alert"
-msgstr ""
+msgstr "制限されたエンティティのアラート"
 
 #: .\intelligent_tracker_hub\models.py:12
 msgid "Occupancy Threshold Event"
-msgstr ""
+msgstr "占有しきい値イベント"
 
 #: .\intelligent_tracker_hub\models.py:13
 msgid "Fall Detected Alert"
-msgstr ""
+msgstr "転倒検知アラート"
 
 #: .\intelligent_tracker_hub\models.py:14
 msgid "Loitering Alert"
-msgstr ""
+msgstr "徘徊警報"
 
 #: .\intelligent_tracker_hub\models.py:15
 msgid "Line Cross Alert"
-msgstr ""
+msgstr "ラインクロスアラート"
 
 #: .\intelligent_tracker_hub\models.py:19
 msgid "Low"
-msgstr ""
+msgstr "低い"
 
 #: .\intelligent_tracker_hub\models.py:20
 msgid "Medium"
-msgstr ""
+msgstr "中くらい"
 
 #: .\intelligent_tracker_hub\models.py:21
 msgid "High"
-msgstr ""
+msgstr "高い"
 
 #: .\intelligent_tracker_hub\models.py:22
 msgid "Critical"
-msgstr ""
+msgstr "致命的"
 
 #: .\intelligent_tracker_hub\models.py:26
 msgid "Online"
-msgstr ""
+msgstr "オンライン"
 
 #: .\intelligent_tracker_hub\models.py:27
 msgid "Offline"
-msgstr ""
+msgstr "オフライン"
 
 #: .\intelligent_tracker_hub\models.py:28
 msgid "Connecting"
-msgstr ""
+msgstr "接続中"
 
 #: .\intelligent_tracker_hub\models.py:29
 msgid "Degraded"
-msgstr ""
+msgstr "劣化した"
 
 #: .\intelligent_tracker_hub\models.py:42
 #: .\intelligent_tracker_hub\models.py:163
 msgid "Camera Identifier"
-msgstr ""
+msgstr "カメラ識別子"
 
 #: .\intelligent_tracker_hub\models.py:43
 msgid "Unique identifier (e.g. cam-north-gate-01)"
-msgstr ""
+msgstr "一意の識別子 (例: cam-north-gate-01)"
 
 #: .\intelligent_tracker_hub\models.py:47
 msgid "Camera Name"
-msgstr ""
+msgstr "カメラ名"
 
 #: .\intelligent_tracker_hub\models.py:48
 msgid "Human-readable label (e.g. North Perimeter Fence)"
-msgstr ""
+msgstr "人間が読めるラベル (例: 北境界フェンス)"
 
 #: .\intelligent_tracker_hub\models.py:56
 #: .\intelligent_tracker_hub\models.py:158
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:179
 msgid "Site / Facility"
-msgstr ""
+msgstr "敷地・施設"
 
 #: .\intelligent_tracker_hub\models.py:62
 msgid "Edge Stream URL"
-msgstr ""
+msgstr "エッジストリームURL"
 
 #: .\intelligent_tracker_hub\models.py:63
 msgid ""
 "Edge MJPEG stream URL (e.g. http://edge-node:8000/live/cam-01/ or mock://)"
 msgstr ""
+"Edge MJPEG ストリーム URL (例: http://edge-node:8000/live/cam-01/ または mock://)"
 
 #: .\intelligent_tracker_hub\models.py:70
 #: .\task_runner\templates\task_runner\task_progress_widget.html:13
 msgid "Connection Status"
-msgstr ""
+msgstr "接続ステータス"
 
 #: .\intelligent_tracker_hub\models.py:76
 msgid "Last Heartbeat"
-msgstr ""
+msgstr "最後のハートビート"
 
 #: .\intelligent_tracker_hub\models.py:80
 msgid "Target FPS"
-msgstr ""
+msgstr "ターゲットFPS"
 
 #: .\intelligent_tracker_hub\models.py:85
 msgid "Stream Resolution"
-msgstr ""
+msgstr "ストリーム解像度"
 
 #: .\intelligent_tracker_hub\models.py:95
 msgid "Camera Telemetry Metadata"
-msgstr ""
+msgstr "カメラテレメトリーメタデータ"
 
 #: .\intelligent_tracker_hub\models.py:96
 msgid "Dropped frames, bitrate, inference model, active trackers"
-msgstr ""
+msgstr "ドロップフレーム、ビットレート、推論モデル、アクティブトラッカー"
 
 #: .\intelligent_tracker_hub\models.py:102
 msgid "Camera"
-msgstr ""
+msgstr "カメラ"
 
 #: .\intelligent_tracker_hub\models.py:103
 msgid "Cameras"
-msgstr ""
+msgstr "カメラ"
 
 #: .\intelligent_tracker_hub\models.py:143
 msgid "Event UUID"
-msgstr ""
+msgstr "イベントUUID"
 
 #: .\intelligent_tracker_hub\models.py:150
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:74
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:218
 msgid "Event Type"
-msgstr ""
+msgstr "イベントの種類"
 
 #: .\intelligent_tracker_hub\models.py:168
 #: .\intelligent_tracker_hub\models.py:388
 msgid "Event Timestamp"
-msgstr ""
+msgstr "イベントのタイムスタンプ"
 
 #: .\intelligent_tracker_hub\models.py:174
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:100
 msgid "Evidence Snapshot"
-msgstr ""
+msgstr "証拠のスナップショット"
 
 #: .\intelligent_tracker_hub\models.py:182
 msgid "Video Evidence"
-msgstr ""
+msgstr "証拠ビデオ"
 
 #: .\intelligent_tracker_hub\models.py:187
 msgid "Telemetry & Dwell Metadata"
-msgstr ""
+msgstr "テレメトリと滞留メタデータ"
 
 #: .\intelligent_tracker_hub\models.py:194
 msgid "Severity Level"
-msgstr ""
+msgstr "重大度レベル"
 
 #: .\intelligent_tracker_hub\models.py:199
 msgid "Is Resolved"
-msgstr ""
+msgstr "解決済み"
 
 #: .\intelligent_tracker_hub\models.py:207
 msgid "Resolved By"
-msgstr ""
+msgstr "解決者"
 
 #: .\intelligent_tracker_hub\models.py:212
 msgid "Resolved At"
-msgstr ""
+msgstr "解決日"
 
 #: .\intelligent_tracker_hub\models.py:216
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:217
 msgid "Resolution Notes"
-msgstr ""
+msgstr "解決策のメモ"
 
 #: .\intelligent_tracker_hub\models.py:218
 #: .\intelligent_tracker_hub\models.py:402
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:193
 msgid "Ingested At"
-msgstr ""
+msgstr "摂取場所"
 
 #: .\intelligent_tracker_hub\models.py:222
 msgid "Security Event"
-msgstr ""
+msgstr "セキュリティイベント"
 
 #: .\intelligent_tracker_hub\models.py:223
 msgid "Security Events"
-msgstr ""
+msgstr "セキュリティイベント"
 
 #: .\intelligent_tracker_hub\models.py:282
 msgid "Received At"
-msgstr ""
+msgstr "受信場所"
 
 #: .\intelligent_tracker_hub\models.py:283
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:21
 msgid "Client IP"
-msgstr ""
+msgstr "クライアントIP"
 
 #: .\intelligent_tracker_hub\models.py:284
 msgid "Endpoint"
-msgstr ""
+msgstr "終点"
 
 #: .\intelligent_tracker_hub\models.py:285
 msgid "HTTP Method"
-msgstr ""
+msgstr "HTTPメソッド"
 
 #: .\intelligent_tracker_hub\models.py:286
 msgid "X-Tracker-Signature Header"
-msgstr ""
+msgstr "X-Tracker-署名ヘッダー"
 
 #: .\intelligent_tracker_hub\models.py:287
 msgid "Signature Valid"
-msgstr ""
+msgstr "署名は有効です"
 
 #: .\intelligent_tracker_hub\models.py:288
 msgid "Associated Event UUID"
-msgstr ""
+msgstr "関連イベント UUID"
 
 #: .\intelligent_tracker_hub\models.py:289
 msgid "Raw Request Body"
-msgstr ""
+msgstr "生のリクエスト本文"
 
 #: .\intelligent_tracker_hub\models.py:290
 msgid "HTTP Status Code"
-msgstr ""
+msgstr "HTTPステータスコード"
 
 #: .\intelligent_tracker_hub\models.py:291
 msgid "Error Details"
-msgstr ""
+msgstr "エラーの詳細"
 
 #: .\intelligent_tracker_hub\models.py:292
 msgid "Processed Successfully"
-msgstr ""
+msgstr "正常に処理されました"
 
 #: .\intelligent_tracker_hub\models.py:295
 msgid "Security Audit Log"
-msgstr ""
+msgstr "セキュリティ監査ログ"
 
 #: .\intelligent_tracker_hub\models.py:296
 msgid "Security Audit Logs"
-msgstr ""
+msgstr "セキュリティ監査ログ"
 
 #: .\intelligent_tracker_hub\models.py:305
 msgid "Entry"
-msgstr ""
+msgstr "エントリ"
 
 #: .\intelligent_tracker_hub\models.py:306
 msgid "Exit"
-msgstr ""
+msgstr "出口"
 
 #: .\intelligent_tracker_hub\models.py:310
 msgid "Facial Recognition"
-msgstr ""
+msgstr "顔認識"
 
 #: .\intelligent_tracker_hub\models.py:311
 msgid "License Plate (ANPR)"
-msgstr ""
+msgstr "ナンバープレート (ANPR)"
 
 #: .\intelligent_tracker_hub\models.py:312
 msgid "Security Tag / RFID"
-msgstr ""
+msgstr "セキュリティタグ・RFID"
 
 #: .\intelligent_tracker_hub\models.py:313
 msgid "Manual Operator Override"
-msgstr ""
+msgstr "オペレーターによる手動オーバーライド"
 
 #: .\intelligent_tracker_hub\models.py:327
 msgid "Access UUID"
-msgstr ""
+msgstr "アクセスUUID"
 
 #: .\intelligent_tracker_hub\models.py:335
 msgid "CRM Contact"
-msgstr ""
+msgstr "CRM連絡先"
 
 #: .\intelligent_tracker_hub\models.py:341
 msgid "Facility / Site"
-msgstr ""
+msgstr "施設・敷地"
 
 #: .\intelligent_tracker_hub\models.py:346
 msgid "Gate Camera ID"
-msgstr ""
+msgstr "ゲートカメラID"
 
 #: .\intelligent_tracker_hub\models.py:347
 msgid ""
 "Identifier of camera covering the access point (e.g. cam-north-gate-entry)"
-msgstr ""
+msgstr "アクセス ポイントをカバーするカメラの ID (例: cam-north-gate-entry)"
 
 #: .\intelligent_tracker_hub\models.py:354
 msgid "Access Direction"
-msgstr ""
+msgstr "アクセス方向"
 
 #: .\intelligent_tracker_hub\models.py:361
 msgid "Verification Method"
-msgstr ""
+msgstr "検証方法"
 
 #: .\intelligent_tracker_hub\models.py:366
 msgid "Recognized Identifier"
-msgstr ""
+msgstr "認識された識別子"
 
 #: .\intelligent_tracker_hub\models.py:367
 msgid "Plate string, face track ID, or RFID code matched at the edge"
-msgstr ""
+msgstr "エッジで一致したプレートストリング、フェイストラックID、またはRFIDコード"
 
 #: .\intelligent_tracker_hub\models.py:372
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:138
 msgid "Detection Confidence"
-msgstr ""
+msgstr "検出の信頼性"
 
 #: .\intelligent_tracker_hub\models.py:377
 msgid "Access Granted"
-msgstr ""
+msgstr "アクセス権の付与"
 
 #: .\intelligent_tracker_hub\models.py:382
 msgid "Denial Reason"
-msgstr ""
+msgstr "拒否理由"
 
 #: .\intelligent_tracker_hub\models.py:383
 msgid ""
 "Reason for access denial (e.g. Pass Expired, Banned Entity, Unrecognized)"
-msgstr ""
+msgstr "アクセス拒否の理由 (例: パスの期限切れ、禁止されたエンティティ、認識されない)"
 
 #: .\intelligent_tracker_hub\models.py:394
 msgid "Access Snapshot"
-msgstr ""
+msgstr "スナップショットへのアクセス"
 
 #: .\intelligent_tracker_hub\models.py:399
 msgid "Access Telemetry Metadata"
-msgstr ""
+msgstr "テレメトリメタデータへのアクセス"
 
 #: .\intelligent_tracker_hub\models.py:400
 msgid "Gate turnstile number, ambient temperature, vehicle make/model"
-msgstr ""
+msgstr "ゲート改札口の番号、周囲温度、車両のメーカー/モデル"
 
 #: .\intelligent_tracker_hub\models.py:405
 msgid "Visitor Access Log"
-msgstr ""
+msgstr "訪問者のアクセスログ"
 
 #: .\intelligent_tracker_hub\models.py:406
 msgid "Visitor Access Logs"
-msgstr ""
+msgstr "訪問者のアクセスログ"
 
 #: .\intelligent_tracker_hub\plugin.py:12
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:4
 msgid "Edge AI Security Hub"
-msgstr ""
+msgstr "エッジ AI セキュリティ ハブ"
 
 #: .\intelligent_tracker_hub\plugin.py:14
 msgid ""
 "Spatial security command hub integrating real-time edge AI vision, intrusion"
 " webhooks, video evidence archiving, and access control."
 msgstr ""
+"リアルタイムのエッジ AI ビジョン、侵入 Webhook、ビデオ証拠のアーカイブ、アクセス制御を統合した空間セキュリティ コマンド ハブ。"
 
 #: .\intelligent_tracker_hub\plugin.py:25 .\templates\base.html:125
 #: .\templates\themes\bootstrap5\partials\header.html:68
 msgid "Security Hub"
-msgstr ""
+msgstr "セキュリティハブ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:8
 msgid "Edge AI Webhook Audit Trail"
-msgstr ""
+msgstr "Edge AI Webhook 監査証跡"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:11
 msgid "Valid HMAC Only"
-msgstr ""
+msgstr "有効な HMAC のみ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:12
 msgid "Failed HMAC Only"
-msgstr ""
+msgstr "失敗した HMAC のみ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:13
 msgid "All Logs"
-msgstr ""
+msgstr "すべてのログ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:20
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:274
 msgid "Timestamp (UTC)"
-msgstr ""
+msgstr "タイムスタンプ (UTC)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:22
 msgid "Method & Endpoint"
-msgstr ""
+msgstr "メソッドとエンドポイント"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:23
 msgid "HMAC Verdict"
-msgstr ""
+msgstr "HMAC の評決"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:24
 msgid "Status Code"
-msgstr ""
+msgstr "ステータスコード"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:41
 msgid "HMAC Verified"
-msgstr ""
+msgstr "HMAC 検証済み"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:45
 msgid "Invalid Signature"
-msgstr ""
+msgstr "無効な署名"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:71
 msgid "Signature Header"
-msgstr ""
+msgstr "署名ヘッダー"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:81
 msgid "Payload Preview"
-msgstr ""
+msgstr "ペイロードのプレビュー"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:91
 msgid "No audit logs recorded yet."
-msgstr ""
+msgstr "監査ログはまだ記録されていません。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:101
 msgid "Page"
-msgstr ""
+msgstr "ページ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\audit_log.html:101
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:350
 msgid "of"
-msgstr ""
+msgstr "の"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:15
 msgid "Edge AI Spatial Security Hub"
-msgstr ""
+msgstr "エッジ AI 空間セキュリティ ハブ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:17
 msgid "Integrated with"
-msgstr ""
+msgstr "と統合"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:23
 msgid "Simulate Edge Alert"
-msgstr ""
+msgstr "エッジアラートのシミュレート"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:26
 msgid "Webhook Audit"
-msgstr ""
+msgstr "Webhook監査"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:29
 msgid "SOC Admin"
-msgstr ""
+msgstr "SOC 管理者"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:38
 msgid "Operations Dashboard"
-msgstr ""
+msgstr "運用ダッシュボード"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:43
 msgid "Webhook Audit Logs"
-msgstr ""
+msgstr "Webhook監査ログ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:48
 msgid "Telemetry API (JSON)"
-msgstr ""
+msgstr "テレメトリ API (JSON)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:65
 msgid "Dispatch Test Edge Webhook"
-msgstr ""
+msgstr "テストエッジ Webhook のディスパッチ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:71
 msgid ""
 "Simulates an incoming edge alert from davtoh/intelligent-tracker with "
 "automated HMAC signing and audit trail recording."
 msgstr ""
+"自動化された HMAC 署名と監査証跡記録を使用して、davtoh/intelligent-tracker からの受信エッジ "
+"アラートをシミュレートします。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:76
 msgid "Intrusion Alert (High)"
-msgstr ""
+msgstr "侵入警報（高）"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:77
 msgid "Fall Detected Alert (Critical)"
-msgstr ""
+msgstr "転倒検出アラート (重大)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:78
 msgid "Restricted Entity Alert (High)"
-msgstr ""
+msgstr "制限付きエンティティ アラート (高)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:79
 msgid "Occupancy Threshold Event (Medium)"
-msgstr ""
+msgstr "占有しきい値イベント (中)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:80
 msgid "Loitering Alert (Medium)"
-msgstr ""
+msgstr "徘徊警報(中)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:84
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:244
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:183
 msgid "Camera ID"
-msgstr ""
+msgstr "カメラID"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:88
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:126
 msgid "Zone Name"
-msgstr ""
+msgstr "ゾーン名"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:92
 msgid "Location / Facility"
-msgstr ""
+msgstr "所在地・設備"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:94
 msgid "Default / Unassigned"
-msgstr ""
+msgstr "デフォルト / 未割り当て"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\base_security.html:104
 msgid "Trigger Simulated Event"
-msgstr ""
+msgstr "シミュレートされたイベントをトリガーする"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:14
 msgid "Total Events"
-msgstr ""
+msgstr "イベント総数"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:27
 msgid "Unresolved"
-msgstr ""
+msgstr "未解決"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:40
 msgid "Critical Alarms"
-msgstr ""
+msgstr "重大なアラーム"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:53
 msgid "Cameras Online"
-msgstr ""
+msgstr "オンラインカメラ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:72
 msgid "Multi-Camera Surveillance Matrix"
-msgstr ""
+msgstr "マルチカメラ監視マトリックス"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:80
 msgid "Facility:"
-msgstr ""
+msgstr "施設："
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:82
 msgid "All Facilities & Sites"
-msgstr ""
+msgstr "すべての施設とサイト"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:94
 msgid "Solo View (1 Camera)"
-msgstr ""
+msgstr "ソロビュー (1 カメラ)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:98
 msgid "2x2 Grid View"
-msgstr ""
+msgstr "2x2 グリッド ビュー"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:102
 msgid "3x3 Matrix View"
-msgstr ""
+msgstr "3x3 マトリックス ビュー"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:109
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:506
 msgid "Alarm Audio: ON"
-msgstr ""
+msgstr "アラーム音声: オン"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:114
 msgid "Simulate Intrusion"
-msgstr ""
+msgstr "侵入をシミュレートする"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:185
 msgid "Pause/Resume Stream"
-msgstr ""
+msgstr "ストリームの一時停止/再開"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:188
 msgid "Open Raw Stream"
-msgstr ""
+msgstr "未加工ストリームを開く"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:191
 msgid "Fullscreen"
-msgstr ""
+msgstr "全画面表示"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:202
 msgid "No Active Cameras Configured for this Site."
-msgstr ""
+msgstr "このサイトにはアクティブなカメラが構成されていません。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:204
 msgid ""
 "Cameras report via edge heartbeats or can be registered in the admin "
 "console."
-msgstr ""
+msgstr "カメラはエッジ ハートビート経由でレポートするか、管理コンソールに登録できます。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:220
 msgid "All Event Types"
-msgstr ""
+msgstr "すべてのイベントタイプ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:229
 msgid "All Severities"
-msgstr ""
+msgstr "すべての重大度"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:239
 msgid "Unresolved Only"
-msgstr ""
+msgstr "未解決のみ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:240
 msgid "Resolved Only"
-msgstr ""
+msgstr "解決済みのみ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:251
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:97
 msgid "Reset Filters"
-msgstr ""
+msgstr "フィルターをリセットする"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:263
 msgid "Spatial Security Events Log"
-msgstr ""
+msgstr "空間セキュリティイベントログ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:265
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:383
 msgid "Events"
-msgstr ""
+msgstr "イベント"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:272
 msgid "Event Type & Zone"
-msgstr ""
+msgstr "イベントの種類とゾーン"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:273
 msgid "Location / Camera"
-msgstr ""
+msgstr "場所/カメラ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:275
 msgid "Evidence"
-msgstr ""
+msgstr "証拠"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:277
 msgid "Action"
-msgstr ""
+msgstr "アクション"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:297
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:180
 msgid "Default Site"
-msgstr ""
+msgstr "デフォルトのサイト"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:306
 #: .\video_gallery\templates\video_gallery\partials\player_modal.html:12
 msgid "Video"
-msgstr ""
+msgstr "ビデオ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:313
 msgid "No Snapshot"
-msgstr ""
+msgstr "スナップショットなし"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:319
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:21
 msgid "Resolved"
-msgstr ""
+msgstr "解決済み"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:323
 msgid "Active Alarm"
-msgstr ""
+msgstr "アクティブなアラーム"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:337
 msgid "No security events recorded matching criteria."
-msgstr ""
+msgstr "条件に一致するセキュリティ イベントは記録されませんでした。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:338
 msgid ""
 "Edge AI vision alerts dispatched via Webhook will display in real time here."
-msgstr ""
+msgstr "Webhook 経由で送信された Edge AI ビジョン アラートは、ここにリアルタイムで表示されます。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:350
 msgid "Showing"
-msgstr ""
+msgstr "表示中"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:381
 msgid "Recent Gate Access & Visitor Passes"
-msgstr ""
+msgstr "最近のゲートアクセスとビジターパス"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:390
 msgid "Contact / Plate"
-msgstr ""
+msgstr "コンタクト・プレート"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:392
 msgid "Facility & Gate"
-msgstr ""
+msgstr "施設とゲート"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:393
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:394
 msgid "Direction"
-msgstr ""
+msgstr "方向"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:404
 msgid "Granted"
-msgstr ""
+msgstr "付与された"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:408
 msgid "Denied"
-msgstr ""
+msgstr "拒否されました"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:456
 msgid "No physical gate access events recorded yet."
-msgstr ""
+msgstr "物理的なゲート アクセス イベントはまだ記録されていません。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\dashboard.html:510
 msgid "Alarm Audio: MUTED"
-msgstr ""
+msgstr "アラーム音声: 消音"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:7
 msgid "Back to Events Dashboard"
-msgstr ""
+msgstr "イベントダッシュボードに戻る"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:25
 msgid "Active Incident"
-msgstr ""
+msgstr "アクティブなインシデント"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:51
 msgid "Video Evidence Stream"
-msgstr ""
+msgstr "ビデオ証拠ストリーム"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:56
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:259
 msgid "Archived in Cloud Vault"
-msgstr ""
+msgstr "Cloud Vault にアーカイブされる"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:58
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:259
 msgid "Re-sync from edge source reference"
-msgstr ""
+msgstr "エッジソースリファレンスからの再同期"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:59
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:259
 msgid "Re-sync"
-msgstr ""
+msgstr "再同期"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:62
 msgid "Local vault file damaged or missing; streaming from edge reference"
-msgstr ""
+msgstr "ローカルボルトファイルが破損しているか欠落しています。エッジリファレンスからのストリーミング"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:63
 msgid "Vault Damaged (Edge Stream Active)"
-msgstr ""
+msgstr "ボールトが損傷しています (Edge Stream がアクティブです)"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:66
 msgid "Repair from Source"
-msgstr ""
+msgstr "ソースからの修理"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:70
 msgid "Zero-Copy Edge Stream"
-msgstr ""
+msgstr "ゼロコピーエッジストリーム"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:73
 msgid "Archive to Cloud Vault"
-msgstr ""
+msgstr "Cloud Vault へのアーカイブ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:82
 msgid "Your browser does not support HTML5 video streaming."
-msgstr ""
+msgstr "お使いのブラウザは HTML5 ビデオ ストリーミングをサポートしていません。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:109
 msgid "No evidence snapshot was attached to this edge webhook."
-msgstr ""
+msgstr "このエッジ Webhook には証拠のスナップショットが添付されていませんでした。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:119
 msgid "Edge Telemetry & Bounding Box Data"
-msgstr ""
+msgstr "エッジ テレメトリとバウンディング ボックス データ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:132
 msgid "Dwell Duration"
-msgstr ""
+msgstr "滞留時間"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:144
 msgid "Entity Identifier"
-msgstr ""
+msgstr "エンティティ識別子"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:152
 msgid "Ground-Plane Homography Trajectory"
-msgstr ""
+msgstr "地表面ホモグラフィー軌道"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:153
 msgid "Waypoints"
-msgstr ""
+msgstr "ウェイポイント"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:155
 msgid "Calibrated spatial coordinates from World Scenario Studio."
-msgstr ""
+msgstr "World Scenario Studio からの校正された空間座標。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:161
 msgid "Raw JSON Telemetry"
-msgstr ""
+msgstr "未加工の JSON テレメトリ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:173
 msgid "Facility & Camera"
-msgstr ""
+msgstr "設備とカメラ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:187
 msgid "City / State"
-msgstr ""
+msgstr "市/州"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:204
 msgid "Incident Resolution & Audit"
-msgstr ""
+msgstr "インシデントの解決と監査"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:212
 msgid "Resolved by"
-msgstr ""
+msgstr "解決者"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:224
 msgid "Operator Resolution Notes"
-msgstr ""
+msgstr "オペレーターの解決に関するメモ"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:225
 msgid "Enter investigative notes, verified identity, or action taken..."
-msgstr ""
+msgstr "調査メモ、確認された身元、または実行されたアクションを入力します..."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:228
 msgid "Acknowledge & Mark Resolved"
-msgstr ""
+msgstr "承認して解決済みとしてマークする"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:247
 msgid "Processing..."
-msgstr ""
+msgstr "処理..."
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:260
 msgid "Video evidence permanently frozen into cloud storage."
-msgstr ""
+msgstr "ビデオ証拠はクラウド ストレージに永久に凍結されます。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:263
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:268
 msgid "Try Again"
-msgstr ""
+msgstr "もう一度やり直してください"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:264
 msgid "Archival failed."
-msgstr ""
+msgstr "アーカイブに失敗しました。"
 
 #: .\intelligent_tracker_hub\templates\intelligent_tracker_hub\event_detail.html:269
 msgid "Network error during archival."
-msgstr ""
+msgstr "アーカイブ中のネットワーク エラー。"
 
 #: .\intelligent_tracker_hub\views.py:89
 msgid "North Perimeter Gate"
-msgstr ""
+msgstr "北外周ゲート"
 
 #: .\intelligent_tracker_hub\views.py:163
 #, python-format
 msgid "Security event %s marked as resolved."
-msgstr ""
+msgstr "セキュリティ イベント %s は解決済みとしてマークされています。"
 
 #: .\intelligent_tracker_hub\views.py:234
 #, python-format
 msgid "Simulated security event %s created successfully."
-msgstr ""
+msgstr "シミュレートされたセキュリティ イベント %s が正常に作成されました。"
 
 #: .\language_management\models.py:16
 msgid "User language"
-msgstr ""
+msgstr "ユーザー言語"
 
 #: .\language_management\models.py:19
 msgid "Set the language to show in site"
-msgstr ""
+msgstr "サイトに表示する言語を設定します"
 
 #: .\language_management\models.py:23
 msgid "This language code is too long."
-msgstr ""
+msgstr "この言語コードは長すぎます。"
 
 #: .\language_management\templates\language_management\form.html:37
 #: .\templates\themes\bootstrap5\partials\header.html:94
 msgid "Language"
-msgstr ""
+msgstr "言語"
 
 #: .\language_management\views.py:13
 msgid "Language Management"
-msgstr ""
+msgstr "言語管理"
 
 #: .\location_management\apps.py:7
 msgid "Location management"
-msgstr ""
+msgstr "位置管理"
 
 #: .\location_management\models.py:8
 msgid "country name"
-msgstr ""
+msgstr "国名"
 
 #: .\location_management\models.py:8 .\location_management\models.py:9
 #: .\location_management\models.py:21 .\location_management\models.py:22
@@ -4348,493 +4379,494 @@ msgstr ""
 #: .\user_management\models.py:53 .\user_management\models.py:54
 #: .\user_management\models.py:55 .\user_management\models.py:56
 msgid "This is the help text"
-msgstr ""
+msgstr "これはヘルプテキストです"
 
 #: .\location_management\models.py:9
 msgid "country code"
-msgstr ""
+msgstr "国番号"
 
 #: .\location_management\models.py:13 .\location_management\models.py:21
 #: .\location_management\models.py:35 .\user_management\models.py:53
 msgid "country"
-msgstr ""
+msgstr "国"
 
 #: .\location_management\models.py:14
 msgid "countries"
-msgstr ""
+msgstr "国"
 
 #: .\location_management\models.py:22
 msgid "state name"
-msgstr ""
+msgstr "州名"
 
 #: .\location_management\models.py:23
 msgid "state code"
-msgstr ""
+msgstr "州コード"
 
 #: .\location_management\models.py:27 .\location_management\models.py:36
 #: .\user_management\models.py:54
 msgid "state"
-msgstr ""
+msgstr "州"
 
 #: .\location_management\models.py:28
 msgid "states"
-msgstr ""
+msgstr "州"
 
 #: .\location_management\models.py:37
 msgid "city name"
-msgstr ""
+msgstr "都市名"
 
 #: .\location_management\models.py:38 .\location_management\models.py:55
 msgid "latitude"
-msgstr ""
+msgstr "緯度"
 
 #: .\location_management\models.py:39 .\location_management\models.py:56
 msgid "longitude"
-msgstr ""
+msgstr "経度"
 
 #: .\location_management\models.py:43 .\location_management\models.py:53
 #: .\user_management\models.py:55
 msgid "city"
-msgstr ""
+msgstr "市"
 
 #: .\location_management\models.py:44
 msgid "cities"
-msgstr ""
+msgstr "都市"
 
 #: .\location_management\models.py:51
 msgid "location name"
-msgstr ""
+msgstr "地名"
 
 #: .\location_management\models.py:51
 msgid "Facility, campus, or site name (e.g. North HQ)"
-msgstr ""
+msgstr "施設、キャンパス、またはサイトの名前 (例: 北本社)"
 
 #: .\location_management\models.py:52
 msgid "location code"
-msgstr ""
+msgstr "場所コード"
 
 #: .\location_management\models.py:52
 msgid "Unique site identifier (e.g. SITE-NORTH-01)"
-msgstr ""
+msgstr "一意のサイト識別子 (例: SITE-NORTH-01)"
 
 #: .\location_management\models.py:53
 msgid "City location"
-msgstr ""
+msgstr "都市の位置"
 
 #: .\location_management\models.py:54
 msgid "address"
-msgstr ""
+msgstr "住所"
 
 #: .\location_management\models.py:54
 msgid "Street address"
-msgstr ""
+msgstr "住所"
 
 #: .\location_management\models.py:55
 msgid "Site latitude coordinate"
-msgstr ""
+msgstr "サイトの緯度座標"
 
 #: .\location_management\models.py:56
 msgid "Site longitude coordinate"
-msgstr ""
+msgstr "サイトの経度座標"
 
 #: .\location_management\models.py:57
 msgid "is active"
-msgstr ""
+msgstr "アクティブです"
 
 #: .\location_management\models.py:63
 msgid "location"
-msgstr ""
+msgstr "位置"
 
 #: .\location_management\models.py:64
 msgid "locations"
-msgstr ""
+msgstr "場所"
 
 #: .\menu_management\admin.py:23
 msgid "Items"
-msgstr ""
+msgstr "アイテム"
 
 #: .\menu_management\admin.py:25
 msgid "Sync discovered plugins into this menu"
-msgstr ""
+msgstr "検出されたプラグインをこのメニューに同期します"
 
 #: .\menu_management\admin.py:29
 msgid "Successfully synced plugin menu items."
-msgstr ""
+msgstr "プラグイン メニュー項目が正常に同期されました。"
 
 #: .\menu_management\apps.py:8
 msgid "Menu Management"
-msgstr ""
+msgstr "メニュー管理"
 
 #: .\menu_management\models.py:8 .\video_gallery\models.py:35
 msgid "Slug"
-msgstr ""
+msgstr "ナメクジ"
 
 #: .\menu_management\models.py:8
 msgid "Unique identifier, e.g. main_navbar"
-msgstr ""
+msgstr "一意の識別子。メインナビゲーションバー"
 
 #: .\menu_management\models.py:9 .\menu_management\models.py:31
 #: .\todo\models.py:9 .\todo\templates\todo\add.html:19
 #: .\video_gallery\models.py:103
 msgid "Title"
-msgstr ""
+msgstr "タイトル"
 
 #: .\menu_management\models.py:11
 msgid "Is active"
-msgstr ""
+msgstr "アクティブです"
 
 #: .\menu_management\models.py:14 .\menu_management\models.py:28
 msgid "Menu"
-msgstr ""
+msgstr "メニュー"
 
 #: .\menu_management\models.py:15
 msgid "Menus"
-msgstr ""
+msgstr "メニュー"
 
 #: .\menu_management\models.py:29
 msgid "Parent item"
-msgstr ""
+msgstr "親項目"
 
 #: .\menu_management\models.py:31
 msgid "Display label for the menu item"
-msgstr ""
+msgstr "メニュー項目の表示ラベル"
 
 #: .\menu_management\models.py:32
 msgid "Named URL"
-msgstr ""
+msgstr "名前付きURL"
 
 #: .\menu_management\models.py:32
 msgid "Django reverse URL name, e.g., home:about"
-msgstr ""
+msgstr "Django の逆引き URL 名 (例: home:about)"
 
 #: .\menu_management\models.py:33
 msgid "Explicit URL / Path"
-msgstr ""
+msgstr "明示的な URL / パス"
 
 #: .\menu_management\models.py:33
 msgid "External or explicit URL, e.g., /about/ or https://..."
-msgstr ""
+msgstr "外部または明示的な URL (例: /about/ または https://...)"
 
 #: .\menu_management\models.py:34
 msgid "Icon CSS class"
-msgstr ""
+msgstr "アイコンCSSクラス"
 
 #: .\menu_management\models.py:34
 msgid "FontAwesome or Linearicons class, e.g., fa fa-tasks"
-msgstr ""
+msgstr "FontAwesome または Linearicons クラス、例: fa fa-tasks"
 
 #: .\menu_management\models.py:36
 msgid "Order"
-msgstr ""
+msgstr "注文"
 
 #: .\menu_management\models.py:36
 msgid "Display order (lower numbers appear first)"
-msgstr ""
+msgstr "表示順序 (小さい番号が最初に表示されます)"
 
 #: .\menu_management\models.py:37
 msgid "Visible"
-msgstr ""
+msgstr "見える"
 
 #: .\menu_management\models.py:37
 msgid "Toggle to hide or show this item"
-msgstr ""
+msgstr "この項目の表示と非表示を切り替えます"
 
 #: .\menu_management\models.py:40
 msgid "Requires authentication"
-msgstr ""
+msgstr "認証が必要です"
 
 #: .\menu_management\models.py:41
 msgid "Requires staff access"
-msgstr ""
+msgstr "スタッフのアクセスが必要"
 
 #: .\menu_management\models.py:44
 msgid "Plugin source"
-msgstr ""
+msgstr "プラグインソース"
 
 #: .\menu_management\models.py:44
 msgid "Originating plugin ID, e.g., todo, polls"
-msgstr ""
+msgstr "元のプラグイン ID (例: todo、pols)"
 
 #: .\menu_management\models.py:45
 msgid "Custom user item"
-msgstr ""
+msgstr "カスタムユーザーアイテム"
 
 #: .\menu_management\models.py:45
 msgid "True if created manually by admin rather than auto-discovered"
-msgstr ""
+msgstr "自動検出ではなく管理者によって手動で作成された場合は True"
 
 #: .\menu_management\models.py:48
 msgid "Menu Item"
-msgstr ""
+msgstr "メニュー項目"
 
 #: .\menu_management\models.py:49
 msgid "Menu Items"
-msgstr ""
+msgstr "メニュー項目"
 
 #: .\plugin_registry\apps.py:8
 msgid "Plugin Registry"
-msgstr ""
+msgstr "プラグインレジストリ"
 
 #: .\polls\apps.py:7 .\polls\plugin.py:14 .\polls\templates\polls\index.html:6
 #: .\templates\base.html:122
 #: .\templates\themes\bootstrap5\partials\header.html:65
 msgid "Polls"
-msgstr ""
+msgstr "投票"
 
 #: .\polls\models.py:10
 msgid "Question text"
-msgstr ""
+msgstr "質問文"
 
 #: .\polls\models.py:11
 msgid "Date published"
-msgstr ""
+msgstr "発行日"
 
 #: .\polls\models.py:12
 msgid "Poll status"
-msgstr ""
+msgstr "投票ステータス"
 
 #: .\polls\models.py:15 .\polls\models.py:31
 msgid "Question"
-msgstr ""
+msgstr "質問"
 
 #: .\polls\models.py:16
 msgid "Questions"
-msgstr ""
+msgstr "質問"
 
 #: .\polls\models.py:27
 msgid "Published recently?"
-msgstr ""
+msgstr "最近出版されましたか？"
 
 #: .\polls\models.py:32
 msgid "Choice text"
-msgstr ""
+msgstr "選択肢のテキスト"
 
 #: .\polls\models.py:33
 msgid "Votes"
-msgstr ""
+msgstr "投票"
 
 #: .\polls\models.py:36
 msgid "Choice"
-msgstr ""
+msgstr "選択"
 
 #: .\polls\models.py:37
 msgid "Choices"
-msgstr ""
+msgstr "選択肢"
 
 #: .\polls\plugin.py:7
 msgid "Polls & Voting"
-msgstr ""
+msgstr "投票と投票"
 
 #: .\polls\plugin.py:8
 msgid "Interactive voting system with fraud prevention and results charts"
-msgstr ""
+msgstr "不正防止と結果グラフを備えたインタラクティブな投票システム"
 
 #: .\polls\templates\polls\detail.html:5
 msgid "Poll details"
-msgstr ""
+msgstr "投票の詳細"
 
 #: .\polls\templates\polls\detail.html:14
 #: .\polls\templates\polls\results.html:14
 msgid "Back to Polls"
-msgstr ""
+msgstr "投票に戻る"
 
 #: .\polls\templates\polls\detail.html:31
 msgid "Submit Vote"
-msgstr ""
+msgstr "投票を送信する"
 
 #: .\polls\templates\polls\index.html:17
 msgid "Community Polls"
-msgstr ""
+msgstr "コミュニティ投票"
 
 #: .\polls\templates\polls\index.html:31
 msgid "No polls are available."
-msgstr ""
+msgstr "投票は利用できません。"
 
 #: .\polls\templates\polls\results.html:5
 msgid "Poll results"
-msgstr ""
+msgstr "投票結果"
 
 #: .\polls\templates\polls\results.html:22
 #, python-format
 msgid "%(votes)s vote"
 msgid_plural "%(votes)s votes"
-msgstr[0] ""
+msgstr[0] "%(votes)s票"
+msgstr[1] "%(votes)s票"
 
 #: .\polls\templates\polls\results.html:29
 msgid "Vote Again"
-msgstr ""
+msgstr "もう一度投票してください"
 
 #: .\polls\templates\polls\results.html:30
 msgid "All Polls"
-msgstr ""
+msgstr "すべての投票"
 
 #: .\polls\views.py:72
 msgid "Please select an option before submitting your vote."
-msgstr ""
+msgstr "投票を送信する前にオプションを選択してください。"
 
 #: .\polls\views.py:75
 msgid "You didn't select a choice."
-msgstr ""
+msgstr "あなたは選択肢を選択しませんでした。"
 
 #: .\polls\views.py:83
 #, python-format
 msgid "Your vote for '%(choice)s' has been recorded!"
-msgstr ""
+msgstr "「%(choice)s」への投票が記録されました。"
 
 #: .\rest_api\plugin.py:7 .\rest_api\plugin.py:14 .\templates\base.html:128
 #: .\templates\themes\bootstrap5\partials\header.html:71
 msgid "REST API"
-msgstr ""
+msgstr "REST API"
 
 #: .\rest_api\plugin.py:8
 msgid "Django REST Framework browsable and serialized endpoints"
-msgstr ""
+msgstr "Django REST フレームワークの参照可能でシリアル化されたエンドポイント"
 
 #: .\task_runner\admin.py:37
 msgid "Task Overview"
-msgstr ""
+msgstr "タスクの概要"
 
 #: .\task_runner\admin.py:51
 msgid "Live Monitoring"
-msgstr ""
+msgstr "ライブモニタリング"
 
 #: .\task_runner\admin.py:57
 msgid "Task Logs & Result"
-msgstr ""
+msgstr "タスクのログと結果"
 
 #: .\task_runner\admin.py:70 .\task_runner\models.py:36
 #: .\task_runner\templates\task_runner\job_detail.html:47
 #: .\task_runner\templates\task_runner\job_list.html:120
 msgid "Task ID"
-msgstr ""
+msgstr "タスクID"
 
 #: .\task_runner\admin.py:91
 #: .\task_runner\templates\task_runner\job_list.html:122
 msgid "Progress"
-msgstr ""
+msgstr "進捗"
 
 #: .\task_runner\admin.py:100
 msgid "Real-time Task Monitor"
-msgstr ""
+msgstr "リアルタイムタスクモニター"
 
 #: .\task_runner\admin.py:103
 msgid "Save task first to display live stream."
-msgstr ""
+msgstr "ライブ ストリームを表示するには、まずタスクを保存します。"
 
 #: .\task_runner\admin.py:120
 msgid "Trigger Collectstatic in background"
-msgstr ""
+msgstr "バックグラウンドで Collectstatic をトリガーする"
 
 #: .\task_runner\admin.py:123
 msgid "Background collectstatic task queued."
-msgstr ""
+msgstr "バックグラウンドの静的収集タスクがキューに入れられました。"
 
 #: .\task_runner\admin.py:125
 msgid "Trigger Auto-Translate (Spanish baseline)"
-msgstr ""
+msgstr "自動翻訳のトリガー (スペイン語ベースライン)"
 
 #: .\task_runner\admin.py:128
 msgid "Background auto-translate task for Spanish queued."
-msgstr ""
+msgstr "スペイン語のバックグラウンド自動翻訳タスクがキューに入れられました。"
 
 #: .\task_runner\admin.py:130 .\task_runner\admin.py:172
 #: .\task_runner\templates\admin\task_runner\taskjob\change_list.html:17
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:9
 msgid "Launch External Script"
-msgstr ""
+msgstr "外部スクリプトの起動"
 
 #: .\task_runner\admin.py:150
 msgid "Please provide a valid command."
-msgstr ""
+msgstr "有効なコマンドを入力してください。"
 
 #: .\task_runner\admin.py:163
 #, python-brace-format
 msgid "External script '{0}' queued successfully with Task ID: {1}"
-msgstr ""
+msgstr "外部スクリプト '{0}' はタスク ID: {1} で正常にキューに登録されました"
 
 #: .\task_runner\apps.py:8 .\task_runner\templates\task_runner\job_list.html:4
 #: .\task_runner\templates\task_runner\job_list.html:12
 msgid "Background Task Runner"
-msgstr ""
+msgstr "バックグラウンドタスクランナー"
 
 #: .\task_runner\models.py:25
 msgid "Pending"
-msgstr ""
+msgstr "保留中"
 
 #: .\task_runner\models.py:26
 msgid "Running"
-msgstr ""
+msgstr "ランニング"
 
 #: .\task_runner\models.py:27
 msgid "Success"
-msgstr ""
+msgstr "成功"
 
 #: .\task_runner\models.py:28
 msgid "Failure"
-msgstr ""
+msgstr "失敗"
 
 #: .\task_runner\models.py:29
 msgid "Revoked"
-msgstr ""
+msgstr "取り消されました"
 
 #: .\task_runner\models.py:37
 msgid "Celery task UUID or unique identifier"
-msgstr ""
+msgstr "Celery タスクの UUID または一意の識別子"
 
 #: .\task_runner\models.py:41
 #: .\task_runner\templates\task_runner\job_detail.html:50
 #: .\task_runner\templates\task_runner\job_list.html:119
 msgid "Task Name"
-msgstr ""
+msgstr "タスク名"
 
 #: .\task_runner\models.py:42
 msgid "Human-readable name or task function path"
-msgstr ""
+msgstr "人間が判読できる名前またはタスク関数のパス"
 
 #: .\task_runner\models.py:53
 msgid "Progress (%)"
-msgstr ""
+msgstr "進捗 （％）"
 
 #: .\task_runner\models.py:54
 msgid "Completion percentage between 0 and 100"
-msgstr ""
+msgstr "0 ～ 100 の完了率"
 
 #: .\task_runner\models.py:59
 msgid "Log Output"
-msgstr ""
+msgstr "ログ出力"
 
 #: .\task_runner\models.py:60
 msgid "Captured stdout, stderr, or lifecycle log stream"
-msgstr ""
+msgstr "キャプチャされた stdout、stderr、またはライフサイクル ログ ストリーム"
 
 #: .\task_runner\models.py:66
 msgid "Exception message or stack trace if the task failed"
-msgstr ""
+msgstr "タスクが失敗した場合の例外メッセージまたはスタック トレース"
 
 #: .\task_runner\models.py:71
 #: .\task_runner\templates\task_runner\job_detail.html:69
 msgid "Result Data"
-msgstr ""
+msgstr "結果データ"
 
 #: .\task_runner\models.py:72
 msgid "JSON-encoded output returned by the background task"
-msgstr ""
+msgstr "バックグラウンド タスクによって返される JSON エンコードされた出力"
 
 #: .\task_runner\models.py:93
 msgid "Background Task Job"
-msgstr ""
+msgstr "バックグラウンドタスクジョブ"
 
 #: .\task_runner\models.py:94
 msgid "Background Task Jobs"
-msgstr ""
+msgstr "バックグラウンドタスクジョブ"
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:8
 msgid "Task jobs"
-msgstr ""
+msgstr "タスクジョブ"
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:100
 msgid "Queue External Script in Background"
-msgstr ""
+msgstr "バックグラウンドで外部スクリプトをキューに入れる"
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:103
 msgid ""
@@ -4842,214 +4874,218 @@ msgid ""
 "asynchronously inside a Celery worker. Output is streamed live via WebSocket"
 " to the job detail view."
 msgstr ""
+"Celery ワーカー内で非同期に実行する Python、Django 管理、またはシェル コマンドを指定します。出力は WebSocket "
+"経由でジョブ詳細ビューにライブでストリーミングされます。"
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:111
 #: .\task_runner\templates\task_runner\job_list.html:267
 msgid "Command to Execute:"
-msgstr ""
+msgstr "実行するコマンド:"
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:126
 msgid "Quick Presets (Click to autofill):"
-msgstr ""
+msgstr "クイック プリセット (クリックして自動入力):"
 
 #: .\task_runner\templates\admin\task_runner\taskjob\launch_script.html:140
 msgid "Queue Script Now"
-msgstr ""
+msgstr "今すぐスクリプトをキューに入れる"
 
 #: .\task_runner\templates\task_runner\job_detail.html:4
 msgid "Background Task"
-msgstr ""
+msgstr "バックグラウンドタスク"
 
 #: .\task_runner\templates\task_runner\job_detail.html:13
 #: .\templates\themes\bootstrap5\partials\header.html:132
 #: .\templates\themes\tailwind\partials\header.html:121
 msgid "Task Runner"
-msgstr ""
+msgstr "タスクランナー"
 
 #: .\task_runner\templates\task_runner\job_detail.html:23
 msgid "Back to Task List"
-msgstr ""
+msgstr "タスクリストに戻る"
 
 #: .\task_runner\templates\task_runner\job_detail.html:26
 msgid "Edit in Admin"
-msgstr ""
+msgstr "管理者で編集する"
 
 #: .\task_runner\templates\task_runner\job_detail.html:42
 msgid "Task Details"
-msgstr ""
+msgstr "タスクの詳細"
 
 #: .\task_runner\templates\task_runner\job_detail.html:58
 #: .\task_runner\templates\task_runner\job_list.html:164
 msgid "System / Daemon"
-msgstr ""
+msgstr "システム / デーモン"
 
 #: .\task_runner\templates\task_runner\job_detail.html:62
 msgid "Started At"
-msgstr ""
+msgstr "開始日"
 
 #: .\task_runner\templates\task_runner\job_detail.html:65
 msgid "Last Update"
-msgstr ""
+msgstr "最終更新"
 
 #: .\task_runner\templates\task_runner\job_list.html:14
 msgid ""
 "Monitor, launch, and inspect Celery asynchronous jobs with live streaming."
-msgstr ""
+msgstr "ライブストリーミングを使用して Celery の非同期ジョブを監視、起動、検査します。"
 
 #: .\task_runner\templates\task_runner\job_list.html:23
 msgid "Launch New Task"
-msgstr ""
+msgstr "新しいタスクの起動"
 
 #: .\task_runner\templates\task_runner\job_list.html:26
 msgid "Admin Script Launcher"
-msgstr ""
+msgstr "管理スクリプトランチャー"
 
 #: .\task_runner\templates\task_runner\job_list.html:29
 msgid "Django Admin"
-msgstr ""
+msgstr "ジャンゴ管理者"
 
 #: .\task_runner\templates\task_runner\job_list.html:39
 msgid "Quick Script Execution (Celery Background Task)"
-msgstr ""
+msgstr "スクリプトの迅速な実行 (Celery バックグラウンド タスク)"
 
 #: .\task_runner\templates\task_runner\job_list.html:41
 msgid "Runs asynchronously via Celery worker & streams output live."
-msgstr ""
+msgstr "Celery ワーカーを介して非同期的に実行され、出力をライブでストリーミングします。"
 
 #: .\task_runner\templates\task_runner\job_list.html:61
 msgid "Run Script"
-msgstr ""
+msgstr "スクリプトの実行"
 
 #: .\task_runner\templates\task_runner\job_list.html:65
 msgid "Presets:"
-msgstr ""
+msgstr "プリセット:"
 
 #: .\task_runner\templates\task_runner\job_list.html:87
 msgid "Search by task name or task ID..."
-msgstr ""
+msgstr "タスク名またはタスクIDで検索..."
 
 #: .\task_runner\templates\task_runner\job_list.html:180
 msgid "No background tasks found."
-msgstr ""
+msgstr "バックグラウンド タスクが見つかりません。"
 
 #: .\task_runner\templates\task_runner\job_list.html:190
 #: .\video_gallery\templates\video_gallery\gallery_list.html:149
 msgid "Page navigation"
-msgstr ""
+msgstr "ページナビゲーション"
 
 #: .\task_runner\templates\task_runner\job_list.html:194
 #: .\video_gallery\templates\video_gallery\gallery_list.html:154
 msgid "Previous"
-msgstr ""
+msgstr "前の"
 
 #: .\task_runner\templates\task_runner\job_list.html:202
 #: .\video_gallery\templates\video_gallery\gallery_list.html:172
 msgid "Next"
-msgstr ""
+msgstr "次"
 
 #: .\task_runner\templates\task_runner\job_list.html:220
 msgid "Queue New Background Task"
-msgstr ""
+msgstr "新しいバックグラウンドタスクをキューに入れる"
 
 #: .\task_runner\templates\task_runner\job_list.html:232
 msgid "Choose Task to Queue:"
-msgstr ""
+msgstr "キューに入れるタスクを選択します:"
 
 #: .\task_runner\templates\task_runner\job_list.html:240
 msgid "Run External Script"
-msgstr ""
+msgstr "外部スクリプトの実行"
 
 #: .\task_runner\templates\task_runner\job_list.html:249
 msgid "Auto-Translate"
-msgstr ""
+msgstr "自動翻訳"
 
 #: .\task_runner\templates\task_runner\job_list.html:258
 msgid "Collect Static"
-msgstr ""
+msgstr "静電気を収集する"
 
 #: .\task_runner\templates\task_runner\job_list.html:276
 msgid ""
 "The command runs inside a background Celery worker subprocess. Output is "
 "streamed live via WebSocket."
 msgstr ""
+"このコマンドは、バックグラウンドの Celery ワーカー サブプロセス内で実行されます。出力は WebSocket 経由でライブ "
+"ストリーミングされます。"
 
 #: .\task_runner\templates\task_runner\job_list.html:280
 msgid "Click to fill preset:"
-msgstr ""
+msgstr "クリックしてプリセットを入力します:"
 
 #: .\task_runner\templates\task_runner\job_list.html:292
 msgid "Target Language (Optional)"
-msgstr ""
+msgstr "ターゲット言語 (オプション)"
 
 #: .\task_runner\templates\task_runner\job_list.html:296
 msgid "Translation Backend"
-msgstr ""
+msgstr "翻訳バックエンド"
 
 #: .\task_runner\templates\task_runner\job_list.html:304
 msgid "Max Strings (Optional test limit)"
-msgstr ""
+msgstr "最大文字列数 (オプションのテスト制限)"
 
 #: .\task_runner\templates\task_runner\job_list.html:313
 msgid ""
 "Collects all static assets into STATIC_ROOT in the background without "
 "blocking the web worker."
-msgstr ""
+msgstr "Web ワーカーをブロックせずに、すべての静的アセットをバックグラウンドで STATIC_ROOT に収集します。"
 
 #: .\task_runner\templates\task_runner\job_list.html:323
 msgid "Queue Task Now"
-msgstr ""
+msgstr "今すぐタスクをキューに入れる"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:23
 msgid "Execution Progress"
-msgstr ""
+msgstr "実行の進行状況"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:47
 msgid "Task Error:"
-msgstr ""
+msgstr "タスクエラー:"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:56
 msgid "Live Console Output"
-msgstr ""
+msgstr "ライブコンソール出力"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:57
 msgid "Copy Log"
-msgstr ""
+msgstr "ログのコピー"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:71
 msgid "Task initialized. Waiting for stream output..."
-msgstr ""
+msgstr "タスクが初期化されました。ストリーム出力を待機しています..."
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:227
 msgid "Live WebSocket Connected"
-msgstr ""
+msgstr "ライブ WebSocket が接続されました"
 
 #: .\task_runner\templates\task_runner\task_progress_widget.html:248
 msgid "Live Sync Active (HTTP Poll)"
-msgstr ""
+msgstr "ライブ同期アクティブ (HTTP ポーリング)"
 
 #: .\task_runner\views.py:64
 msgid "Task not found"
-msgstr ""
+msgstr "タスクが見つかりません"
 
 #: .\task_runner\views.py:92
 msgid "Auto-translate task queued successfully."
-msgstr ""
+msgstr "自動翻訳タスクが正常にキューに登録されました。"
 
 #: .\task_runner\views.py:102
 msgid "Collectstatic task queued successfully."
-msgstr ""
+msgstr "Collectstatic タスクが正常にキューに登録されました。"
 
 #: .\task_runner\views.py:107
 msgid "Please provide a command to run."
-msgstr ""
+msgstr "実行するコマンドを指定してください。"
 
 #: .\task_runner\views.py:117
 msgid "External script queued successfully."
-msgstr ""
+msgstr "外部スクリプトが正常にキューに登録されました。"
 
 #: .\task_runner\views.py:120
 msgid "Unknown task type specified."
-msgstr ""
+msgstr "不明なタスク タイプが指定されました。"
 
 #: .\templates\base.html:93 .\templates\themes\bootstrap5\base.html:14
 #: .\templates\themes\bootstrap5\partials\footer.html:7
@@ -5067,17 +5103,17 @@ msgstr ""
 #: .\templates\themes\tailwind\partials\header.html:10
 #: .\templates\themes\tailwind\partials\header.html:11
 msgid "Enterprise Website"
-msgstr ""
+msgstr "エンタープライズ Web サイト"
 
 #: .\templates\base.html:119
 #: .\templates\themes\bootstrap5\partials\header.html:61
 msgid "Apps"
-msgstr ""
+msgstr "アプリ"
 
 #: .\templates\base.html:121
 #: .\templates\themes\bootstrap5\partials\header.html:64 .\todo\plugin.py:14
 msgid "Todo List"
-msgstr ""
+msgstr "Todoリスト"
 
 #: .\templates\base.html:126
 #: .\templates\themes\bootstrap5\partials\header.html:69
@@ -5086,20 +5122,20 @@ msgstr ""
 #: .\video_gallery\templates\video_gallery\gallery_detail.html:22
 #: .\video_gallery\templates\video_gallery\gallery_list.html:24
 msgid "Media Gallery"
-msgstr ""
+msgstr "メディアギャラリー"
 
 #: .\templates\base.html:127
 #: .\templates\themes\bootstrap5\partials\header.html:70
 #: .\webprogram\plugin.py:7 .\webprogram\plugin.py:14
 msgid "Brython WebProgram"
-msgstr ""
+msgstr "Brython ウェブプログラム"
 
 #: .\templates\base.html:129 .\templates\base.html:151
 #: .\templates\themes\bootstrap5\partials\header.html:74
 #: .\templates\themes\bootstrap5\partials\header.html:127
 #: .\templates\themes\tailwind\partials\header.html:118
 msgid "Site Admin"
-msgstr ""
+msgstr "サイト管理者"
 
 #: .\templates\base.html:149
 #: .\templates\themes\bootstrap5\partials\header.html:121
@@ -5107,19 +5143,19 @@ msgstr ""
 #: .\templates\themes\tailwind\partials\header.html:114
 #: .\user_management\templates\user_management\profile.html:14
 msgid "Profile"
-msgstr ""
+msgstr "プロフィール"
 
 #: .\templates\base.html:152
 #: .\templates\themes\bootstrap5\partials\header.html:72
 msgid "Background Tasks"
-msgstr ""
+msgstr "バックグラウンドタスク"
 
 #: .\templates\base.html:158
 #: .\templates\themes\bootstrap5\partials\header.html:142
 #: .\templates\themes\minimal\partials\header.html:87
 #: .\templates\themes\tailwind\partials\header.html:128
 msgid "Logout"
-msgstr ""
+msgstr "ログアウト"
 
 #: .\templates\base.html:163 .\templates\registration\login.html:4
 #: .\templates\registration\login.html:40
@@ -5129,278 +5165,278 @@ msgstr ""
 #: .\user_management\templates\user_management\login.html:4
 #: .\user_management\templates\user_management\login.html:18
 msgid "Login"
-msgstr ""
+msgstr "ログイン"
 
 #: .\templates\base.html:164
 #: .\templates\themes\bootstrap5\partials\header.html:152
 #: .\templates\themes\minimal\partials\header.html:94
 #: .\templates\themes\tailwind\partials\header.html:135
 msgid "Signup"
-msgstr ""
+msgstr "サインアップ"
 
 #: .\templates\base_form.html:5
 msgid "Form"
-msgstr ""
+msgstr "形状"
 
 #: .\templates\base_form.html:34 .\templates\base_form.html:38
 #: .\templates\signup.html:9 .\templates\signup.html:13
 msgid "Sign up"
-msgstr ""
+msgstr "サインアップ"
 
 #: .\templates\registration\logged_out.html:4
 #: .\user_management\templates\user_management\logout.html:12
 #: .\user_management\templates\user_management\logout.html:14
 msgid "Logged Out"
-msgstr ""
+msgstr "ログアウトしました"
 
 #: .\templates\registration\logged_out.html:9
 msgid "You are logged out"
-msgstr ""
+msgstr "ログアウトしています"
 
 #: .\templates\registration\logged_out.html:11
 #: .\user_management\templates\user_management\logout.html:28
 msgid "Log In Again"
-msgstr ""
+msgstr "再度ログインしてください"
 
 #: .\templates\registration\login.html:12
 #: .\user_management\templates\user_management\login.html:12
 msgid "Sign In"
-msgstr ""
+msgstr "サインイン"
 
 #: .\templates\registration\login.html:15
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
+msgstr "ユーザー名とパスワードが一致しませんでした。もう一度試してください。"
 
 #: .\templates\registration\login.html:20
 msgid ""
 "Your account doesn't have access to this page. To proceed, please login with"
 " an account that has access."
-msgstr ""
+msgstr "あなたのアカウントはこのページにアクセスできません。続行するには、アクセス権のあるアカウントでログインしてください。"
 
 #: .\templates\registration\login.html:22
 msgid "Please login to see this page."
-msgstr ""
+msgstr "このページを表示するにはログインしてください。"
 
 #: .\templates\registration\login.html:42
 msgid "Lost password?"
-msgstr ""
+msgstr "パスワードを紛失しましたか?"
 
 #: .\templates\registration\password_reset_email.html:1
 #: .\user_management\templates\user_management\password_reset_email.html:5
 #, python-format
 msgid ""
 "Someone asked for password reset for email %(email)s. Follow the link below:"
-msgstr ""
+msgstr "誰かがメール %(email)s のパスワードのリセットを要求しました。以下のリンクに従ってください。"
 
 #: .\templates\signup.html:4
 #: .\user_management\templates\user_management\signup.html:5
 msgid "Sign Up"
-msgstr ""
+msgstr "サインアップ"
 
 #: .\templates\themes\bootstrap5\base.html:10
 msgid "Modern Enterprise Web Application"
-msgstr ""
+msgstr "最新のエンタープライズ Web アプリケーション"
 
 #: .\templates\themes\bootstrap5\partials\footer.html:7
 #: .\templates\themes\minimal\partials\footer.html:5
 #: .\templates\themes\tailwind\partials\footer.html:7
 msgid "All rights reserved."
-msgstr ""
+msgstr "無断転載を禁じます。"
 
 #: .\templates\themes\bootstrap5\partials\footer.html:10
 #: .\templates\themes\minimal\partials\footer.html:6
 #: .\templates\themes\tailwind\partials\footer.html:10
 msgid "Active CSS Framework:"
-msgstr ""
+msgstr "アクティブな CSS フレームワーク:"
 
 #: .\templates\themes\bootstrap5\partials\footer.html:15
 #: .\templates\themes\minimal\partials\footer.html:9
 #: .\templates\themes\minimal\partials\header.html:41
 #: .\templates\themes\tailwind\partials\footer.html:14
 msgid "About"
-msgstr ""
+msgstr "について"
 
 #: .\templates\themes\bootstrap5\partials\header.html:87
 #: .\templates\themes\minimal\partials\header.html:53
 msgid "Switch Language"
-msgstr ""
+msgstr "言語を切り替える"
 
 #: .\templates\themes\bootstrap5\partials\theme_selector.html:3
 #: .\templates\themes\minimal\partials\theme_selector.html:8
 #: .\templates\themes\tailwind\partials\theme_selector.html:8
 msgid "Switch CSS Framework"
-msgstr ""
+msgstr "スイッチCSSフレームワーク"
 
 #: .\templates\themes\bootstrap5\partials\theme_selector.html:8
 #: .\templates\themes\minimal\partials\theme_selector.html:17
 #: .\templates\themes\tailwind\partials\theme_selector.html:25
 msgid "CSS Framework"
-msgstr ""
+msgstr "CSSフレームワーク"
 
 #: .\templates\themes\minimal\base.html:10
 msgid "Modern Enterprise Web Application (Minimal Semantic Theme)"
-msgstr ""
+msgstr "最新のエンタープライズ Web アプリケーション (最小限のセマンティック テーマ)"
 
 #: .\templates\themes\minimal\partials\header.html:80
 msgid "Admin"
-msgstr ""
+msgstr "管理者"
 
 #: .\templates\themes\minimal\partials\header.html:81
 msgid "Tasks"
-msgstr ""
+msgstr "タスク"
 
 #: .\templates\themes\tailwind\base.html:10
 msgid "Modern Enterprise Web Application (Tailwind CSS Theme)"
-msgstr ""
+msgstr "最新のエンタープライズ Web アプリケーション (Tailwind CSS テーマ)"
 
 #: .\theme_management\apps.py:8
 msgid "Theme & CSS Framework Management"
-msgstr ""
+msgstr "テーマとCSSフレームワークの管理"
 
 #: .\timezone_management\models.py:41 .\user_management\models.py:52
 msgid "timezone"
-msgstr ""
+msgstr "タイムゾーン"
 
 #: .\timezone_management\models.py:49
 msgid "Sets the timezone"
-msgstr ""
+msgstr "タイムゾーンを設定します"
 
 #: .\timezone_management\models.py:52
 msgid "Select the timezone to keep track of time"
-msgstr ""
+msgstr "時間を追跡するタイムゾーンを選択します"
 
 #: .\timezone_management\models.py:56
 msgid "This timezone format is too long"
-msgstr ""
+msgstr "このタイムゾーン形式は長すぎます"
 
 #: .\timezone_management\templates\timezone_management\select.html:6
 msgid "Time zone:"
-msgstr ""
+msgstr "タイムゾーン:"
 
 #: .\timezone_management\templates\timezone_management\select.html:12
 msgid "Set"
-msgstr ""
+msgstr "セット"
 
 #: .\todo\apps.py:7
 msgid "Todo's"
-msgstr ""
+msgstr "藤堂さん"
 
 #: .\todo\models.py:10
 msgid "Text"
-msgstr ""
+msgstr "文章"
 
 #: .\todo\models.py:11
 msgid "Created at"
-msgstr ""
+msgstr "で作成されました"
 
 #: .\todo\models.py:14
 msgid "Todo"
-msgstr ""
+msgstr "藤堂"
 
 #: .\todo\models.py:15
 msgid "Todos"
-msgstr ""
+msgstr "トドス"
 
 #: .\todo\plugin.py:7
 msgid "Todo Task Manager"
-msgstr ""
+msgstr "Todoタスクマネージャー"
 
 #: .\todo\plugin.py:8
 msgid "Interactive task management app with due dates and completion states"
-msgstr ""
+msgstr "期日と完了状態を表示する対話型タスク管理アプリ"
 
 #: .\todo\templates\todo\add.html:5
 msgid "Add to Todo list"
-msgstr ""
+msgstr "Todoリストに追加"
 
 #: .\todo\templates\todo\add.html:14 .\todo\templates\todo\details.html:13
 msgid "Back to Todo List"
-msgstr ""
+msgstr "Todo リストに戻る"
 
 #: .\todo\templates\todo\add.html:15
 msgid "Create New Task"
-msgstr ""
+msgstr "新しいタスクの作成"
 
 #: .\todo\templates\todo\add.html:20
 msgid "Enter task title"
-msgstr ""
+msgstr "タスクのタイトルを入力してください"
 
 #: .\todo\templates\todo\add.html:23
 msgid "Description / Notes"
-msgstr ""
+msgstr "説明/注意事項"
 
 #: .\todo\templates\todo\add.html:24
 msgid "Enter task description..."
-msgstr ""
+msgstr "タスクの説明を入力してください..."
 
 #: .\todo\templates\todo\add.html:27
 msgid "Save Task"
-msgstr ""
+msgstr "タスクの保存"
 
 #: .\todo\templates\todo\details.html:5
 msgid "Todo details"
-msgstr ""
+msgstr "Todoの詳細"
 
 #: .\todo\templates\todo\details.html:18
 msgid "Timezone & Timestamp Diagnostics:"
-msgstr ""
+msgstr "タイムゾーンとタイムスタンプの診断:"
 
 #: .\todo\templates\todo\index.html:6
 msgid "Todo Index"
-msgstr ""
+msgstr "Todoインデックス"
 
 #: .\todo\templates\todo\index.html:20
 #, python-format
 msgid "Welcome, %(username)s!"
-msgstr ""
+msgstr "ようこそ、%(username)s!"
 
 #: .\todo\templates\todo\index.html:22
 msgid "Welcome to Your Todo List"
-msgstr ""
+msgstr "ToDo リストへようこそ"
 
 #: .\todo\templates\todo\index.html:24
 msgid "Add Todo"
-msgstr ""
+msgstr "Todoの追加"
 
 #: .\todo\templates\todo\index.html:41
 msgid "Are you sure you want to delete this task?"
-msgstr ""
+msgstr "このタスクを削除してもよろしいですか?"
 
 #: .\todo\templates\todo\index.html:42
 msgid "Delete Task"
-msgstr ""
+msgstr "タスクの削除"
 
 #: .\todo\templates\todo\index.html:52
 msgid "No tasks yet. Create your first task to get started!"
-msgstr ""
+msgstr "まだタスクはありません。まずは最初のタスクを作成してください。"
 
 #: .\todo\templates\todo\index.html:53
 msgid "Create Task"
-msgstr ""
+msgstr "タスクの作成"
 
 #: .\todo\views.py:58
 msgid "Todo title cannot be empty."
-msgstr ""
+msgstr "Todo タイトルを空にすることはできません。"
 
 #: .\todo\views.py:67
 msgid "Task created successfully!"
-msgstr ""
+msgstr "タスクが正常に作成されました。"
 
 #: .\todo\views.py:81
 msgid "Task deleted successfully!"
-msgstr ""
+msgstr "タスクは正常に削除されました。"
 
 #: .\user_management\admin.py:16
 msgid "Personal info"
-msgstr ""
+msgstr "個人情報"
 
 #: .\user_management\admin.py:17
 msgid "Permissions"
-msgstr ""
+msgstr "権限"
 
 #: .\user_management\admin.py:19
 msgid "Important dates"
-msgstr ""
+msgstr "重要な日付"
 
 #: .\user_management\apps.py:7
 msgid "User management"

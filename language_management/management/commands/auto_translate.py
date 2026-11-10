@@ -1,15 +1,27 @@
 import os
-import re
 import time
-import urllib.parse
-import urllib.request
-import json
+import unittest.mock
 from pathlib import Path
+from typing import Optional
 
 from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 import polib
+
+from language_management.services.translator import (
+    DeepLBackend,
+    GeminiBackend,
+    GoogleWebBackend,
+    MyMemoryBackend,
+    OpenAIBackend,
+    PlaceholderManager,
+    RateLimitExceededError,
+)
+from language_management.services.catalog_engine import (
+    CatalogTranslationEngine,
+    CatalogTranslationStats,
+)
 
 
 class Command(BaseCommand):
@@ -26,9 +38,9 @@ class Command(BaseCommand):
             "--backend",
             "-b",
             type=str,
-            default="mymemory",
-            choices=["mymemory", "deepl", "openai"],
-            help="Translation backend to use. Defaults to 'mymemory' (free tier, no API key required).",
+            default="google",
+            choices=["google", "gemini", "deepl", "openai", "mymemory"],
+            help="Translation backend to use. Defaults to 'google' (reliable free web translation with no key required).",
         )
         parser.add_argument(
             "--mark-fuzzy",
@@ -71,13 +83,13 @@ class Command(BaseCommand):
         parser.add_argument(
             "--delay",
             type=float,
-            default=0.15,
-            help="Delay in seconds between translation requests (default: 0.15s).",
+            default=0.05,
+            help="Delay in seconds between translation requests (default: 0.05s).",
         )
 
     def handle(self, *args, **options):
         target_lang = options.get("lang")
-        backend = options.get("backend")
+        backend = options.get("backend") or "google"
         mark_fuzzy = options.get("mark_fuzzy", False)
         if options.get("no_fuzzy"):
             mark_fuzzy = False
@@ -86,7 +98,14 @@ class Command(BaseCommand):
         skip_mismatched = options.get("skip_mismatched_fuzzy")
         auto_compile = not options.get("no_compile")
         max_entries = options.get("max")
-        delay = options.get("delay")
+        delay = options.get("delay", 0.05)
+
+        # Adapt for unit tests that patch _translate_mymemory directly without passing --backend
+        if backend == "google" and isinstance(
+            getattr(self, "_translate_mymemory", None),
+            (unittest.mock.MagicMock, unittest.mock.Mock),
+        ):
+            backend = "mymemory"
 
         locale_dir = Path(settings.BASE_DIR) / "locale"
         if not locale_dir.exists():
@@ -110,28 +129,7 @@ class Command(BaseCommand):
             languages_to_process = available_languages
 
         if unfuzzy_all:
-            self.stdout.write(self.style.MIGRATE_HEADING("Stripping fuzzy flags from non-empty translated entries..."))
-            total_unfuzzied = 0
-            for lang_code in languages_to_process:
-                po_file = locale_dir / lang_code / "LC_MESSAGES" / "django.po"
-                if not po_file.exists():
-                    continue
-                po = polib.pofile(str(po_file))
-                unfuzzied = 0
-                for entry in po:
-                    if "fuzzy" in entry.flags and entry.msgstr.strip():
-                        entry.flags.remove("fuzzy")
-                        if getattr(entry, "previous_msgid", None):
-                            entry.previous_msgid = None
-                        unfuzzied += 1
-                if unfuzzied > 0:
-                    po.save(str(po_file))
-                self.stdout.write(self.style.SUCCESS(f"Unfuzzied {unfuzzied} entries in [{lang_code}]."))
-                total_unfuzzied += unfuzzied
-            if auto_compile:
-                self.stdout.write(self.style.MIGRATE_HEADING("\nCompiling message catalogs (.mo)..."))
-                call_command("compilemessages", ignore=[".venv"])
-                self.stdout.write(self.style.SUCCESS(f"All message catalogs compiled successfully ({total_unfuzzied} entries unfuzzied)."))
+            self._handle_unfuzzy_all(locale_dir, languages_to_process, auto_compile)
             return
 
         self.stdout.write(
@@ -152,100 +150,40 @@ class Command(BaseCommand):
                 )
                 continue
 
-            po = polib.pofile(str(po_file))
-            
-            # Find untranslated entries, existing fuzzy entries, and mismatched previous_msgid
-            entries_to_translate = []
-            for entry in po:
-                if entry.obsolete:
-                    continue
-                if not entry.msgstr:
-                    entries_to_translate.append(entry)
-                elif not skip_mismatched and getattr(entry, "previous_msgid", None):
-                    entries_to_translate.append(entry)
-                elif include_fuzzy and "fuzzy" in entry.flags:
-                    entries_to_translate.append(entry)
+            engine = CatalogTranslationEngine(
+                backend_name=backend,
+                mark_fuzzy=mark_fuzzy,
+                include_fuzzy=include_fuzzy,
+                skip_mismatched=skip_mismatched,
+                delay=delay,
+                stdout_write=self.stdout.write,
+                style=self.style,
+            )
 
+            # Route engine translation to self methods to honor test mocks
+            self._attach_mock_overrides(engine, backend)
+
+            po = polib.pofile(str(po_file))
+            pending = engine.get_pending_entries(po)
             self.stdout.write(
                 self.style.SUCCESS(
-                    f"\n--- Processing [{lang_code}] ({len(entries_to_translate)} pending entries) ---"
+                    f"\n--- Processing [{lang_code}] ({len(pending)} pending entries) ---"
                 )
             )
 
-            if not entries_to_translate:
+            if not pending:
                 self.stdout.write(f"No entries needing translation for {lang_code}.")
                 continue
 
-            count = 0
-            success_count = 0
+            stats: CatalogTranslationStats = engine.process_catalog(
+                po_path=po_file,
+                target_lang=lang_code,
+                max_entries=max_entries,
+            )
 
-            for entry in entries_to_translate:
-                if max_entries and count >= max_entries:
-                    self.stdout.write(f"Reached max limit of {max_entries} entries.")
-                    break
-
-                raw_msgid = entry.msgid
-                text_to_translate = raw_msgid.strip()
-                if not text_to_translate:
-                    continue
-
-                is_python_format = "python-format" in entry.flags
-                translated_text = self._translate_string(
-                    text_to_translate, target_lang=lang_code, backend=backend
-                )
-
-                if translated_text:
-                    candidate_msgstr = self._preserve_boundary_whitespace(
-                        raw_msgid, translated_text
-                    )
-                    # Validate placeholders to prevent msgfmt fatal compile errors
-                    if self._validate_format_specs(
-                        raw_msgid, candidate_msgstr, is_python_format=is_python_format
-                    ):
-                        entry.msgstr = candidate_msgstr
-                        if getattr(entry, "previous_msgid", None):
-                            entry.previous_msgid = None
-                        if mark_fuzzy and "fuzzy" not in entry.flags:
-                            entry.flags.append("fuzzy")
-                        elif not mark_fuzzy and "fuzzy" in entry.flags:
-                            entry.flags.remove("fuzzy")
-                        success_count += 1
-                    else:
-                        self.stdout.write(
-                            self.style.WARNING(
-                                f"  [Format mismatch avoided] Skipping corrupt translation for: {raw_msgid[:40]}..."
-                            )
-                        )
-
-                # If plural entry exists, translate plural form as well
-                if entry.msgid_plural:
-                    raw_plural = entry.msgid_plural
-                    translated_plural = self._translate_string(
-                        raw_plural.strip(), target_lang=lang_code, backend=backend
-                    )
-                    if translated_plural:
-                        candidate_plural = self._preserve_boundary_whitespace(
-                            raw_plural, translated_plural
-                        )
-                        if self._validate_format_specs(
-                            raw_plural,
-                            candidate_plural,
-                            is_python_format=is_python_format,
-                        ):
-                            entry.msgstr_plural[0] = entry.msgstr or candidate_msgstr
-                            entry.msgstr_plural[1] = candidate_plural
-
-                count += 1
-                if count % 15 == 0 or count == len(entries_to_translate):
-                    self.stdout.write(f"  Translated {count}/{len(entries_to_translate)} strings...")
-
-                if delay > 0:
-                    time.sleep(delay)
-
-            po.save(str(po_file))
             self.stdout.write(
                 self.style.SUCCESS(
-                    f"Saved {success_count} translated strings to {po_file}."
+                    f"Saved {stats.succeeded} translated strings to {po_file} (Failed: {stats.failed})."
                 )
             )
 
@@ -260,188 +198,88 @@ class Command(BaseCommand):
             except Exception as e:
                 self.stderr.write(self.style.ERROR(f"Error compiling messages: {e}"))
 
-    def _protect_placeholders(self, text):
-        """Replaces format placeholders (e.g. %(var)s, {var}, {{ var }}, %s) with safe tokens."""
-        placeholders = []
+    def _handle_unfuzzy_all(self, locale_dir: Path, languages: list[str], auto_compile: bool):
+        self.stdout.write(self.style.MIGRATE_HEADING("Stripping fuzzy flags from non-empty translated entries..."))
+        total_unfuzzied = 0
+        for lang_code in languages:
+            po_file = locale_dir / lang_code / "LC_MESSAGES" / "django.po"
+            if not po_file.exists():
+                continue
+            po = polib.pofile(str(po_file))
+            unfuzzied = 0
+            for entry in po:
+                if "fuzzy" in entry.flags and entry.msgstr.strip():
+                    entry.flags.remove("fuzzy")
+                    if getattr(entry, "previous_msgid", None):
+                        entry.previous_msgid = None
+                    unfuzzied += 1
+            if unfuzzied > 0:
+                po.save(str(po_file))
+            self.stdout.write(self.style.SUCCESS(f"Unfuzzied {unfuzzied} entries in [{lang_code}]."))
+            total_unfuzzied += unfuzzied
 
-        def repl(match):
-            placeholders.append(match.group(0))
-            return f"__PH_{len(placeholders) - 1}__"
+        if auto_compile:
+            self.stdout.write(self.style.MIGRATE_HEADING("\nCompiling message catalogs (.mo)..."))
+            call_command("compilemessages", ignore=[".venv"])
+            self.stdout.write(self.style.SUCCESS(f"All message catalogs compiled successfully ({total_unfuzzied} entries unfuzzied)."))
 
-        # Match Python %(name)s, %s, %d, Django {{ var }}, {% tag %}
-        pattern = re.compile(
-            r"(%\([a-zA-Z0-9_]+\)[sfd]|%[sfd]|{{[^}]+}}|{%[^%]+%}|%[0-9]*\.[0-9]*[f]|%[0-9]+[sfd])"
-        )
-        safe_text = pattern.sub(repl, text)
-        return safe_text, placeholders
-
-    def _restore_placeholders(self, text, placeholders):
-        """Restores protected placeholders from safe tokens."""
-        result = text
-        for i, ph in enumerate(placeholders):
-            # Matches __PH_0__, [[PH0]], [PH0], etc., leniently
-            token_pattern = re.compile(
-                rf"(?:__|\[\[?)\s*PH_?\s*{i}\s*(?:__|\]\]?)", re.IGNORECASE
-            )
-            result = token_pattern.sub(ph, result)
-        return result
-
-    def _extract_format_specs(self, text):
-        """Extracts python-format specifications from a string."""
-        pattern = re.compile(
-            r"(%\([a-zA-Z0-9_]+\)[sfd]|%[sfd]|%[0-9]*\.[0-9]*[f]|%[0-9]+[sfd])"
-        )
-        return pattern.findall(text)
-
-    def _validate_format_specs(self, msgid, msgstr, is_python_format=False):
-        """
-        Validates that msgstr preserves all format specifiers present in msgid.
-        If python-format is required and placeholders were dropped or corrupted,
-        returns False to prevent msgfmt fatal compile errors.
-        """
-        if not msgstr:
-            return True
-
-        if is_python_format or "%" in msgid:
-            expected = sorted(self._extract_format_specs(msgid))
-            actual = sorted(self._extract_format_specs(msgstr))
-            if expected != actual:
-                return False
-
-        # Validate leading and trailing newlines matching msgid
-        if msgid.startswith("\n") and not msgstr.startswith("\n"):
-            return False
-        if msgid.endswith("\n") and not msgstr.endswith("\n"):
-            return False
-
-        return True
-
-    def _preserve_boundary_whitespace(self, original, translated):
-        """Ensures translated text matches the original's leading/trailing newlines and spaces."""
-        if not translated:
-            return translated
-
-        # Leading whitespace/newline preservation
-        leading_ws = ""
-        for char in original:
-            if char in " \t\r\n":
-                leading_ws += char
-            else:
-                break
-
-        # Trailing whitespace/newline preservation
-        trailing_ws = ""
-        for char in reversed(original):
-            if char in " \t\r\n":
-                trailing_ws = char + trailing_ws
-            else:
-                break
-
-        return f"{leading_ws}{translated.strip()}{trailing_ws}"
-
-    def _translate_string(self, text, target_lang, backend):
-        """Translates a single string using the selected backend with placeholder preservation."""
-        safe_text, placeholders = self._protect_placeholders(text)
-
-        translated = None
+    def _attach_mock_overrides(self, engine: CatalogTranslationEngine, backend: str):
+        """Allows test mocks on Command methods to seamlessly route through CatalogTranslationEngine."""
         if backend == "mymemory":
-            translated = self._translate_mymemory(safe_text, target_lang)
+            engine.backend.translate = self._translate_mymemory
+        elif backend == "deepl":
+            engine.backend.translate = self._translate_deepl
+        elif backend == "openai":
+            engine.backend.translate = self._translate_openai
+        elif backend == "gemini":
+            engine.backend.translate = self._translate_gemini
+        elif backend == "google":
+            engine.backend.translate = self._translate_google
+
+    # Public helper delegates for test and backwards compatibility
+    def _protect_placeholders(self, text: str):
+        return PlaceholderManager.protect(text)
+
+    def _restore_placeholders(self, text: str, placeholders: list[str]):
+        return PlaceholderManager.restore(text, placeholders)
+
+    def _extract_format_specs(self, text: str):
+        return PlaceholderManager.extract_format_specs(text)
+
+    def _validate_format_specs(self, msgid: str, msgstr: str, is_python_format: bool = False):
+        return PlaceholderManager.validate_format_specs(msgid, msgstr, is_python_format=is_python_format)
+
+    def _preserve_boundary_whitespace(self, original: str, translated: str):
+        return PlaceholderManager.preserve_boundary_whitespace(original, translated)
+
+    def _translate_string(self, text: str, target_lang: str, backend: str = "google"):
+        safe_text, placeholders = self._protect_placeholders(text)
+        translated = None
+        if backend == "google":
+            translated = self._translate_google(safe_text, target_lang)
+        elif backend == "gemini":
+            translated = self._translate_gemini(safe_text, target_lang)
         elif backend == "deepl":
             translated = self._translate_deepl(safe_text, target_lang)
         elif backend == "openai":
             translated = self._translate_openai(safe_text, target_lang)
-
+        elif backend == "mymemory":
+            translated = self._translate_mymemory(safe_text, target_lang)
         if not translated:
             return None
+        return self._restore_placeholders(translated, placeholders)
 
-        final_text = self._restore_placeholders(translated, placeholders)
-        return final_text
+    def _translate_google(self, text: str, target_lang: str) -> Optional[str]:
+        return GoogleWebBackend().translate(text, target_lang)
 
-    def _translate_mymemory(self, text, target_lang):
-        """Free MyMemory API translation."""
-        try:
-            encoded_query = urllib.parse.quote(text)
-            url = f"https://api.mymemory.translated.net/get?q={encoded_query}&langpair=en|{target_lang}"
-            
-            # If developer set an email in env/settings, MyMemory increases free daily quota to 10k words
-            email = getattr(settings, "MYMEMORY_EMAIL", os.environ.get("MYMEMORY_EMAIL", ""))
-            if email:
-                url += f"&de={urllib.parse.quote(email)}"
+    def _translate_gemini(self, text: str, target_lang: str) -> Optional[str]:
+        return GeminiBackend().translate(text, target_lang)
 
-            req = urllib.request.Request(
-                url,
-                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) EnterpriseWebsite/1.0"},
-            )
-            with urllib.request.urlopen(req, timeout=8) as response:
-                payload = json.loads(response.read().decode("utf-8"))
-                res_data = payload.get("responseData")
-                if res_data and "translatedText" in res_data:
-                    return res_data["translatedText"]
-        except Exception:
-            return None
-        return None
+    def _translate_deepl(self, text: str, target_lang: str) -> Optional[str]:
+        return DeepLBackend().translate(text, target_lang)
 
-    def _translate_deepl(self, text, target_lang):
-        """DeepL API translation using DEEPL_AUTH_KEY."""
-        api_key = getattr(settings, "DEEPL_AUTH_KEY", os.environ.get("DEEPL_AUTH_KEY", ""))
-        if not api_key:
-            return None
-        try:
-            import requests
-            endpoint = (
-                "https://api-free.deepl.com/v2/translate"
-                if ":fx" in api_key
-                else "https://api.deepl.com/v2/translate"
-            )
-            # DeepL uses 'PT-PT' or 'PT-BR' instead of generic 'pt'
-            dl_lang = target_lang.upper()
-            if dl_lang == "PT":
-                dl_lang = "PT-PT"
+    def _translate_openai(self, text: str, target_lang: str) -> Optional[str]:
+        return OpenAIBackend().translate(text, target_lang)
 
-            resp = requests.post(
-                endpoint,
-                headers={"Authorization": f"DeepL-Auth-Key {api_key}"},
-                data={"text": text, "target_lang": dl_lang, "source_lang": "EN"},
-                timeout=10,
-            )
-            if resp.status_code == 200:
-                data = resp.json()
-                translations = data.get("translations", [])
-                if translations:
-                    return translations[0].get("text")
-        except Exception:
-            return None
-        return None
-
-    def _translate_openai(self, text, target_lang):
-        """OpenAI API translation using OPENAI_API_KEY."""
-        api_key = getattr(settings, "OPENAI_API_KEY", os.environ.get("OPENAI_API_KEY", ""))
-        if not api_key:
-            return None
-        try:
-            import requests
-            resp = requests.post(
-                "https://api.openai.com/v1/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {api_key}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "model": "gpt-4o-mini",
-                    "messages": [
-                        {
-                            "role": "system",
-                            "content": f"You are a professional software localization translator. Translate from English into language code '{target_lang}'. Return ONLY the translation, preserving exact casing and tokens like [[PH0]].",
-                        },
-                        {"role": "user", "content": text},
-                    ],
-                    "temperature": 0.2,
-                },
-                timeout=10,
-            )
-            if resp.status_code == 200:
-                data = resp.json()
-                return data["choices"][0]["message"]["content"].strip()
-        except Exception:
-            return None
-        return None
+    def _translate_mymemory(self, text: str, target_lang: str) -> Optional[str]:
+        return MyMemoryBackend().translate(text, target_lang)

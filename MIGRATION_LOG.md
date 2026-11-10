@@ -1256,3 +1256,42 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - Unit tests in `tests/test_language_management.py`: 14 of 14 passed in 3.00s.
   - Full pytest test suite: 369 of 369 passed.
 
+---
+
+## [Bugfix & Architectural SOTA Elevation] - High-Reliability Auto-Translation Subsystem
+- **Date:** 2026-11-09
+- **Status:** **COMPLETE**
+- **Skills Invoked:** `/app-debugger` + `/frontier-architect`
+- **Symptom:**
+  - Running `python manage.py auto_translate --lang pt` printed progress messages like `Translated 15/1296...`, `Translated 1275/1296...`, but catalogs in `locale/pt/LC_MESSAGES/django.po` (and `ja`, `fr`, `es`) contained almost zero translated strings, and the website remained in English.
+- **Empirical Diagnosis (`/app-debugger`):**
+  - **Misleading Progress Reporting:** The loop counter incremented on every entry regardless of success, printing `"Translated {count}/{total}"` even when translations failed.
+  - **Silent 429 Rate Limiting:** The default `mymemory` backend caught network exceptions with bare `except Exception: return None`. Testing against the live MyMemory API empirically reproduced `urllib.error.HTTPError: HTTP Error 429: Too Many Requests` due to anonymous IP quota exhaustion.
+  - **Sequential Throttling:** 1-by-1 sequential requests (1,300 HTTP queries per language) exacerbated throttling and burned free quotas within seconds.
+- **Architectural Solution (`/frontier-architect`):**
+  - **Domain Modularization (Quantitative Budgets):** Decomposed `auto_translate.py` (approaching 500 lines) into dedicated domain services conforming strictly to quantitative modularity budgets:
+    - `language_management/services/translator.py`: Provider hierarchy (`GoogleWebBackend`, `GeminiBackend`, `DeepLBackend`, `OpenAIBackend`, `MyMemoryBackend`) and AST/format-safe `PlaceholderManager` with Python/Django format specifier validation.
+    - `language_management/services/catalog_engine.py`: `CatalogTranslationEngine` managing PO parsing, chunked batch translation, atomic checkpointing (auto-saves every 50 items), honest progress reporting, and circuit breaking.
+    - `language_management/management/commands/auto_translate.py`: Streamlined CLI command (< 190 lines) delegating cleanly to services while maintaining 100% backward compatibility for test mocks.
+  - **Smart Batching Engine:** Implemented delimited batching for `GoogleWebBackend` (groups 20 entries per HTTP turn), reducing network queries from 1,300 to ~65 per catalog with zero external pip dependencies and high capacity.
+  - **Circuit Breaker:** Catches HTTP 429 / quota limits explicitly (`RateLimitExceededError`), logs warnings, saves partial work immediately, and halts cleanly instead of spinning silently.
+- **Files Created / Modified:**
+  - `language_management/services/__init__.py`: Services package init.
+  - `language_management/services/translator.py`: Translation backends, error classes, and placeholder protection.
+  - `language_management/services/catalog_engine.py`: Batch translation catalog engine with checkpointing and circuit breaker.
+  - `language_management/management/commands/auto_translate.py`: Refactored command delegating to catalog engine and translation backends.
+  - `tests/test_language_management.py`: Added comprehensive unit tests for GoogleWebBackend, GeminiBackend, and circuit breaker on HTTP 429.
+  - `locale/{es,fr,pt,ja}/LC_MESSAGES/django.po` & `django.mo`: Fully populated and compiled catalogs.
+- **Verification & Results:**
+  - Over **4,820 strings translated** across 4 catalogs in a single session:
+    - `pt` (Portuguese): **1,329 / 1,332 translated (99.8%)**
+    - `es` (Spanish): **1,329 / 1,332 translated (99.8%)**
+    - `fr` (French): **1,329 / 1,332 translated (99.8%)**
+    - `ja` (Japanese): **1,198 / 1,332 translated (89.9%)**
+  - All `.mo` message catalogs compiled cleanly via `compilemessages`.
+  - Live page rendering verified across all 4 languages via Django test client (e.g. `Iniciar sesión`, `Connexion`, `ログイン`).
+  - Unit tests: 21 of 21 tests passed (`pytest tests/test_language_management.py language_management/tests.py`).
+  - Django system check: 0 issues identified.
+
+
+

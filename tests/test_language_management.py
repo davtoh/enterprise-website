@@ -142,3 +142,33 @@ class TestLanguageManagement:
         res = cmd._translate_string("Hello %(name)s", "es", backend="mymemory")
         assert res == "Hola %(name)s"
 
+    @patch("urllib.request.urlopen")
+    def test_auto_translate_google_web_backend(self, mock_urlopen):
+        mock_res = io.BytesIO(b'[[["Hola mundo", "Hello world", null, null, 1]]]')
+        mock_urlopen.return_value.__enter__.return_value = mock_res
+        cmd = AutoTranslateCommand()
+        result = cmd._translate_google("Hello world", "es")
+        assert result == "Hola mundo"
+
+    @patch("urllib.request.urlopen")
+    def test_auto_translate_gemini_backend_with_key(self, mock_urlopen, settings):
+        settings.GEMINI_API_KEY = "dummy-gemini-key"
+        res_payload = b'{"candidates": [{"content": {"parts": [{"text": "[{\\"id\\": 0, \\"translation\\": \\"Bonjour le monde\\"}]"}]}}]}'
+        mock_urlopen.return_value.__enter__.return_value = io.BytesIO(res_payload)
+        cmd = AutoTranslateCommand()
+        result = cmd._translate_gemini("Hello world", "fr")
+        assert result == "Bonjour le monde"
+
+    @patch("urllib.request.urlopen")
+    def test_mymemory_circuit_breaker_on_429(self, mock_urlopen):
+        import urllib.error
+        from language_management.services.translator import RateLimitExceededError
+
+        mock_urlopen.side_effect = urllib.error.HTTPError(
+            "url", 429, "Too Many Requests", {}, None
+        )
+        cmd = AutoTranslateCommand()
+        with pytest.raises(RateLimitExceededError):
+            cmd._translate_mymemory("Hello", "es")
+
+
