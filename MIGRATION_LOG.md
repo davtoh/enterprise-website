@@ -1362,6 +1362,35 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - Ran test suite `.\.venv\Scripts\python.exe manage.py test`: 14 of 14 passed (100% green).
   - Validated clean staged changes across all 12 application files.
 
+---
+
+## [Multi-Theme Architecture & Container Parity] - Cascade Layers, CSS Hygiene & Documentation
+- **Date:** 2026-11-11
+- **Status:** **COMPLETE**
+- **Skills Invoked:** `/frontier-architect`
+- **Objectives:**
+  - Establish a zero-duplication multi-theme architecture supporting `bootstrap5` (Bootstrap 5.3.3), `tailwind` (Tailwind CSS + Alpine.js), and `minimal` (Minimal Semantic CSS) across all shared Django domain templates (`crm`, `erp`, `todo`, `polls`, `home`, `task_runner`, `video_gallery`, `user_management`).
+  - Resolve the container centering defect in `tailwind` and harmonize responsive grid gutters across all themes (`sm: 540px`, `md: 720px`, `lg: 960px`, `xl: 1140px`, `xxl: 1320px`, and `1200px` minimal max-width).
+  - Formalize CSS Cascade Layers (`@layer tokens, framework, adapter, components, utilities;`) so utility overrides outrank adapter/component rules mathematically without `!important`.
+  - Add automated anti-regression verification for CSS `!important` hygiene and `<main>` container DOM layout across CRM and Todo routes.
+  - Document the layout contract, developer guidelines, and 1-step single-framework decoupling recipe.
+- **Files Created / Modified:**
+  - `static/css/theme-tokens.css`: Declared `@layer tokens, framework, adapter, components, utilities;` and wrapped design tokens (`@layer tokens`) and brand component classes (`@layer components`).
+  - `static/css/theme-adapter.css`: Added universal `.container` / `.container-fluid` / `.container-{sm..xxl}` responsive centering rules with `margin-inline: auto` and `--bs-gutter-x` inside `@layer adapter`, and ordered utilities inside `@layer utilities`.
+  - `templates/themes/bootstrap5/partials/styles.html`: Aligned Bootstrap 5.3.3 + `main.css` (`layer(framework)`) and `django.css` (`layer(components)`) with the global layer hierarchy.
+  - `templates/themes/tailwind/partials/styles.html`: Configured `tailwind.config.theme.container = { center: true, padding: '1rem' }` (`preflight: false`) and scoped compatibility rules to `@layer framework`.
+  - `templates/themes/minimal/partials/styles.html`: Harmonized `.container` with `--container-max-width: 1200px` and `--container-gutter-x: 2rem` across `@layer tokens`, `@layer framework`, and `@layer adapter`.
+  - `tests/test_theme_management.py`: Added `test_theme_adapter_defines_container`, `test_css_cascade_layer_hierarchy`, `test_container_centering_across_all_themes`, `_ContainerDOMParser`, `TestThemeHygieneAndLayout.test_zero_important_in_application_stylesheets`, and `TestThemeHygieneAndLayout.test_container_dom_centered_layout_in_crm_and_todo` (25 tests total).
+  - `docs/THEME_ARCHITECTURE.md`: Created developer reference covering theme resolution, cascade layers, container contract, Zero `!important` policy, new-view guidelines, scenario matrix, and 1-step decoupling recipe.
+  - `MIGRATION_LOG.md`: Recorded multi-theme architecture completion and consolidation recipe.
+- **1-Step Decoupling Recipe (Summary):**
+  - Pin `AVAILABLE_THEMES = ['bootstrap5']` and `SITE_THEME` in `enterprise_website/settings/base.py` (or flatten `templates/themes/<chosen>/` into `templates/` and drop `ThemeMiddleware` / `ThemeTemplateLoader` / `theme_context`). Shared domain templates require zero rewrites because they rely solely on `.container`, `.container-fluid`, `.row`, `.col-*`, `.card`, `.btn`, and `theme-tokens.css`.
+- **Verification:**
+  - `.\.venv\Scripts\python.exe manage.py check` → 0 issues identified (0 silenced).
+  - `.\.venv\Scripts\python.exe -m pytest tests/test_theme_management.py -v` → 25 passed.
+  - `.\.venv\Scripts\python.exe manage.py test` → 14 passed.
+
+
 
 
 

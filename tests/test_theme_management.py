@@ -1,4 +1,5 @@
 import re
+from html.parser import HTMLParser
 from pathlib import Path
 
 import pytest
@@ -291,3 +292,82 @@ class TestThemeManagement:
                     assert 'margin-inline: auto;' in content
                 elif theme == 'bootstrap5':
                     assert 'bootstrap@5.3.3' in content
+
+
+class _ContainerDOMParser(HTMLParser):
+    """HTML parser extracting container divs and linked stylesheet hrefs."""
+
+    def __init__(self):
+        super().__init__()
+        self.containers, self.stylesheets, self._in_main = [], [], False
+
+    def handle_starttag(self, tag, attrs):
+        attr_map = dict(attrs)
+        if tag == 'main':
+            self._in_main = True
+        elif tag == 'link' and attr_map.get('rel') == 'stylesheet':
+            self.stylesheets.append(attr_map.get('href', ''))
+        elif tag == 'div':
+            classes = attr_map.get('class', '').split()
+            if 'container' in classes or 'container-fluid' in classes:
+                self.containers.append({
+                    'classes': classes,
+                    'style': attr_map.get('style', ''),
+                    'in_main': self._in_main,
+                })
+
+    def handle_endtag(self, tag):
+        if tag == 'main':
+            self._in_main = False
+
+
+@pytest.mark.django_db
+class TestThemeHygieneAndLayout:
+
+    def test_zero_important_in_application_stylesheets(self):
+        """Ensures application CSS and theme <style> blocks avoid !important outside [x-cloak]."""
+        base = Path(settings.BASE_DIR)
+        vendor_css = {
+            'animate.min.css', 'bootstrap.css', 'font-awesome.min.css',
+            'linearicons.css', 'magnific-popup.css', 'nice-select.css',
+        }
+        excluded = {'.venv', 'staticfiles', 'htmlcov', 'node_modules'}
+        app_css = [
+            p for p in base.rglob('*.css')
+            if not (excluded & set(p.parts)) and p.name not in vendor_css
+        ]
+        assert {'theme-tokens.css', 'theme-adapter.css'} <= {p.name for p in app_css}
+
+        for css_path in app_css:
+            cleaned = re.sub(r'/\*.*?\*/', '', css_path.read_text(encoding='utf-8'), flags=re.S)
+            assert '!important' not in cleaned, f"Disallowed !important in {css_path.relative_to(base)}"
+
+        for theme in settings.AVAILABLE_THEMES:
+            partial = base / 'templates' / 'themes' / theme / 'partials' / 'styles.html'
+            for block in re.findall(r'<style[^>]*>(.*?)</style>', partial.read_text(encoding='utf-8'), flags=re.S | re.I):
+                cleaned = re.sub(r'\[x-cloak\]\s*\{[^}]*\}', '', re.sub(r'/\*.*?\*/', '', block, flags=re.S), flags=re.S)
+                assert '!important' not in cleaned, f"Disallowed !important in {theme} styles.html"
+
+    def test_container_dom_centered_layout_in_crm_and_todo(self, client, staff_user):
+        """Verifies parsed DOM containers in CRM and Todo inherit centered layout across themes."""
+        client.force_login(staff_user)
+        routes = [
+            (reverse('todo:index'), 'container'),
+            (reverse('todo:add'), 'container'),
+            (reverse('crm:dashboard'), 'container-fluid'),
+        ]
+        disallowed = {'mx-0', 'ml-0', 'mr-0', 'ms-0', 'me-0'}
+
+        for theme in settings.AVAILABLE_THEMES:
+            for url, expected_cls in routes:
+                response = client.get(f"{url}?theme={theme}")
+                assert response.status_code == 200
+                parser = _ContainerDOMParser()
+                parser.feed(response.content.decode('utf-8'))
+                nodes = [c for c in parser.containers if c['in_main'] and expected_cls in c['classes']]
+                assert nodes, f"Missing <div class='{expected_cls}'> in <main> for {url} ({theme})"
+                assert any('theme-adapter.css' in href for href in parser.stylesheets)
+                assert any('theme-tokens.css' in href for href in parser.stylesheets)
+                for node in nodes:
+                    assert not (disallowed & set(node['classes'])), f"Uncentered class on {url} ({theme})"
+                    assert not re.search(r'margin-(left|right|inline)\s*:\s*0', node['style'])
