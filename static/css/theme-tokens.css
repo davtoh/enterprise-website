@@ -6,54 +6,59 @@
  * navbar accents, hero CTA buttons, and card elevations across all templates.
  */
 
-:root {
-  /* Brand Color Palette */
-  --brand-primary: #ff7d59;
-  --brand-primary-hover: #e8633d;
-  --brand-secondary: #ffa98c;
-  --brand-accent: #ffe38c;
-  --brand-dark: #222222;
-  --brand-light: #fff8f5;
+@layer tokens, framework, adapter, components, utilities;
 
-  /* Semantic System Color Palette (Cross-Theme SSOT) */
-  --color-primary: #ff7d59;
-  --color-primary-rgb: 255, 125, 89;
-  --color-primary-subtle: #fff1ec;
-  --color-success: #16a34a;
-  --color-success-subtle: #dcfce7;
-  --color-info: #0284c7;
-  --color-info-subtle: #e0f2fe;
-  --color-warning: #d97706;
-  --color-warning-subtle: #fef3c7;
-  --color-danger: #dc2626;
-  --color-danger-subtle: #fee2e2;
-  --color-secondary: #64748b;
-  --color-secondary-subtle: #f1f5f9;
-  --color-surface: #ffffff;
-  --color-bg: #f8fafc;
-  --color-border: #e2e8f0;
-  --color-text: #0f172a;
-  --color-text-muted: #64748b;
+@layer tokens {
+  :root {
+    /* Brand Color Palette */
+    --brand-primary: #ff7d59;
+    --brand-primary-hover: #e8633d;
+    --brand-secondary: #ffa98c;
+    --brand-accent: #ffe38c;
+    --brand-dark: #222222;
+    --brand-light: #fff8f5;
 
-  /* Brand Gradients */
-  --brand-gradient: linear-gradient(135deg, #ffa98c 0%, #ffe38c 100%);
-  --brand-gradient-vibrant: linear-gradient(135deg, #ff7d59 0%, #ffa98c 50%, #ffe38c 100%);
-  --brand-gradient-hover: linear-gradient(135deg, #ff6a42 0%, #ff9a78 50%, #ffd974 100%);
+    /* Semantic System Color Palette (Cross-Theme SSOT) */
+    --color-primary: #ff7d59;
+    --color-primary-rgb: 255, 125, 89;
+    --color-primary-subtle: #fff1ec;
+    --color-success: #16a34a;
+    --color-success-subtle: #dcfce7;
+    --color-info: #0284c7;
+    --color-info-subtle: #e0f2fe;
+    --color-warning: #d97706;
+    --color-warning-subtle: #fef3c7;
+    --color-danger: #dc2626;
+    --color-danger-subtle: #fee2e2;
+    --color-secondary: #64748b;
+    --color-secondary-subtle: #f1f5f9;
+    --color-surface: #ffffff;
+    --color-bg: #f8fafc;
+    --color-border: #e2e8f0;
+    --color-text: #0f172a;
+    --color-text-muted: #64748b;
 
-  /* Shadows & Elevation */
-  --brand-shadow: 0 4px 15px rgba(255, 125, 89, 0.25);
-  --brand-shadow-lg: 0 8px 25px rgba(255, 125, 89, 0.35);
-  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
+    /* Brand Gradients */
+    --brand-gradient: linear-gradient(135deg, #ffa98c 0%, #ffe38c 100%);
+    --brand-gradient-vibrant: linear-gradient(135deg, #ff7d59 0%, #ffa98c 50%, #ffe38c 100%);
+    --brand-gradient-hover: linear-gradient(135deg, #ff6a42 0%, #ff9a78 50%, #ffd974 100%);
 
-  /* Radius Tokens */
-  --radius-pill: 50rem;
-  --radius-card: 1rem;
+    /* Shadows & Elevation */
+    --brand-shadow: 0 4px 15px rgba(255, 125, 89, 0.25);
+    --brand-shadow-lg: 0 8px 25px rgba(255, 125, 89, 0.35);
+    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+    /* Radius Tokens */
+    --radius-pill: 50rem;
+    --radius-card: 1rem;
+  }
 }
 
-/* ==========================================================================
-   1. Reusable Button Components
-   ========================================================================== */
+@layer components {
+  /* ==========================================================================
+     1. Reusable Button Components
+     ========================================================================== */
 .btn-brand-primary,
 a.btn-brand-primary,
 button.btn-brand-primary {
@@ -236,3 +241,4 @@ button.btn-hero-cta:focus {
   box-shadow: none;
   cursor: pointer;
 }
+} /* end @layer components */

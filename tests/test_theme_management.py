@@ -221,11 +221,11 @@ class TestThemeManagement:
         assert 'style="margin-right: 10px;"' not in content
 
     def test_theme_adapter_defines_container(self):
-        """Verifies theme-adapter.css defines centered responsive container rules inside @layer."""
+        """Verifies theme-adapter.css defines centered responsive container rules inside @layer adapter."""
         adapter_path = Path(settings.BASE_DIR) / 'static' / 'css' / 'theme-adapter.css'
         css = adapter_path.read_text(encoding='utf-8')
 
-        assert '@layer theme-adapter' in css
+        assert '@layer adapter' in css
         assert '.container,' in css
         assert '.container-fluid,' in css
         assert 'margin-inline: auto;' in css
@@ -234,6 +234,36 @@ class TestThemeManagement:
         assert 'padding-inline:' in css
         for max_width in ('540px', '720px', '960px', '1140px', '1320px'):
             assert max_width in css, f"Expected responsive container max-width {max_width} in theme-adapter.css"
+
+    def test_css_cascade_layer_hierarchy(self, client):
+        """Verifies formal @layer hierarchy across tokens, adapter, and theme style partials."""
+        tokens_css = (Path(settings.BASE_DIR) / 'static' / 'css' / 'theme-tokens.css').read_text(encoding='utf-8')
+        adapter_css = (Path(settings.BASE_DIR) / 'static' / 'css' / 'theme-adapter.css').read_text(encoding='utf-8')
+
+        expected_order = '@layer tokens, framework, adapter, components, utilities;'
+        assert expected_order in tokens_css
+        assert '@layer tokens' in tokens_css
+        assert '@layer components' in tokens_css
+
+        assert expected_order in adapter_css
+        assert '@layer adapter' in adapter_css
+        assert '@layer utilities' in adapter_css
+        assert '!important' not in adapter_css
+        assert adapter_css.index('.border-0') < adapter_css.index('.border-start')
+        assert adapter_css.index('.d-none') < adapter_css.index('.d-sm-inline-block')
+
+        bs5_content = client.get('/?theme=bootstrap5').content.decode('utf-8')
+        assert expected_order in bs5_content
+        assert 'layer(framework)' in bs5_content
+        assert 'bootstrap@5.3.3/dist/css/bootstrap.min.css") layer(framework)' in bs5_content
+
+        minimal_content = client.get('/?theme=minimal').content.decode('utf-8')
+        assert '@layer framework' in minimal_content
+        assert '@layer adapter' in minimal_content
+
+        tailwind_content = client.get('/?theme=tailwind').content.decode('utf-8')
+        assert 'preflight: false' in tailwind_content
+        assert '@layer framework' in tailwind_content
 
     def test_container_centering_across_all_themes(self, client, staff_user):
         """Verifies container adapter linkage and theme-specific centering rules across all themes."""
