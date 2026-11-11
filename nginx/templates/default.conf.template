@@ -1,10 +1,7 @@
 # ==============================================================================
-# Nginx Reverse Proxy & Static File Server Configuration
+# Nginx Reverse Proxy & Static File Server Configuration Template
+# Parameterized via Docker envsubst at container startup (/etc/nginx/templates/)
 # ==============================================================================
-
-upstream web_app {
-    server web:8000;
-}
 
 map $http_upgrade $connection_upgrade {
     default upgrade;
@@ -12,8 +9,8 @@ map $http_upgrade $connection_upgrade {
 }
 
 server {
-    listen 80;
-    server_name localhost;
+    listen ${NGINX_PORT};
+    server_name ${NGINX_SERVER_NAME};
 
     client_max_body_size 25M;
 
@@ -36,17 +33,21 @@ server {
         add_header Cache-Control "public, max-age=2592000, immutable";
     }
 
-    # Media uploads served directly by Nginx
-    location /media/ {
+    # Media uploads served directly by Nginx (matching MEDIA_URL = /media-files/)
+    location /media-files/ {
         alias /app/media/;
         expires 7d;
         access_log off;
         add_header Cache-Control "public, max-age=604800";
     }
 
-    # Dynamic and WebSocket requests forwarded to Daphne ASGI application
+    # Dynamic DNS resolver using parameter or Docker embedded default (127.0.0.11)
+    resolver ${DNS_RESOLVER} valid=5s ipv6=off;
+
+    # Dynamic and WebSocket requests forwarded to ASGI/WSGI application
     location / {
-        proxy_pass http://web_app;
+        set $upstream_backend http://${WEB_HOST}:${WEB_PORT};
+        proxy_pass $upstream_backend;
         proxy_http_version 1.1;
 
         # WebSocket headers

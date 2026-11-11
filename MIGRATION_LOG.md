@@ -1335,3 +1335,28 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - Navigation parity verified across all 3 themes for Home, About, Services, Products, Contact, Todo, CRM, ERP.
   - Balanced `<main>` tags verified across all 3 theme base templates.
 
+---
+
+## [Docker Hardening & Nginx Dynamic DNS] - 502 Bad Gateway Stale IP Resolution Fix
+- **Date:** 2026-11-10
+- **Status:** **COMPLETE**
+- **Skills Invoked:** `/app-debugger`
+- **Symptom:**
+  - After modifying or rebuilding containers, Nginx intermittently served `502 Bad Gateway nginx/1.27.5`.
+- **Empirical Diagnosis (`/app-debugger`):**
+  - Inspected `enterprise_nginx` error logs: `connect() failed (111: Connection refused) while connecting to upstream: "http://172.18.0.4:8000/", host: "localhost:8080"`.
+  - Discovered that when `enterprise_web` was recreated, its internal Docker IP address changed from `172.18.0.4` to `172.18.0.6`.
+  - The old IP `172.18.0.4` was reassigned by Docker to `enterprise_flower` (which listens on 5555, not 8000).
+  - Because Nginx had a static `upstream web_app { server web:8000; }`, Nginx cached the IP `172.18.0.4` in memory from startup and never re-resolved `web`, continuously forwarding requests to Flower.
+- **Architectural Solution:**
+  - In `nginx/default.conf`, added Docker embedded DNS resolver `resolver 127.0.0.11 valid=5s ipv6=off;`.
+  - Changed `proxy_pass` to use dynamic variable `set $upstream_backend http://web:8000; proxy_pass $upstream_backend;`.
+  - This forces Nginx to dynamically re-resolve the container's IP every 5 seconds, ensuring that container rebuilds and IP reallocations never trigger stale IP 502 Bad Gateway errors.
+- **Verification:**
+  - Tested all 14 core routes on `http://localhost:8080/` (Home, themes, CRM, ERP, Todo, Media, static assets) $\rightarrow$ all return 200 OK.
+  - Automated tests: 33 of 33 tests passed in 9.33s.
+
+
+
+
+

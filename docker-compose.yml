@@ -34,6 +34,12 @@ services:
         condition: service_healthy
     expose:
       - "8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
   db:
     image: postgres:16-alpine
@@ -70,12 +76,19 @@ services:
     restart: unless-stopped
     ports:
       - "${PORT:-80}:80"
+    environment:
+      - NGINX_PORT=${NGINX_PORT:-80}
+      - NGINX_SERVER_NAME=${NGINX_SERVER_NAME:-localhost}
+      - WEB_HOST=${WEB_HOST:-web}
+      - WEB_PORT=${WEB_PORT:-8000}
+      - DNS_RESOLVER=${DNS_RESOLVER:-127.0.0.11}
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/templates:/etc/nginx/templates:ro
       - static_volume:/app/staticfiles:ro
       - media_volume:/app/media:ro
     depends_on:
-      - web
+      web:
+        condition: service_healthy
 
   celery_worker:
     build:
