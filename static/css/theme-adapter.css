@@ -10,6 +10,69 @@
 
 @layer theme-adapter {
   /* ==========================================================================
+     0. Universal Responsive Containers
+     ========================================================================== */
+  .container,
+  .container-fluid,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    box-sizing: border-box;
+    --bs-gutter-x: var(--container-gutter-x, 1.5rem);
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-inline: calc(var(--bs-gutter-x) * 0.5);
+    margin-inline: auto;
+  }
+
+  @media (min-width: 576px) {
+    .container,
+    .container-sm {
+      max-width: var(--container-max-sm, 540px);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container,
+    .container-sm,
+    .container-md {
+      max-width: var(--container-max-md, 720px);
+    }
+  }
+
+  @media (min-width: 992px) {
+    .container,
+    .container-sm,
+    .container-md,
+    .container-lg {
+      max-width: var(--container-max-lg, 960px);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .container,
+    .container-sm,
+    .container-md,
+    .container-lg,
+    .container-xl {
+      max-width: var(--container-max-xl, 1140px);
+    }
+  }
+
+  @media (min-width: 1400px) {
+    .container,
+    .container-sm,
+    .container-md,
+    .container-lg,
+    .container-xl,
+    .container-xxl {
+      max-width: var(--container-max-xxl, 1320px);
+    }
+  }
+
+  /* ==========================================================================
      1. 12-Column Responsive Flex Grid
      ========================================================================== */
   .row {

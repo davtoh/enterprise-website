@@ -1,3 +1,6 @@
+import re
+from pathlib import Path
+
 import pytest
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -216,3 +219,45 @@ class TestThemeManagement:
         assert 'display: block !important' not in content
         assert '#launchTaskModal.in' not in content
         assert 'style="margin-right: 10px;"' not in content
+
+    def test_theme_adapter_defines_container(self):
+        """Verifies theme-adapter.css defines centered responsive container rules inside @layer."""
+        adapter_path = Path(settings.BASE_DIR) / 'static' / 'css' / 'theme-adapter.css'
+        css = adapter_path.read_text(encoding='utf-8')
+
+        assert '@layer theme-adapter' in css
+        assert '.container,' in css
+        assert '.container-fluid,' in css
+        assert 'margin-inline: auto;' in css
+        assert '--bs-gutter-x' in css
+        assert '--container-gutter-x' in css
+        assert 'padding-inline:' in css
+        for max_width in ('540px', '720px', '960px', '1140px', '1320px'):
+            assert max_width in css, f"Expected responsive container max-width {max_width} in theme-adapter.css"
+
+    def test_container_centering_across_all_themes(self, client, staff_user):
+        """Verifies container adapter linkage and theme-specific centering rules across all themes."""
+        client.force_login(staff_user)
+        target_routes = ['/', reverse('crm:dashboard')]
+
+        for theme in ['bootstrap5', 'tailwind', 'minimal']:
+            for route in target_routes:
+                response = client.get(f"{route}?theme={theme}")
+                assert response.status_code == 200, f"{route} failed under theme {theme}"
+                content = response.content.decode('utf-8')
+
+                assert 'theme-adapter.css' in content, f"theme-adapter.css missing on {route} ({theme})"
+                assert 'container' in content, f"No container class rendered on {route} ({theme})"
+
+                if theme == 'tailwind':
+                    assert re.search(
+                        r"container:\s*\{\s*center:\s*true,\s*padding:\s*'1rem'",
+                        content,
+                    ), f"Tailwind container center/padding config missing on {route}"
+                elif theme == 'minimal':
+                    assert '--container-max-width: 1200px;' in content
+                    assert '--container-gutter-x:' in content
+                    assert 'var(--container-max-width' in content
+                    assert 'margin-inline: auto;' in content
+                elif theme == 'bootstrap5':
+                    assert 'bootstrap@5.3.3' in content
