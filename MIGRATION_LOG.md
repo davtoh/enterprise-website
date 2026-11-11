@@ -1337,24 +1337,30 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
 
 ---
 
-## [Docker Hardening & Nginx Dynamic DNS] - 502 Bad Gateway Stale IP Resolution Fix
-- **Date:** 2026-11-10
+## [Frontend Hygiene & Specificity Remediation] - Selective `!important` Elimination & Vendor/Protocol Preservation
+- **Date:** 2026-11-11
 - **Status:** **COMPLETE**
 - **Skills Invoked:** `/app-debugger`
-- **Symptom:**
-  - After modifying or rebuilding containers, Nginx intermittently served `502 Bad Gateway nginx/1.27.5`.
+- **Symptom / Context:**
+  - Bulk deletion of `!important` across 33 staged files risked breaking utility precedence, framework protocols, third-party libraries, and hover states.
 - **Empirical Diagnosis (`/app-debugger`):**
-  - Inspected `enterprise_nginx` error logs: `connect() failed (111: Connection refused) while connecting to upstream: "http://172.18.0.4:8000/", host: "localhost:8080"`.
-  - Discovered that when `enterprise_web` was recreated, its internal Docker IP address changed from `172.18.0.4` to `172.18.0.6`.
-  - The old IP `172.18.0.4` was reassigned by Docker to `enterprise_flower` (which listens on 5555, not 8000).
-  - Because Nginx had a static `upstream web_app { server web:8000; }`, Nginx cached the IP `172.18.0.4` in memory from startup and never re-resolved `web`, continuously forwarding requests to Flower.
-- **Architectural Solution:**
-  - In `nginx/default.conf`, added Docker embedded DNS resolver `resolver 127.0.0.11 valid=5s ipv6=off;`.
-  - Changed `proxy_pass` to use dynamic variable `set $upstream_backend http://web:8000; proxy_pass $upstream_backend;`.
-  - This forces Nginx to dynamically re-resolve the container's IP every 5 seconds, ensuring that container rebuilds and IP reallocations never trigger stale IP 502 Bad Gateway errors.
+  - **Category A (Framework & Protocol Directives):** Alpine.js `[x-cloak]` requires `display: none !important;` by official specification to prevent FOUC. Email tracking pixels in `crm/tasks.py` and `crm/utils.py` require inline `display: none !important;` to prevent hostile email client resets (e.g. Gmail).
+  - **Category B (Vendor & Utility Framework Architecture):** Bootstrap 4 source SCSS (`static/scss/bootstrap/`), `static/css/theme-adapter.css`, and third-party libraries (`magnific-popup.css`, `nice-select.css`) intentionally use `!important` per utility class and lightbox specification so utility classes override component styles.
+  - **Category C (Application CSS & Specificity Deficits):** 
+    - `change_list.html`: `.launch-script-admin-link` lost specificity to Django Admin's `ul.object-tools a:link`.
+    - `theme-tokens.css`: `.btn-brand-primary:hover` and `.navbar-brand-theme .nav-link:hover` lost to Bootstrap's `.navbar-light .navbar-nav .nav-link:hover` (0,3,0).
+    - `_home_sections.scss`: Line 26 retained `color: $black !important;` while line 37 hover was changed to `color: $white;`, resulting in hover state locking to black.
+    - `mail-script.js`: Had messy `.attr("style", "display: none");;` string manipulation.
+- **Remediation & Architectural Solution:**
+  - Restored upstream vendor and framework protocol files (`static/scss/bootstrap/`, `theme-adapter.css`, `magnific-popup.css`, `nice-select.css`, `crm/tasks.py`, `crm/utils.py`, `[x-cloak]`).
+  - Elevated selector specificity without `!important` in application CSS:
+    - `task_runner/templates/admin/task_runner/taskjob/change_list.html`: Scoped to `ul.object-tools a.launch-script-admin-link` and `:hover`.
+    - `static/css/theme-tokens.css`: Multi-selector expansion for `.btn-brand-primary`, `a.btn-brand-primary`, `button.btn-brand-primary` and parent scoping for `.navbar.navbar-brand-theme`.
+    - `static/scss/theme/_home_sections.scss`: Removed `!important` from base state `.primary-btn` so `:hover` turns white cleanly.
+    - `static/js/mail-script.js`: Replaced inline style hacking with standard jQuery `submit.hide()`.
 - **Verification:**
-  - Tested all 14 core routes on `http://localhost:8080/` (Home, themes, CRM, ERP, Todo, Media, static assets) $\rightarrow$ all return 200 OK.
-  - Automated tests: 33 of 33 tests passed in 9.33s.
+  - Ran test suite `.\.venv\Scripts\python.exe manage.py test`: 14 of 14 passed (100% green).
+  - Validated clean staged changes across all 12 application files.
 
 
 

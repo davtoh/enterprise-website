@@ -54,9 +54,11 @@
 /* ==========================================================================
    1. Reusable Button Components
    ========================================================================== */
-.btn-brand-primary {
+.btn-brand-primary,
+a.btn-brand-primary,
+button.btn-brand-primary {
   background: var(--brand-gradient-vibrant);
-  color: #ffffff !important;
+  color: #ffffff;
   border: none;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -67,16 +69,24 @@
   justify-content: center;
 }
 
-.btn-brand-primary:hover {
+.btn-brand-primary:hover,
+a.btn-brand-primary:hover,
+button.btn-brand-primary:hover,
+.btn-brand-primary:focus,
+a.btn-brand-primary:focus,
+button.btn-brand-primary:focus {
   background: var(--brand-gradient-hover);
-  color: #ffffff !important;
+  color: #ffffff;
   transform: translateY(-2px);
   box-shadow: var(--brand-shadow-lg);
+  text-decoration: none;
 }
 
-.btn-brand-outline {
+.btn-brand-outline,
+a.btn-brand-outline,
+button.btn-brand-outline {
   background: transparent;
-  color: var(--brand-primary) !important;
+  color: var(--brand-primary);
   border: 2px solid var(--brand-primary);
   font-weight: 600;
   transition: all 0.3s ease;
@@ -85,17 +95,25 @@
   justify-content: center;
 }
 
-.btn-brand-outline:hover {
+.btn-brand-outline:hover,
+a.btn-brand-outline:hover,
+button.btn-brand-outline:hover,
+.btn-brand-outline:focus,
+a.btn-brand-outline:focus,
+button.btn-brand-outline:focus {
   background: var(--brand-gradient-vibrant);
-  color: #ffffff !important;
+  color: #ffffff;
   border-color: transparent;
   transform: translateY(-2px);
+  text-decoration: none;
 }
 
 /* Hero CTA Button (e.g. 'Explore Services') */
-.btn-hero-cta {
+.btn-hero-cta,
+a.btn-hero-cta,
+button.btn-hero-cta {
   background: #ffffff;
-  color: var(--brand-primary) !important;
+  color: var(--brand-primary);
   border: 2px solid #ffffff;
   font-weight: 700;
   letter-spacing: 0.5px;
@@ -106,12 +124,18 @@
   justify-content: center;
 }
 
-.btn-hero-cta:hover {
+.btn-hero-cta:hover,
+a.btn-hero-cta:hover,
+button.btn-hero-cta:hover,
+.btn-hero-cta:focus,
+a.btn-hero-cta:focus,
+button.btn-hero-cta:focus {
   background: transparent;
-  color: #ffffff !important;
+  color: #ffffff;
   border-color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 6px 25px rgba(255, 255, 255, 0.3);
+  text-decoration: none;
 }
 
 /* ==========================================================================
@@ -148,15 +172,19 @@
   border-radius: 6px;
 }
 
+.navbar.navbar-brand-theme .nav-link:hover,
+.navbar.navbar-brand-theme .nav-link:focus,
 .navbar-brand-theme .nav-link:hover,
 .navbar-brand-theme .nav-link:focus {
-  color: var(--brand-primary) !important;
+  color: var(--brand-primary);
   background-color: rgba(255, 125, 89, 0.08);
 }
 
+.navbar.navbar-brand-theme .nav-item.active .nav-link,
+.navbar.navbar-brand-theme .nav-link.active,
 .navbar-brand-theme .nav-item.active .nav-link,
 .navbar-brand-theme .nav-link.active {
-  color: var(--brand-primary) !important;
+  color: var(--brand-primary);
   font-weight: 600;
   background-color: rgba(255, 125, 89, 0.12);
 }
@@ -200,11 +228,11 @@
 }
 
 .hero-language-picker .form-select {
-  border: none !important;
-  background-color: transparent !important;
+  border: none;
+  background-color: transparent;
   font-weight: 600;
   color: #333333;
   padding-left: 0.5rem;
-  box-shadow: none !important;
+  box-shadow: none;
   cursor: pointer;
 }
