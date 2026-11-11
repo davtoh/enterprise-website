@@ -167,6 +167,39 @@ class TestThemeManagement:
         all_templates = registry.get_all_plugin_templates()
         assert 'todo' in all_templates
 
+    def test_navigation_parity_across_all_themes(self, client):
+        """Verifies that all 3 themes provide complete navigation access including Apps."""
+        for theme in ['bootstrap5', 'tailwind', 'minimal']:
+            response = client.get(f"/?theme={theme}")
+            assert response.status_code == 200
+            content = response.content.decode('utf-8')
+            assert 'href="/about/"' in content, f"About link missing in theme {theme}"
+            assert 'href="/services/"' in content, f"Services link missing in theme {theme}"
+            assert 'href="/products/"' in content, f"Products link missing in theme {theme}"
+            assert 'href="/contact/"' in content, f"Contact link missing in theme {theme}"
+            assert 'href="/todo/"' in content, f"Todo app link missing in theme {theme}"
+            assert 'href="/crm/"' in content, f"CRM app link missing in theme {theme}"
+            assert 'href="/erp/"' in content, f"ERP app link missing in theme {theme}"
+
+    def test_shared_design_tokens_and_adapter_in_all_themes(self, client):
+        """Verifies that theme-tokens.css and theme-adapter.css are linked in all themes."""
+        for theme in ['bootstrap5', 'tailwind', 'minimal']:
+            response = client.get(f"/?theme={theme}")
+            assert response.status_code == 200
+            content = response.content.decode('utf-8')
+            assert 'theme-tokens.css' in content, f"theme-tokens.css not linked in {theme}"
+            assert 'theme-adapter.css' in content, f"theme-adapter.css not linked in {theme}"
+
+    def test_base_main_tag_structure_across_all_themes(self):
+        """Verifies that <main> tags are opened and closed properly in all theme base templates."""
+        for theme in ['bootstrap5', 'tailwind', 'minimal']:
+            set_current_theme(theme)
+            rendered = render_to_string('base.html', {'title': 'Main Tag Test'})
+            assert '<main' in rendered, f"<main> tag missing in theme {theme}"
+            assert '</main>' in rendered, f"</main> closing tag missing in theme {theme}"
+            assert rendered.count('<main') == 1, f"Unexpected <main> count in theme {theme}"
+            assert rendered.count('</main>') == 1, f"Unexpected </main> count in theme {theme}"
+
     def test_zero_custom_modal_hacks_in_task_runner(self, client, staff_user):
         client.force_login(staff_user)
         response = client.get(reverse('task_runner:list'))

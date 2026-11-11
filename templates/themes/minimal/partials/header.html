@@ -40,7 +40,27 @@
           <li><a href="{% url 'home:index' %}">{% trans "Home" %}</a></li>
           <li><a href="{% url 'home:about' %}">{% trans "About" %}</a></li>
           <li><a href="{% url 'home:services' %}">{% trans "Services" %}</a></li>
+          <li><a href="{% url 'home:products' %}">{% trans "Products" %}</a></li>
           <li><a href="{% url 'home:contact' %}">{% trans "Contact" %}</a></li>
+          <!-- Apps Dropdown -->
+          <li class="position-relative" x-data="{ open: false }">
+            <button @click="open = !open" @click.away="open = false" type="button" class="btn btn-outline border-0 py-1 px-2">
+              <span>{% trans "Apps" %}</span> &#9662;
+            </button>
+            <div x-show="open" x-cloak class="dropdown-panel-left">
+              <a href="{% url 'todo:index' %}" class="dropdown-item-link"><i class="fa fa-tasks me-2"></i> {% trans "Todo List" %}</a>
+              <a href="{% url 'polls:index' %}" class="dropdown-item-link"><i class="fa fa-bar-chart me-2"></i> {% trans "Polls" %}</a>
+              <a href="{% url 'crm:dashboard' %}" class="dropdown-item-link"><i class="fa fa-users me-2"></i> {% trans "CRM" %}</a>
+              <a href="{% url 'erp:dashboard' %}" class="dropdown-item-link"><i class="fa fa-cubes me-2"></i> {% trans "ERP" %}</a>
+              <a href="{% url 'intelligent_tracker_hub:dashboard' %}" class="dropdown-item-link"><i class="fa fa-shield me-2"></i> {% trans "Security Hub" %}</a>
+              <a href="{% url 'video_gallery:gallery_list' %}" class="dropdown-item-link"><i class="fa fa-video-camera me-2"></i> {% trans "Media Gallery" %}</a>
+              <a href="{% url 'webprogram:index' %}" class="dropdown-item-link"><i class="fa fa-code me-2"></i> {% trans "Brython WebProgram" %}</a>
+              <a href="/rest_api/" class="dropdown-item-link"><i class="fa fa-cogs me-2"></i> {% trans "REST API" %}</a>
+              <a href="{% url 'task_runner:list' %}" class="dropdown-item-link"><i class="fa fa-terminal me-2"></i> {% trans "Background Tasks" %}</a>
+              <hr class="m-1 border-top border-light">
+              <a href="{% url 'admin:index' %}" class="dropdown-item-link"><i class="fa fa-shield me-2"></i> {% trans "Site Admin" %}</a>
+            </div>
+          </li>
         {% endif %}
       </ul>
 

@@ -55,6 +55,54 @@
           <a href="{% url 'home:services' %}" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand-600">{% trans "Services" %}</a>
           <a href="{% url 'home:products' %}" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand-600">{% trans "Products" %}</a>
           <a href="{% url 'home:contact' %}" class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-brand-600">{% trans "Contact" %}</a>
+          <!-- Apps Dropdown -->
+          <div class="relative" x-data="{ open: false }">
+            <button 
+              @click="open = !open" 
+              @click.away="open = false" 
+              type="button" 
+              class="text-gray-700 hover:text-brand-600 px-3 py-2 text-sm font-medium inline-flex items-center">
+              <span>{% trans "Apps" %}</span>
+              <i class="fa fa-chevron-down ml-1.5 text-xs text-gray-400"></i>
+            </button>
+            <div 
+              x-show="open" 
+              x-transition
+              class="origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 py-1"
+              x-cloak>
+              <a href="{% url 'todo:index' %}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <i class="fa fa-tasks mr-2 text-brand-600"></i><span>{% trans "Todo List" %}</span>
+              </a>
+              <a href="{% url 'polls:index' %}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <i class="fa fa-bar-chart mr-2 text-brand-600"></i><span>{% trans "Polls" %}</span>
+              </a>
+              <a href="{% url 'crm:dashboard' %}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <i class="fa fa-users mr-2 text-brand-600"></i><span>{% trans "CRM" %}</span>
+              </a>
+              <a href="{% url 'erp:dashboard' %}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <i class="fa fa-cubes mr-2 text-brand-600"></i><span>{% trans "ERP" %}</span>
+              </a>
+              <a href="{% url 'intelligent_tracker_hub:dashboard' %}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <i class="fa fa-shield mr-2 text-brand-600"></i><span>{% trans "Security Hub" %}</span>
+              </a>
+              <a href="{% url 'video_gallery:gallery_list' %}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <i class="fa fa-video-camera mr-2 text-brand-600"></i><span>{% trans "Media Gallery" %}</span>
+              </a>
+              <a href="{% url 'webprogram:index' %}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <i class="fa fa-code mr-2 text-brand-600"></i><span>{% trans "Brython WebProgram" %}</span>
+              </a>
+              <a href="/rest_api/" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <i class="fa fa-cogs mr-2 text-brand-600"></i><span>{% trans "REST API" %}</span>
+              </a>
+              <a href="{% url 'task_runner:list' %}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <i class="fa fa-terminal mr-2 text-brand-600"></i><span>{% trans "Background Tasks" %}</span>
+              </a>
+              <div class="border-t border-gray-100 my-1"></div>
+              <a href="{% url 'admin:index' %}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                <i class="fa fa-shield mr-2 text-gray-400"></i><span>{% trans "Site Admin" %}</span>
+              </a>
+            </div>
+          </div>
         {% endif %}
       </nav>
 
@@ -156,6 +204,21 @@
           {% if nav_item.icon %}<i class="{{ nav_item.icon }} mr-2"></i>{% endif %}{% trans nav_item.title %}
         </a>
       {% endfor %}
+    {% else %}
+      <a href="{% url 'home:index' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">{% trans "Home" %}</a>
+      <a href="{% url 'home:about' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">{% trans "About Us" %}</a>
+      <a href="{% url 'home:services' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">{% trans "Services" %}</a>
+      <a href="{% url 'home:products' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">{% trans "Products" %}</a>
+      <a href="{% url 'home:contact' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">{% trans "Contact" %}</a>
+      <div class="border-t border-gray-100 my-1 pt-1">
+        <span class="block px-3 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">{% trans "Apps" %}</span>
+        <a href="{% url 'todo:index' %}" class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-50"><i class="fa fa-tasks mr-2 text-brand-600"></i>{% trans "Todo List" %}</a>
+        <a href="{% url 'polls:index' %}" class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-50"><i class="fa fa-bar-chart mr-2 text-brand-600"></i>{% trans "Polls" %}</a>
+        <a href="{% url 'crm:dashboard' %}" class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-50"><i class="fa fa-users mr-2 text-brand-600"></i>{% trans "CRM" %}</a>
+        <a href="{% url 'erp:dashboard' %}" class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-50"><i class="fa fa-cubes mr-2 text-brand-600"></i>{% trans "ERP" %}</a>
+        <a href="{% url 'intelligent_tracker_hub:dashboard' %}" class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-50"><i class="fa fa-shield mr-2 text-brand-600"></i>{% trans "Security Hub" %}</a>
+        <a href="{% url 'task_runner:list' %}" class="block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-50"><i class="fa fa-terminal mr-2 text-brand-600"></i>{% trans "Background Tasks" %}</a>
+      </div>
     {% endif %}
     <div class="pt-4 border-t border-gray-200">
       {% include 'partials/theme_selector.html' %}

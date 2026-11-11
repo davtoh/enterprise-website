@@ -1,4 +1,8 @@
 {% load static %}
+<!-- Reusable Design Tokens & Shared Grid Adapter -->
+<link rel="stylesheet" href="{% static 'css/theme-tokens.css' %}">
+<link rel="stylesheet" href="{% static 'css/theme-adapter.css' %}">
+
 <!-- Tailwind CSS via CDN with Typography & Forms plugins -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -8,11 +12,14 @@
       extend: {
         colors: {
           brand: {
-            50: '#f0f4ff',
-            100: '#d9e2ff',
-            500: '#3b82f6',
-            600: '#2563eb',
-            700: '#1d4ed8',
+            50: '#fff8f5',
+            100: '#ffe38c',
+            200: '#ffd0b8',
+            500: '#ffa98c',
+            600: '#ff7d59',
+            700: '#e8633d',
+            800: '#c84e2b',
+            900: '#222222',
           }
         },
         fontFamily: {
@@ -23,21 +30,16 @@
   }
 </script>
 
-<!-- Google Font -->
+<!-- Google Font & Icons -->
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-
 <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 
 <style>
   [x-cloak] {
     display: none !important;
   }
-  /* Tailwind compatibility utilities for Django form elements and cards */
-  .card {
-    background-color: #ffffff;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  }
+
+  /* Tailwind compatibility utilities for Django form elements and buttons */
   .table {
     width: 100%;
     border-collapse: collapse;
@@ -59,14 +61,16 @@
     text-decoration: none;
   }
   .btn-primary {
-    background-color: #2563eb;
+    background-color: var(--color-primary, #ff7d59);
     color: #ffffff;
+    border: 1px solid transparent;
   }
   .btn-primary:hover {
-    background-color: #1d4ed8;
+    background-color: var(--brand-primary-hover, #e8633d);
+    color: #ffffff;
   }
   .btn-secondary {
-    background-color: #6b7280;
+    background-color: #64748b;
     color: #ffffff;
   }
   .btn-success {
@@ -78,12 +82,21 @@
     color: #ffffff;
   }
   .btn-outline-primary {
-    border: 1px solid #2563eb;
-    color: #2563eb;
+    border: 1px solid var(--color-primary, #ff7d59);
+    color: var(--color-primary, #ff7d59);
+    background-color: transparent;
   }
   .btn-outline-primary:hover {
-    background-color: #2563eb;
+    background-color: var(--color-primary, #ff7d59);
     color: #ffffff;
+  }
+  .btn-outline-secondary {
+    border: 1px solid #d1d5db;
+    color: #4b5563;
+    background-color: transparent;
+  }
+  .btn-outline-secondary:hover {
+    background-color: #f3f4f6;
   }
   .form-control, .form-select {
     width: 100%;
@@ -110,7 +123,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #2563eb;
+    background-color: var(--color-primary, #ff7d59);
     color: #ffffff;
   }
 </style>

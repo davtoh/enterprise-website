@@ -1293,5 +1293,45 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - Unit tests: 21 of 21 tests passed (`pytest tests/test_language_management.py language_management/tests.py`).
   - Django system check: 0 issues identified.
 
+---
 
+## [Theme Architecture Elevation & SOTA Grid Adapter] - Multi-Theme Parity (Tailwind CSS & Minimal Semantic)
+- **Date:** 2026-11-09
+- **Status:** **COMPLETE**
+- **Skills Invoked:** `/frontier-architect` + `/modern-web-guidance`
+- **Context & Motivation:**
+  - Evaluated visual and structural disparity across the multi-theme architecture: Bootstrap 5.3 rendered structured layouts, while Tailwind CSS and Minimal Semantic suffered from unstyled multi-column cards, missing brand tokens, and absent "Apps" navigation.
+- **Architectural Analysis (Structural Choice vs. Maintenance Gap):**
+  - **Structural Choice (DRY):** Preserved shared application templates across all apps (Home, CRM, ERP, Todo, User Management) rather than duplicating 50+ templates per framework.
+  - **Maintenance Gap Resolved:** Implemented a modern CSS layout adapter (`theme-adapter.css`) using `@layer theme-adapter` to map standard 12-column grid (`.row`, `.col-*`, `.g-1`..`.g-5`), `.list-group`, `.card`, subtle badges (`.bg-*-subtle`), and KPI border accents (`.border-start .border-4`) directly into native CSS Flexbox/Grid.
+- **Key Enhancements Implemented:**
+  - **Shared Design Tokens (`static/css/theme-tokens.css`):**
+    - Expanded central token system with semantic system color variables (`--color-primary`, `--color-primary-subtle`, `--color-success-subtle`, `--color-info-subtle`, etc.) as the Single Source of Truth (SSOT) across all 3 themes.
+  - **Zero-Dependency Modern CSS Adapter (`static/css/theme-adapter.css`):**
+    - Lightweight stylesheet (214 lines, well within 350-line budget) implementing responsive breakpoints (`sm`, `md`, `lg`, `xl`), `.row`, `.col-*`, `.card-body`, `.list-group`, subtle status badges, and elevation utilities.
+  - **Tailwind CSS Theme (`templates/themes/tailwind/`):**
+    - Linked `theme-tokens.css` and `theme-adapter.css` in `partials/styles.html`.
+    - Configured `tailwind.config` to inherit brand color tokens (`brand-50` through `brand-900`).
+    - Added full "Apps" dropdown menu (Todo, Polls, CRM, ERP, Security Hub, Media Gallery, Brython, REST API, Background Tasks, Site Admin) in desktop and mobile off-canvas drawer using Alpine.js.
+  - **Minimal Semantic Theme (`templates/themes/minimal/`):**
+    - Linked `theme-tokens.css` and `theme-adapter.css` in `partials/styles.html`.
+    - Modernized typography, form elements, and card spacing with semantic CSS custom properties.
+    - Added "Products" link and the full "Apps" dropdown menu with Alpine.js dropdown panels in `partials/header.html`.
+  - **Bootstrap 5 Base Template Syntax Fix:**
+    - Corrected unclosed `</main>` tag in `templates/themes/bootstrap5/base.html` by opening `<main class="flex-grow-1 site-main">`.
+- **Files Created / Modified:**
+  - `static/css/theme-adapter.css` (created: 214 lines)
+  - `static/css/theme-tokens.css` (expanded with semantic subtle colors)
+  - `templates/themes/bootstrap5/base.html` (fixed unclosed `<main>` tag)
+  - `templates/themes/bootstrap5/partials/styles.html` (linked theme-adapter.css)
+  - `templates/themes/tailwind/partials/styles.html` (linked tokens & adapter, brand colors)
+  - `templates/themes/tailwind/partials/header.html` (added Apps dropdown desktop/mobile)
+  - `templates/themes/minimal/partials/styles.html` (linked tokens & adapter, clean styles)
+  - `templates/themes/minimal/partials/header.html` (added Products & Apps dropdown)
+  - `tests/test_theme_management.py` (added 3 new tests: navigation parity, shared tokens/adapter, balanced main tags)
+  - `MIGRATION_LOG.md` (updated progress log)
+- **Verification & Test Outcomes:**
+  - Unit tests in `tests/test_theme_management.py`: **20 of 20 passed in 4.14s** (100% green).
+  - Navigation parity verified across all 3 themes for Home, About, Services, Products, Contact, Todo, CRM, ERP.
+  - Balanced `<main>` tags verified across all 3 theme base templates.
 

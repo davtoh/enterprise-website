@@ -15,6 +15,26 @@
   --brand-dark: #222222;
   --brand-light: #fff8f5;
 
+  /* Semantic System Color Palette (Cross-Theme SSOT) */
+  --color-primary: #ff7d59;
+  --color-primary-rgb: 255, 125, 89;
+  --color-primary-subtle: #fff1ec;
+  --color-success: #16a34a;
+  --color-success-subtle: #dcfce7;
+  --color-info: #0284c7;
+  --color-info-subtle: #e0f2fe;
+  --color-warning: #d97706;
+  --color-warning-subtle: #fef3c7;
+  --color-danger: #dc2626;
+  --color-danger-subtle: #fee2e2;
+  --color-secondary: #64748b;
+  --color-secondary-subtle: #f1f5f9;
+  --color-surface: #ffffff;
+  --color-bg: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+
   /* Brand Gradients */
   --brand-gradient: linear-gradient(135deg, #ffa98c 0%, #ffe38c 100%);
   --brand-gradient-vibrant: linear-gradient(135deg, #ff7d59 0%, #ffa98c 50%, #ffe38c 100%);
