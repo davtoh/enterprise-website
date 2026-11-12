@@ -8,7 +8,14 @@
 <script>
   tailwind.config = {
     darkMode: 'class',
+    corePlugins: {
+      preflight: false,
+    },
     theme: {
+      container: {
+        center: true,
+        padding: '1rem',
+      },
       extend: {
         colors: {
           brand: {
@@ -39,91 +46,137 @@
     display: none !important;
   }
 
-  /* Tailwind compatibility utilities for Django form elements and buttons */
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  .table th, .table td {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #e5e7eb;
-  }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border-radius: 0.375rem;
-    transition: all 0.15s ease-in-out;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  .btn-primary {
-    background-color: var(--color-primary, #ff7d59);
-    color: #ffffff;
-    border: 1px solid transparent;
-  }
-  .btn-primary:hover {
-    background-color: var(--brand-primary-hover, #e8633d);
-    color: #ffffff;
-  }
-  .btn-secondary {
-    background-color: #64748b;
-    color: #ffffff;
-  }
-  .btn-success {
-    background-color: #16a34a;
-    color: #ffffff;
-  }
-  .btn-danger {
-    background-color: #dc2626;
-    color: #ffffff;
-  }
-  .btn-outline-primary {
-    border: 1px solid var(--color-primary, #ff7d59);
-    color: var(--color-primary, #ff7d59);
-    background-color: transparent;
-  }
-  .btn-outline-primary:hover {
-    background-color: var(--color-primary, #ff7d59);
-    color: #ffffff;
-  }
-  .btn-outline-secondary {
-    border: 1px solid #d1d5db;
-    color: #4b5563;
-    background-color: transparent;
-  }
-  .btn-outline-secondary:hover {
-    background-color: #f3f4f6;
-  }
-  .form-control, .form-select {
-    width: 100%;
-    padding: 0.5rem 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-  }
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    border-radius: 9999px;
-  }
-  .progress {
-    height: 1rem;
-    overflow: hidden;
-    background-color: #e5e7eb;
-    border-radius: 0.375rem;
-  }
-  .progress-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-primary, #ff7d59);
-    color: #ffffff;
+  /* Tailwind Preflight + Bootstrap compatibility elements scoped to @layer framework
+     so @layer adapter, @layer components, and @layer utilities override without !important */
+  @layer framework {
+    *, ::after, ::before { box-sizing: border-box; border-width: 0; border-style: solid; border-color: #e5e7eb; }
+    ::after, ::before { --tw-content: ''; }
+    :host, html { line-height: 1.5; -webkit-text-size-adjust: 100%; -moz-tab-size: 4; tab-size: 4; font-family: Poppins, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { margin: 0; line-height: inherit; }
+    hr { height: 0; color: inherit; border-top-width: 1px; }
+    h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+    a { color: inherit; text-decoration: inherit; }
+    b, strong { font-weight: bolder; }
+    small { font-size: 80%; }
+    table { text-indent: 0; border-color: inherit; border-collapse: collapse; }
+    button, input, optgroup, select, textarea { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; letter-spacing: inherit; color: inherit; margin: 0; padding: 0; }
+    button, select { text-transform: none; }
+    button, input:where([type=button]), input:where([type=reset]), input:where([type=submit]) { -webkit-appearance: button; background-color: transparent; background-image: none; }
+    blockquote, dd, dl, figure, h1, h2, h3, h4, h5, h6, hr, p, pre { margin: 0; }
+    fieldset { margin: 0; padding: 0; }
+    legend { padding: 0; }
+    menu, ol, ul { list-style: none; margin: 0; padding: 0; }
+    textarea { resize: vertical; }
+    input::placeholder, textarea::placeholder { opacity: 1; color: #9ca3af; }
+    [role=button], button { cursor: pointer; }
+    :disabled { cursor: default; }
+    audio, canvas, embed, iframe, img, object, svg, video { display: block; vertical-align: middle; }
+    img, video { max-width: 100%; height: auto; }
+    [hidden]:where(:not([hidden=until-found])) { display: none; }
+
+    /* Tailwind compatibility utilities for Django form elements and buttons */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 0.375rem;
+      transition: all 0.15s ease-in-out;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary, #ff7d59);
+      color: #ffffff;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brand-primary-hover, #e8633d);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background-color: #64748b;
+      color: #ffffff;
+    }
+
+    .btn-success {
+      background-color: #16a34a;
+      color: #ffffff;
+    }
+
+    .btn-danger {
+      background-color: #dc2626;
+      color: #ffffff;
+    }
+
+    .btn-outline-primary {
+      border: 1px solid var(--color-primary, #ff7d59);
+      color: var(--color-primary, #ff7d59);
+      background-color: transparent;
+    }
+
+    .btn-outline-primary:hover {
+      background-color: var(--color-primary, #ff7d59);
+      color: #ffffff;
+    }
+
+    .btn-outline-secondary {
+      border: 1px solid #d1d5db;
+      color: #4b5563;
+      background-color: transparent;
+    }
+
+    .btn-outline-secondary:hover {
+      background-color: #f3f4f6;
+    }
+
+    .form-control,
+    .form-select {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 9999px;
+    }
+
+    .progress {
+      height: 1rem;
+      overflow: hidden;
+      background-color: #e5e7eb;
+      border-radius: 0.375rem;
+    }
+
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-primary, #ff7d59);
+      color: #ffffff;
+    }
   }
 </style>
