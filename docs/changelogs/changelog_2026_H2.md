@@ -1,309 +1,6 @@
-# Project Modernization & Migration Log
+<!-- AI AGENT NOTICE: Historical archive only. DO NOT read this file unless explicitly asked to research past migrations. -->
 
-This log tracks all architectural updates, bug fixes, route modernizations, and security enhancements for **Enterprise Website**. It serves as a persistent checkpoint across AI sessions, token windows, and development milestones.
-
----
-
-## [Milestone 1] - AI Rules & Standardization Setup
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Establish workspace and global AI guidelines for comment preservation, persistent task logging, milestone review workflow, and security standards.
-- **Files Created / Modified:**
-  - `AGENTS.md`: Workspace root guidelines.
-  - `.agents/rules/comment_preservation.md`: Reference preservation rules.
-  - `.agents/rules/task_logging.md`: Persistent task/migration log rules.
-  - `.agents/rules/milestone_workflow.md`: Milestone review protocol.
-  - `.agents/rules/security_and_standards.md`: OWASP and cross-platform standards.
-  - `documentation/GLOBAL_AI_RULES.md`: Ready-to-copy standard rule for `~/.gemini/config/rules/` and other migration projects.
-  - `MIGRATION_LOG.md`: Initialized persistent task tracking log.
-- **Verification:**
-  - Files created in standard `.agents/rules` and root `AGENTS.md` format.
-
----
-
-## [Milestone 2] - Navigation & Page Routes Modernization
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Fix broken navigation links in `templates/base.html` that previously pointed to static `about.html`, `services.html`, `products.html`, `contact.html`.
-  - Implement Class-Based Views and responsive templates in `home` app for About Us, Services, Products, and Contact.
-  - Add routes supporting both standard URLs (`/about/`) and legacy paths (`/about.html`, etc.) for seamless backwards compatibility.
-  - Add an "Apps" dropdown in the navbar linking directly to the interactive modules:
-    - Todo (`/todo/`)
-    - Polls (`/polls/`)
-    - Brython WebProgram (`/webprogram/`)
-    - REST API (`/rest_api/`)
-    - Django Admin (`/admin/`)
-  - Update brand logo link to dynamic `{% url 'home:index' %}`.
-  - Update `home/templates/home/index.html` buttons and footer links to route to active Django views.
-- **Files Created / Modified:**
-  - `templates/base.html`
-  - `home/urls.py`
-  - `home/views.py`
-  - `home/templates/home/about.html`
-  - `home/templates/home/services.html`
-  - `home/templates/home/products.html`
-  - `home/templates/home/contact.html`
-  - `home/templates/home/index.html`
-- **Verification:**
-  - Automated route checks verified HTTP 200 for all standard and `.html` paths (`/`, `/index.html`, `/about/`, `/about.html`, `/services/`, `/services.html`, `/products/`, `/products.html`, `/contact/`, `/contact.html`).
-
----
-
-## [Milestone 3] - Logic Fixes, Auth Modernization & Security Hardening
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Fix `user_management/views.py`:
-    - Fixed base64 encoding/decoding compatibility for Django 3+ / 5.x in `send_account_activation_email` and `activate_user_account`.
-    - Fixed activation template path to `emails/user_management/activation.html`.
-    - Corrected broken reverse namespaces (`app:activate_user_account` -> `user_management:activate_user_account`, `hr:user_profile` -> `user_management:profile`).
-    - Handled Django 5 `LogoutView` POST-by-default requirement gracefully with `http_method_names = ['get', 'post', 'options']` while adding a secure CSRF POST logout form in the navbar.
-    - Updated `SiteUserProfileView` and `SiteUserUpdateView` with `LoginRequiredMixin` and `get_object()` returning `request.user` so `/accounts/profile/` functions without requiring a PK in the URL.
-    - Created `user_management/templates/user_management/profile.html`, `logout.html`, and `siteuser_list.html`.
-  - Fix `todo/views.py` and templates:
-    - Replaced hard-crashing `Todo.objects.get()` with `get_object_or_404(Todo, id=id)`.
-    - Sanitized `add` view with empty-title validation and error alerts.
-    - Replaced typographical quotes (`”`) with standard double quotes (`"`) in `todo/templates/todo/index.html`.
-    - Enhanced card layout in `todo/templates/todo/add.html` and `details.html` while preserving all timezone test tags and developer reference comments.
-  - Fix `polls/templates`:
-    - Wrapped `polls/index.html`, `detail.html`, and `results.html` in clean card containers compatible with `base.html`.
-- **Files Created / Modified:**
-  - `user_management/views.py`
-  - `user_management/templates/user_management/profile.html`
-  - `user_management/templates/user_management/logout.html`
-  - `user_management/templates/user_management/siteuser_list.html`
-  - `todo/views.py`
-  - `todo/templates/todo/index.html`
-  - `todo/templates/todo/add.html`
-  - `todo/templates/todo/details.html`
-  - `polls/templates/polls/index.html`
-  - `polls/templates/polls/detail.html`
-  - `polls/templates/polls/results.html`
-- **Verification:**
-  - `manage.py check` passes with 0 issues.
-  - Test client verified HTTP 200 on GET and 302 on POST for `/accounts/logout/`.
-  - Full route matrix verified across all apps with HTTP 200 / 302.
-
----
-
-## [Milestone 4] - Messages Refactoring & Environment Execution Standards
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Refactor `templates/partials/messages.html`:
-    - Remove hardcoded test alerts and restore dynamic Django message rendering loop (`{% if messages %} ... {% endif %}`).
-    - Eliminate hacky `!important`, full-screen viewport taking `min-height: 100vh`, and intrusive high z-index overlay.
-    - Implement clean Bootstrap alerts with gentle drop shadow, dismiss button, and 6-second auto-dismiss.
-  - Document Environment & Execution Standards:
-    - Eliminate command discovery friction by clearly defining the local virtual environment at `.\.venv\Scripts\python.exe` (and pip at `.\.venv\Scripts\pip.exe`).
-    - Explain that global Windows PATH points to an unconfigured Python stub without project packages installed.
-    - Clarify authentication architecture: custom user model `user_management.SiteUser`, separation of front-end `/accounts/login/` vs `/admin/login/` (`is_staff=True`), and how to inspect/create default users.
-    - Persist these rules across `.agents/rules/environment_and_execution.md` and root `AGENTS.md`.
-- **Files Created / Modified:**
-  - `templates/partials/messages.html`
-  - `.agents/rules/environment_and_execution.md`
-  - `AGENTS.md`
-  - `MIGRATION_LOG.md`
-- **Verification:**
-  - Verified `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
-  - Confirmed `templates/partials/messages.html` renders only when messages exist and without intrusive CSS overrides.
-
----
-
-## [Milestone 5] - Full Application Flash Messaging Integration
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Wire Django messages framework across all critical user interactions:
-    - **Login (`user_management.views.LoginView`)**:
-      - `form_valid`: Displays `messages.success` greeting the user by name upon successful login.
-      - `form_invalid`: Displays `messages.error` ("Invalid username or password. Please check your credentials and try again.").
-    - **Logout (`user_management.views.LogoutView`)**:
-      - `dispatch`: Displays `messages.info` ("You have been successfully logged out. See you soon!").
-    - **Sign Up / Registration (`user_management.views.SignUpView`)**:
-      - `form_valid`: Displays `messages.success` notifying account creation and prompting login.
-      - `form_invalid`: Displays `messages.error` prompting correction of registration errors.
-    - **Account Activation (`user_management.views.activate_user_account`)**:
-      - Success: Displays `messages.success` and redirects to profile.
-      - Expired/Invalid token: Displays `messages.error` and redirects cleanly to `/accounts/login/` instead of raw plain-text HTTP response.
-    - **Profile Updates (`user_management.views.SiteUserUpdateView`)**:
-      - `form_valid`: Displays `messages.success` on profile changes.
-      - `form_invalid`: Displays `messages.error` if profile validation fails.
-    - **Polls Voting (`polls.views.vote`)**:
-      - No selection: Displays `messages.warning` ("Please select an option before submitting your vote.").
-      - Vote cast: Displays `messages.success` confirming recorded vote.
-- **Files Created / Modified:**
-  - `user_management/views.py`
-  - `polls/views.py`
-  - `templates/partials/messages.html`
-  - `MIGRATION_LOG.md`
-- **Verification:**
-  - Verified `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
-  - Tested template tag parsing in `messages.html` to support both `alert-` prefixed tags and bare tags (`error`, `warning`, `success`, `info`).
-
----
-
-## [Milestone 6] - Internationalization (i18n), Rosetta Mapping & Automated Translation Baseline
-- **Date:** 2026-10-21
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - **AI & Project Rule Updates:**
-    - Created [`.agents/rules/rosetta_and_i18n.md`](file:///g:/Mi%20unidad/projects/web_and_services/enterprise_website/.agents/rules/rosetta_and_i18n.md) defining strict i18n and Rosetta standards for all new templates, models, and views.
-    - Updated [`AGENTS.md`](file:///g:/Mi%20unidad/projects/web_and_services/enterprise_website/AGENTS.md) with **Section 6: Internationalization (i18n) & Rosetta Translation**.
-  - **Rosetta & Machine Translation Settings:**
-    - Configured `django.template.context_processors.i18n` in `TEMPLATES['OPTIONS']['context_processors']` within `enterprise_website/settings.py`.
-    - Enabled `ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True` and added optional API keys (`DEEPL_AUTH_KEY`, `OPENAI_API_KEY`, `AZURE_CLIENT_SECRET`, `GOOGLE_APPLICATION_CREDENTIALS_PATH`) in `enterprise_website/settings.py` and `.env.example`.
-  - **Comprehensive Codebase Mapping & Translation Tagging:**
-    - Mapped and wrapped all untranslated strings across:
-      - Core layout: `templates/base.html`, `templates/admin/base_site.html`, `templates/signup.html`, `templates/base_form.html`, `templates/registration/logged_out.html`.
-      - Home App: `index.html`, `about.html`, `services.html`, `products.html`, `contact.html`, and contact flash messages in `home/views.py`.
-      - User Management App: `login.html`, `logout.html`, `profile.html`, `siteuser_list.html`, `signup.html`, `upload_image_form.html`, password reset templates (`password_reset_form.html`, `password_reset_done.html`, `password_reset_confirm.html`, `password_reset_complete.html`, `password_reset_email.html`), activation email (`activation.html`), `user_management/forms.py` (image validation, birthdate validation, ImageUploadForm label), and all authentication flash messages in `user_management/views.py`.
-      - Todo App: model verbose names in `todo/models.py`, task messages in `todo/views.py`, and templates (`index.html`, `add.html`, `details.html`).
-      - Polls App: model verbose names in `polls/models.py`, vote messages in `polls/views.py`, and templates (`index.html`, `detail.html`, `results.html`).
-      - Timezone Management: `timezone_management/templates/timezone_management/select.html`.
-      - Language Management: `language_management/views.py`.
-  - **Catalog Extraction:**
-    - Executed `.\.venv\Scripts\python.exe manage.py makemessages --all --ignore=.venv`.
-    - Total catalog strings increased from 49 to 278 across all 5 target locales (`es`, `fr`, `it`, `ja`, `pt`).
-  - **Automated Baseline Translation Tooling:**
-    - Built custom Django management command: `python manage.py auto_translate` (`language_management/management/commands/auto_translate.py`).
-    - Features:
-      - Multi-backend translation: MyMemory (free tier, no API key needed), DeepL (`DEEPL_AUTH_KEY`), OpenAI (`OPENAI_API_KEY`).
-      - Format specifier protection: Replaces `%(var)s`, `%s`, `{{ var }}`, `{% tag %}` with safe placeholder tokens during translation and safely restores them.
-      - Rosetta workflow integration: Automatically tags machine-generated translations with the `fuzzy` flag so human translators can easily filter and review them in `/rosetta/`.
-      - Automatically fixes mismatched gettext fuzzy guesses from obsolete strings.
-      - Automatically triggers `compilemessages --ignore=.venv`.
-- **Files Created / Modified:**
-  - `.agents/rules/rosetta_and_i18n.md`
-  - `AGENTS.md`
-  - `enterprise_website/settings.py`
-  - `.env.example`
-  - `language_management/management/commands/auto_translate.py`
-  - `templates/base.html`, `templates/admin/base_site.html`, `templates/signup.html`, `templates/base_form.html`, `templates/registration/logged_out.html`, `templates/registration/password_reset_email.html`
-  - `home/templates/home/` (index, about, services, products, contact) & `home/views.py`
-  - `user_management/templates/user_management/` (all templates), `user_management/forms.py`, `user_management/views.py`
-  - `todo/models.py`, `todo/views.py`, `todo/templates/todo/`
-  - `polls/models.py`, `polls/views.py`, `polls/templates/polls/`
-  - `timezone_management/templates/timezone_management/select.html`
-  - `language_management/views.py`
-  - `locale/` (PO catalogs for `es`, `fr`, `it`, `ja`, `pt`)
-  - `MIGRATION_LOG.md`
-- **Verification:**
-  - Ran `.\.venv\Scripts\python.exe manage.py check` -> 0 issues.
-  - Ran `makemessages` -> 278 catalog entries created.
-  - Tested `auto_translate` command with MyMemory and placeholder protection.
-  - Verified `compilemessages --ignore=.venv` succeeds across all 5 languages.
-
----
-
-## [Milestone 7] - Documentation Consolidation & System Operations Manual
-- **Date:** 2026-10-21
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - **Single Root README Consolidation:**
-    - Consolidated all relevant legacy setup instructions, production MySQL configurations, data fixtures, and project purpose from `README.rst` into `README.md`.
-    - Removed redundant root `README.rst` to maintain a single source of truth (`README.md`).
-  - **Comprehensive System Manual Creation:**
-    - Created [`documentation/README.md`](file:///g:/Mi%20unidad/projects/web_and_services/enterprise_website/documentation/README.md) detailing:
-      - Project executive summary, purpose, and value proposition.
-      - Full architectural directory breakdown across all apps (`home`, `user_management`, `todo`, `polls`, `language_management`, `location_management`, `timezone_management`, `rest_api`, `webprogram`, `custom_tags`).
-      - Detailed feature descriptions for each module.
-      - System workflows with Mermaid diagrams (Authentication lifecycle, i18n & Rosetta translation pipeline, Geo-data ingestion, and Polling/voting).
-      - Step-by-step commands guide for virtual environments, migrations, fixtures (`populate_users --test`), location databases (`populate_locations`), and poll management (`closepoll`).
-      - Full commands reference for translation tooling (`makemessages`, `auto_translate` with all backend and flag variations, and `compilemessages`).
-      - Windows GNU gettext installation instructions (`mlocati`).
-      - Production database configuration (MySQL / PostgreSQL) and Daphne ASGI deployment.
-  - **Root Documentation References:**
-    - Added direct references and links to `documentation/README.md` within root `README.md`.
-    - Added Operations & Maintenance command cheat sheet to `README.md`.
-- **Files Created / Modified:**
-  - `documentation/README.md` (created)
-  - `README.md` (updated & consolidated)
-  - `README.rst` (deleted)
-  - `MIGRATION_LOG.md` (updated)
-- **Verification:**
-  - Verified `README.rst` deleted (`Test-Path README.rst` -> `False`).
-  - Verified markdown links and formatting in `README.md` and `documentation/README.md`.
-  - Ran `.\.venv\Scripts\python.exe manage.py check` to ensure zero regressions.
-
----
-
-## [Milestone 8] - Plugin Registry & Dynamic Menus System
-- **Date:** 2026-10-22
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Build `plugin_registry` Django application with `AppPlugin` base interface and `registry.autodiscover()`.
-  - Build `menu_management` Django application with `Menu` and `MenuItem` models supporting hierarchy, URL reverse resolution, permission checks, and plugin origin tracking.
-  - Create `sync_menus` command and admin action to synchronize discovered `AppPlugin` definitions into active database menus without overriding manual user customizations.
-  - Implement `dynamic_menu` context processor injecting structured tree `main_navigation` into all templates.
-  - Update `templates/base.html` to render the dynamic navigation menu with graceful static fallback.
-  - Register `home`, `todo`, `polls`, `webprogram`, and `rest_api` apps with `plugin.py` implementations.
-  - Add `documentation/plugin_system.md` detailing plugin creation and menu management workflows.
-- **Files Created / Modified:**
-  - `plugin_registry/` (`base.py`, `registry.py`, `apps.py`, `__init__.py`)
-  - `menu_management/` (`models.py`, `apps.py`, `admin.py`, `context_processors.py`, `sync.py`, `management/commands/sync_menus.py`, `migrations/0001_initial.py`)
-  - `home/plugin.py`, `todo/plugin.py`, `polls/plugin.py`, `webprogram/plugin.py`, `rest_api/plugin.py`
-  - `enterprise_website/settings.py` (registered apps, added context processor, added `testserver` to `ALLOWED_HOSTS`)
-  - `templates/base.html` (dynamic menu loop)
-  - `documentation/plugin_system.md`
-  - `MIGRATION_LOG.md`
-- **Verification:**
-  - `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
-  - `.\.venv\Scripts\python.exe manage.py migrate` executed cleanly.
-  - `.\.venv\Scripts\python.exe manage.py sync_menus` successfully populated `main_navbar`.
-  - Django test client verified HTTP 200 on `/` with all 6 root navigation items and 4 child items under "Apps".
-
----
-
-## [Milestone 9] - Automated Test Suite & Code Quality Hardening
-- **Date:** 2026-10-22
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Configure `pytest-django` testing framework via `pytest.ini` and coverage runner via `.coveragerc`.
-  - Update `requirements/local.txt` to include `pytest-cov>=4.1.0` alongside `pytest` and `pytest-django`.
-  - Build comprehensive, isolated unit and integration test modules across all applications:
-    - `tests/test_home.py` (13 tests): verified HTTP 200 for all standard and legacy `.html` routes (`/`, `/about/`, `/services/`, `/products/`, `/contact/`) and contact form submission/validation.
-    - `tests/test_user_management.py` (17 tests): verified user signup, login, GET/POST logout, profile views, update views, activation token workflow, AJAX location loaders, `populate_users` command, age and birthdate form validation, and model representations.
-    - `tests/test_todo.py` (11 tests): verified list view (empty and populated), authenticated greeting, add form GET/POST, detailed timezone conversion diagnostics, 404 handling, and newly added `delete` route.
-    - `tests/test_polls.py` (15 tests): verified questions filtering (past vs future), detail view, race-condition protected voting (`F('votes') + 1`), error redisplay on missing choices, results view, and `closepoll` command (including `--delete`).
-    - `tests/test_language_management.py` (11 tests): verified index view, Django `/i18n/setlang/` endpoint for multiple languages, placeholder protection engine (`_protect_placeholders`), and translation backends (MyMemory, DeepL, OpenAI).
-    - `tests/test_timezone_management.py` (4 tests): verified `TimezoneMiddleware` activation with `Asia/Tokyo`, deactivation fallback to default, and `set_timezone` view.
-    - `tests/test_plugin_registry.py` (8 tests): verified autodiscovery across all apps, menu hierarchy synchronization, idempotency, URL resolution, permission visibility, and `dynamic_menu` context processor.
-    - `tests/test_rest_api.py` (5 tests): verified API root, paginated users list, user details, and dynamic attribute filtering (`?val=username&val=email`).
-    - `tests/test_webprogram.py` (2 tests): verified Brython WebProgram views.
-    - `tests/test_utils_and_extra.py` (9 tests): verified referer parsing, valid same-host referer, age utility, and avatar image validation (dimensions, format, size limits).
-  - Codebase stabilization fixes implemented during test development:
-    - `user_management/urls.py` & `views.py`: Fixed `activate_user_account` URL parameter names (`uidb64`/`token` vs legacy `slug`/`slug2`) and added fallback kwargs to prevent `NoReverseMatch` and runtime crashes.
-    - `timezone_management/middleware.py` & `views.py`: Eliminated hard crashes on `import pytz` by implementing standard library `zoneinfo` with multi-version fallbacks.
-    - `timezone_management/urls.py` & `enterprise_website/urls.py`: Wired `set_timezone` route into main URLconf at `/tz/set/`.
-    - `todo/views.py` & `urls.py`: Added explicit `delete` view and route (`todo:delete`).
-    - `polls/tests.py`: Modernized legacy `assertQuerysetEqual` calls for Django 5 compatibility.
-    - `user_management/forms.py`: Corrected format specifiers (`%(w)d x %(h)d` and `{max_size}k`) in avatar dimension validation to prevent `ValueError: unsupported format character`.
-    - `user_management/management/commands/populate_users.py`: Wrapped `create_user` calls in `with transaction.atomic():` savepoints to prevent breaking the outer test transaction on `IntegrityError`.
-    - `rest_api/urls.py`: Added `order_by('id')` to `UserViewSet` queryset to eliminate DRF pagination warnings.
-- **Files Created / Modified:**
-  - `.gitignore` (added `.coverage`, `.coverage.*`, `htmlcov/`, `.pytest_cache/`, and untracked legacy `.coverage`)
-  - `requirements/local.txt`
-  - `pytest.ini` (created)
-  - `.coveragerc` (created)
-  - `tests/__init__.py`, `tests/test_home.py`, `tests/test_user_management.py`, `tests/test_todo.py`, `tests/test_polls.py`, `tests/test_language_management.py`, `tests/test_timezone_management.py`, `tests/test_plugin_registry.py`, `tests/test_rest_api.py`, `tests/test_webprogram.py`, `tests/test_utils_and_extra.py`
-  - `user_management/urls.py`, `user_management/views.py`, `user_management/forms.py`, `user_management/management/commands/populate_users.py`
-  - `timezone_management/middleware.py`, `timezone_management/views.py`, `timezone_management/urls.py`
-  - `todo/views.py`, `todo/urls.py`
-  - `polls/tests.py`
-  - `rest_api/urls.py`
-  - `enterprise_website/urls.py`
-  - `milestone_plan.md`
-  - `TODO_MODERNIZATION.md`
-  - `MIGRATION_LOG.md`
-- **Verification:**
-  - `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
-  - `.\.venv\Scripts\python.exe -m pytest` executed cleanly: **106 passed in 22.03s** with **0 failures**.
-  - `.\.venv\Scripts\python.exe -m pytest --cov=. --cov-report=html` achieved **80% total statement coverage** with report generated in `htmlcov/index.html`.
-
----
+# Historical Changelog Archive (2026 H2)
 
 ## [Milestone 10] - Docker, CI/CD & Production Security
 - **Date:** 2026-10-22
@@ -357,13 +54,13 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `TODO_MODERNIZATION.md` (modified)
   - `MIGRATION_LOG.md` (modified)
 - **Verification:**
-  - `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
+  - `python manage.py check` passes with 0 issues.
   - `python manage.py check --deploy` passes with 0 issues in production mode (`$env:DEBUG="False"`).
   - `docker compose config` and `docker compose -f docker-compose.yml config` validate syntax, environment interpolation, and network topology with 0 errors.
   - `manage.py download_geodata --help` functions cleanly.
-  - `.\.venv\Scripts\python.exe -m pytest` executed cleanly: **110 passed in 22.15s** with **0 failures**.
-  - `.\.venv\Scripts\python.exe -m pytest --cov=. --cov-report=html` maintains **80% total statement coverage**.
-  - `docker compose -f docker-compose.yml up -d --build` verified live: all 4 containers (`enterprise_db`, `enterprise_redis`, `enterprise_web`, `enterprise_nginx`) built cleanly, passed health checks, migrated PostgreSQL 16 automatically, synced menus, and served HTTP 200 on `http://localhost/`.
+  - `python -m pytest` executed cleanly: **110 passed in 22.15s** with **0 failures**.
+  - `python -m pytest --cov=. --cov-report=html` maintains **80% total statement coverage**.
+  - `docker compose -f docker-compose.yml up -d --build` verified live: all 4 containers (`enterprise_db`, `enterprise_redis`, `enterprise_web`, `enterprise_nginx`) built cleanly, passed health checks, migrated PostgreSQL 16 automatically, synced menus, and served HTTP 200 on `$APP_URL/`.
   - Static asset delivery verified: updated `docker-entrypoint.sh` to ensure `collectstatic` unconditionally populates `/app/staticfiles` in the shared volume on startup, resolving HTTP 200 for all CSS, JS, and image assets via Nginx.
 
 ---
@@ -426,11 +123,11 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `TODO_MODERNIZATION.md` (modified: executive summary and completed checklist)
   - `MIGRATION_LOG.md` (modified)
 - **Verification:**
-  - `.\.venv\Scripts\python.exe manage.py check` passes with 0 issues.
+  - `python manage.py check` passes with 0 issues.
   - `docker compose config` and `docker compose -f docker-compose.yml config` validate syntax, environment interpolation, and network topology with 0 errors across all 6 services.
   - `manage.py sync_menus` executes cleanly and registers "Background Tasks" under the Apps dropdown.
-  - `.\.venv\Scripts\python.exe -m pytest tests/test_task_runner.py -v` executes cleanly: **18 passed in 7.71s** with **0 failures**.
-  - `.\.venv\Scripts\python.exe -m pytest --cov=. --cov-report=term-missing` executed full suite cleanly: **128 passed in 33.78s** with **0 failures**.
+  - `python -m pytest tests/test_task_runner.py -v` executes cleanly: **18 passed in 7.71s** with **0 failures**.
+  - `python -m pytest --cov=. --cov-report=term-missing` executed full suite cleanly: **128 passed in 33.78s** with **0 failures**.
   - Total statement coverage achieved: **81%** (exceeding the 80% coverage threshold).
 - **Milestone 11 Post-Verification Hardening & Rule Updates:**
   - **Port Policy & Git Isolation:**
@@ -529,16 +226,15 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `task_runner/templates/task_runner/job_list.html`, `job_detail.html`, `task_progress_widget.html`, `change_list.html`, `launch_script.html` (native BS5 modal & zero custom CSS overrides)
   - `user_management/templates/user_management/*` (profile, siteuser_list, login, logout, password reset views modernized to BS5 cards/utilities)
   - `polls/templates/polls/*` (index, detail, results modernized with unified buttons)
-  - `home/templates/home/*` (contact, index, services modernized with hero CTA)
-  - `language_management/templates/language_management/form.html` (Bootstrap 5 select classes)
+  - `home/templates<local_path>` (Bootstrap 5 select classes)
   - `static/css/bootstrap.css` (modernized to Bootstrap 5.3.3)
   - `static/js/vendor/bootstrap.bundle.min.js`, `htmx.min.js`, `alpine.min.js` (vendored offline)
   - `tests/test_theme_management.py` (17 tests created)
 - **Verification & Test Outcomes:**
-  - `.\.venv\Scripts\python.exe manage.py check` → 0 issues.
-  - `.\.venv\Scripts\python.exe manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean.
-  - `.\.venv\Scripts\python.exe -m pytest tests/test_theme_management.py` → **17 passed in 3.18s**.
-  - `.\.venv\Scripts\python.exe -m pytest` → **146 passed in 26.03s**, 0 failures.
+  - `python manage.py check` → 0 issues.
+  - `python manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean.
+  - `python -m pytest tests/test_theme_management.py` → **17 passed in 3.18s**.
+  - `python -m pytest` → **146 passed in 26.03s**, 0 failures.
 
 ---
 
@@ -581,11 +277,11 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `milestone_plan.md` (updated Milestone 13 to complete)
   - `TODO_MODERNIZATION.md` (updated audit roadmap)
 - **Verification & Test Outcomes:**
-  - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
-  - `.\.venv\Scripts\python.exe manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean.
-  - `.\.venv\Scripts\python.exe manage.py sync_menus` → **Successfully synced plugins into menu 'main_navbar'**.
-  - `.\.venv\Scripts\python.exe -m pytest tests/test_video_gallery.py` → **40 passed in 1.99s** with **91% statement coverage**.
-  - `.\.venv\Scripts\python.exe -m pytest` → **186 passed in 26.65s**, 0 failures across entire codebase.
+  - `python manage.py check` → **0 issues identified (0 silenced)**.
+  - `python manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean.
+  - `python manage.py sync_menus` → **Successfully synced plugins into menu 'main_navbar'**.
+  - `python -m pytest tests/test_video_gallery.py` → **40 passed in 1.99s** with **91% statement coverage**.
+  - `python -m pytest` → **186 passed in 26.65s**, 0 failures across entire codebase.
 
 ---
 
@@ -630,11 +326,11 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `tests/test_crm.py` (23 comprehensive unit, task, integration, and UI endpoint tests)
   - `milestone_plan.md` (marked Milestone 14 complete)
 - **Verification & Test Outcomes:**
-  - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
-  - `.\.venv\Scripts\python.exe manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean.
-  - `.\.venv\Scripts\python.exe manage.py sync_menus` → **Successfully synced plugins into menu 'main_navbar'**.
-  - `.\.venv\Scripts\python.exe -m pytest tests/test_crm.py --cov=crm` → **23 passed in 150.17s** with **85% statement coverage**.
-  - `.\.venv\Scripts\python.exe -m pytest` → **209 passed in 182.42s**, 0 failures across entire repository.
+  - `python manage.py check` → **0 issues identified (0 silenced)**.
+  - `python manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean.
+  - `python manage.py sync_menus` → **Successfully synced plugins into menu 'main_navbar'**.
+  - `python -m pytest tests/test_crm.py --cov=crm` → **23 passed in 150.17s** with **85% statement coverage**.
+  - `python -m pytest` → **209 passed in 182.42s**, 0 failures across entire repository.
 
 ---
 
@@ -733,11 +429,11 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `tests/test_erp.py` (20 comprehensive unit, task, integration, and UI endpoint tests)
   - `milestone_plan.md`, `TODO_MODERNIZATION.md` (updated with Milestone 15 completion)
 - **Verification & Test Outcomes:**
-  - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
-  - `.\.venv\Scripts\python.exe manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean across all locales.
-  - `.\.venv\Scripts\python.exe manage.py sync_menus` → **Successfully synced plugins into menu 'main_navbar'**.
-  - `.\.venv\Scripts\python.exe -m pytest tests/test_erp.py --cov=erp` → **20 passed in 76.82s** with **91% statement coverage**.
-  - `.\.venv\Scripts\python.exe -m pytest` → **230 passed in 235.02s**, 0 failures across repository.
+  - `python manage.py check` → **0 issues identified (0 silenced)**.
+  - `python manage.py makemessages --all --ignore=.venv` & `compilemessages` → clean across all locales.
+  - `python manage.py sync_menus` → **Successfully synced plugins into menu 'main_navbar'**.
+  - `python -m pytest tests/test_erp.py --cov=erp` → **20 passed in 76.82s** with **91% statement coverage**.
+  - `python -m pytest` → **230 passed in 235.02s**, 0 failures across repository.
 
 ---
 
@@ -764,8 +460,8 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `documentation/README.md` (documented Edge AI Vision & Spatial Security Hub integration architecture and API contracts)
   - `MIGRATION_LOG.md` (recorded feasibility analysis and planning checkpoint)
 - **Verification & Test Outcomes:**
-  - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
-  - `.\.venv\Scripts\python.exe -m pytest tests/test_crm.py` → **23 passed in 10.66s**.
+  - `python manage.py check` → **0 issues identified (0 silenced)**.
+  - `python -m pytest tests/test_crm.py` → **23 passed in 10.66s**.
   - All 230 test cases passing repository-wide.
 
 ---
@@ -796,7 +492,7 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `tests/test_intelligent_tracker_hub.py` (11 tests covering HMAC cryptographic verification, webhook dispatches, Base64 snapshots, catalog/stats APIs, model methods, and views)
   - `milestone_plan.md`, `TODO_MODERNIZATION.md`, `MIGRATION_LOG.md` (updated with Milestone 16a completion)
 - **Verification & Test Outcomes:**
-  - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
+  - `python manage.py check` → **0 issues identified (0 silenced)**.
 ---
 
 ## [Milestone 16b] - Video Evidence Ingestion & Zero-Copy Stream Gateway
@@ -831,10 +527,10 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
   - `milestone_plan.md` & `TODO_MODERNIZATION.md` (marked Milestone 16b complete)
   - `tests/test_intelligent_tracker_hub.py` (added 9 tests covering zero-copy registration, HMAC tampering, stream proxy range forwarding, local archive slicing, cloud archival trigger, multipart upload, UI video rendering, corrupted archive auto-fallback to reference, and forced repair from source)
 - **Verification & Test Outcomes:**
-  - `.\.venv\Scripts\python.exe manage.py check` → **0 issues identified (0 silenced)**.
-  - `.\.venv\Scripts\python.exe manage.py makemessages` & `compilemessages` → Clean compilation across all 5 locales (`es`, `fr`, `it`, `ja`, `pt`).
-  - `.\.venv\Scripts\python.exe -m pytest tests/test_intelligent_tracker_hub.py tests/test_video_gallery.py --cov=intelligent_tracker_hub` → **60 passed in 9.25s with 87% statement coverage**.
-  - `.\.venv\Scripts\python.exe -m pytest -q` → **250 passed in 49.33s (100% passing repository-wide)**.
+  - `python manage.py check` → **0 issues identified (0 silenced)**.
+  - `python manage.py makemessages` & `compilemessages` → Clean compilation across all 5 locales (`es`, `fr`, `it`, `ja`, `pt`).
+  - `python -m pytest tests/test_intelligent_tracker_hub.py tests/test_video_gallery.py --cov=intelligent_tracker_hub` → **60 passed in 9.25s with 87% statement coverage**.
+  - `python -m pytest -q` → **250 passed in 49.33s (100% passing repository-wide)**.
 
 ---
 
@@ -1238,9 +934,9 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
 - **Date:** 2026-11-09
 - **Status:** **COMPLETE**
 - **Symptom:**
-  - Submitting language switcher form to `/i18n/setlang/` on `http://localhost:8080/` (or any non-standard `$PORT`) failed with HTTP 403 Forbidden: `Origin checking failed - http://localhost:8080 does not match any trusted origins.`
+  - Submitting language switcher form to `/i18n/setlang/` on `$APP_URL/` (or any non-standard `$PORT`) failed with HTTP 403 Forbidden: `Origin checking failed - $APP_URL does not match any trusted origins.`
 - **Root Cause & Architectural Solution:**
-  - Root Cause: In `nginx/default.conf`, `proxy_set_header Host $host;` stripped the client's external port (`$host` has no port), causing a mismatch between the browser's `Origin: http://localhost:<port>` and Django's inferred host `localhost`.
+  - Root Cause: In `nginx/default.conf`, `proxy_set_header Host $host;` stripped the client's external port (`$host` has no port), causing a mismatch between the browser's `Origin: $APP_URL:<port>` and Django's inferred host `localhost`.
   - Architectural Fix: In `nginx/default.conf`, changed `Host` and `X-Forwarded-Host` to `$http_host` (preserving incoming client port dynamically across any `$env:PORT` binding).
   - Configured 12-factor `CSRF_TRUSTED_ORIGINS` in `enterprise_website/settings/security.py` strictly loaded from `os.getenv("CSRF_TRUSTED_ORIGINS", "")` with empty default `[]` for zero hardcoded ports.
   - In `docker-compose.yml`, passed `CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS:-}` without hardcoding ports.
@@ -1346,7 +1042,7 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
 - **Empirical Diagnosis (`/app-debugger`):**
   - **Category A (Framework & Protocol Directives):** Alpine.js `[x-cloak]` requires `display: none !important;` by official specification to prevent FOUC. Email tracking pixels in `crm/tasks.py` and `crm/utils.py` require inline `display: none !important;` to prevent hostile email client resets (e.g. Gmail).
   - **Category B (Vendor & Utility Framework Architecture):** Bootstrap 4 source SCSS (`static/scss/bootstrap/`), `static/css/theme-adapter.css`, and third-party libraries (`magnific-popup.css`, `nice-select.css`) intentionally use `!important` per utility class and lightbox specification so utility classes override component styles.
-  - **Category C (Application CSS & Specificity Deficits):** 
+  - **Category C (Application CSS & Specificity Deficits):**
     - `change_list.html`: `.launch-script-admin-link` lost specificity to Django Admin's `ul.object-tools a:link`.
     - `theme-tokens.css`: `.btn-brand-primary:hover` and `.navbar-brand-theme .nav-link:hover` lost to Bootstrap's `.navbar-light .navbar-nav .nav-link:hover` (0,3,0).
     - `_home_sections.scss`: Line 26 retained `color: $black !important;` while line 37 hover was changed to `color: $white;`, resulting in hover state locking to black.
@@ -1359,7 +1055,7 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
     - `static/scss/theme/_home_sections.scss`: Removed `!important` from base state `.primary-btn` so `:hover` turns white cleanly.
     - `static/js/mail-script.js`: Replaced inline style hacking with standard jQuery `submit.hide()`.
 - **Verification:**
-  - Ran test suite `.\.venv\Scripts\python.exe manage.py test`: 14 of 14 passed (100% green).
+  - Ran test suite `python manage.py test`: 14 of 14 passed (100% green).
   - Validated clean staged changes across all 12 application files.
 
 ---
@@ -1386,12 +1082,60 @@ This log tracks all architectural updates, bug fixes, route modernizations, and 
 - **1-Step Decoupling Recipe (Summary):**
   - Pin `AVAILABLE_THEMES = ['bootstrap5']` and `SITE_THEME` in `enterprise_website/settings/base.py` (or flatten `templates/themes/<chosen>/` into `templates/` and drop `ThemeMiddleware` / `ThemeTemplateLoader` / `theme_context`). Shared domain templates require zero rewrites because they rely solely on `.container`, `.container-fluid`, `.row`, `.col-*`, `.card`, `.btn`, and `theme-tokens.css`.
 - **Verification:**
-  - `.\.venv\Scripts\python.exe manage.py check` → 0 issues identified (0 silenced).
-  - `.\.venv\Scripts\python.exe -m pytest tests/test_theme_management.py -v` → 25 passed.
-  - `.\.venv\Scripts\python.exe manage.py test` → 14 passed.
+  - `python manage.py check` → 0 issues identified (0 silenced).
+  - `python -m pytest tests/test_theme_management.py -v` → 25 passed.
+  - `python manage.py test` → 14 passed.
 
+---
 
+## [Coordinated Framework Upgrade] - Django 5.2.19 LTS, DRF 3.18.2 & Allauth 65.22.0
+- **Date:** 2026-11-12
+- **Status:** **COMPLETE**
+- **Skills Invoked:** `/frontier-architect`
+- **Context & Motivation:**
+  - Dependabot opened individual, isolated PRs (#1, #2, #3, #4) that could not be merged separately due to circular and interdependent constraints:
+    - DRF 3.18.2 strictly requires Django >= 5.2.
+    - Upgrading Django 5.0 to 5.2 required coordinated allauth settings, database migrations, and `assertQuerySetEqual` test method updates.
+    - Allauth 65.x introduced new migrations (`account.0006_emailaddress_lower`, `0007_emailaddress_idx_upper`, `0008_emailaddress_unique_primary_email_fix`, `0009_emailaddress_unique_primary_email`) and deprecated old setting names (`ACCOUNT_AUTHENTICATION_METHOD`).
+- **Phases Executed & Changes Implemented:**
+  - **Phase 1: Dependency Alignment & Virtualenv Resolution:**
+    - Upgraded `requirements/base.txt`: `Django==5.2.19`, `djangorestframework==3.18.2`, `django-allauth==65.22.0`.
+    - Executed `pip check` to prove zero dependency conflicts with Channels, Daphne, and Twisted.
+  - **Phase 2: Allauth 65.x Migration & Settings Modernization:**
+    - Modernized `enterprise_website/settings/base.py`:
+      - Replaced `ACCOUNT_AUTHENTICATION_METHOD = "username_email"` with `ACCOUNT_AUTHENTICATION_METHODS = {"username", "email"}`.
+      - Retained `ACCOUNT_EMAIL_VERIFICATION = "none"`, `ACCOUNT_EMAIL_REQUIRED = False`.
+      - Preserved middleware order (`AccountMiddleware` following `AuthenticationMiddleware`).
+    - Applied database migrations via `manage.py migrate` across allauth account app (`0006` through `0009`).
+  - **Phase 3: Core API, Deprecation Audit & Test Method Modernization:**
+    - Replaced deprecated Django `assertQuerysetEqual` with modern `assertQuerySetEqual` in `polls/tests.py` (5 test methods).
+    - Verified DRF 3.18 token endpoints, viewsets, and serializing behavior.
+  - **Phase 4: Rosetta Catalog Integrity & Full Suite Verification:**
+    - Compiled all PO catalogs via `manage.py compilemessages --ignore=.venv` (es, fr, it, ja, pt clean).
+    - Executed complete workspace test suite with `pytest`: **381 of 381 passed** (100% green).
+- **Files Created / Modified:**
+  - `requirements/base.txt`
+  - `enterprise_website/settings/base.py`
+  - `polls/tests.py`
+  - `.TODO/coordinated_framework_upgrade_plan.md`
+  - `MIGRATION_LOG.md`
+- **Verification & Test Outcomes:**
+  - `python manage.py check` → **0 issues identified (0 silenced)**.
+  - `python manage.py compilemessages --ignore=.venv` → All catalogs up to date.
+  - `python -m pytest` → **381 passed in 97.51s (100% green)**.
 
-
-
-
+## [Milestone 9] - Automated Test Suite & Code Quality Hardening
+- **Date:** 2026-10-22
+- **Status:** **COMPLETE**
+- **Objectives:**
+  - Configure `pytest-django` testing framework via `pytest.ini` and coverage runner via `.coveragerc`.
+  - Update `requirements/local.txt` to include `pytest-cov>=4.1.0` alongside `pytest` and `pytest-django`.
+  - Build comprehensive, isolated unit and integration test modules across all applications:
+    - `tests/test_home.py` (13 tests): verified HTTP 200 for all standard and legacy `.html` routes (`/`, `/about/`, `/services/`, `/products/`, `/contact/`) and contact form submission/validation.
+    - `tests/test_user_management.py` (17 tests): verified user signup, login, GET/POST logout, profile views, update views, activation token workflow, AJAX location loaders, `populate_users` command, age and birthdate form validation, and model representations.
+    - `tests/test_todo.py` (11 tests): verified list view (empty and populated), authenticated greeting, add form GET/POST, detailed timezone conversion diagnostics, 404 handling, and newly added `delete` route.
+    - `tests/test_polls.py` (15 tests): verified questions filtering (past vs future), detail view, race-condition protected voting (`F('votes') + 1`), error redisplay on missing choices, results view, and `closepoll` command (including `--delete`).
+    - `tests/test_language_management.py` (11 tests): verified index view, Django `/i18n/setlang/` endpoint for multiple languages, placeholder protection engine (`_protect_placeholders`), and translation backends (MyMemory, DeepL, OpenAI).
+    - `tests/test_timezone_management.py` (4 tests): verified `TimezoneMiddleware` activation with `Asia/Tokyo`, deactivation fallback to default, and `set_timezone` view.
+    - `tests/test_plugin_registry.py` (8 tests): verified autodiscovery across all apps, menu hierarchy synchronization, idempotency, URL resolution, permission visibility, and `dynamic_menu` context processor.
+    - `tests/test_rest_api.py` (5 tests): verified API root, paginated users list, user details, and dynamic attribute filtering (`?val=username&val=email`).
