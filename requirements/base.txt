@@ -10,12 +10,12 @@ charset-normalizer==3.5.2
 constantly==23.10.4
 cryptography==50.0.2
 daphne==4.2.3
-Django==5.0.14
-django-allauth==0.62.1
+Django==5.2.19
+django-allauth==65.22.0
 django-countries==9.1.0
 django-phonenumber-field==8.5.0
 django-rosetta==0.10.3
-djangorestframework==3.17.2
+djangorestframework==3.18.2
 hyperlink==21.0.0
 idna==3.20
 Incremental==24.11.0

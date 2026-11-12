@@ -14,6 +14,11 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login'  # must be absolute path
 AUTH_USER_MODEL = 'user_management.SiteUser'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 

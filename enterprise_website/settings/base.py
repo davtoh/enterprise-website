@@ -44,6 +44,13 @@ ASGI_APPLICATION = 'enterprise_website.routing.application'
 SITE_ID = 1
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
+# django-allauth 65.x configuration
+# https://docs.allauth.org/en/latest/account/configuration.html
+ACCOUNT_LOGIN_METHODS = {'username', 'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_PRESERVE_USERNAME_CASING = False
+
 # Theme Architecture & Dynamic CSS Framework Configuration
 SITE_THEME = os.getenv('SITE_THEME', 'bootstrap5').lower().strip()
 AVAILABLE_THEMES = ['bootstrap5', 'tailwind', 'minimal']
