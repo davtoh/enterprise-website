@@ -73,7 +73,7 @@ def activate_user_account(request, uidb64=None, token=None, slug=None, slug2=Non
         user.is_active = True
         user.save()
 
-        login(request, user)
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         messages.success(request, _("Welcome, %(username)s! Your account has been successfully activated.") % {'username': user.username})
         return redirect('user_management:profile')
     else:
