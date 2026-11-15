@@ -9,6 +9,14 @@ from todo.models import Todo
 class TestHomePages:
     """Tests for all 5 public pages in the home application."""
 
+    @pytest.fixture(autouse=True)
+    def _clear_cache(self):
+        from django.core.cache import cache
+
+        cache.clear()
+        yield
+        cache.clear()
+
     @pytest.mark.parametrize("route_name", [
         "home:index",
         "home:index_file",
@@ -121,3 +129,22 @@ class TestHomePages:
         assert Lead.objects.count() == 0
         assert InteractionLog.objects.count() == 0
         assert Todo.objects.count() == 0
+
+    @pytest.mark.parametrize(
+        ("route_name", "expected_slug"),
+        [
+            ("home:index", "home"),
+            ("home:about", "about"),
+            ("home:services", "services"),
+            ("home:products", "products"),
+            ("home:contact", "contact"),
+        ],
+    )
+    def test_home_views_expose_seeded_cms_page_context(self, client, route_name, expected_slug):
+        from cms.seed import seed_initial_cms_pages
+
+        seed_initial_cms_pages()
+        response = client.get(reverse(route_name))
+        assert response.status_code == 200
+        assert response.context["cms_page"] is not None
+        assert response.context["cms_page"].slug == expected_slug

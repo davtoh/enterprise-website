@@ -18,17 +18,35 @@
         {% if main_navigation %}
           {% for nav_item in main_navigation %}
             {% if nav_item.children %}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{{ nav_item.url }}" id="navDropdown-{{ forloop.counter }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {% if nav_item.icon %}<i class="{{ nav_item.icon }} me-1"></i>{% endif %}{% trans nav_item.title %}
-                </a>
+              <li class="nav-item dropdown d-flex align-items-center">
+                {% if nav_item.url and nav_item.url != '#' %}
+                  <a class="nav-link pe-1 {% if nav_item.url_name and request.resolver_match.view_name == nav_item.url_name %}active fw-semibold text-primary{% endif %}" href="{{ nav_item.url }}">
+                    {% if nav_item.icon %}<i class="{{ nav_item.icon }} me-1"></i>{% endif %}{% trans nav_item.title %}
+                  </a>
+                  <button class="nav-link dropdown-toggle dropdown-toggle-split ps-1 border-0 bg-transparent" id="navDropdown-{{ forloop.counter }}" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{% trans 'Toggle submenu' %}">
+                    <span class="visually-hidden">{% trans "Toggle submenu" %}</span>
+                  </button>
+                {% else %}
+                  <a class="nav-link dropdown-toggle" href="#" id="navDropdown-{{ forloop.counter }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if nav_item.icon %}<i class="{{ nav_item.icon }} me-1"></i>{% endif %}{% trans nav_item.title %}
+                  </a>
+                {% endif %}
                 <ul class="dropdown-menu shadow-sm" aria-labelledby="navDropdown-{{ forloop.counter }}">
                   {% for child in nav_item.children %}
                     <li>
-                      <a class="dropdown-item d-flex align-items-center" href="{{ child.url }}">
+                      <a class="dropdown-item d-flex align-items-center {% if child.children %}fw-semibold{% endif %}" href="{{ child.url }}">
                         {% if child.icon %}<i class="{{ child.icon }} me-2"></i>{% endif %}{% trans child.title %}
                       </a>
                     </li>
+                    {% if child.children %}
+                      {% for grandchild in child.children %}
+                        <li>
+                          <a class="dropdown-item d-flex align-items-center ps-4 small text-muted" href="{{ grandchild.url }}">
+                            {% if grandchild.icon %}<i class="{{ grandchild.icon }} me-2"></i>{% else %}<i class="fa fa-angle-right me-2"></i>{% endif %}{% trans grandchild.title %}
+                          </a>
+                        </li>
+                      {% endfor %}
+                    {% endif %}
                   {% endfor %}
                 </ul>
               </li>

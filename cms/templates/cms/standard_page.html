@@ -9,16 +9,34 @@
     {% wagtailuserbar %}
     <article class="cms-standard-page py-4">
         <div class="container">
-            <header class="mb-4">
-                <h1 class="mb-2">{{ page.title }}</h1>
-                {% if page.intro %}
-                    <p class="lead text-muted">{{ page.intro }}</p>
-                {% endif %}
-            </header>
+            {% if section_sidebar and section_sidebar.items %}
+                <div class="row g-4">
+                    <div class="col-12 col-lg-3">
+                        {% include "partials/section_sidebar.html" %}
+                    </div>
+                    <div class="col-12 col-lg-9">
+                        <header class="mb-4">
+                            <h1 class="mb-2">{{ page.title }}</h1>
+                            {% if page.intro %}
+                                <p class="lead text-muted">{{ page.intro }}</p>
+                            {% endif %}
+                        </header>
+                        {% for block in page.body %}
+                            {% include_block block %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <header class="mb-4">
+                    <h1 class="mb-2">{{ page.title }}</h1>
+                    {% if page.intro %}
+                        <p class="lead text-muted">{{ page.intro }}</p>
+                    {% endif %}
+                </header>
+                {% for block in page.body %}
+                    {% include_block block %}
+                {% endfor %}
+            {% endif %}
         </div>
-
-        {% for block in page.body %}
-            {% include_block block %}
-        {% endfor %}
     </article>
 {% endblock %}

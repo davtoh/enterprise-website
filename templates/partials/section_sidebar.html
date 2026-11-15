@@ -1,0 +1,35 @@
+{% load i18n %}
+
+{% if section_sidebar and section_sidebar.items %}
+<aside class="cms-section-sidebar card border-0 shadow-sm mb-4" aria-label="{% trans 'Section Navigation' %}">
+  <div class="card-header bg-transparent border-bottom py-3">
+    <h2 class="h6 mb-0 fw-bold">
+      {% if section_sidebar.url and section_sidebar.url != '#' %}
+        <a href="{{ section_sidebar.url }}" class="text-decoration-none text-dark">
+          {% trans section_sidebar.title %}
+        </a>
+      {% else %}
+        {% trans section_sidebar.title %}
+      {% endif %}
+    </h2>
+  </div>
+  <nav class="list-group list-group-flush">
+    {% for item in section_sidebar.items %}
+      <a href="{{ item.url }}"
+         class="list-group-item list-group-item-action d-flex align-items-center {% if item.url == section_sidebar.active_path %}active fw-semibold{% endif %}">
+        {% if item.icon %}<i class="{{ item.icon }} me-2"></i>{% endif %}
+        <span>{% trans item.title %}</span>
+      </a>
+      {% if item.children %}
+        {% for subitem in item.children %}
+          <a href="{{ subitem.url }}"
+             class="list-group-item list-group-item-action ps-4 small d-flex align-items-center {% if subitem.url == section_sidebar.active_path %}active fw-semibold{% else %}text-muted{% endif %}">
+            {% if subitem.icon %}<i class="{{ subitem.icon }} me-2"></i>{% else %}<i class="fa fa-angle-right me-2"></i>{% endif %}
+            <span>{% trans subitem.title %}</span>
+          </a>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </nav>
+</aside>
+{% endif %}

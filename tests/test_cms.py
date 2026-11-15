@@ -184,3 +184,93 @@ class TestCMSPagesAndBlocks:
         cat_es.save()
         assert cat_es.translation_key == cat_en.translation_key
         assert cat_es.locale == es_locale
+
+
+@pytest.mark.django_db
+class TestCMSSeedingAndNavigation:
+    """Tests for idempotent CMS seeding, 3-level headers, and contextual section sidebar."""
+
+    @pytest.fixture(autouse=True)
+    def _clear_cache(self):
+        from django.core.cache import cache
+
+        cache.clear()
+        yield
+        cache.clear()
+
+    def test_seed_initial_cms_pages_idempotent(self):
+        from django.core.management import call_command
+
+        from cms.seed import seed_initial_cms_pages
+
+        _get_or_create_wagtail_root()
+        first = seed_initial_cms_pages()
+        assert first["created"] == 7
+        assert first["existing"] == 0
+
+        second = seed_initial_cms_pages()
+        assert second["created"] == 0
+        assert second["existing"] == 7
+
+        call_command("seed_cms_pages")
+        assert StandardPage.objects.filter(slug="home").exists()
+        assert BlogIndexPage.objects.filter(slug="blog").exists()
+        assert BlogPage.objects.filter(slug="welcome-to-enterprise-cms").exists()
+
+    @pytest.mark.parametrize("theme_name", ["bootstrap5", "tailwind", "minimal"])
+    def test_standard_page_renders_3rd_level_section_sidebar_across_themes(self, client, theme_name):
+        from pathlib import Path
+
+        from cms.bridge import sync_wagtail_menus
+
+        root = _get_or_create_wagtail_root()
+        section = StandardPage(title="Company", slug="company", show_in_menus=True)
+        root.add_child(instance=section)
+        section.save_revision().publish()
+
+        dept = StandardPage(title="Engineering", slug="engineering", show_in_menus=True)
+        section.add_child(instance=dept)
+        dept.save_revision().publish()
+
+        team = StandardPage(title="Platform Team", slug="platform-team", show_in_menus=True)
+        dept.add_child(instance=team)
+        team.save_revision().publish()
+
+        sync_wagtail_menus()
+
+        response = client.get(f"{team.url}?theme={theme_name}")
+        assert response.status_code == 200
+        html = response.content.decode("utf-8")
+        assert "cms-section-sidebar" in html
+        assert "Engineering" in html
+        assert "Platform Team" in html
+
+        sidebar_src = Path(settings.BASE_DIR, "templates/partials/section_sidebar.html").read_text(encoding="utf-8")
+        assert "!important" not in sidebar_src
+        assert 'style="' not in sidebar_src
+
+    @pytest.mark.parametrize("theme_name", ["bootstrap5", "tailwind", "minimal"])
+    def test_headers_render_clickable_parent_and_2_level_dropdown_across_themes(self, client, theme_name):
+        from pathlib import Path
+
+        from menu_management.cache import invalidate_menu_cache
+        from menu_management.models import Menu, MenuItem
+
+        menu, _ = Menu.objects.get_or_create(slug="main_navbar", defaults={"title": "Main Navbar"})
+        parent = MenuItem.objects.create(menu=menu, title="Solutions", url_path="/services/", order=1)
+        child = MenuItem.objects.create(menu=menu, parent=parent, title="Cloud", url_path="/products/", order=1)
+        MenuItem.objects.create(menu=menu, parent=child, title="Kubernetes", url_path="/about/", order=1)
+        invalidate_menu_cache()
+
+        response = client.get(f"/?theme={theme_name}")
+        assert response.status_code == 200
+        html = response.content.decode("utf-8")
+        assert "Solutions" in html
+        assert 'href="/services/"' in html
+        assert "Toggle submenu" in html
+        assert "Cloud" in html
+        assert "Kubernetes" in html
+
+        header_src = Path(settings.BASE_DIR, f"templates/themes/{theme_name}/partials/header.html").read_text(encoding="utf-8")
+        assert "!important" not in header_src
+        assert 'style="' not in header_src

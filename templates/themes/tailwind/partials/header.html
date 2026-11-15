@@ -17,32 +17,57 @@
         {% if main_navigation %}
           {% for nav_item in main_navigation %}
             {% if nav_item.children %}
-              <div class="relative" x-data="{ open: false }">
-                <button 
-                  @click="open = !open" 
-                  @click.away="open = false" 
-                  type="button" 
-                  class="text-gray-600 hover:text-brand-600 px-3 py-2 text-sm font-medium inline-flex items-center">
-                  {% if nav_item.icon %}<i class="{{ nav_item.icon }} mr-1.5"></i>{% endif %}
-                  <span>{% trans nav_item.title %}</span>
-                  <i class="fa fa-chevron-down ml-1.5 text-xs text-gray-400"></i>
-                </button>
-                <div 
-                  x-show="open" 
+              <div class="relative inline-flex items-center" x-data="{ open: false }">
+                {% if nav_item.url and nav_item.url != '#' %}
+                  <a
+                    href="{{ nav_item.url }}"
+                    class="pl-3 pr-1 py-2 text-sm font-medium inline-flex items-center {% if nav_item.url_name and request.resolver_match.view_name == nav_item.url_name %}text-brand-600 font-semibold border-b-2 border-brand-600{% else %}text-gray-600 hover:text-brand-600{% endif %}">
+                    {% if nav_item.icon %}<i class="{{ nav_item.icon }} mr-1.5"></i>{% endif %}
+                    <span>{% trans nav_item.title %}</span>
+                  </a>
+                  <button
+                    @click="open = !open"
+                    @click.away="open = false"
+                    type="button"
+                    aria-label="{% trans 'Toggle submenu' %}"
+                    class="text-gray-500 hover:text-brand-600 pr-2 py-2 text-sm inline-flex items-center">
+                    <i class="fa fa-chevron-down text-xs"></i>
+                  </button>
+                {% else %}
+                  <button
+                    @click="open = !open"
+                    @click.away="open = false"
+                    type="button"
+                    class="text-gray-600 hover:text-brand-600 px-3 py-2 text-sm font-medium inline-flex items-center">
+                    {% if nav_item.icon %}<i class="{{ nav_item.icon }} mr-1.5"></i>{% endif %}
+                    <span>{% trans nav_item.title %}</span>
+                    <i class="fa fa-chevron-down ml-1.5 text-xs text-gray-400"></i>
+                  </button>
+                {% endif %}
+                <div
+                  x-show="open"
                   x-transition
-                  class="origin-top-left absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 py-1"
+                  class="origin-top-left absolute left-0 top-full mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 py-1"
                   x-cloak>
                   {% for child in nav_item.children %}
-                    <a href="{{ child.url }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    <a href="{{ child.url }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 {% if child.children %}font-semibold{% endif %}">
                       {% if child.icon %}<i class="{{ child.icon }} mr-2 text-gray-400"></i>{% endif %}
                       <span>{% trans child.title %}</span>
                     </a>
+                    {% if child.children %}
+                      {% for grandchild in child.children %}
+                        <a href="{{ grandchild.url }}" class="flex items-center pl-8 pr-4 py-1.5 text-xs text-gray-600 hover:bg-gray-100">
+                          {% if grandchild.icon %}<i class="{{ grandchild.icon }} mr-2 text-gray-400"></i>{% else %}<i class="fa fa-angle-right mr-2 text-gray-400"></i>{% endif %}
+                          <span>{% trans grandchild.title %}</span>
+                        </a>
+                      {% endfor %}
+                    {% endif %}
                   {% endfor %}
                 </div>
               </div>
             {% else %}
-              <a 
-                href="{{ nav_item.url }}" 
+              <a
+                href="{{ nav_item.url }}"
                 class="px-3 py-2 text-sm font-medium {% if nav_item.url_name and request.resolver_match.view_name == nav_item.url_name %}text-brand-600 font-semibold border-b-2 border-brand-600{% else %}text-gray-600 hover:text-brand-600{% endif %}">
                 {% if nav_item.icon %}<i class="{{ nav_item.icon }} mr-1.5"></i>{% endif %}
                 <span>{% trans nav_item.title %}</span>

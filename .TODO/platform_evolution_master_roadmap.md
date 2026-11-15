@@ -74,13 +74,13 @@ All modified and newly created source files across all 5 steps must strictly obe
 - [x] **webprogram/ & crm/ & erp/ & intelligent_tracker_hub/**: Enforce zone visibility (`requires_staff=True` on staff workspace plugins; `ENABLE_LABS_PLUGINS` feature flag on `webprogram`) and verify with unit/integration tests.
 - [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
-### Step 3: Wagtail Hybrid CMS, Blog Engine, `wagtail-localize` & 3-Level Cached Navigation (**DEFERRED TO NEXT TURN / MILESTONE**)
-- **Child Plan**: `.TODO/step_3_wagtail_cms_blog_and_navigation.md`
-- [ ] **requirements/base.txt & enterprise_website/settings/**: Install and configure `wagtail` and `wagtail-localize` at `/cms/` alongside existing apps and `LocaleMiddleware`.
-- [ ] **cms/ (New App)**: Implement `StandardPage`, `BlogIndexPage`, `BlogPage`, `BlogCategory`, and theme-aware `StreamField` blocks (`HeroBlock`, `RichTextSectionBlock`, `FeatureGridBlock`, `CallToActionBlock`) extending `base.html` and `theme-adapter.css`.
-- [ ] **menu_management/ & cms/bridge.py**: Refactor `sync_plugin_menus` into modular helpers ($\le 40$L/fn), link Wagtail `show_in_menus` page trees idempotently into `MenuItem`, and add per-role/locale cache invalidation on `MenuItem` and Wagtail page publish/unpublish signals.
-- [ ] **templates/themes/*/partials/header.html**: Upgrade `bootstrap5`, `tailwind`, and `minimal` headers to support clickable parent tabs, 2-level dropdowns, and a 3rd-level contextual section sidebar partial, migrating static `home` pages into seeded Wagtail pages while preserving legacy `.html` route compatibility.
-- [ ] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
+### Step 3: Wagtail Hybrid CMS, Blog Engine, `wagtail-localize` & 3-Level Cached Navigation
+- [x] **Child Plan**: `.TODO/step_3_wagtail_cms_blog_and_navigation.md`
+- [x] **requirements/base.txt & enterprise_website/settings/**: Install and configure `wagtail` and `wagtail-localize` at `/cms/` alongside existing apps and `LocaleMiddleware`.
+- [x] **cms/ (New App)**: Implement `StandardPage`, `BlogIndexPage`, `BlogPage`, `BlogCategory`, and theme-aware `StreamField` blocks (`HeroBlock`, `RichTextSectionBlock`, `FeatureGridBlock`, `CallToActionBlock`) extending `base.html` and `theme-adapter.css`.
+- [x] **menu_management/ & cms/bridge.py**: Refactor `sync_plugin_menus` into modular helpers ($\le 40$L/fn), link Wagtail `show_in_menus` page trees idempotently into `MenuItem`, and add per-role/locale cache invalidation on `MenuItem` and Wagtail page publish/unpublish signals.
+- [x] **templates/themes/*/partials/header.html**: Upgrade `bootstrap5`, `tailwind`, and `minimal` headers to support clickable parent tabs, 2-level dropdowns, and a 3rd-level contextual section sidebar partial, migrating static `home` pages into seeded Wagtail pages while preserving legacy `.html` route compatibility.
+- [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
 ### Step 4: Cross-App Composable Blocks, Public ERP Catalog & `ActionItem` Promotion (**DEFERRED TO NEXT TURN / MILESTONE**)
 - **Child Plan**: `.TODO/step_4_cross_app_blocks_and_pipelines.md`

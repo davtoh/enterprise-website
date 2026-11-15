@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-15] feat: Step 3 Milestone 3: 3-Level Theme Headers, Section Sidebar & Seeded CMS Pages
+- **Type**: feat
+- **Summary**: Upgraded bootstrap5/tailwind/minimal headers with clickable parent tabs and 2-level dropdowns, added 3rd-level section_sidebar.html, implemented idempotent seed_initial_cms_pages(), and exposed cms_page context in home/views.py.
+- **Files** (10):
+  - `cms/templates/cms/standard_page.html`
+  - `home/views.py`
+  - `templates/themes/bootstrap5/partials/header.html`
+  - `templates/themes/minimal/partials/header.html`
+  - `templates/themes/tailwind/partials/header.html`
+  - `tests/test_cms.py`
+  - `tests/test_home.py`
+  - `cms/management/`
+  - ... (+2 more)
+- **Verification**: pytest tests/test_cms.py tests/test_home.py tests/test_theme_management.py tests/test_plugin_registry.py
+
 ## [2026-11-15] feat: Step 3 Milestone 2: Wagtail Menu Bridge, 3-Level Hierarchy & Per-Role/Locale Cached Navigation
 - **Type**: feat
 - **Summary**: Added MenuItem.wagtail_page with localized title/URL resolution, 3-level Wagtail-to-MenuItem sync in cms/bridge.py, versioned per-role/locale menu caching in menu_management/cache.py, and signal-driven cache invalidation.
@@ -118,21 +133,3 @@
   - `polls/tests.py`
   - `CHANGELOG.md`
 - **Verification**: pytest (381 passed)
-
-## [Milestone 1] - AI Rules & Standardization Setup
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Establish workspace and global AI guidelines for comment preservation, persistent task logging, milestone review workflow, and security standards.
-- **Files Created / Modified:**
-  - `AGENTS.md`: Workspace root guidelines.
-  - `.agents/rules/comment_preservation.md`: Reference preservation rules.
-  - `.agents/rules/task_logging.md`: Persistent task/migration log rules.
-  - `.agents/rules/milestone_workflow.md`: Milestone review protocol.
-  - `.agents/rules/security_and_standards.md`: OWASP and cross-platform standards.
-  - `documentation/GLOBAL_AI_RULES.md`: Ready-to-copy standard rule for `~/.gemini/config/rules/` and other migration projects.
-  - `MIGRATION_LOG.md`: Initialized persistent task tracking log.
-- **Verification:**
-  - Files created in standard `.agents/rules` and root `AGENTS.md` format.
-
----

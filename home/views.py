@@ -6,6 +6,13 @@ from django.views.generic.base import TemplateView
 from .services import ingest_website_contact_submission
 
 
+def _get_seeded_cms_page(slug: str):
+    """Return the live seeded StandardPage for a legacy home slug, if present."""
+    from cms.models import StandardPage
+
+    return StandardPage.objects.live().filter(slug=slug).first()
+
+
 class HomeView(TemplateView):
     # https://github.com/harukaeru/Brython-Django
     template_name = "home/index.html"
@@ -14,6 +21,7 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Home - Enterprise Website"
         context['banner_content_title'] = "Enterprise Website"
+        context['cms_page'] = _get_seeded_cms_page("home")
         return context
 
 
@@ -23,6 +31,7 @@ class AboutView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "About Us - Enterprise Website"
+        context['cms_page'] = _get_seeded_cms_page("about")
         return context
 
 
@@ -32,6 +41,7 @@ class ServicesView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Services - Enterprise Website"
+        context['cms_page'] = _get_seeded_cms_page("services")
         return context
 
 
@@ -41,6 +51,7 @@ class ProductsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Products - Enterprise Website"
+        context['cms_page'] = _get_seeded_cms_page("products")
         return context
 
 
@@ -50,6 +61,7 @@ class ContactView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Contact Us - Enterprise Website"
+        context['cms_page'] = _get_seeded_cms_page("contact")
         return context
 
     def post(self, request, *args, **kwargs):
