@@ -84,4 +84,11 @@ Welcome to the project repository. When working on modernization, debugging, fea
 
 ---
 
+## 9. Wagtail CMS, Signals & Cache Invariants
+- **Wagtail Test Page Attachment & M2M Order:** Attach Wagtail test pages to `Site.objects.get(is_default_site=True).root_page`, and save `BlogPage` instances via `add_child()` before adding `ParentalManyToManyField` categories.
+- **Compact CMS Signal Registration & Versioned Cache Keys:** Loop signal connections over model tuples in `register_cms_signals()` to stay under the 40-line function budget, and use versioned cache keys (`cache.incr`) for backend-agnostic menu invalidation.
+- **Cache Isolation for `seed_initial_cms_pages()` Tests:** Tests that trigger Wagtail `page_published` signals or `sync_wagtail_menus()` populate `LocMemCache` via `cms/signals.py`. Pytest classes using `seed_initial_cms_pages()` must clear `django.core.cache.cache` in an `autouse` fixture to prevent leaking `main_navigation` into subsequent fallback-nav tests.
+
+---
+
 *Detailed modular rules are located in `.agents/rules/`.*
