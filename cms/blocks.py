@@ -2,6 +2,7 @@ from django.utils.translation import gettext_lazy as _
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
+from erp.blocks import ProductShowcaseBlock
 from polls.blocks import PollEmbedBlock
 from video_gallery.blocks import VideoGalleryEmbedBlock
 
@@ -86,3 +87,4 @@ class CMSStreamBlock(blocks.StreamBlock):
     cta = CallToActionBlock()
     video_gallery = VideoGalleryEmbedBlock()
     poll = PollEmbedBlock()
+    product_showcase = ProductShowcaseBlock()

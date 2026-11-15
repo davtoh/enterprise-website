@@ -148,3 +148,40 @@ class TestHomePages:
         assert response.status_code == 200
         assert response.context["cms_page"] is not None
         assert response.context["cms_page"].slug == expected_slug
+
+    def test_products_view_renders_published_erp_products(self, client):
+        from decimal import Decimal
+        from erp.models import Category, Product
+
+        cat = Category.objects.create(name="Robotics")
+        Product.objects.create(
+            sku="PUB-R1",
+            name="Autonomous Rover R1",
+            category=cat,
+            public_summary="Rugged indoor/outdoor telemetry rover.",
+            unit_price=Decimal("1999.00"),
+            is_active=True,
+            is_published=True,
+        )
+        Product.objects.create(
+            sku="PRIV-R2",
+            name="Secret R2 Prototype",
+            category=cat,
+            is_active=True,
+            is_published=False,
+        )
+        Product.objects.create(
+            sku="INACT-R3",
+            name="Retired R3",
+            category=cat,
+            is_active=False,
+            is_published=True,
+        )
+
+        response = client.get(reverse("home:products"))
+        assert response.status_code == 200
+        html = response.content.decode("utf-8")
+        assert "Autonomous Rover R1" in html
+        assert "Rugged indoor/outdoor telemetry rover." in html
+        assert "Secret R2 Prototype" not in html
+        assert "Retired R3" not in html

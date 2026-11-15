@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-15] feat: Step 4 Milestone 2: ERP Modular Models, Public Catalog & CRM Invoice Link
+- **Type**: feat
+- **Summary**: Split erp/models.py into erp/models/ package, added Product.is_published/public_summary, ProductShowcaseBlock, dynamic ProductsView catalog, and Invoice CRM backfill.
+- **Files** (16):
+  - `cms/blocks.py`
+  - `erp/forms.py`
+  - `erp/models.py`
+  - `erp/plugin.py`
+  - `erp/views/invoices.py`
+  - `home/templates/home/products.html`
+  - `home/views.py`
+  - `tests/erp/test_invoices_and_pdf.py`
+  - ... (+8 more)
+- **Verification**: pytest tests/erp/ tests/crm/ tests/test_home.py tests/test_cms.py
+
 ## [2026-11-15] feat: Step 4 M1: Composable AppPlugin v2 StreamField Blocks & Public/Staff Video Isolation
 - **Type**: feat
 - **Summary**: Added is_public/requires_staff isolation on VideoGallery/VideoItem, registered VideoGalleryEmbedBlock and PollEmbedBlock via AppPlugin v2 and CMSStreamBlock, and added multi-theme block templates and tests.
@@ -127,24 +142,3 @@
   - `timezone_management/urls.py`
   - ... (+3 more)
 - **Verification**: pytest tests/test_polls.py tests/test_timezone_management.py tests/test_webprogram.py tests/test_user_management.py
-
-## [2026-11-15] fix: Step 1 Milestone 1: REST API Permission Lockdown, Serializer Separation & Secret Hygiene
-- **Type**: fix
-- **Summary**: Extracted UserSerializer and UserViewSet from rest_api/urls.py, enforced IsAuthenticated with staff/self queryset scoping, removed legacy Google Maps key comment, and pruned unused DRF imports.
-- **Files** (6):
-  - `enterprise_website/urls.py`
-  - `rest_api/urls.py`
-  - `rest_api/views.py`
-  - `templates/partials/scripts.html`
-  - `tests/test_rest_api.py`
-  - `rest_api/serializers.py`
-- **Verification**: python -m pytest tests/test_rest_api.py
-
-## [2026-11-12] feat: Coordinated Framework Upgrade - Django 5.2 LTS, DRF 3.18.2 & Allauth 65.22.0
-- **Type**: feat
-- **Summary**: Synchronized upgrade of Django 5.2.19, DRF 3.18.2, and Allauth 65.22.0 with allauth settings modernization, DB migrations, assertQuerySetEqual fixes, and Dependabot grouping rules.
-- **Files** (3):
-  - `MIGRATION_LOG.md`
-  - `polls/tests.py`
-  - `CHANGELOG.md`
-- **Verification**: pytest (381 passed)

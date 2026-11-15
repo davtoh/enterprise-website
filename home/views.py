@@ -49,9 +49,16 @@ class ProductsView(TemplateView):
     template_name = "home/products.html"
 
     def get_context_data(self, **kwargs):
+        from erp.models import Product
+
         context = super().get_context_data(**kwargs)
         context['title'] = "Products - Enterprise Website"
         context['cms_page'] = _get_seeded_cms_page("products")
+        context['products'] = list(
+            Product.objects.filter(is_active=True, is_published=True)
+            .select_related("category")
+            .order_by("name")
+        )
         return context
 
 

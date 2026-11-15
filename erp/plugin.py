@@ -1,4 +1,5 @@
 from django.utils.translation import gettext_lazy as _
+from erp.blocks import ProductShowcaseBlock
 from plugin_registry.base import AppPlugin, MenuItemDefinition, PluginZone
 
 
@@ -35,6 +36,9 @@ class ERPPlugin(AppPlugin):
     tasks = [
         "erp.check_low_stock_alerts",
         "erp.send_invoice_email",
+    ]
+    stream_blocks = [
+        ("product_showcase", ProductShowcaseBlock),
     ]
 
 

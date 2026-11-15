@@ -376,3 +376,68 @@ class TestComposablePluginStreamBlocks:
             tpl_src = Path(settings.BASE_DIR, "cms/templates/cms/blocks", tpl_name).read_text(encoding="utf-8")
             assert "!important" not in tpl_src
             assert 'style="' not in tpl_src
+
+    @pytest.mark.parametrize("theme_name", ["bootstrap5", "tailwind", "minimal"])
+    def test_standard_page_renders_product_showcase_block_across_themes(self, client, theme_name):
+        from decimal import Decimal
+        from django.conf import settings
+        from pathlib import Path
+        from cms.models import StandardPage
+        from erp.models import Category, Product
+        from plugin_registry.registry import registry
+
+        block_names = [name for name, _ in registry.get_active_stream_blocks()]
+        assert "product_showcase" in block_names
+
+        cat = Category.objects.create(name=f"Automation-{theme_name}")
+        Product.objects.create(
+            sku=f"SHOW-{theme_name}-1",
+            name=f"Edge Controller {theme_name}",
+            category=cat,
+            public_summary="Real-time industrial edge controller.",
+            unit_price=Decimal("750.00"),
+            is_active=True,
+            is_published=True,
+        )
+        Product.objects.create(
+            sku=f"HIDE-{theme_name}-2",
+            name=f"Hidden Draft Unit {theme_name}",
+            category=cat,
+            is_active=True,
+            is_published=False,
+        )
+
+        root = _get_or_create_wagtail_root()
+        page = StandardPage(
+            title=f"Catalog {theme_name}",
+            slug=f"catalog-{theme_name}",
+            intro="ERP Product Showcase",
+            body=[
+                (
+                    "product_showcase",
+                    {
+                        "heading": "Industrial Catalog",
+                        "category_slug": cat.slug,
+                        "max_items": 4,
+                        "show_prices": True,
+                    },
+                ),
+            ],
+        )
+        root.add_child(instance=page)
+        page.save_revision().publish()
+
+        response = client.get(f"{page.url}?theme={theme_name}")
+        assert response.status_code == 200
+        html = response.content.decode("utf-8")
+        assert "Industrial Catalog" in html
+        assert f"Edge Controller {theme_name}" in html
+        assert "Real-time industrial edge controller." in html
+        assert "750.00" in html
+        assert f"Hidden Draft Unit {theme_name}" not in html
+
+        tpl_src = Path(settings.BASE_DIR, "cms/templates/cms/blocks/product_showcase_block.html").read_text(
+            encoding="utf-8"
+        )
+        assert "!important" not in tpl_src
+        assert 'style="' not in tpl_src

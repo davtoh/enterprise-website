@@ -25,7 +25,7 @@ class InvoiceListView(LoginRequiredMixin, ListView):
     paginate_by = 15
 
     def get_queryset(self):
-        qs = Invoice.objects.order_by("-issue_date", "-id")
+        qs = Invoice.objects.select_related("crm_company", "crm_contact").order_by("-issue_date", "-id")
         status = self.request.GET.get("status", "").strip()
         q = self.request.GET.get("q", "").strip()
         if status:
