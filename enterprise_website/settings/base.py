@@ -53,6 +53,9 @@ ACCOUNT_PRESERVE_USERNAME_CASING = False
 
 # Theme Architecture & Dynamic CSS Framework Configuration
 SITE_THEME = os.getenv('SITE_THEME', 'bootstrap5').lower().strip()
+
+# Plugin Zone Feature Flags
+ENABLE_LABS_PLUGINS = os.getenv("ENABLE_LABS_PLUGINS", "False").lower() in ("true", "1", "t")
 AVAILABLE_THEMES = ['bootstrap5', 'tailwind', 'minimal']
 
 # during the request phase, where middleware is applied first-to-last

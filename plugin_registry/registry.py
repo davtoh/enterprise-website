@@ -4,10 +4,11 @@ import logging
 from typing import Dict, List, Optional, Type
 
 from django.apps import apps
+from django.conf import settings
 from django.core.cache import cache
 from django.db import OperationalError, ProgrammingError
 
-from .base import AppPlugin
+from .base import AppPlugin, PluginZone
 
 logger = logging.getLogger(__name__)
 
@@ -107,6 +108,12 @@ class PluginRegistry:
         plugin_cls = self._plugins.get(slug)
         if plugin_cls is not None and getattr(plugin_cls, "is_system", False):
             return True
+        if (
+            plugin_cls is not None
+            and plugin_cls.get_zone() == PluginZone.LABS
+            and not getattr(settings, "ENABLE_LABS_PLUGINS", False)
+        ):
+            return False
         return bool(self._get_plugin_states().get(slug, True))
 
     def get_enabled_plugins(self) -> Dict[str, Type[AppPlugin]]:

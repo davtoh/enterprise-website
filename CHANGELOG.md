@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-15] feat: Step 2 Milestone 2: Zone Separation, ENABLE_LABS_PLUGINS & sync_plugin_menus Refactoring
+- **Type**: feat
+- **Summary**: Separated Public/Staff/Labs plugin zones, added ENABLE_LABS_PLUGINS gating, marked core plugins is_system=True, and decomposed sync_plugin_menus into <=40L helpers.
+- **Files** (14):
+  - `.env.example`
+  - `crm/plugin.py`
+  - `enterprise_website/settings/base.py`
+  - `erp/plugin.py`
+  - `home/plugin.py`
+  - `intelligent_tracker_hub/plugin.py`
+  - `language_management/plugin.py`
+  - `menu_management/sync.py`
+  - ... (+6 more)
+- **Verification**: pytest tests/test_plugin_registry.py tests/test_webprogram.py tests/crm/ tests/erp/ tests/test_intelligent_tracker_hub.py tests/test_task_runner.py tests/test_user_management.py
+
 ## [2026-11-15] feat: AppPlugin v2, Entry Points, PluginState & Runtime Gating
 - **Type**: feat
 - **Summary**: Added PluginZone, AppPlugin v2 extension attributes, entry_points discovery, PluginState with cache invalidation, PluginGatingMiddleware (404 on disabled routes), and menu tree filtering.

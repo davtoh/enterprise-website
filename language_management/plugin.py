@@ -9,6 +9,7 @@ class LanguageManagementPlugin(AppPlugin):
     description = "Internationalization, catalog maintenance, and automated translation."
     category = "utilities"
     icon = "fa-language"
+    is_system = True
 
     url_namespace = "language_management"
     url_prefix = "lang"

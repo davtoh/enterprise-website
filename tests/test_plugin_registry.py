@@ -250,4 +250,69 @@ class TestAppPluginV2AndGating:
         assert "Polls" in child_titles
 
 
+@pytest.mark.django_db
+class TestZoneSeparationAndPropagation:
+    """Milestone 2 tests for Staff/Labs/System plugin zones and menu propagation."""
+
+    def test_staff_zone_plugins_propagate_requires_staff_to_menus(self, clean_menu_db):
+        from plugin_registry.base import PluginZone
+
+        registry.autodiscover()
+        for slug in ("crm", "erp", "intelligent_tracker_hub", "task_runner"):
+            plugin_cls = registry.get_plugin(slug)
+            assert plugin_cls is not None
+            assert plugin_cls.get_zone() == PluginZone.STAFF
+            assert plugin_cls.requires_staff is True
+            assert plugin_cls.requires_auth is True
+
+        sync_plugin_menus()
+        regular_user = User.objects.create_user(username="regular_user", password="pw", is_staff=False)
+        staff_user = User.objects.create_user(username="staff_user", password="pw", is_staff=True)
+
+        regular_apps = next(
+            item for item in get_menu_tree("main_navbar", user=regular_user) if item["title"] == "Apps"
+        )
+        regular_titles = [child["title"] for child in regular_apps["children"]]
+        for staff_label in ("CRM", "ERP", "Security Hub", "Background Tasks"):
+            assert staff_label not in regular_titles
+
+        staff_apps = next(
+            item for item in get_menu_tree("main_navbar", user=staff_user) if item["title"] == "Apps"
+        )
+        staff_titles = [child["title"] for child in staff_apps["children"]]
+        for staff_label in ("CRM", "ERP", "Security Hub", "Background Tasks"):
+            assert staff_label in staff_titles
+
+    def test_sync_plugin_menus_propagates_plugin_level_defaults(self, clean_menu_db):
+        class StaffDefaultPlugin(AppPlugin):
+            name = "staff_default_test"
+            requires_auth = True
+            requires_staff = True
+            menu_items = [
+                MenuItemDefinition(
+                    label="Staff Default Item",
+                    url_path="/staff-default/",
+                    parent_slug="Apps",
+                )
+            ]
+
+        registry.register(StaffDefaultPlugin)
+        try:
+            sync_plugin_menus()
+            item = MenuItem.objects.get(plugin_source="staff_default_test")
+            assert item.requires_auth is True
+            assert item.requires_staff is True
+        finally:
+            registry._plugins.pop("staff_default_test", None)
+
+    def test_core_plugins_have_is_system_protection(self):
+        registry.autodiscover()
+        for slug in ("home", "theme_management", "language_management"):
+            plugin_cls = registry.get_plugin(slug)
+            assert plugin_cls is not None
+            assert plugin_cls.is_system is True
+            PluginState.objects.create(slug=slug, is_enabled=False)
+            assert registry.is_plugin_enabled(slug) is True
+
+
 

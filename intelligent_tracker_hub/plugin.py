@@ -1,5 +1,5 @@
 from django.utils.translation import gettext_lazy as _
-from plugin_registry.base import AppPlugin, MenuItemDefinition
+from plugin_registry.base import AppPlugin, MenuItemDefinition, PluginZone
 
 
 class IntelligentTrackerPlugin(AppPlugin):
@@ -16,6 +16,9 @@ class IntelligentTrackerPlugin(AppPlugin):
     )
     category = "productivity"
     icon = "fa fa-shield"
+    zone = PluginZone.STAFF
+    requires_staff = True
+    requires_auth = True
 
     url_namespace = "intelligent_tracker_hub"
     url_prefix = "security"
@@ -28,6 +31,7 @@ class IntelligentTrackerPlugin(AppPlugin):
             order=33,
             parent_slug="Apps",
             requires_auth=True,
+            requires_staff=True,
         ),
     ]
 

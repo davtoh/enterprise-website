@@ -1,5 +1,5 @@
 from django.utils.translation import gettext_lazy as _
-from plugin_registry.base import AppPlugin, MenuItemDefinition
+from plugin_registry.base import AppPlugin, MenuItemDefinition, PluginZone
 
 
 class ERPPlugin(AppPlugin):
@@ -13,6 +13,9 @@ class ERPPlugin(AppPlugin):
     )
     category = "management"
     icon = "fa fa-cubes"
+    zone = PluginZone.STAFF
+    requires_staff = True
+    requires_auth = True
 
     url_namespace = "erp"
     url_prefix = "erp"
@@ -25,6 +28,7 @@ class ERPPlugin(AppPlugin):
             order=33,
             parent_slug="Apps",
             requires_auth=True,
+            requires_staff=True,
         ),
     ]
 
@@ -45,6 +49,9 @@ class ERPProcurementPlugin(AppPlugin):
     )
     category = "management"
     icon = "fa fa-truck"
+    zone = PluginZone.STAFF
+    requires_staff = True
+    requires_auth = True
     is_stub = True
     status = "coming_soon"
 
@@ -60,6 +67,9 @@ class ERPWarehousePlugin(AppPlugin):
     )
     category = "management"
     icon = "fa fa-building-o"
+    zone = PluginZone.STAFF
+    requires_staff = True
+    requires_auth = True
     is_stub = True
     status = "coming_soon"
 
@@ -75,5 +85,8 @@ class ERPAccountingPlugin(AppPlugin):
     )
     category = "management"
     icon = "fa fa-calculator"
+    zone = PluginZone.STAFF
+    requires_staff = True
+    requires_auth = True
     is_stub = True
     status = "coming_soon"

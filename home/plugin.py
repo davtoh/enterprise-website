@@ -7,6 +7,7 @@ class HomePlugin(AppPlugin):
     verbose_name = _("Corporate Showcase")
     description = _("Corporate showcase pages: Home, About, Services, Products, Contact")
     category = "core"
+    is_system = True
     
     menu_items = [
         MenuItemDefinition(label=_("Home"), url_name="home:index", order=10),
