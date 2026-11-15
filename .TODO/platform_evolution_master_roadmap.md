@@ -59,12 +59,12 @@ All modified and newly created source files across all 5 steps must strictly obe
 ## 5. Multi-Step Master Roadmap
 
 ### Step 1: Security, Dead-Code & Hygiene Hardening + Lead Intake Pipeline (**ACTIVE EXECUTION TARGET**)
-- **Child Plan**: `.TODO/step_1_security_hygiene_hardening.md`
-- [ ] **rest_api/**: Extract `UserSerializer` and `UserViewSet` from `rest_api/urls.py` into `rest_api/serializers.py` and `rest_api/views.py`, enforce `IsAuthenticated` (staff full list, non-staff self-only) on `UserViewSet`, and update `tests/test_rest_api.py` for anonymous rejection + authenticated access.
-- [ ] **enterprise_website/settings/ & templates/partials/scripts.html**: Remove commented Google Maps API key from `templates/partials/scripts.html`, harden `SECRET_KEY` and `INTELLIGENT_TRACKER_SECRET_KEY` production checks (`DEBUG=False`), and clean unused imports in `enterprise_website/urls.py`.
-- [ ] **user_management/, webprogram/, language_management/, timezone_management/, polls/**: Remove dead `upload_pic` and `index2` views, wrap `webprogram` title in `gettext_lazy`, remove unused `LayoutLanguages` model/form (or mark deprecated cleanly with migration check), add `app_name = 'timezone_management'` (updating `select.html` and `tests/test_timezone_management.py`), and move `show_results` template tag from `custom_tags` to `polls` (keeping backwards-compatible import shim).
-- [ ] **home/views.py & home/services.py**: Wire `ContactView.post` to create/update `crm.Contact`, create a `crm.Lead` (`LeadSource.WEBSITE`), and create a follow-up `todo.Todo` item, verified by new tests in `tests/test_home.py`.
-- [ ] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
+- [x] **Child Plan**: `.TODO/step_1_security_hygiene_hardening.md`
+- [x] **rest_api/**: Extract `UserSerializer` and `UserViewSet` from `rest_api/urls.py` into `rest_api/serializers.py` and `rest_api/views.py`, enforce `IsAuthenticated` (staff full list, non-staff self-only) on `UserViewSet`, and update `tests/test_rest_api.py` for anonymous rejection + authenticated access.
+- [x] **enterprise_website/settings/ & templates/partials/scripts.html**: Remove commented Google Maps API key from `templates/partials/scripts.html`, harden `SECRET_KEY` and `INTELLIGENT_TRACKER_SECRET_KEY` production checks (`DEBUG=False`), and clean unused imports in `enterprise_website/urls.py`.
+- [x] **user_management/, webprogram/, language_management/, timezone_management/, polls/**: Remove dead `upload_pic` and `index2` views, wrap `webprogram` title in `gettext_lazy`, remove unused `LayoutLanguages` model/form (or mark deprecated cleanly with migration check), add `app_name = 'timezone_management'` (updating `select.html` and `tests/test_timezone_management.py`), and move `show_results` template tag from `custom_tags` to `polls` (keeping backwards-compatible import shim).
+- [x] **home/views.py & home/services.py**: Wire `ContactView.post` to create/update `crm.Contact`, create a `crm.Lead` (`LeadSource.WEBSITE`), and create a follow-up `todo.Todo` item, verified by new tests in `tests/test_home.py`.
+- [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
 ### Step 2: `AppPlugin v2`, Zone Separation, `django-unfold` Admin & Module Marketplace (**DEFERRED TO NEXT TURN / MILESTONE**)
 - **Child Plan**: `.TODO/step_2_plugin_marketplace_and_unfold_admin.md`

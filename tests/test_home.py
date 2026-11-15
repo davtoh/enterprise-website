@@ -82,6 +82,27 @@ class TestHomePages:
         assert Lead.objects.filter(contact=contact, source=LeadSource.WEBSITE).count() == 1
         assert Todo.objects.filter(title__icontains="Alice Smith").count() == 1
 
+    def test_contact_form_submission_updates_mixed_case_existing_contact(self, client):
+        existing = Contact.objects.create(first_name="Legacy", last_name="User", email="MixedCase@Example.com")
+        url = reverse("home:contact")
+        response = client.post(
+            url,
+            {
+                "name": "Updated Person",
+                "email": "mixedcase@example.com",
+                "subject": "Follow-up",
+                "message": "Checking case-insensitive deduplication",
+            },
+            follow=True,
+        )
+        assert response.status_code == 200
+        assert Contact.objects.filter(email__iexact="mixedcase@example.com").count() == 1
+        existing.refresh_from_db()
+        assert existing.first_name == "Updated"
+        assert existing.last_name == "Person"
+        assert Lead.objects.filter(contact=existing, source=LeadSource.WEBSITE).count() == 1
+        assert Todo.objects.filter(title__icontains="Updated Person").count() == 1
+
     def test_contact_form_submission_validation_failure(self, client):
         url = reverse("home:contact")
         # Missing required fields

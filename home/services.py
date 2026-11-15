@@ -12,6 +12,22 @@ def _split_contact_name(full_name: str) -> tuple[str, str]:
     return first_name, last_name
 
 
+def _upsert_contact_by_email(clean_email: str, first_name: str, last_name: str) -> Contact:
+    """Match an existing Contact case-insensitively before creating a new normalized row."""
+    contact = Contact.objects.filter(email__iexact=clean_email).order_by("id").first()
+    if contact is not None:
+        contact.first_name = first_name
+        contact.last_name = last_name
+        contact.save(update_fields=["first_name", "last_name"])
+        return contact
+
+    contact, _created = Contact.objects.update_or_create(
+        email=clean_email,
+        defaults={"first_name": first_name, "last_name": last_name},
+    )
+    return contact
+
+
 def ingest_website_contact_submission(
     name: str,
     email: str,
@@ -27,10 +43,7 @@ def ingest_website_contact_submission(
     lead_title = (clean_subject or f"Website Inquiry from {clean_name}")[:255]
 
     with transaction.atomic():
-        contact, _created = Contact.objects.update_or_create(
-            email=clean_email,
-            defaults={"first_name": first_name, "last_name": last_name},
-        )
+        contact = _upsert_contact_by_email(clean_email, first_name, last_name)
         lead = Lead.objects.create(
             title=lead_title,
             contact=contact,

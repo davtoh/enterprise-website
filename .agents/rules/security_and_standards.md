@@ -21,3 +21,8 @@ Enforce industry-standard best practices, OWASP Top 10 guidelines, 12-factor app
    - Adhere to PEP 8 in Python (and standard idioms in other languages when migrating).
    - Use meaningful variable and function names.
    - Keep views, models, and controllers modular and single-responsibility.
+
+## Django & DRF Invariants
+- **DRF `SessionAuthentication` vs. `401` Contracts**: Endpoints using `SessionAuthentication` + `IsAuthenticated` return `403 Forbidden` (not `401 Unauthorized`) to unauthenticated callers and may return `404` for cross-tenant isolation; keep integration tests and API contracts aligned with actual DRF status codes.
+- **Case-Insensitive `Contact` Deduplication (`email__iexact`)**: Before calling `Contact.objects.update_or_create(email=clean_email, ...)` on normalized emails, query `email__iexact` first so mixed-case legacy rows are updated rather than duplicated.
+- **Django URL Namespace Hygiene (`urls.W005`)**: Keep included namespaces (`namespace=...`) registered on one canonical route/alias to prevent `urls.W005` duplicate-namespace warnings during `manage.py check`.
