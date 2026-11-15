@@ -12,9 +12,8 @@ Welcome to the project repository. When working on modernization, debugging, fea
 ---
 
 ## 2. Persistent Task & Migration Logging
-- **Always update the migration log:** Maintain `MIGRATION_LOG.md` (and `TODO_MODERNIZATION.md`) with explicit checkpoints.
-- **Quota & Token Boundary Resilience:** Log current state, completed items, files touched, and next steps before executing heavy tasks.
-- If a session terminates or runs out of quota, any subsequent AI instance can read `MIGRATION_LOG.md` and immediately resume without redundant analysis.
+- **Changelog & Plan State Engine:** Record completed milestones and notable fixes via `diagnose.py changelog add` into `CHANGELOG.md` (and track multi-step roadmaps in `.TODO/` / `.frontier/`). Never create or append to `MIGRATION_LOG.md`.
+- **Quota & Token Boundary Resilience:** Keep `.frontier/plans/<slug>/` and `.frontier/LEARN_QUEUE.md` up-to-date so any subsequent AI instance can resume immediately via `plan_engine.py status` and `plan_engine.py next`.
 
 ---
 
@@ -75,6 +74,13 @@ Welcome to the project repository. When working on modernization, debugging, fea
   - Always prefix icons with `fa fa-<name>` (e.g., `fa fa-tasks`). Omitting `fa` causes empty square glyphs.
 - **Port Security & Docker Overrides:**
   - Never expose internal database/cache ports in `docker-compose.yml`. Host port bindings belong strictly in `docker-compose.override.yml`.
+
+---
+
+## 8. Plugin Registry, Labs & Unfold Admin Invariants
+- **Lazy Model Imports in Plugin Discovery:** `PluginRegistry` and plugin `ready()` hooks execute before Django's app registry is fully populated. Always defer ORM model imports (`PluginState`, `SiteConfiguration`, etc.) inside hook methods/functions (`get_active_plugins()`, etc.) rather than importing models at module top level.
+- **Labs Plugins URL Prefix:** Every plugin registered with `zone="labs"` must declare an explicit `url_prefix` so dynamic plugin routing stays isolated and never collides with root or CMS routes.
+- **Custom Unfold `/admin/*` Route Ordering & Context:** Mount custom `/admin/*` views **before** `path("admin/", admin.site.urls)` in `urlpatterns`, wrap them with `admin.site.admin_view(...)`, and merge `admin.site.each_context(request)` into template context so Unfold navigation, breadcrumbs, and permissions render properly.
 
 ---
 
