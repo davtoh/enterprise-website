@@ -20,6 +20,7 @@ from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf.urls.static import static  # https://docs.djangoproject.com/en/2.0/howto/static-files/
 from timezone_management import views as tz_views
+from plugin_registry.admin_views import PluginMarketplaceView
 
 urlpatterns = [
     path('', include('home.urls')),
@@ -41,6 +42,11 @@ urlpatterns = [
     path('api/v1/', include('intelligent_tracker_hub.api_urls')),
 
     #path('accounts/', include('django.contrib.auth.urls')),
+    path(
+        'admin/marketplace/',
+        admin.site.admin_view(PluginMarketplaceView.as_view()),
+        name='admin_marketplace',
+    ),
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),  # <url path>/setlang
     path('rest_api/', include('rest_api.urls')),  # , namespace='rest_framework'

@@ -315,4 +315,83 @@ class TestZoneSeparationAndPropagation:
             assert registry.is_plugin_enabled(slug) is True
 
 
+@pytest.mark.django_db
+class TestUnfoldAdminAndMarketplace:
+    """Milestone 3 tests for django-unfold Admin & Module Marketplace."""
+
+    def test_unfold_admin_renders_for_staff(self, client):
+        staff = User.objects.create_user(
+            username="unfold_staff", password="pw", is_staff=True, is_superuser=True
+        )
+        client.force_login(staff)
+        response = client.get("/admin/")
+        assert response.status_code == 200
+        body = response.content.decode("utf-8")
+        assert "Module Marketplace" in body
+        assert "Enterprise Workspace" in body
+
+    def test_marketplace_requires_staff_access(self, client):
+        resp_anon = client.get("/admin/marketplace/")
+        assert resp_anon.status_code == 302
+        assert "/admin/login/" in resp_anon.url
+
+        regular = User.objects.create_user(username="non_staff", password="pw", is_staff=False)
+        client.force_login(regular)
+        resp_reg = client.get("/admin/marketplace/")
+        assert resp_reg.status_code == 302
+        assert "/admin/login/" in resp_reg.url
+
+    def test_marketplace_get_and_zone_filtering(self, client):
+        staff = User.objects.create_user(username="mkt_staff", password="pw", is_staff=True)
+        client.force_login(staff)
+
+        resp = client.get("/admin/marketplace/")
+        assert resp.status_code == 200
+        body = resp.content.decode("utf-8")
+        assert "Module Marketplace" in body
+        assert "todo" in body
+
+        resp_staff_zone = client.get("/admin/marketplace/?zone=staff")
+        assert resp_staff_zone.status_code == 200
+        staff_body = resp_staff_zone.content.decode("utf-8")
+        assert "crm" in staff_body
+        assert "todo" not in staff_body
+
+    def test_marketplace_post_toggles_plugin_state(self, client):
+        staff = User.objects.create_user(username="toggle_staff", password="pw", is_staff=True)
+        client.force_login(staff)
+
+        resp_disable = client.post(
+            "/admin/marketplace/",
+            {"slug": "todo", "action": "disable"},
+            follow=True,
+        )
+        assert resp_disable.status_code == 200
+        assert PluginState.objects.get(slug="todo").is_enabled is False
+        assert registry.is_plugin_enabled("todo") is False
+
+        resp_enable = client.post(
+            "/admin/marketplace/",
+            {"slug": "todo", "action": "enable"},
+            follow=True,
+        )
+        assert resp_enable.status_code == 200
+        assert PluginState.objects.get(slug="todo").is_enabled is True
+        assert registry.is_plugin_enabled("todo") is True
+
+    def test_marketplace_blocks_disabling_system_plugin(self, client):
+        staff = User.objects.create_user(username="sys_staff", password="pw", is_staff=True)
+        client.force_login(staff)
+
+        resp = client.post(
+            "/admin/marketplace/",
+            {"slug": "home", "action": "disable"},
+            follow=True,
+        )
+        assert resp.status_code == 200
+        assert "cannot be disabled" in resp.content.decode("utf-8")
+        assert registry.is_plugin_enabled("home") is True
+
+
+
 

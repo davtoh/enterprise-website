@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-15] feat: Step 2 Milestone 3: django-unfold Admin Workspace & Module Marketplace UI
+- **Type**: feat
+- **Summary**: Configured django-unfold admin with grouped sidebar navigation, PluginStateAdmin, and staff-only Module Marketplace (/admin/marketplace/) with zone/category filters and live toggle protection.
+- **Files** (9):
+  - `enterprise_website/settings/__init__.py`
+  - `enterprise_website/settings/apps.py`
+  - `enterprise_website/urls.py`
+  - `requirements/base.txt`
+  - `tests/test_plugin_registry.py`
+  - `enterprise_website/settings/unfold_config.py`
+  - `plugin_registry/admin.py`
+  - `plugin_registry/admin_views.py`
+  - ... (+1 more)
+- **Verification**: pytest tests/test_plugin_registry.py tests/test_task_runner.py tests/test_user_management.py
+
 ## [2026-11-15] feat: Step 2 Milestone 2: Zone Separation, ENABLE_LABS_PLUGINS & sync_plugin_menus Refactoring
 - **Type**: feat
 - **Summary**: Separated Public/Staff/Labs plugin zones, added ENABLE_LABS_PLUGINS gating, marked core plugins is_system=True, and decomposed sync_plugin_menus into <=40L helpers.
@@ -125,27 +140,3 @@
     - Replaced hard-crashing `Todo.objects.get()` with `get_object_or_404(Todo, id=id)`.
     - Sanitized `add` view with empty-title validation and error alerts.
     - Replaced typographical quotes (`”`) with standard double quotes (`"`) in `todo/templates/todo/index.html`.
-
-## [Milestone 4] - Messages Refactoring & Environment Execution Standards
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Refactor `templates/partials/messages.html`:
-    - Remove hardcoded test alerts and restore dynamic Django message rendering loop (`{% if messages %} ... {% endif %}`).
-    - Eliminate hacky `!important`, full-screen viewport taking `min-height: 100vh`, and intrusive high z-index overlay.
-    - Implement clean Bootstrap alerts with gentle drop shadow, dismiss button, and 6-second auto-dismiss.
-  - Document Environment & Execution Standards:
-    - Eliminate command discovery friction by clearly defining the local virtual environment at `python` (and pip at `.\.venv\Scripts\pip.exe`).
-    - Explain that global Windows PATH points to an unconfigured Python stub without project packages installed.
-    - Clarify authentication architecture: custom user model `user_management.SiteUser`, separation of front-end `/accounts/login/` vs `/admin/login/` (`is_staff=True`), and how to inspect/create default users.
-    - Persist these rules across `.agents/rules/environment_and_execution.md` and root `AGENTS.md`.
-- **Files Created / Modified:**
-  - `templates/partials/messages.html`
-  - `.agents/rules/environment_and_execution.md`
-  - `AGENTS.md`
-  - `MIGRATION_LOG.md`
-- **Verification:**
-  - Verified `python manage.py check` passes with 0 issues.
-  - Confirmed `templates/partials/messages.html` renders only when messages exist and without intrusive CSS overrides.
-
----

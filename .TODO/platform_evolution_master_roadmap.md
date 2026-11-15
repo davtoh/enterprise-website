@@ -66,13 +66,13 @@ All modified and newly created source files across all 5 steps must strictly obe
 - [x] **home/views.py & home/services.py**: Wire `ContactView.post` to create/update `crm.Contact`, create a `crm.Lead` (`LeadSource.WEBSITE`), and create a follow-up `todo.Todo` item, verified by new tests in `tests/test_home.py`.
 - [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
-### Step 2: `AppPlugin v2`, Zone Separation, `django-unfold` Admin & Module Marketplace (**DEFERRED TO NEXT TURN / MILESTONE**)
-- **Child Plan**: `.TODO/step_2_plugin_marketplace_and_unfold_admin.md`
-- [ ] **plugin_registry/**: Extend `AppPlugin` (`v2`) with `zone` (`public`, `staff`, `labs`), `stream_blocks`, `api_urlpatterns`, `dashboard_widgets`, and `importlib.metadata.entry_points(group="enterprise_website.plugins")` discovery.
-- [ ] **plugin_registry/models.py & middleware.py**: Add `PluginState` model (`slug`, `is_enabled`, `config_json`) with cached runtime route/menu/task gating so disabled plugins return `404` and hide menu items without mutating `INSTALLED_APPS`.
-- [ ] **enterprise_website/settings/ &plugin_registry/admin_views.py**: Integrate `django-unfold` on `/admin/` with grouped sidebar navigation (`CRM`, `ERP`, `Security Hub`, `Platform`, `CMS`), cross-links to `/cms/` and `/rosetta/`, and an interactive **Module Marketplace** card grid for toggling plugins.
-- [ ] **webprogram/ & crm/ & erp/ & intelligent_tracker_hub/**: Enforce zone visibility (`requires_staff=True` on staff workspace plugins; `ENABLE_LABS_PLUGINS` feature flag on `webprogram`) and verify with unit/integration tests.
-- [ ] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
+### Step 2: `AppPlugin v2`, Zone Separation, `django-unfold` Admin & Module Marketplace
+- [x] **Child Plan**: `.TODO/step_2_plugin_marketplace_and_unfold_admin.md`
+- [x] **plugin_registry/**: Extend `AppPlugin` (`v2`) with `zone` (`public`, `staff`, `labs`), `stream_blocks`, `api_urlpatterns`, `dashboard_widgets`, and `importlib.metadata.entry_points(group="enterprise_website.plugins")` discovery.
+- [x] **plugin_registry/models.py & middleware.py**: Add `PluginState` model (`slug`, `is_enabled`, `config_json`) with cached runtime route/menu/task gating so disabled plugins return `404` and hide menu items without mutating `INSTALLED_APPS`.
+- [x] **enterprise_website/settings/ &plugin_registry/admin_views.py**: Integrate `django-unfold` on `/admin/` with grouped sidebar navigation (`CRM`, `ERP`, `Security Hub`, `Platform`, `CMS`), cross-links to `/cms/` and `/rosetta/`, and an interactive **Module Marketplace** card grid for toggling plugins.
+- [x] **webprogram/ & crm/ & erp/ & intelligent_tracker_hub/**: Enforce zone visibility (`requires_staff=True` on staff workspace plugins; `ENABLE_LABS_PLUGINS` feature flag on `webprogram`) and verify with unit/integration tests.
+- [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
 ### Step 3: Wagtail Hybrid CMS, Blog Engine, `wagtail-localize` & 3-Level Cached Navigation (**DEFERRED TO NEXT TURN / MILESTONE**)
 - **Child Plan**: `.TODO/step_3_wagtail_cms_blog_and_navigation.md`

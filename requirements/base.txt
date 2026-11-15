@@ -15,6 +15,7 @@ django-allauth==65.22.0
 django-countries==9.1.0
 django-phonenumber-field==8.5.0
 django-rosetta==0.10.3
+django-unfold==0.110.1
 djangorestframework==3.18.2
 hyperlink==21.0.0
 idna==3.20

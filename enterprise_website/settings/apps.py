@@ -7,6 +7,7 @@ and modular enterprise domain subsystems.
 
 DJANGO_CORE_APPS = [
     'daphne',  # Must be before django.contrib.staticfiles for channels/ASGI
+    'unfold',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.sites',
