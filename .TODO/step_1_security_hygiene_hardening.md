@@ -61,12 +61,12 @@ This child plan executes **Master Step 1** across 3 atomic, vertically verified 
 ## 5. Multi-Phase Roadmap & Milestones
 
 ### Milestone 1: REST API Permission Lockdown, Serializer Separation & Secret Hygiene (**ACTIVE EXECUTION TARGET**)
-- [ ] **rest_api/serializers.py**: Create `UserSerializer` (extracted from `rest_api/urls.py`) preserving dynamic `?val=` query-param field filtering and `rest_api:siteuser-detail` hyperlinked identity.
-- [ ] **rest_api/views.py**: Implement `UserViewSet` with `permission_classes = [permissions.IsAuthenticated]` and `get_queryset()` scoping full queryset to `is_staff=True` and `User.objects.filter(pk=request.user.pk)` for standard authenticated users.
-- [ ] **rest_api/urls.py**: Slim `rest_api/urls.py` to import `UserViewSet` from `rest_api.views` and register `router.register(r'users', UserViewSet, basename='siteuser')`.
-- [ ] **templates/partials/scripts.html & enterprise_website/urls.py**: Remove the commented legacy block containing the literal Google Maps API key in `templates/partials/scripts.html` and prune unused DRF imports from `enterprise_website/urls.py`.
-- [ ] **tests/test_rest_api.py**: Add `test_users_list_requires_authentication` (asserting `403` for anonymous `GET`), update existing list/detail/dynamic-field tests to authenticate via `api_client.force_authenticate`, and test non-staff self-scoping.
-- [ ] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
+- [x] **rest_api/serializers.py**: Create `UserSerializer` (extracted from `rest_api/urls.py`) preserving dynamic `?val=` query-param field filtering and `rest_api:siteuser-detail` hyperlinked identity.
+- [x] **rest_api/views.py**: Implement `UserViewSet` with `permission_classes = [permissions.IsAuthenticated]` and `get_queryset()` scoping full queryset to `is_staff=True` and `User.objects.filter(pk=request.user.pk)` for standard authenticated users.
+- [x] **rest_api/urls.py**: Slim `rest_api/urls.py` to import `UserViewSet` from `rest_api.views` and register `router.register(r'users', UserViewSet, basename='siteuser')`.
+- [x] **templates/partials/scripts.html & enterprise_website/urls.py**: Remove the commented legacy block containing the literal Google Maps API key in `templates/partials/scripts.html` and prune unused DRF imports from `enterprise_website/urls.py`.
+- [x] **tests/test_rest_api.py**: Add `test_users_list_requires_authentication` (asserting `403` for anonymous `GET`), update existing list/detail/dynamic-field tests to authenticate via `api_client.force_authenticate`, and test non-staff self-scoping.
+- [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
 ### Milestone 2: Dead-Code Pruning, i18n Fixes & URL Namespace Standardization (**DEFERRED TO NEXT TURN / MILESTONE**)
 - [ ] **user_management/views.py**: Remove the unrouted, broken `upload_pic` function (lines 193–205) and clean any unused imports in `user_management/views.py`.

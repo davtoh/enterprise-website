@@ -20,10 +20,6 @@ from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf.urls.static import static  # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-# for the rest API
-from django.contrib.auth import get_user_model
-from rest_framework import routers, serializers, viewsets
-
 urlpatterns = [
     path('', include('home.urls')),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url("favicon.ico"))),

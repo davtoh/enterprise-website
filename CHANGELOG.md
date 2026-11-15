@@ -1,5 +1,17 @@
 # Changelog
 
+## [2026-11-15] fix: Step 1 Milestone 1: REST API Permission Lockdown, Serializer Separation & Secret Hygiene
+- **Type**: fix
+- **Summary**: Extracted UserSerializer and UserViewSet from rest_api/urls.py, enforced IsAuthenticated with staff/self queryset scoping, removed legacy Google Maps key comment, and pruned unused DRF imports.
+- **Files** (6):
+  - `enterprise_website/urls.py`
+  - `rest_api/urls.py`
+  - `rest_api/views.py`
+  - `templates/partials/scripts.html`
+  - `tests/test_rest_api.py`
+  - `rest_api/serializers.py`
+- **Verification**: python -m pytest tests/test_rest_api.py
+
 ## [2026-11-12] feat: Coordinated Framework Upgrade - Django 5.2 LTS, DRF 3.18.2 & Allauth 65.22.0
 - **Type**: feat
 - **Summary**: Synchronized upgrade of Django 5.2.19, DRF 3.18.2, and Allauth 65.22.0 with allauth settings modernization, DB migrations, assertQuerySetEqual fixes, and Dependabot grouping rules.
@@ -130,19 +142,3 @@
       - System workflows with Mermaid diagrams (Authentication lifecycle, i18n & Rosetta translation pipeline, Geo-data ingestion, and Polling/voting).
       - Step-by-step commands guide for virtual environments, migrations, fixtures (`populate_users --test`), location databases (`populate_locations`), and poll management (`closepoll`).
       - Full commands reference for translation tooling (`makemessages`, `auto_translate` with all backend and flag variations, and `compilemessages`).
-
-## [Milestone 8] - Plugin Registry & Dynamic Menus System
-- **Date:** 2026-10-22
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Build `plugin_registry` Django application with `AppPlugin` base interface and `registry.autodiscover()`.
-  - Build `menu_management` Django application with `Menu` and `MenuItem` models supporting hierarchy, URL reverse resolution, permission checks, and plugin origin tracking.
-  - Create `sync_menus` command and admin action to synchronize discovered `AppPlugin` definitions into active database menus without overriding manual user customizations.
-  - Implement `dynamic_menu` context processor injecting structured tree `main_navigation` into all templates.
-  - Update `templates/base.html` to render the dynamic navigation menu with graceful static fallback.
-  - Register `home`, `todo`, `polls`, `webprogram`, and `rest_api` apps with `plugin.py` implementations.
-  - Add `documentation/plugin_system.md` detailing plugin creation and menu management workflows.
-- **Files Created / Modified:**
-  - `plugin_registry/` (`base.py`, `registry.py`, `apps.py`, `__init__.py`)
-  - `menu_management/` (`models.py`, `apps.py`, `admin.py`, `context_processors.py`, `sync.py`, `management/commands/sync_menus.py`, `migrations/0001_initial.py`)
-  - `home/plugin.py`, `todo/plugin.py`, `polls/plugin.py`, `webprogram/plugin.py`, `rest_api/plugin.py`
