@@ -19,6 +19,7 @@ from django.conf import settings
 from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf.urls.static import static  # https://docs.djangoproject.com/en/2.0/howto/static-files/
+from timezone_management import views as tz_views
 
 urlpatterns = [
     path('', include('home.urls')),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('webprogram/', include('webprogram.urls')),
     path('lang/', include('language_management.urls')),
     path('tz/', include('timezone_management.urls')),
+    path('tz/set/', tz_views.set_timezone, name='set_timezone'),
     path('accounts/', include('user_management.urls')),
     path('tasks/', include('task_runner.urls')),
     path('theme/', include('theme_management.urls')),

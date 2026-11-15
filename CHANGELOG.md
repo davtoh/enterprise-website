@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-15] fix: Step 1 Milestone 2: Dead-Code Pruning, i18n Fixes & URL Namespace Standardization
+- **Type**: fix
+- **Summary**: Removed dead upload_pic and index2 views, wrapped webprogram title in gettext_lazy, added timezone_management app_name with root alias fallback, extracted show_results to polls/templatetags/poll_tags.py, and pruned unused imports.
+- **Files** (11):
+  - `custom_tags/templatetags/present.py`
+  - `enterprise_website/urls.py`
+  - `language_management/views.py`
+  - `tests/test_polls.py`
+  - `tests/test_timezone_management.py`
+  - `tests/test_webprogram.py`
+  - `timezone_management/templates/timezone_management/select.html`
+  - `timezone_management/urls.py`
+  - ... (+3 more)
+- **Verification**: pytest tests/test_polls.py tests/test_timezone_management.py tests/test_webprogram.py tests/test_user_management.py
+
 ## [2026-11-15] fix: Step 1 Milestone 1: REST API Permission Lockdown, Serializer Separation & Secret Hygiene
 - **Type**: fix
 - **Summary**: Extracted UserSerializer and UserViewSet from rest_api/urls.py, enforced IsAuthenticated with staff/self queryset scoping, removed legacy Google Maps key comment, and pruned unused DRF imports.
@@ -126,19 +141,3 @@
       - Core layout: `templates/base.html`, `templates/admin/base_site.html`, `templates/signup.html`, `templates/base_form.html`, `templates/registration/logged_out.html`.
       - Home App: `index.html`, `about.html`, `services.html`, `products.html`, `contact.html`, and contact flash messages in `home/views.py`.
       - User Management App: `login.html`, `logout.html`, `profile.html`, `siteuser_list.html`, `signup.html`, `upload_image_form.html`, password reset templates (`password_reset_form.html`, `password_reset_done.html`, `password_reset_confirm.html`, `password_reset_complete.html`, `password_reset_email.html`), activation email (`activation.html`), `user_management/forms.py` (image validation, birthdate validation, ImageUploadForm label), and all authentication flash messages in `user_management/views.py`.
-
-## [Milestone 7] - Documentation Consolidation & System Operations Manual
-- **Date:** 2026-10-21
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - **Single Root README Consolidation:**
-    - Consolidated all relevant legacy setup instructions, production MySQL configurations, data fixtures, and project purpose from `README.rst` into `README.md`.
-    - Removed redundant root `README.rst` to maintain a single source of truth (`README.md`).
-  - **Comprehensive System Manual Creation:**
-    - Created [`documentation/README.md`](README.md) detailing:
-      - Project executive summary, purpose, and value proposition.
-      - Full architectural directory breakdown across all apps (`home`, `user_management`, `todo`, `polls`, `language_management`, `location_management`, `timezone_management`, `rest_api`, `webprogram`, `custom_tags`).
-      - Detailed feature descriptions for each module.
-      - System workflows with Mermaid diagrams (Authentication lifecycle, i18n & Rosetta translation pipeline, Geo-data ingestion, and Polling/voting).
-      - Step-by-step commands guide for virtual environments, migrations, fixtures (`populate_users --test`), location databases (`populate_locations`), and poll management (`closepoll`).
-      - Full commands reference for translation tooling (`makemessages`, `auto_translate` with all backend and flag variations, and `compilemessages`).

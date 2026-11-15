@@ -130,3 +130,14 @@ class TestPollsApp:
         res_results = views.results(request, published_poll.id)
         assert res_results.status_code == 200
 
+    def test_show_results_template_tag_and_legacy_delegate(self, published_poll):
+        from django.template import Context, Template
+
+        tpl_new = Template("{% load poll_tags %}{% show_results question %}")
+        rendered_new = tpl_new.render(Context({"question": published_poll}))
+        assert "Google Cloud Platform" in rendered_new
+
+        tpl_legacy = Template("{% load present %}{% show_results question %}")
+        rendered_legacy = tpl_legacy.render(Context({"question": published_poll}))
+        assert "Google Cloud Platform" in rendered_legacy
+

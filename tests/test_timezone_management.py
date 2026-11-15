@@ -11,14 +11,16 @@ class TestTimezoneManagement:
     """Tests for timezone selection view and middleware activation."""
 
     def test_timezone_select_page_get(self, client):
-        url = reverse("set_timezone")
+        url = reverse("timezone_management:set_timezone")
+        assert url == "/tz/set/"
+        assert reverse("set_timezone") == "/tz/set/"
         response = client.get(url)
         assert response.status_code == 200
         assert "Time zone:" in response.content.decode()
         assert "America/Bogota" in response.content.decode()
 
     def test_set_timezone_post_saves_to_session(self, client):
-        url = reverse("set_timezone")
+        url = reverse("timezone_management:set_timezone")
         response = client.post(url, {"timezone": "Europe/Paris", "next": "/"}, follow=True)
         assert response.status_code == 200
         assert client.session.get("django_timezone") == "Europe/Paris"
