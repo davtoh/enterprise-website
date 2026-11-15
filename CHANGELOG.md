@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-15] feat: AppPlugin v2, Entry Points, PluginState & Runtime Gating
+- **Type**: feat
+- **Summary**: Added PluginZone, AppPlugin v2 extension attributes, entry_points discovery, PluginState with cache invalidation, PluginGatingMiddleware (404 on disabled routes), and menu tree filtering.
+- **Files** (10):
+  - `.TODO/step_2_plugin_marketplace_and_unfold_admin.md`
+  - `enterprise_website/settings/base.py`
+  - `menu_management/context_processors.py`
+  - `plugin_registry/__init__.py`
+  - `plugin_registry/base.py`
+  - `plugin_registry/registry.py`
+  - `tests/test_plugin_registry.py`
+  - `plugin_registry/middleware.py`
+  - ... (+2 more)
+- **Verification**: pytest tests/test_plugin_registry.py tests/test_webprogram.py tests/crm/ tests/erp/ tests/test_intelligent_tracker_hub.py tests/test_task_runner.py tests/test_user_management.py
+
 ## [2026-11-15] feat: Home Contact-to-CRM Lead & Follow-Up Intake Pipeline
 - **Type**: feat
 - **Summary**: Added home/services.py atomic CRM/Todo contact ingestion, wired ContactView.post, pruned unused imports, and expanded tests/test_home.py.
@@ -119,19 +134,3 @@
   - Confirmed `templates/partials/messages.html` renders only when messages exist and without intrusive CSS overrides.
 
 ---
-
-## [Milestone 5] - Full Application Flash Messaging Integration
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Wire Django messages framework across all critical user interactions:
-    - **Login (`user_management.views.LoginView`)**:
-      - `form_valid`: Displays `messages.success` greeting the user by name upon successful login.
-      - `form_invalid`: Displays `messages.error` ("Invalid username or password. Please check your credentials and try again.").
-    - **Logout (`user_management.views.LogoutView`)**:
-      - `dispatch`: Displays `messages.info` ("You have been successfully logged out. See you soon!").
-    - **Sign Up / Registration (`user_management.views.SignUpView`)**:
-      - `form_valid`: Displays `messages.success` notifying account creation and prompting login.
-      - `form_invalid`: Displays `messages.error` prompting correction of registration errors.
-    - **Account Activation (`user_management.views.activate_user_account`)**:
-      - Success: Displays `messages.success` and redirects to profile.

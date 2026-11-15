@@ -1,5 +1,13 @@
 from dataclasses import dataclass, field
+from enum import Enum
 from typing import List, Optional, Dict, Any
+
+
+class PluginZone(str, Enum):
+    """Operational zone for an application plugin."""
+    PUBLIC = "public"
+    STAFF = "staff"
+    LABS = "labs"
 
 
 @dataclass
@@ -50,6 +58,15 @@ class AppPlugin:
     # Per-theme template directories / overrides: e.g. {'bootstrap5': 'todo/bs5/', 'tailwind': 'todo/tw/'}
     plugin_templates: Dict[str, str] = {}
 
+    # AppPlugin v2 contract: zone, access policy, and modular extension points
+    zone: PluginZone = PluginZone.PUBLIC
+    requires_staff: bool = False
+    requires_auth: bool = False
+    is_system: bool = False
+    stream_blocks: List[Any] = []
+    api_urlpatterns: List[Any] = []
+    dashboard_widgets: List[Dict[str, Any]] = []
+
     @classmethod
     def get_menu_items(cls) -> List[MenuItemDefinition]:
         return cls.menu_items
@@ -61,3 +78,19 @@ class AppPlugin:
     @classmethod
     def get_plugin_templates(cls) -> Dict[str, str]:
         return cls.plugin_templates
+
+    @classmethod
+    def get_zone(cls) -> PluginZone:
+        return cls.zone if isinstance(cls.zone, PluginZone) else PluginZone(cls.zone)
+
+    @classmethod
+    def get_stream_blocks(cls) -> List[Any]:
+        return cls.stream_blocks
+
+    @classmethod
+    def get_api_urlpatterns(cls) -> List[Any]:
+        return cls.api_urlpatterns
+
+    @classmethod
+    def get_dashboard_widgets(cls) -> List[Dict[str, Any]]:
+        return cls.dashboard_widgets

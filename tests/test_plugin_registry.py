@@ -1,12 +1,18 @@
+from unittest.mock import MagicMock, patch
+
 import pytest
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.core.management import call_command
+from django.http import Http404, HttpResponse
 from django.test import RequestFactory
 
-from menu_management.context_processors import dynamic_menu
+from menu_management.context_processors import dynamic_menu, get_menu_tree
 from menu_management.models import Menu, MenuItem
 from menu_management.sync import sync_plugin_menus
-from plugin_registry import AppPlugin, MenuItemDefinition, registry
+from plugin_registry import AppPlugin, MenuItemDefinition, PluginZone, registry
+from plugin_registry.middleware import PluginGatingMiddleware
+from plugin_registry.models import PLUGIN_STATE_CACHE_KEY, PluginState
 
 User = get_user_model()
 
@@ -101,5 +107,147 @@ class TestPluginRegistryAndMenus:
         assert "Home" in root_titles
         assert "About Us" in root_titles
         assert "Apps" in root_titles
+
+
+@pytest.mark.django_db
+class TestAppPluginV2AndGating:
+    """Tests for AppPlugin v2 contract, entry points, PluginState, and runtime gating."""
+
+    @pytest.fixture(autouse=True)
+    def clear_plugin_cache(self):
+        cache.delete(PLUGIN_STATE_CACHE_KEY)
+        yield
+        cache.delete(PLUGIN_STATE_CACHE_KEY)
+
+    def test_app_plugin_v2_defaults_and_getters(self):
+        class CustomV2Plugin(AppPlugin):
+            name = "custom_v2_test"
+            zone = "staff"
+            requires_staff = True
+            requires_auth = True
+            is_system = False
+            stream_blocks = [("hero", "HeroBlock")]
+            api_urlpatterns = ["api/v2/custom/"]
+            dashboard_widgets = [{"id": "kpi_1", "title": "KPI"}]
+
+        assert CustomV2Plugin.get_zone() is PluginZone.STAFF
+        assert CustomV2Plugin.requires_staff is True
+        assert CustomV2Plugin.requires_auth is True
+        assert CustomV2Plugin.is_system is False
+        assert CustomV2Plugin.get_stream_blocks() == [("hero", "HeroBlock")]
+        assert CustomV2Plugin.get_api_urlpatterns() == ["api/v2/custom/"]
+        assert CustomV2Plugin.get_dashboard_widgets() == [{"id": "kpi_1", "title": "KPI"}]
+        assert AppPlugin.get_zone() is PluginZone.PUBLIC
+
+    def test_entry_points_discovery_in_autodiscover(self):
+        class ExternalEntryPlugin(AppPlugin):
+            name = "external_ep_plugin"
+            verbose_name = "External Entry Point Plugin"
+            url_prefix = "ext_ep"
+
+        fake_ep = MagicMock()
+        fake_ep.name = "external_ep_plugin"
+        fake_ep.value = "ext_pkg.plugin:ExternalEntryPlugin"
+        fake_ep.load.return_value = ExternalEntryPlugin
+
+        original_discovered = registry._discovered
+        registry._discovered = False
+        try:
+            with patch("plugin_registry.registry.metadata.entry_points", return_value=[fake_ep]) as mock_eps:
+                registry.autodiscover()
+                mock_eps.assert_called_with(group="enterprise_website.plugins")
+            assert registry.get_plugin("external_ep_plugin") is ExternalEntryPlugin
+        finally:
+            registry._plugins.pop("external_ep_plugin", None)
+            registry._discovered = original_discovered
+
+    def test_plugin_state_persistence_and_cache_invalidation(self):
+        assert registry.is_plugin_enabled("todo") is True
+
+        state = PluginState.objects.create(
+            slug="todo",
+            is_enabled=False,
+            config_json={"max_items": 50},
+        )
+        assert state.config_json == {"max_items": 50}
+        assert registry.is_plugin_enabled("todo") is False
+        assert "todo" not in registry.get_enabled_plugins()
+
+        state.is_enabled = True
+        state.save()
+        assert registry.is_plugin_enabled("todo") is True
+        assert "todo" in registry.get_enabled_plugins()
+
+        state.is_enabled = False
+        state.save()
+        assert registry.is_plugin_enabled("todo") is False
+        state.delete()
+        assert registry.is_plugin_enabled("todo") is True
+
+    def test_registry_accessors_filter_disabled_plugins(self):
+        class RichPlugin(AppPlugin):
+            name = "rich_filter_test"
+            tasks = ["rich.tasks.sync"]
+            plugin_templates = {"bootstrap5": "rich/bs5/"}
+            stream_blocks = [("rich_block", object())]
+            api_urlpatterns = ["api/rich/"]
+
+        registry.register(RichPlugin)
+        try:
+            assert "rich_filter_test" in registry.get_all_tasks()
+            assert "rich_filter_test" in registry.get_all_plugin_templates()
+            assert "rich_filter_test" in registry.get_all_stream_blocks()
+            assert "rich_filter_test" in registry.get_all_api_urlpatterns()
+
+            PluginState.objects.create(slug="rich_filter_test", is_enabled=False)
+
+            assert "rich_filter_test" not in registry.get_all_tasks()
+            assert "rich_filter_test" not in registry.get_all_plugin_templates()
+            assert "rich_filter_test" not in registry.get_all_stream_blocks()
+            assert "rich_filter_test" not in registry.get_all_api_urlpatterns()
+        finally:
+            registry._plugins.pop("rich_filter_test", None)
+
+    def test_system_plugin_cannot_be_disabled(self):
+        class CoreSystemPlugin(AppPlugin):
+            name = "core_sys_test"
+            is_system = True
+            url_prefix = "core_sys"
+
+        registry.register(CoreSystemPlugin)
+        try:
+            PluginState.objects.create(slug="core_sys_test", is_enabled=False)
+            assert registry.is_plugin_enabled("core_sys_test") is True
+        finally:
+            registry._plugins.pop("core_sys_test", None)
+
+    def test_plugin_gating_middleware_returns_404_when_disabled(self, rf):
+        middleware = PluginGatingMiddleware(lambda req: HttpResponse("ok"))
+
+        enabled_req = rf.get("/crm/")
+        assert middleware(enabled_req).status_code == 200
+
+        PluginState.objects.create(slug="crm", is_enabled=False)
+
+        disabled_req = rf.get("/crm/contacts/")
+        with pytest.raises(Http404):
+            middleware(disabled_req)
+
+        lang_prefixed_req = rf.get("/en/crm/contacts/")
+        lang_prefixed_req.LANGUAGE_CODE = "en"
+        with pytest.raises(Http404):
+            middleware(lang_prefixed_req)
+
+    def test_menu_tree_hides_disabled_plugin_items(self, clean_menu_db):
+        sync_plugin_menus()
+        user = User(username="menu_visitor")
+
+        PluginState.objects.create(slug="todo", is_enabled=False)
+        nav = get_menu_tree("main_navbar", user=user)
+        apps_node = next(item for item in nav if item["title"] == "Apps")
+        child_titles = [child["title"] for child in apps_node["children"]]
+        assert "Todo List" not in child_titles
+        assert "Polls" in child_titles
+
 
 
