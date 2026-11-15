@@ -76,7 +76,7 @@ This child plan executes **Master Step 1** across 3 atomic, vertically verified 
 - [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
 ### Milestone 3: Home Contact-to-CRM Lead & Follow-Up Intake Pipeline (**DEFERRED TO NEXT TURN / MILESTONE**)
-- [ ] **home/services.py**: Create `ingest_website_contact_submission(name, email, subject, message)` that atomically `update_or_create`s `crm.Contact`, creates a `crm.Lead` (`source=LeadSource.WEBSITE`) + `crm.InteractionLog`, and creates a follow-up `todo.Todo` record.
-- [ ] **home/views.py**: Wire `ContactView.post` to call `ingest_website_contact_submission` when `name`, `email`, and `message` are valid, and prune unused imports in `home/views.py` and `home/models.py`.
-- [ ] **tests/test_home.py**: Expand `test_contact_form_submission_success` (and add dedicated assertions) verifying that submitting `/contact/` creates `crm.Contact`, `crm.Lead` (`LeadSource.WEBSITE`), and a follow-up `todo.Todo` item.
-- [ ] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
+- [x] **home/services.py**: Create `ingest_website_contact_submission(name, email, subject, message)` that atomically `update_or_create`s `crm.Contact`, creates a `crm.Lead` (`source=LeadSource.WEBSITE`) + `crm.InteractionLog`, and creates a follow-up `todo.Todo` record.
+- [x] **home/views.py**: Wire `ContactView.post` to call `ingest_website_contact_submission` when `name`, `email`, and `message` are valid, and prune unused imports in `home/views.py` and `home/models.py`.
+- [x] **tests/test_home.py**: Expand `test_contact_form_submission_success` (and add dedicated assertions) verifying that submitting `/contact/` creates `crm.Contact`, `crm.Lead` (`LeadSource.WEBSITE`), and a follow-up `todo.Todo` item.
+- [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.

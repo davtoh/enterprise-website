@@ -1,5 +1,15 @@
 # Changelog
 
+## [2026-11-15] feat: Home Contact-to-CRM Lead & Follow-Up Intake Pipeline
+- **Type**: feat
+- **Summary**: Added home/services.py atomic CRM/Todo contact ingestion, wired ContactView.post, pruned unused imports, and expanded tests/test_home.py.
+- **Files** (4):
+  - `home/models.py`
+  - `home/views.py`
+  - `tests/test_home.py`
+  - `home/services.py`
+- **Verification**: pytest tests/test_home.py tests/crm/
+
 ## [2026-11-15] fix: Step 1 Milestone 2: Dead-Code Pruning, i18n Fixes & URL Namespace Standardization
 - **Type**: fix
 - **Summary**: Removed dead upload_pic and index2 views, wrapped webprogram title in gettext_lazy, added timezone_management app_name with root alias fallback, extracted show_results to polls/templatetags/poll_tags.py, and pruned unused imports.
@@ -125,19 +135,3 @@
       - `form_invalid`: Displays `messages.error` prompting correction of registration errors.
     - **Account Activation (`user_management.views.activate_user_account`)**:
       - Success: Displays `messages.success` and redirects to profile.
-
-## [Milestone 6] - Internationalization (i18n), Rosetta Mapping & Automated Translation Baseline
-- **Date:** 2026-10-21
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - **AI & Project Rule Updates:**
-    - Created [`.agents/rules/rosetta_and_i18n.md`](rosetta_and_i18n.md) defining strict i18n and Rosetta standards for all new templates, models, and views.
-    - Updated [`AGENTS.md`](AGENTS.md) with **Section 6: Internationalization (i18n) & Rosetta Translation**.
-  - **Rosetta & Machine Translation Settings:**
-    - Configured `django.template.context_processors.i18n` in `TEMPLATES['OPTIONS']['context_processors']` within `enterprise_website/settings.py`.
-    - Enabled `ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True` and added optional API keys (`DEEPL_AUTH_KEY`, `OPENAI_API_KEY`, `AZURE_CLIENT_SECRET`, `GOOGLE_APPLICATION_CREDENTIALS_PATH`) in `enterprise_website/settings.py` and `.env.example`.
-  - **Comprehensive Codebase Mapping & Translation Tagging:**
-    - Mapped and wrapped all untranslated strings across:
-      - Core layout: `templates/base.html`, `templates/admin/base_site.html`, `templates/signup.html`, `templates/base_form.html`, `templates/registration/logged_out.html`.
-      - Home App: `index.html`, `about.html`, `services.html`, `products.html`, `contact.html`, and contact flash messages in `home/views.py`.
-      - User Management App: `login.html`, `logout.html`, `profile.html`, `siteuser_list.html`, `signup.html`, `upload_image_form.html`, password reset templates (`password_reset_form.html`, `password_reset_done.html`, `password_reset_confirm.html`, `password_reset_complete.html`, `password_reset_email.html`), activation email (`activation.html`), `user_management/forms.py` (image validation, birthdate validation, ImageUploadForm label), and all authentication flash messages in `user_management/views.py`.

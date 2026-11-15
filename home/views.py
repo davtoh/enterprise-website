@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template.loader import get_template
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
+
+from .services import ingest_website_contact_submission
 
 
 class HomeView(TemplateView):
@@ -42,10 +44,6 @@ class ProductsView(TemplateView):
         return context
 
 
-from django.contrib import messages
-from django.utils.translation import gettext as _
-
-
 class ContactView(TemplateView):
     template_name = "home/contact.html"
 
@@ -60,6 +58,12 @@ class ContactView(TemplateView):
         subject = request.POST.get('subject', '').strip()
         message = request.POST.get('message', '').strip()
         if name and email and message:
+            ingest_website_contact_submission(
+                name=name,
+                email=email,
+                subject=subject,
+                message=message,
+            )
             messages.success(request, _("Thank you, %(name)s! Your message has been received.") % {'name': name})
         else:
             messages.error(request, _("Please fill out all required fields."))
