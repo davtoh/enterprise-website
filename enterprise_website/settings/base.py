@@ -75,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 TEMPLATES = [
@@ -161,4 +162,17 @@ ROSETTA_SHOW_OCCURRENCES = True
 def ROSETTA_ACCESS_CONTROL_FUNCTION(user):
     # only staff members can use rosetta
     return user.is_staff is True and user.is_active is True
+
+
+# Wagtail & wagtail-localize configuration
+WAGTAIL_SITE_NAME = os.getenv("WAGTAIL_SITE_NAME", "Enterprise Website")
+WAGTAILADMIN_BASE_URL = os.getenv("WAGTAILADMIN_BASE_URL", "")
+WAGTAIL_I18N_ENABLED = True
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.search.backends.database",
+    }
+}
+
 

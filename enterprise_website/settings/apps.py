@@ -28,6 +28,22 @@ THIRD_PARTY_APPS = [
     'phonenumber_field',  # https://github.com/stefanfoulis/django-phonenumber-field
     'rosetta',
     'channels',
+    'wagtail_localize',
+    'wagtail_localize.locales',
+    'wagtail.contrib.forms',
+    'wagtail.contrib.redirects',
+    'wagtail.contrib.routable_page',
+    'wagtail.embeds',
+    'wagtail.sites',
+    'wagtail.users',
+    'wagtail.snippets',
+    'wagtail.documents',
+    'wagtail.images',
+    'wagtail.search',
+    'wagtail.admin',
+    'wagtail',
+    'modelcluster',
+    'taggit',
 ]
 
 ENTERPRISE_APPS = [
@@ -36,6 +52,7 @@ ENTERPRISE_APPS = [
     'rest_api.apps.RestApiConfig',
     'webprogram.apps.WebprogramConfig',
     'home.apps.HomeConfig',
+    'cms.apps.CmsConfig',
     'todo.apps.TodoConfig',
     'language_management.apps.LanguageManagementConfig',
     'polls.apps.PollsConfig',

@@ -1,5 +1,18 @@
 # Changelog
 
+## [2026-11-15] feat: Step 3 Milestone 1: Wagtail CMS, Blog Models & Theme-Aware StreamField Blocks
+- **Type**: feat
+- **Summary**: Configured Wagtail 8.1 + wagtail-localize 1.14.5, implemented cms app (CMSPlugin, StandardPage, BlogIndexPage, BlogPage, BlogCategory, StreamField blocks), multi-theme templates, and tests/test_cms.py (23 passed)
+- **Files** (7):
+  - `.TODO/step_3_wagtail_cms_blog_and_navigation.md`
+  - `enterprise_website/settings/apps.py`
+  - `enterprise_website/settings/base.py`
+  - `enterprise_website/urls.py`
+  - `requirements/base.txt`
+  - `cms/`
+  - `tests/test_cms.py`
+- **Verification**: pytest tests/test_cms.py tests/test_home.py
+
 ## [2026-11-15] feat: Step 2 Milestone 3: django-unfold Admin Workspace & Module Marketplace UI
 - **Type**: feat
 - **Summary**: Configured django-unfold admin with grouped sidebar navigation, PluginStateAdmin, and staff-only Module Marketplace (/admin/marketplace/) with zone/category filters and live toggle protection.
@@ -124,19 +137,3 @@
     - Django Admin (`/admin/`)
   - Update brand logo link to dynamic `{% url 'home:index' %}`.
   - Update `home/templates/home/index.html` buttons and footer links to route to active Django views.
-
-## [Milestone 3] - Logic Fixes, Auth Modernization & Security Hardening
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Fix `user_management/views.py`:
-    - Fixed base64 encoding/decoding compatibility for Django 3+ / 5.x in `send_account_activation_email` and `activate_user_account`.
-    - Fixed activation template path to `emails/user_management/activation.html`.
-    - Corrected broken reverse namespaces (`app:activate_user_account` -> `user_management:activate_user_account`, `hr:user_profile` -> `user_management:profile`).
-    - Handled Django 5 `LogoutView` POST-by-default requirement gracefully with `http_method_names = ['get', 'post', 'options']` while adding a secure CSRF POST logout form in the navbar.
-    - Updated `SiteUserProfileView` and `SiteUserUpdateView` with `LoginRequiredMixin` and `get_object()` returning `request.user` so `/accounts/profile/` functions without requiring a PK in the URL.
-    - Created `user_management/templates/user_management/profile.html`, `logout.html`, and `siteuser_list.html`.
-  - Fix `todo/views.py` and templates:
-    - Replaced hard-crashing `Todo.objects.get()` with `get_object_or_404(Todo, id=id)`.
-    - Sanitized `add` view with empty-title validation and error alerts.
-    - Replaced typographical quotes (`”`) with standard double quotes (`"`) in `todo/templates/todo/index.html`.

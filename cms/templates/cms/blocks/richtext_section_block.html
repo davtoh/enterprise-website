@@ -1,0 +1,11 @@
+{% load wagtailcore_tags %}
+<section class="cms-block-richtext py-4">
+    <div class="container">
+        {% if self.heading %}
+            <h2 class="mb-3">{{ self.heading }}</h2>
+        {% endif %}
+        <div class="cms-richtext-body">
+            {{ self.body|richtext }}
+        </div>
+    </div>
+</section>
