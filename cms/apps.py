@@ -8,3 +8,8 @@ class CmsConfig(AppConfig):
     default_auto_field = "django.db.models.AutoField"
     name = "cms"
     verbose_name = _("Content Management (Wagtail)")
+
+    def ready(self):
+        from .signals import register_cms_signals
+
+        register_cms_signals()

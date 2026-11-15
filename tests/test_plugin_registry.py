@@ -392,6 +392,32 @@ class TestUnfoldAdminAndMarketplace:
         assert "cannot be disabled" in resp.content.decode("utf-8")
         assert registry.is_plugin_enabled("home") is True
 
+    def test_menu_tree_caches_per_role_and_invalidates_on_plugin_state(
+        self, clean_menu_db, django_assert_num_queries
+    ):
+        cache.clear()
+        sync_plugin_menus()
+        regular_user = User.objects.create_user(username="cache_reg", password="pw", is_staff=False)
+        staff_user = User.objects.create_user(username="cache_staff", password="pw", is_staff=True)
+
+        reg_tree = get_menu_tree("main_navbar", user=regular_user)
+        staff_tree = get_menu_tree("main_navbar", user=staff_user)
+
+        reg_apps = next(item for item in reg_tree if item["title"] == "Apps")
+        staff_apps = next(item for item in staff_tree if item["title"] == "Apps")
+        assert "CRM" not in [c["title"] for c in reg_apps["children"]]
+        assert "CRM" in [c["title"] for c in staff_apps["children"]]
+
+        with django_assert_num_queries(0):
+            assert get_menu_tree("main_navbar", user=regular_user) == reg_tree
+            assert get_menu_tree("main_navbar", user=staff_user) == staff_tree
+
+        PluginState.objects.create(slug="todo", is_enabled=False)
+        updated_reg_tree = get_menu_tree("main_navbar", user=regular_user)
+        updated_apps = next(item for item in updated_reg_tree if item["title"] == "Apps")
+        assert "Todo List" not in [c["title"] for c in updated_apps["children"]]
+
+
 
 
 

@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-15] feat: Step 3 Milestone 2: Wagtail Menu Bridge, 3-Level Hierarchy & Per-Role/Locale Cached Navigation
+- **Type**: feat
+- **Summary**: Added MenuItem.wagtail_page with localized title/URL resolution, 3-level Wagtail-to-MenuItem sync in cms/bridge.py, versioned per-role/locale menu caching in menu_management/cache.py, and signal-driven cache invalidation.
+- **Files** (10):
+  - `cms/apps.py`
+  - `menu_management/context_processors.py`
+  - `menu_management/models.py`
+  - `menu_management/sync.py`
+  - `tests/test_plugin_registry.py`
+  - `cms/bridge.py`
+  - `cms/signals.py`
+  - `menu_management/cache.py`
+  - ... (+2 more)
+- **Verification**: pytest tests/test_cms_bridge.py tests/test_plugin_registry.py
+
 ## [2026-11-15] feat: Step 3 Milestone 1: Wagtail CMS, Blog Models & Theme-Aware StreamField Blocks
 - **Type**: feat
 - **Summary**: Configured Wagtail 8.1 + wagtail-localize 1.14.5, implemented cms app (CMSPlugin, StandardPage, BlogIndexPage, BlogPage, BlogCategory, StreamField blocks), multi-theme templates, and tests/test_cms.py (23 passed)
@@ -121,19 +136,3 @@
   - Files created in standard `.agents/rules` and root `AGENTS.md` format.
 
 ---
-
-## [Milestone 2] - Navigation & Page Routes Modernization
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Fix broken navigation links in `templates/base.html` that previously pointed to static `about.html`, `services.html`, `products.html`, `contact.html`.
-  - Implement Class-Based Views and responsive templates in `home` app for About Us, Services, Products, and Contact.
-  - Add routes supporting both standard URLs (`/about/`) and legacy paths (`/about.html`, etc.) for seamless backwards compatibility.
-  - Add an "Apps" dropdown in the navbar linking directly to the interactive modules:
-    - Todo (`/todo/`)
-    - Polls (`/polls/`)
-    - Brython WebProgram (`/webprogram/`)
-    - REST API (`/rest_api/`)
-    - Django Admin (`/admin/`)
-  - Update brand logo link to dynamic `{% url 'home:index' %}`.
-  - Update `home/templates/home/index.html` buttons and footer links to route to active Django views.

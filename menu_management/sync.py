@@ -1,6 +1,7 @@
 import logging
 from django.db import transaction
 from plugin_registry import registry
+from .cache import invalidate_menu_cache
 from .models import Menu, MenuItem
 
 logger = logging.getLogger(__name__)
@@ -134,3 +135,11 @@ def sync_plugin_menus(menu_slug: str = 'main_navbar'):
         for plugin_name, plugin_cls in plugins.items():
             for item_def in plugin_cls.get_menu_items():
                 _sync_single_menu_item(menu, plugin_name, plugin_cls, item_def)
+
+    try:
+        from cms.bridge import sync_wagtail_menus
+
+        sync_wagtail_menus(menu_slug=menu_slug)
+    except ImportError:
+        pass
+    invalidate_menu_cache()
