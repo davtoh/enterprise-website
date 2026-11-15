@@ -2,6 +2,9 @@ from django.utils.translation import gettext_lazy as _
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
+from polls.blocks import PollEmbedBlock
+from video_gallery.blocks import VideoGalleryEmbedBlock
+
 
 class HeroBlock(blocks.StructBlock):
     """Full-width hero banner block with optional CTA and background/side image."""
@@ -81,3 +84,5 @@ class CMSStreamBlock(blocks.StreamBlock):
     richtext = RichTextSectionBlock()
     features = FeatureGridBlock()
     cta = CallToActionBlock()
+    video_gallery = VideoGalleryEmbedBlock()
+    poll = PollEmbedBlock()

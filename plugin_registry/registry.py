@@ -63,6 +63,21 @@ def _discover_entry_points(register_fn) -> None:
             logger.warning("Error loading entry point plugin %s: %s", ep.name, exc)
 
 
+def _get_plugin_states() -> Dict[str, bool]:
+    """Return cached {slug: is_enabled} map from PluginState, or empty dict if DB is unready."""
+    cached = cache.get(PLUGIN_STATE_CACHE_KEY)
+    if cached is not None:
+        return cached
+    try:
+        from .models import PluginState
+
+        states = dict(PluginState.objects.values_list("slug", "is_enabled"))
+    except (OperationalError, ProgrammingError):
+        return {}
+    cache.set(PLUGIN_STATE_CACHE_KEY, states, timeout=300)
+    return states
+
+
 class PluginRegistry:
     """Central registry discovering and managing AppPlugins across installed apps."""
 
@@ -86,20 +101,6 @@ class PluginRegistry:
         self.autodiscover()
         return dict(self._plugins)
 
-    def _get_plugin_states(self) -> Dict[str, bool]:
-        """Return cached {slug: is_enabled} map from PluginState, or empty dict if DB is unready."""
-        cached = cache.get(PLUGIN_STATE_CACHE_KEY)
-        if cached is not None:
-            return cached
-        try:
-            from .models import PluginState
-
-            states = dict(PluginState.objects.values_list("slug", "is_enabled"))
-        except (OperationalError, ProgrammingError):
-            return {}
-        cache.set(PLUGIN_STATE_CACHE_KEY, states, timeout=300)
-        return states
-
     def is_plugin_enabled(self, slug: str) -> bool:
         """Return True if the plugin slug is enabled (system/empty/unpersisted plugins default True)."""
         if not slug or slug == "system":
@@ -114,7 +115,7 @@ class PluginRegistry:
             and not getattr(settings, "ENABLE_LABS_PLUGINS", False)
         ):
             return False
-        return bool(self._get_plugin_states().get(slug, True))
+        return bool(_get_plugin_states().get(slug, True))
 
     def get_enabled_plugins(self) -> Dict[str, Type[AppPlugin]]:
         """Return all discovered plugins that are currently enabled."""
@@ -148,6 +149,13 @@ class PluginRegistry:
             for name, plugin_cls in self.get_enabled_plugins().items()
             if plugin_cls.get_stream_blocks()
         }
+
+    def get_active_stream_blocks(self) -> List[tuple]:
+        """Return a flat list of (block_name, block_cls) tuples for enabled plugins."""
+        active_blocks: List[tuple] = []
+        for blocks in self.get_all_stream_blocks().values():
+            active_blocks.extend(blocks)
+        return active_blocks
 
     def get_all_api_urlpatterns(self) -> Dict[str, List]:
         """Return registered API URL patterns for enabled plugins, indexed by plugin name."""

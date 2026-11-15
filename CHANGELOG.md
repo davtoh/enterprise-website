@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-15] feat: Step 4 M1: Composable AppPlugin v2 StreamField Blocks & Public/Staff Video Isolation
+- **Type**: feat
+- **Summary**: Added is_public/requires_staff isolation on VideoGallery/VideoItem, registered VideoGalleryEmbedBlock and PollEmbedBlock via AppPlugin v2 and CMSStreamBlock, and added multi-theme block templates and tests.
+- **Files** (16):
+  - `cms/blocks.py`
+  - `plugin_registry/registry.py`
+  - `polls/plugin.py`
+  - `tests/test_cms.py`
+  - `tests/test_polls.py`
+  - `tests/test_video_gallery.py`
+  - `video_gallery/admin.py`
+  - `video_gallery/models.py`
+  - ... (+8 more)
+- **Verification**: pytest tests/test_video_gallery.py tests/test_polls.py tests/test_cms.py tests/test_plugin_registry.py
+
 ## [2026-11-15] feat: Step 3 Milestone 3: 3-Level Theme Headers, Section Sidebar & Seeded CMS Pages
 - **Type**: feat
 - **Summary**: Upgraded bootstrap5/tailwind/minimal headers with clickable parent tabs and 2-level dropdowns, added 3rd-level section_sidebar.html, implemented idempotent seed_initial_cms_pages(), and exposed cms_page context in home/views.py.

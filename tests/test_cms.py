@@ -274,3 +274,105 @@ class TestCMSSeedingAndNavigation:
         header_src = Path(settings.BASE_DIR, f"templates/themes/{theme_name}/partials/header.html").read_text(encoding="utf-8")
         assert "!important" not in header_src
         assert 'style="' not in header_src
+
+
+@pytest.mark.django_db
+class TestComposablePluginStreamBlocks:
+    """Tests for AppPlugin v2 StreamField block registration and multi-theme rendering."""
+
+    def test_registry_get_active_stream_blocks_respects_enabled_state(self):
+        from django.core.cache import cache
+        from plugin_registry.models import PluginState
+
+        active_names = [name for name, _ in registry.get_active_stream_blocks()]
+        assert "video_gallery" in active_names
+        assert "poll" in active_names
+
+        PluginState.objects.update_or_create(slug="video_gallery", defaults={"is_enabled": False})
+        cache.clear()
+        try:
+            filtered_names = [name for name, _ in registry.get_active_stream_blocks()]
+            assert "video_gallery" not in filtered_names
+            assert "poll" in filtered_names
+        finally:
+            PluginState.objects.filter(slug="video_gallery").delete()
+            cache.clear()
+
+    @pytest.mark.parametrize("theme_name", ["bootstrap5", "tailwind", "minimal"])
+    def test_standard_page_renders_video_gallery_and_poll_blocks_across_themes(self, client, theme_name):
+        from pathlib import Path
+        from django.utils import timezone
+        from polls.models import Choice, Question
+        from video_gallery.models import VideoGallery, VideoItem
+
+        gallery = VideoGallery.objects.create(
+            name="CMS Feature Demos",
+            slug=f"cms-feature-demos-{theme_name}",
+            is_active=True,
+            is_public=True,
+            requires_staff=False,
+        )
+        VideoItem.objects.create(
+            gallery=gallery,
+            title="Public Demo Reel",
+            embed_url="https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            is_public=True,
+            requires_staff=False,
+        )
+        VideoItem.objects.create(
+            gallery=gallery,
+            title="Hidden Staff Clip",
+            embed_url="https://www.youtube.com/watch?v=9bZkp7q19f0",
+            is_public=False,
+            requires_staff=True,
+        )
+
+        question = Question.objects.create(
+            question_text="Which deployment mode do you prefer?",
+            pub_date=timezone.now(),
+            opened=True,
+        )
+        Choice.objects.create(question=question, choice_text="Kubernetes", votes=3)
+        Choice.objects.create(question=question, choice_text="Docker Compose", votes=2)
+
+        root = _get_or_create_wagtail_root()
+        page = StandardPage(
+            title=f"Showcase {theme_name}",
+            slug=f"showcase-{theme_name}",
+            intro="Cross-app composable blocks",
+            body=[
+                (
+                    "video_gallery",
+                    {
+                        "heading": "Featured Videos",
+                        "gallery_slug": gallery.slug,
+                        "max_items": 3,
+                    },
+                ),
+                (
+                    "poll",
+                    {
+                        "heading": "Community Poll",
+                        "question_id": question.id,
+                    },
+                ),
+            ],
+        )
+        root.add_child(instance=page)
+        page.save_revision().publish()
+
+        response = client.get(f"{page.url}?theme={theme_name}")
+        assert response.status_code == 200
+        html = response.content.decode("utf-8")
+        assert "Featured Videos" in html
+        assert "Public Demo Reel" in html
+        assert "Hidden Staff Clip" not in html
+        assert "Community Poll" in html
+        assert "Which deployment mode do you prefer?" in html
+        assert "Kubernetes" in html
+        assert f"/polls/{question.id}/vote/" in html
+
+        for tpl_name in ("video_gallery_embed_block.html", "poll_embed_block.html"):
+            tpl_src = Path(settings.BASE_DIR, "cms/templates/cms/blocks", tpl_name).read_text(encoding="utf-8")
+            assert "!important" not in tpl_src
+            assert 'style="' not in tpl_src

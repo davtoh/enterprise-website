@@ -1,0 +1,67 @@
+{% load i18n %}
+<section class="cms-block-video-gallery py-5">
+    <div class="container">
+        {% if gallery %}
+            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+                <div>
+                    <h2 class="h3 mb-1">{{ self.heading|default:gallery.name }}</h2>
+                    {% if gallery.description %}
+                        <p class="text-muted mb-0">{{ gallery.description }}</p>
+                    {% endif %}
+                </div>
+                <a href="{{ gallery.get_absolute_url }}" class="btn btn-brand-outline btn-sm">
+                    <i class="fa fa-video-camera me-1" aria-hidden="true"></i>
+                    {% trans "View Full Gallery" %}
+                </a>
+            </div>
+
+            {% if videos %}
+                <div class="row g-4">
+                    {% for video in videos %}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card card-brand h-100 shadow-sm">
+                                <img
+                                    src="{{ video.display_thumbnail_url }}"
+                                    class="card-img-top"
+                                    alt="{{ video.title }}"
+                                    loading="lazy"
+                                >
+                                <div class="card-body d-flex flex-column">
+                                    <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+                                        <span class="badge bg-primary-subtle text-primary">
+                                            {{ video.get_source_type_display }}
+                                        </span>
+                                    </div>
+                                    <h3 class="h5 card-title">{{ video.title }}</h3>
+                                    {% if video.description %}
+                                        <p class="card-text text-muted small mb-3">
+                                            {{ video.description|truncatewords:20 }}
+                                        </p>
+                                    {% endif %}
+                                    <div class="mt-auto">
+                                        <a href="{{ gallery.get_absolute_url }}" class="btn btn-brand-primary btn-sm">
+                                            <i class="fa fa-play me-1" aria-hidden="true"></i>
+                                            {% trans "Watch Video" %}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="card shadow-sm">
+                    <div class="card-body text-muted">
+                        {% trans "No public videos are currently available in this gallery." %}
+                    </div>
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="card shadow-sm">
+                <div class="card-body text-muted">
+                    {% trans "Selected video gallery is unavailable." %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
