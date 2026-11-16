@@ -203,3 +203,53 @@ class TestHomePages:
         assert followup_todo.content_object == lead
         assert followup_todo.object_id == lead.pk
         assert contact.email == "grace@example.com"
+
+
+@pytest.mark.django_db
+class TestLocationManagementResources:
+    """Verify Unfold + Import/Export ModelResources for location_management."""
+
+    def test_location_admins_use_unfold_and_import_export(self):
+        from django.contrib import admin
+        from import_export.admin import ImportExportModelAdmin
+        from unfold.admin import ModelAdmin as UnfoldModelAdmin
+        from location_management.models import Cities, Countries, Location, States
+
+        for model in (Countries, States, Cities, Location):
+            model_admin = admin.site._registry[model]
+            assert isinstance(model_admin, UnfoldModelAdmin)
+            assert isinstance(model_admin, ImportExportModelAdmin)
+
+    def test_location_resources_export_and_dry_run_import(self):
+        from decimal import Decimal
+        from location_management.models import Cities, Countries, Location, States
+        from location_management.resources import (
+            CitiesResource,
+            CountriesResource,
+            LocationResource,
+            StatesResource,
+        )
+
+        country = Countries.objects.create(name="United States", code="US")
+        state = States.objects.create(country=country, name="Texas", code="TX")
+        city = Cities.objects.create(
+            country=country,
+            state=state,
+            name="Austin",
+            latitude=Decimal("30.26715300"),
+            longitude=Decimal("-97.74306080"),
+        )
+        loc = Location.objects.create(name="Austin HQ", code="AUS-HQ", city=city)
+
+        for resource_cls, qs in (
+            (CountriesResource, Countries.objects.filter(pk=country.pk)),
+            (StatesResource, States.objects.filter(pk=state.pk)),
+            (CitiesResource, Cities.objects.filter(pk=city.pk)),
+            (LocationResource, Location.objects.filter(pk=loc.pk)),
+        ):
+            resource = resource_cls()
+            dataset = resource.export(qs)
+            assert len(dataset) == 1
+            result = resource.import_data(dataset, dry_run=True)
+            assert not result.has_errors()
+

@@ -60,28 +60,27 @@ class LeadStageUpdateView(CRMBaseView, View):
 class LeadListView(CRMBaseView, ListView):
     model = Lead
     template_name = "crm/lead_list.html"
+    partial_template_name = "crm/partials/lead_table.html"
     context_object_name = "leads"
     paginate_by = 20
 
+    def get_template_names(self):
+        if getattr(self.request, "htmx", False):
+            return [self.partial_template_name]
+        return [self.template_name]
+
     def get_queryset(self):
-        qs = Lead.objects.select_related("contact", "company", "assigned_to")
-        q = self.request.GET.get("q", "").strip()
-        stage = self.request.GET.get("stage", "").strip()
+        from ..filters import LeadFilter
 
-        if q:
-            qs = qs.filter(
-                Q(title__icontains=q) |
-                Q(contact__first_name__icontains=q) |
-                Q(contact__last_name__icontains=q) |
-                Q(company__name__icontains=q)
-            )
-        if stage and stage in LeadStage.values:
-            qs = qs.filter(stage=stage)
-
-        return qs.order_by("-created_at")
+        base_qs = Lead.objects.select_related(
+            "contact", "company", "assigned_to"
+        ).order_by("-created_at")
+        self.filterset = LeadFilter(self.request.GET, queryset=base_qs)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        ctx["filter"] = getattr(self, "filterset", None)
         ctx["stages"] = LeadStage.choices
         ctx["current_stage"] = self.request.GET.get("stage", "")
         ctx["query"] = self.request.GET.get("q", "")

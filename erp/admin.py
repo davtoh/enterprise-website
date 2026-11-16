@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
+from import_export.admin import ImportExportModelAdmin
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm
 from .models import (
     Category,
     InventoryLocation,
@@ -9,10 +12,11 @@ from .models import (
     Invoice,
     InvoiceItem,
 )
+from .resources import InvoiceResource, ProductResource, StockMovementResource
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(UnfoldModelAdmin):
     list_display = ("name", "slug", "product_count", "created_at")
     search_fields = ("name", "description")
     prepopulated_fields = {"slug": ("name",)}
@@ -23,7 +27,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(InventoryLocation)
-class InventoryLocationAdmin(admin.ModelAdmin):
+class InventoryLocationAdmin(UnfoldModelAdmin):
     list_display = ("name", "code", "is_active", "created_at")
     list_filter = ("is_active",)
     search_fields = ("name", "code", "address")
@@ -38,7 +42,10 @@ class StockMovementInline(admin.TabularInline):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(UnfoldModelAdmin, ImportExportModelAdmin):
+    resource_classes = [ProductResource]
+    import_form_class = ImportForm
+    export_form_class = ExportForm
     list_display = (
         "name",
         "sku",
@@ -65,7 +72,10 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 @admin.register(StockMovement)
-class StockMovementAdmin(admin.ModelAdmin):
+class StockMovementAdmin(UnfoldModelAdmin, ImportExportModelAdmin):
+    resource_classes = [StockMovementResource]
+    import_form_class = ImportForm
+    export_form_class = ExportForm
     list_display = (
         "created_at",
         "movement_type",
@@ -88,7 +98,10 @@ class InvoiceItemInline(admin.TabularInline):
 
 
 @admin.register(Invoice)
-class InvoiceAdmin(admin.ModelAdmin):
+class InvoiceAdmin(UnfoldModelAdmin, ImportExportModelAdmin):
+    resource_classes = [InvoiceResource]
+    import_form_class = ImportForm
+    export_form_class = ExportForm
     list_display = (
         "invoice_number",
         "customer_name",

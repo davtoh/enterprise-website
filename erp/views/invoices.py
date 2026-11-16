@@ -10,6 +10,7 @@ from django.utils.translation import gettext as _
 from django.views import View
 from django.views.generic import DeleteView, DetailView, ListView
 
+from erp.filters import InvoiceFilter
 from erp.forms import InvoiceForm, InvoiceItemFormSet
 from erp.models import Invoice, InvoiceStatus
 from erp.pdf import generate_invoice_pdf
@@ -21,21 +22,25 @@ logger = logging.getLogger(__name__)
 class InvoiceListView(LoginRequiredMixin, ListView):
     model = Invoice
     template_name = "erp/invoice_list.html"
+    partial_template_name = "erp/partials/invoice_table.html"
     context_object_name = "invoices"
     paginate_by = 15
 
+    def get_template_names(self):
+        if getattr(self.request, "htmx", False):
+            return [self.partial_template_name]
+        return [self.template_name]
+
     def get_queryset(self):
-        qs = Invoice.objects.select_related("crm_company", "crm_contact").order_by("-issue_date", "-id")
-        status = self.request.GET.get("status", "").strip()
-        q = self.request.GET.get("q", "").strip()
-        if status:
-            qs = qs.filter(status=status)
-        if q:
-            qs = qs.filter(Q(invoice_number__icontains=q) | Q(customer_name__icontains=q) | Q(customer_email__icontains=q))
-        return qs
+        base_qs = Invoice.objects.select_related(
+            "crm_company", "crm_contact"
+        ).order_by("-issue_date", "-id")
+        self.filterset = InvoiceFilter(self.request.GET, queryset=base_qs)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        ctx["filter"] = getattr(self, "filterset", None)
         ctx["status_choices"] = InvoiceStatus.choices
         ctx["selected_status"] = self.request.GET.get("status", "")
         ctx["search_query"] = self.request.GET.get("q", "")

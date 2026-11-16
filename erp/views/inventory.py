@@ -7,6 +7,7 @@ from django.utils.translation import gettext as _
 from django.views import View
 from django.views.generic import ListView
 
+from erp.filters import StockMovementFilter
 from erp.forms import StockMovementForm
 from erp.models import StockMovement, StockMovementType
 
@@ -16,21 +17,25 @@ logger = logging.getLogger(__name__)
 class StockMovementListView(LoginRequiredMixin, ListView):
     model = StockMovement
     template_name = "erp/movement_list.html"
+    partial_template_name = "erp/partials/movement_table.html"
     context_object_name = "movements"
     paginate_by = 20
 
+    def get_template_names(self):
+        if getattr(self.request, "htmx", False):
+            return [self.partial_template_name]
+        return [self.template_name]
+
     def get_queryset(self):
-        qs = StockMovement.objects.select_related("product", "location", "created_by").order_by("-created_at")
-        mtype = self.request.GET.get("type", "").strip()
-        q = self.request.GET.get("q", "").strip()
-        if mtype:
-            qs = qs.filter(movement_type=mtype)
-        if q:
-            qs = qs.filter(Q(product__name__icontains=q) | Q(product__sku__icontains=q) | Q(reference__icontains=q))
-        return qs
+        base_qs = StockMovement.objects.select_related(
+            "product", "location", "created_by"
+        ).order_by("-created_at")
+        self.filterset = StockMovementFilter(self.request.GET, queryset=base_qs)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        ctx["filter"] = getattr(self, "filterset", None)
         ctx["movement_types"] = StockMovementType.choices
         ctx["selected_type"] = self.request.GET.get("type", "")
         ctx["search_query"] = self.request.GET.get("q", "")

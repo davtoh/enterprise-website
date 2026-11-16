@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-16] feat: Step 5 M2: Ecosystem Ops (django-filter, django-import-export & django-htmx)
+- **Type**: feat
+- **Summary**: Added FilterSets, Unfold ImportExportModelAdmin resources, and HTMX partial table rendering across crm, erp, and location_management.
+- **Files** (27):
+  - `crm/admin.py`
+  - `crm/templates/crm/company_list.html`
+  - `crm/templates/crm/contact_list.html`
+  - `crm/templates/crm/lead_list.html`
+  - `crm/views/companies.py`
+  - `crm/views/contacts.py`
+  - `crm/views/leads.py`
+  - `erp/admin.py`
+  - ... (+19 more)
+- **Verification**: pytest tests/crm/ tests/erp/ tests/test_home.py
+
 ## [2026-11-16] feat: Step 5 M1: Unified /api/v1/ (drf-spectacular) & AppPlugin.api_urlpatterns
 - **Type**: feat
 - **Summary**: Added drf-spectacular, django-filter, django-import-export, and django-htmx; mounted /api/v1/schema/, /api/v1/docs/, /api/v1/redoc/, and active plugin API routes via get_active_api_urlpatterns().
@@ -131,19 +146,4 @@
   - `language_management/plugin.py`
   - `menu_management/sync.py`
   - ... (+6 more)
-- **Verification**: pytest tests/test_plugin_registry.py tests/test_webprogram.py tests/crm/ tests/erp/ tests/test_intelligent_tracker_hub.py tests/test_task_runner.py tests/test_user_management.py
-
-## [2026-11-15] feat: AppPlugin v2, Entry Points, PluginState & Runtime Gating
-- **Type**: feat
-- **Summary**: Added PluginZone, AppPlugin v2 extension attributes, entry_points discovery, PluginState with cache invalidation, PluginGatingMiddleware (404 on disabled routes), and menu tree filtering.
-- **Files** (10):
-  - `.TODO/step_2_plugin_marketplace_and_unfold_admin.md`
-  - `enterprise_website/settings/base.py`
-  - `menu_management/context_processors.py`
-  - `plugin_registry/__init__.py`
-  - `plugin_registry/base.py`
-  - `plugin_registry/registry.py`
-  - `tests/test_plugin_registry.py`
-  - `plugin_registry/middleware.py`
-  - ... (+2 more)
 - **Verification**: pytest tests/test_plugin_registry.py tests/test_webprogram.py tests/crm/ tests/erp/ tests/test_intelligent_tracker_hub.py tests/test_task_runner.py tests/test_user_management.py

@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
+from import_export.admin import ImportExportModelAdmin
+from unfold.admin import ModelAdmin as UnfoldModelAdmin
+from unfold.contrib.import_export.forms import ExportForm, ImportForm
 from .models import (
     Company,
     Contact,
@@ -12,6 +15,7 @@ from .models import (
     EmailDeliveryLog,
     Segment,
 )
+from .resources import CompanyResource, ContactResource, LeadResource
 
 
 class ContactInline(admin.TabularInline):
@@ -37,7 +41,10 @@ class EmailStepInline(admin.StackedInline):
 
 
 @admin.register(Company)
-class CompanyAdmin(admin.ModelAdmin):
+class CompanyAdmin(UnfoldModelAdmin, ImportExportModelAdmin):
+    resource_classes = [CompanyResource]
+    import_form_class = ImportForm
+    export_form_class = ExportForm
     list_display = ("name", "industry", "city", "country", "annual_revenue", "created_at")
     search_fields = ("name", "industry", "city", "country")
     list_filter = ("industry", "country")
@@ -45,7 +52,10 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 @admin.register(Contact)
-class ContactAdmin(admin.ModelAdmin):
+class ContactAdmin(UnfoldModelAdmin, ImportExportModelAdmin):
+    resource_classes = [ContactResource]
+    import_form_class = ImportForm
+    export_form_class = ExportForm
     list_display = (
         "full_name",
         "email",
@@ -105,7 +115,10 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 @admin.register(Lead)
-class LeadAdmin(admin.ModelAdmin):
+class LeadAdmin(UnfoldModelAdmin, ImportExportModelAdmin):
+    resource_classes = [LeadResource]
+    import_form_class = ImportForm
+    export_form_class = ExportForm
     list_display = ("title", "contact", "company", "stage_badge", "value", "assigned_to", "expected_close_date", "created_at")
     search_fields = ("title", "contact__first_name", "contact__last_name", "company__name")
     list_filter = ("stage", "source", "assigned_to")
@@ -130,7 +143,7 @@ class LeadAdmin(admin.ModelAdmin):
 
 
 @admin.register(InteractionLog)
-class InteractionLogAdmin(admin.ModelAdmin):
+class InteractionLogAdmin(UnfoldModelAdmin):
     list_display = ("timestamp", "type_badge", "summary", "lead", "contact", "user")
     search_fields = ("summary", "details", "contact__email", "lead__title")
     list_filter = ("interaction_type", "timestamp", "user")
@@ -157,7 +170,7 @@ class InteractionLogAdmin(admin.ModelAdmin):
 
 
 @admin.register(EmailSequence)
-class EmailSequenceAdmin(admin.ModelAdmin):
+class EmailSequenceAdmin(UnfoldModelAdmin):
     list_display = ("name", "trigger_stage", "is_active", "steps_count", "created_at")
     list_filter = ("is_active", "trigger_stage")
     search_fields = ("name", "description")
@@ -169,21 +182,21 @@ class EmailSequenceAdmin(admin.ModelAdmin):
 
 
 @admin.register(EmailStep)
-class EmailStepAdmin(admin.ModelAdmin):
+class EmailStepAdmin(UnfoldModelAdmin):
     list_display = ("sequence", "step_number", "delay_days", "subject", "created_at")
     list_filter = ("sequence",)
     search_fields = ("subject", "body_template")
 
 
 @admin.register(SequenceEnrollment)
-class SequenceEnrollmentAdmin(admin.ModelAdmin):
+class SequenceEnrollmentAdmin(UnfoldModelAdmin):
     list_display = ("contact", "sequence", "lead", "current_step_number", "status", "next_send_at", "enrolled_at")
     list_filter = ("status", "sequence")
     search_fields = ("contact__email", "contact__first_name", "contact__last_name", "lead__title")
 
 
 @admin.register(EmailDeliveryLog)
-class EmailDeliveryLogAdmin(admin.ModelAdmin):
+class EmailDeliveryLogAdmin(UnfoldModelAdmin):
     list_display = ("recipient_email", "subject", "status_badge", "sent_at", "opened_at")
     list_filter = ("status", "sent_at")
     search_fields = ("recipient_email", "subject", "error_message")
@@ -205,7 +218,7 @@ class EmailDeliveryLogAdmin(admin.ModelAdmin):
 
 
 @admin.register(Segment)
-class SegmentAdmin(admin.ModelAdmin):
+class SegmentAdmin(UnfoldModelAdmin):
     list_display = ("name", "contact_count_display", "lead_count_display", "created_at")
     search_fields = ("name", "description")
 

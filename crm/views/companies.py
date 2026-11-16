@@ -11,6 +11,7 @@ from django.views.generic import (
 )
 
 from .base import CRMBaseView
+from ..filters import CompanyFilter
 from ..forms import CompanyForm
 from ..models import Company
 
@@ -18,23 +19,23 @@ from ..models import Company
 class CompanyListView(CRMBaseView, ListView):
     model = Company
     template_name = "crm/company_list.html"
+    partial_template_name = "crm/partials/company_table.html"
     context_object_name = "companies"
     paginate_by = 20
 
+    def get_template_names(self):
+        if getattr(self.request, "htmx", False):
+            return [self.partial_template_name]
+        return [self.template_name]
+
     def get_queryset(self):
-        qs = Company.objects.all()
-        q = self.request.GET.get("q", "").strip()
-        if q:
-            qs = qs.filter(
-                Q(name__icontains=q) |
-                Q(industry__icontains=q) |
-                Q(city__icontains=q) |
-                Q(country__icontains=q)
-            )
-        return qs.order_by("name")
+        base_qs = Company.objects.all().order_by("name")
+        self.filterset = CompanyFilter(self.request.GET, queryset=base_qs)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        ctx["filter"] = getattr(self, "filterset", None)
         ctx["query"] = self.request.GET.get("q", "")
         return ctx
 
