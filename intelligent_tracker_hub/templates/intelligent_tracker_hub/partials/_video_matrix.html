@@ -1,0 +1,91 @@
+{% load i18n %}
+<!-- Live Video Matrix Grid -->
+<div class="row g-3 mb-4" id="videoMatrixContainer">
+  {% for cam in cameras %}
+    <div class="{% if layout_mode == 'solo' %}col-12{% elif layout_mode == '3x3' %}col-md-6 col-lg-4{% else %}col-md-6{% endif %}">
+      <div class="card bg-dark text-white border-secondary shadow-sm h-100 camera-tile" id="tile-{{ cam.camera_id }}">
+        <!-- Camera Tile Header -->
+        <div class="card-header bg-black bg-opacity-50 py-2 px-3 d-flex justify-content-between align-items-center border-secondary">
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-{{ cam.status_badge_class }} py-1 px-2 d-flex align-items-center gap-1">
+              <i class="fa fa-circle small"></i>
+              <span>{{ cam.get_status_display }}</span>
+            </span>
+            <span class="fw-bold text-light small text-truncate" style="max-width: 180px;" title="{{ cam.name }}">
+              {{ cam.name }}
+            </span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-secondary bg-opacity-50 text-light small font-monospace">
+              {{ cam.camera_id }}
+            </span>
+            {% if cam.site %}
+              <span class="badge bg-info bg-opacity-25 text-info small text-truncate" style="max-width: 110px;">
+                {{ cam.site.name }}
+              </span>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Video Player Frame with Layered Canvas -->
+        <div class="card-body p-0 position-relative bg-black d-flex align-items-center justify-content-center" style="min-height: 240px; overflow: hidden;">
+          <!-- Live MJPEG Stream Image -->
+          <img src="{% url 'intelligent_tracker_api:camera_stream_live' cam.camera_id %}"
+               alt="Live Stream {{ cam.name }}"
+               id="stream-img-{{ cam.camera_id }}"
+               class="w-100 h-100 object-fit-contain d-block"
+               loading="lazy"
+               onerror="this.onerror=null; this.src='{% url 'intelligent_tracker_api:camera_stream_live' cam.camera_id %}?mock=1';">
+
+          <!-- Layered HTML5 Telemetry Canvas -->
+          <canvas id="canvas-overlay-{{ cam.camera_id }}"
+                  class="position-absolute top-0 start-0 w-100 h-100"
+                  style="pointer-events: none; z-index: 10;">
+          </canvas>
+
+          <!-- Telemetry HUD Badge Overlay -->
+          <div class="position-absolute bottom-0 start-0 p-2 d-flex gap-2" style="z-index: 15; background: rgba(0,0,0,0.4); border-top-right-radius: 6px;">
+            <span class="badge bg-black bg-opacity-75 text-success small font-monospace" id="fps-badge-{{ cam.camera_id }}">
+              FPS: {{ cam.fps }}
+            </span>
+            <span class="badge bg-black bg-opacity-75 text-light small font-monospace">
+              {{ cam.resolution }}
+            </span>
+            <span class="badge bg-black bg-opacity-75 text-info small font-monospace" id="occupancy-badge-{{ cam.camera_id }}">
+              OCC: 1
+            </span>
+          </div>
+        </div>
+
+        <!-- Camera Tile Footer Controls -->
+        <div class="card-footer bg-black bg-opacity-50 py-2 px-3 d-flex justify-content-between align-items-center border-secondary">
+          <small class="text-muted font-monospace">
+            <i class="fa fa-clock-o me-1"></i>
+            {% if cam.last_heartbeat %}{{ cam.last_heartbeat|date:"H:i:s" }} UTC{% else %}{% trans "Active" %}{% endif %}
+          </small>
+          <div class="btn-group btn-group-sm">
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="toggleStreamPlay('{{ cam.camera_id }}')" id="btn-play-{{ cam.camera_id }}" title="{% trans 'Pause/Resume Stream' %}">
+              <i class="fa fa-pause"></i>
+            </button>
+            <a href="{% url 'intelligent_tracker_api:camera_stream_live' cam.camera_id %}" target="_blank" class="btn btn-outline-secondary btn-sm" title="{% trans 'Open Raw Stream' %}">
+              <i class="fa fa-external-link"></i>
+            </a>
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="toggleTileFullscreen('tile-{{ cam.camera_id }}')" title="{% trans 'Fullscreen' %}">
+              <i class="fa fa-expand"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="col-12">
+      <div class="card bg-dark text-white border-secondary p-5 text-center">
+        <i class="fa fa-video-camera fa-3x text-muted mb-3 d-block"></i>
+        <h5 class="fw-bold">{% trans "No Active Cameras Configured for this Site." %}</h5>
+        <p class="text-muted small mb-3">
+          {% trans "Cameras report via edge heartbeats or can be registered in the admin console." %}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+</div>

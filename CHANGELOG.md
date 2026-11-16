@@ -1,5 +1,19 @@
 # Changelog
 
+## [2026-11-16] refactor: Step 5 Milestone 3: Modularity Budget Paydown & Master Roadmap Sign-Off
+- **Type**: refactor
+- **Summary**: Decomposed erp/pdf.py, intelligent_tracker_hub/api/*.py (with shared _helpers.py), and dashboard.html into 7 partials; all 468 pytest tests and modularity audits pass.
+- **Files** (8):
+  - `erp/pdf.py`
+  - `intelligent_tracker_hub/api/access_control.py`
+  - `intelligent_tracker_hub/api/security_events.py`
+  - `intelligent_tracker_hub/api/video_evidence.py`
+  - `intelligent_tracker_hub/api/video_streaming.py`
+  - `intelligent_tracker_hub/templates/intelligent_tracker_hub/dashboard.html`
+  - `intelligent_tracker_hub/api/_helpers.py`
+  - `intelligent_tracker_hub/templates/intelligent_tracker_hub/partials/`
+- **Verification**: pytest
+
 ## [2026-11-16] feat: Step 5 M2: Ecosystem Ops (django-filter, django-import-export & django-htmx)
 - **Type**: feat
 - **Summary**: Added FilterSets, Unfold ImportExportModelAdmin resources, and HTMX partial table rendering across crm, erp, and location_management.
@@ -132,18 +146,3 @@
   - `plugin_registry/admin_views.py`
   - ... (+1 more)
 - **Verification**: pytest tests/test_plugin_registry.py tests/test_task_runner.py tests/test_user_management.py
-
-## [2026-11-15] feat: Step 2 Milestone 2: Zone Separation, ENABLE_LABS_PLUGINS & sync_plugin_menus Refactoring
-- **Type**: feat
-- **Summary**: Separated Public/Staff/Labs plugin zones, added ENABLE_LABS_PLUGINS gating, marked core plugins is_system=True, and decomposed sync_plugin_menus into <=40L helpers.
-- **Files** (14):
-  - `.env.example`
-  - `crm/plugin.py`
-  - `enterprise_website/settings/base.py`
-  - `erp/plugin.py`
-  - `home/plugin.py`
-  - `intelligent_tracker_hub/plugin.py`
-  - `language_management/plugin.py`
-  - `menu_management/sync.py`
-  - ... (+6 more)
-- **Verification**: pytest tests/test_plugin_registry.py tests/test_webprogram.py tests/crm/ tests/erp/ tests/test_intelligent_tracker_hub.py tests/test_task_runner.py tests/test_user_management.py

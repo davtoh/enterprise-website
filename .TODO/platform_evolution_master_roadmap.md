@@ -90,10 +90,10 @@ All modified and newly created source files across all 5 steps must strictly obe
 - [x] **language_management/ & timezone_management/**: Sync user language and timezone selections to `SiteUser` profile preferences when authenticated.
 - [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
-### Step 5: Unified `/api/v1/` (`drf-spectacular`), Ecosystem Ops & Modularity Paydown (**DEFERRED TO NEXT TURN / MILESTONE**)
-- **Child Plan**: `.TODO/step_5_unified_api_and_modularity_paydown.md`
-- [ ] **rest_api/ & enterprise_website/urls.py**: Integrate `drf-spectacular` (`/api/v1/schema/`, `/api/v1/docs/`), auto-mount `AppPlugin.api_urlpatterns` under `/api/v1/`, and keep `/rest_api/` routing compatible.
-- [ ] **crm/ & erp/ & location_management/**: Add `django-filter` and `django-import-export` integration for admin and list views, plus `django-htmx` middleware for partial rendering.
-- [ ] **erp/pdf.py & intelligent_tracker_hub/**: Decompose oversized functions (`generate_invoice_pdf`, `access_control.py::post`, `video_evidence.py::post`, `security_events.py::post`, `video_streaming.py::get`) and `intelligent_tracker_hub/templates/intelligent_tracker_hub/dashboard.html` (630L) into partials/helpers under the 350L/40L modularity budget.
-- [ ] **tests/ & .diagnostics/**: Run full regression suite (`pytest`), `diagnose.py audit`, `diagnose.py scan --prune`, and final `plan_engine.py digest`.
-- [ ] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
+### Step 5: Unified `/api/v1/` (`drf-spectacular`), Ecosystem Ops & Modularity Paydown
+- [x] **Child Plan**: `.TODO/step_5_unified_api_and_modularity_paydown.md`
+- [x] **rest_api/ & enterprise_website/urls.py**: Integrate `drf-spectacular` (`/api/v1/schema/`, `/api/v1/docs/`), auto-mount `AppPlugin.api_urlpatterns` under `/api/v1/`, and keep `/rest_api/` routing compatible.
+- [x] **crm/ & erp/ & location_management/**: Add `django-filter` and `django-import-export` integration for admin and list views, plus `django-htmx` middleware for partial rendering.
+- [x] **erp/pdf.py & intelligent_tracker_hub/**: Decompose oversized functions (`generate_invoice_pdf`, `access_control.py::post`, `video_evidence.py::post`, `security_events.py::post`, `video_streaming.py::get`) and `intelligent_tracker_hub/templates/intelligent_tracker_hub/dashboard.html` (630L) into partials/helpers under the 350L/40L modularity budget.
+- [x] **tests/ & .diagnostics/**: Run full regression suite (`pytest`), `diagnose.py audit`, `diagnose.py scan --prune`, and final `plan_engine.py digest`.
+- [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.

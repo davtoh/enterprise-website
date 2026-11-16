@@ -1,0 +1,118 @@
+{% load i18n %}
+<!-- Incidents List -->
+<div class="card shadow-sm border-0 mb-4">
+  <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+    <h5 class="card-title h6 mb-0 fw-bold">
+      <i class="fa fa-shield text-primary me-2"></i>{% trans "Spatial Security Events Log" %}
+    </h5>
+    <span class="badge bg-secondary">{{ page_obj.paginator.count }} {% trans "Events" %}</span>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">{% trans "Severity" %}</th>
+          <th scope="col">{% trans "Event Type & Zone" %}</th>
+          <th scope="col">{% trans "Location / Camera" %}</th>
+          <th scope="col">{% trans "Timestamp (UTC)" %}</th>
+          <th scope="col">{% trans "Evidence" %}</th>
+          <th scope="col">{% trans "Status" %}</th>
+          <th scope="col" class="text-end">{% trans "Action" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for evt in events %}
+          <tr>
+            <td>
+              <span class="badge bg-{{ evt.severity_badge_class }}">{{ evt.severity }}</span>
+            </td>
+            <td>
+              <div class="fw-bold">{{ evt.get_event_type_display }}</div>
+              {% if evt.zone_name %}
+                <span class="text-muted small"><i class="fa fa-crosshairs me-1"></i>{{ evt.zone_name }}</span>
+              {% endif %}
+            </td>
+            <td>
+              <div class="fw-semibold">
+                <i class="fa fa-video-camera me-1 text-muted"></i>{{ evt.camera_id }}
+              </div>
+              <small class="text-muted">
+                {% if evt.site %}{{ evt.site.name }}{% else %}{% trans "Default Site" %}{% endif %}
+              </small>
+            </td>
+            <td>
+              <span class="small">{{ evt.timestamp|date:"Y-m-d H:i:s" }}</span>
+            </td>
+            <td>
+              {% if evt.video_evidence %}
+                <a href="{% url 'intelligent_tracker_hub:event_detail' evt.event_id %}" class="btn btn-sm btn-outline-info p-1 px-2">
+                  <i class="fa fa-film me-1"></i>{% trans "Video" %}
+                </a>
+              {% elif evt.snapshot %}
+                <a href="{{ evt.snapshot.url }}" target="_blank" class="d-inline-block">
+                  <img src="{{ evt.snapshot.url }}" alt="Evidence" class="rounded border" width="48" height="32">
+                </a>
+              {% else %}
+                <span class="text-muted small">{% trans "No Snapshot" %}</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if evt.is_resolved %}
+                <span class="badge bg-success-subtle text-success border border-success-subtle">
+                  <i class="fa fa-check me-1"></i>{% trans "Resolved" %}
+                </span>
+              {% else %}
+                <span class="badge bg-danger-subtle text-danger border border-danger-subtle">
+                  <i class="fa fa-clock-o me-1"></i>{% trans "Active Alarm" %}
+                </span>
+              {% endif %}
+            </td>
+            <td class="text-end">
+              <a href="{% url 'intelligent_tracker_hub:event_detail' evt.event_id %}" class="btn btn-outline-primary btn-sm">
+                <i class="fa fa-eye me-1"></i>{% trans "Details" %}
+              </a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="7" class="text-center py-5 text-muted">
+              <i class="fa fa-shield fa-3x mb-3 d-block text-secondary"></i>
+              <p class="mb-1 fw-bold">{% trans "No security events recorded matching criteria." %}</p>
+              <p class="small text-muted mb-0">{% trans "Edge AI vision alerts dispatched via Webhook will display in real time here." %}</p>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  {% if page_obj.has_other_pages %}
+    <div class="card-footer bg-white d-flex justify-content-between align-items-center py-3">
+      <span class="small text-muted">
+        {% trans "Showing" %} {{ page_obj.start_index }} - {{ page_obj.end_index }} {% trans "of" %} {{ page_obj.paginator.count }}
+      </span>
+      <nav aria-label="Events pagination">
+        <ul class="pagination pagination-sm mb-0">
+          {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}&event_type={{ selected_event_type }}&severity={{ selected_severity }}&status={{ selected_status }}&camera_id={{ selected_camera_id }}&site_id={{ selected_site_id }}&layout={{ layout_mode }}">
+                &laquo;
+              </a>
+            </li>
+          {% endif %}
+          <li class="page-item disabled">
+            <span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+          </li>
+          {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}&event_type={{ selected_event_type }}&severity={{ selected_severity }}&status={{ selected_status }}&camera_id={{ selected_camera_id }}&site_id={{ selected_site_id }}&layout={{ layout_mode }}">
+                &raquo;
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  {% endif %}
+</div>
