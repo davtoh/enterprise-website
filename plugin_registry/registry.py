@@ -176,3 +176,11 @@ class PluginRegistry:
 
 # Global registry singleton
 registry = PluginRegistry()
+
+
+def get_active_api_urlpatterns() -> List:
+    """Return a flat list of URL patterns registered by enabled plugins."""
+    patterns: List = []
+    for plugin_patterns in registry.get_all_api_urlpatterns().values():
+        patterns.extend(plugin_patterns)
+    return patterns

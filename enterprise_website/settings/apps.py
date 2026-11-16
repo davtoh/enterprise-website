@@ -20,6 +20,10 @@ DJANGO_CORE_APPS = [
 
 THIRD_PARTY_APPS = [
     'rest_framework',  # support for rest apps
+    'drf_spectacular',
+    'django_filters',
+    'import_export',
+    'django_htmx',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

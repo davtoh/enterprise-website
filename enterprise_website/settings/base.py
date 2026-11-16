@@ -67,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware', #Manages sessions across requests
     'django.middleware.locale.LocaleMiddleware', # https://docs.djangoproject.com/en/2.1/topics/i18n/translation/#how-django-discovers-language-preference
     'django.middleware.common.CommonMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware', #Associates users with requests using sessions.
     'allauth.account.middleware.AccountMiddleware',

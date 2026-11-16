@@ -43,7 +43,7 @@ urlpatterns = [
     path('crm/', include('crm.urls')),
     path('erp/', include('erp.urls')),
     path('security/', include('intelligent_tracker_hub.urls')),
-    path('api/v1/', include('intelligent_tracker_hub.api_urls')),
+    path('api/v1/', include('rest_api.v1_urls')),
 
     #path('accounts/', include('django.contrib.auth.urls')),
     path(

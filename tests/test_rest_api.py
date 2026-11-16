@@ -107,3 +107,32 @@ class TestRestApi:
         url = reverse("rest_api:siteuser-detail", kwargs={"pk": 99999})
         response = api_client.get(url)
         assert response.status_code == 404
+
+    def test_v1_openapi_schema_endpoint(self, api_client):
+        url = reverse("schema")
+        response = api_client.get(url, HTTP_ACCEPT="application/json")
+        assert response.status_code == 200
+        assert str(response.data.get("openapi", "")).startswith("3.")
+        paths = response.data.get("paths", {})
+        assert "/api/v1/users/" in paths
+        assert "/api/v1/security/events/" in paths
+
+    def test_v1_swagger_and_redoc_endpoints(self, api_client):
+        docs_response = api_client.get(reverse("swagger-ui"))
+        assert docs_response.status_code == 200
+        assert "SwaggerUIBundle" in docs_response.content.decode("utf-8")
+
+        redoc_response = api_client.get(reverse("redoc"))
+        assert redoc_response.status_code == 200
+
+    def test_v1_users_endpoint_via_plugin_api_urlpatterns(self, api_client, api_users, staff_user):
+        anon_resp = api_client.get("/api/v1/users/")
+        assert anon_resp.status_code == 403
+
+        api_client.force_authenticate(user=staff_user)
+        staff_resp = api_client.get("/api/v1/users/")
+        assert staff_resp.status_code == 200
+        items = staff_resp.data.get("results", staff_resp.data)
+        usernames = [u["username"] for u in items]
+        assert "alice" in usernames
+        assert "bob" in usernames

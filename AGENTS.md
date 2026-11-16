@@ -79,6 +79,7 @@ Welcome to the project repository. When working on modernization, debugging, fea
 
 ## 8. Plugin Registry, Labs & Unfold Admin Invariants
 - **Lazy Model Imports in Plugin Discovery:** `PluginRegistry` and plugin `ready()` hooks execute before Django's app registry is fully populated. Always defer ORM model imports (`PluginState`, `SiteConfiguration`, etc.) inside hook methods/functions (`get_active_plugins()`, etc.) rather than importing models at module top level.
+- **PluginRegistry Method Budget & Block ORM Deferral:** Keep `PluginRegistry` within the 12-method class budget by extracting stateless helpers (e.g., `_get_plugin_states`) to module level, and defer ORM imports inside Wagtail block `get_context()` when blocks are referenced by `AppPlugin.stream_blocks`.
 - **Labs Plugins URL Prefix:** Every plugin registered with `zone="labs"` must declare an explicit `url_prefix` so dynamic plugin routing stays isolated and never collides with root or CMS routes.
 - **Custom Unfold `/admin/*` Route Ordering & Context:** Mount custom `/admin/*` views **before** `path("admin/", admin.site.urls)` in `urlpatterns`, wrap them with `admin.site.admin_view(...)`, and merge `admin.site.each_context(request)` into template context so Unfold navigation, breadcrumbs, and permissions render properly.
 
@@ -88,6 +89,12 @@ Welcome to the project repository. When working on modernization, debugging, fea
 - **Wagtail Test Page Attachment & M2M Order:** Attach Wagtail test pages to `Site.objects.get(is_default_site=True).root_page`, and save `BlogPage` instances via `add_child()` before adding `ParentalManyToManyField` categories.
 - **Compact CMS Signal Registration & Versioned Cache Keys:** Loop signal connections over model tuples in `register_cms_signals()` to stay under the 40-line function budget, and use versioned cache keys (`cache.incr`) for backend-agnostic menu invalidation.
 - **Cache Isolation for `seed_initial_cms_pages()` Tests:** Tests that trigger Wagtail `page_published` signals or `sync_wagtail_menus()` populate `LocMemCache` via `cms/signals.py`. Pytest classes using `seed_initial_cms_pages()` must clear `django.core.cache.cache` in an `autouse` fixture to prevent leaking `main_navigation` into subsequent fallback-nav tests.
+
+---
+
+## 10. Cross-App Models, Forms & Middleware Invariants
+- **ModelForm Backfilled Fields:** When backfilling `ModelForm` fields in `model.save()` (e.g., `Invoice.customer_name` from `crm_company`/`crm_contact`), set `blank=True` on the model fields and enforce conditional presence in `Form.clean()`.
+- **TimeZone Display & Middleware Activation:** Ensure `TimeZone.__str__` returns a readable label, `TimezoneMiddleware` reads `user.timezone.timezone`, and `TimezoneMiddleware` is registered in `settings.base.MIDDLEWARE` for live activation.
 
 ---
 

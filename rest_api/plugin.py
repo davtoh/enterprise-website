@@ -18,3 +18,10 @@ class RestApiPlugin(AppPlugin):
             parent_slug="Apps",
         )
     ]
+
+    @classmethod
+    def get_api_urlpatterns(cls):
+        """Return DRF router URL patterns lazily to avoid AppRegistryNotReady during startup."""
+        from rest_api.urls import router
+
+        return list(router.urls)

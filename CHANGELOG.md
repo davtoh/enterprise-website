@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-16] feat: Step 5 M1: Unified /api/v1/ (drf-spectacular) & AppPlugin.api_urlpatterns
+- **Type**: feat
+- **Summary**: Added drf-spectacular, django-filter, django-import-export, and django-htmx; mounted /api/v1/schema/, /api/v1/docs/, /api/v1/redoc/, and active plugin API routes via get_active_api_urlpatterns().
+- **Files** (12):
+  - `.TODO/step_5_unified_api_and_modularity_paydown.md`
+  - `AGENTS.md`
+  - `enterprise_website/settings/apps.py`
+  - `enterprise_website/settings/base.py`
+  - `enterprise_website/settings/integrations.py`
+  - `enterprise_website/urls.py`
+  - `plugin_registry/registry.py`
+  - `requirements/base.txt`
+  - ... (+4 more)
+- **Verification**: pytest tests/test_rest_api.py tests/test_plugin_registry.py tests/tracker/
+
 ## [2026-11-16] feat: Step 4 Milestone 3: ActionItem Promotion & SiteUser Locale/Timezone Sync
 - **Type**: feat
 - **Summary**: Promoted Todo to ActionItem with GenericForeignKey, linked contact leads in home/services.py, and synced SiteUser preferred_language and timezone.
@@ -132,13 +147,3 @@
   - `plugin_registry/middleware.py`
   - ... (+2 more)
 - **Verification**: pytest tests/test_plugin_registry.py tests/test_webprogram.py tests/crm/ tests/erp/ tests/test_intelligent_tracker_hub.py tests/test_task_runner.py tests/test_user_management.py
-
-## [2026-11-15] feat: Home Contact-to-CRM Lead & Follow-Up Intake Pipeline
-- **Type**: feat
-- **Summary**: Added home/services.py atomic CRM/Todo contact ingestion, wired ContactView.post, pruned unused imports, and expanded tests/test_home.py.
-- **Files** (4):
-  - `home/models.py`
-  - `home/views.py`
-  - `tests/test_home.py`
-  - `home/services.py`
-- **Verification**: pytest tests/test_home.py tests/crm/

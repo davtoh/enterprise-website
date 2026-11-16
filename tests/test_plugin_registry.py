@@ -417,6 +417,26 @@ class TestUnfoldAdminAndMarketplace:
         updated_apps = next(item for item in updated_reg_tree if item["title"] == "Apps")
         assert "Todo List" not in [c["title"] for c in updated_apps["children"]]
 
+    def test_get_active_api_urlpatterns_respects_plugin_state(self):
+        from plugin_registry.registry import PluginRegistry, get_active_api_urlpatterns
+
+        method_names = [
+            name
+            for name, member in vars(PluginRegistry).items()
+            if callable(member)
+        ]
+        assert len(method_names) <= 12
+
+        active_names = [getattr(p, "name", None) for p in get_active_api_urlpatterns()]
+        assert "siteuser-list" in active_names
+
+        state = PluginState.objects.create(slug="rest_api", is_enabled=False)
+        try:
+            disabled_names = [getattr(p, "name", None) for p in get_active_api_urlpatterns()]
+            assert "siteuser-list" not in disabled_names
+        finally:
+            state.delete()
+
 
 
 

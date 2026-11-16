@@ -13,10 +13,14 @@ daphne==4.2.3
 Django==5.2.19
 django-allauth==65.22.0
 django-countries==9.1.0
+django-filter==26.2
+django-htmx==1.29.0
+django-import-export==4.4.5
 django-phonenumber-field==8.5.0
 django-rosetta==0.10.3
 django-unfold==0.110.1
 djangorestframework==3.18.2
+drf-spectacular==0.30.0
 hyperlink==21.0.0
 idna==3.20
 Incremental==24.11.0
