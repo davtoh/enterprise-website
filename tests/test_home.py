@@ -185,3 +185,21 @@ class TestHomePages:
         assert "Rugged indoor/outdoor telemetry rover." in html
         assert "Secret R2 Prototype" not in html
         assert "Retired R3" not in html
+
+    def test_contact_form_submission_links_todo_to_lead(self):
+        from crm.models import Lead
+        from home.services import ingest_website_contact_submission
+        from todo.models import Todo
+
+        contact, lead, _interaction, followup_todo = ingest_website_contact_submission(
+            name="Grace Hopper",
+            email="grace@example.com",
+            subject="Compiler Inquiry",
+            message="Interested in enterprise support.",
+        )
+        followup_todo.refresh_from_db()
+        assert isinstance(lead, Lead)
+        assert isinstance(followup_todo, Todo)
+        assert followup_todo.content_object == lead
+        assert followup_todo.object_id == lead.pk
+        assert contact.email == "grace@example.com"

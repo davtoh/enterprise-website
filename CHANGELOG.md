@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-16] feat: Step 4 Milestone 3: ActionItem Promotion & SiteUser Locale/Timezone Sync
+- **Type**: feat
+- **Summary**: Promoted Todo to ActionItem with GenericForeignKey, linked contact leads in home/services.py, and synced SiteUser preferred_language and timezone.
+- **Files** (19):
+  - `enterprise_website/settings/base.py`
+  - `enterprise_website/urls.py`
+  - `home/services.py`
+  - `language_management/views.py`
+  - `tests/test_home.py`
+  - `tests/test_timezone_management.py`
+  - `tests/test_todo.py`
+  - `tests/test_user_management.py`
+  - ... (+11 more)
+- **Verification**: pytest tests/test_video_gallery.py tests/test_polls.py tests/test_todo.py tests/crm/ tests/erp/ tests/test_timezone_management.py tests/test_user_management.py tests/test_home.py tests/test_cms.py
+
 ## [2026-11-15] feat: Step 4 Milestone 2: ERP Modular Models, Public Catalog & CRM Invoice Link
 - **Type**: feat
 - **Summary**: Split erp/models.py into erp/models/ package, added Product.is_published/public_summary, ProductShowcaseBlock, dynamic ProductsView catalog, and Invoice CRM backfill.
@@ -127,18 +142,3 @@
   - `tests/test_home.py`
   - `home/services.py`
 - **Verification**: pytest tests/test_home.py tests/crm/
-
-## [2026-11-15] fix: Step 1 Milestone 2: Dead-Code Pruning, i18n Fixes & URL Namespace Standardization
-- **Type**: fix
-- **Summary**: Removed dead upload_pic and index2 views, wrapped webprogram title in gettext_lazy, added timezone_management app_name with root alias fallback, extracted show_results to polls/templatetags/poll_tags.py, and pruned unused imports.
-- **Files** (11):
-  - `custom_tags/templatetags/present.py`
-  - `enterprise_website/urls.py`
-  - `language_management/views.py`
-  - `tests/test_polls.py`
-  - `tests/test_timezone_management.py`
-  - `tests/test_webprogram.py`
-  - `timezone_management/templates/timezone_management/select.html`
-  - `timezone_management/urls.py`
-  - ... (+3 more)
-- **Verification**: pytest tests/test_polls.py tests/test_timezone_management.py tests/test_webprogram.py tests/test_user_management.py

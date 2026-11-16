@@ -12,6 +12,18 @@
                 <div class="card shadow-sm border-0 rounded-3 p-4">
                     <a href="{% url 'todo:index' %}" class="text-muted mb-3 d-inline-block"><i class="fa fa-arrow-left me-1"></i> {% trans "Back to Todo List" %}</a>
                     <h2 class="mb-3">{{ todo.title }}</h2>
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        <span class="badge bg-secondary-subtle text-secondary-emphasis border">{{ todo.get_status_display }}</span>
+                        {% if todo.due_date %}
+                            <span class="badge bg-warning-subtle text-warning-emphasis border">{% trans "Due" %}: {{ todo.due_date|date:"M d, Y" }}</span>
+                        {% endif %}
+                        {% if todo.owner %}
+                            <span class="badge bg-info-subtle text-info-emphasis border">{% trans "Owner" %}: {{ todo.owner.username }}</span>
+                        {% endif %}
+                        {% if todo.content_object %}
+                            <span class="badge bg-primary-subtle text-primary-emphasis border">{% trans "Linked" %}: {{ todo.content_type.model }} #{{ todo.object_id }}</span>
+                        {% endif %}
+                    </div>
                     <p class="lead mb-4 text-break">{{ todo.text }}</p>
                     <hr>
                     <div class="alert alert-light border p-3 small">

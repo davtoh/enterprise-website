@@ -82,13 +82,13 @@ All modified and newly created source files across all 5 steps must strictly obe
 - [x] **templates/themes/*/partials/header.html**: Upgrade `bootstrap5`, `tailwind`, and `minimal` headers to support clickable parent tabs, 2-level dropdowns, and a 3rd-level contextual section sidebar partial, migrating static `home` pages into seeded Wagtail pages while preserving legacy `.html` route compatibility.
 - [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
-### Step 4: Cross-App Composable Blocks, Public ERP Catalog & `ActionItem` Promotion (**DEFERRED TO NEXT TURN / MILESTONE**)
-- **Child Plan**: `.TODO/step_4_cross_app_blocks_and_pipelines.md`
-- [ ] **video_gallery/ & polls/**: Separate public `VideoGallery` items from staff-only `SecurityEvent` evidence (`is_public` / `requires_staff`) and register embeddable Wagtail `StreamField` blocks (`VideoGalleryEmbedBlock`, `PollEmbedBlock`) via `AppPlugin v2`.
-- [ ] **erp/ & crm/**: Add `is_published` public catalog support to `erp.Product` with a reusable `ProductShowcaseBlock`, and add optional `crm_company` / `crm_contact` ForeignKeys on `erp.Invoice` while keeping plain-text customer fields backwards-compatible.
-- [ ] **todo/**: Promote `Todo` into a cross-app `ActionItem` model by adding optional `owner` (`SiteUser`), `status`, `due_date`, and `GenericForeignKey` (`content_type`, `object_id`) linking to `crm.Lead`, `erp.Invoice`, and `intelligent_tracker_hub.SecurityEvent` while preserving `plugin_templates` multi-theme overrides.
-- [ ] **language_management/ & timezone_management/**: Sync user language and timezone selections to `SiteUser` profile preferences when authenticated.
-- [ ] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
+### Step 4: Cross-App Composable Blocks, Public ERP Catalog & `ActionItem` Promotion
+- [x] **Child Plan**: `.TODO/step_4_cross_app_blocks_and_pipelines.md`
+- [x] **video_gallery/ & polls/**: Separate public `VideoGallery` items from staff-only `SecurityEvent` evidence (`is_public` / `requires_staff`) and register embeddable Wagtail `StreamField` blocks (`VideoGalleryEmbedBlock`, `PollEmbedBlock`) via `AppPlugin v2`.
+- [x] **erp/ & crm/**: Add `is_published` public catalog support to `erp.Product` with a reusable `ProductShowcaseBlock`, and add optional `crm_company` / `crm_contact` ForeignKeys on `erp.Invoice` while keeping plain-text customer fields backwards-compatible.
+- [x] **todo/**: Promote `Todo` into a cross-app `ActionItem` model by adding optional `owner` (`SiteUser`), `status`, `due_date`, and `GenericForeignKey` (`content_type`, `object_id`) linking to `crm.Lead`, `erp.Invoice`, and `intelligent_tracker_hub.SecurityEvent` while preserving `plugin_templates` multi-theme overrides.
+- [x] **language_management/ & timezone_management/**: Sync user language and timezone selections to `SiteUser` profile preferences when authenticated.
+- [x] **CHANGELOG.md**: Record milestone completion via `python "C:/Users/User/.gemini/config/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
 ### Step 5: Unified `/api/v1/` (`drf-spectacular`), Ecosystem Ops & Modularity Paydown (**DEFERRED TO NEXT TURN / MILESTONE**)
 - **Child Plan**: `.TODO/step_5_unified_api_and_modularity_paydown.md`

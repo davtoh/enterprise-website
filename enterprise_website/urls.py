@@ -20,6 +20,7 @@ from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf.urls.static import static  # https://docs.djangoproject.com/en/2.0/howto/static-files/
 from timezone_management import views as tz_views
+from language_management.views import set_language_and_sync_profile
 from plugin_registry.admin_views import PluginMarketplaceView
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
@@ -53,6 +54,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cms/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
+    path('i18n/setlang/', set_language_and_sync_profile, name='set_language'),
     path('i18n/', include('django.conf.urls.i18n')),  # <url path>/setlang
     path('rest_api/', include('rest_api.urls')),  # , namespace='rest_framework'
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

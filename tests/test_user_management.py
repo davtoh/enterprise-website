@@ -236,6 +236,14 @@ class TestUserAuthentication:
         test_user.save()
         process_timezone(sender=None, instance=test_user, timezone="America/Bogota")
 
+    def test_set_language_syncs_authenticated_user_preferred_language(self, client, test_user):
+        client.force_login(test_user)
+        response = client.post(reverse("set_language"), {"language": "es", "next": "/"})
+        assert response.status_code == 302
+        assert response.cookies["django_language"].value == "es"
+        test_user.refresh_from_db()
+        assert test_user.preferred_language == "es"
+
 
 
 

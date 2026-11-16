@@ -60,6 +60,7 @@ def ingest_website_contact_submission(
         followup_todo = Todo.objects.create(
             title=f"Follow up with {clean_name}: {lead_title}"[:500],
             text=f"Contact: {clean_name} <{clean_email}>\nSubject: {clean_subject or '(No subject)'}\n\n{clean_message}",
+            content_object=lead,
         )
 
     return contact, lead, interaction, followup_todo

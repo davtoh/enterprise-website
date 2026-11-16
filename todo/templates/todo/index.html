@@ -31,7 +31,14 @@
                                         <a href="{% url 'todo:details' todo.id %}" class="fw-semibold text-dark text-decoration-none">{{ todo.title }}</a>
                                         <p class="text-muted mb-0 small">{{ todo.text|truncatewords:15 }}</p>
                                     </div>
-                                    <div class="d-flex align-items-center gap-2">
+                                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                                        <span class="badge bg-secondary-subtle text-secondary-emphasis border">{{ todo.get_status_display }}</span>
+                                        {% if todo.due_date %}
+                                            <span class="badge bg-warning-subtle text-warning-emphasis border">{% trans "Due" %}: {{ todo.due_date|date:"M d, Y" }}</span>
+                                        {% endif %}
+                                        {% if todo.owner %}
+                                            <span class="badge bg-info-subtle text-info-emphasis border">{{ todo.owner.username }}</span>
+                                        {% endif %}
                                         <span class="badge bg-light text-muted border">{{ todo.created_at|date:"M d, Y" }}</span>
                                         <button 
                                             class="btn btn-sm btn-outline-danger" 

@@ -70,6 +70,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware', #Associates users with requests using sessions.
     'allauth.account.middleware.AccountMiddleware',
+    'timezone_management.middleware.TimezoneMiddleware',
     'theme_management.middleware.ThemeMiddleware',
     'plugin_registry.middleware.PluginGatingMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

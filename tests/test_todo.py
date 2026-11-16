@@ -94,3 +94,75 @@ class TestTodoApp:
         url = reverse("todo:delete", kwargs={"id": 99999})
         response = client.post(url)
         assert response.status_code == 404
+
+    def test_action_item_alias_and_defaults(self, db):
+        from todo.models import ActionItem, ActionItemStatus
+
+        assert ActionItem is Todo
+        item = ActionItem.objects.create(title="Legacy Call", text="Only title and text")
+        assert item.status == ActionItemStatus.PENDING
+        assert item.owner is None
+        assert item.due_date is None
+        assert item.content_object is None
+
+    def test_action_item_generic_foreign_key_linkage(self, db):
+        from crm.models import Contact, Lead
+        from erp.models import Invoice
+        from intelligent_tracker_hub.models import SecurityEvent
+        from todo.models import ActionItem
+
+        contact = Contact.objects.create(first_name="Ada", last_name="Lovelace", email="ada@example.com")
+        lead = Lead.objects.create(title="Enterprise Deal", contact=contact)
+        invoice = Invoice.objects.create(invoice_number="INV-4001", customer_name="Analytical Engine Co")
+        event = SecurityEvent.objects.create(camera_id="cam-north-01")
+
+        lead_item = ActionItem.objects.create(title="Call Lead", text="Follow up", content_object=lead)
+        inv_item = ActionItem.objects.create(title="Collect Invoice", text="Send reminder", content_object=invoice)
+        sec_item = ActionItem.objects.create(title="Review Alert", text="Inspect clip", content_object=event)
+
+        lead_item.refresh_from_db()
+        inv_item.refresh_from_db()
+        sec_item.refresh_from_db()
+
+        assert lead_item.content_object == lead
+        assert inv_item.content_object == invoice
+        assert sec_item.content_object == event
+
+    def test_todo_add_with_status_due_date_and_owner_filter(self, client):
+        import datetime
+        from todo.models import ActionItemStatus
+
+        user = User.objects.create_user(username="action_owner", password="Pass123!Password")
+        client.force_login(user)
+
+        response = client.post(
+            reverse("todo:add"),
+            {
+                "title": "Quarterly Review",
+                "text": "Prepare action items",
+                "status": ActionItemStatus.IN_PROGRESS,
+                "due_date": "2026-12-01",
+            },
+            follow=True,
+        )
+        assert response.status_code == 200
+        item = Todo.objects.get(title="Quarterly Review")
+        assert item.owner == user
+        assert item.status == ActionItemStatus.IN_PROGRESS
+        assert item.due_date == datetime.date(2026, 12, 1)
+
+        filtered = client.get(reverse("todo:index"), {"status": ActionItemStatus.IN_PROGRESS, "owner": "me"})
+        assert filtered.status_code == 200
+        assert "Quarterly Review" in filtered.content.decode()
+
+        detail_res = client.get(reverse("todo:details", kwargs={"id": item.id}))
+        assert detail_res.status_code == 200
+        assert "action_owner" in detail_res.content.decode()
+
+    def test_todo_plugin_templates_preserved(self):
+        from todo.plugin import TodoPlugin
+
+        assert TodoPlugin.plugin_templates == {
+            "bootstrap5": "todo/bs5/",
+            "tailwind": "todo/tw/",
+        }

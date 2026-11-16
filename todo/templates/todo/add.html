@@ -19,9 +19,23 @@
                             <label for="title" class="form-label fw-bold">{% trans "Title" %}</label>
                             <input type="text" name="title" id="title" class="form-control" placeholder="{% trans 'Enter task title' %}" required />
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label for="text" class="form-label fw-bold">{% trans "Description / Notes" %}</label>
                             <textarea name="text" id="text" rows="4" class="form-control" placeholder="{% trans 'Enter task description...' %}"></textarea>
+                        </div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label for="status" class="form-label fw-bold">{% trans "Status" %}</label>
+                                <select name="status" id="status" class="form-select">
+                                    {% for value, label in statuses %}
+                                        <option value="{{ value }}">{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="due_date" class="form-label fw-bold">{% trans "Due Date" %}</label>
+                                <input type="date" name="due_date" id="due_date" class="form-control" />
+                            </div>
                         </div>
                         <input type="hidden" name="next" value="{{ request.GET.next | default:back_url}}">
                         <button type="submit" class="btn btn-brand-primary rounded-pill px-4 text-uppercase">{% trans "Save Task" %}</button>

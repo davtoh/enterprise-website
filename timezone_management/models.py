@@ -40,6 +40,9 @@ class TimeZone(models.Model):
     #timezone = TimeZoneField(choices=time_zone_groups, max_length=35, default=settings.TIME_ZONE)  # defaults supported
     timezone = models.CharField(_('timezone'), help_text=_('This is the help text'), choices=time_zone_groups, max_length=35, default=settings.TIME_ZONE)
 
+    def __str__(self):
+        return self.timezone
+
 
 class TimeZoneForm(ModelForm):
     class Meta:
