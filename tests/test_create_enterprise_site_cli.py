@@ -12,6 +12,7 @@ import zipfile
 
 import pytest
 
+from create_enterprise_site.cli import main as cli_main
 from create_enterprise_site.fetcher import (
     TemplateFetchError,
     is_valid_template_root,
@@ -19,6 +20,7 @@ from create_enterprise_site.fetcher import (
 )
 from plugin_registry.scaffolding import SiteManifest
 from plugin_registry.scaffolding.cli_runner import execute_scaffolding
+from tests.test_create_site import _run_generated_manage
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
@@ -223,3 +225,104 @@ class TestTemplateFetcher:
         with pytest.raises(TemplateFetchError, match="Unsupported git URL"):
             with resolve_template_source(git_url="ext::sh -c id"):
                 pass
+
+
+class TestCreateEnterpriseSiteCli:
+    """End-to-end tests for `create_enterprise_site.cli.main` and `python -m create_enterprise_site`."""
+
+    def test_cli_main_generates_minimal_site_and_runs_check_and_migrate(self, tmp_path):
+        target = tmp_path / "minimal_cli_site"
+        out, err = io.StringIO(), io.StringIO()
+        code = cli_main(
+            [
+                "minimal_cli_site",
+                "--no-input",
+                "--plugins",
+                "none",
+                "--no-docker",
+                "--target-dir",
+                str(target),
+                "--template-dir",
+                str(REPO_ROOT),
+            ],
+            stdout=out,
+            stderr=err,
+        )
+        assert code == 0, err.getvalue()
+        assert err.getvalue() == ""
+        assert (target / "manage.py").is_file()
+        assert not (target / "crm").exists()
+        assert not (target / "docker-compose.yml").exists()
+
+        check_res = _run_generated_manage(target, "check")
+        assert check_res.returncode == 0, check_res.stderr
+        migrate_res = _run_generated_manage(target, "migrate", "--noinput")
+        assert migrate_res.returncode == 0, migrate_res.stderr
+
+    def test_python_m_create_enterprise_site_generates_full_site_without_django_settings(self, tmp_path):
+        target = tmp_path / "full_cli_site"
+        env = {k: v for k, v in os.environ.items() if k != "DJANGO_SETTINGS_MODULE"}
+        env["PYTHONPATH"] = str(REPO_ROOT)
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "create_enterprise_site",
+                "full_cli_site",
+                "--no-input",
+                "--plugins",
+                "all",
+                "--theme",
+                "tailwind",
+                "--languages",
+                "en,es",
+                "--target-dir",
+                str(target),
+                "--template-dir",
+                str(REPO_ROOT),
+            ],
+            cwd=str(tmp_path),
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert result.returncode == 0, result.stderr
+        assert "Next Steps:" in result.stdout
+        assert (target / "manage.py").is_file()
+        assert (target / "crm").is_dir()
+        assert (target / "erp").is_dir()
+        assert (target / "docker-compose.yml").is_file()
+
+        check_res = _run_generated_manage(target, "check")
+        assert check_res.returncode == 0, check_res.stderr
+        migrate_res = _run_generated_manage(target, "migrate", "--noinput")
+        assert migrate_res.returncode == 0, migrate_res.stderr
+
+    def test_cli_dry_run_dump_manifest_and_error_exit_code(self, tmp_path):
+        manifest_path = tmp_path / "cli_manifest.json"
+        out, err = io.StringIO(), io.StringIO()
+        code = cli_main(
+            [
+                "dry_cli_site",
+                "--no-input",
+                "--plugins",
+                "erp",
+                "--dry-run",
+                "--dump-manifest",
+                str(manifest_path),
+            ],
+            stdout=out,
+            stderr=err,
+        )
+        assert code == 0, err.getvalue()
+        assert manifest_path.is_file()
+        assert "Dry run complete" in out.getvalue()
+
+        bad_code = cli_main(
+            ["bad_site", "--no-input", "--template-dir", str(tmp_path / "missing_repo")],
+            stdout=out,
+            stderr=err,
+        )
+        assert bad_code == 1
+        assert "Error:" in err.getvalue()

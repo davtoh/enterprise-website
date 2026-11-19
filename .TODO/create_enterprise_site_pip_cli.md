@@ -75,11 +75,11 @@ All modified and newly created source files across all 3 milestones must strictl
 - [x] **tests/test_create_enterprise_site_cli.py**: Add unit tests for pure-stdlib subprocess import/execution without Django settings, `cli_runner` parity, and `fetcher.py` local, archive (including Zip-Slip & checksum failure), and mocked git acquisition.
 - [x] **CHANGELOG.md**: Record Milestone 1 completion via `python "<config_dir>/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
-### Milestone 2: `create-enterprise-site` Standalone Console Entry Point & PEP 621 `pyproject.toml` Packaging (**DEFERRED TO NEXT TURN / MILESTONE**)
-- [ ] **create_enterprise_site/cli.py & create_enterprise_site/__main__.py**: Implement the standalone `create-enterprise-site` CLI entry point (`main(argv)`) integrating `cli_runner` options with template acquisition flags (`--template-dir`, `--template-url`, `--template-sha256`, `--git-url`, `--branch`, `--version`) and deterministic error handling.
-- [ ] **pyproject.toml & MANIFEST.in**: Create PEP 621 `pyproject.toml` and `MANIFEST.in` registering `create-enterprise-site = "create_enterprise_site.cli:main"`, package discovery for `create_enterprise_site` and `plugin_registry.scaffolding`, and repository tool metadata.
-- [ ] **tests/test_create_enterprise_site_cli.py**: Add end-to-end CLI tests (`create_enterprise_site.cli.main` and `python -m create_enterprise_site`) generating minimal and full projects in `tmp_path` and verifying `manage.py check` and `manage.py migrate --noinput`.
-- [ ] **CHANGELOG.md**: Record Milestone 2 completion via `python "<config_dir>/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
+### Milestone 2: `create-enterprise-site` Standalone Console Entry Point & PEP 621 `pyproject.toml` Packaging
+- [x] **create_enterprise_site/cli.py & create_enterprise_site/__main__.py**: Implement the standalone `create-enterprise-site` CLI entry point (`main(argv)`) integrating `cli_runner` options with template acquisition flags (`--template-dir`, `--template-url`, `--template-sha256`, `--git-url`, `--branch`, `--version`) and deterministic error handling.
+- [x] **pyproject.toml & MANIFEST.in**: Create PEP 621 `pyproject.toml` and `MANIFEST.in` registering `create-enterprise-site = "create_enterprise_site.cli:main"`, package discovery for `create_enterprise_site` and `plugin_registry.scaffolding`, and repository tool metadata.
+- [x] **tests/test_create_enterprise_site_cli.py**: Add end-to-end CLI tests (`create_enterprise_site.cli.main` and `python -m create_enterprise_site`) generating minimal and full projects in `tmp_path` and verifying `manage.py check` and `manage.py migrate --noinput`.
+- [x] **CHANGELOG.md**: Record Milestone 2 completion via `python "<config_dir>/skills/system-diagnostics/scripts/diagnose.py" changelog add`.
 
 ### Milestone 3: CI Package Build Pipeline, Root `README.md` Quickstart, Executable Documentation & Milestone 18 Sign-Off (**DEFERRED TO NEXT TURN / MILESTONE**)
 - [ ] **.github/workflows/ci.yml**: Add `pip install --no-build-isolation --no-deps -e .` and `create-enterprise-site` smoke verification to the GitHub Actions CI workflow.

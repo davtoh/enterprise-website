@@ -1,5 +1,16 @@
 # Changelog
 
+## [2026-11-19] feat: Milestone 18.2: create-enterprise-site Standalone CLI & PEP 621 Packaging
+- **Type**: feat
+- **Summary**: Implemented create_enterprise_site.cli/main, python -m create_enterprise_site entrypoint, PEP 621 pyproject.toml, MANIFEST.in, and E2E CLI tests.
+- **Files** (5):
+  - `tests/test_create_enterprise_site_cli.py`
+  - `MANIFEST.in`
+  - `create_enterprise_site/__main__.py`
+  - `create_enterprise_site/cli.py`
+  - `pyproject.toml`
+- **Verification**: .venv/Scripts/python.exe -m pytest tests/test_create_enterprise_site_cli.py tests/test_create_site.py tests/test_create_site_command.py
+
 ## [2026-11-19] feat: Milestone 18.1: Pure-Stdlib Scaffolding Engine, Shared CLI Runner & Template Fetcher
 - **Type**: feat
 - **Summary**: Decoupled Django imports from plugin_registry.scaffolding, extracted shared cli_runner.py, and added create_enterprise_site/fetcher.py with SHA-256 and Zip-Slip/Tar-Slip protection.
@@ -127,18 +138,3 @@
   - `tests/erp/test_invoices_and_pdf.py`
   - ... (+8 more)
 - **Verification**: pytest tests/erp/ tests/crm/ tests/test_home.py tests/test_cms.py
-
-## [2026-11-15] feat: Step 4 M1: Composable AppPlugin v2 StreamField Blocks & Public/Staff Video Isolation
-- **Type**: feat
-- **Summary**: Added is_public/requires_staff isolation on VideoGallery/VideoItem, registered VideoGalleryEmbedBlock and PollEmbedBlock via AppPlugin v2 and CMSStreamBlock, and added multi-theme block templates and tests.
-- **Files** (16):
-  - `cms/blocks.py`
-  - `plugin_registry/registry.py`
-  - `polls/plugin.py`
-  - `tests/test_cms.py`
-  - `tests/test_polls.py`
-  - `tests/test_video_gallery.py`
-  - `video_gallery/admin.py`
-  - `video_gallery/models.py`
-  - ... (+8 more)
-- **Verification**: pytest tests/test_video_gallery.py tests/test_polls.py tests/test_cms.py tests/test_plugin_registry.py

@@ -1,0 +1,8 @@
+include README.md
+include pyproject.toml
+recursive-include create_enterprise_site *.py
+include plugin_registry/__init__.py
+recursive-include plugin_registry/scaffolding *.py
+prune tests
+prune .venv
+prune .git
