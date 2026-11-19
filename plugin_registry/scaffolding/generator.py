@@ -6,8 +6,6 @@ import subprocess
 import sys
 from typing import Iterable, Optional, Union
 
-from django.conf import settings
-
 from plugin_registry.scaffolding.manifest import CORE_ALWAYS_ON_APPS, SiteManifest
 from plugin_registry.scaffolding.renderers import render_all_configs
 
@@ -40,13 +38,28 @@ def _rewrite_package_ref(path: Path, new_pkg: str) -> None:
     _write_utf8(path, updated)
 
 
+def _resolve_default_source_root() -> Path:
+    """Resolve template repository root from Django settings when configured, else package ancestor."""
+    try:
+        from django.conf import settings
+
+        if settings.configured:
+            return Path(settings.BASE_DIR).resolve()
+    except ImportError:
+        pass
+    return Path(__file__).resolve().parents[2]
+
+
 class ProjectGenerator:
     """Materialize a standalone Django project from a validated SiteManifest."""
 
     def __init__(self, manifest: SiteManifest, source_root: Optional[Path] = None) -> None:
         self.manifest = manifest
         self.manifest.validate()
-        self.source_root = Path(source_root or settings.BASE_DIR).resolve()
+        if source_root is not None:
+            self.source_root = Path(source_root).resolve()
+        else:
+            self.source_root = _resolve_default_source_root()
 
     def _prepare_target(self, target_dir: Optional[Union[str, Path]], overwrite: bool) -> Path:
         raw_target = target_dir or self.manifest.target_dir or (Path.cwd() / self.manifest.project_name)

@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-11-19] feat: Milestone 18.1: Pure-Stdlib Scaffolding Engine, Shared CLI Runner & Template Fetcher
+- **Type**: feat
+- **Summary**: Decoupled Django imports from plugin_registry.scaffolding, extracted shared cli_runner.py, and added create_enterprise_site/fetcher.py with SHA-256 and Zip-Slip/Tar-Slip protection.
+- **Files** (10):
+  - `.TODO/create_enterprise_site_pip_cli.md`
+  - `AGENTS.md`
+  - `plugin_registry/__init__.py`
+  - `plugin_registry/management/commands/create_site.py`
+  - `plugin_registry/scaffolding/__init__.py`
+  - `plugin_registry/scaffolding/generator.py`
+  - `plugin_registry/scaffolding/manifest.py`
+  - `create_enterprise_site/`
+  - ... (+2 more)
+- **Verification**: pytest tests/test_create_enterprise_site_cli.py tests/test_create_site.py tests/test_create_site_command.py
+
 ## [2026-11-19] feat: Milestone 17.3: manage.py create_site CLI Wizard & Docs
 - **Type**: feat
 - **Summary**: Implemented interactive and non-interactive manage.py create_site wizard, documentation/create_site.md, and E2E CLI tests.
@@ -127,18 +142,3 @@
   - `video_gallery/models.py`
   - ... (+8 more)
 - **Verification**: pytest tests/test_video_gallery.py tests/test_polls.py tests/test_cms.py tests/test_plugin_registry.py
-
-## [2026-11-15] feat: Step 3 Milestone 3: 3-Level Theme Headers, Section Sidebar & Seeded CMS Pages
-- **Type**: feat
-- **Summary**: Upgraded bootstrap5/tailwind/minimal headers with clickable parent tabs and 2-level dropdowns, added 3rd-level section_sidebar.html, implemented idempotent seed_initial_cms_pages(), and exposed cms_page context in home/views.py.
-- **Files** (10):
-  - `cms/templates/cms/standard_page.html`
-  - `home/views.py`
-  - `templates/themes/bootstrap5/partials/header.html`
-  - `templates/themes/minimal/partials/header.html`
-  - `templates/themes/tailwind/partials/header.html`
-  - `tests/test_cms.py`
-  - `tests/test_home.py`
-  - `cms/management/`
-  - ... (+2 more)
-- **Verification**: pytest tests/test_cms.py tests/test_home.py tests/test_theme_management.py tests/test_plugin_registry.py

@@ -7,10 +7,6 @@ from pathlib import Path
 import re
 from typing import Any, Dict, Iterable, List, Set, Tuple, Union
 
-from django.apps import apps
-
-from plugin_registry.registry import registry
-
 CORE_ALWAYS_ON_APPS: Tuple[str, ...] = (
     "plugin_registry",
     "menu_management",
@@ -125,6 +121,11 @@ def normalize_languages(languages: Iterable[str]) -> List[str]:
 def _lookup_plugin_dependencies(slug: str) -> Tuple[str, ...]:
     """Return declared dependencies for an optional plugin from fallback map and AppPlugin registry."""
     deps: Set[str] = set(PLUGIN_DEPENDENCY_MAP.get(slug, ()))
+    try:
+        from django.apps import apps
+        from plugin_registry.registry import registry
+    except ImportError:
+        return tuple(deps)
     if apps.ready:
         plugin_cls = registry.get_plugin(slug)
         if plugin_cls is not None:

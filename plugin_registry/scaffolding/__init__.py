@@ -1,6 +1,12 @@
 """Composable scaffolding engine for `manage.py create_site`."""
 
 from .ai_advisor import suggest_manifest_from_prompt
+from .cli_runner import (
+    ConsoleWriter,
+    add_scaffolding_arguments,
+    execute_scaffolding,
+    resolve_manifest_from_options,
+)
 from .generator import ProjectGenerator
 from .manifest import (
     CORE_ALWAYS_ON_APPS,
