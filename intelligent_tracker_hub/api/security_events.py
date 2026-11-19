@@ -1,8 +1,6 @@
-import base64
 import json
 import logging
 import uuid
-from django.core.files.base import ContentFile
 from django.db.models import Count
 from django.utils import timezone
 from rest_framework import status, viewsets
@@ -10,7 +8,6 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from location_management.models import Location
 from ..models import (
     SecurityEvent,
     SecurityEventType,
@@ -22,9 +19,77 @@ from ..serializers import (
     SecurityEventSerializer,
     SecurityAuditLogSerializer,
 )
-from ..security import verify_hmac_signature, get_client_ip
+from ..security import verify_hmac_signature
+from ._helpers import (
+    decode_base64_image,
+    get_signature_header,
+    record_audit_log,
+    resolve_site_location,
+)
 
 logger = logging.getLogger(__name__)
+
+
+def _derive_event_severity(data: dict, event_type: str, metadata: dict) -> str:
+    """Derive SecuritySeverity from explicit field, metadata, or event type."""
+    explicit = data.get("severity")
+    if explicit:
+        return explicit
+    if metadata.get("severity") in SecuritySeverity.values:
+        return metadata["severity"]
+    if event_type == SecurityEventType.FALL_DETECTED:
+        return SecuritySeverity.CRITICAL
+    if event_type in (SecurityEventType.INTRUSION, SecurityEventType.RESTRICTED_ENTITY):
+        return SecuritySeverity.HIGH
+    if event_type in (SecurityEventType.OCCUPANCY_THRESHOLD, SecurityEventType.LOITERING):
+        return SecuritySeverity.MEDIUM
+    return SecuritySeverity.LOW
+
+
+def _verify_webhook_request(request, signature_header: str) -> Response | None:
+    """Validate HMAC-SHA256 signature on incoming security event webhook."""
+    if verify_hmac_signature(request.body, signature_header):
+        return None
+    record_audit_log(
+        request,
+        signature_header=signature_header,
+        signature_valid=False,
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        processed_successfully=False,
+        error_message="Missing or invalid X-Tracker-Signature HMAC signature.",
+    )
+    return Response(
+        {
+            "error": "Unauthorized",
+            "detail": "Missing or invalid X-Tracker-Signature HMAC-SHA256 signature.",
+        },
+        status=status.HTTP_401_UNAUTHORIZED,
+    )
+
+
+def _persist_security_event(data: dict) -> SecurityEvent:
+    """Build and save SecurityEvent including optional base64 snapshot evidence."""
+    event_id = data.get("event_id") or uuid.uuid4()
+    event_type = data["event_type"]
+    metadata = data.get("metadata") or {}
+    security_event = SecurityEvent(
+        event_id=event_id,
+        event_type=event_type,
+        site=resolve_site_location(data.get("site_id"), data.get("site_code")),
+        camera_id=data["camera_id"],
+        timestamp=data.get("timestamp") or timezone.now(),
+        metadata=metadata,
+        severity=_derive_event_severity(data, event_type, metadata),
+    )
+    snapshot_base64 = data.get("snapshot_base64")
+    if snapshot_base64:
+        try:
+            content_file = decode_base64_image(snapshot_base64)
+            security_event.snapshot.save(f"{event_id}.jpg", content_file, save=False)
+        except Exception as exc:
+            metadata["snapshot_decode_error"] = str(exc)
+    security_event.save()
+    return security_event
 
 
 class SecurityEventWebhookApiView(APIView):
@@ -37,124 +102,32 @@ class SecurityEventWebhookApiView(APIView):
     authentication_classes = []
 
     def post(self, request, *args, **kwargs):
-        client_ip = get_client_ip(request)
-        raw_body = request.body
-        signature_header = (
-            request.headers.get("X-Tracker-Signature")
-            or request.META.get("HTTP_X_TRACKER_SIGNATURE", "")
-        )
+        signature_header = get_signature_header(request)
+        auth_error = _verify_webhook_request(request, signature_header)
+        if auth_error is not None:
+            return auth_error
 
-        # 1. HMAC Signature Verification
-        is_signature_valid = verify_hmac_signature(raw_body, signature_header)
-        if not is_signature_valid:
-            SecurityAuditLog.objects.create(
-                ip_address=client_ip,
-                endpoint=request.path,
-                http_method=request.method,
-                signature_header=signature_header,
-                signature_valid=False,
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                error_message="Missing or invalid X-Tracker-Signature HMAC signature.",
-                raw_payload=raw_body.decode("utf-8", errors="replace")[:5000],
-                processed_successfully=False,
-            )
-            return Response(
-                {
-                    "error": "Unauthorized",
-                    "detail": "Missing or invalid X-Tracker-Signature HMAC-SHA256 signature.",
-                },
-                status=status.HTTP_401_UNAUTHORIZED,
-            )
-
-        # 2. Schema Validation
         serializer = SecurityEventWebhookSerializer(data=request.data)
         if not serializer.is_valid():
-            SecurityAuditLog.objects.create(
-                ip_address=client_ip,
-                endpoint=request.path,
-                http_method=request.method,
+            record_audit_log(
+                request,
                 signature_header=signature_header,
                 signature_valid=True,
                 status_code=status.HTTP_400_BAD_REQUEST,
-                error_message=json.dumps(serializer.errors),
-                raw_payload=raw_body.decode("utf-8", errors="replace")[:5000],
                 processed_successfully=False,
+                error_message=json.dumps(serializer.errors),
             )
-            return Response(
-                {"error": "Bad Request", "errors": serializer.errors},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            return Response({"error": "Bad Request", "errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-        data = serializer.validated_data
-        event_id = data.get("event_id") or uuid.uuid4()
-        event_type = data["event_type"]
-        camera_id = data["camera_id"]
-        event_timestamp = data.get("timestamp") or timezone.now()
-        metadata = data.get("metadata") or {}
-
-        # 3. Derive Severity if not explicitly specified
-        severity = data.get("severity")
-        if not severity:
-            if metadata.get("severity") in SecuritySeverity.values:
-                severity = metadata["severity"]
-            elif event_type == SecurityEventType.FALL_DETECTED:
-                severity = SecuritySeverity.CRITICAL
-            elif event_type in (SecurityEventType.INTRUSION, SecurityEventType.RESTRICTED_ENTITY):
-                severity = SecuritySeverity.HIGH
-            elif event_type in (SecurityEventType.OCCUPANCY_THRESHOLD, SecurityEventType.LOITERING):
-                severity = SecuritySeverity.MEDIUM
-            else:
-                severity = SecuritySeverity.LOW
-
-        # 4. Resolve Location Site
-        site_obj = None
-        site_id = data.get("site_id")
-        site_code = data.get("site_code")
-        if site_id:
-            site_obj = Location.objects.filter(id=site_id).first()
-        if not site_obj and site_code:
-            site_obj = Location.objects.filter(code=site_code).first()
-
-        # 5. Build and Save SecurityEvent
-        security_event = SecurityEvent(
-            event_id=event_id,
-            event_type=event_type,
-            site=site_obj,
-            camera_id=camera_id,
-            timestamp=event_timestamp,
-            metadata=metadata,
-            severity=severity,
-        )
-
-        # 6. Process Evidence Snapshot (Base64 JPEG/PNG)
-        snapshot_base64 = data.get("snapshot_base64")
-        if snapshot_base64:
-            try:
-                if ";base64," in snapshot_base64:
-                    _, b64data = snapshot_base64.split(";base64,", 1)
-                else:
-                    b64data = snapshot_base64
-                decoded_img = base64.b64decode(b64data)
-                filename = f"{event_id}.jpg"
-                security_event.snapshot.save(filename, ContentFile(decoded_img), save=False)
-            except Exception as e:
-                metadata["snapshot_decode_error"] = str(e)
-
-        security_event.save()
-
-        # 7. Record Audit Trail
-        SecurityAuditLog.objects.create(
-            ip_address=client_ip,
-            endpoint=request.path,
-            http_method=request.method,
+        security_event = _persist_security_event(serializer.validated_data)
+        record_audit_log(
+            request,
             signature_header=signature_header,
             signature_valid=True,
             event_id=str(security_event.event_id),
             status_code=status.HTTP_201_CREATED,
-            raw_payload=raw_body.decode("utf-8", errors="replace")[:5000],
             processed_successfully=True,
         )
-
         return Response(
             {
                 "status": "success",

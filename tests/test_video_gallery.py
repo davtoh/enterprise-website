@@ -339,3 +339,105 @@ class TestVideoGalleryPluginAndAdmin:
         res_video_change = admin_client.get(reverse("admin:video_gallery_videoitem_change", args=[video.pk]))
         assert res_video_change.status_code == 200
         assert "Live Player Preview" in res_video_change.content.decode()
+
+
+@pytest.mark.django_db
+class TestVideoGalleryStaffIsolation:
+    """Tests for public vs. staff-only gallery, video, and SecurityEvent evidence isolation."""
+
+    def test_public_vs_staff_isolation(self, client, admin_client):
+        from intelligent_tracker_hub.models import SecurityEvent
+
+        public_gallery = VideoGallery.objects.create(
+            name="Public Showcase",
+            slug="public-showcase",
+            is_active=True,
+            is_public=True,
+            requires_staff=False,
+        )
+        staff_gallery = VideoGallery.objects.create(
+            name="Staff Security Archive",
+            slug="staff-security-archive",
+            is_active=True,
+            is_public=False,
+            requires_staff=True,
+        )
+
+        public_video = VideoItem.objects.create(
+            gallery=public_gallery,
+            title="Public Product Tour",
+            embed_url="https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            is_public=True,
+            requires_staff=False,
+        )
+        private_video = VideoItem.objects.create(
+            gallery=public_gallery,
+            title="Internal Draft Clip",
+            embed_url="https://www.youtube.com/watch?v=9bZkp7q19f0",
+            is_public=False,
+            requires_staff=False,
+        )
+        staff_video = VideoItem.objects.create(
+            gallery=public_gallery,
+            title="Staff Briefing Clip",
+            embed_url="https://vimeo.com/76979871",
+            is_public=True,
+            requires_staff=True,
+        )
+        evidence_video = VideoItem.objects.create(
+            gallery=public_gallery,
+            title="Gate Intrusion Evidence",
+            embed_url="https://cdn.example.com/evidence.mp4",
+            is_public=True,
+            requires_staff=False,
+        )
+        SecurityEvent.objects.create(
+            camera_id="cam-gate-01",
+            video_evidence=evidence_video,
+        )
+        staff_gallery_item = VideoItem.objects.create(
+            gallery=staff_gallery,
+            title="Vault Camera Clip",
+            embed_url="https://cdn.example.com/vault.mp4",
+            is_public=False,
+            requires_staff=True,
+        )
+
+        # public_videos() helper excludes private, staff-only, and SecurityEvent-linked items
+        assert list(public_gallery.public_videos()) == [public_video]
+        assert list(staff_gallery.public_videos()) == []
+
+        # Anonymous user: GalleryListView
+        res_list = client.get(reverse("video_gallery:gallery_list"))
+        assert res_list.status_code == 200
+        list_html = res_list.content.decode()
+        assert "Public Showcase" in list_html
+        assert "Staff Security Archive" not in list_html
+
+        # Anonymous user: GalleryDetailView
+        res_detail = client.get(public_gallery.get_absolute_url())
+        assert res_detail.status_code == 200
+        detail_html = res_detail.content.decode()
+        assert "Public Product Tour" in detail_html
+        assert "Internal Draft Clip" not in detail_html
+        assert "Staff Briefing Clip" not in detail_html
+        assert "Gate Intrusion Evidence" not in detail_html
+        assert client.get(staff_gallery.get_absolute_url()).status_code == 404
+
+        # Anonymous user: VideoItemModalView
+        assert client.get(reverse("video_gallery:video_modal", args=[public_video.pk])).status_code == 200
+        assert client.get(reverse("video_gallery:video_modal", args=[private_video.pk])).status_code == 404
+        assert client.get(reverse("video_gallery:video_modal", args=[staff_video.pk])).status_code == 404
+        assert client.get(reverse("video_gallery:video_modal", args=[evidence_video.pk])).status_code == 404
+
+        # Staff user sees all active galleries and evidence
+        staff_list_html = admin_client.get(reverse("video_gallery:gallery_list")).content.decode()
+        assert "Public Showcase" in staff_list_html
+        assert "Staff Security Archive" in staff_list_html
+
+        staff_detail_html = admin_client.get(public_gallery.get_absolute_url()).content.decode()
+        assert "Gate Intrusion Evidence" in staff_detail_html
+        assert "Staff Briefing Clip" in staff_detail_html
+        assert admin_client.get(staff_gallery.get_absolute_url()).status_code == 200
+        assert admin_client.get(reverse("video_gallery:video_modal", args=[evidence_video.pk])).status_code == 200
+        assert admin_client.get(reverse("video_gallery:video_modal", args=[staff_gallery_item.pk])).status_code == 200

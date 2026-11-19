@@ -130,3 +130,37 @@ class TestPollsApp:
         res_results = views.results(request, published_poll.id)
         assert res_results.status_code == 200
 
+    def test_show_results_template_tag_and_legacy_delegate(self, published_poll):
+        from django.template import Context, Template
+
+        tpl_new = Template("{% load poll_tags %}{% show_results question %}")
+        rendered_new = tpl_new.render(Context({"question": published_poll}))
+        assert "Google Cloud Platform" in rendered_new
+
+        tpl_legacy = Template("{% load present %}{% show_results question %}")
+        rendered_legacy = tpl_legacy.render(Context({"question": published_poll}))
+        assert "Google Cloud Platform" in rendered_legacy
+
+    def test_poll_plugin_registers_stream_block(self):
+        from plugin_registry import registry
+        from polls.blocks import PollEmbedBlock
+
+        active_blocks = registry.get_active_stream_blocks()
+        assert ("poll", PollEmbedBlock) in active_blocks
+
+    def test_poll_embed_block_context_filtering(self, published_poll, future_poll):
+        from polls.blocks import PollEmbedBlock
+
+        block = PollEmbedBlock()
+        ctx_open = block.get_context({"question_id": published_poll.id, "heading": "Cast Vote"})
+        assert ctx_open["question"] == published_poll
+        assert len(ctx_open["choices"]) == 3
+
+        ctx_future = block.get_context({"question_id": future_poll.id, "heading": ""})
+        assert ctx_future["question"] is None
+
+        published_poll.opened = False
+        published_poll.save(update_fields=["opened"])
+        ctx_closed = block.get_context({"question_id": published_poll.id, "heading": ""})
+        assert ctx_closed["question"] is None
+

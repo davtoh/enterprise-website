@@ -1,5 +1,5 @@
 from django.utils.translation import gettext_lazy as _
-from plugin_registry.base import AppPlugin, MenuItemDefinition
+from plugin_registry.base import AppPlugin, MenuItemDefinition, PluginZone
 
 
 class CRMPlugin(AppPlugin):
@@ -10,6 +10,9 @@ class CRMPlugin(AppPlugin):
     description = _("Full-featured CRM with pipeline Kanban, email sequences, customer segmentation, and analytics.")
     category = "productivity"
     icon = "fa fa-users"
+    zone = PluginZone.STAFF
+    requires_staff = True
+    requires_auth = True
 
     url_namespace = "crm"
     url_prefix = "crm"
@@ -22,6 +25,7 @@ class CRMPlugin(AppPlugin):
             order=32,
             parent_slug="Apps",
             requires_auth=True,
+            requires_staff=True,
         ),
     ]
 

@@ -1,0 +1,57 @@
+{% load i18n %}
+<section class="cms-block-product-showcase py-5">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-4">
+            <div>
+                <h2 class="h3 mb-1">{{ self.heading|default:_("Featured Products") }}</h2>
+            </div>
+            <a href="{% url 'home:products' %}" class="btn btn-brand-outline btn-sm">
+                <i class="fa fa-cubes me-1" aria-hidden="true"></i>
+                {% trans "View All Products" %}
+            </a>
+        </div>
+
+        {% if products %}
+            <div class="row g-4">
+                {% for product in products %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card card-brand h-100 shadow-sm">
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+                                    {% if product.category %}
+                                        <span class="badge bg-primary-subtle text-primary">
+                                            {{ product.category.name }}
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-secondary-subtle text-secondary">
+                                            {% trans "Catalog" %}
+                                        </span>
+                                    {% endif %}
+                                    <small class="text-muted">{{ product.sku }}</small>
+                                </div>
+                                <h3 class="h5 card-title">{{ product.name }}</h3>
+                                {% if product.public_summary or product.description %}
+                                    <p class="card-text text-muted small mb-3">
+                                        {{ product.public_summary|default:product.description|truncatewords:24 }}
+                                    </p>
+                                {% endif %}
+                                {% if show_prices %}
+                                    <div class="mt-auto pt-2 border-top d-flex align-items-center justify-content-between">
+                                        <span class="fw-semibold">${{ product.unit_price }}</span>
+                                        <small class="text-muted">/ {{ product.unit }}</small>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="card shadow-sm">
+                <div class="card-body text-muted">
+                    {% trans "No published products are currently available." %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>

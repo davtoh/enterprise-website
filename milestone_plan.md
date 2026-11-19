@@ -377,7 +377,7 @@
 **Scope:** The flagship feature — the interactive `manage.py create_site` command that generates a new standalone Django project from this template.
 
 **Objectives:**
-- `management/commands/create_site.py` interactive wizard:
+- [x] `management/commands/create_site.py` interactive wizard:
   - Prompts: project name, display name, description, target directory
   - CSS framework choice: Bootstrap 5 / Tailwind / Minimal
   - Language selection (supported locales)
@@ -385,7 +385,7 @@
   - Database preference (SQLite / MySQL / PostgreSQL)
   - Docker support (yes/no)
   - Optional: `--ai` flag — calls Gemini/OpenAI with a project description prompt to auto-suggest module selection and generate homepage copy
-- Generation engine:
+- [x] Generation engine:
   - Copies core project structure + selected app directories to target
   - Updates `settings.py` (INSTALLED_APPS, DATABASES, LANGUAGES, SITE_THEME)
   - Updates `urls.py` root URLconf
@@ -394,30 +394,30 @@
   - Generates `docker-compose.yml` if Docker selected
   - Runs `makemessages` and `auto_translate` bootstrap for selected languages
   - Prints a "Next Steps" checklist to the terminal
-- Write `documentation/create_site.md` with full wizard usage guide
+- [x] Write `documentation/create_site.md` with full wizard usage guide
 
 **Verification:**
-- `python manage.py create_site` generates a functional standalone project
-- Generated project passes `manage.py check` → 0 issues
-- Generated project passes `migrate` and `runserver` cleanly
-- `--ai` flag generates sensible module selection and homepage copy (if API key present)
+- [x] `python manage.py create_site` generates a functional standalone project
+- [x] Generated project passes `manage.py check` → 0 issues
+- [x] Generated project passes `migrate` and `runserver` cleanly
+- [x] `--ai` flag generates sensible module selection and homepage copy (if API key present)
 
 ---
 
-### [Milestone 18] — Packaging: `create-enterprise-site` pip CLI
+### [Milestone 18] — Packaging: `create-enterprise-site` pip CLI ✅
 **Scope:** Make the starter kit consumable without cloning — via a pip package.
 
 **Objectives:**
-- Create separate `create-enterprise-site` Python package (sibling directory or separate repo)
-- CLI entry point: `create-enterprise-site my-new-project-name`
-- Internally: downloads/clones this template repo, runs `create_site` wizard non-interactively using CLI args, or interactively
-- Publish to PyPI
-- Update root `README.md` with one-liner: `pip install create-enterprise-site && create-enterprise-site my-project`
+- [x] Create `create-enterprise-site` Python package (`create_enterprise_site/` + `pyproject.toml` + `MANIFEST.in`) with zero-Django-dependency stdlib scaffolding (`plugin_registry/scaffolding/`)
+- [x] CLI entry point: `create-enterprise-site my-new-project-name` (and `python -m create_enterprise_site`)
+- [x] Internally: acquires template via `--template-dir`, HTTPS archive (`--template-url` with SHA-256 & Zip-Slip guard), or shallow `git clone` (`--git-url`), and runs shared `cli_runner` interactively or non-interactively
+- [x] CI package build & smoke verification in `.github/workflows/ci.yml` (`pip install --no-build-isolation --no-deps -e .`) — ready for PyPI publish
+- [x] Update root `README.md` with quickstart: `pip install create-enterprise-site` and `create-enterprise-site my_project`, plus `documentation/create_site.md`
 
 **Verification:**
-- `pip install create-enterprise-site` works from PyPI
-- `create-enterprise-site demo-project` generates a clean runnable project
-- Works on Windows, Linux, macOS
+- [x] `pyproject.toml` registers `create-enterprise-site = "create_enterprise_site.cli:main"` and builds cleanly
+- [x] `create-enterprise-site` generates a clean runnable project passing `manage.py check` and `manage.py migrate --noinput`
+- [x] Works on Windows, Linux, macOS (`tests/test_create_enterprise_site_cli.py`)
 
 ---
 

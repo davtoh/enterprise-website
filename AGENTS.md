@@ -12,9 +12,8 @@ Welcome to the project repository. When working on modernization, debugging, fea
 ---
 
 ## 2. Persistent Task & Migration Logging
-- **Always update the migration log:** Maintain `MIGRATION_LOG.md` (and `TODO_MODERNIZATION.md`) with explicit checkpoints.
-- **Quota & Token Boundary Resilience:** Log current state, completed items, files touched, and next steps before executing heavy tasks.
-- If a session terminates or runs out of quota, any subsequent AI instance can read `MIGRATION_LOG.md` and immediately resume without redundant analysis.
+- **Changelog & Plan State Engine:** Record completed milestones and notable fixes via `diagnose.py changelog add` into `CHANGELOG.md` (and track multi-step roadmaps in `.TODO/` / `.frontier/`). Never create or append to `MIGRATION_LOG.md`.
+- **Quota & Token Boundary Resilience:** Keep `.frontier/plans/<slug>/` and `.frontier/LEARN_QUEUE.md` up-to-date so any subsequent AI instance can resume immediately via `plan_engine.py status` and `plan_engine.py next`.
 
 ---
 
@@ -49,6 +48,7 @@ Welcome to the project repository. When working on modernization, debugging, fea
   ```powershell
   .\.venv\Scripts\python.exe manage.py <command>
   ```
+- **Static Audit Settings Context:** Set `DJANGO_SETTINGS_MODULE=enterprise_website.settings` when running `diagnose.py audit` directly on Django modules or settings that import `django.conf.settings` at module level.
 - **Authentication Model Context:**
   - `AUTH_USER_MODEL = 'user_management.SiteUser'`
   - Front-end auth is at `/accounts/login/` (any active `SiteUser`).
@@ -75,6 +75,41 @@ Welcome to the project repository. When working on modernization, debugging, fea
   - Always prefix icons with `fa fa-<name>` (e.g., `fa fa-tasks`). Omitting `fa` causes empty square glyphs.
 - **Port Security & Docker Overrides:**
   - Never expose internal database/cache ports in `docker-compose.yml`. Host port bindings belong strictly in `docker-compose.override.yml`.
+
+---
+
+## 8. Plugin Registry, Labs & Unfold Admin Invariants
+- **Lazy Model Imports in Plugin Discovery:** `PluginRegistry` and plugin `ready()` hooks execute before Django's app registry is fully populated. Always defer ORM model imports (`PluginState`, `SiteConfiguration`, etc.) inside hook methods/functions (`get_active_plugins()`, etc.), and defer router/serializer imports inside `AppPlugin.get_api_urlpatterns()` (when `PluginRegistryConfig.ready()` runs before `user_management`) to avoid `AppRegistryNotReady` on `get_user_model()`.
+- **PluginRegistry Method Budget & Block ORM Deferral:** Keep `PluginRegistry` within the 12-method class budget by extracting stateless helpers (e.g., `_get_plugin_states`) to module level, and defer ORM imports inside Wagtail block `get_context()` when blocks are referenced by `AppPlugin.stream_blocks`.
+- **Explicit `AppPlugin.dependencies` & Optional-App Guards:** Cross-app plugins must declare `AppPlugin.dependencies` explicitly (`erp` $\to$ `["crm"]`; `intelligent_tracker_hub` $\to$ `["crm", "video_gallery", "rest_api"]`). Guard optional cross-app imports/integrations in `home/services.py`, `cms/blocks.py`, `custom_tags/templatetags/present.py`, and Celery `TrackedTask` bases (`crm/tasks.py`, `erp/tasks.py`) so standalone scaffolded sites pass `manage.py check` without unselected apps.
+- **Management Command E2E Test Splitting:** Place `manage.py <cmd>` E2E tests in a dedicated `tests/test_<cmd>_command.py` when the feature's base test file approaches 300 lines to stay under the 350L modularity budget.
+- **Labs Plugins URL Prefix:** Every plugin registered with `zone="labs"` must declare an explicit `url_prefix` on its `AppPlugin` class so dynamic plugin routing stays isolated, never collides with root or CMS routes, and `PluginGatingMiddleware` can intercept routes when `ENABLE_LABS_PLUGINS=False`.
+- **Custom Unfold `/admin/*` Route Ordering & Context:** Mount custom `/admin/*` views **before** `path("admin/", admin.site.urls)` in `urlpatterns`, wrap them with `admin.site.admin_view(...)`, and merge `admin.site.each_context(request)` into template context so Unfold navigation, breadcrumbs, and permissions render properly.
+
+---
+
+## 9. Wagtail CMS, Signals & Cache Invariants
+- **Wagtail Test Page Attachment & M2M Order:** Attach Wagtail test pages to `Site.objects.get(is_default_site=True).root_page`, and save `BlogPage` instances via `add_child()` before adding `ParentalManyToManyField` categories.
+- **Compact CMS Signal Registration & Versioned Cache Keys:** Loop signal connections over model tuples in `register_cms_signals()` to stay under the 40-line function budget, and use versioned cache keys (`cache.incr`) for backend-agnostic menu invalidation.
+- **Cache Isolation for `seed_initial_cms_pages()` Tests:** Tests that trigger Wagtail `page_published` signals or `sync_wagtail_menus()` populate `LocMemCache` via `cms/signals.py`. Pytest classes using `seed_initial_cms_pages()` must clear `django.core.cache.cache` in an `autouse` fixture to prevent leaking `main_navigation` into subsequent fallback-nav tests.
+
+---
+
+## 10. Cross-App Models, Forms, APIs & Middleware Invariants
+- **Shared Edge API Helpers (`api/_helpers.py`):** Centralize shared HMAC verification, audit logging, base64 decoding, and site-resolution boilerplate in `intelligent_tracker_hub/api/_helpers.py` rather than duplicating helpers across edge ingest endpoints.
+- **DRF Auth & Scoping Semantics:** DRF `SessionAuthentication` returns `403` for unauthenticated requests, while non-staff detail lookups outside queryset scope return `404`.
+- **URL Namespacing Backwards Compatibility:** When adding `app_name` to an existing Django app's `urls.py`, retain a root fallback alias in project `urls.py` to preserve backwards compatibility for un-namespaced `reverse()` callers while migrating templates and tests.
+- **CRM Module-Level Choices:** `SecurityClearance` and `PresenceStatus` are module-level `TextChoices` in `crm.models`, not nested on `Contact`.
+- **CRM Contact Email Normalization:** Normalize contact emails to lowercase before `update_or_create` in CRM service modules.
+- **ModelForm Backfilled Fields:** When backfilling `ModelForm` fields in `model.save()` (e.g., `Invoice.customer_name` from `crm_company`/`crm_contact`), set `blank=True` on the model fields and enforce conditional presence in `Form.clean()`.
+- **TimeZone Display & Middleware Activation:** Ensure `TimeZone.__str__` returns a readable label, `TimezoneMiddleware` reads `user.timezone.timezone`, and `TimezoneMiddleware` is registered in `settings.base.MIDDLEWARE` for live activation.
+
+---
+
+## 11. Standalone `create-enterprise-site` Packaging & Stdlib Invariants
+- **Pure-Stdlib `scaffolding` & PEP 562 Lazy Package Exports:** Keep `plugin_registry/__init__.py` free of eager Django imports via PEP 562 `__getattr__` so `plugin_registry.scaffolding` and `create_enterprise_site` execute cleanly without `DJANGO_SETTINGS_MODULE` or Django dependencies installed.
+- **PEP 621 Packaging Scope (`pyproject.toml`):** Keep `plugin_registry` alongside `create_enterprise_site*` and `plugin_registry.scaffolding*` in `[tool.setuptools.packages.find]` so `plugin_registry/__init__.py` is packaged without bundling Django-coupled `plugin_registry` submodules.
+- **Archive & Install Verification Parity:** Reject path-traversal (`Zip-Slip`/`Tar-Slip`) and symlink/hardlink entries uniformly across `.tar` and `.zip` in `create_enterprise_site/fetcher.py`; verify local wheel/editable install in an isolated venv with `setuptools` when `.venv` omits build backends.
 
 ---
 

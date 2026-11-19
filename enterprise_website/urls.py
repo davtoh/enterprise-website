@@ -19,10 +19,12 @@ from django.conf import settings
 from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf.urls.static import static  # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-# for the rest API
-from django.contrib.auth import get_user_model
-from rest_framework import routers, serializers, viewsets
+from timezone_management import views as tz_views
+from language_management.views import set_language_and_sync_profile
+from plugin_registry.admin_views import PluginMarketplaceView
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
 
 urlpatterns = [
     path('', include('home.urls')),
@@ -32,6 +34,7 @@ urlpatterns = [
     path('webprogram/', include('webprogram.urls')),
     path('lang/', include('language_management.urls')),
     path('tz/', include('timezone_management.urls')),
+    path('tz/set/', tz_views.set_timezone, name='set_timezone'),
     path('accounts/', include('user_management.urls')),
     path('tasks/', include('task_runner.urls')),
     path('theme/', include('theme_management.urls')),
@@ -40,10 +43,18 @@ urlpatterns = [
     path('crm/', include('crm.urls')),
     path('erp/', include('erp.urls')),
     path('security/', include('intelligent_tracker_hub.urls')),
-    path('api/v1/', include('intelligent_tracker_hub.api_urls')),
+    path('api/v1/', include('rest_api.v1_urls')),
 
     #path('accounts/', include('django.contrib.auth.urls')),
+    path(
+        'admin/marketplace/',
+        admin.site.admin_view(PluginMarketplaceView.as_view()),
+        name='admin_marketplace',
+    ),
     path('admin/', admin.site.urls),
+    path('cms/', include(wagtailadmin_urls)),
+    path('documents/', include(wagtaildocs_urls)),
+    path('i18n/setlang/', set_language_and_sync_profile, name='set_language'),
     path('i18n/', include('django.conf.urls.i18n')),  # <url path>/setlang
     path('rest_api/', include('rest_api.urls')),  # , namespace='rest_framework'
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -52,6 +63,11 @@ if 'rosetta' in settings.INSTALLED_APPS:
     urlpatterns += [
         path('rosetta/', include('rosetta.urls'))
     ]
+
+# Wagtail catch-all page serving (must remain after explicit Django routes)
+urlpatterns += [
+    path('', include(wagtail_urls)),
+]
 
 # Change admin site title
 # https://matheusho.svbtle.com/change-django-admin-site-title

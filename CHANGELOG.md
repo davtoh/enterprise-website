@@ -1,148 +1,151 @@
 # Changelog
 
-## [2026-11-12] feat: Coordinated Framework Upgrade - Django 5.2 LTS, DRF 3.18.2 & Allauth 65.22.0
+## [2026-11-19] feat: Milestone 18.3: CI Package Build, Executable Docs & Sign-Off
 - **Type**: feat
-- **Summary**: Synchronized upgrade of Django 5.2.19, DRF 3.18.2, and Allauth 65.22.0 with allauth settings modernization, DB migrations, assertQuerySetEqual fixes, and Dependabot grouping rules.
-- **Files** (3):
-  - `MIGRATION_LOG.md`
-  - `polls/tests.py`
-  - `CHANGELOG.md`
-- **Verification**: pytest (381 passed)
+- **Summary**: Added editable CLI install and smoke test to GitHub Actions CI, documented create-enterprise-site quickstart and Scenario Combinations Matrix in README.md and documentation/create_site.md, marked Milestone 18 complete in milestone_plan.md, and added pyproject/version/doc-flag-parity tests.
+- **Files** (5):
+  - `.github/workflows/ci.yml`
+  - `README.md`
+  - `documentation/create_site.md`
+  - `milestone_plan.md`
+  - `tests/test_create_enterprise_site_cli.py`
+- **Verification**: .venv/Scripts/python.exe -m pytest tests/test_create_enterprise_site_cli.py tests/test_create_site.py tests/test_create_site_command.py
 
-## [Milestone 1] - AI Rules & Standardization Setup
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Establish workspace and global AI guidelines for comment preservation, persistent task logging, milestone review workflow, and security standards.
-- **Files Created / Modified:**
-  - `AGENTS.md`: Workspace root guidelines.
-  - `.agents/rules/comment_preservation.md`: Reference preservation rules.
-  - `.agents/rules/task_logging.md`: Persistent task/migration log rules.
-  - `.agents/rules/milestone_workflow.md`: Milestone review protocol.
-  - `.agents/rules/security_and_standards.md`: OWASP and cross-platform standards.
-  - `documentation/GLOBAL_AI_RULES.md`: Ready-to-copy standard rule for `~/.gemini/config/rules/` and other migration projects.
-  - `MIGRATION_LOG.md`: Initialized persistent task tracking log.
-- **Verification:**
-  - Files created in standard `.agents/rules` and root `AGENTS.md` format.
+## [2026-11-19] feat: Milestone 18.2: create-enterprise-site Standalone CLI & PEP 621 Packaging
+- **Type**: feat
+- **Summary**: Implemented create_enterprise_site.cli/main, python -m create_enterprise_site entrypoint, PEP 621 pyproject.toml, MANIFEST.in, and E2E CLI tests.
+- **Files** (5):
+  - `tests/test_create_enterprise_site_cli.py`
+  - `MANIFEST.in`
+  - `create_enterprise_site/__main__.py`
+  - `create_enterprise_site/cli.py`
+  - `pyproject.toml`
+- **Verification**: .venv/Scripts/python.exe -m pytest tests/test_create_enterprise_site_cli.py tests/test_create_site.py tests/test_create_site_command.py
 
----
-
-## [Milestone 2] - Navigation & Page Routes Modernization
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Fix broken navigation links in `templates/base.html` that previously pointed to static `about.html`, `services.html`, `products.html`, `contact.html`.
-  - Implement Class-Based Views and responsive templates in `home` app for About Us, Services, Products, and Contact.
-  - Add routes supporting both standard URLs (`/about/`) and legacy paths (`/about.html`, etc.) for seamless backwards compatibility.
-  - Add an "Apps" dropdown in the navbar linking directly to the interactive modules:
-    - Todo (`/todo/`)
-    - Polls (`/polls/`)
-    - Brython WebProgram (`/webprogram/`)
-    - REST API (`/rest_api/`)
-    - Django Admin (`/admin/`)
-  - Update brand logo link to dynamic `{% url 'home:index' %}`.
-  - Update `home/templates/home/index.html` buttons and footer links to route to active Django views.
-
-## [Milestone 3] - Logic Fixes, Auth Modernization & Security Hardening
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Fix `user_management/views.py`:
-    - Fixed base64 encoding/decoding compatibility for Django 3+ / 5.x in `send_account_activation_email` and `activate_user_account`.
-    - Fixed activation template path to `emails/user_management/activation.html`.
-    - Corrected broken reverse namespaces (`app:activate_user_account` -> `user_management:activate_user_account`, `hr:user_profile` -> `user_management:profile`).
-    - Handled Django 5 `LogoutView` POST-by-default requirement gracefully with `http_method_names = ['get', 'post', 'options']` while adding a secure CSRF POST logout form in the navbar.
-    - Updated `SiteUserProfileView` and `SiteUserUpdateView` with `LoginRequiredMixin` and `get_object()` returning `request.user` so `/accounts/profile/` functions without requiring a PK in the URL.
-    - Created `user_management/templates/user_management/profile.html`, `logout.html`, and `siteuser_list.html`.
-  - Fix `todo/views.py` and templates:
-    - Replaced hard-crashing `Todo.objects.get()` with `get_object_or_404(Todo, id=id)`.
-    - Sanitized `add` view with empty-title validation and error alerts.
-    - Replaced typographical quotes (`”`) with standard double quotes (`"`) in `todo/templates/todo/index.html`.
-
-## [Milestone 4] - Messages Refactoring & Environment Execution Standards
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Refactor `templates/partials/messages.html`:
-    - Remove hardcoded test alerts and restore dynamic Django message rendering loop (`{% if messages %} ... {% endif %}`).
-    - Eliminate hacky `!important`, full-screen viewport taking `min-height: 100vh`, and intrusive high z-index overlay.
-    - Implement clean Bootstrap alerts with gentle drop shadow, dismiss button, and 6-second auto-dismiss.
-  - Document Environment & Execution Standards:
-    - Eliminate command discovery friction by clearly defining the local virtual environment at `python` (and pip at `.\.venv\Scripts\pip.exe`).
-    - Explain that global Windows PATH points to an unconfigured Python stub without project packages installed.
-    - Clarify authentication architecture: custom user model `user_management.SiteUser`, separation of front-end `/accounts/login/` vs `/admin/login/` (`is_staff=True`), and how to inspect/create default users.
-    - Persist these rules across `.agents/rules/environment_and_execution.md` and root `AGENTS.md`.
-- **Files Created / Modified:**
-  - `templates/partials/messages.html`
-  - `.agents/rules/environment_and_execution.md`
+## [2026-11-19] feat: Milestone 18.1: Pure-Stdlib Scaffolding Engine, Shared CLI Runner & Template Fetcher
+- **Type**: feat
+- **Summary**: Decoupled Django imports from plugin_registry.scaffolding, extracted shared cli_runner.py, and added create_enterprise_site/fetcher.py with SHA-256 and Zip-Slip/Tar-Slip protection.
+- **Files** (10):
+  - `.TODO/create_enterprise_site_pip_cli.md`
   - `AGENTS.md`
-  - `MIGRATION_LOG.md`
-- **Verification:**
-  - Verified `python manage.py check` passes with 0 issues.
-  - Confirmed `templates/partials/messages.html` renders only when messages exist and without intrusive CSS overrides.
+  - `plugin_registry/__init__.py`
+  - `plugin_registry/management/commands/create_site.py`
+  - `plugin_registry/scaffolding/__init__.py`
+  - `plugin_registry/scaffolding/generator.py`
+  - `plugin_registry/scaffolding/manifest.py`
+  - `create_enterprise_site/`
+  - ... (+2 more)
+- **Verification**: pytest tests/test_create_enterprise_site_cli.py tests/test_create_site.py tests/test_create_site_command.py
 
----
+## [2026-11-19] feat: Milestone 17.3: manage.py create_site CLI Wizard & Docs
+- **Type**: feat
+- **Summary**: Implemented interactive and non-interactive manage.py create_site wizard, documentation/create_site.md, and E2E CLI tests.
+- **Files** (5):
+  - `milestone_plan.md`
+  - `tests/test_create_site.py`
+  - `documentation/create_site.md`
+  - `plugin_registry/management/`
+  - `tests/test_create_site_command.py`
+- **Verification**: pytest tests/test_create_site.py tests/test_create_site_command.py
 
-## [Milestone 5] - Full Application Flash Messaging Integration
-- **Date:** 2026-10-20
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Wire Django messages framework across all critical user interactions:
-    - **Login (`user_management.views.LoginView`)**:
-      - `form_valid`: Displays `messages.success` greeting the user by name upon successful login.
-      - `form_invalid`: Displays `messages.error` ("Invalid username or password. Please check your credentials and try again.").
-    - **Logout (`user_management.views.LogoutView`)**:
-      - `dispatch`: Displays `messages.info` ("You have been successfully logged out. See you soon!").
-    - **Sign Up / Registration (`user_management.views.SignUpView`)**:
-      - `form_valid`: Displays `messages.success` notifying account creation and prompting login.
-      - `form_invalid`: Displays `messages.error` prompting correction of registration errors.
-    - **Account Activation (`user_management.views.activate_user_account`)**:
-      - Success: Displays `messages.success` and redirects to profile.
+## [2026-11-19] feat: Milestone 17.2: Project Scaffolding Generator Engine
+- **Type**: feat
+- **Summary**: Added split-settings, URLconf, env, requirements, and Docker renderers plus ProjectGenerator and optional task_runner/polls guards.
+- **Files** (8):
+  - `crm/tasks.py`
+  - `custom_tags/templatetags/present.py`
+  - `erp/tasks.py`
+  - `plugin_registry/scaffolding/__init__.py`
+  - `tests/test_create_site.py`
+  - `plugin_registry/scaffolding/generator.py`
+  - `plugin_registry/scaffolding/renderers.py`
+  - `plugin_registry/scaffolding/settings_renderers.py`
+- **Verification**: pytest tests/test_create_site.py tests/test_plugin_registry.py tests/test_home.py tests/test_cms.py
 
-## [Milestone 6] - Internationalization (i18n), Rosetta Mapping & Automated Translation Baseline
-- **Date:** 2026-10-21
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - **AI & Project Rule Updates:**
-    - Created [`.agents/rules/rosetta_and_i18n.md`](rosetta_and_i18n.md) defining strict i18n and Rosetta standards for all new templates, models, and views.
-    - Updated [`AGENTS.md`](AGENTS.md) with **Section 6: Internationalization (i18n) & Rosetta Translation**.
-  - **Rosetta & Machine Translation Settings:**
-    - Configured `django.template.context_processors.i18n` in `TEMPLATES['OPTIONS']['context_processors']` within `enterprise_website/settings.py`.
-    - Enabled `ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True` and added optional API keys (`DEEPL_AUTH_KEY`, `OPENAI_API_KEY`, `AZURE_CLIENT_SECRET`, `GOOGLE_APPLICATION_CREDENTIALS_PATH`) in `enterprise_website/settings.py` and `.env.example`.
-  - **Comprehensive Codebase Mapping & Translation Tagging:**
-    - Mapped and wrapped all untranslated strings across:
-      - Core layout: `templates/base.html`, `templates/admin/base_site.html`, `templates/signup.html`, `templates/base_form.html`, `templates/registration/logged_out.html`.
-      - Home App: `index.html`, `about.html`, `services.html`, `products.html`, `contact.html`, and contact flash messages in `home/views.py`.
-      - User Management App: `login.html`, `logout.html`, `profile.html`, `siteuser_list.html`, `signup.html`, `upload_image_form.html`, password reset templates (`password_reset_form.html`, `password_reset_done.html`, `password_reset_confirm.html`, `password_reset_complete.html`, `password_reset_email.html`), activation email (`activation.html`), `user_management/forms.py` (image validation, birthdate validation, ImageUploadForm label), and all authentication flash messages in `user_management/views.py`.
+## [2026-11-19] feat: create_site Milestone 1: SiteManifest, Dependency Resolver & AI Blueprint Advisor
+- **Type**: feat
+- **Summary**: Added SiteManifest schema/JSON IO, transitive AppPlugin dependency resolver, optional --ai blueprint advisor with offline heuristic fallback, and optional-app guards in home/services.py and cms/blocks.py.
+- **Files** (8):
+  - `.TODO/create_site_scaffolding_wizard.md`
+  - `AGENTS.md`
+  - `cms/blocks.py`
+  - `erp/plugin.py`
+  - `home/services.py`
+  - `intelligent_tracker_hub/plugin.py`
+  - `plugin_registry/scaffolding/`
+  - `tests/test_create_site.py`
+- **Verification**: pytest tests/test_create_site.py tests/test_plugin_registry.py tests/test_home.py tests/test_cms.py
 
-## [Milestone 7] - Documentation Consolidation & System Operations Manual
-- **Date:** 2026-10-21
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - **Single Root README Consolidation:**
-    - Consolidated all relevant legacy setup instructions, production MySQL configurations, data fixtures, and project purpose from `README.rst` into `README.md`.
-    - Removed redundant root `README.rst` to maintain a single source of truth (`README.md`).
-  - **Comprehensive System Manual Creation:**
-    - Created [`documentation/README.md`](README.md) detailing:
-      - Project executive summary, purpose, and value proposition.
-      - Full architectural directory breakdown across all apps (`home`, `user_management`, `todo`, `polls`, `language_management`, `location_management`, `timezone_management`, `rest_api`, `webprogram`, `custom_tags`).
-      - Detailed feature descriptions for each module.
-      - System workflows with Mermaid diagrams (Authentication lifecycle, i18n & Rosetta translation pipeline, Geo-data ingestion, and Polling/voting).
-      - Step-by-step commands guide for virtual environments, migrations, fixtures (`populate_users --test`), location databases (`populate_locations`), and poll management (`closepoll`).
-      - Full commands reference for translation tooling (`makemessages`, `auto_translate` with all backend and flag variations, and `compilemessages`).
+## [2026-11-16] refactor: Step 5 Milestone 3: Modularity Budget Paydown & Master Roadmap Sign-Off
+- **Type**: refactor
+- **Summary**: Decomposed erp/pdf.py, intelligent_tracker_hub/api/*.py (with shared _helpers.py), and dashboard.html into 7 partials; all 468 pytest tests and modularity audits pass.
+- **Files** (8):
+  - `erp/pdf.py`
+  - `intelligent_tracker_hub/api/access_control.py`
+  - `intelligent_tracker_hub/api/security_events.py`
+  - `intelligent_tracker_hub/api/video_evidence.py`
+  - `intelligent_tracker_hub/api/video_streaming.py`
+  - `intelligent_tracker_hub/templates/intelligent_tracker_hub/dashboard.html`
+  - `intelligent_tracker_hub/api/_helpers.py`
+  - `intelligent_tracker_hub/templates/intelligent_tracker_hub/partials/`
+- **Verification**: pytest
 
-## [Milestone 8] - Plugin Registry & Dynamic Menus System
-- **Date:** 2026-10-22
-- **Status:** **COMPLETE**
-- **Objectives:**
-  - Build `plugin_registry` Django application with `AppPlugin` base interface and `registry.autodiscover()`.
-  - Build `menu_management` Django application with `Menu` and `MenuItem` models supporting hierarchy, URL reverse resolution, permission checks, and plugin origin tracking.
-  - Create `sync_menus` command and admin action to synchronize discovered `AppPlugin` definitions into active database menus without overriding manual user customizations.
-  - Implement `dynamic_menu` context processor injecting structured tree `main_navigation` into all templates.
-  - Update `templates/base.html` to render the dynamic navigation menu with graceful static fallback.
-  - Register `home`, `todo`, `polls`, `webprogram`, and `rest_api` apps with `plugin.py` implementations.
-  - Add `documentation/plugin_system.md` detailing plugin creation and menu management workflows.
-- **Files Created / Modified:**
-  - `plugin_registry/` (`base.py`, `registry.py`, `apps.py`, `__init__.py`)
-  - `menu_management/` (`models.py`, `apps.py`, `admin.py`, `context_processors.py`, `sync.py`, `management/commands/sync_menus.py`, `migrations/0001_initial.py`)
-  - `home/plugin.py`, `todo/plugin.py`, `polls/plugin.py`, `webprogram/plugin.py`, `rest_api/plugin.py`
+## [2026-11-16] feat: Step 5 M2: Ecosystem Ops (django-filter, django-import-export & django-htmx)
+- **Type**: feat
+- **Summary**: Added FilterSets, Unfold ImportExportModelAdmin resources, and HTMX partial table rendering across crm, erp, and location_management.
+- **Files** (27):
+  - `crm/admin.py`
+  - `crm/templates/crm/company_list.html`
+  - `crm/templates/crm/contact_list.html`
+  - `crm/templates/crm/lead_list.html`
+  - `crm/views/companies.py`
+  - `crm/views/contacts.py`
+  - `crm/views/leads.py`
+  - `erp/admin.py`
+  - ... (+19 more)
+- **Verification**: pytest tests/crm/ tests/erp/ tests/test_home.py
+
+## [2026-11-16] feat: Step 5 M1: Unified /api/v1/ (drf-spectacular) & AppPlugin.api_urlpatterns
+- **Type**: feat
+- **Summary**: Added drf-spectacular, django-filter, django-import-export, and django-htmx; mounted /api/v1/schema/, /api/v1/docs/, /api/v1/redoc/, and active plugin API routes via get_active_api_urlpatterns().
+- **Files** (12):
+  - `.TODO/step_5_unified_api_and_modularity_paydown.md`
+  - `AGENTS.md`
+  - `enterprise_website/settings/apps.py`
+  - `enterprise_website/settings/base.py`
+  - `enterprise_website/settings/integrations.py`
+  - `enterprise_website/urls.py`
+  - `plugin_registry/registry.py`
+  - `requirements/base.txt`
+  - ... (+4 more)
+- **Verification**: pytest tests/test_rest_api.py tests/test_plugin_registry.py tests/tracker/
+
+## [2026-11-16] feat: Step 4 Milestone 3: ActionItem Promotion & SiteUser Locale/Timezone Sync
+- **Type**: feat
+- **Summary**: Promoted Todo to ActionItem with GenericForeignKey, linked contact leads in home/services.py, and synced SiteUser preferred_language and timezone.
+- **Files** (19):
+  - `enterprise_website/settings/base.py`
+  - `enterprise_website/urls.py`
+  - `home/services.py`
+  - `language_management/views.py`
+  - `tests/test_home.py`
+  - `tests/test_timezone_management.py`
+  - `tests/test_todo.py`
+  - `tests/test_user_management.py`
+  - ... (+11 more)
+- **Verification**: pytest tests/test_video_gallery.py tests/test_polls.py tests/test_todo.py tests/crm/ tests/erp/ tests/test_timezone_management.py tests/test_user_management.py tests/test_home.py tests/test_cms.py
+
+## [2026-11-15] feat: Step 4 Milestone 2: ERP Modular Models, Public Catalog & CRM Invoice Link
+- **Type**: feat
+- **Summary**: Split erp/models.py into erp/models/ package, added Product.is_published/public_summary, ProductShowcaseBlock, dynamic ProductsView catalog, and Invoice CRM backfill.
+- **Files** (16):
+  - `cms/blocks.py`
+  - `erp/forms.py`
+  - `erp/models.py`
+  - `erp/plugin.py`
+  - `erp/views/invoices.py`
+  - `home/templates/home/products.html`
+  - `home/views.py`
+  - `tests/erp/test_invoices_and_pdf.py`
+  - ... (+8 more)
+- **Verification**: pytest tests/erp/ tests/crm/ tests/test_home.py tests/test_cms.py

@@ -168,3 +168,57 @@ def test_stock_movement_views(client, auth_user, test_product, test_location):
     test_product.refresh_from_db()
     assert test_product.current_stock == initial_stock + 10
 
+
+@pytest.mark.django_db
+def test_product_public_catalog_filtering_and_form(test_category):
+    from erp.forms import ProductForm
+
+    pub_active = Product.objects.create(
+        sku="PUB-001",
+        name="Published Sensor",
+        category=test_category,
+        public_summary="High-accuracy optical sensor.",
+        unit_price=Decimal("299.00"),
+        is_active=True,
+        is_published=True,
+    )
+    Product.objects.create(
+        sku="PRIV-001",
+        name="Internal Prototype",
+        category=test_category,
+        is_active=True,
+        is_published=False,
+    )
+    Product.objects.create(
+        sku="INACT-001",
+        name="Discontinued Unit",
+        category=test_category,
+        is_active=False,
+        is_published=True,
+    )
+
+    public_qs = Product.objects.filter(is_active=True, is_published=True)
+    assert list(public_qs) == [pub_active]
+
+    form = ProductForm(
+        data={
+            "sku": "PUB-002",
+            "name": "Published Gateway",
+            "category": test_category.pk,
+            "description": "Full specs",
+            "public_summary": "Edge IoT gateway",
+            "unit": "pcs",
+            "unit_price": "499.00",
+            "cost_price": "250.00",
+            "current_stock": 15,
+            "reorder_threshold": 5,
+            "is_active": True,
+            "is_published": False,
+        }
+    )
+    assert form.is_valid(), form.errors
+    saved = form.save()
+    assert saved.is_published is False
+    assert saved.public_summary == "Edge IoT gateway"
+
+

@@ -1,6 +1,8 @@
 from django.utils.translation import gettext_lazy as _
 from plugin_registry import AppPlugin, MenuItemDefinition
 
+from .blocks import VideoGalleryEmbedBlock
+
 
 class VideoGalleryPlugin(AppPlugin):
     name = "video_gallery"
@@ -8,6 +10,9 @@ class VideoGalleryPlugin(AppPlugin):
     description = _("Admin-managed embed-based video galleries supporting YouTube, Vimeo, and MP4")
     icon = "fa fa-video-camera"
     category = "productivity"
+    stream_blocks = [
+        ("video_gallery", VideoGalleryEmbedBlock),
+    ]
 
     menu_items = [
         MenuItemDefinition(

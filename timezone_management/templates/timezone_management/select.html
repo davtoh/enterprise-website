@@ -1,7 +1,7 @@
 {% load tz %}
 {% load i18n %}
 {% get_current_timezone as TIME_ZONE %}
-<form action="{% url 'set_timezone' %}" method="POST">
+<form action="{% url 'timezone_management:set_timezone' %}" method="POST">
     {% csrf_token %}
     <label for="timezone">{% trans "Time zone:" %}</label>
     <select name="timezone">

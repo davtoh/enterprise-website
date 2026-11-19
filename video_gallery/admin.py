@@ -34,8 +34,8 @@ class VideoItemInline(admin.TabularInline):
 
 @admin.register(VideoGallery)
 class VideoGalleryAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug", "get_video_count", "is_active", "created_at")
-    list_filter = ("is_active", "created_at")
+    list_display = ("name", "slug", "get_video_count", "is_active", "is_public", "requires_staff", "created_at")
+    list_filter = ("is_active", "is_public", "requires_staff", "created_at")
     search_fields = ("name", "description")
     prepopulated_fields = {"slug": ("name",)}
     inlines = [VideoItemInline]
@@ -60,7 +60,7 @@ class VideoItemAdmin(admin.ModelAdmin):
         "is_active",
         "created_at",
     )
-    list_filter = ("gallery", "source_type", "is_active", "created_at")
+    list_filter = ("gallery", "source_type", "is_active", "is_public", "requires_staff", "created_at")
     search_fields = ("title", "description", "embed_url")
     readonly_fields = (
         "thumbnail_preview_large",
@@ -96,7 +96,7 @@ class VideoItemAdmin(admin.ModelAdmin):
         ),
         (
             _("Display & Publishing"),
-            {"fields": ("order", "is_active", "created_at", "updated_at")},
+            {"fields": ("order", "is_active", "is_public", "requires_staff", "created_at", "updated_at")},
         ),
     )
 

@@ -1,7 +1,16 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template.loader import get_template
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.utils.translation import gettext as _
 from django.views.generic.base import TemplateView
+
+from .services import ingest_website_contact_submission
+
+
+def _get_seeded_cms_page(slug: str):
+    """Return the live seeded StandardPage for a legacy home slug, if present."""
+    from cms.models import StandardPage
+
+    return StandardPage.objects.live().filter(slug=slug).first()
 
 
 class HomeView(TemplateView):
@@ -12,6 +21,7 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Home - Enterprise Website"
         context['banner_content_title'] = "Enterprise Website"
+        context['cms_page'] = _get_seeded_cms_page("home")
         return context
 
 
@@ -21,6 +31,7 @@ class AboutView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "About Us - Enterprise Website"
+        context['cms_page'] = _get_seeded_cms_page("about")
         return context
 
 
@@ -30,6 +41,7 @@ class ServicesView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Services - Enterprise Website"
+        context['cms_page'] = _get_seeded_cms_page("services")
         return context
 
 
@@ -37,13 +49,17 @@ class ProductsView(TemplateView):
     template_name = "home/products.html"
 
     def get_context_data(self, **kwargs):
+        from erp.models import Product
+
         context = super().get_context_data(**kwargs)
         context['title'] = "Products - Enterprise Website"
+        context['cms_page'] = _get_seeded_cms_page("products")
+        context['products'] = list(
+            Product.objects.filter(is_active=True, is_published=True)
+            .select_related("category")
+            .order_by("name")
+        )
         return context
-
-
-from django.contrib import messages
-from django.utils.translation import gettext as _
 
 
 class ContactView(TemplateView):
@@ -52,6 +68,7 @@ class ContactView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "Contact Us - Enterprise Website"
+        context['cms_page'] = _get_seeded_cms_page("contact")
         return context
 
     def post(self, request, *args, **kwargs):
@@ -60,6 +77,12 @@ class ContactView(TemplateView):
         subject = request.POST.get('subject', '').strip()
         message = request.POST.get('message', '').strip()
         if name and email and message:
+            ingest_website_contact_submission(
+                name=name,
+                email=email,
+                subject=subject,
+                message=message,
+            )
             messages.success(request, _("Thank you, %(name)s! Your message has been received.") % {'name': name})
         else:
             messages.error(request, _("Please fill out all required fields."))

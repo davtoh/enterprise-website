@@ -50,6 +50,13 @@ class SiteUser(AbstractUser):
                                         #default='profile_pictures/None/no-img.jpg',
                                         blank=True, null=True)
     timezone = models.ForeignKey(TimeZone, verbose_name=_('timezone'), help_text=_('This is the help text'), on_delete=models.SET_NULL, null=True, blank=True)
+    preferred_language = models.CharField(
+        _('preferred language'),
+        max_length=16,
+        choices=settings.LANGUAGES,
+        blank=True,
+        default='',
+    )
     country = models.ForeignKey(Countries, verbose_name=_('country'), help_text=_('This is the help text'), on_delete=models.SET_NULL, null=True, blank=True)
     state = models.ForeignKey(States, verbose_name=_('state'), help_text=_('This is the help text'), on_delete=models.SET_NULL, null=True, blank=True)
     city = models.ForeignKey(Cities, verbose_name=_('city'), help_text=_('This is the help text'), on_delete=models.SET_NULL, null=True, blank=True)

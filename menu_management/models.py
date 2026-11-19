@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse, NoReverseMatch
 
@@ -43,6 +44,14 @@ class MenuItem(models.Model):
     # Origin tracking for plugin discovery & synchronization
     plugin_source = models.CharField(_('Plugin source'), max_length=100, blank=True, help_text=_('Originating plugin ID, e.g., todo, polls'))
     is_custom = models.BooleanField(_('Custom user item'), default=True, help_text=_('True if created manually by admin rather than auto-discovered'))
+    wagtail_page = models.ForeignKey(
+        'wagtailcore.Page',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='menu_items',
+        verbose_name=_('Wagtail Page'),
+    )
 
     class Meta:
         verbose_name = _('Menu Item')
@@ -52,13 +61,43 @@ class MenuItem(models.Model):
     def __str__(self):
         return f"{self.title} ({self.get_resolved_url()})"
 
-    def get_resolved_url(self) -> str:
-        """Resolve the URL using url_name first, falling back to url_path."""
+    def get_localized_page(self, language_code: str | None = None):
+        """Return the live localized Wagtail Page for the active or given language."""
+        if not self.wagtail_page_id:
+            return None
+        page = self.wagtail_page
+        lang = language_code or translation.get_language()
+        if lang and getattr(page, 'locale', None) and page.locale.language_code != lang:
+            from wagtail.models import Locale
+
+            locale = Locale.objects.filter(language_code=lang).first()
+            if locale is not None:
+                translated = page.get_translation_or_none(locale)
+                if translated is not None and translated.live:
+                    return translated
+        return page if page.live else None
+
+    def get_resolved_title(self, language_code: str | None = None) -> str:
+        """Resolve localized Wagtail page title when linked, falling back to MenuItem.title."""
+        if self.wagtail_page_id:
+            page = self.get_localized_page(language_code=language_code)
+            if page is not None:
+                return page.title
+        return self.title
+
+    def get_resolved_url(self, language_code: str | None = None) -> str:
+        """Resolve the URL using url_name, localized wagtail_page, or url_path."""
         if self.url_name:
             try:
                 return reverse(self.url_name)
             except NoReverseMatch:
                 pass
+        if self.wagtail_page_id:
+            page = self.get_localized_page(language_code=language_code)
+            if page is not None:
+                page_url = page.url
+                if page_url:
+                    return page_url
         return self.url_path or '#'
 
     def is_accessible_by(self, user) -> bool:

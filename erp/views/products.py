@@ -12,6 +12,7 @@ from django.views.generic import (
     UpdateView,
 )
 
+from erp.filters import ProductFilter
 from erp.forms import ProductForm
 from erp.models import Category, Product
 
@@ -21,21 +22,23 @@ logger = logging.getLogger(__name__)
 class ProductListView(LoginRequiredMixin, ListView):
     model = Product
     template_name = "erp/product_list.html"
+    partial_template_name = "erp/partials/product_table.html"
     context_object_name = "products"
     paginate_by = 15
 
+    def get_template_names(self):
+        if getattr(self.request, "htmx", False):
+            return [self.partial_template_name]
+        return [self.template_name]
+
     def get_queryset(self):
-        qs = Product.objects.select_related("category").order_by("name")
-        q = self.request.GET.get("q", "").strip()
-        category = self.request.GET.get("category", "").strip()
-        if q:
-            qs = qs.filter(Q(name__icontains=q) | Q(sku__icontains=q))
-        if category:
-            qs = qs.filter(category_id=category)
-        return qs
+        base_qs = Product.objects.select_related("category").order_by("name")
+        self.filterset = ProductFilter(self.request.GET, queryset=base_qs)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        ctx["filter"] = getattr(self, "filterset", None)
         ctx["categories"] = Category.objects.all()
         ctx["search_query"] = self.request.GET.get("q", "")
         ctx["selected_category"] = self.request.GET.get("category", "")

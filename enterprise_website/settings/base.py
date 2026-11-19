@@ -53,6 +53,9 @@ ACCOUNT_PRESERVE_USERNAME_CASING = False
 
 # Theme Architecture & Dynamic CSS Framework Configuration
 SITE_THEME = os.getenv('SITE_THEME', 'bootstrap5').lower().strip()
+
+# Plugin Zone Feature Flags
+ENABLE_LABS_PLUGINS = os.getenv("ENABLE_LABS_PLUGINS", "False").lower() in ("true", "1", "t")
 AVAILABLE_THEMES = ['bootstrap5', 'tailwind', 'minimal']
 
 # during the request phase, where middleware is applied first-to-last
@@ -64,13 +67,17 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware', #Manages sessions across requests
     'django.middleware.locale.LocaleMiddleware', # https://docs.djangoproject.com/en/2.1/topics/i18n/translation/#how-django-discovers-language-preference
     'django.middleware.common.CommonMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware', #Associates users with requests using sessions.
     'allauth.account.middleware.AccountMiddleware',
+    'timezone_management.middleware.TimezoneMiddleware',
     'theme_management.middleware.ThemeMiddleware',
+    'plugin_registry.middleware.PluginGatingMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
 TEMPLATES = [
@@ -157,4 +164,17 @@ ROSETTA_SHOW_OCCURRENCES = True
 def ROSETTA_ACCESS_CONTROL_FUNCTION(user):
     # only staff members can use rosetta
     return user.is_staff is True and user.is_active is True
+
+
+# Wagtail & wagtail-localize configuration
+WAGTAIL_SITE_NAME = os.getenv("WAGTAIL_SITE_NAME", "Enterprise Website")
+WAGTAILADMIN_BASE_URL = os.getenv("WAGTAILADMIN_BASE_URL", "")
+WAGTAIL_I18N_ENABLED = True
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "wagtail.search.backends.database",
+    }
+}
+
 

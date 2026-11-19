@@ -15,6 +15,10 @@ from django.utils.deprecation import MiddlewareMixin
 class TimezoneMiddleware(MiddlewareMixin):
     def process_request(self, request):
         tzname = request.session.get('django_timezone')
+        if not tzname:
+            user = getattr(request, 'user', None)
+            if user and user.is_authenticated and getattr(user, 'timezone', None):
+                tzname = user.timezone.timezone
         if tzname:
             if ZoneInfo is not None:
                 try:

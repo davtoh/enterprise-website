@@ -1,13 +1,5 @@
-from django import template, conf
-from django.core.exceptions import ImproperlyConfigured
-from django.conf import settings
-from django.utils.safestring import mark_safe
-from django.utils.html import escape
-from django.contrib.staticfiles import finders
-from django.contrib.staticfiles.storage import staticfiles_storage
-from django.template.loader import render_to_string, get_template
-import os
-from django.template.defaulttags import load
+from django import template
+from django.apps import apps
 
 # reusing code https://stackoverflow.com/a/9480134/5288758
 
@@ -16,10 +8,9 @@ register = template.Library()
 
 @register.inclusion_tag('custom_tags/results.html')
 def show_results(model):
-    """
-    Shows the results from a model
+    """Backwards-compatible delegate to polls.templatetags.poll_tags.show_results."""
+    if not apps.is_installed("polls"):
+        return {}
+    from polls.templatetags.poll_tags import show_results as _poll_show_results
 
-    :param model:
-    :return:
-    """
-    return {'choices': model.choice_set.all()}
+    return _poll_show_results(model)

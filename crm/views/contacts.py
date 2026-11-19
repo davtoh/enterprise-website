@@ -11,6 +11,7 @@ from django.views.generic import (
 )
 
 from .base import CRMBaseView
+from ..filters import ContactFilter
 from ..forms import ContactForm, InteractionLogForm
 from ..models import Contact
 
@@ -18,36 +19,25 @@ from ..models import Contact
 class ContactListView(CRMBaseView, ListView):
     model = Contact
     template_name = "crm/contact_list.html"
+    partial_template_name = "crm/partials/contact_table.html"
     context_object_name = "contacts"
     paginate_by = 20
 
+    def get_template_names(self):
+        if getattr(self.request, "htmx", False):
+            return [self.partial_template_name]
+        return [self.template_name]
+
     def get_queryset(self):
-        qs = Contact.objects.select_related("company", "last_seen_location")
-        q = self.request.GET.get("q", "").strip()
-        tag = self.request.GET.get("tag", "").strip()
-        clearance = self.request.GET.get("clearance", "").strip()
-        presence = self.request.GET.get("presence", "").strip()
-
-        if q:
-            qs = qs.filter(
-                Q(first_name__icontains=q) |
-                Q(last_name__icontains=q) |
-                Q(email__icontains=q) |
-                Q(company__name__icontains=q) |
-                Q(license_plate__icontains=q) |
-                Q(security_tag__icontains=q)
-            )
-        if tag:
-            qs = qs.filter(tags__icontains=tag)
-        if clearance:
-            qs = qs.filter(security_clearance=clearance)
-        if presence:
-            qs = qs.filter(presence_status=presence)
-
-        return qs.order_by("last_name", "first_name")
+        base_qs = Contact.objects.select_related(
+            "company", "last_seen_location"
+        ).order_by("last_name", "first_name")
+        self.filterset = ContactFilter(self.request.GET, queryset=base_qs)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
+        ctx["filter"] = getattr(self, "filterset", None)
         ctx["query"] = self.request.GET.get("q", "")
         ctx["current_tag"] = self.request.GET.get("tag", "")
         ctx["current_clearance"] = self.request.GET.get("clearance", "")

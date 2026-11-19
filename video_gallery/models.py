@@ -39,6 +39,8 @@ class VideoGallery(models.Model):
     )
     description = models.TextField(_("Description"), blank=True)
     is_active = models.BooleanField(_("Is Active"), default=True)
+    is_public = models.BooleanField(_("Is Public"), default=True)
+    requires_staff = models.BooleanField(_("Requires Staff"), default=False)
     created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated At"), auto_now=True)
 
@@ -57,6 +59,16 @@ class VideoGallery(models.Model):
         """Returns active videos ordered by display order then creation time."""
         return self.videos.filter(is_active=True).order_by("order", "created_at")
 
+    def public_videos(self):
+        """Returns active, public, non-staff videos excluding SecurityEvent evidence."""
+        if not self.is_active or not self.is_public or self.requires_staff:
+            return self.videos.none()
+        return self.active_videos().filter(
+            is_public=True,
+            requires_staff=False,
+            security_events__isnull=True,
+        )
+
     @property
     def video_count(self) -> int:
         return self.active_videos().count()
@@ -69,10 +81,11 @@ class VideoGallery(models.Model):
             return first_video.display_thumbnail_url
         return DEFAULT_THUMBNAIL_SVG
 
-    def get_source_counts(self) -> dict:
+    def get_source_counts(self, include_staff: bool = False) -> dict:
         """Returns a breakdown of video counts by source_type."""
         counts = {"all": 0, "youtube": 0, "vimeo": 0, "mp4": 0}
-        for item in self.active_videos().values("source_type"):
+        videos = self.active_videos() if include_staff else self.public_videos()
+        for item in videos.values("source_type"):
             st = item["source_type"]
             counts["all"] += 1
             if st in counts:
@@ -130,6 +143,8 @@ class VideoItem(models.Model):
     )
     order = models.PositiveIntegerField(_("Display Order"), default=0)
     is_active = models.BooleanField(_("Is Active"), default=True)
+    is_public = models.BooleanField(_("Is Public"), default=True)
+    requires_staff = models.BooleanField(_("Requires Staff"), default=False)
     created_at = models.DateTimeField(_("Created At"), auto_now_add=True)
     updated_at = models.DateTimeField(_("Updated At"), auto_now=True)
 

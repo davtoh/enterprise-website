@@ -15,16 +15,33 @@
         {% if main_navigation %}
           {% for nav_item in main_navigation %}
             {% if nav_item.children %}
-              <li class="position-relative" x-data="{ open: false }">
-                <button @click="open = !open" @click.away="open = false" type="button" class="btn btn-outline border-0 py-1 px-2">
-                  {% if nav_item.icon %}<i class="{{ nav_item.icon }}"></i>{% endif %}
-                  <span>{% trans nav_item.title %}</span> &#9662;
-                </button>
+              <li class="position-relative d-inline-flex align-items-center" x-data="{ open: false }">
+                {% if nav_item.url and nav_item.url != '#' %}
+                  <a href="{{ nav_item.url }}" class="pe-1 {% if nav_item.url_name and request.resolver_match.view_name == nav_item.url_name %}fw-bold text-primary{% else %}text-muted{% endif %}">
+                    {% if nav_item.icon %}<i class="{{ nav_item.icon }}"></i>{% endif %}
+                    <span>{% trans nav_item.title %}</span>
+                  </a>
+                  <button @click="open = !open" @click.away="open = false" type="button" class="btn btn-outline border-0 py-1 px-1" aria-label="{% trans 'Toggle submenu' %}">
+                    &#9662;
+                  </button>
+                {% else %}
+                  <button @click="open = !open" @click.away="open = false" type="button" class="btn btn-outline border-0 py-1 px-2">
+                    {% if nav_item.icon %}<i class="{{ nav_item.icon }}"></i>{% endif %}
+                    <span>{% trans nav_item.title %}</span> &#9662;
+                  </button>
+                {% endif %}
                 <div x-show="open" x-cloak class="dropdown-panel-left">
                   {% for child in nav_item.children %}
-                    <a href="{{ child.url }}" class="dropdown-item-link">
+                    <a href="{{ child.url }}" class="dropdown-item-link {% if child.children %}fw-semibold{% endif %}">
                       {% if child.icon %}<i class="{{ child.icon }}"></i>{% endif %} {% trans child.title %}
                     </a>
+                    {% if child.children %}
+                      {% for grandchild in child.children %}
+                        <a href="{{ grandchild.url }}" class="dropdown-item-link ps-4 small text-muted">
+                          {% if grandchild.icon %}<i class="{{ grandchild.icon }}"></i>{% else %}<i class="fa fa-angle-right me-1"></i>{% endif %} {% trans grandchild.title %}
+                        </a>
+                      {% endfor %}
+                    {% endif %}
                   {% endfor %}
                 </div>
               </li>

@@ -1,10 +1,13 @@
 import logging
-from celery import shared_task
+from celery import Task, shared_task
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.db.models import F
 from django.utils.translation import gettext as _
-from task_runner.base import TrackedTask
+try:
+    from task_runner.base import TrackedTask
+except ImportError:
+    TrackedTask = Task
 from .models import Product, Invoice, InvoiceStatus
 from .pdf import generate_invoice_pdf
 

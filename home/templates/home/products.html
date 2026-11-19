@@ -33,7 +33,31 @@
                     </p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row g-4">
+                {% for product in products %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="card card-brand h-100 shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+                                {% if product.category %}
+                                    <span class="badge bg-primary-subtle text-primary">{{ product.category.name }}</span>
+                                {% else %}
+                                    <span class="badge bg-secondary-subtle text-secondary">{% trans "Catalog" %}</span>
+                                {% endif %}
+                                <small class="text-muted">{{ product.sku }}</small>
+                            </div>
+                            <h4 class="h5 card-title">{{ product.name }}</h4>
+                            <p class="card-text text-muted small mb-3">
+                                {{ product.public_summary|default:product.description|truncatewords:24 }}
+                            </p>
+                            <div class="mt-auto pt-2 border-top d-flex align-items-center justify-content-between">
+                                <span class="fw-semibold">${{ product.unit_price }}</span>
+                                <small class="text-muted">/ {{ product.unit }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
                 <div class="col-lg-3 col-md-6 mb-30">
                     <div class="single-product">
                         <div class="thumb text-center p-3">
@@ -44,7 +68,7 @@
                             <p>
                                 {% trans "Optical vision sensor with low latency edge telemetry streaming to Django REST endpoints." %}
                             </p>
-                            <span class="badge badge-primary py-2 px-3 mb-2">{% trans "Industrial Grade" %}</span>
+                            <span class="badge bg-primary py-2 px-3 mb-2">{% trans "Industrial Grade" %}</span>
                         </div>
                     </div>
                 </div>
@@ -58,7 +82,7 @@
                             <p>
                                 {% trans "Omnidirectional navigation chassis designed for automated warehouse coordination." %}
                             </p>
-                            <span class="badge badge-success py-2 px-3 mb-2">{% trans "Automated AGV" %}</span>
+                            <span class="badge bg-success py-2 px-3 mb-2">{% trans "Automated AGV" %}</span>
                         </div>
                     </div>
                 </div>
@@ -72,7 +96,7 @@
                             <p>
                                 {% trans "Modular smart connector hub bridging microcontrollers to cloud WebSocket channels." %}
                             </p>
-                            <span class="badge badge-info py-2 px-3 mb-2">{% trans "IoT Gateway" %}</span>
+                            <span class="badge bg-info py-2 px-3 mb-2">{% trans "IoT Gateway" %}</span>
                         </div>
                     </div>
                 </div>
@@ -86,10 +110,11 @@
                             <p>
                                 {% trans "Dual-core industrial computing unit running embedded Linux with remote Django API sync." %}
                             </p>
-                            <span class="badge badge-dark py-2 px-3 mb-2">{% trans "Core Processor" %}</span>
+                            <span class="badge bg-dark py-2 px-3 mb-2">{% trans "Core Processor" %}</span>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </section>

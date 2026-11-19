@@ -1,6 +1,8 @@
 from plugin_registry import AppPlugin, MenuItemDefinition
 from django.utils.translation import gettext_lazy as _
 
+from .blocks import PollEmbedBlock
+
 
 class PollsPlugin(AppPlugin):
     name = "polls"
@@ -8,6 +10,9 @@ class PollsPlugin(AppPlugin):
     description = _("Interactive voting system with fraud prevention and results charts")
     icon = "fa fa-bar-chart"
     category = "engagement"
+    stream_blocks = [
+        ("poll", PollEmbedBlock),
+    ]
     
     menu_items = [
         MenuItemDefinition(

@@ -163,3 +163,60 @@ def test_invoice_views(client, auth_user, test_invoice):
     created = _test_invoice_create_view(client)
     _test_invoice_update_delete_views(client, created)
 
+
+@pytest.mark.django_db
+def test_invoice_crm_backfill_on_save_and_form():
+    from crm.models import Company, Contact
+    from erp.forms import InvoiceForm
+
+    company = Company.objects.create(
+        name="Orbital Dynamics",
+        address="42 Launchpad Blvd",
+        city="Austin",
+        country="USA",
+    )
+    contact = Contact.objects.create(
+        first_name="Elena",
+        last_name="Rostova",
+        email="elena@orbital.example.com",
+        company=company,
+    )
+
+    inv_from_contact = Invoice.objects.create(crm_contact=contact)
+    assert inv_from_contact.crm_company == company
+    assert inv_from_contact.customer_name == "Elena Rostova (Orbital Dynamics)"
+    assert inv_from_contact.customer_email == "elena@orbital.example.com"
+    assert inv_from_contact.customer_address == "42 Launchpad Blvd, Austin, USA"
+
+    inv_from_company = Invoice.objects.create(
+        crm_company=company,
+        customer_email="ap@orbital.example.com",
+    )
+    assert inv_from_company.customer_name == "Orbital Dynamics"
+    assert inv_from_company.customer_address == "42 Launchpad Blvd, Austin, USA"
+
+    valid_form = InvoiceForm(
+        data={
+            "crm_contact": contact.pk,
+            "issue_date": str(datetime.date.today()),
+            "due_date": str(datetime.date.today() + datetime.timedelta(days=30)),
+            "status": InvoiceStatus.DRAFT,
+            "tax_rate": "0.00",
+            "discount_amount": "0.00",
+        }
+    )
+    assert valid_form.is_valid(), valid_form.errors
+
+    invalid_form = InvoiceForm(
+        data={
+            "issue_date": str(datetime.date.today()),
+            "due_date": str(datetime.date.today() + datetime.timedelta(days=30)),
+            "status": InvoiceStatus.DRAFT,
+            "tax_rate": "0.00",
+            "discount_amount": "0.00",
+        }
+    )
+    assert not invalid_form.is_valid()
+    assert "customer_name" in invalid_form.errors
+
+

@@ -6,7 +6,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth import login
 from django.conf import settings
 try:
@@ -18,7 +17,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from .models import States, Cities
-from .forms import SiteUserCreationForm, ImageUploadForm
+from .forms import SiteUserCreationForm
 
 
 from django.contrib import messages
@@ -188,18 +187,4 @@ class SiteUserProfileView(LoginRequiredMixin, DetailView):
 
     def get_object(self, queryset=None):
         return self.request.user
-
-
-def upload_pic(request):
-    # https://coderwall.com/p/bz0sng/simple-django-image-upload-to-model-imagefield
-    if request.method == 'POST':
-        form = ImageUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            m = request
-            m.model_pic = form.cleaned_data['image']
-            m.save()
-            return HttpResponse('image upload success')
-    else:
-        return render(request, 'user_management/upload_image_form.html')
-    return HttpResponseForbidden('allowed only via POST')
 

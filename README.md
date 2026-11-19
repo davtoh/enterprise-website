@@ -32,6 +32,24 @@ For an in-depth architectural breakdown, directory layout, application modules, 
 
 ## Quickstart Guide
 
+### 0. Standalone CLI Quickstart (`create-enterprise-site`)
+
+Scaffold a customized standalone Django + Wagtail project without cloning the repository first:
+
+```bash
+pip install create-enterprise-site
+create-enterprise-site my_project
+```
+
+Or run directly from a local checkout:
+
+```bash
+pip install --no-build-isolation --no-deps -e .
+create-enterprise-site my_project --template-dir .
+```
+
+See the **[Standalone CLI & Scaffolding Wizard Guide](documentation/create_site.md)** for non-interactive flags, `--ai` blueprint advisor, and Scenario Combinations Matrix.
+
 ### 1. Prerequisites
 - **Python 3.12** (or Python >= 3.10)
 - Git
@@ -316,7 +334,8 @@ Continuous Integration and Delivery is automated via `.github/workflows/ci.yml`:
   2. Compiles translations via `compilemessages`.
   3. Executes `manage.py check` and production `manage.py check --deploy`.
   4. Runs complete test suite with coverage (`pytest --cov=. --cov-report=xml --cov-report=html`).
-  5. Uploads HTML coverage report artifact.
+  5. Installs the standalone CLI (`pip install --no-build-isolation --no-deps -e .`) and runs `create-enterprise-site` smoke verification.
+  6. Uploads HTML coverage report artifact.
 - **On Release Tag (`v*`):**
   1. Builds multi-stage production Docker image.
   2. Pushes container image to GitHub Container Registry (`ghcr.io`).
@@ -370,6 +389,7 @@ Continuous Integration and Delivery is automated via `.github/workflows/ci.yml`:
 ## Documentation Index
 
 - [Architecture & Operations Manual](documentation/README.md)
+- [Standalone CLI & Scaffolding Wizard](documentation/create_site.md)
 - [Modernization Roadmap & Audit](TODO_MODERNIZATION.md)
 - [Migration & Checkpoint Log](MIGRATION_LOG.md)
 - [AI & Coding Guidelines](AGENTS.md)

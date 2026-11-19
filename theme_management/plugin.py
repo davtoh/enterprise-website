@@ -8,5 +8,6 @@ class ThemeManagementPlugin(AppPlugin):
     version = "1.0.0"
     icon = "fa-paint-brush"
     category = "core"
+    is_system = True
     url_namespace = "theme_management"
     url_prefix = "theme/"

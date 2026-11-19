@@ -1,0 +1,59 @@
+{% load i18n %}
+<section class="cms-block-poll py-5">
+    <div class="container">
+        <div class="card card-brand shadow-sm">
+            <div class="card-body p-4">
+                {% if question %}
+                    <div class="d-flex align-items-center justify-content-between gap-2 mb-3">
+                        <h2 class="h4 mb-0">
+                            <i class="fa fa-bar-chart me-2 text-primary" aria-hidden="true"></i>
+                            {{ self.heading|default:question.question_text }}
+                        </h2>
+                        <span class="badge bg-primary-subtle text-primary">
+                            {% blocktrans count count=total_votes %}{{ count }} vote{% plural %}{{ count }} votes{% endblocktrans %}
+                        </span>
+                    </div>
+
+                    {% if self.heading and self.heading != question.question_text %}
+                        <p class="text-muted mb-3">{{ question.question_text }}</p>
+                    {% endif %}
+
+                    {% if choices %}
+                        <form action="{% url 'polls:vote' question.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="list-group mb-3">
+                                {% for choice in choices %}
+                                    <label class="list-group-item d-flex align-items-center justify-content-between gap-2">
+                                        <span class="d-flex align-items-center gap-2">
+                                            <input
+                                                type="radio"
+                                                name="choice"
+                                                id="cms-poll-{{ question.id }}-choice-{{ choice.id }}"
+                                                value="{{ choice.id }}"
+                                                required
+                                            >
+                                            <span>{{ choice.choice_text }}</span>
+                                        </span>
+                                    </label>
+                                {% endfor %}
+                            </div>
+                            <div class="d-flex flex-wrap align-items-center gap-2">
+                                <button type="submit" class="btn btn-brand-primary btn-sm">
+                                    <i class="fa fa-check me-1" aria-hidden="true"></i>
+                                    {% trans "Vote" %}
+                                </button>
+                                <a href="{% url 'polls:results' question.id %}" class="btn btn-brand-outline btn-sm">
+                                    {% trans "View Results" %}
+                                </a>
+                            </div>
+                        </form>
+                    {% else %}
+                        <p class="text-muted mb-0">{% trans "No choices are configured for this poll." %}</p>
+                    {% endif %}
+                {% else %}
+                    <p class="text-muted mb-0">{% trans "Selected poll is unavailable or closed." %}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

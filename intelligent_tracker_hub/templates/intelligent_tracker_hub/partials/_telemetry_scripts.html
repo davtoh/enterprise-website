@@ -1,0 +1,165 @@
+{% load i18n %}
+<!-- Telemetry Canvas & Web Audio Script -->
+<script>
+  let audioAlarmEnabled = true;
+  let audioCtx = null;
+
+  function initAudio() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  }
+
+  function playAlertChime() {
+    if (!audioAlarmEnabled) return;
+    try {
+      initAudio();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5
+      osc.frequency.setValueAtTime(1174.66, audioCtx.currentTime + 0.1); // D6
+      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.35);
+    } catch (e) {
+      console.warn("Audio chime prevented:", e);
+    }
+  }
+
+  function toggleAudioAlarm() {
+    audioAlarmEnabled = !audioAlarmEnabled;
+    const btn = document.getElementById("btnAudioChime");
+    const txt = document.getElementById("audioStatusText");
+    if (audioAlarmEnabled) {
+      btn.className = "btn btn-outline-warning btn-sm";
+      txt.textContent = "{% trans 'Alarm Audio: ON' %}";
+      playAlertChime();
+    } else {
+      btn.className = "btn btn-outline-secondary btn-sm";
+      txt.textContent = "{% trans 'Alarm Audio: MUTED' %}";
+    }
+  }
+
+  function toggleStreamPlay(cameraId) {
+    const img = document.getElementById(`stream-img-${cameraId}`);
+    const btn = document.getElementById(`btn-play-${cameraId}`);
+    if (!img) return;
+
+    if (img.dataset.paused === "true") {
+      img.src = img.dataset.origSrc;
+      img.dataset.paused = "false";
+      btn.innerHTML = '<i class="fa fa-pause"></i>';
+    } else {
+      img.dataset.origSrc = img.src;
+      img.src = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3Crect width='100%25' height='100%25' fill='%2312161c'/%3E%3Ctext x='50%25' y='50%25' fill='%239ca3af' font-size='16' text-anchor='middle' dominant-baseline='middle'%3ESTREAM PAUSED%3C/text%3E%3C/svg%3E";
+      img.dataset.paused = "true";
+      btn.innerHTML = '<i class="fa fa-play"></i>';
+    }
+  }
+
+  function toggleTileFullscreen(tileId) {
+    const tile = document.getElementById(tileId);
+    if (!tile) return;
+    if (!document.fullscreenElement) {
+      tile.requestFullscreen().catch(err => console.warn(err));
+    } else {
+      document.exitFullscreen().catch(err => console.warn(err));
+    }
+  }
+
+  // Telemetry Canvas Rendering Loop
+  const cameraIds = [{% for c in cameras %}"{{ c.camera_id }}",{% endfor %}];
+
+  function renderTelemetry(cameraId) {
+    const canvas = document.getElementById(`canvas-overlay-${cameraId}`);
+    if (!canvas) return;
+
+    // Synchronize canvas coordinate resolution with its display client dimensions
+    if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+    }
+
+    const ctx = canvas.getContext('2d');
+    const telemetryUrl = `/api/v1/security/stream/telemetry/${cameraId}/`;
+
+    fetch(telemetryUrl)
+      .then(res => res.json())
+      .then(data => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (data.active_tracks && data.active_tracks.length > 0) {
+          const occBadge = document.getElementById(`occupancy-badge-${cameraId}`);
+          if (occBadge) {
+            occBadge.textContent = `OCC: ${data.active_tracks.length}`;
+          }
+
+          data.active_tracks.forEach(track => {
+            const [ymin, xmin, ymax, xmax] = track.bbox;
+            const x = xmin * canvas.width;
+            const y = ymin * canvas.height;
+            const w = (xmax - xmin) * canvas.width;
+            const h = (ymax - ymin) * canvas.height;
+            const color = track.color || "#10b981";
+
+            // Draw bounding box
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = color;
+            ctx.strokeRect(x, y, w, h);
+
+            // Corner accent markers
+            const cornerLen = 10;
+            ctx.lineWidth = 3;
+            // Top-left
+            ctx.beginPath();
+            ctx.moveTo(x, y + cornerLen);
+            ctx.lineTo(x, y);
+            ctx.lineTo(x + cornerLen, y);
+            ctx.stroke();
+
+            // Bottom-right
+            ctx.beginPath();
+            ctx.moveTo(x + w, y + h - cornerLen);
+            ctx.lineTo(x + w, y + h);
+            ctx.lineTo(x + w - cornerLen, y + h);
+            ctx.stroke();
+
+            // Label tag banner
+            const labelText = `${track.label} [${Math.round(track.confidence * 100)}%]`;
+            ctx.font = '11px monospace';
+            const textWidth = ctx.measureText(labelText).width;
+            ctx.fillStyle = color;
+            ctx.fillRect(x, Math.max(0, y - 18), textWidth + 8, 18);
+
+            ctx.fillStyle = '#0f172a';
+            ctx.fillText(labelText, x + 4, Math.max(12, y - 5));
+
+            // If intrusion detected, trigger audio alert
+            if (track.status === 'intrusion') {
+              playAlertChime();
+            }
+          });
+        }
+      })
+      .catch(err => {
+        // Quietly catch network polling disconnects
+      });
+  }
+
+  // Poll telemetry every 1.5s for each camera tile
+  setInterval(() => {
+    cameraIds.forEach(id => renderTelemetry(id));
+  }, 1500);
+
+  // Initial draw
+  setTimeout(() => {
+    cameraIds.forEach(id => renderTelemetry(id));
+  }, 500);
+</script>

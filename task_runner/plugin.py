@@ -1,4 +1,4 @@
-from plugin_registry.base import AppPlugin, MenuItemDefinition
+from plugin_registry.base import AppPlugin, MenuItemDefinition, PluginZone
 
 
 class TaskRunnerPlugin(AppPlugin):
@@ -9,6 +9,9 @@ class TaskRunnerPlugin(AppPlugin):
     description = "Asynchronous task queue with live WebSocket progress streaming."
     category = "utilities"
     icon = "fa-tasks"
+    zone = PluginZone.STAFF
+    requires_staff = True
+    requires_auth = True
 
     url_namespace = "task_runner"
     url_prefix = "tasks"
