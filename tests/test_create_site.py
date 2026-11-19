@@ -1,5 +1,8 @@
 import io
 import json
+import os
+import subprocess
+import sys
 import urllib.error
 import urllib.request
 
@@ -12,6 +15,7 @@ from home.services import ingest_website_contact_submission
 from intelligent_tracker_hub.plugin import IntelligentTrackerPlugin
 from plugin_registry.scaffolding import (
     CORE_ALWAYS_ON_APPS,
+    ProjectGenerator,
     SiteManifest,
     resolve_plugin_dependencies,
     suggest_manifest_from_prompt,
@@ -210,3 +214,83 @@ class TestOptionalAppGuards:
         orig_is_installed = apps.is_installed
         monkeypatch.setattr(apps, "is_installed", lambda name: False if name == "erp" else orig_is_installed(name))
         assert _load_optional_block("erp", "erp.blocks", "ProductShowcaseBlock") is None
+
+
+def _run_generated_manage(project_dir, *args):
+    """Run manage.py inside an isolated generated project without inheriting parent settings."""
+    env = os.environ.copy()
+    env.pop("DJANGO_SETTINGS_MODULE", None)
+    env["USE_SQLITE"] = "True"
+    env["DEBUG"] = "True"
+    return subprocess.run(
+        [sys.executable, "manage.py", *args],
+        cwd=str(project_dir),
+        env=env,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+
+class TestProjectGenerator:
+    """Isolated TemporaryDirectory tests for ProjectGenerator and rendered configs."""
+
+    def test_generate_minimal_project_passes_check_and_migrate(self, tmp_path):
+        manifest = SiteManifest(
+            project_name="acme_minimal",
+            display_name="Acme Minimal",
+            theme="minimal",
+            languages=["en"],
+            plugins=[],
+            database="sqlite",
+            include_docker=False,
+        )
+        dest = ProjectGenerator(manifest).generate(tmp_path / "acme_minimal")
+
+        assert (dest / "manage.py").is_file()
+        assert (dest / "acme_minimal" / "settings" / "base.py").is_file()
+        assert (dest / "site_manifest.json").is_file()
+        assert not (dest / "docker-compose.yml").exists()
+        assert not (dest / "crm").exists()
+        assert not (dest / "erp").exists()
+
+        check_res = _run_generated_manage(dest, "check")
+        assert check_res.returncode == 0, check_res.stderr
+
+        migrate_res = _run_generated_manage(dest, "migrate", "--noinput")
+        assert migrate_res.returncode == 0, migrate_res.stderr
+
+    def test_generate_selective_enterprise_project_passes_check_and_migrate(self, tmp_path):
+        manifest = SiteManifest(
+            project_name="acme_ops",
+            display_name="Acme Operations",
+            theme="tailwind",
+            languages=["en", "es"],
+            plugins=["erp", "intelligent_tracker_hub"],
+            database="sqlite",
+            include_docker=True,
+        )
+        dest = ProjectGenerator(manifest).generate(tmp_path / "acme_ops")
+
+        assert (dest / "docker-compose.yml").is_file()
+        assert (dest / "crm").is_dir()
+        assert (dest / "erp").is_dir()
+        assert (dest / "video_gallery").is_dir()
+        assert (dest / "rest_api" / "v1_urls.py").is_file()
+        assert not (dest / "polls").exists()
+
+        check_res = _run_generated_manage(dest, "check")
+        assert check_res.returncode == 0, check_res.stderr
+
+        migrate_res = _run_generated_manage(dest, "migrate", "--noinput")
+        assert migrate_res.returncode == 0, migrate_res.stderr
+
+    def test_generate_refuses_non_empty_target_without_overwrite(self, tmp_path):
+        target = tmp_path / "existing_site"
+        target.mkdir()
+        (target / "README.txt").write_text("keep me", encoding="utf-8")
+
+        manifest = SiteManifest(project_name="existing_site", plugins=[])
+        with pytest.raises(FileExistsError):
+            ProjectGenerator(manifest).generate(target)
+

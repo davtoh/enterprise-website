@@ -1,5 +1,19 @@
 # Changelog
 
+## [2026-11-19] feat: Milestone 17.2: Project Scaffolding Generator Engine
+- **Type**: feat
+- **Summary**: Added split-settings, URLconf, env, requirements, and Docker renderers plus ProjectGenerator and optional task_runner/polls guards.
+- **Files** (8):
+  - `crm/tasks.py`
+  - `custom_tags/templatetags/present.py`
+  - `erp/tasks.py`
+  - `plugin_registry/scaffolding/__init__.py`
+  - `tests/test_create_site.py`
+  - `plugin_registry/scaffolding/generator.py`
+  - `plugin_registry/scaffolding/renderers.py`
+  - `plugin_registry/scaffolding/settings_renderers.py`
+- **Verification**: pytest tests/test_create_site.py tests/test_plugin_registry.py tests/test_home.py tests/test_cms.py
+
 ## [2026-11-19] feat: create_site Milestone 1: SiteManifest, Dependency Resolver & AI Blueprint Advisor
 - **Type**: feat
 - **Summary**: Added SiteManifest schema/JSON IO, transitive AppPlugin dependency resolver, optional --ai blueprint advisor with offline heuristic fallback, and optional-app guards in home/services.py and cms/blocks.py.
@@ -132,16 +146,3 @@
   - `menu_management/cache.py`
   - ... (+2 more)
 - **Verification**: pytest tests/test_cms_bridge.py tests/test_plugin_registry.py
-
-## [2026-11-15] feat: Step 3 Milestone 1: Wagtail CMS, Blog Models & Theme-Aware StreamField Blocks
-- **Type**: feat
-- **Summary**: Configured Wagtail 8.1 + wagtail-localize 1.14.5, implemented cms app (CMSPlugin, StandardPage, BlogIndexPage, BlogPage, BlogCategory, StreamField blocks), multi-theme templates, and tests/test_cms.py (23 passed)
-- **Files** (7):
-  - `.TODO/step_3_wagtail_cms_blog_and_navigation.md`
-  - `enterprise_website/settings/apps.py`
-  - `enterprise_website/settings/base.py`
-  - `enterprise_website/urls.py`
-  - `requirements/base.txt`
-  - `cms/`
-  - `tests/test_cms.py`
-- **Verification**: pytest tests/test_cms.py tests/test_home.py

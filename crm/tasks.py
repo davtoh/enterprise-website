@@ -1,10 +1,13 @@
 import datetime
 import logging
-from celery import shared_task
+from celery import Task, shared_task
 from django.conf import settings
 from django.core.mail import send_mail
 from django.utils import timezone
-from task_runner.base import TrackedTask
+try:
+    from task_runner.base import TrackedTask
+except ImportError:
+    TrackedTask = Task
 from .utils import render_email_content
 
 logger = logging.getLogger(__name__)

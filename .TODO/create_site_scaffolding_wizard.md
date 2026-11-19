@@ -73,11 +73,11 @@ All modified and newly created source files across all 3 milestones must strictl
 - [x] **tests/test_create_site.py**: Add unit tests for SiteManifest validation, JSON serialization round-trips, transitive plugin dependency resolution, AI advisor parsing/fallback, and optional-app graceful guards.
 - [x] **CHANGELOG.md**: Record Milestone 1 completion via python "<config_dir>/skills/system-diagnostics/scripts/diagnose.py" changelog add.
 
-### Milestone 2: Project Scaffolding Generator Engine (`renderers.py` & `generator.py`) (**DEFERRED TO NEXT TURN / MILESTONE**)
-- [ ] **plugin_registry/scaffolding/renderers.py**: Implement modular config renderers for split settings (apps.py, base.py, storage.py, integrations.py, unfold_config.py), urls.py, rest_api/v1_urls.py, .env.example, requirements.txt, and docker-compose.yml.
-- [ ] **plugin_registry/scaffolding/generator.py**: Implement ProjectGenerator to copy core + selected app trees, rename project package references to project_name, write site_manifest.json, and optionally run i18n bootstrap.
-- [ ] **tests/test_create_site.py**: Add isolated TemporaryDirectory scaffolding tests verifying generated minimal and full projects pass manage.py check and migrate.
-- [ ] **CHANGELOG.md**: Record Milestone 2 completion via python "<config_dir>/skills/system-diagnostics/scripts/diagnose.py" changelog add.
+### Milestone 2: Project Scaffolding Generator Engine (`renderers.py` & `generator.py`)
+- [x] **plugin_registry/scaffolding/renderers.py**: Implement modular config renderers for split settings (apps.py, base.py, storage.py, integrations.py, unfold_config.py), urls.py, rest_api/v1_urls.py, .env.example, requirements.txt, and docker-compose.yml.
+- [x] **plugin_registry/scaffolding/generator.py**: Implement ProjectGenerator to copy core + selected app trees, rename project package references to project_name, write site_manifest.json, and optionally run i18n bootstrap.
+- [x] **tests/test_create_site.py**: Add isolated TemporaryDirectory scaffolding tests verifying generated minimal and full projects pass manage.py check and migrate.
+- [x] **CHANGELOG.md**: Record Milestone 2 completion via python "<config_dir>/skills/system-diagnostics/scripts/diagnose.py" changelog add.
 
 ### Milestone 3: `manage.py create_site` Interactive & Non-Interactive CLI Wizard & Documentation (**DEFERRED TO NEXT TURN / MILESTONE**)
 - [ ] **plugin_registry/management/commands/create_site.py**: Implement manage.py create_site command supporting interactive wizard prompts, non-interactive CLI flags, --from-manifest, --dump-manifest, and --ai advisor.
