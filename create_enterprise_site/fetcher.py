@@ -2,13 +2,15 @@
 
 from contextlib import contextmanager
 import hashlib
+import ipaddress
 import os
 from pathlib import Path
 import shutil
+import socket
 import subprocess
 import tarfile
 import tempfile
-from typing import Iterator, Optional
+from typing import Iterator, Optional, Union
 from urllib.error import URLError
 from urllib.parse import urlparse
 import urllib.request
@@ -17,6 +19,10 @@ import zipfile
 DEFAULT_GIT_BRANCH = "main"
 _REQUIRED_MARKERS = ("manage.py", "enterprise_website", "plugin_registry")
 _DOWNLOAD_CHUNK_SIZE = 65536
+_ZIP_SYMLINK_MODE = 0o120000
+_UNIX_FILE_TYPE_MASK = 0o170000
+_BLOCKED_HOSTNAMES = frozenset({"localhost", "localhost.localdomain", "metadata.google.internal", "metadata"})
+_BLOCKED_HOST_SUFFIXES = (".localhost", ".local", ".internal")
 
 
 class TemplateFetchError(RuntimeError):
@@ -48,11 +54,58 @@ def _find_template_root(base_dir: Path) -> Path:
     )
 
 
+def _is_disallowed_ip(ip: Union[ipaddress.IPv4Address, ipaddress.IPv6Address]) -> bool:
+    """Return True for private, loopback, link-local, multicast, reserved, or non-global IPs."""
+    mapped = getattr(ip, "ipv4_mapped", None)
+    if mapped is not None and _is_disallowed_ip(mapped):
+        return True
+    return (
+        not ip.is_global
+        or ip.is_private
+        or ip.is_loopback
+        or ip.is_link_local
+        or ip.is_multicast
+        or ip.is_reserved
+        or ip.is_unspecified
+    )
+
+
+def _validate_public_host(hostname: Optional[str], port: Optional[int], label: str = "Template archive URL") -> None:
+    """Reject local, metadata, and private-network targets to prevent SSRF."""
+    host = (hostname or "").strip().rstrip(".").lower()
+    if not host or "%" in host:
+        raise TemplateFetchError(f"{label} has an invalid host {hostname!r}.")
+    if host in _BLOCKED_HOSTNAMES or host.endswith(_BLOCKED_HOST_SUFFIXES):
+        raise TemplateFetchError(f"{label} host {hostname!r} is disallowed (private/local/metadata endpoint).")
+
+    try:
+        ip_literal = ipaddress.ip_address(host)
+    except ValueError:
+        ip_literal = None
+
+    if ip_literal is not None:
+        if _is_disallowed_ip(ip_literal):
+            raise TemplateFetchError(f"{label} target IP {ip_literal} is disallowed (non-public address).")
+        return
+
+    try:
+        addr_infos = socket.getaddrinfo(host, port or 443, type=socket.SOCK_STREAM)
+    except socket.gaierror:
+        return
+    for _, _, _, _, sockaddr in addr_infos:
+        resolved_ip = ipaddress.ip_address(sockaddr[0].split("%", 1)[0])
+        if _is_disallowed_ip(resolved_ip):
+            raise TemplateFetchError(f"{label} host {hostname!r} resolves to disallowed IP {resolved_ip}.")
+
+
 def _validate_https_url(url: str, label: str = "Template URL") -> None:
-    """Enforce HTTPS scheme and non-empty host on remote template URLs."""
+    """Enforce HTTPS scheme, non-empty public host, and no embedded credentials."""
     parsed = urlparse(url.strip())
-    if parsed.scheme.lower() != "https" or not parsed.netloc:
+    if parsed.scheme.lower() != "https" or not parsed.netloc or not parsed.hostname:
         raise TemplateFetchError(f"{label} must be a valid https:// URL, got {url!r}.")
+    if parsed.username or parsed.password:
+        raise TemplateFetchError(f"{label} must not embed credentials, got {url!r}.")
+    _validate_public_host(parsed.hostname, parsed.port, label=label)
 
 
 def _validate_git_url(url: str) -> None:
@@ -73,6 +126,9 @@ def _download_archive(url: str, dest_file: Path, expected_sha256: Optional[str])
     hasher = hashlib.sha256()
     try:
         with urllib.request.urlopen(url, timeout=60) as response, dest_file.open("wb") as out:
+            final_url = response.geturl()
+            if isinstance(final_url, str) and final_url and final_url != url:
+                _validate_https_url(final_url, label="Template archive redirect URL")
             while True:
                 chunk = response.read(_DOWNLOAD_CHUNK_SIZE)
                 if not chunk:
@@ -92,16 +148,18 @@ def _download_archive(url: str, dest_file: Path, expected_sha256: Optional[str])
 
 
 def _safe_extract_zip(archive_path: Path, extract_dir: Path) -> None:
-    """Extract a ZIP archive after rejecting any path-traversal (Zip-Slip) entries."""
+    """Extract a ZIP archive after rejecting symlinks and path-traversal (Zip-Slip) entries."""
     root = extract_dir.resolve()
     try:
         with zipfile.ZipFile(archive_path, "r") as zf:
             for info in zf.infolist():
+                if (info.external_attr >> 16) & _UNIX_FILE_TYPE_MASK == _ZIP_SYMLINK_MODE:
+                    raise TemplateFetchError(f"Unsafe symlink member in zip archive: {info.filename!r}")
                 member_path = Path(info.filename)
                 if member_path.is_absolute() or not (root / member_path).resolve().is_relative_to(root):
                     raise TemplateFetchError(f"Unsafe Zip-Slip path detected in archive: {info.filename!r}")
             zf.extractall(root)
-    except zipfile.BadZipFile as exc:
+    except (zipfile.BadZipFile, OSError) as exc:
         raise TemplateFetchError(f"Invalid ZIP archive '{archive_path}': {exc}") from exc
 
 

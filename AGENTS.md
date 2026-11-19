@@ -106,4 +106,11 @@ Welcome to the project repository. When working on modernization, debugging, fea
 
 ---
 
+## 11. Standalone `create-enterprise-site` Packaging & Stdlib Invariants
+- **Pure-Stdlib `scaffolding` & PEP 562 Lazy Package Exports:** Keep `plugin_registry/__init__.py` free of eager Django imports via PEP 562 `__getattr__` so `plugin_registry.scaffolding` and `create_enterprise_site` execute cleanly without `DJANGO_SETTINGS_MODULE` or Django dependencies installed.
+- **PEP 621 Packaging Scope (`pyproject.toml`):** Keep `plugin_registry` alongside `create_enterprise_site*` and `plugin_registry.scaffolding*` in `[tool.setuptools.packages.find]` so `plugin_registry/__init__.py` is packaged without bundling Django-coupled `plugin_registry` submodules.
+- **Archive & Install Verification Parity:** Reject path-traversal (`Zip-Slip`/`Tar-Slip`) and symlink/hardlink entries uniformly across `.tar` and `.zip` in `create_enterprise_site/fetcher.py`; verify local wheel/editable install in an isolated venv with `setuptools` when `.venv` omits build backends.
+
+---
+
 *Detailed modular rules are located in `.agents/rules/`.*

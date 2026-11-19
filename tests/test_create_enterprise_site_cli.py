@@ -4,6 +4,7 @@ import hashlib
 import io
 import os
 from pathlib import Path
+import socket
 import subprocess
 import sys
 import tarfile
@@ -59,6 +60,13 @@ def _build_tar_gz_bytes(entries: dict[str, bytes], symlink_name: str | None = No
     return buf.getvalue()
 
 
+def _mock_urlopen_bytes(payload: bytes) -> MagicMock:
+    resp = MagicMock()
+    resp.read.side_effect = [payload, b""]
+    resp.__enter__.return_value = resp
+    return resp
+
+
 class TestStdlibScaffoldingDecoupling:
     """Verify `plugin_registry.scaffolding` imports and runs without Django configured or installed."""
 
@@ -74,12 +82,7 @@ class TestStdlibScaffoldingDecoupling:
         )
         env = {k: v for k, v in os.environ.items() if k != "DJANGO_SETTINGS_MODULE"}
         result = subprocess.run(
-            [sys.executable, "-c", script],
-            cwd=str(REPO_ROOT),
-            env=env,
-            capture_output=True,
-            text=True,
-            check=False,
+            [sys.executable, "-c", script], cwd=str(REPO_ROOT), env=env, capture_output=True, text=True, check=False
         )
         assert result.returncode == 0, result.stderr
         assert "STDLIB_OK" in result.stdout
@@ -92,49 +95,30 @@ class TestCliRunnerParity:
         out = io.StringIO()
         manifest_file = tmp_path / "m.json"
         dry_res = execute_scaffolding(
-            {
-                "project_name": "runner_demo",
-                "plugins": "erp",
-                "no_input": True,
-                "dump_manifest": str(manifest_file),
-                "dry_run": True,
-            },
+            {"project_name": "runner_demo", "plugins": "erp", "no_input": True, "dump_manifest": str(manifest_file), "dry_run": True},
             stdout=out,
         )
-        assert dry_res is None
-        assert manifest_file.is_file()
-        loaded = SiteManifest.from_json_file(manifest_file)
-        assert loaded.plugins == ["crm", "erp"]
+        assert dry_res is None and manifest_file.is_file()
+        assert SiteManifest.from_json_file(manifest_file).plugins == ["crm", "erp"]
 
         target = tmp_path / "runner_site"
         dest = execute_scaffolding(
-            {
-                "project_name": "runner_demo",
-                "target_dir": str(target),
-                "plugins": "polls",
-                "include_docker": False,
-                "no_input": True,
-            },
+            {"project_name": "runner_demo", "target_dir": str(target), "plugins": "polls", "include_docker": False, "no_input": True},
             stdout=out,
             source_root=REPO_ROOT,
         )
         assert dest == target.resolve()
-        assert (target / "manage.py").is_file()
-        assert (target / "polls").is_dir()
+        assert (target / "manage.py").is_file() and (target / "polls").is_dir()
         assert "Next Steps:" in out.getvalue()
 
     def test_execute_scaffolding_interactive_prompts(self, tmp_path):
         target = tmp_path / "prompted_site"
-        stdin = io.StringIO(
-            f"prompted_site\nPrompted Title\nDesc\n{target}\ntailwind\nen,es\ntodo\nsqlite\nn\n"
-        )
+        stdin = io.StringIO(f"prompted_site\nPrompted Title\nDesc\n{target}\ntailwind\nen,es\ntodo\nsqlite\nn\n")
         out = io.StringIO()
         dest = execute_scaffolding({}, stdout=out, stdin=stdin, source_root=REPO_ROOT)
         assert dest == target.resolve()
         saved = SiteManifest.from_json_file(target / "site_manifest.json")
-        assert saved.theme == "tailwind"
-        assert saved.plugins == ["todo"]
-        assert saved.include_docker is False
+        assert saved.theme == "tailwind" and saved.plugins == ["todo"] and saved.include_docker is False
 
 
 class TestTemplateFetcher:
@@ -143,8 +127,7 @@ class TestTemplateFetcher:
     def test_local_template_dir_and_invalid_dir(self, tmp_path):
         fake_root = _make_fake_template(tmp_path / "repo")
         with resolve_template_source(template_dir=str(fake_root)) as resolved:
-            assert resolved == fake_root.resolve()
-            assert is_valid_template_root(resolved)
+            assert resolved == fake_root.resolve() and is_valid_template_root(resolved)
 
         empty_dir = tmp_path / "empty"
         empty_dir.mkdir()
@@ -161,17 +144,9 @@ class TestTemplateFetcher:
             }
         )
         digest = hashlib.sha256(payload).hexdigest()
-        mock_resp = MagicMock()
-        mock_resp.read.side_effect = [payload, b""]
-        mock_resp.__enter__.return_value = mock_resp
-
-        with patch("create_enterprise_site.fetcher.urllib.request.urlopen", return_value=mock_resp):
-            with resolve_template_source(
-                template_url="https://example.com/archive.zip",
-                template_sha256=digest,
-            ) as resolved:
-                assert is_valid_template_root(resolved)
-                assert resolved.name == "enterprise_website-main"
+        with patch("create_enterprise_site.fetcher.urllib.request.urlopen", return_value=_mock_urlopen_bytes(payload)):
+            with resolve_template_source(template_url="https://example.com/archive.zip", template_sha256=digest) as resolved:
+                assert is_valid_template_root(resolved) and resolved.name == "enterprise_website-main"
             assert not resolved.exists()
 
     def test_archive_rejects_bad_sha256_and_http_scheme(self):
@@ -179,40 +154,74 @@ class TestTemplateFetcher:
             with resolve_template_source(template_url="http://example.com/archive.zip"):
                 pass
 
-        mock_resp = MagicMock()
-        mock_resp.read.side_effect = [b"corrupt", b""]
-        mock_resp.__enter__.return_value = mock_resp
-        with patch("create_enterprise_site.fetcher.urllib.request.urlopen", return_value=mock_resp):
+        with patch("create_enterprise_site.fetcher.urllib.request.urlopen", return_value=_mock_urlopen_bytes(b"corrupt")):
             with pytest.raises(TemplateFetchError, match="SHA-256 mismatch"):
-                with resolve_template_source(
-                    template_url="https://example.com/archive.zip",
-                    template_sha256="0" * 64,
-                ):
+                with resolve_template_source(template_url="https://example.com/archive.zip", template_sha256="0" * 64):
                     pass
 
     def test_zip_slip_and_tar_slip_rejected(self):
         evil_zip = _build_zip_bytes({"../evil.txt": b"pwned"})
-        mock_zip = MagicMock()
-        mock_zip.read.side_effect = [evil_zip, b""]
-        mock_zip.__enter__.return_value = mock_zip
-        with patch("create_enterprise_site.fetcher.urllib.request.urlopen", return_value=mock_zip):
+        with patch("create_enterprise_site.fetcher.urllib.request.urlopen", return_value=_mock_urlopen_bytes(evil_zip)):
             with pytest.raises(TemplateFetchError, match="Zip-Slip"):
                 with resolve_template_source(template_url="https://example.com/evil.zip"):
                     pass
 
         evil_tar = _build_tar_gz_bytes({"repo/manage.py": b"ok"}, symlink_name="repo/bad_link")
-        mock_tar = MagicMock()
-        mock_tar.read.side_effect = [evil_tar, b""]
-        mock_tar.__enter__.return_value = mock_tar
-        with patch("create_enterprise_site.fetcher.urllib.request.urlopen", return_value=mock_tar):
+        with patch("create_enterprise_site.fetcher.urllib.request.urlopen", return_value=_mock_urlopen_bytes(evil_tar)):
             with pytest.raises(TemplateFetchError, match="Unsafe link"):
                 with resolve_template_source(template_url="https://example.com/evil.tar.gz"):
                     pass
 
+    def test_zip_symlink_entry_rejected(self):
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+            zf.writestr("repo/manage.py", b"ok")
+            sym = zipfile.ZipInfo("repo/bad_link")
+            sym.create_system = 3
+            sym.external_attr = 0o120777 << 16
+            zf.writestr(sym, b"/etc/passwd")
+        with patch("create_enterprise_site.fetcher.urllib.request.urlopen", return_value=_mock_urlopen_bytes(buf.getvalue())):
+            with pytest.raises(TemplateFetchError, match="Unsafe symlink"):
+                with resolve_template_source(template_url="https://example.com/evil_sym.zip"):
+                    pass
+
+    @pytest.mark.parametrize("bad_url", [
+        "https://localhost/archive.zip", "https://sub.localhost/archive.zip",
+        "https://metadata.google.internal/archive.zip", "https://internal.service.local/archive.zip",
+        "https://127.0.0.1/archive.zip", "https://169.254.169.254/latest/meta-data/",
+        "https://10.0.0.5/archive.zip", "https://172.16.0.1/archive.zip", "https://192.168.1.10/archive.zip",
+        "https://100.64.0.1/archive.zip", "https://[::1]/archive.zip", "https://[::ffff:127.0.0.1]/archive.zip",
+        "https://user:pass@example.com/archive.zip",
+    ])
+    def test_ssrf_disallowed_archive_urls_rejected_before_urlopen(self, bad_url):
+        with patch("create_enterprise_site.fetcher.urllib.request.urlopen") as mock_open:
+            with pytest.raises(TemplateFetchError):
+                with resolve_template_source(template_url=bad_url):
+                    pass
+            mock_open.assert_not_called()
+
+    def test_ssrf_dns_private_resolution_and_redirect_rejected(self):
+        fake_addr = [(socket.AF_INET, socket.SOCK_STREAM, 6, "", ("169.254.169.254", 443))]
+        with (
+            patch("create_enterprise_site.fetcher.socket.getaddrinfo", return_value=fake_addr),
+            patch("create_enterprise_site.fetcher.urllib.request.urlopen") as mock_open,
+        ):
+            with pytest.raises(TemplateFetchError, match="disallowed IP"):
+                with resolve_template_source(template_url="https://rebind.example.com/archive.zip"):
+                    pass
+            mock_open.assert_not_called()
+
+        mock_redirect = MagicMock()
+        mock_redirect.geturl.return_value = "https://127.0.0.1/archive.zip"
+        mock_redirect.__enter__.return_value = mock_redirect
+        with patch("create_enterprise_site.fetcher.urllib.request.urlopen", return_value=mock_redirect):
+            with pytest.raises(TemplateFetchError, match="disallowed"):
+                with resolve_template_source(template_url="https://example.com/archive.zip"):
+                    pass
+
     def test_mocked_git_clone_success_and_failure(self):
         def fake_clone(cmd, **kwargs):
-            clone_dest = Path(cmd[-1])
-            _make_fake_template(clone_dest)
+            _make_fake_template(Path(cmd[-1]))
             return subprocess.CompletedProcess(cmd, 0, stdout="", stderr="")
 
         with (
@@ -236,25 +245,13 @@ class TestCreateEnterpriseSiteCli:
         target = tmp_path / "minimal_cli_site"
         out, err = io.StringIO(), io.StringIO()
         code = cli_main(
-            [
-                "minimal_cli_site",
-                "--no-input",
-                "--plugins",
-                "none",
-                "--no-docker",
-                "--target-dir",
-                str(target),
-                "--template-dir",
-                str(REPO_ROOT),
-            ],
+            ["minimal_cli_site", "--no-input", "--plugins", "none", "--no-docker", "--target-dir", str(target), "--template-dir", str(REPO_ROOT)],
             stdout=out,
             stderr=err,
         )
         assert code == 0, err.getvalue()
-        assert err.getvalue() == ""
-        assert (target / "manage.py").is_file()
-        assert not (target / "crm").exists()
-        assert not (target / "docker-compose.yml").exists()
+        assert err.getvalue() == "" and (target / "manage.py").is_file()
+        assert not (target / "crm").exists() and not (target / "docker-compose.yml").exists()
 
         check_res = _run_generated_manage(target, "check")
         assert check_res.returncode == 0, check_res.stderr
@@ -265,36 +262,15 @@ class TestCreateEnterpriseSiteCli:
         target = tmp_path / "full_cli_site"
         env = {k: v for k, v in os.environ.items() if k != "DJANGO_SETTINGS_MODULE"}
         env["PYTHONPATH"] = str(REPO_ROOT)
-        result = subprocess.run(
-            [
-                sys.executable,
-                "-m",
-                "create_enterprise_site",
-                "full_cli_site",
-                "--no-input",
-                "--plugins",
-                "all",
-                "--theme",
-                "tailwind",
-                "--languages",
-                "en,es",
-                "--target-dir",
-                str(target),
-                "--template-dir",
-                str(REPO_ROOT),
-            ],
-            cwd=str(tmp_path),
-            env=env,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
+        cmd = [
+            sys.executable, "-m", "create_enterprise_site", "full_cli_site", "--no-input",
+            "--plugins", "all", "--theme", "tailwind", "--languages", "en,es",
+            "--target-dir", str(target), "--template-dir", str(REPO_ROOT),
+        ]
+        result = subprocess.run(cmd, cwd=str(tmp_path), env=env, capture_output=True, text=True, check=False)
         assert result.returncode == 0, result.stderr
         assert "Next Steps:" in result.stdout
-        assert (target / "manage.py").is_file()
-        assert (target / "crm").is_dir()
-        assert (target / "erp").is_dir()
-        assert (target / "docker-compose.yml").is_file()
+        assert (target / "manage.py").is_file() and (target / "crm").is_dir() and (target / "erp").is_dir() and (target / "docker-compose.yml").is_file()
 
         check_res = _run_generated_manage(target, "check")
         assert check_res.returncode == 0, check_res.stderr
@@ -305,29 +281,15 @@ class TestCreateEnterpriseSiteCli:
         manifest_path = tmp_path / "cli_manifest.json"
         out, err = io.StringIO(), io.StringIO()
         code = cli_main(
-            [
-                "dry_cli_site",
-                "--no-input",
-                "--plugins",
-                "erp",
-                "--dry-run",
-                "--dump-manifest",
-                str(manifest_path),
-            ],
+            ["dry_cli_site", "--no-input", "--plugins", "erp", "--dry-run", "--dump-manifest", str(manifest_path)],
             stdout=out,
             stderr=err,
         )
         assert code == 0, err.getvalue()
-        assert manifest_path.is_file()
-        assert "Dry run complete" in out.getvalue()
+        assert manifest_path.is_file() and "Dry run complete" in out.getvalue()
 
-        bad_code = cli_main(
-            ["bad_site", "--no-input", "--template-dir", str(tmp_path / "missing_repo")],
-            stdout=out,
-            stderr=err,
-        )
-        assert bad_code == 1
-        assert "Error:" in err.getvalue()
+        bad_code = cli_main(["bad_site", "--no-input", "--template-dir", str(tmp_path / "missing_repo")], stdout=out, stderr=err)
+        assert bad_code == 1 and "Error:" in err.getvalue()
 
     def test_pyproject_console_script_version_and_doc_flag_parity(self):
         pyproject = tomllib.loads((REPO_ROOT / "pyproject.toml").read_text(encoding="utf-8"))
