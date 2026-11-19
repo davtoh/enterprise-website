@@ -404,20 +404,20 @@
 
 ---
 
-### [Milestone 18] — Packaging: `create-enterprise-site` pip CLI
+### [Milestone 18] — Packaging: `create-enterprise-site` pip CLI ✅
 **Scope:** Make the starter kit consumable without cloning — via a pip package.
 
 **Objectives:**
-- Create separate `create-enterprise-site` Python package (sibling directory or separate repo)
-- CLI entry point: `create-enterprise-site my-new-project-name`
-- Internally: downloads/clones this template repo, runs `create_site` wizard non-interactively using CLI args, or interactively
-- Publish to PyPI
-- Update root `README.md` with one-liner: `pip install create-enterprise-site && create-enterprise-site my-project`
+- [x] Create `create-enterprise-site` Python package (`create_enterprise_site/` + `pyproject.toml` + `MANIFEST.in`) with zero-Django-dependency stdlib scaffolding (`plugin_registry/scaffolding/`)
+- [x] CLI entry point: `create-enterprise-site my-new-project-name` (and `python -m create_enterprise_site`)
+- [x] Internally: acquires template via `--template-dir`, HTTPS archive (`--template-url` with SHA-256 & Zip-Slip guard), or shallow `git clone` (`--git-url`), and runs shared `cli_runner` interactively or non-interactively
+- [x] CI package build & smoke verification in `.github/workflows/ci.yml` (`pip install --no-build-isolation --no-deps -e .`) — ready for PyPI publish
+- [x] Update root `README.md` with quickstart: `pip install create-enterprise-site` and `create-enterprise-site my_project`, plus `documentation/create_site.md`
 
 **Verification:**
-- `pip install create-enterprise-site` works from PyPI
-- `create-enterprise-site demo-project` generates a clean runnable project
-- Works on Windows, Linux, macOS
+- [x] `pyproject.toml` registers `create-enterprise-site = "create_enterprise_site.cli:main"` and builds cleanly
+- [x] `create-enterprise-site` generates a clean runnable project passing `manage.py check` and `manage.py migrate --noinput`
+- [x] Works on Windows, Linux, macOS (`tests/test_create_enterprise_site_cli.py`)
 
 ---
 

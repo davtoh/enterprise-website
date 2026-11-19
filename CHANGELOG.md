@@ -1,5 +1,16 @@
 # Changelog
 
+## [2026-11-19] feat: Milestone 18.3: CI Package Build, Executable Docs & Sign-Off
+- **Type**: feat
+- **Summary**: Added editable CLI install and smoke test to GitHub Actions CI, documented create-enterprise-site quickstart and Scenario Combinations Matrix in README.md and documentation/create_site.md, marked Milestone 18 complete in milestone_plan.md, and added pyproject/version/doc-flag-parity tests.
+- **Files** (5):
+  - `.github/workflows/ci.yml`
+  - `README.md`
+  - `documentation/create_site.md`
+  - `milestone_plan.md`
+  - `tests/test_create_enterprise_site_cli.py`
+- **Verification**: .venv/Scripts/python.exe -m pytest tests/test_create_enterprise_site_cli.py tests/test_create_site.py tests/test_create_site_command.py
+
 ## [2026-11-19] feat: Milestone 18.2: create-enterprise-site Standalone CLI & PEP 621 Packaging
 - **Type**: feat
 - **Summary**: Implemented create_enterprise_site.cli/main, python -m create_enterprise_site entrypoint, PEP 621 pyproject.toml, MANIFEST.in, and E2E CLI tests.

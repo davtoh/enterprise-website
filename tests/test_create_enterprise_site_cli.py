@@ -7,12 +7,14 @@ from pathlib import Path
 import subprocess
 import sys
 import tarfile
+import tomllib
 from unittest.mock import MagicMock, patch
 import zipfile
 
 import pytest
 
-from create_enterprise_site.cli import main as cli_main
+from create_enterprise_site import __version__
+from create_enterprise_site.cli import build_parser, main as cli_main
 from create_enterprise_site.fetcher import (
     TemplateFetchError,
     is_valid_template_root,
@@ -326,3 +328,19 @@ class TestCreateEnterpriseSiteCli:
         )
         assert bad_code == 1
         assert "Error:" in err.getvalue()
+
+    def test_pyproject_console_script_version_and_doc_flag_parity(self):
+        pyproject = tomllib.loads((REPO_ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+        assert pyproject["project"]["version"] == __version__
+        assert pyproject["project"]["scripts"]["create-enterprise-site"] == "create_enterprise_site.cli:main"
+
+        ver = subprocess.run(
+            [sys.executable, "-m", "create_enterprise_site", "--version"],
+            cwd=str(REPO_ROOT), capture_output=True, text=True, check=False,
+        )
+        assert ver.returncode == 0 and __version__ in ver.stdout
+
+        doc_text = (REPO_ROOT / "documentation" / "create_site.md").read_text(encoding="utf-8")
+        flags = {opt for act in build_parser()._actions for opt in act.option_strings if opt.startswith("--") and opt != "--help"}
+        missing = [opt for opt in sorted(flags) if opt not in doc_text]
+        assert not missing, f"Undocumented CLI flags in documentation/create_site.md: {missing}"
