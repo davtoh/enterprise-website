@@ -1,10 +1,27 @@
+import importlib
+
+from django.apps import apps
 from django.utils.translation import gettext_lazy as _
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
-from erp.blocks import ProductShowcaseBlock
-from polls.blocks import PollEmbedBlock
-from video_gallery.blocks import VideoGalleryEmbedBlock
+
+def _load_optional_block(app_label: str, module_path: str, symbol_name: str):
+    """Import an optional Wagtail block class if its app is installed and importable."""
+    if apps.apps_ready and not apps.is_installed(app_label):
+        return None
+    try:
+        module = importlib.import_module(module_path)
+        return getattr(module, symbol_name, None)
+    except ImportError:
+        return None
+
+
+ProductShowcaseBlock = _load_optional_block("erp", "erp.blocks", "ProductShowcaseBlock")
+PollEmbedBlock = _load_optional_block("polls", "polls.blocks", "PollEmbedBlock")
+VideoGalleryEmbedBlock = _load_optional_block(
+    "video_gallery", "video_gallery.blocks", "VideoGalleryEmbedBlock"
+)
 
 
 class HeroBlock(blocks.StructBlock):
@@ -85,6 +102,9 @@ class CMSStreamBlock(blocks.StreamBlock):
     richtext = RichTextSectionBlock()
     features = FeatureGridBlock()
     cta = CallToActionBlock()
-    video_gallery = VideoGalleryEmbedBlock()
-    poll = PollEmbedBlock()
-    product_showcase = ProductShowcaseBlock()
+    if VideoGalleryEmbedBlock is not None:
+        video_gallery = VideoGalleryEmbedBlock()
+    if PollEmbedBlock is not None:
+        poll = PollEmbedBlock()
+    if ProductShowcaseBlock is not None:
+        product_showcase = ProductShowcaseBlock()

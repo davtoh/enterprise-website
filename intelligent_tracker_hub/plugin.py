@@ -19,6 +19,7 @@ class IntelligentTrackerPlugin(AppPlugin):
     zone = PluginZone.STAFF
     requires_staff = True
     requires_auth = True
+    dependencies = ["crm", "video_gallery", "rest_api"]
 
     url_namespace = "intelligent_tracker_hub"
     url_prefix = "security"

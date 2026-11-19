@@ -17,6 +17,7 @@ class ERPPlugin(AppPlugin):
     zone = PluginZone.STAFF
     requires_staff = True
     requires_auth = True
+    dependencies = ["crm"]
 
     url_namespace = "erp"
     url_prefix = "erp"
