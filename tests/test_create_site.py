@@ -294,3 +294,4 @@ class TestProjectGenerator:
         with pytest.raises(FileExistsError):
             ProjectGenerator(manifest).generate(target)
 
+

@@ -1,5 +1,16 @@
 # Changelog
 
+## [2026-11-19] feat: Milestone 17.3: manage.py create_site CLI Wizard & Docs
+- **Type**: feat
+- **Summary**: Implemented interactive and non-interactive manage.py create_site wizard, documentation/create_site.md, and E2E CLI tests.
+- **Files** (5):
+  - `milestone_plan.md`
+  - `tests/test_create_site.py`
+  - `documentation/create_site.md`
+  - `plugin_registry/management/`
+  - `tests/test_create_site_command.py`
+- **Verification**: pytest tests/test_create_site.py tests/test_create_site_command.py
+
 ## [2026-11-19] feat: Milestone 17.2: Project Scaffolding Generator Engine
 - **Type**: feat
 - **Summary**: Added split-settings, URLconf, env, requirements, and Docker renderers plus ProjectGenerator and optional task_runner/polls guards.
@@ -131,18 +142,3 @@
   - `cms/management/`
   - ... (+2 more)
 - **Verification**: pytest tests/test_cms.py tests/test_home.py tests/test_theme_management.py tests/test_plugin_registry.py
-
-## [2026-11-15] feat: Step 3 Milestone 2: Wagtail Menu Bridge, 3-Level Hierarchy & Per-Role/Locale Cached Navigation
-- **Type**: feat
-- **Summary**: Added MenuItem.wagtail_page with localized title/URL resolution, 3-level Wagtail-to-MenuItem sync in cms/bridge.py, versioned per-role/locale menu caching in menu_management/cache.py, and signal-driven cache invalidation.
-- **Files** (10):
-  - `cms/apps.py`
-  - `menu_management/context_processors.py`
-  - `menu_management/models.py`
-  - `menu_management/sync.py`
-  - `tests/test_plugin_registry.py`
-  - `cms/bridge.py`
-  - `cms/signals.py`
-  - `menu_management/cache.py`
-  - ... (+2 more)
-- **Verification**: pytest tests/test_cms_bridge.py tests/test_plugin_registry.py

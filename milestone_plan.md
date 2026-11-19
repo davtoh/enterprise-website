@@ -377,7 +377,7 @@
 **Scope:** The flagship feature — the interactive `manage.py create_site` command that generates a new standalone Django project from this template.
 
 **Objectives:**
-- `management/commands/create_site.py` interactive wizard:
+- [x] `management/commands/create_site.py` interactive wizard:
   - Prompts: project name, display name, description, target directory
   - CSS framework choice: Bootstrap 5 / Tailwind / Minimal
   - Language selection (supported locales)
@@ -385,7 +385,7 @@
   - Database preference (SQLite / MySQL / PostgreSQL)
   - Docker support (yes/no)
   - Optional: `--ai` flag — calls Gemini/OpenAI with a project description prompt to auto-suggest module selection and generate homepage copy
-- Generation engine:
+- [x] Generation engine:
   - Copies core project structure + selected app directories to target
   - Updates `settings.py` (INSTALLED_APPS, DATABASES, LANGUAGES, SITE_THEME)
   - Updates `urls.py` root URLconf
@@ -394,13 +394,13 @@
   - Generates `docker-compose.yml` if Docker selected
   - Runs `makemessages` and `auto_translate` bootstrap for selected languages
   - Prints a "Next Steps" checklist to the terminal
-- Write `documentation/create_site.md` with full wizard usage guide
+- [x] Write `documentation/create_site.md` with full wizard usage guide
 
 **Verification:**
-- `python manage.py create_site` generates a functional standalone project
-- Generated project passes `manage.py check` → 0 issues
-- Generated project passes `migrate` and `runserver` cleanly
-- `--ai` flag generates sensible module selection and homepage copy (if API key present)
+- [x] `python manage.py create_site` generates a functional standalone project
+- [x] Generated project passes `manage.py check` → 0 issues
+- [x] Generated project passes `migrate` and `runserver` cleanly
+- [x] `--ai` flag generates sensible module selection and homepage copy (if API key present)
 
 ---
 

@@ -79,8 +79,8 @@ All modified and newly created source files across all 3 milestones must strictl
 - [x] **tests/test_create_site.py**: Add isolated TemporaryDirectory scaffolding tests verifying generated minimal and full projects pass manage.py check and migrate.
 - [x] **CHANGELOG.md**: Record Milestone 2 completion via python "<config_dir>/skills/system-diagnostics/scripts/diagnose.py" changelog add.
 
-### Milestone 3: `manage.py create_site` Interactive & Non-Interactive CLI Wizard & Documentation (**DEFERRED TO NEXT TURN / MILESTONE**)
-- [ ] **plugin_registry/management/commands/create_site.py**: Implement manage.py create_site command supporting interactive wizard prompts, non-interactive CLI flags, --from-manifest, --dump-manifest, and --ai advisor.
-- [ ] **documentation/create_site.md & milestone_plan.md**: Write complete create_site wizard documentation with CLI recipes and Scenario Combinations Matrix, and mark Milestone 17 complete in milestone_plan.md.
-- [ ] **tests/test_create_site.py**: Add end-to-end call_command('create_site') tests for CLI flags, interactive stdin prompts, manifest export/import, and --ai mode.
-- [ ] **CHANGELOG.md**: Record Milestone 3 completion via python "<config_dir>/skills/system-diagnostics/scripts/diagnose.py" changelog add.
+### Milestone 3: `manage.py create_site` Interactive & Non-Interactive CLI Wizard & Documentation
+- [x] **plugin_registry/management/commands/create_site.py**: Implement manage.py create_site command supporting interactive wizard prompts, non-interactive CLI flags, --from-manifest, --dump-manifest, and --ai advisor.
+- [x] **documentation/create_site.md & milestone_plan.md**: Write complete create_site wizard documentation with CLI recipes and Scenario Combinations Matrix, and mark Milestone 17 complete in milestone_plan.md.
+- [x] **tests/test_create_site.py**: Add end-to-end call_command('create_site') tests for CLI flags, interactive stdin prompts, manifest export/import, and --ai mode.
+- [x] **CHANGELOG.md**: Record Milestone 3 completion via python "<config_dir>/skills/system-diagnostics/scripts/diagnose.py" changelog add.
